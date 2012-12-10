@@ -76,11 +76,8 @@ define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
 // Clean up the configuration vars
 unset($application, $modules, $system);
 
-if (file_exists('install'.EXT))
-{
-	// Load the installation check
-	return include 'install'.EXT;
-}
+// Uncomment to run install check.
+// return include 'install'.EXT;
 
 /**
  * Define the start time of the application, used for profiling.
