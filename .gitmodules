@@ -13,3 +13,9 @@
 [submodule "modules/KOstache"]
 	path = modules/KOstache
 	url = git://github.com/zombor/KOstache.git
+[submodule "modules/minion"]
+	path = modules/minion
+	url = git://github.com/kohana/minion.git
+[submodule "modules/tasks-migrations"]
+	path = modules/tasks-migrations
+	url = git://github.com/kohana-minion/tasks-migrations.git
