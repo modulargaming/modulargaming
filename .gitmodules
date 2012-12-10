@@ -19,3 +19,6 @@
 [submodule "modules/tasks-migrations"]
 	path = modules/tasks-migrations
 	url = git://github.com/kohana-minion/tasks-migrations.git
+[submodule "modules/userguide"]
+	path = modules/userguide
+	url = git://github.com/kohana/userguide.git

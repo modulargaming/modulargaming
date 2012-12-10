@@ -116,7 +116,7 @@ Kohana::modules(array(
 	'migrations' => MODPATH.'tasks-migrations',
 	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
 
 /**
