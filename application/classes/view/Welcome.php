@@ -2,5 +2,5 @@
 
 class View_Welcome
 {
-	
+	public $title = 'Welcome';
 }
