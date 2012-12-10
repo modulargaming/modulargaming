@@ -10,3 +10,6 @@
 [submodule "modules/auth"]
 	path = modules/auth
 	url = git://github.com/kohana/auth.git
+[submodule "modules/KOstache"]
+	path = modules/KOstache
+	url = git://github.com/zombor/KOstache.git
