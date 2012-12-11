@@ -1,0 +1,14 @@
+{
+    "require-dev": {
+        "phpspec/phpspec2": "*"
+    },
+    "config": {
+        "bin-dir": "."
+    },
+    "autoload": {
+        "psr-0": {
+            "": "application/classes"
+        }
+    },
+    "minimum-stability": "dev"
+}
