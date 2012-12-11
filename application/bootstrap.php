@@ -58,16 +58,8 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 
 // -- Configuration and initialization -----------------------------------------
 
-/**
- * Set the default language
- */
-I18n::lang('en-gb');
 
 
-/**
- * Set the default cookie security
- */
-Cookie::$salt = 'change me';
 
 /**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
@@ -108,6 +100,34 @@ Kohana::$log->attach(new Log_File(APPPATH.'logs'));
  * Attach a file reader to config. Multiple readers are supported.
  */
 Kohana::$config->attach(new Config_File);
+
+
+/**
+* Cookie
+*/
+// Set the magic salt to add to a cookie
+Cookie::$salt = Kohana::$config->load('modulargaming.cookie_salt');
+// Set the number of seconds before a cookie expires
+//Cookie::$expiration = Kohana::$config->load('modulargaming.cookie_lifetime');
+// Restrict the path that the cookie is available to
+//Cookie::$path = '/';
+// Restrict the domain that the cookie is available to
+//Cookie::$domain = 'www.modulargaming.com';
+// Only transmit cookies over secure connections
+//Cookie::$secure = TRUE;
+// Only transmit cookies over HTTP, disabling Javascript access
+//Cookie::$httponly = TRUE;
+
+/**
+* Session
+*/
+Session::$default = 'database';
+
+
+/**
+ * Set the default language
+ */
+I18n::lang('en-gb');
 
 /**
  * Enable modules. Modules are referenced by a relative or absolute path.
