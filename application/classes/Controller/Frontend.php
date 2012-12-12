@@ -4,7 +4,20 @@ class Controller_Frontend extends Controller {
 
 	public function before()
 	{
+		$this->check_csrf();
 
+		$this->auth = Auth::instance();
+		$this->user = $this->auth->get_user();
+
+	}
+
+	public function after()
+	{
+
+	}
+
+	private function check_csrf()
+	{
 		if (HTTP_Request::POST == $this->request->method())
 		{
 			$validation = Validation::factory($this->request->post())
@@ -16,12 +29,6 @@ class Controller_Frontend extends Controller {
 				throw HTTP_Exception::factory(403, 'CSRF check failed!');
 			}
 		}
-
-	}
-
-	public function after()
-	{
-
 	}
 
 } // End Frontend
