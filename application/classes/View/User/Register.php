@@ -2,12 +2,12 @@
 
 class View_User_Register {
 
-        public $title = 'Register';
+	public $title = 'Register';
 
-        public function csrf()
-        {
-                return Security::token();
-        }
+	public function csrf()
+	{
+		return Security::token();
+	}
 
 }
 

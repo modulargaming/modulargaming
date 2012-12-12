@@ -6,8 +6,9 @@ class Controller_User extends Controller_Frontend {
 	{
 		if ( Auth::instance()->logged_in() == false )
 		{
-		$this->redirect('user/login');
+			$this->redirect('user/login');
 		}
+		
 		$this->register();
 	}
 
@@ -38,8 +39,8 @@ class Controller_User extends Controller_Frontend {
 
 	public function action_register()
 	{
-                if ($_POST)
-                {
+		if ($_POST)
+		{
 			$post = $this->request->post();
 
 		}
