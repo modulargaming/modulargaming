@@ -2,23 +2,11 @@
 
 class View_User_Login {
 
-public $title = 'Log In';
+	public $title = 'Log In';
 
-public function base()
-{
-return URL::base(Request::$initial, TRUE);
-}
-
-public function links()
-{
-$route = Route::get('default');
-return array(
-'save' => $route->uri(array('controller'=>'user', 'action'=>'login')),
-);
-}
-
+	public function csrf()
+	{
+		return Security::token();
+	}
 
 }
-
-
-
