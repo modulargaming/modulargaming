@@ -3,4 +3,10 @@
 class View_Welcome
 {
 	public $title = 'Welcome';
+
+	public function csrf()
+	{
+		return Security::token();
+	}
+
 }
