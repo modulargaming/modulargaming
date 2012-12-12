@@ -4,7 +4,7 @@ return array
 (
 'default' => array
 (
-'type' => 'mysql',
+'type' => 'MySQL',
 'connection' => array(
 /**
 * The following options are available for MySQL:
@@ -31,7 +31,7 @@ return array
 
 
 'alternate' => array(
-'type' => 'pdo',
+'type' => 'PDO',
 'connection' => array(
 /**
 * The following options are available for PDO:

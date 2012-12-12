@@ -19,15 +19,15 @@ $this->session = Session::instance();
 // First make sure we have at least one admin user
 // This code can safely be deleted after the first login
 // DELETE AFTER FIRST LOGIN -- BLOCK START
-$user = Orm::Factory('user');
+$user = ORM::Factory('user');
 if ($user->count_all() == 0)
 {
 $login_role = ORM::factory('role',array('name' => 'login'));
 $admin_role = ORM::factory('role', array('name' => 'admin'));
 $data = array('username' => 'administrator',
-'email' => 'admin@tempuri.com',
-'password' => 'admin12345',
-'password_confirm' => 'admin12345');
+'email' => 'admin@modulargaming.com',
+'password' => 'password',
+'password_confirm' => 'password');
 
 $user->create_user($data, array('username','password','email'));
 $user->add('roles',$login_role)->add('roles',$admin_role);

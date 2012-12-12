@@ -1,3 +1,11 @@
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_id` varchar(24) NOT NULL,
+  `last_active` int(10) unsigned NOT NULL,
+  `contents` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_active` (`last_active`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(32) NOT NULL,
