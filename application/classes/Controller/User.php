@@ -4,12 +4,12 @@ class Controller_User extends Controller_Frontend {
 
 	public function action_index()
 	{
-		if ( Auth::instance()->logged_in() == false )
+		if ( ! $this->auth->logged_in())
 		{
 			$this->redirect('user/login');
 		}
 		
-		$this->register();
+		die('Logged in');
 	}
 
 	public function action_login()
@@ -41,13 +41,26 @@ class Controller_User extends Controller_Frontend {
 	{
 		if ($_POST)
 		{
-			$post = $this->request->post();
+			try
+			{
+				$user = ORM::Factory('User')
+					->create_user($this->request->post(), array(
+						'username',
+						'email',
+						'password'
+					));
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				var_dump($e->errors('models'));
+				die();
+			}
+
+			$this->redirect('');
 
 		}
 
 		$this->view = new View_User_Register;
-
-
 	}
 
 
