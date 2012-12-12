@@ -4,7 +4,7 @@ return array
 (
 'default' => array
 (
-'type' => 'MySQL',
+'type' => 'mysql',
 'connection' => array(
 /**
 * The following options are available for MySQL:
@@ -14,19 +14,46 @@ return array
 * string username database username
 * string password database password
 * boolean persistent use persistent connections?
-* array variables system variables as "key => value" pairs
 *
 * Ports and sockets may be appended to the hostname.
 */
 'hostname' => 'localhost',
-'database' => '',
-'username' => '',
+'database' => 'modulargaming',
+'username' => 'root',
 'password' => '',
 'persistent' => FALSE,
 ),
 'table_prefix' => '',
 'charset' => 'utf8',
 'caching' => FALSE,
-'profiling' => (Kohana::$environment !== Kohana::PRODUCTION),
+'profiling' => TRUE,
+),
+
+
+'alternate' => array(
+'type' => 'pdo',
+'connection' => array(
+/**
+* The following options are available for PDO:
+*
+* string dsn Data Source Name
+* string username database username
+* string password database password
+* boolean persistent use persistent connections?
+*/
+'dsn' => 'mysql:host=localhost;dbname=modulargaming',
+'username' => 'root',
+'password' => '',
+'persistent' => FALSE,
+),
+/**
+* The following extra options are available for PDO:
+*
+* string identifier set the escaping identifier
+*/
+'table_prefix' => '',
+'charset' => 'utf8',
+'caching' => FALSE,
+'profiling' => TRUE,
 ),
 );

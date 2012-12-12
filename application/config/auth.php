@@ -3,7 +3,7 @@
 return array(
 'driver' => 'orm',
 'hash_method' => 'sha256',
-'hash_key' => 'dsadsadad',
+'hash_key' => 'change me',
 'lifetime' => 0,
 'session_type' => Session::$default,
 'session_key' => 'auth_user',
