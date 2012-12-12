@@ -40,8 +40,21 @@ class Controller_User extends Controller_Frontend {
 	{
                 if ($_POST)
                 {
+			$post = $this->request->post();
+	   	 	try
+    				{
+				
+        			$user = ORM::factory('User');
+        			$user->username = $_POST['username'];
+        			$user->password = Auth::instance()->hash_password($_POST['password']);
+				$user->save();
+    				}
 
-                        $post = $this->post();
+    			catch (ORM_Validation_Exception $e)
+    				{
+        			$errors = $e->errors('models');
+    				}
+
 
 		}
 
@@ -53,9 +66,9 @@ class Controller_User extends Controller_Frontend {
 
 	public function action_logout()
 	{
-	// Sign out the user
-	Auth::instance()->logout();
-	$this->redirect('');
+		// Sign out the user
+		Auth::instance()->logout();
+		$this->redirect('');
 	
 	}
 
