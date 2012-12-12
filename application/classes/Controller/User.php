@@ -4,7 +4,11 @@ class Controller_User extends Controller_Frontend {
 
 	public function action_index()
 	{
-
+		if ( Auth::instance()->logged_in() == false )
+		{
+		$this->redirect('user/login');
+		}
+		$this->register();
 	}
 
 	public function action_login()
@@ -21,7 +25,7 @@ class Controller_User extends Controller_Frontend {
 			if ($auth->login($post['username'],$post['password'], $remember))
 			{
 				die('logged in');
-				//$this->request->redirect('');
+				//$this->redirect('dashboard');
 			}
 			else
 			{
@@ -37,13 +41,22 @@ class Controller_User extends Controller_Frontend {
                 if ($_POST)
                 {
 
-                        $post = $this->request->post();
+                        $post = $this->post();
 
 		}
 
 		$this->view = new View_User_Register;
 
 
+	}
+
+
+	public function action_logout()
+	{
+	// Sign out the user
+	Auth::instance()->logout();
+	$this->redirect('');
+	
 	}
 
 
