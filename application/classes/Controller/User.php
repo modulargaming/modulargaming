@@ -41,20 +41,6 @@ class Controller_User extends Controller_Frontend {
                 if ($_POST)
                 {
 			$post = $this->request->post();
-	   	 	try
-    				{
-				
-        			$user = ORM::factory('User');
-        			$user->username = $_POST['username'];
-        			$user->password = Auth::instance()->hash_password($_POST['password']);
-				$user->save();
-    				}
-
-    			catch (ORM_Validation_Exception $e)
-    				{
-        			$errors = $e->errors('models');
-    				}
-
 
 		}
 
