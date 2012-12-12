@@ -2,6 +2,12 @@
 
 class Controller_Frontend extends Controller {
 
+	protected $auth;
+	protected $user;
+
+	protected $protected = FALSE; // Require user to be logged in.
+	protected $view; // View to render.
+
 	public function before()
 	{
 		$this->check_csrf();
@@ -13,7 +19,11 @@ class Controller_Frontend extends Controller {
 
 	public function after()
 	{
-
+		if ($this->view)
+		{
+			$renderer = Kostache_Layout::factory();
+			$this->response->body($renderer->render($this->view));
+		}
 	}
 
 	private function check_csrf()

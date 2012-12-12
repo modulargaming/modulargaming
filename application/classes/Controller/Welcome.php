@@ -4,8 +4,7 @@ class Controller_Welcome extends Controller_Frontend {
 
 	public function action_index()
 	{
-		$renderer = Kostache_Layout::factory();
-		$this->response->body($renderer->render(new View_Welcome));
+		$this->view = new View_Welcome;
 	}
 
 } // End Welcome

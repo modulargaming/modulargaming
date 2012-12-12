@@ -29,9 +29,7 @@ class Controller_User extends Controller_Frontend {
 			}
 		}
 
-		// Display the login view.
-		$renderer = Kostache_Layout::factory();
-		$this->response->body($renderer->render(new View_User_Login));
+		$this->view = new View_User_Login;
 	}
 
 
