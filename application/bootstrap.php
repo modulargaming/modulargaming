@@ -101,28 +101,15 @@ Kohana::$log->attach(new Log_File(APPPATH.'logs'));
  */
 Kohana::$config->attach(new Config_File);
 
+/**
+ * Cookie
+ */
+Cookie::$salt = 'salt';
 
 /**
-* Cookie
-*/
-// Set the magic salt to add to a cookie
-Cookie::$salt = Kohana::$config->load('modulargaming.cookie_salt');
-// Set the number of seconds before a cookie expires
-//Cookie::$expiration = Kohana::$config->load('modulargaming.cookie_lifetime');
-// Restrict the path that the cookie is available to
-//Cookie::$path = '/';
-// Restrict the domain that the cookie is available to
-//Cookie::$domain = 'www.modulargaming.com';
-// Only transmit cookies over secure connections
-//Cookie::$secure = TRUE;
-// Only transmit cookies over HTTP, disabling Javascript access
-//Cookie::$httponly = TRUE;
-
-/**
-* Session
-*/
+ * Session
+ */
 Session::$default = 'database';
-
 
 /**
  * Set the default language
