@@ -14,10 +14,9 @@ class Controller_User extends Controller_Frontend {
 		{
 			$auth = Auth::instance();
 
-
-			$remember = isset($_POST['remember']) ? (bool) $_POST['remember'] : FALSE;
-
 			$post = $this->request->post();
+
+			$remember = isset($post['remember']) ? (bool) $post['remember'] : FALSE;
 
 			if ($auth->login($post['username'],$post['password'], $remember))
 			{
