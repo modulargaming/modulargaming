@@ -20,7 +20,7 @@ return array
 'hostname' => 'localhost',
 'database' => 'modulargaming',
 'username' => 'root',
-'password' => '',
+'password' => 'password',
 'persistent' => FALSE,
 ),
 'table_prefix' => '',
