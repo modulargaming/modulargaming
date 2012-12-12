@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 
 return array(
-'driver' => 'orm',
+'driver' => 'ORM',
 'hash_method' => 'sha256',
 'hash_key' => 'change me',
 'lifetime' => 0,

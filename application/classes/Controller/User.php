@@ -22,14 +22,14 @@ public function action_login() {
 $message = NULL;
 $auth = Auth::instance();
 if($auth->logged_in() != 0){
-$this->redirect_to_dashboards();
+$this->redirect_to_dashboard();
 }
 if (count($_POST) > 0)
 {
 $auth->login($this->request->post('username'),$this->request->post('password'));
 if ($auth->logged_in())
 {
-$this->redirect_to_dashboards();
+$this->redirect_to_dashboard();
 }
 $message = 'Login failed. Password is case-sensitive. Is Caps Lock on?';
 }
@@ -40,15 +40,15 @@ $this->show_login_form($message);
 // or by the save action if validation fails.
 private function show_login_form($message)
 {
-$view = new View_User_Login;
-$view->set('message', $message);
-$this->response->body($view);
+                $renderer = Kostache_Layout::factory();
+		$renderer->set('message', $message);
+		$this->response->body($renderer->render(new View_User_Login));
 }
 
 public function action_logout() {
 // Sign out the user
 Auth::instance()->logout();
-$this->redirect_to_dashboards();
+$this->redirect_to_dashboard();
 }
 
 public function action_index()
@@ -63,8 +63,9 @@ $this->show_profile_form();
 
 public function action_noaccess()
   {
-$view = new View_User_Noaccess;
-$this->response->body($view);
+                $renderer = Kostache_Layout::factory();
+                $this->response->body($renderer->render(new View_User_Noaccess));
+
   }
 
 public function action_save()
@@ -78,7 +79,7 @@ $user = Auth::instance()->get_user();
 $user = $user->update_user($_POST, array('password', 'email'));
 $user->save();
 EmailHelper::notify($user, $this->request->post('password'));
-$this->redirect_to_dashboards();
+$this->redirect_to_dashboard();
 }
 catch (ORM_Validation_Exception $e)
 {
@@ -91,7 +92,7 @@ $this->show_profile_form($user, $errors);
 }
 else
 {
-$this->redirect_to_dashboards();
+$this->redirect_to_dashboard();
 }
 }
 
@@ -103,10 +104,11 @@ if ($user === NULL)
 {
 $user = Auth::instance()->get_user();
 }
-$view = new View_User_Profile;
-$view->set('user', $user->as_array())
+$renderer = Kostache_Layout::factory();
+$renderer->set('user', $user->as_array())
 ->set('errors',$errors);
-$this->response->body($view);
+$this->response->body($renderer->render(new View_User_Profile));
+
 }
 
 private function redirect_to_dashboard()
