@@ -32,5 +32,20 @@ class Controller_User extends Controller_Frontend {
 		$this->view = new View_User_Login;
 	}
 
+	public function action_register()
+	{
+                if ($_POST)
+                {
+
+                        $post = $this->request->post();
+
+		}
+
+		$this->view = new View_User_Register;
+
+
+	}
+
+
 
 } // End User
