@@ -1,51 +1,25 @@
 # Modular Gaming
 
-A modular browser based game framework based on Kohana 3.3 using KOstache and ORM.
+A modular browser based game framework using Kohana 3.3 with ORM and KOstache.
 
 > It is unstable and still developing.
 
 ## Requirements
 
 * PHP 5.3+
-* Mysql 5.1+
+* MySQL 5.1+
 
 ## Installation
 
-Step 1: Download Modular Gaming!
+Step 1: Download
 
-Using your console, to get it from git execute the following command in the root of your development environment:
+Download Modular Gaming from www.modulargaming.com
 
-	$ git clone git://github.com/modulargaming/modulargaming.git
-
-And watch the git magic...
-
-Of course you can always download the code from the http://www.modulargaming.com
-
-Step 2: Initial Structure
-
-Next the submodules must be initialized:
-
-	cd modulargaming (or whatever you named it)
-
-	$ git submodule init
-	
-Now that the submodules are added, update them:
-
-	$ git submodule update
-
-Now do the same for KOstache:
-
-	$ cd modules/kostache
-	$ git submodule init
-	$ git submodule update
-
-That's all there is to it.
-
-Step 3: Configuration of Database
+Step 2: Configuration of Database
 
 Edit `application/config/database.php` with the correct information.
 
-Step 4: Import SQL
+Step 3: Import SQL
 
 Import modulargaming.sql using your tool of choice (MySQL client, PHPMyAdmin etc)
 
@@ -59,7 +33,7 @@ Open `application/bootstrap.php` and make the following changes:
 
 * Update the default cookie salt
 
-> You will need to update .htaccess to refer to the correct location of the folder containing Modular Gaming. 
+* Update .htaccess to refer to the correct location
 
 Make sure the `application/cache` and `application/logs` directories are world writable with:
 
