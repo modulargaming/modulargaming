@@ -58,3 +58,43 @@ ALTER TABLE `roles_users`
 
 ALTER TABLE `user_tokens`
   ADD CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS `forum_categories` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `forum_categories`
+--
+
+INSERT INTO `forum_categories` (`id`, `title`, `description`) VALUES
+(1, 'General', 'General Discussions'),
+(2, 'Marketplace', 'Buy and sell items.');
+
+
+CREATE TABLE IF NOT EXISTS `forum_posts` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `topic_id` int(6) NOT NULL,
+  `user_id` int(6) NOT NULL,
+  `title` varchar(25) NOT NULL,
+  `content` varchar(500) NOT NULL,
+  `created` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `forum_topics` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `category_id` int(6) NOT NULL,
+  `user_id` int(6) NOT NULL,
+  `title` varchar(30) NOT NULL,
+  `status` varchar(12) NOT NULL,
+  `posts` int(6) NOT NULL,
+  `created` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
