@@ -12,6 +12,9 @@ class Controller_User extends Controller_Frontend {
 		die('Logged in');
 	}
 
+	/**
+	 * Display the login page and handle login attempts.
+	 */
 	public function action_login()
 	{
 
