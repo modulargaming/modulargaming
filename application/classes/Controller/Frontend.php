@@ -33,7 +33,7 @@ class Controller_Frontend extends Controller {
 
 	private function check_csrf()
 	{
-		if (HTTP_Request::POST == $this->request->method())
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			$validation = Validation::factory($this->request->post())
 				->rule('csrf', 'not_empty')
