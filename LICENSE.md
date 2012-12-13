@@ -1,4 +1,7 @@
-Copyright Modular Gaming
+This license is a legal agreement between you and the Kohana Team for the use of Modular Gaming (the "Software"). 
+By obtaining the Software you agree to comply with the terms and conditions of this license. 
+
+Copyright 2008-2012 Modular Gaming
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
