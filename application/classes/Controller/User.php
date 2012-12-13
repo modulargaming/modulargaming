@@ -49,6 +49,8 @@ class Controller_User extends Controller_Frontend {
 						'email',
 						'password'
 					));
+
+				$user->add('roles', ORM::Factory('Role')->where('name', '=', 'login')->find());
 			}
 			catch (ORM_Validation_Exception $e)
 			{
