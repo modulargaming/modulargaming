@@ -65,14 +65,14 @@ class Controller_User extends Controller_Frontend {
 	}
 
 
+	/**
+	 * Sign out the user and redirect him to the frontpage.
+	 */
 	public function action_logout()
 	{
-		// Sign out the user
 		Auth::instance()->logout();
 		$this->redirect('');
-	
 	}
-
 
 
 } // End User
