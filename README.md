@@ -23,7 +23,7 @@ Step 3: Import SQL
 
 Import modulargaming.sql using your tool of choice (MySQL client, PHPMyAdmin etc)
 
-Step 5: Configuration of modulargaming
+Step 4: Configuration of modulargaming
 
 Open `application/bootstrap.php` and make the following changes: 
 
@@ -33,12 +33,11 @@ Open `application/bootstrap.php` and make the following changes:
 
 * Update the default cookie salt
 
+Step 5:
+
 * Update .htaccess to refer to the correct location
 
-Make sure the `application/cache` and `application/logs` directories are world writable with:
-
- `chmod 0777 application/{cache,logs}`
+* chmod 0777 application/{cache,logs}
 
 
-Now browse to `yourdomain.com` and you should see the **Home Page**.
 
