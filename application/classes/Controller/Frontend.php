@@ -15,6 +15,11 @@ class Controller_Frontend extends Controller {
 		$this->auth = Auth::instance();
 		$this->user = $this->auth->get_user();
 
+		if ($this->protected == TRUE AND $this->auth->logged_in() == FALSE)
+		{
+			throw HTTP_Exception::Factory(403, 'Login to access this page!');
+		}
+
 	}
 
 	public function after()
@@ -36,7 +41,7 @@ class Controller_Frontend extends Controller {
 
 			if ( ! $validation->check())
 			{
-				throw HTTP_Exception::factory(403, 'CSRF check failed!');
+				throw HTTP_Exception::Factory(403, 'CSRF check failed!');
 			}
 		}
 	}
