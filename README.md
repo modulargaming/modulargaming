@@ -39,5 +39,3 @@ Step 5:
 
 * chmod 0777 application/{cache,logs}
 
-
-
