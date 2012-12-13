@@ -15,4 +15,13 @@
 			<log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
 	</logging>
 
+	<filter>
+		<whitelist addUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">application</directory>
+			<exclude>
+				<directory>application/tests</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+
 </phpunit>
