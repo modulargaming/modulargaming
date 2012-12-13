@@ -25,8 +25,7 @@ class Controller_User extends Controller_Frontend {
 
 			if ($auth->login($post['username'],$post['password'], $remember))
 			{
-				die('logged in');
-				//$this->redirect('dashboard');
+				$this->redirect('');
 			}
 			else
 			{
