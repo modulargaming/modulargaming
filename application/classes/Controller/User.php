@@ -49,11 +49,6 @@ class Controller_User extends Controller_Frontend {
 						'email',
 						'password'
 					));
-
-				$role = ORM::Factory('Roles_User');
-				$role->user_id = $user->id;
-				$role->role_id = 1;
-				$role->save();
 			}
 			catch (ORM_Validation_Exception $e)
 			{
