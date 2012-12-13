@@ -2,6 +2,6 @@
 
 class View_User_Login extends View_Base {
 
-	public $title = 'Log In';∂
+	public $title = 'Log In';
 
 }
