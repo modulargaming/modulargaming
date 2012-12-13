@@ -1,6 +1,6 @@
 # Modular Gaming
 
-A modular browser based game framework based on Kohana 3.3 using ORM.
+A modular browser based game framework based on Kohana 3.3 using KOstache and ORM.
 
 > It is unstable and still developing.
 
@@ -33,6 +33,12 @@ Now that the submodules are added, update them:
 
 	$ git submodule update
 
+Now do the same for KOstache:
+
+	$ cd modules/kostache
+	$ git submodule init
+	$ git submodule update
+
 That's all there is to it.
 
 Step 3: Configuration of Database
@@ -51,7 +57,7 @@ Open `application/bootstrap.php` and make the following changes:
 
 * Set the default directory for your application
 
-* Set the default cookie salt
+* Update the default cookie salt
 
 > You will need to update .htaccess to refer to the correct location of the folder containing Modular Gaming. 
 
