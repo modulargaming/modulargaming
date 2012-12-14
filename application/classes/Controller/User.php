@@ -26,7 +26,7 @@ class Controller_User extends Controller_Frontend {
 
 			$remember = isset($post['remember']) ? (bool) $post['remember'] : FALSE;
 
-			if ($auth->login($post['username'],$post['password'], $remember))
+			if ($auth->login($post['username'], $post['password'], $remember))
 			{
 				$this->redirect('');
 			}
