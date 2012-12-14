@@ -43,3 +43,8 @@ Step 5:
 
 * chmod 0777 application/{cache,logs}
 
+## Testing
+
+We use BDD, with 2 different tools, phpspec and behat.
+
+We use composer to install them, http://getcomposer.org/ or you could install them manually using pear.
