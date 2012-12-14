@@ -2,13 +2,20 @@
     "require-dev": {
         "phpspec/phpspec2": "*"
     },
-    "config": {
-        "bin-dir": "."
+
+    "require": {
+        "behat/behat": "2.4.*@stable"
     },
+
+    "config": {
+        "bin-dir": "bin/"
+    },
+
     "autoload": {
         "psr-0": {
             "": "application/classes"
         }
     },
+    
     "minimum-stability": "dev"
 }

@@ -1,5 +1,5 @@
 application/cache/*
 application/logs/*
 /vendor/
-/phpspec
+/bin/
 /composer.lock
