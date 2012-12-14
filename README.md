@@ -33,6 +33,10 @@ Open `application/bootstrap.php` and make the following changes:
 
 * Update the default cookie salt
 
+Open `application/config/auth.php` and make the following changes:
+
+* Update the default hash key
+
 Step 5:
 
 * Update .htaccess to refer to the correct location
