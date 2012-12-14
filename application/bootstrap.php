@@ -76,7 +76,6 @@ if (isset($_SERVER['KOHANA_ENV']))
  * Set the environment string by the domain (defaults to Kohana::DEVELOPMENT).
  */
 Kohana::$environment = ($_SERVER['SERVER_NAME'] !== 'localhost') ? Kohana::PRODUCTION : Kohana::DEVELOPMENT;
-/**
 
 /**
  * Initialize Kohana, setting the default options.
