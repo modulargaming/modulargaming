@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="name-of-project" default="build">
-	<target name="build" depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs,phpcpd,phpunit,phpcb"/>
+	<target name="build" depends="prepare, lint, phploc, pdepend, phpmd, phpcs, phpcpd, phpunit, phpcb"/>
 
-	<target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+	<target name="build-parallel" depends="prepare, lint, tools-parallel, phpunit, phpcb"/>
 
 	<target name="tools-parallel" description="Run tools in parallel">
 		<parallel threadCount="2">
 			<sequential>
 				<antcall target="pdepend"/>
-				<antcall target="phpmd-ci"/>
+				<antcall target="phpmd"/>
 			</sequential>
 			<antcall target="phpcpd"/>
 			<antcall target="phpcs"/>
@@ -19,7 +19,6 @@
 
 	<target name="clean" description="Cleanup build artifacts">
 		<delete dir="${basedir}/build/api"/>
-		<delete dir="${basedir}/build/code-browser"/>
 		<delete dir="${basedir}/build/coverage"/>
 		<delete dir="${basedir}/build/logs"/>
 		<delete dir="${basedir}/build/pdepend"/>
@@ -27,7 +26,6 @@
 
 	<target name="prepare" depends="clean" description="Prepare for build">
 		<mkdir dir="${basedir}/build/api"/>
-		<mkdir dir="${basedir}/build/code-browser"/>
 		<mkdir dir="${basedir}/build/coverage"/>
 		<mkdir dir="${basedir}/build/logs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
@@ -62,16 +60,7 @@
 		</exec>
 	</target>
 
-	<target name="phpmd"
-		description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
-		<exec executable="phpmd">
-			<arg path="${basedir}/application" />
-			<arg value="text" />
-			<arg value="${basedir}/build/phpmd.xml" />
-		</exec>
-	</target>
-
-	<target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+	<target name="phpmd" description="Perform project mess detection using PHPMD">
 		<exec executable="phpmd">
 			<arg path="${basedir}/application" />
 			<arg value="xml" />
@@ -112,4 +101,5 @@
 			<arg path="${basedir}/build/code-browser" />
 		</exec>
 	</target>
+
 </project>
