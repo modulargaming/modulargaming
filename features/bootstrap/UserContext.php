@@ -30,6 +30,17 @@ class UserContext extends BehatContext
 	}
 
 	/**
+	 * @Given /^I am logged in as "([^"]*)"$/
+	 */
+	public function iAmLoggedInAs($username)
+	{
+		return array(
+			new Step\Given('there is a user with username "' . $username . '" and password "password"'),
+			new Step\Given('I login with username "' . $username . '" and password "password"')
+		);
+	}
+
+	/**
 	 * @Given /^there is a user with username "([^"]*)" and password "([^"]*)"$/
 	 */
 	public function thereIsAUserWithUsernameAndPassword($username, $password)
