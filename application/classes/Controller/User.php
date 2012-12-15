@@ -75,7 +75,7 @@ class Controller_User extends Controller_Frontend {
 			}
 			else
 			{
-				die('error');
+				Hint::error('Login information incorrect!');
 			}
 		}
 
