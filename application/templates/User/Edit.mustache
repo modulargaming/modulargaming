@@ -1,0 +1,23 @@
+<form method="post">
+	<fieldset>
+		<legend>Profile</legend>
+
+		<input type="hidden" name="csrf" value="{{csrf}}">
+
+		<label>Password</label>
+		<input type="password" name="password_current">
+
+		<label>Email</label>
+		<input type="email" name="email">
+
+		<label>New Password</label>
+		<input type="password" name="password">
+
+		<label>Confirm Password</label>
+		<input type="password" name="password_confirm">
+
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Save</button>
+		</div>
+	</fieldset>
+</form>
