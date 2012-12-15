@@ -4,8 +4,7 @@ Feature: logout
 	I need to be able to logout
 
 	Background:
-		Given there is a user with username "username" and password "password"
-			And I login with username "username" and password "password"
+		Given I am logged in as "username"
 	
 	Scenario: Logout succesfully
 		Given I should see "Logout"
