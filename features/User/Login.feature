@@ -1,7 +1,7 @@
 Feature: login
 	In order to use guest restricted features
 	As a guest with existing account
-	I need to login with my credential
+	I need to be able to login with my credential
 
 	Background:
 		Given there is a user with username "username" and password "password"
