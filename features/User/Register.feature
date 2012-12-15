@@ -8,7 +8,7 @@ Feature: Register
         Scenario: Register succesfully
                 Given I register with username "username", email "username@domain.com", password "password" and confirm password "password_confirm"
                 Then I should not see "Register"
-               	And I should see "Welcome"
+               	And I should see "Logout"
 
         Scenario: Register with too long username
                 Given I register with an invalid username that is more than 24 characters long
