@@ -24,7 +24,15 @@
 
 					<ul class="nav pull-right">
 						{{#logged_in}}
-							<li><a href="/user/logout">Logout</a></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									{{user.username}}
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="/user/logout">Logout</a></li>
+								</ul>
+							</li>
 						{{/logged_in}}
 						{{^logged_in}}
 							<li><a href="/user/login">Login</a></li>
@@ -40,5 +48,7 @@
 		{{>content}}
 	</div>
 
+	<script src="/assets/js/jquery-1.8.3.js"></script>
+	<script src="/assets/js/bootstrap.js"></script>
 </body>
 </html>

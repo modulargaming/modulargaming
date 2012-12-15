@@ -14,4 +14,9 @@ class View_Base
 		return Auth::instance()->logged_in();
 	}
 
+	public function user()
+	{
+		return Auth::instance()->get_user()->as_array();
+	}
+
 }
