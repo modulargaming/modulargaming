@@ -63,10 +63,8 @@ class Controller_User extends Controller_Frontend {
 				die();
 			}
 
-                        if ($this->auth->login($_POST['username'], $_POST['password']))
-                        {
-                                $this->redirect('');
-                        }
+			$this->auth->force_login($user);
+			$this->redirect('');
 
 		}
 

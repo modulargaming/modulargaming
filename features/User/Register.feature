@@ -15,6 +15,8 @@ Feature: Register
 			| password         | password         |
 			| password_confirm | password         |
 		And I press "Register"
+		Then I should see "Logout"
+                And I should not see "Register"
 		Then there should be a user with username "username"
 
 	Scenario: Register with too long username
