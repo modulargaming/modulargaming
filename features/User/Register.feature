@@ -3,12 +3,12 @@ Feature: Register
 	As a guest without an existing account
 
         Background:
-                Given there is a form with username, email, password and confirm password 
+                Given there is a form with username "username", email "username@domain.com", password "password" and confirm password "password" 
 
         Scenario: Register succesfully
                 Given I register with username "username", email "username@domain.com", password "password" and confirm password "password_confirm"
                 Then I should not see "Register"
-               	And I should be redirected to Welcome
+               	And I should see "Welcome"
 
         Scenario: Register with too long username
                 Given I register with an invalid username that is more than 24 characters long
