@@ -69,6 +69,7 @@ class Controller_User extends Controller_Frontend {
 
 			if ($this->auth->login($post['username'], $post['password'], $remember))
 			{
+				Hint::success('You have been logged!');
 				$this->redirect('');
 			}
 			else

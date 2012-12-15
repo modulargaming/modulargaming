@@ -19,4 +19,9 @@ class View_Base
 		return Auth::instance()->get_user()->as_array();
 	}
 
+	public function hints()
+	{
+		return Hint::get_once();
+	}
+
 }
