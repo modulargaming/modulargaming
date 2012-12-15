@@ -4,7 +4,7 @@ Feature: Edit
 	I need to be able to edit the account information
 
 	Background:
-		Given I login with username "username" and password "password"
+		Given I am logged in as "username"
 			And I am on "user/edit"
 			And I should see "Save"
 
