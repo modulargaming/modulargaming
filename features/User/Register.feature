@@ -49,7 +49,7 @@ Feature: Register
 	Scenario: Register with confirm password not matching password
 		When I fill in the following:
 			| username         | username         |
-			| email            | email!domain.com |
+			| email            | email@domain.com |
 			| password         | password         |
 			| password_confirm | drowssap         |
 		And I press "Register"
