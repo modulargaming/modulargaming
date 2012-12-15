@@ -6,7 +6,7 @@ Feature: Edit
 	Background:
 		Given I login with username "username" and password "password"
 			And I am on "user/edit"
-			And I should see "Save"
+			And I should see "Update Profile"
 
 	Scenario: Edit succesfully
 		When I fill in the following:

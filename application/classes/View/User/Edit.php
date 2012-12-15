@@ -2,5 +2,5 @@
 
 class View_User_Edit extends View_Base {
 
-	public $title = 'Edit Profile';
+	public $title = 'Update Profile';
 }
