@@ -81,4 +81,17 @@ class UserContext extends BehatContext
 		);
 	}
 
+	public function thereShouldBeAUserWithEmail($email)
+	{
+		$user = ORM::Factory('User')
+			->where('email', '=', $email)
+			->find();
+
+		if ( ! $email->loaded())
+		{
+			throw new Exception('There is no user with that email "' . $email . '"');
+		}
+	}
+
+
 }
