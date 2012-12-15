@@ -6,7 +6,7 @@ Feature: Register
                 Given there is a form with username, email, password and confirm password 
 
         Scenario: Register succesfully
-                Given I register with username "username", email "username@domain.com", password "password" and confirm password "password"
+                Given I register with username "username", email "username@domain.com", password "password" and confirm password "password_confirm"
                 Then I should not see "Register"
                	And I should be redirected to Welcome
 
