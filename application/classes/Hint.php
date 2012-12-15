@@ -51,7 +51,7 @@ class Hint {
 	{
 		if (is_array($text))
 		{
-			foreach ($text as $message)
+			foreach($text as $message)
 			{
 				// Recursively set each message
 				Hint::set($type, $message);
@@ -106,7 +106,7 @@ class Hint {
 	 */
 	public static function __callStatic($type, $arg)
 	{
-		Hint::set($type, __($arg[0]), Arr::get($arg, 1), Arr::get($arg, 2));
+		Hint::set($type, $arg[0], Arr::get($arg, 1), Arr::get($arg, 2));
 	}
 
 	/**

@@ -14,11 +14,11 @@ Feature: login
 	Scenario: Login with bad username
 		Given there is no user with username "username"
 		Given I login with username "username" and password "password"
-		Then I should see "error"
+		Then I should see "Login information incorrect! "
 
 	Scenario: Login with bad password
 		Given I login with username "username" and password "WrongPassword"
-		Then I should see "error"
+		Then I should see "Login information incorrect! "
 
 	Scenario: Cannot view login page if logged in
 		Given I login with username "username" and password "password"

@@ -96,15 +96,14 @@ class Controller_User extends Controller_Frontend {
 					));
 
 				$user->add('roles', ORM::Factory('Role')->where('name', '=', 'login')->find());
+
+				$this->auth->force_login($user);
+				$this->redirect('');
 			}
 			catch (ORM_Validation_Exception $e)
 			{
-				var_dump($e->errors('models'));
-				die();
+				Hint::error($e->errors('models'));
 			}
-
-			$this->auth->force_login($user);
-			$this->redirect('');
 
 		}
 
