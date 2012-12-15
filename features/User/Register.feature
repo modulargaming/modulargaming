@@ -1,6 +1,7 @@
 Feature: Register
 	In order to use guest restricted features
 	As a guest without an existing account
+	I need to be able to register an account
 
 	Background:
 		Given there is no user with username "username"
