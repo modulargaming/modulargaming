@@ -17,7 +17,7 @@ Feature: Edit
 		And I press "Save"
 		Then I should see "newemail@domain.com"
 			And I should not see "email@domain.com"
-		Then there should be a user with email "newemail@domain.com"
+		Then there should be a user with the email "newemail@domain.com"
 
 	Scenario: Edit with too short password
 		When I fill in the following:

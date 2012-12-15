@@ -81,7 +81,7 @@ class UserContext extends BehatContext
 		);
 	}
 
-	public function thereShouldBeAUserWithEmail($email)
+	public function thereShouldBeAUserWithTheEmail($email)
 	{
 		$user = ORM::Factory('User')
 			->where('email', '=', $email)
