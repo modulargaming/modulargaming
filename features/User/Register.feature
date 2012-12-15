@@ -1,6 +1,6 @@
 Feature: Register
-        In order to use the login feature
-        I need to be able to register with correct information
+	In order to use guest restricted features
+	As a guest without an existing account
 
         Background:
                 Given there is a form with username, email, password and confirm password 
