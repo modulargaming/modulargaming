@@ -15,6 +15,21 @@ class UserContext extends BehatContext
 	}
 
 	/**
+	 *	@Then /^there should be a user with username "([^"]*)"$/
+	 */
+	public function thereShouldBeAUserWithUsername($username)
+	{
+		$user = ORM::Factory('User')
+			->where('username', '=', $username)
+			->find();
+
+		if ( ! $user->loaded())
+		{
+			throw new Exception('There is no user with username "' . $username . '"');
+		}
+	}
+
+	/**
 	 * @Given /^there is a user with username "([^"]*)" and password "([^"]*)"$/
 	 */
 	public function thereIsAUserWithUsernameAndPassword($username, $password)
