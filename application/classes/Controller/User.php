@@ -8,8 +8,47 @@ class Controller_User extends Controller_Frontend {
 		{
 			$this->redirect('user/login');
 		}
+		die('Error');
+	}
+
+	public function action_edit()
+	{
+		if ( ! $this->auth->logged_in())
+		{
+			$this->redirect('user/login');
+		}
+
+		if ($_POST)
+		{
+			$post = $this->request->post();
+			if ($this->auth->check_password($post['password_current']))
+			{
+				try
+				{
+					$user = ORM::Factory('User', $this->auth->get_user())
+						->update_user($this->request->post(), array(
+							'email',
+							'password'
+						));
+
+				}
+				catch (ORM_Validation_Exception $e)
+				{
+					var_dump($e->errors('models'));
+					die();
+				}
+
+				$this->auth->force_login($user);
+				$this->redirect('user');
+			}
+			else
+			{
+				die('error');
+			}
+
+		}
 		
-		die('Logged in');
+		$this->view = new View_User_Edit;
 	}
 
 	/**
