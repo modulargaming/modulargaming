@@ -1,4 +1,4 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') OR die('No direct script access.');
 
 /**
  * Modified for Modular Gaming
@@ -12,7 +12,7 @@
  * @author     Gregorio Ramirez
  * @copyright  (c) 2011 Gregorio Ramirez
  * @license    MIT
- * @see        http://github.com/goyote/hint/
+ * @link       http://github.com/goyote/hint/
  */
 
 class Hint {
@@ -42,16 +42,16 @@ class Hint {
 	 *     Hint::set(Hint::ERROR, ':file is not writable', 
 	 *         array(':file' => $file));
 	 *
-	 * @param   string  message type (e.g. Hint::SUCCESS)
-	 * @param   mixed   message text or array of messages
-	 * @param   array   values to replace with sprintf or strtr
-	 * @param   mixed   custom data
+	 * @param   string  $type    message type (e.g. Hint::SUCCESS)
+	 * @param   mixed   $text    message text or array of messages
+	 * @param   array   $values  values to replace with sprintf or strtr
+	 * @param   mixed   $data    custom data
 	 */
 	public static function set($type, $text, array $values = NULL, $data = NULL)
 	{
 		if (is_array($text))
 		{
-			foreach($text as $message)
+			foreach ($text as $message)
 			{
 				// Recursively set each message
 				Hint::set($type, $message);
@@ -100,8 +100,8 @@ class Hint {
 	 *     // Embed some values
 	 *     Hint::success('user.login.success', array($username));
 	 *
-	 * @param  string  message type (e.g. Hint::SUCCESS)
-	 * @param  array   remaining parameters
+	 * @param  string  $type  message type (e.g. Hint::SUCCESS)
+	 * @param  array   $arg   remaining parameters
 	 * @uses   __()
 	 */
 	public static function __callStatic($type, $arg)
@@ -126,9 +126,9 @@ class Hint {
 	 *     // Customize the default value
 	 *     $error_messages = Hint::get(Hint::ERROR, 'my default value');
 	 *
-	 * @param   mixed  message type (e.g. Hint::SUCCESS, array(Hint::ERROR, Hint::ALERT))
-	 * @param   mixed  default value to return
-	 * @param   bool   delete the messages?
+	 * @param   mixed  $type     message type (e.g. Hint::SUCCESS, array(Hint::ERROR, Hint::ALERT))
+	 * @param   mixed  $default  default value to return
+	 * @param   bool   $delete   delete the messages?
 	 * @return  mixed
 	 */
 	public static function get($type = NULL, $default = NULL, $delete = FALSE)
@@ -207,8 +207,8 @@ class Hint {
 	 *     // Customize the default value
 	 *     $error_messages = Hint::get_once(Hint::ERROR, 'my default value');
 	 *
-	 * @param   mixed  message type (e.g. Hint::SUCCESS, array(Hint::ERROR, Hint::ALERT))
-	 * @param   mixed  default value to return
+	 * @param   mixed  $type     message type (e.g. Hint::SUCCESS, array(Hint::ERROR, Hint::ALERT))
+	 * @param   mixed  $default  default value to return
 	 * @return  mixed
 	 */	
 	public static function get_once($type = NULL, $default = NULL)
@@ -227,7 +227,7 @@ class Hint {
 	 *     // Delete error and alert messages
 	 *     Hint::delete(array(Hint::ERROR, Hint::ALERT));
 	 *
-	 * @param  mixed  message type (e.g. Hint::SUCCESS, array(Hint::ERROR, Hint::ALERT))
+	 * @param  mixed  $type  message type (e.g. Hint::SUCCESS, array(Hint::ERROR, Hint::ALERT))
 	 */
 	public static function delete($type = NULL)
 	{
