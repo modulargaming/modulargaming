@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Frontend extends Controller {
+abstract class Controller_Frontend extends Controller {
 
 	protected $auth;
 	protected $user;
