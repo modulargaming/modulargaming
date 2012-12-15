@@ -8,7 +8,8 @@ class Controller_User extends Controller_Frontend {
 		{
 			$this->redirect('user/login');
 		}
-		die('Error');
+		
+		$this->view = new View_User_Profile;
 	}
 
 	public function action_edit()
