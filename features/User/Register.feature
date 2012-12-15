@@ -21,7 +21,7 @@ Feature: Register
 
 	Scenario: Register with too long username
 		When I fill in the following:
-			| username         | abcdefghijklmnopqrstuvwxyz12345678910         |
+			| username         | abcdefghijklmnopqrstuvwxyz12345678910 |
 			| email            | email@domain.com |
 			| password         | password         |
 			| password_confirm | password         |
@@ -32,8 +32,8 @@ Feature: Register
 		When I fill in the following:
 			| username         | username         |
 			| email            | email@domain.com |
-			| password         | passwor         |
-			| password_confirm | passwor         |
+			| password         | passwor          |
+			| password_confirm | passwor          |
 		And I press "Register"
 		Then I should see "password must be at least 8 characters long"
 
