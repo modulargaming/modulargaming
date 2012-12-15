@@ -25,8 +25,7 @@ class Controller_User extends Controller_Frontend {
 			{
 				try
 				{
-					$user = ORM::Factory('User', $this->auth->get_user())
-						->update_user($this->request->post(), array(
+					$this->user->update_user($this->request->post(), array(
 							'email',
 							'password'
 						));
@@ -38,8 +37,8 @@ class Controller_User extends Controller_Frontend {
 					die();
 				}
 
-				$this->auth->force_login($user);
-				$this->redirect('user');
+				$this->auth->force_login($this->user);
+				$this->redirect('user/edit');
 			}
 			else
 			{
