@@ -18,15 +18,18 @@ class Controller_User extends Controller_Frontend {
 	public function action_login()
 	{
 
+		if ($this->auth->logged_in())
+		{
+			$this->redirect('user');
+		}
+
 		if ($_POST)
 		{
-			$auth = Auth::instance();
-
 			$post = $this->request->post();
 
 			$remember = isset($post['remember']) ? (bool) $post['remember'] : FALSE;
 
-			if ($auth->login($post['username'], $post['password'], $remember))
+			if ($this->auth->login($post['username'], $post['password'], $remember))
 			{
 				$this->redirect('');
 			}
@@ -73,7 +76,7 @@ class Controller_User extends Controller_Frontend {
 	 */
 	public function action_logout()
 	{
-		Auth::instance()->logout();
+		$this->auth->logout();
 		$this->redirect('');
 	}
 
