@@ -1,9 +1,17 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Abstract base controller for frontend controllers.
+ * 
+ * @package    Modular Gaming
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 abstract class Controller_Frontend extends Controller {
 
-	protected $auth;
-	protected $user;
+	protected $auth; // Auth instance
+	protected $user; // Current logged in user
 
 	protected $protected = FALSE; // Require user to be logged in.
 	protected $view; // View to render.
