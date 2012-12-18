@@ -5,6 +5,10 @@ class Model_Message extends ORM
 	public function rules()
     	{
 		return array(
+		'to_id' => array(
+                array('not_empty'),
+                array('max_length', array(':value', 6)),
+            	),
 		'subject' => array(
                 array('not_empty'),
                 array('max_length', array(':value', 255)),
