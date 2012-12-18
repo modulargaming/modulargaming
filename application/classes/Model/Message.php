@@ -21,7 +21,6 @@ class Model_Message extends ORM
                 //$extra_validation = Model_Message::get_id_validation($values)
                 //        ->rule('to_id', 'valid');
 
-		
                 //return $this->values($values, $expected)->create($extra_validation);
                 return $this->values($values, $expected)->create();
         }
