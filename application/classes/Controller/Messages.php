@@ -7,9 +7,7 @@ class Controller_Messages extends Controller_Frontend {
 		$this->view = new View_Messages_Index;
 		$message = ORM::factory('Message');
 		$message->where('to_id', '=', $this->user->id);
-		$message->reset(FALSE); 
    		$this->view->total = $message->count_all();
-		$messages = $message->find_all();
 
 	}
 
