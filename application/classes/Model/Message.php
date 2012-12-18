@@ -3,31 +3,31 @@
 class Model_Message extends ORM
 {
 	public function rules()
-    	{
+	{
 		return array(
-		'to_id' => array(
-                array('not_empty'),
-                array('max_length', array(':value', 6)),
-            	),
-		'subject' => array(
-                array('not_empty'),
-                array('max_length', array(':value', 255)),
-            	),
-		'text' => array(
-		array('not_empty'),
-            	),
-        	);
-    	}
+			'to_id' => array(
+				array('not_empty'),
+				array('max_length', array(':value', 6)),
+			),
+			'subject' => array(
+				array('not_empty'),
+				array('max_length', array(':value', 255)),
+			),
+			'text' => array(
+				array('not_empty'),
+			),
+		);
+	}
 
 	public function create_message($values, $expected)
-        {
-                // Validation for id
-                //$extra_validation = Model_Message::get_id_validation($values)
-                //        ->rule('to_id', 'valid');
+	{
+		// Validation for id
+		//$extra_validation = Model_Message::get_id_validation($values)
+		//        ->rule('to_id', 'valid');
 
-                //return $this->values($values, $expected)->create($extra_validation);
-                return $this->values($values, $expected)->create();
-        }
+		//return $this->values($values, $expected)->create($extra_validation);
+		return $this->values($values, $expected)->create();
+	}
 
 
 
