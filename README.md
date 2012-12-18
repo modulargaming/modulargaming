@@ -13,7 +13,15 @@ A modular browser based game framework using Kohana 3.3 with ORM and KOstache.
 
 Step 1: Download
 
-Download Modular Gaming from www.modulargaming.com
+Download Modular Gaming from www.modulargaming.com or GIT.
+
+`git clone git@github.com:hinton/mg.git`
+`git submodule init`
+`git submodule update`
+`cd modules/kostache`
+`git submodule init`
+`git submodule update`
+
 
 Step 2: Configuration of Database
 
@@ -48,3 +56,6 @@ Step 5:
 We use BDD, with 2 different tools, phpspec and behat.
 
 We use composer to install them, http://getcomposer.org/ or you could install them manually using pear.
+
+`curl -s https://getcomposer.org/installer | php`
+`./composer.phar install --dev`
