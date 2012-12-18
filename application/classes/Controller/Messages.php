@@ -36,6 +36,7 @@ protected $protected = TRUE;
 						'time',
 					));
 
+				Hint::success('You have sent a message');
 				$this->redirect('messages');
 			}
 			catch (ORM_Validation_Exception $e)

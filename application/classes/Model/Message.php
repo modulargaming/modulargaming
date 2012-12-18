@@ -16,6 +16,8 @@ class Model_Message extends ORM
 			),
 			'text' => array(
 				array('not_empty'),
+				array('max_length', array(':value', 1024)),
+
 			),
 		);
 	}
