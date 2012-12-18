@@ -23,12 +23,14 @@ class Controller_Messages extends Controller_Frontend {
 
 				$array = $this->request->post();
 				$array['from_id'] = $this->user->id;
+				$array['time'] = time();
 				$message = ORM::Factory('Message')
 					->create_message($array, array(
 						'to_id',
 						'subject',
 						'text',
 						'from_id',
+						'time',
 					));
 
 				$this->redirect('messages');
