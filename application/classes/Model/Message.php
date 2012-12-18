@@ -8,6 +8,7 @@ class Model_Message extends ORM
 			'to_id' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 6)),
+				array('numeric'),
 			),
 			'subject' => array(
 				array('not_empty'),
