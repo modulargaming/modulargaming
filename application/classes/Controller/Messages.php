@@ -1,6 +1,9 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
+
 class Controller_Messages extends Controller_Frontend {
+
+protected $protected = TRUE;
 
 	public function action_index()
 	{
