@@ -1,6 +1,16 @@
 You have {{total}} messages. <a href="/messages/create">Create a message</a>
 
-
-{{#list_messages}}
-    {{subject}}
-{{/list_messages}}
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Subject</td>
+		</tr>
+	</thead>
+	<tbody>
+		{{#messages}}
+			<tr>
+				<td>{{subject}}</td>
+			</tr>
+		{{/messages}}
+	</tbody>
+</table>
