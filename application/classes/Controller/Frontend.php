@@ -10,8 +10,8 @@
  */
 abstract class Controller_Frontend extends Controller {
 
-	protected $auth; // Auth instance
-	protected $user; // Current logged in user
+	protected $auth; // Auth instance.
+	protected $user; // Current logged in user.
 
 	protected $protected = FALSE; // Require user to be logged in.
 	protected $view; // View to render.
