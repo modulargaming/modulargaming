@@ -32,6 +32,33 @@ class Controller_Messages extends Controller_Frontend {
     		}
 
    	 	return $list;
-}
+	}
+
+        public function action_create()
+        {
+                if ($_POST)
+                {
+                        try
+                        {
+                                $message = ORM::Factory('Message')
+                                        ->create_message($this->request->post(), array(
+                                                'to_id',
+                                                'subject',
+                                                'text',
+						'from_id'
+                                        ));
+
+                                $this->redirect('messages');
+                        }
+                        catch (ORM_Validation_Exception $e)
+                        {
+                                Hint::error($e->errors('models'));
+                        }
+
+                }
+
+                $this->view = new View_Messages_Create;
+        }
+
 
 } // End Messages
