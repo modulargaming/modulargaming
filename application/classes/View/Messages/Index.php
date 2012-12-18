@@ -22,7 +22,7 @@ class View_Messages_Index extends View_Base
 		return $messages;
 	}
 
-	public function total()
+	public function total_messages()
 	{
 		return count($this->messages);
 	}
