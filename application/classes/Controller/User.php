@@ -70,7 +70,7 @@ class Controller_User extends Controller_Frontend {
 
 			if ($this->auth->login($post['username'], $post['password'], $remember))
 			{
-				Hint::success('You have been logged!');
+				Hint::success('You have been logged in!');
 				$this->redirect('');
 			}
 			else
@@ -110,12 +110,12 @@ class Controller_User extends Controller_Frontend {
 		$this->view = new View_User_Register;
 	}
 
-
 	/**
 	 * Sign out the user and redirect him to the frontpage.
 	 */
 	public function action_logout()
 	{
+		Hint::success('You are now logged out!');
 		$this->auth->logout();
 		$this->redirect('');
 	}

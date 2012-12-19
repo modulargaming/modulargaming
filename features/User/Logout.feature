@@ -9,4 +9,5 @@ Feature: logout
 	Scenario: Logout succesfully
 		Given I should see "Logout"
 		When I follow "Logout"
-		Then I should see "Login"
+		Then I should see "You are now logged out!"
+			And I should see "Login"
