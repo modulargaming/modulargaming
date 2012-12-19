@@ -4,17 +4,19 @@
 
 		<input type="hidden" name="csrf" value="{{csrf}}">
 
-		<label>Receiver</label>
-		<input type="text" name="receiver">
+		<label for="receiver_id">Receiver ID</label>
+		<input type="text" name="receiver_id">
 
-		<label>Subject</label>
+		<label for="subject">Subject</label>
 		<input type="text" name="subject">
-<br />
-		<textarea rows="4" cols="50" name="text">
-		</textarea>
+
+		<label for="text">Message</label>
+		<textarea rows="4" cols="50" name="text"></textarea>
+
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Send</button>
 		</div>
+		
 	</fieldset>
 </form>
 

@@ -3,13 +3,15 @@ You have {{total_messages}} messages. <a href="/messages/create">Create a messag
 <table class="table table-striped">
 	<thead>
 		<tr>
-				<td>Subject:</td>
+			<th>Subject</th>
+			<th>Sender</th>
 		</tr>
 	</thead>
 	<tbody>
 		{{#messages}}
 			<tr>
 				<td>{{subject}}</td>
+				<td><a href="user/view/{{sender.id}}">{{sender.username}}</a></td>
 			</tr>
 		{{/messages}}
 	</tbody>

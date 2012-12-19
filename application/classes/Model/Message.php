@@ -3,22 +3,19 @@
 class Model_Message extends ORM
 {
 
-	protected $_has_one = array(
-	'receiver' => array(
-        'model'       => 'User',
-        'foreign_key' => 'id',
-	),
-	'sender' => array(
-        'model'       => 'User',
-        'foreign_key' => 'id',
-	),
-);
-
+	protected $_belongs_to = array(
+		'receiver' => array(
+			'model'       => 'User',
+		),
+		'sender' => array(
+			'model'       => 'User',
+		),
+	);
 
 	public function rules()
 	{
 		return array(
-			'receiver' => array(
+			'receiver_id' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 6)),
 				array('numeric'),
