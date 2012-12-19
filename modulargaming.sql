@@ -101,8 +101,8 @@ CREATE TABLE IF NOT EXISTS `forum_topics` (
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `folder_id` int(11) NOT NULL,
-  `sender_id` int(11) NOT NULL,
-  `receiver_id` int(11) NOT NULL,
+  `sender` int(11) NOT NULL,
+  `receiver` int(11) NOT NULL,
   `time` int(10) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `text` mediumtext NOT NULL,
