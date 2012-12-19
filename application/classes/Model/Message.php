@@ -2,6 +2,19 @@
 
 class Model_Message extends ORM
 {
+
+	protected $_has_one = array(
+	'to_id' => array(
+        'model'       => 'User',
+        'foreign_key' => 'id',
+	),
+	'from_id' => array(
+        'model'       => 'User',
+        'foreign_key' => 'id',
+	),
+);
+
+
 	public function rules()
 	{
 		return array(
