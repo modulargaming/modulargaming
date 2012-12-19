@@ -15,7 +15,6 @@ class View_Messages_Index extends View_Base
 				'subject' => $message->subject,
 				'text' => $message->text,
 				'sender' => $message->sender,
-				'folder_id' => $message->folder_id,
 			);
 		}
 
