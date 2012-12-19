@@ -11,7 +11,7 @@ protected $protected = TRUE;
 
 		// TODO: Add pagination
 		$messages = ORM::factory('Message')
-			->where('receiver_id', '=', $this->user->id)
+			->where('receiver', '=', $this->user->id)
 			->find_all();
 
 		$this->view->messages = $messages;
@@ -25,14 +25,14 @@ protected $protected = TRUE;
 			{
 
 				$array = $this->request->post();
-				$array['sender_id'] = $this->user->id;
+				$array['sender'] = $this->user->id;
 				$array['time'] = time();
 				$message = ORM::Factory('Message')
 					->create_message($array, array(
-						'receiver_id',
+						'receiver',
 						'subject',
 						'text',
-						'sender_id',
+						'sender',
 						'time',
 					));
 
