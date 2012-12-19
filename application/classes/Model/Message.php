@@ -17,8 +17,6 @@ class Model_Message extends ORM
 		return array(
 			'receiver_id' => array(
 				array('not_empty'),
-				array('max_length', array(':value', 6)),
-				array('numeric'),
 			),
 			'subject' => array(
 				array('not_empty'),
@@ -35,11 +33,11 @@ class Model_Message extends ORM
 	public function create_message($values, $expected)
 	{
 		// Validation for id
-		//$extra_validation = Model_Message::get_id_validation($values)
-		//        ->rule('receiver', 'valid');
+		$extra_validation = Validation::Factory($values)
+			->rule('receiver_id', 'Model_User::user_exists');
 
-		//return $this->values($values, $expected)->create($extra_validation);
-		return $this->values($values, $expected)->create();
+		return $this->values($values, $expected)
+			->create($extra_validation);
 	}
 
 

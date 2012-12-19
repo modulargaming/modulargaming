@@ -27,9 +27,9 @@ class Controller_User extends Controller_Frontend {
 				try
 				{
 					$this->user->update_user($this->request->post(), array(
-							'email',
-							'password'
-						));
+						'email',
+						'password'
+					));
 
 				}
 				catch (ORM_Validation_Exception $e)
