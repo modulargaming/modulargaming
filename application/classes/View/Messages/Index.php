@@ -14,7 +14,7 @@ class View_Messages_Index extends View_Base
 				//'href'     => Route::url('messages', array('id' => $message->id)),
 				'subject' => $message->subject,
 				'text' => $message->text,
-				'from_id' => $message->from_id,
+				'sender_id' => $message->sender_id,
 				'folder_id' => $message->folder_id,
 			);
 		}

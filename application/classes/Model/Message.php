@@ -4,11 +4,11 @@ class Model_Message extends ORM
 {
 
 	protected $_has_one = array(
-	'to_id' => array(
+	'receiver_id' => array(
         'model'       => 'User',
         'foreign_key' => 'id',
 	),
-	'from_id' => array(
+	'sender_id' => array(
         'model'       => 'User',
         'foreign_key' => 'id',
 	),
@@ -18,7 +18,7 @@ class Model_Message extends ORM
 	public function rules()
 	{
 		return array(
-			'to_id' => array(
+			'receiver_id' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 6)),
 				array('numeric'),
@@ -39,7 +39,7 @@ class Model_Message extends ORM
 	{
 		// Validation for id
 		//$extra_validation = Model_Message::get_id_validation($values)
-		//        ->rule('to_id', 'valid');
+		//        ->rule('receiver_id', 'valid');
 
 		//return $this->values($values, $expected)->create($extra_validation);
 		return $this->values($values, $expected)->create();
