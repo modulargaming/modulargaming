@@ -57,7 +57,7 @@ Open `application/config/auth.php` and make the following changes:
 
 Open `.htaccess` and make the following changes:
 
-* Set the correct RewriteBase path
+* Set the correct RewriteBase
 
 ### Step 5: Permissions
 
