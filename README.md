@@ -1,8 +1,21 @@
 # Modular Gaming
 
-A modular browser based game framework using Kohana 3.3 with ORM and KOstache.
+A modular browser based game framework using [Kohana 3.3](https://github.com/kohana/core) with [ORM](https://github.com/kohana/orm) and [KOstache](https://github.com/zombor/KOstache).
 
-> It is unstable and still developing.
+## Kohana
+
+Kohana is an elegant, open source, and object oriented HMVC framework built using PHP5, by a team of volunteers.
+Kostache is a Kohana 3 module for using Mustache templates in your application.
+It aims to be swift, secure, and small.
+
+## KOstache
+
+Kostache is a Kohana 3 module for using Mustache templates in your application.
+
+## License
+
+Released under a BSD license, Modular Gaming can be used legally for any open source,
+ commercial, or personal project.
 
 ## Requirements
 
@@ -13,15 +26,12 @@ A modular browser based game framework using Kohana 3.3 with ORM and KOstache.
 
 Step 1: Download
 
-Download Modular Gaming from www.modulargaming.com or GIT.
+Download Modular Gaming from Github.
 
-`git clone git@github.com:hinton/mg.git`
-`git submodule init`
-`git submodule update`
-`cd modules/kostache`
-`git submodule init`
-`git submodule update`
-
+$ git clone git@github.com:hinton/mg.git
+$ git submodule update --init
+$ cd modules/kostache
+$ git submodule update --init
 
 Step 2: Configuration of Database
 
@@ -35,15 +45,15 @@ Step 4: Configuration of modulargaming
 
 Open `application/bootstrap.php` and make the following changes: 
 
-* Set the default [timezone](http://php.net/timezones) for your application
-
 * Set the default directory for your application
 
-* Update the default cookie salt
+* Set the default cookie salt
+
+* Set the default [timezone](http://php.net/timezones) for your application
 
 Open `application/config/auth.php` and make the following changes:
 
-* Update the default hash key
+* Set the default hash key
 
 Step 5:
 
