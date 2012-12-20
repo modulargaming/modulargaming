@@ -55,11 +55,13 @@ Open `application/config/auth.php` and make the following changes:
 
 * Set the default hash key
 
-### Step 5:
+Open `.htaccess` and make the following changes:
 
-* Update .htaccess to refer to the correct location
+* Set the correct application path
 
-* chmod 0777 application/{cache,logs}
+### Step 5: Permissions
+
+	$ chmod 0777 application/{cache,logs}
 
 ## Testing
 
