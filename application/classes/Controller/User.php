@@ -86,25 +86,32 @@ class Controller_User extends Controller_Frontend {
 	{
 		if ($_POST)
 		{
-			try
+			// Honeypot check.
+			if ($this->request->post('full_name') == "")
 			{
-				$user = ORM::Factory('User')
-					->create_user($this->request->post(), array(
+				try
+				{
+					$user = ORM::Factory('User')
+						->create_user($this->request->post(), array(
 						'username',
 						'email',
 						'password'
 					));
 
-				$user->add('roles', ORM::Factory('Role')->where('name', '=', 'login')->find());
+					$user->add('roles', ORM::Factory('Role')->where('name', '=', 'login')->find());
 
-				$this->auth->force_login($user);
-				$this->redirect('');
+					$this->auth->force_login($user);
+					$this->redirect('');
+				}
+				catch (ORM_Validation_Exception $e)
+				{
+					Hint::error($e->errors('models'));
+				}
 			}
-			catch (ORM_Validation_Exception $e)
+			else
 			{
-				Hint::error($e->errors('models'));
+				Hint::error('System detects you as a robot, the hidden robot check field should be empty!');
 			}
-
 		}
 
 		$this->view = new View_User_Register;

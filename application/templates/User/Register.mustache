@@ -4,17 +4,22 @@
 
 		<input type="hidden" name="csrf" value="{{csrf}}">
 
-		<label>Username</label>
-		<input type="text" name="username">
+		<div class="hide-2">
+			<label for="full_name">Robot check, leave empty</label>
+			<input type="" name="full_name" id="full_name">
+		</div>
 
-		<label>Email</label>
-		<input type="text" name="email">
+		<label for="username">Username</label>
+		<input type="text" name="username" id="username">
 
-		<label>Password</label>
-		<input type="password" name="password">
+		<label for="email">Email</label>
+		<input type="text" name="email" id="email">
 
-		<label>Confirm Password</label>
-		<input type="password" name="password_confirm">
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password">
+
+		<label for="password_confirm">Confirm Password</label>
+		<input type="password" name="password_confirm" id="password_confirm">
 
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Register</button>
