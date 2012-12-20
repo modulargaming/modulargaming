@@ -67,5 +67,5 @@ We use BDD, with 2 different tools, phpspec and behat.
 
 We use composer to install them, http://getcomposer.org/ or you could install them manually using pear.
 
-`curl -s https://getcomposer.org/installer | php`
-`./composer.phar install --dev`
+	$ curl -s https://getcomposer.org/installer | php
+	$ ./composer.phar install --dev
