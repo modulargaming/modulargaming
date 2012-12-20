@@ -19,6 +19,9 @@ class Controller_User extends Controller_Frontend {
 			$this->redirect('user/login');
 		}
 
+		$timezones = ORM::Factory('User_Timezone')
+			->find_all();
+
 		if ($_POST)
 		{
 			$post = $this->request->post();
@@ -49,6 +52,7 @@ class Controller_User extends Controller_Frontend {
 		}
 		
 		$this->view = new View_User_Edit;
+		$this->view->timezones = $timezones->as_array();
 	}
 
 	/**
