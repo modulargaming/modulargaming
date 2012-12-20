@@ -5,7 +5,6 @@ A modular persistent browser based game framework using [Kohana 3.3](https://git
 ## Kohana
 
 Kohana is an elegant, open source, and object oriented HMVC framework built using PHP5, by a team of volunteers.
-Kostache is a Kohana 3 module for using Mustache templates in your application.
 It aims to be swift, secure, and small.
 
 ## KOstache
