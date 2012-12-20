@@ -2,21 +2,21 @@
 
 A modular persistent browser based game framework using [Kohana 3.3](https://github.com/kohana/core) with [ORM](https://github.com/kohana/orm) and [KOstache](https://github.com/zombor/KOstache).
 
-## Kohana
+### Kohana
 
 Kohana is an elegant, open source, and object oriented HMVC framework built using PHP5, by a team of volunteers.
 It aims to be swift, secure, and small.
 
-## KOstache
+### KOstache
 
 Kostache is a Kohana 3 module for using Mustache templates in your application.
 
-## License
+### License
 
 Released under a BSD license, Modular Gaming can be used legally for any open source,
  commercial, or personal project.
 
-## Requirements
+### Requirements
 
 * PHP 5.3+
 * MySQL 5.1+
