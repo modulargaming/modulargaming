@@ -24,7 +24,7 @@ Released under a BSD license, Modular Gaming can be used legally for any open so
 
 ## Installation
 
-Step 1: Download
+### Step 1: Download
 
 Download Modular Gaming from Github.
 
@@ -33,15 +33,15 @@ Download Modular Gaming from Github.
 	$ cd modules/kostache
 	$ git submodule update --init
 
-Step 2: Configuration of Database
+### Step 2: Configuration of Database
 
 Edit `application/config/database.php` with the correct information.
 
-Step 3: Import SQL
+### Step 3: Import SQL
 
 Import modulargaming.sql using your tool of choice (MySQL client, PHPMyAdmin etc)
 
-Step 4: Configuration of modulargaming
+### Step 4: Configuration of modulargaming
 
 Open `application/bootstrap.php` and make the following changes: 
 
@@ -55,7 +55,7 @@ Open `application/config/auth.php` and make the following changes:
 
 * Set the default hash key
 
-Step 5:
+### Step 5:
 
 * Update .htaccess to refer to the correct location
 
