@@ -28,10 +28,10 @@ Step 1: Download
 
 Download Modular Gaming from Github.
 
-$ git clone git@github.com:hinton/mg.git
-$ git submodule update --init
-$ cd modules/kostache
-$ git submodule update --init
+	$ git clone git@github.com:hinton/mg.git
+	$ git submodule update --init
+	$ cd modules/kostache
+	$ git submodule update --init
 
 Step 2: Configuration of Database
 
