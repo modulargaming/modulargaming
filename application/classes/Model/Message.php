@@ -5,10 +5,10 @@ class Model_Message extends ORM
 
 	protected $_belongs_to = array(
 		'receiver' => array(
-			'model'       => 'User',
+			'model' => 'User',
 		),
 		'sender' => array(
-			'model'       => 'User',
+			'model' => 'User',
 		),
 	);
 
