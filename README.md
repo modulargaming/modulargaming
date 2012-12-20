@@ -1,19 +1,19 @@
-# Modular Gaming
+# [Modular Gaming](http://www.modulargaming.com)
 
-A modular persistent browser based game framework using [Kohana 3.3](https://github.com/kohana/core) with [ORM](https://github.com/kohana/orm) and [KOstache](https://github.com/zombor/KOstache).
+A modular [persistent browser based game](http://www.pbbg.org) framework using [Kohana 3.3](https://github.com/kohana/core) with [ORM](https://github.com/kohana/orm) and [KOstache](https://github.com/zombor/KOstache).
 
 ### Kohana
 
-Kohana is an elegant, open source, and object oriented HMVC framework built using PHP5, by a team of volunteers.
+[Kohana](http://kohanaframework.org) is an elegant, open source, and object oriented [HMVC](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller) framework built using [PHP5](http://www.php.net), by a team of volunteers.
 It aims to be swift, secure, and small.
 
 ### KOstache
 
-Kostache is a Kohana 3 module for using Mustache templates in your application.
+Kostache is a Kohana 3 module for using [Mustache](https://github.com/mustache) templates in your application.
 
 ### License
 
-Released under a BSD license, Modular Gaming can be used legally for any open source,
+Released under a [BSD license](http://www.modulargaming.com/license), [Modular Gaming](http://www.modulargaming.com) can be used legally for any open source,
  commercial, or personal project.
 
 ### Requirements
