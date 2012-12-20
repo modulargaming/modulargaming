@@ -16,7 +16,10 @@ class View_Base
 
 	public function user()
 	{
-		return Auth::instance()->get_user()->as_array();
+		$user = Auth::instance()->get_user()->as_array();
+		$user['last_login'] = Date::format($user['last_login']);
+
+		return $user;
 	}
 
 	public function hints()

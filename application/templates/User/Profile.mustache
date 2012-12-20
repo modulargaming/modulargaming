@@ -1,8 +1,10 @@
 <h2 class="page-title">Profile</h2>
 <ul>
-<li>User ID {{user.id}}</li>
-<li>Username {{user.username}}</li>
-<li>Email {{user.email}}</li>
-<li>Logins {{user.logins}}</li>
-<li>Last Login {{user.last_login}}</li>
+	{{#user}}
+		<li>User ID {{id}}</li>
+		<li>Username {{username}}</li>
+		<li>Email {{email}}</li>
+		<li>Logins {{logins}}</li>
+		<li>Last Login {{last_login}}</li>
+	{{/user}}
 </ul>
