@@ -9,11 +9,11 @@ It aims to be swift, secure, and small.
 
 ### KOstache
 
-Kostache is a Kohana 3 module for using [Mustache](https://github.com/mustache) templates in your application.
+Kostache is a Kohana 3.3 module for using [Mustache](https://github.com/mustache) templates in your application.
 
 ### License
 
-Released under a [BSD license](http://www.modulargaming.com/license), [Modular Gaming](http://www.modulargaming.com) can be used legally for any open source,
+Released under a [BSD license](http://www.modulargaming.com/license), Modular Gaming can be used legally for any open source,
  commercial, or personal project.
 
 ### Requirements
