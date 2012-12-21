@@ -74,7 +74,39 @@ class Controller_Pet extends Controller_Frontend {
 	
 	public function action_adopt()
 	{
+		$pets = ORM::factory('User_Pet')
+			->where('user_id', '=', 0)
+			->find_all();
+		if ($_POST)
+		{
+			$post = $this->request->post();
+			try
+			{
+				foreach($pets as $pet)
+				{
+					if($pet->pet_id == $post['pet_id'])
+					{
+						foreach($this->user->pets->order_by('active', 'desc')->find_all() as $user_pet)
+						{
+							$user_pet->user->active = 0;
+							$user_pet->user->save();
+						}
+						$pet->user_id = $this->user->id;
+						$pet->active = 1;
+						$pet->save();
+						$adopted_pet = ORM::factory('Pet', $pet->pet_id);
+						Hint::success('You have adopted '.$adopted_pet->name);
+					}
+				}
+				$this->redirect('pet');
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				Hint::error($e->errors('models'));
+			}
+		}
 		$this->view = new View_Pet_Adopt;
+		$this->view->pets = $pets;
 	}
 
 	public function action_create()
