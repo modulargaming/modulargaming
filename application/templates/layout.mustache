@@ -34,15 +34,15 @@
 								<ul class="dropdown-menu">
 									<li><a href="{{base_url}}messages/">Messages [{{total_messages}}]</a>
 									<li><a href="{{base_url}}user/">Profile</a></li>
-									<li><a href="{{base_url}}user/edit">Update Profile</a></li>
+									<li><a href="{{base_url}}user/edit/">Update Profile</a></li>
 									<li class="divider"></li>
-									<li><a href="{{base_url}}user/logout">Logout</a></li>
+									<li><a href="{{base_url}}user/logout/">Logout</a></li>
 								</ul>
 							</li>
 						{{/logged_in}}
 						{{^logged_in}}
-							<li><a href="{{base_url}}user/login">Login</a></li>
-							<li><a href="{{base_url}}user/register">Register</a></li>
+							<li><a href="{{base_url}}user/login/">Login</a></li>
+							<li><a href="{{base_url}}user/register/">Register</a></li>
 						{{/logged_in}}
 					</ul>
 				</div><!--/.nav-collapse -->
@@ -56,7 +56,7 @@
 		{{>content}}
 	</div>
 
-	<script src="{{base_url}}/assets/js/jquery-1.8.3.js"></script>
-	<script src="{{base_url}}/assets/js/bootstrap.js"></script>
+	<script src="{{base_url}}assets/js/jquery-1.8.3.js"></script>
+	<script src="{{base_url}}assets/js/bootstrap.js"></script>
 </body>
 </html>
