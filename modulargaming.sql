@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` CHAR(64) NOT NULL,
   `logins` INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `last_login` INT(10) UNSIGNED DEFAULT NULL,
+  `timezone` INT(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
@@ -107,3 +108,16 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `text` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+
+
+CREATE TABLE `user_timezones` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `timezone` varchar(50) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+INSERT INTO `user_timezones` (`id`, `timezone`, `name`) VALUES
+(1, 'Europe/Stockholm', '(UTC+01:00) Stockholm'),
+(2, 'Pacific/Midway', '(UTC-11:00) Midway Island');
+
