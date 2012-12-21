@@ -2,6 +2,9 @@
 
 class Controller_User extends Controller_Frontend {
 
+	/**
+	 * Show the user dashboard.
+	 */
 	public function action_index()
 	{
 		if ( ! $this->auth->logged_in())
@@ -12,6 +15,9 @@ class Controller_User extends Controller_Frontend {
 		$this->view = new View_User_Profile;
 	}
 
+	/**
+	 * User preferences.
+	 */
 	public function action_edit()
 	{
 		if ( ! $this->auth->logged_in())
@@ -126,7 +132,7 @@ class Controller_User extends Controller_Frontend {
 	 */
 	public function action_logout()
 	{
-		Hint::success('You are now logged out!');
+		Hint::success(Kohana::message('user', 'logout.success'));
 		$this->auth->logout();
 		$this->redirect('');
 	}
