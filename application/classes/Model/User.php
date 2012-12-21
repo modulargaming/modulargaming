@@ -8,6 +8,15 @@ class Model_User extends Model_Auth_User {
 		),
 	);
 
+	public function rules()
+	{
+		return Arr::merge(parent::rules(), array(
+			'timezone' => array(
+				array('Model_User_Timezone::timezone_exists')
+			)
+		));
+	}
+
 	static public function user_exists($id)
 	{
 		$user = ORM::Factory('User', $id);

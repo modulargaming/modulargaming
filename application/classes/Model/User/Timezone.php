@@ -2,6 +2,11 @@
 
 class Model_User_Timezone extends ORM {
 
+	static public function timezone_exists($id)
+	{
+		$timezone = ORM::Factory('User_Timezone', $id);
 
+		return $timezone->loaded();
+	}
 
 }

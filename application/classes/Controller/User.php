@@ -25,28 +25,28 @@ class Controller_User extends Controller_Frontend {
 		if ($_POST)
 		{
 			$post = $this->request->post();
+
 			if ($this->auth->check_password($post['password_current']))
 			{
 				try
 				{
 					$this->user->update_user($this->request->post(), array(
 						'email',
-						'password'
+						'password',
+						'timezone'
 					));
 
+					//$this->auth->force_login($this->user);
+					$this->redirect('user/edit');
 				}
 				catch (ORM_Validation_Exception $e)
 				{
-					var_dump($e->errors('models'));
-					die();
+					Hint::error($e->errors('models'));
 				}
-
-				$this->auth->force_login($this->user);
-				$this->redirect('user/edit');
 			}
 			else
 			{
-				die('error');
+				Hint::error('Incorrect password');
 			}
 
 		}

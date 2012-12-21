@@ -27,4 +27,9 @@ class View_Base
 		return Hint::get_once();
 	}
 
+	public function debug_toolbar()
+	{
+		Debugtoolbar::render();
+	}
+
 }

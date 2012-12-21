@@ -75,7 +75,7 @@ if (isset($_SERVER['KOHANA_ENV']))
 /**
  * Set the environment string by the domain (defaults to Kohana::DEVELOPMENT).
  */
-Kohana::$environment = ($_SERVER['SERVER_NAME'] !== 'localhost') ? Kohana::PRODUCTION : Kohana::DEVELOPMENT;
+//Kohana::$environment = ($_SERVER['SERVER_NAME'] !== 'localhost') ? Kohana::PRODUCTION : Kohana::DEVELOPMENT;
 
 /**
  * Initialize Kohana, setting the default options.
@@ -139,6 +139,7 @@ Kohana::modules(array(
 	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	'unittest'   => MODPATH.'unittest',   // Unit testing
 	'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'd-toolbar'  => MODPATH.'debug-toolbar',
 	));
 
 /**
