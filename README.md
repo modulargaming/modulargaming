@@ -31,6 +31,8 @@ Download Modular Gaming from Github.
 	$ git submodule update --init
 	$ cd modules/kostache
 	$ git submodule update --init
+	$ cd modules/debug-toolbar
+	$ git submodule update --init
 
 ### Step 2: Configuration of Database
 
@@ -57,6 +59,8 @@ Open `application/config/auth.php` and make the following changes:
 Open `.htaccess` and make the following changes:
 
 * Set the correct RewriteBase
+
+* Set the correct KOHANA_ENV DEVELOPMENT or PRODUCTION
 
 ### Step 5: Permissions
 
