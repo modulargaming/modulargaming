@@ -1,5 +1,18 @@
 #SetEnv KOHANA_ENV DEVELOPMENT
 
+# Protect hidden files from being viewed
+<Files .*>
+	Order Deny,Allow
+	Deny From All
+</Files>
+
+
+# Disable directory listing
+Options -Indexes 
+
+
+<IfModule mod_rewrite.c>
+
 # Turn on URL rewriting
 RewriteEngine On
 
@@ -22,3 +35,14 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Rewrite all other URLs to index.php/URL
 #RewriteRule .* index.php/$0 [PT]
 RewriteRule .* index.php [PT]
+
+</IfModule>
+
+<IfModule mod_php5.c>
+  php_value magic_quotes_gpc                0
+  php_value register_globals                0
+  php_value session.auto_start              0
+  php_value mbstring.http_input             pass
+  php_value mbstring.http_output            pass
+  php_value mbstring.encoding_translation   0
+</IfModule>
