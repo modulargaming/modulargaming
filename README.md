@@ -60,7 +60,7 @@ Open `.htaccess` and make the following changes:
 
 * Set the correct RewriteBase
 
-* Set the correct KOHANA_ENV DEVELOPMENT or PRODUCTION
+* Set the correct environment, either KOHANA_ENV DEVELOPMENT or KOHANA_ENV PRODUCTION
 
 ### Step 5: Permissions
 
