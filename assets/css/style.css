@@ -1,3 +1,7 @@
 body {
-	margin-top: 50px; /* Pad down the body below top navigation */
+        padding-top: 60px;
+        padding-bottom: 40px;
+}
+.center {
+	text-align: center;
 }
