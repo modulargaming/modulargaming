@@ -2,6 +2,11 @@
 
 class View_User_Profile extends View_Base {
 
-	public $title = 'Profile';
+	public $profile_user;
+
+	public function title()
+	{
+		return $this->profile_user['username'] . '\'s Profile';
+	}
 
 }

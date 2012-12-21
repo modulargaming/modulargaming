@@ -12,7 +12,7 @@ class Controller_User extends Controller_Frontend {
 			$this->redirect('user/login');
 		}
 		
-		$this->view = new View_User_Profile;
+		$this->view = new View_User_Dashboard;
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Controller_User extends Controller_Frontend {
 			}
 			else
 			{
-				Hint::error('System detects you as a robot, the hidden robot check field should be empty!');
+				Hint::error(Kohana::message('user', 'register.honeypot'));
 			}
 		}
 
@@ -136,6 +136,24 @@ class Controller_User extends Controller_Frontend {
 
 		$this->auth->logout();
 		$this->redirect('');
+	}
+
+	/**
+	 * View users profile
+	 */
+	public function action_view()
+	{
+		$id = $this->request->param('id');
+
+		$user = ORM::Factory('User', $id);
+
+		if ( ! $user->loaded())
+		{
+			throw HTTP_Exception::Factory('404', 'No such user');
+		}
+
+		$this->view = new View_User_Profile;
+		$this->view->profile_user = $user->as_array();
 	}
 
 
