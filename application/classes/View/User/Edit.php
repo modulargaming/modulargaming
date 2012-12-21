@@ -15,7 +15,7 @@ class View_User_Edit extends View_Base {
 			$timezones[] = array(
 				'id'       => $timezone->id,
 				'name'     => $timezone->name,
-				'selected' => $timezone->id == $user['timezone'],
+				'selected' => $timezone->id == $user['timezone']['id'],
 			);
 		}
 

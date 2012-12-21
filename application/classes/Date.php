@@ -5,8 +5,8 @@ class Date extends Kohana_Date{
 	/**
 	 * Format timestamp to users format.
 	 *
-	 * @param $timestamp
-	 * @return string
+	 * @param   integer $timestamp Timestamp to format
+	 * @return  string
 	 */
 	public static function format($timestamp)
 	{
@@ -15,11 +15,13 @@ class Date extends Kohana_Date{
 
 		if ($auth->logged_in())
 		{
-			//$user = $auth->get_user();
-			//$format = $user->date_format;
+			$user = $auth->get_user();
+			$timezone = $user->timezone->timezone;
+			$offset = Date::offset($timezone);
+			$timestamp = $timestamp + $offset;
 		}
 
-		return strftime($format);
+		return strftime($format, $timestamp);
 	}
 
 }

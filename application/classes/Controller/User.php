@@ -33,10 +33,10 @@ class Controller_User extends Controller_Frontend {
 					$this->user->update_user($this->request->post(), array(
 						'email',
 						'password',
-						'timezone'
+						'timezone_id'
 					));
 
-					//$this->auth->force_login($this->user);
+					Hint::success('User preferences updated.');
 					$this->redirect('user/edit');
 				}
 				catch (ORM_Validation_Exception $e)

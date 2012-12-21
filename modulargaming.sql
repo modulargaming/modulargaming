@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` CHAR(64) NOT NULL,
   `logins` INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `last_login` INT(10) UNSIGNED DEFAULT NULL,
-  `timezone` INT(11) UNSIGNED DEFAULT NULL,
+  `timezone_id` INT(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
