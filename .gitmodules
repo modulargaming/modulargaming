@@ -27,4 +27,4 @@
 	url = git://github.com/kohana/unittest.git
 [submodule "modules/debug-toolbar"]
 	path = modules/debug-toolbar
-	url = git://github.com/biakaveron/debug-toolbar.git
+	url = git://github.com/modulargaming/debug-toolbar.git
