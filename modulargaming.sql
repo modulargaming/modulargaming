@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `pets` (
   `race_id` int(6) NOT NULL,
   `colour_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `pet_colours` (
   `id` int(6) NOT NULL,
@@ -161,8 +161,8 @@ CREATE TABLE IF NOT EXISTS `user_pets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `pet_id` int(11) NOT NULL,
-  `active` int(1) NOT NULL,
+  `active` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `pet_id` (`pet_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;

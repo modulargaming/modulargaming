@@ -27,6 +27,7 @@ class Model_Pet extends ORM
 			'name' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 255)),
+				array(array($this, 'unique'), array('name', ':value')),
 			),
 		);
 	}

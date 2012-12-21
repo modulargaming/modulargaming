@@ -1,3 +1,77 @@
-<a class="btn" href="{{base_url}}pet/">Your pets</a> <a class="btn" href="{{base_url}}pet/adopt/">Adopt a pet</a>
-
-<hr>
+<form method="post">
+	<input type="hidden" name="csrf" value="{{csrf}}">
+	<input type="hidden" name="race_id" value="1" id="race_id" />
+	<input type="hidden" name="colour_id" id="colour_id" value="1" />
+	<input type="hidden" name="gender" id="gender" value="male" />
+	<ul class="thumbnails">
+		<li class="span4">
+			<div class="thumbnail center">
+				<img src="{{base_url}}assets/img/pets/1/black.png" id="pet_image" />
+				<h3><span id="pet_colour">Black</span> <span id="pet_race">Koorai</span></h3>
+				<p id="pet_description">The Koorai</p>
+			</div>
+		</li>
+		<li class="span8">
+			<label>Race</label>
+			<ul class="thumbnails">
+				{{#races}}
+				<li>
+					<a href="#" class="thumbnail" rel="popover" data-trigger="hover" data-placement="bottom" data-content="{{description}}" data-original-title="{{name}}" data-race="{{id}}">
+						<img src="{{base_url}}assets/img/pets/{{id}}/black.png" class="pet_race" />
+					</a>
+				</li>
+				{{/races}}
+			</ul>
+			<label>Colour</label>
+			<div class="btn-group" data-toggle="buttons-radio">
+				{{#colours}}
+				<button type="button" class="btn pet_colour{{active}}" value="{{id}}">{{name}}</button>
+				{{/colours}}
+			</div><br /><br />
+			<label>Name</label>
+			<input type="text" name="name" /><br /><br />
+			<label>Gender</label>
+			<div class="btn-group gender" data-toggle="buttons-radio">
+				<button type="button" class="btn active" value="male">Male</button>
+				<button type="button" class="btn" value="female">Female</button>
+			</div>
+		</li>
+	</ul>
+	<div class="form-actions">
+		<button class="btn btn-success" type="submit">Create pet</button>
+	</div>
+</form>
+<style>
+.pet_race {
+	width: 100px;
+	height: 100px;
+}
+</style>
+<script>
+var pet_race = 1,
+	pet_colour = 1,
+	colour_name = ['', 'Black', 'Blue', 'Green', 'Red', 'White', 'Yellow'],
+	colour_image = ['', 'black.png', 'blue.png', 'green.png', 'red.png', 'white.png', 'yellow.png'];
+function pet_image() {
+	$('#pet_image').attr('src', '{{base_url}}assets/img/pets/' + pet_race + '/' + colour_image[pet_colour]);
+}
+window.onload = function() {
+	$("a[rel=popover]").click(function(e) {
+		pet_race = $(this).data('race');
+		$('#race_id').val(pet_race);
+		pet_image();
+		$('#pet_race').text($(this).data('original-title'));
+		$('#pet_description').text($(this).data('content'));
+		e.preventDefault();
+	}).popover();
+	$(".pet_colour").click(function() {
+		pet_colour = $(this).val();
+		$('#pet_colour').text(colour_name[pet_colour]);
+		$("#colour_id").val(pet_colour);
+		pet_image();
+	});
+	$(".gender button").click(function() {
+		$("#gender").val($(this).val());
+	});
+};
+</script>
