@@ -84,11 +84,11 @@ protected $protected = TRUE;
 			$post = $this->request->post();
 			try
 			{
-				foreach($pets as $pet)
+				foreach ($pets as $pet)
 				{
-					if($pet->pet_id == $post['pet_id'])
+					if ($pet->pet_id == $post['pet_id'])
 					{
-						foreach($this->user->pets->order_by('active', 'desc')->find_all() as $user_pet)
+						foreach ($this->user->pets->order_by('active', 'desc')->find_all() as $user_pet)
 						{
 							$user_pet->user->active = 0;
 							$user_pet->user->save();
