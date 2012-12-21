@@ -4,6 +4,11 @@ class View_Base
 {
 	public $title = 'Welcome';
 
+	public function base_url()
+	{
+		return url::base();
+	}
+	
 	public function csrf()
 	{
 		return Security::token();
