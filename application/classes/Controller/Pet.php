@@ -2,6 +2,8 @@
 
 class Controller_Pet extends Controller_Frontend {
 
+protected $protected = TRUE;
+
 	public function action_index()
 	{
 		$pets = $this->user->pets->order_by('active', 'desc')->find_all();
