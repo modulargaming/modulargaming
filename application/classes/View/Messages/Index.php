@@ -11,7 +11,7 @@ class View_Messages_Index extends View_Base
 		foreach ($this->messages as $message)
 		{
 			$messages[] = array(
-				//'href'     => Route::url('messages', array('id' => $message->id)),
+				// 'href'     => Route::url('messages', array('id' => $message->id)),
 				'subject' => $message->subject,
 				'text' => $message->text,
 				'sender' => $message->sender,
