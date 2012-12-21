@@ -4,7 +4,7 @@ class Model_User extends Model_Auth_User {
 
 	protected $_has_many = array(
 		'user_tokens' => array(
-			'model' => 'User_Token'
+			'model' => 'user_token'
 		),
 		'roles' => array(
 			'model' => 'Role',
@@ -12,7 +12,7 @@ class Model_User extends Model_Auth_User {
 		),
 		'pets' => array(
 			'model' => 'Pet',
-			'through' => 'User_Pets'
+			'through' => 'user_pets'
 		),
 	);
 
