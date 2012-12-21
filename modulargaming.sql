@@ -121,3 +121,59 @@ INSERT INTO `user_timezones` (`id`, `timezone`, `name`) VALUES
 (1, 'Europe/Stockholm', '(UTC+01:00) Stockholm'),
 (2, 'Pacific/Midway', '(UTC-11:00) Midway Island');
 
+CREATE TABLE IF NOT EXISTS `pets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `gender` enum('male','female') NOT NULL,
+  `race_id` int(6) NOT NULL,
+  `colour_id` int(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+INSERT INTO `pets` (`id`, `name`, `gender`, `race_id`, `colour_id`) VALUES
+(1, 'Test', 'male', 1, 3),
+(2, 'Test2', 'male', 2, 3),
+(3, 'Test3', 'male', 2, 4);
+
+CREATE TABLE IF NOT EXISTS `pet_colours` (
+  `id` int(6) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` longtext NOT NULL,
+  `image` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `pet_colours` (`id`, `name`, `description`, `image`) VALUES
+(1, 'Black', 'Black colour', 'black.png'),
+(2, 'Blue', 'Blue colour', 'blue.png'),
+(3, 'Green', 'Green colour', 'green.png'),
+(4, 'Red', 'Red colour', 'red.png'),
+(5, 'White', 'White colour', 'white.png'),
+(6, 'Yellow', 'Yellow colour', 'yellow.png');
+
+CREATE TABLE IF NOT EXISTS `pet_races` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+INSERT INTO `pet_races` (`id`, `name`, `description`) VALUES
+(1, 'Koorai', 'The Koorai'),
+(2, 'Zedro', 'The Zedro.');
+
+CREATE TABLE IF NOT EXISTS `user_pets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `pet_id` int(11) NOT NULL,
+  `active` int(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pet_id` (`pet_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4;
+
+INSERT INTO `user_pets` (`id`, `user_id`, `pet_id`, `active`) VALUES
+(1, 4, 1, 0),
+(2, 4, 2, 1),
+(3, 4, 3, 0);
+

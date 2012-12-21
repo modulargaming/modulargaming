@@ -24,7 +24,10 @@
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="{{base_url}}">Home</a></li>
-						<li><a href="{{base_url}}messages/">Messages <span class="badge badge-important">{{total_messages}}</span></a></li>
+						{{#logged_in}}
+							<li><a href="{{base_url}}pet/">Pets</a></li>
+							<li><a href="{{base_url}}messages/">Messages <span class="badge badge-important">{{total_messages}}</span></a></li>
+						{{/logged_in}}
 					</ul>
 
 					<ul class="nav pull-right">

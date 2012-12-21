@@ -2,6 +2,20 @@
 
 class Model_User extends Model_Auth_User {
 
+	protected $_has_many = array(
+		'user_tokens' => array(
+			'model' => 'User_Token'
+		),
+		'roles' => array(
+			'model' => 'Role',
+			'through' => 'roles_users'
+		),
+		'pets' => array(
+			'model' => 'Pet',
+			'through' => 'User_Pets'
+		),
+	);
+
 	protected $_belongs_to = array(
 		'timezone' => array(
 			'model' => 'User_Timezone',
@@ -18,6 +32,9 @@ class Model_User extends Model_Auth_User {
 			'timezone_id' => array(
 				array('not_empty'),
 				array('Model_User_Timezone::timezone_exists')
+			),
+			'pet' => array(
+				array('Model_User_Pet::pet_exists')
 			)
 		));
 	}
