@@ -6,7 +6,7 @@ class View_Base
 
 	public function base_url()
 	{
-		return url::base();
+		return URL::base();
 	}
 	
 	public function csrf()
