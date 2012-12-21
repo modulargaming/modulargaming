@@ -25,9 +25,6 @@ class Controller_User extends Controller_Frontend {
 			$this->redirect('user/login');
 		}
 
-		$timezones = ORM::Factory('User_Timezone')
-			->find_all();
-
 		if ($_POST)
 		{
 			$post = $this->request->post();
@@ -42,7 +39,7 @@ class Controller_User extends Controller_Frontend {
 						'timezone_id'
 					));
 
-					Hint::success('User preferences updated.');
+					Hint::success(Kohana::message('user', 'edit.success'));
 					$this->redirect('user/edit');
 				}
 				catch (ORM_Validation_Exception $e)
@@ -56,7 +53,10 @@ class Controller_User extends Controller_Frontend {
 			}
 
 		}
-		
+
+		$timezones = ORM::Factory('User_Timezone')
+			->find_all();
+
 		$this->view = new View_User_Edit;
 		$this->view->timezones = $timezones->as_array();
 	}
@@ -80,12 +80,12 @@ class Controller_User extends Controller_Frontend {
 
 			if ($this->auth->login($post['username'], $post['password'], $remember))
 			{
-				Hint::success('You have been logged in!');
+				Hint::success(Kohana::message('user', 'login.success'));
 				$this->redirect('');
 			}
 			else
 			{
-				Hint::error('Login information incorrect!');
+				Hint::error(Kohana::message('user', 'login.incorrect'));
 			}
 		}
 
@@ -133,6 +133,7 @@ class Controller_User extends Controller_Frontend {
 	public function action_logout()
 	{
 		Hint::success(Kohana::message('user', 'logout.success'));
+
 		$this->auth->logout();
 		$this->redirect('');
 	}
