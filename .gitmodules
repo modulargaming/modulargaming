@@ -28,3 +28,6 @@
 [submodule "modules/debug-toolbar"]
 	path = modules/debug-toolbar
 	url = git://github.com/modulargaming/debug-toolbar.git
+[submodule "modules/acl"]
+	path = modules/acl
+	url = git://github.com/modulargaming/acl.git
