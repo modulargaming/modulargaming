@@ -1,4 +1,4 @@
-SetEnv KOHANA_ENV DEVELOPMENT
+SetEnv KOHANA_ENV development
 
 # Protect hidden files from being viewed
 <Files .*>
