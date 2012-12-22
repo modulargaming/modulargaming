@@ -2,6 +2,11 @@
 
 class Model_User extends Model_Auth_User implements Model_ACL_User {
 
+	protected $_created_column = array(
+		'column' => 'created',
+		'format' => TRUE
+	);
+
 	protected $_has_many = array(
 		'user_tokens' => array(
 			'model' => 'user_token'
