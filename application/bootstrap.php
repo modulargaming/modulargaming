@@ -56,10 +56,8 @@ spl_autoload_register(array('Kohana', 'auto_load'));
  */
 ini_set('unserialize_callback_func', 'spl_autoload_call');
 
+
 // -- Configuration and initialization -----------------------------------------
-
-
-
 
 /**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
@@ -123,18 +121,19 @@ I18n::lang('en-gb');
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	'kostache'       => MODPATH.'kostache',   // Mustache template system
-	'auth'           => MODPATH.'auth',       // Basic authentication
+	'acl'           => MODPATH.'acl',        // Access control
+	'auth'          => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	'database'       => MODPATH.'database',   // Database access
+	'database'      => MODPATH.'database',   // Database access
+	'debug-toolbar' => MODPATH.'debug-toolbar',
 	// 'image'      => MODPATH.'image',      // Image manipulation
-	'minion'         => MODPATH.'minion',     // CLI Tasks
-	'migrations'     => MODPATH.'tasks-migrations',
-	'orm'            => MODPATH.'orm',        // Object Relationship Mapping
-	'unittest'       => MODPATH.'unittest',   // Unit testing
-	'userguide'      => MODPATH.'userguide',  // User guide and API documentation
-	'debug-toolbar'  => MODPATH.'debug-toolbar',
+	'kostache'      => MODPATH.'kostache',   // Mustache template system
+	'minion'        => MODPATH.'minion',     // CLI Tasks
+	'migrations'    => MODPATH.'tasks-migrations',
+	'orm'           => MODPATH.'orm',        // Object Relationship Mapping
+	'unittest'      => MODPATH.'unittest',   // Unit testing
+	'userguide'     => MODPATH.'userguide',  // User guide and API documentation
 	));
 
 /**
