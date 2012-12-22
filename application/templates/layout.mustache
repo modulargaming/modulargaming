@@ -29,6 +29,9 @@
 					</ul>
 
 					<ul class="nav pull-right">
+                        <form class="navbar-search" action="{{base_url}}search/" method="get">
+                            <input type="text" name="query" class="search-query" placeholder="Search">
+                        </form>
 						{{#logged_in}}
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
