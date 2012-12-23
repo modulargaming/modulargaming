@@ -1,0 +1,22 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Last login</th>
+			<th>Member since</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#users}}
+			<tr>
+				<td>{{id}}</td>
+				<td>{{username}}</td>
+				<td>{{email}}</td>
+				<td>{{last_login}}</td>
+				<td>{{created}}</td>
+			</tr>
+		{{/users}}
+	</tbody>
+</table>

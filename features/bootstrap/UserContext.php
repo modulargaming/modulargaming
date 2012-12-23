@@ -51,6 +51,7 @@ class UserContext extends BehatContext
 		$user->username = $username;
 		$user->password = $password;
 		$user->email = 'temp@mail.com';
+		$user->timezone_id = 1;
 		$user->create();
 
 		$user->add('roles', ORM::Factory('Role')->where('name', '=', 'login')->find());

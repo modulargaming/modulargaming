@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` VARCHAR(32) NOT NULL DEFAULT '',
   `password` CHAR(64) NOT NULL,
   `logins` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created` INT(10) UNSIGNED DEFAULT NULL,
   `last_login` INT(10) UNSIGNED DEFAULT NULL,
   `timezone_id` INT(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
