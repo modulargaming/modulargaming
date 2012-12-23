@@ -27,12 +27,7 @@ Released under a [BSD license](http://www.modulargaming.com/license), Modular Ga
 
 Download Modular Gaming from Github.
 
-	$ git clone git@github.com:hinton/mg.git
-	$ git submodule update --init
-	$ cd modules/kostache
-	$ git submodule update --init
-	$ cd modules/debug-toolbar
-	$ git submodule update --init
+	$ git clone git@github.com:hinton/mg.git --recursive
 
 ### Step 2: Configuration of Database
 
