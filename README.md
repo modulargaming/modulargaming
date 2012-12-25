@@ -55,7 +55,7 @@ Open `.htaccess` and make the following changes:
 
 * Set the correct RewriteBase
 
-* Set the correct environment, either development or production.
+* Set the correct environment, either DEVELOPMENT or PRODUCTION.
 
 ### Step 5: Permissions
 
