@@ -1,4 +1,14 @@
-You have {{total_messages}} messages. <a href="/messages/create">Create a message</a>
+{{^total_messages}}
+<div class="alert alert-error">
+  You have have no messages.
+</div>
+{{/total_messages}}
+
+{{#total_messages}}
+You have {{total_messages}} messages. 
+{{/total_messages}}
+
+<a href="/messages/create">Create a message</a>
 
 <table class="table table-striped">
 	<thead>
