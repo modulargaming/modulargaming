@@ -23,6 +23,7 @@ class View_Base
 	{
 		$user = Auth::instance()->get_user()->as_array();
 		$user['last_login'] = Date::format($user['last_login']);
+		$user['created'] = Date::format($user['created']);
 
 		return $user;
 	}
