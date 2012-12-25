@@ -3,7 +3,7 @@
 
 class Controller_Messages extends Controller_Frontend {
 
-protected $protected = TRUE;
+	protected $protected = TRUE;
 
 	public function action_index()
 	{

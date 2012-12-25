@@ -2,7 +2,7 @@
 
 class Controller_Pet extends Controller_Frontend {
 
-protected $protected = TRUE;
+	protected $protected = TRUE;
 
 	public function action_index()
 	{
