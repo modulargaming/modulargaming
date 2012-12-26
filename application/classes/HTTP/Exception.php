@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class HTTP_Exception_500 extends Kohana_HTTP_Exception_500 {
+class HTTP_Exception extends Kohana_HTTP_Exception {
 
 	/**
 	* Generate a Response for all Exceptions without a more specific override
@@ -23,7 +23,8 @@ class HTTP_Exception_500 extends Kohana_HTTP_Exception_500 {
 		else
 		{
 			$response = Response::factory();
-			$view = new View_Error_500;
+			$view ='View_Error_' . $this->getCode();
+			$view = new $view;
 			$renderer = Kostache_Layout::factory();
 			$response->body ($renderer->render($view));
 			return $response;
