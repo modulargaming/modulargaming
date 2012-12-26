@@ -4,7 +4,7 @@ class Model_Pet_Race extends ORM {
 
 	static public function race_exists($id)
 	{
-		$race = ORM::Factory('Pet_Race', $id);
+		$race = ORM::factory('Pet_Race', $id);
 
 		return $race->loaded();
 	}

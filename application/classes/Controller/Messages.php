@@ -28,7 +28,7 @@ class Controller_Messages extends Controller_Frontend {
 					'time'      => time(),
 				));
 
-				$message = ORM::Factory('Message')
+				$message = ORM::factory('Message')
 					->create_message($array, array(
 						'receiver_id',
 						'subject',
@@ -58,7 +58,7 @@ class Controller_Messages extends Controller_Frontend {
         {
                 $id = $this->request->param('id');
 
-                $message = ORM::Factory('Message', $id);
+                $message = ORM::factory('Message', $id);
 
                 if ( ! $message->loaded())
                 {

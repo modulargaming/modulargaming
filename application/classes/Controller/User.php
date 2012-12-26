@@ -54,7 +54,7 @@ class Controller_User extends Controller_Frontend {
 
 		}
 
-		$timezones = ORM::Factory('User_Timezone')
+		$timezones = ORM::factory('User_Timezone')
 			->find_all();
 
 		$this->view = new View_User_Edit;
@@ -101,14 +101,14 @@ class Controller_User extends Controller_Frontend {
 			{
 				try
 				{
-					$user = ORM::Factory('User')
+					$user = ORM::factory('User')
 						->create_user($this->request->post(), array(
 						'username',
 						'email',
 						'password'
 					));
 
-					$user->add('roles', ORM::Factory('Role')->where('name', '=', 'login')->find());
+					$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
 
 					$this->auth->force_login($user);
 					$this->redirect('');
@@ -145,7 +145,7 @@ class Controller_User extends Controller_Frontend {
 	{
 		$id = $this->request->param('id');
 
-		$user = ORM::Factory('User', $id);
+		$user = ORM::factory('User', $id);
 
 		if ( ! $user->loaded())
 		{

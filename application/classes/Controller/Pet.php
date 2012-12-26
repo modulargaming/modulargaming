@@ -120,14 +120,14 @@ class Controller_Pet extends Controller_Frontend {
 				$array = Arr::merge($this->request->post(), array(
 				));
 
-				$new_pet = ORM::Factory('Pet')
+				$new_pet = ORM::factory('Pet')
 					->create_pet($array, array(
 						'race_id',
 						'colour_id',
 						'gender',
 						'name',
 					));
-				ORM::Factory('User_Pet')->values(array('user_id' => $this->user->id, 'pet_id' => $new_pet->id))->create();
+				ORM::factory('User_Pet')->values(array('user_id' => $this->user->id, 'pet_id' => $new_pet->id))->create();
 				Hint::success('You have created a pet named '.$new_pet->name);
 				$pets = $this->user->pets->find_all();
 				foreach ($pets as $pet)

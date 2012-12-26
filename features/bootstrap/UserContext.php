@@ -19,7 +19,7 @@ class UserContext extends BehatContext
 	 */
 	public function thereShouldBeAUserWithUsername($username)
 	{
-		$user = ORM::Factory('User')
+		$user = ORM::factory('User')
 			->where('username', '=', $username)
 			->find();
 
@@ -47,14 +47,14 @@ class UserContext extends BehatContext
 	{
 		$this->thereIsNoUserWithUsername($username);
 		
-		$user = ORM::Factory('User');
+		$user = ORM::factory('User');
 		$user->username = $username;
 		$user->password = $password;
 		$user->email = 'temp@mail.com';
 		$user->timezone_id = 1;
 		$user->create();
 
-		$user->add('roles', ORM::Factory('Role')->where('name', '=', 'login')->find());
+		$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
 	}
 
 	/**
@@ -84,7 +84,7 @@ class UserContext extends BehatContext
 
 	public function thereShouldBeAUserWithTheEmail($email)
 	{
-		$user = ORM::Factory('User')
+		$user = ORM::factory('User')
 			->where('email', '=', $email)
 			->find();
 

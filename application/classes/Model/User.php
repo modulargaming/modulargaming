@@ -49,7 +49,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 	 */
 	static public function user_exists($id)
 	{
-		$user = ORM::Factory('User', $id);
+		$user = ORM::factory('User', $id);
 
 		return $user->loaded();
 	}

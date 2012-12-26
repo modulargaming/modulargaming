@@ -18,7 +18,7 @@ class Controller_Search extends Controller_Frontend {
 
 			$sql_query = '%' . $query . '%';
 
-			$users = ORM::Factory('User')
+			$users = ORM::factory('User')
 				->where('username', 'LIKE', $sql_query)
 				->find_all();
 

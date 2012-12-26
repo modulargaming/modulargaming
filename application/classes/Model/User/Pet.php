@@ -4,7 +4,7 @@ class Model_User_Pet extends ORM {
 	
 	static public function pet_exists($id)
 	{
-		$pet = ORM::Factory('User_Pet', $id);
+		$pet = ORM::factory('User_Pet', $id);
 
 		return $pet->loaded();
 	}
