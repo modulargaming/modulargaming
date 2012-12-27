@@ -1,9 +1,8 @@
 <h2>{{topic.title}}</h2>
 
-<ul>
 {{#posts}}
-    <li>
-        <a href="{{href}}">{{content}}</a>
-    </li>
+    <p>
+        <a href="{{href}}">{{title}}</a><br />
+	{{content}}
+    </p>
 {{/posts}}
-</ul>
