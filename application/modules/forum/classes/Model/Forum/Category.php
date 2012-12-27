@@ -9,4 +9,29 @@ class Model_Forum_Category extends ORM {
 		),
 	);
 
+        public function rules()
+        {
+                return array(
+                        'name' => array(
+                                array('not_empty'),
+                                array('max_length', array(':value', 255)),
+                                array(array($this, 'unique'), array('name', ':value')),
+                        ),
+                );
+        }
+
+        public function create_category($values, $expected)
+        {
+                return $this->values($values, $expected)
+                        ->create();
+        }
+
+        static public function category_exists($id)
+        {
+                $category = ORM::factory('Forum_Category', $id);
+
+                return $category->loaded();
+        }
+
+
 }

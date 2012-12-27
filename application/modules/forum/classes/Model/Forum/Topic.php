@@ -20,5 +20,34 @@ class Model_Forum_Topic extends ORM {
                 ),
         );
 
+        public function rules()
+        {
+                return array(
+                        'name' => array(
+                                array('not_empty'),
+                                array('max_length', array(':value', 255)),
+                                array(array($this, 'unique'), array('name', ':value')),
+                        ),
+                );
+        }
+
+        public function create_topic($values, $expected)
+        {
+                // Validation for category
+                $extra_validation = Validation::Factory($values)
+                        ->rule('category_id', 'Model_Forum_Category::category_exists');
+
+                return $this->values($values, $expected)
+                        ->create($extra_validation);
+        }
+
+        static public function topic_exists($id)
+        {
+                $topic = ORM::factory('Forum_Topic', $id);
+
+                return $topic->loaded();
+        }
+
+
 
 }

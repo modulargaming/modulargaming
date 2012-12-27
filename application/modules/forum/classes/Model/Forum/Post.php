@@ -15,5 +15,34 @@ class Model_Forum_Post extends ORM {
         );
 
 
+        public function rules()
+        {
+                return array(
+                        'name' => array(
+                                array('not_empty'),
+                                array('max_length', array(':value', 255)),
+                                array(array($this, 'unique'), array('name', ':value')),
+                        ),
+                );
+        }
+
+        public function create_post($values, $expected)
+        {
+                // Validation for topic
+                $extra_validation = Validation::Factory($values)
+                        ->rule('topic_id', 'Model_Forum_Topic::topic_exists');
+
+                return $this->values($values, $expected)
+                        ->create($extra_validation);
+        }
+
+        static public function post_exists($id)
+        {
+                $post = ORM::factory('Forum_Post', $id);
+
+                return $post->loaded();
+        }
+
+
 }
 
