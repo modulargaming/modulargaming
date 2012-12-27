@@ -81,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `forum_posts` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `topic_id` int(6) NOT NULL,
   `user_id` int(6) NOT NULL,
-  `title` varchar(25) NOT NULL,
   `content` varchar(500) NOT NULL,
   `created` int(10) NOT NULL,
   PRIMARY KEY (`id`)

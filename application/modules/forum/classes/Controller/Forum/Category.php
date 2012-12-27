@@ -33,9 +33,8 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 		$topics = $category->topics->find_all();
 
-		$this->view = new View_Forum_Category_Create;
+		$this->view = new View_Forum_Create;
 		$this->view->category = $category;
-		$this->view->topics = $topics;
 	}
 
 }

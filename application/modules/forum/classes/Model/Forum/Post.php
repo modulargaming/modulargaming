@@ -16,12 +16,6 @@ class Model_Forum_Post extends ORM {
 	public function rules()
 	{
 		return array(
-			'title' => array(
-				array('not_empty'),
-				array('max_length', array(':value', 50)),
-				array(array($this, 'unique'), array('name', ':value')),
-			),
-
 			'content' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 1024)),
