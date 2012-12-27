@@ -23,11 +23,12 @@ class Model_Forum_Topic extends ORM {
         public function rules()
         {
                 return array(
-                        'name' => array(
+                        'title' => array(
                                 array('not_empty'),
-                                array('max_length', array(':value', 255)),
+                                array('max_length', array(':value', 50)),
                                 array(array($this, 'unique'), array('name', ':value')),
                         ),
+
                 );
         }
 
