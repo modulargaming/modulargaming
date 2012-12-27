@@ -30,4 +30,11 @@ class View_Forum_Category extends View_Base {
 		return $topics;
 	}
 
+	public function href()
+	{
+		return array(
+				'create' => Route::url('forum/category/create', array('id' => $this->category->id)),
+			);
+	}
+
 }
