@@ -8,4 +8,12 @@ class Model_Forum_Topic extends ORM {
 		)
 	);
 
+        protected $_has_many = array(
+                'posts' => array(
+                        'model'       => 'Forum_Post',
+                        'foreign_key' => 'topic_id',
+                ),
+        );
+
+
 }
