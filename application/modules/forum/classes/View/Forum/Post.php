@@ -2,20 +2,20 @@
 
 class View_Forum_Post extends View_Base {
 
-        public $post;
+	public $post;
 
-        public function title()
-        {
-                return 'Forum - ' . $this->post['title'];
-        }
+	public function title()
+	{
+		return 'Forum - ' . $this->post['title'];
+	}
 
-        public function post()
-        {
-                $post = $this->post;
-                $post['created'] = Date::format($post['created']);
+	public function post()
+	{
+		$post = $this->post;
+		$post['created'] = Date::format($post['created']);
 
-                return $post;
-        }
+		return $post;
+	}
 
 
 }

@@ -18,7 +18,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 		$this->view = new View_Forum_Topic;
 		$this->view->topic = $topic;
 		$this->view->posts = $posts;
-}
+	}
 
 }
 

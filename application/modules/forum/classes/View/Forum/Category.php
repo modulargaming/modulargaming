@@ -33,8 +33,8 @@ class View_Forum_Category extends View_Base {
 	public function href()
 	{
 		return array(
-				'create' => Route::url('forum/category/create', array('id' => $this->category->id)),
-			);
+			'create' => Route::url('forum/category/create', array('id' => $this->category->id)),
+		);
 	}
 
 }

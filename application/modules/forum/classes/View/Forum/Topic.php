@@ -2,34 +2,34 @@
 
 class View_Forum_Topic extends View_Base {
 
-        public $topic;
-        public $posts;
+	public $topic;
+	public $posts;
 
-        public function title()
-        {
-                return 'Forum - ' . $this->topic->title;
-        }
+	public function title()
+	{
+		return 'Forum - ' . $this->topic->title;
+	}
 
-        public function topic()
-        {
-                return $this->topic->as_array();
-        }
+	public function topic()
+	{
+		return $this->topic->as_array();
+	}
 
-        public function posts()
-        {
-                $posts = array();
+	public function posts()
+	{
+		$posts = array();
 
-                foreach ($this->posts as $post)
-                {
-                        $posts[] = array(
-                                'title' => $post->title,
-                                'href' => Route::url('forum/post', array('id' => $post->id)),
+		foreach ($this->posts as $post)
+		{
+			$posts[] = array(
+				'title' => $post->title,
+				'href' => Route::url('forum/post', array('id' => $post->id)),
 				'content' => $post->content,
-                        );
-                }
+			);
+		}
 
-                return $posts;
-        }
+		return $posts;
+	}
 
 }
 
