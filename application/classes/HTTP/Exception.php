@@ -23,8 +23,8 @@ class HTTP_Exception extends Kohana_HTTP_Exception {
 		else
 		{
 			$response = Response::factory();
-			$view ='View_Error_' . $this->getCode();
-			$view = new $view;
+			$view = new View_Error;
+			$view->title = $this->getCode();
 			$view->message = $this->getMessage();
 			$renderer = Kostache_Layout::factory();
 			$response->body ($renderer->render($view));
