@@ -7,6 +7,8 @@ class Controller_Forum_Index extends Controller_Frontend {
 		$categories = ORM::factory('Forum_Category')
 			->find_all();
 
+		Breadcrumb::add('Forum', Route::url('forum'));
+
 		$this->view = new View_Forum_Index;
 		$this->view->categories = $categories;
 	}

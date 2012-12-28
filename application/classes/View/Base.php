@@ -33,4 +33,32 @@ class View_Base
 		return Hint::get_once();
 	}
 
+	public function breadcrumb()
+	{
+		$breadcrumb = array();
+
+		//Breadcrumb::get();
+
+		foreach (Breadcrumb::get() as $item)
+		{
+			$breadcrumb[] = array(
+				'title'   => $item['title'],
+				'href'    => $item['href'],
+				'active'  => $item['href'] == Request::current()->url(),
+				'divider' => TRUE,
+			);
+		}
+
+		// Last breadcrumb should not have a divider
+		$breadcrumb[count($breadcrumb) - 1]['divider'] = FALSE;
+
+		return $breadcrumb;
+	}
+
+	public function has_breadcrumb()
+	{
+		$breadcrumb = Breadcrumb::get();
+		return ! empty($breadcrumb);
+	}
+
 }

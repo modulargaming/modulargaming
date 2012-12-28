@@ -22,9 +22,8 @@ class View_Forum_Topic extends View_Base {
 		foreach ($this->posts as $post)
 		{
 			$posts[] = array(
-				'title' => $post->title,
-				'href' => Route::url('forum/post', array('id' => $post->id)),
 				'content' => $post->content,
+				'href' => Route::url('forum/post', array('id' => $post->id)),
 			);
 		}
 

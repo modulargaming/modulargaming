@@ -15,6 +15,9 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 		$topics = $category->topics->find_all();
 
+		Breadcrumb::add('Forum', Route::url('forum'));
+		Breadcrumb::add($category->title, Route::url('forum/category', array('id' => $id)));
+
 		$this->view = new View_Forum_Category;
 		$this->view->category = $category;
 		$this->view->topics = $topics;
