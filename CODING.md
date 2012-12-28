@@ -1,6 +1,3 @@
-
-[Permalink](http://kohanaframework.org/3.3/guide/kohana/conventions "Permalink to Conventions and Style | Kohana User Guide")
-
 # Conventions and Style | Kohana User Guide
 
 It is encouraged that you follow Kohana's coding style. This makes code more readable and allows for easier code sharing and contributing.
@@ -19,33 +16,19 @@ The following conventions apply:
 
 Remember that in a class, an underscore means a new directory. Consider the following examples:
 
-Class Name
+Class Name			File Path
 
-File Path
+* Controller_Template		classes/Controller/Template.php
 
-Controller_Template
+* Model_User			classes/Model/User.php
 
-classes/Controller/Template.php
+* Model_BlogPost		classes/Model/BlogPost.php
 
-Model_User
+* Database			classes/Database.php
 
-classes/Model/User.php
+* Database_Query		classes/Database/Query.php
 
-Model_BlogPost
-
-classes/Model/BlogPost.php
-
-Database
-
-classes/Database.php
-
-Database_Query
-
-classes/Database/Query.php
-
-Form
-
-classes/Form.php
+* Form				classes/Form.php
 
 ## Coding Standards
 
