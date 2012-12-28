@@ -3,38 +3,6 @@
 
 # Conventions and Style | Kohana User Guide
 
-[Conventions and Coding Style][1]  
-&nbsp;&nbsp;&nbsp;&nbsp; [Class Names and File Location][2]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Examples][3]  
-&nbsp;&nbsp;&nbsp;&nbsp; [Coding Standards][4]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Brackets][5]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Curly Brackets][6]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Class Brackets][7]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Empty Brackets][8]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Array Brackets][9]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Opening Parenthesis][10]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Closing parenthesis][11]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Single Dimension][12]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Multidimensional][13]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Arrays as Function Arguments][14]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Naming Conventions][15]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Classes][16]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Functions and Methods][17]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Variables][18]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Indentation][19]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [String Concatenation][20]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Single Line Statements][21]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Comparison Operations][22]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Switch Structures][23]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Parentheses][24]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Ternaries][25]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Type Casting][26]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Constants][27]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Comments][28]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [One-line Comments][29]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Regular Expressions][30]  
-
-
 It is encouraged that you follow Kohana's coding style. This makes code more readable and allows for easier code sharing and contributing.
 
 ## Class Names and File Location
@@ -499,39 +467,3 @@ Finally, please note that the $ character for matching the position at the end o
     
     preg_match('/^.%2B@.%2B$/', $str);  // TRUE
     preg_match('/^.%2B@.%2B$/D', $str); // FALSE
-
- [1]: http://kohanaframework.org#conventions-and-coding-style
- [2]: http://kohanaframework.org#class-names-and-file-location
- [3]: http://kohanaframework.org#class-name-examples
- [4]: http://kohanaframework.org#coding-standards
- [5]: http://kohanaframework.org#brackets
- [6]: http://kohanaframework.org#curly-brackets
- [7]: http://kohanaframework.org#class-brackets
- [8]: http://kohanaframework.org#empty-brackets
- [9]: http://kohanaframework.org#array-brackets
- [10]: http://kohanaframework.org#opening-parenthesis
- [11]: http://kohanaframework.org#closing-parenthesis
- [12]: http://kohanaframework.org#single-dimension
- [13]: http://kohanaframework.org#multidimensional
- [14]: http://kohanaframework.org#arrays-as-function-arguments
- [15]: http://kohanaframework.org#naming-conventions
- [16]: http://kohanaframework.org#classes
- [17]: http://kohanaframework.org#functions-and-methods
- [18]: http://kohanaframework.org#variables
- [19]: http://kohanaframework.org#indentation
- [20]: http://kohanaframework.org#string-concatenation
- [21]: http://kohanaframework.org#single-line-statements
- [22]: http://kohanaframework.org#comparison-operations
- [23]: http://kohanaframework.org#switch-structures
- [24]: http://kohanaframework.org#parentheses
- [25]: http://kohanaframework.org#ternaries
- [26]: http://kohanaframework.org#type-casting
- [27]: http://kohanaframework.org#constants
- [28]: http://kohanaframework.org#comments
- [29]: http://kohanaframework.org#one-line-comments
- [30]: http://kohanaframework.org#regular-expressions
- [31]: http://kohanaframework.org/3.3/guide/kohana/autoloading
- [32]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
- [33]: http://kohanaframework.org/3.3/guide/kohana/files
- [34]: http://en.wikipedia.org/wiki/Indent_style#BSD.2FAllman_style
- [35]: http://blog.php-security.org/archives/76-Holes-in-most-preg_match-filters.html  
