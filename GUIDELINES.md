@@ -28,7 +28,7 @@ Brackets
 
 Please use BSD/Allman Style bracketing. Brackets are always on their own line. The exception to this rule is the opening bracket for a class, which can be on the same line.
 
-?
+`
 if ($foo == 'bar')
 {
     $baz->bar();
@@ -37,9 +37,10 @@ else
 {
     $baz->default();
 }
+`
  
 // The opening bracket for a class can be on the same line
-Class Foobar {
+`Class Foobar {`
 
 ## Naming Conventions
 
@@ -47,44 +48,51 @@ Kohana uses under_score naming, not camelCase naming.
 
 ### Classes
 
-?
+`
 // Controller class, uses Controller_ prefix
 class Controller_Apple extends Controller {
- 
+
 // Model class, uses Model_ prefix
 class Model_Cheese extends Model {
- 
+
 // Regular class
 class Peanut {
+`
 
 When creating an instance of a class, don't use parentheses if you're not passing something on to the constructor:
 
-?
+`
 // Correct:
 $db = new Database;
- 
+
 // Incorrect:
 $db = new Database();
+`
 
 ## Functions and Methods
 
 Functions should be all lowercase, and use under_scores to separate words:
 
-?
+`
 function drink_beverage($beverage)
 {
+`
 
 ## Variables
 
 All variables should be lowercase and use under_score, not camelCase:
 
-?
-// Correct:
+
+`
+Correct:
 $foo = 'bar';
 $long_example = 'uses underscores';
- 
+`
+
+` 
 // Incorrect:
 $weDontWantThis = 'understood?';
+`
 
 ## Indentation
 
@@ -92,30 +100,31 @@ You must use tabs to indent your code. Using spaces for tabbing is strictly forb
 
 Vertical spacing (for multi-line) is done with spaces. Tabs are not good for vertical alignment because different people have different tab widths.
 
-?
+`
 $text = 'this is a long text block that is wrapped. Normally, we aim for '
       .'wrapping at 80 chars. Vertical alignment is very important for '
       .'code readability. Remember that all indentation is done with tabs,'
       .'but vertical alignment should be completed with spaces, after '
       .'indenting with tabs.';
+`
 
 ## String concatenation
 
 Do not put spaces around the concatenation operator:
 
-?
+`
 // Correct:
 $str = 'one'.$var.'two';
  
 // Incorrect:
 $str = 'one'. $var .'two';
 $str = 'one' . $var . 'two';
-
+`
 ## Single Line Statements
 
 Single-line IF statements should only be used when breaking normal execution (e.g. return or continue):
 
-?
+`
 // Acceptable:
 if ($foo == $bar)
     return $foo;
@@ -133,31 +142,35 @@ if ($foo == $bar)
 if ($baz == $bun)
     $baz = $bar + 2;
 
+`
+
 ## Comparison Operations
 
 Please use OR and AND for comparison:
 
-?
+`
 // Correct:
 if (($foo AND $bar) OR ($b AND $c))
  
 // Incorrect:
 if (($foo && $bar) || ($b && $c))
+`
 
 Please use elseif, not else if:
 
-?
+`
 // Correct:
 elseif ($bar)
  
 // Incorrect:
 else if($bar)
+`
 
 ## Switch structures
 
 Each case, break and default should be on a separate line. The block inside a case or default must be indented by 1 tab.
 
-?
+`
 switch ($var)
 {
     case 'bar':
@@ -171,12 +184,13 @@ switch ($var)
         echo 'bye';
     break;
 }
+`
 
 ## Parentheses
 
 There should be one space after statement name, followed by a parenthesis. The ! (bang) character must have a space on either side to ensure maximum readability. Except in the case of a bang or type casting, there should be no whitespace after an opening parenthesis or before a closing parenthesis.
 
-?
+`
 // Correct:
 if ($foo == $bar)
 if ( ! $foo)
@@ -187,51 +201,57 @@ if(!$foo)
 if ((int) $foo)
 if ( $foo == $bar )
 if (! $foo)
+`
 
 ## Ternaries
 
 All ternary operations should follow a standard format. Use parentheses around expressions only, not around just variables.
 
-?
+`
 $foo = ($bar == $foo) ? $foo : $bar;
 $foo = $bar ? $foo : $bar;
+`
 
 All comparisons and operations must be done inside of a parentheses group:
 
-?
+`
 $foo = ($bar > 5) ? ($bar + $foo) : strlen($bar);
+`
 
 When separating complex ternaries (ternaries where the first part goes beyond ~80 chars) into multiple lines, spaces should be used to line up operators, which should be at the front of the successive lines:
 
-?
+`
 $foo = ($bar == $foo)
      ? $foo
      : $bar;
+`
 
 ## Type Casting
 
 Type casting should be done with spaces on each side of the cast:
 
-?
+`
 // Correct:
 $foo = (string) $bar;
 if ( (string) $bar)
  
 // Incorrect:
 $foo = (string)$bar;
+`
 
 When possible, please use type casting instead of ternary operations:
 
-?
+`
 // Correct:
 $foo = (bool) $bar;
  
 // Incorrect:
 $foo = ($bar == TRUE) ? TRUE : FALSE;
+`
 
 When casting type to integer or boolean, use the short format:
 
-?
+`
 // Correct:
 $foo = (int) $bar;
 $foo = (bool) $bar;
@@ -239,12 +259,13 @@ $foo = (bool) $bar;
 // Incorrect:
 $foo = (integer) $bar;
 $foo = (boolean) $bar;
+`
 
 ## Constants
 
 Always use uppercase for constants:
 
-?
+`
 // Correct:
 define('MY_CONSTANT', 'my_value');
 $a = TRUE;
@@ -254,25 +275,29 @@ $b = NULL;
 define('MyConstant', 'my_value');
 $a = True;
 $b = null;
+`
 
 Place constant comparisons at the end of tests:
 
-?
+`
 // Correct:
 if ($foo !== FALSE)
  
 // Incorrect:
 if (FALSE !== $foo)
+`
 
 This is a slightly controversial choice, so I will explain the reasoning. If we were to write the previous example in plain English, the correct example would read:
 
-?
+`
 if variable $foo is not exactly FALSE
+`
 
 And the incorrect example would read:
 
-?
+`
 if FALSE is not exactly variable $foo
+`
 
 Since we are reading left to right, it simply doesn't make sense to put the constant first.
 Comments
@@ -280,45 +305,49 @@ One-line comments
 
 Use //, preferably above the line of code you're commenting on. Leave a space after it and start with a capital. Never use #.
 
-?
+`
 // Correct
  
 //Incorrect
 // incorrect
-# Incorrect
+'#' Incorrect
+`
 
 ## Regular expressions
 
 When coding regular expressions please use PCRE rather than the POSIX flavor. PCRE is considered more powerful and faster.
 
-?
+`
 // Correct:
 if (preg_match('/abc/i'), $str)
  
 // Incorrect:
 if (eregi('abc', $str))
+`
 
 Use single quotes around your regular expressions rather than double quotes. Single-quoted strings are more convenient because of their simplicity. Unlike double-quoted strings they don't support variable interpolation nor integrated backslash sequences like \n or \t, etc.
 
-?
+`
 // Correct:
 preg_match('/abc/', $str);
  
 // Incorrect:
 preg_match("/abc/", $str);
+`
 
 When performing a regular expression search and replace, please use the $n notation for backreferences. This is preferred over \n.
 
-?
+`
 // Correct:
 preg_replace('/(\d+) dollar/', '$1 euro', $str);
  
 // Incorrect:
 preg_replace('/(\d+) dollar/', '\\1 euro', $str);
+`
 
 Finally, please note that the $ character for matching the position at the end of the line allows for a following newline character. Use the D modifier to fix this if needed. More info.
 
-?
+`
 $str = "email@example.com<script type="text/javascript">
 /* <![CDATA[ */
 (function(){try{var s,a,i,j,r,c,l,b=document.getElementsByTagName("script");l=b[b.length-1].previousSibling;a=l.getAttribute('data-cfemail');if(a){s='';r=parseInt(a.substr(0,2),16);for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}s=document.createTextNode(s);l.parentNode.replaceChild(s,l);}}catch(e){}})();
@@ -327,8 +356,8 @@ $str = "email@example.com<script type="text/javascript">
  
 preg_match('/^.+@.+$/', $str);  // TRUE
 preg_match('/^.+@.+$/D', $str); // FALSE
+`
 
 
-
-© 2008–2010 Kohana Team
+Based off Conventions and Style by Kohana.
 
