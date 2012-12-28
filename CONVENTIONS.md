@@ -450,3 +450,39 @@ Finally, please note that the $ character for matching the position at the end o
     
     preg_match('/^.%2B@.%2B$/', $str);  // TRUE
     preg_match('/^.%2B@.%2B$/D', $str); // FALSE
+
+ [1]: http://kohanaframework.org#conventions-and-coding-style
+ [2]: http://kohanaframework.org#class-names-and-file-location
+ [3]: http://kohanaframework.org#class-name-examples
+ [4]: http://kohanaframework.org#coding-standards
+ [5]: http://kohanaframework.org#brackets
+ [6]: http://kohanaframework.org#curly-brackets
+ [7]: http://kohanaframework.org#class-brackets
+ [8]: http://kohanaframework.org#empty-brackets
+ [9]: http://kohanaframework.org#array-brackets
+ [10]: http://kohanaframework.org#opening-parenthesis
+ [11]: http://kohanaframework.org#closing-parenthesis
+ [12]: http://kohanaframework.org#single-dimension
+ [13]: http://kohanaframework.org#multidimensional
+ [14]: http://kohanaframework.org#arrays-as-function-arguments
+ [15]: http://kohanaframework.org#naming-conventions
+ [16]: http://kohanaframework.org#classes
+ [17]: http://kohanaframework.org#functions-and-methods
+ [18]: http://kohanaframework.org#variables
+ [19]: http://kohanaframework.org#indentation
+ [20]: http://kohanaframework.org#string-concatenation
+ [21]: http://kohanaframework.org#single-line-statements
+ [22]: http://kohanaframework.org#comparison-operations
+ [23]: http://kohanaframework.org#switch-structures
+ [24]: http://kohanaframework.org#parentheses
+ [25]: http://kohanaframework.org#ternaries
+ [26]: http://kohanaframework.org#type-casting
+ [27]: http://kohanaframework.org#constants
+ [28]: http://kohanaframework.org#comments
+ [29]: http://kohanaframework.org#one-line-comments
+ [30]: http://kohanaframework.org#regular-expressions
+ [31]: http://kohanaframework.org/3.3/guide/kohana/autoloading
+ [32]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
+ [33]: http://kohanaframework.org/3.3/guide/kohana/files
+ [34]: http://en.wikipedia.org/wiki/Indent_style#BSD.2FAllman_style
+ [35]: http://blog.php-security.org/archives/76-Holes-in-most-preg_match-filters.html  
