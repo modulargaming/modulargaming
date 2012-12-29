@@ -27,7 +27,7 @@ class Controller_Forum_Category extends Controller_Frontend {
 		$topics = $this->category->topics->find_all();
 
 		$this->view = new View_Forum_Category_Index;
-		$this->view->category = $category;
+		$this->view->category = $this->category;
 		$this->view->topics = $topics;
 	}
 
