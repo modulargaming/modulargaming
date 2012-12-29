@@ -11,13 +11,14 @@ class Model_Forum_Post extends ORM {
 		'topic' => array(
 			'model' => 'Forum_Topic',
 		),
-	);
-
-	protected $_has_one = array(
 		'user' => array(
 			'model' => 'User',
 			'foreign_key' => 'user_id',
 		),
+	);
+
+	protected $_load_with = array(
+		'user'
 	);
 
 

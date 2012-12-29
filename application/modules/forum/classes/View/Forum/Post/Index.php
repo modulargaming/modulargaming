@@ -6,7 +6,7 @@ class View_Forum_Post_Index extends View_Base {
 
 	public function title()
 	{
-		return 'Forum - ' . $this->post['title'];
+		return 'Forum - ';
 	}
 
 	public function post()
