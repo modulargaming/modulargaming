@@ -25,7 +25,7 @@ class View_Forum_Category_Index extends View_Base {
 				'title' => $topic->title,
 				'href' => Route::url('forum/topic', array('id' => $topic->id)),
 				'created' =>  Date::format($topic->created),
-				'user_id' => $topic->user_id,
+				'user' => $topic->user->as_array()
 			);
 		}
 
