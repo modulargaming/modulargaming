@@ -5,11 +5,10 @@
 {{/pets_count}}
 {{#pets}}
 		<li class="span4">
-			<div class="thumbnail">
-				<img src="/mg/assets/img/pets/{{race}}/{{colour.image}}" alt="">
+			<div class="thumbnail center">
+				<img src="{{base_url}}assets/img/pets/{{race}}/{{colour.image}}" alt="">
 				<div class="caption">
 					<h3>{{name}}</h3>
-					<p>Pet stats</p>
 					<form method="post">
 						<input type="hidden" name="csrf" value="{{csrf}}">
 						<button class="btn" name="adopt" value="{{id}}">Adopt</button>
