@@ -19,7 +19,6 @@ class Model_Forum_Post extends ORM {
 			'content' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 1024)),
-				array(array($this, 'unique'), array('name', ':value')),
 			),
 		);
 	}
