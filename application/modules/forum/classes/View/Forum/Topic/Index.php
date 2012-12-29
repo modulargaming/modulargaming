@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Forum_Topic extends View_Base {
+class View_Forum_Topic_Index extends View_Base {
 
 	public $topic;
 	public $posts;
@@ -28,6 +28,16 @@ class View_Forum_Topic extends View_Base {
 		}
 
 		return $posts;
+	}
+
+	public function href()
+	{
+		return array(
+			'create' => Route::url('forum/topic', array(
+				'action' => 'create',
+				'id'     => $this->topic->id
+			)),
+		);
 	}
 
 }

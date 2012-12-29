@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Forum_Category extends View_Base {
+class View_Forum_Category_Index extends View_Base {
 
 	public $category;
 	public $topics;

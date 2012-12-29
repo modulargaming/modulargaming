@@ -4,7 +4,9 @@
 
 {{#posts}}
     <p>
-        <a href="{{href}}">{{title}}</a><br />
+        {{title}}<br />
 	{{content}}
     </p>
 {{/posts}}
+
+<a href="{{href.create}}" class="btn">New post</a>

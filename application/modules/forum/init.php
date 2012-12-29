@@ -14,7 +14,7 @@ Route::set('forum/category', 'forum/category/<id>(/<action>)', array('id' => '[0
 		'action'     => 'view',
 	));
 
-Route::set('forum/topic', 'forum/topic/<id>', array('id' => '[0-9]+'))
+Route::set('forum/topic', 'forum/topic/<id>(/<action>)', array('id' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'forum',
 		'controller' => 'topic',

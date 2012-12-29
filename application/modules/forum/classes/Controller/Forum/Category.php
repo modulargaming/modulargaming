@@ -16,9 +16,9 @@ class Controller_Forum_Category extends Controller_Frontend {
 		$topics = $category->topics->find_all();
 
 		Breadcrumb::add('Forum', Route::url('forum'));
-		Breadcrumb::add($category->title, Route::url('forum/category', array('id' => $id)));
+		Breadcrumb::add($category->title, Route::url('forum/category', array('id' => $category->id)));
 
-		$this->view = new View_Forum_Category;
+		$this->view = new View_Forum_Category_Index;
 		$this->view->category = $category;
 		$this->view->topics = $topics;
 	}
@@ -34,10 +34,53 @@ class Controller_Forum_Category extends Controller_Frontend {
 			throw HTTP_Exception::factory('404', 'Forum category not found');
 		}
 
-		$topics = $category->topics->find_all();
 
-		$this->view = new View_Forum_Create;
-		$this->view->category = $category;
+		if ($_POST)
+		{
+
+			try
+			{
+				$array = Arr::merge($this->request->post(), array(
+					'category_id' => $category->id,
+					'created'      => time(),
+					'user_id'	=> $this->user->id,
+				));
+
+				$topic = ORM::factory('Forum_Topic')
+					->create_topic($array, array(
+						'category_id',
+						'user_id',
+						'title',
+						'created',
+					));
+
+				$array = Arr::merge($array, array(
+					'topic_id' => $topic->id,
+					'created'      => time(),
+					'user_id'	=> $this->user->id,
+				));
+
+				$post = ORM::factory('Forum_Post')
+					->create_post($array, array(
+						'topic_id',
+						'user_id',
+						'content',
+						'created',
+					));
+
+				Hint::success('You have created a topic');
+				$this->redirect("forum/topic/$topic->id");
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				Hint::error($e->errors('models'));
+			}
+
+		}
+
+		$this->view = new View_Forum_Topic_Create;
+
+
 	}
 
 }

@@ -1,0 +1,18 @@
+<form method="post">
+	<fieldset>
+		<legend>Create a Topic</legend>
+
+		<input type="hidden" name="csrf" value="{{csrf}}">
+
+		<label for="title">Title</label>
+		<input type="text" name="title">
+
+		<label for="text">Message</label>
+		<textarea rows="4" cols="50" name="content"></textarea>
+
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Create</button>
+		</div>
+		
+	</fieldset>
+</form>
