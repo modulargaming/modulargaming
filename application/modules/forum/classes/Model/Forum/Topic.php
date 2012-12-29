@@ -21,6 +21,13 @@ class Model_Forum_Topic extends ORM {
 		),
 	);
 
+	protected $_has_one = array(
+		'user' => array(
+			'model' => 'User',
+			'foreign_key' => 'user_id',
+		),
+	);
+
 	public function rules()
 	{
 		return array(

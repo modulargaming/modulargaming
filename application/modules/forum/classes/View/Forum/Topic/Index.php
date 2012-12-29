@@ -24,7 +24,9 @@ class View_Forum_Topic_Index extends View_Base {
 			$posts[] = array(
 				'content' => $post->content,
 				'href' => Route::url('forum/post', array('id' => $post->id)),
-				'created' =>  Date::format($post->created)
+				'created' =>  Date::format($post->created),
+				'user_id' => $post->user_id,
+
 			);
 		}
 

@@ -10,8 +10,16 @@ class Model_Forum_Post extends ORM {
 	protected $_belongs_to = array(
 		'topic' => array(
 			'model' => 'Forum_Topic',
-		)
+		),
 	);
+
+	protected $_has_one = array(
+		'user' => array(
+			'model' => 'User',
+			'foreign_key' => 'user_id',
+		),
+	);
+
 
 	public function rules()
 	{

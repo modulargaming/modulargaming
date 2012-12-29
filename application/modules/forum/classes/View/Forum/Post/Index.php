@@ -13,7 +13,7 @@ class View_Forum_Post_Index extends View_Base {
 	{
 		$post = $this->post;
 		$post['created'] = Date::format($post['created']);
-
+		$post['user_id'] = $post['user_id'];
 		return $post;
 	}
 
