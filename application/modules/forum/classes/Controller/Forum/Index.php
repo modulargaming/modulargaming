@@ -2,6 +2,8 @@
 
 class Controller_Forum_Index extends Controller_Frontend {
 
+	protected $protected = TRUE;
+
 	public function action_index()
 	{
 		$categories = ORM::factory('Forum_Category')

@@ -2,6 +2,8 @@
 
 class Controller_Forum_Topic extends Controller_Frontend {
 
+	protected $protected = TRUE;
+
 	public function action_view()
 	{
 		$id = $this->request->param('id');
