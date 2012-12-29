@@ -4,9 +4,9 @@
 	<meta charset=utf-8>
 	<title>{{title}} - Modular Gaming</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<link rel="stylesheet" href="{{base_url}}assets/css/bootstrap.css">
     <link rel="stylesheet" href="{{base_url}}assets/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="{{base_url}}assets/css/bootstrap-wysihtml5.css">
     <link rel="stylesheet" href="{{base_url}}assets/css/style.css">
 </head>
 <body>
@@ -89,8 +89,12 @@
 		</footer>
 	</div>
 	
+	<script src="{{base_url}}assets/js/wysihtml5.js"></script>
 	<script src="{{base_url}}assets/js/jquery.js"></script>
 	<script src="{{base_url}}assets/js/bootstrap.min.js"></script>
-
+	<script src="{{base_url}}assets/js/bootstrap-wysihtml5.js"></script>
+	<script>
+		$('.textarea').wysihtml5();
+	</script>
 </body>
 </html>
