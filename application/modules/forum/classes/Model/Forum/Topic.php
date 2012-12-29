@@ -12,6 +12,10 @@ class Model_Forum_Topic extends ORM {
 		'category' => array(
 			'model' => 'Forum_Category',
 		),
+		'user' => array(
+			'model' => 'User',
+			'foreign_key' => 'user_id',
+		),
 	);
 
 	protected $_has_many = array(
@@ -21,11 +25,8 @@ class Model_Forum_Topic extends ORM {
 		),
 	);
 
-	protected $_has_one = array(
-		'user' => array(
-			'model' => 'User',
-			'foreign_key' => 'user_id',
-		),
+	protected $_load_with = array(
+		'user'
 	);
 
 	public function rules()

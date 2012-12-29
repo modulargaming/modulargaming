@@ -10,7 +10,7 @@ class Model_Forum_Category extends ORM {
 	);
 
 	protected $_has_one = array(
-		'user' => array(
+		'user_id' => array(
 			'model' => 'User',
 			'foreign_key' => 'user_id',
 		),
