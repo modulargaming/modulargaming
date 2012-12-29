@@ -24,6 +24,7 @@ class View_Forum_Category_Index extends View_Base {
 			$topics[] = array(
 				'title' => $topic->title,
 				'href' => Route::url('forum/topic', array('id' => $topic->id)),
+				'created' =>  Date::format($topic->created),
 			);
 		}
 
