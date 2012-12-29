@@ -3,40 +3,40 @@
 class Controller_Forum_Topic extends Controller_Frontend {
 
 	protected $protected = TRUE;
+	protected $topic;
+
+	public function before()
+	{
+		parent::before();
+
+		$id = $this->request->param('id');
+		$this->topic = ORM::Factory('Forum_Topic', $id);
+
+		if ( ! $this->topic->loaded())
+		{
+			throw HTTP_Exception::factory('404', 'Forum topic not found');
+		}
+
+		Breadcrumb::add('Forum', Route::url('forum'));
+		Breadcrumb::add($this->topic->category->title, Route::url('forum/category', array('id' => $this->topic->category->id)));
+		Breadcrumb::add($this->topic->title, Route::url('forum/topic', array('id' => $this->topic->id)));
+	}
 
 	public function action_view()
 	{
-		$id = $this->request->param('id');
-
-		$topic = ORM::factory('Forum_Topic', $id);
-
-		if ( ! $topic->loaded())
-		{
-			throw HTTP_Exception::factory('404', 'Forum topic not found');
-		}
-
-		$posts = $topic->posts->find_all();
-
-		Breadcrumb::add('Forum', Route::url('forum'));
-		Breadcrumb::add($topic->category->title, Route::url('forum/category', array('id' => $topic->category->id)));
-		Breadcrumb::add($topic->title, Route::url('forum/topic', array('id' => $topic->id)));
+		$posts = $this->topic->posts->find_all();
 
 		$this->view = new View_Forum_Topic_Index;
-		$this->view->topic = $topic;
+		$this->view->topic = $this->topic;
 		$this->view->posts = $posts;
 	}
 
-	public function action_create()
+	public function action_reply()
 	{
-		$id = $this->request->param('id');
-
-		$topic = ORM::factory('Forum_Topic', $id);
-
-		if ( ! $topic->loaded())
-		{
-			throw HTTP_Exception::factory('404', 'Forum topic not found');
-		}
-
+		Breadcrumb::add('Reply', Route::url('forum/topic', array(
+			'id'     => $this->topic->id,
+			'action' => 'reply'
+		)));
 
 		if ($_POST)
 		{
@@ -44,7 +44,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 			try
 			{
 				$array = Arr::merge($this->request->post(), array(
-					'topic_id' => $topic->id,
+					'topic_id' => $this->topic->id,
 					'user_id'	=> $this->user->id,
 				));
 
@@ -66,7 +66,6 @@ class Controller_Forum_Topic extends Controller_Frontend {
 		}
 
 		$this->view = new View_Forum_Post_Create;
-
 
 	}
 

@@ -25,6 +25,7 @@ class View_Forum_Topic_Index extends View_Base {
 				'content' => $post->content,
 				'href' => Route::url('forum/post', array('id' => $post->id)),
 				'created' =>  Date::format($post->created),
+				'user' => $post->user->as_array()
 			);
 		}
 
@@ -34,8 +35,8 @@ class View_Forum_Topic_Index extends View_Base {
 	public function href()
 	{
 		return array(
-			'create' => Route::url('forum/topic', array(
-				'action' => 'create',
+			'reply' => Route::url('forum/topic', array(
+				'action' => 'reply',
 				'id'     => $this->topic->id
 			)),
 		);
