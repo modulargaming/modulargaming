@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sender_id` int(11) NOT NULL,
   `receiver_id` int(11) NOT NULL,
-  `time` int(10) NOT NULL,
+  `created` int(10) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `text` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
