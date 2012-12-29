@@ -3,22 +3,28 @@
 class Controller_Forum_Category extends Controller_Frontend {
 
 	protected $protected = TRUE;
+	protected $category;
 
-	public function action_view()
+	public function before()
 	{
+		parent::before();
+
 		$id = $this->request->param('id');
 
-		$category = ORM::factory('Forum_Category', $id);
+		$this->category = ORM::factory('Forum_Category', $id);
 
-		if ( ! $category->loaded())
+		if ( ! $this->category->loaded())
 		{
 			throw HTTP_Exception::factory('404', 'Forum category not found');
 		}
 
-		$topics = $category->topics->find_all();
-
 		Breadcrumb::add('Forum', Route::url('forum'));
-		Breadcrumb::add($category->title, Route::url('forum/category', array('id' => $category->id)));
+		Breadcrumb::add($this->category->title, Route::url('forum/category', array('id' => $id)));
+	}
+
+	public function action_view()
+	{
+		$topics = $this->category->topics->find_all();
 
 		$this->view = new View_Forum_Category_Index;
 		$this->view->category = $category;
@@ -27,23 +33,13 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 	public function action_create()
 	{
-		$id = $this->request->param('id');
-
-		$category = ORM::factory('Forum_Category', $id);
-
-		if ( ! $category->loaded())
-		{
-			throw HTTP_Exception::factory('404', 'Forum category not found');
-		}
-
-
 		if ($_POST)
 		{
 
 			try
 			{
 				$array = Arr::merge($this->request->post(), array(
-					'category_id' => $category->id,
+					'category_id' => $this->category->id,
 					'user_id'	=> $this->user->id,
 				));
 
