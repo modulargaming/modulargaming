@@ -1,0 +1,19 @@
+<h2>{{pet.name}} the {{pet.colour.name}} {{pet.race.name}}</h2>
+<ul class="thumbnails">
+	<li class="span4">
+		<div class="thumbnail">
+			<img src="/mg/assets/img/pets/{{pet.race}}/{{pet.colour.image}}" />
+		</div>
+	</li>
+	<li class="span2">
+		<ul>
+			<li>ID: {{pet.id}}</li>
+			<li>User: {{pet.user.username}} ({{pet.user_id}})</li>
+			<li>Name: {{pet.name}}</li>
+			<li>Gender: {{pet.gender}}</li>
+			<li>Race: {{pet.race}}</li>
+			<li>Colour: {{pet.colour}}</li>
+			<li>Created: {{pet.created}}</li>
+		</ul>
+	</li>
+</ul>
