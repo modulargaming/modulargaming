@@ -43,7 +43,6 @@ class Controller_Forum_Topic extends Controller_Frontend {
 			{
 				$array = Arr::merge($this->request->post(), array(
 					'topic_id' => $topic->id,
-					'created'      => time(),
 					'user_id'	=> $this->user->id,
 				));
 
@@ -52,7 +51,6 @@ class Controller_Forum_Topic extends Controller_Frontend {
 						'topic_id',
 						'user_id',
 						'content',
-						'created',
 					));
 
 				Hint::success('You have created a post!');

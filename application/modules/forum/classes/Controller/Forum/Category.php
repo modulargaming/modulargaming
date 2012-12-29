@@ -42,7 +42,6 @@ class Controller_Forum_Category extends Controller_Frontend {
 			{
 				$array = Arr::merge($this->request->post(), array(
 					'category_id' => $category->id,
-					'created'      => time(),
 					'user_id'	=> $this->user->id,
 				));
 
@@ -51,12 +50,10 @@ class Controller_Forum_Category extends Controller_Frontend {
 						'category_id',
 						'user_id',
 						'title',
-						'created',
 					));
 
 				$array = Arr::merge($array, array(
 					'topic_id' => $topic->id,
-					'created'      => time(),
 					'user_id'	=> $this->user->id,
 				));
 
@@ -65,7 +62,6 @@ class Controller_Forum_Category extends Controller_Frontend {
 						'topic_id',
 						'user_id',
 						'content',
-						'created',
 					));
 
 				Hint::success('You have created a topic');
