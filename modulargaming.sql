@@ -345,12 +345,16 @@ INSERT INTO `user_timezones` (`id`, `timezone`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `pets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `created` int(10) NOT NULL,
+  `abandoned` int(10) NOT NULL,
+  `active` int(10) NOT NULL,
   `name` varchar(255) NOT NULL,
   `gender` enum('male','female') NOT NULL,
   `race_id` int(6) NOT NULL,
   `colour_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
 CREATE TABLE IF NOT EXISTS `pet_colours` (
   `id` int(6) NOT NULL,
@@ -378,13 +382,3 @@ CREATE TABLE IF NOT EXISTS `pet_races` (
 INSERT INTO `pet_races` (`id`, `name`, `description`) VALUES
 (1, 'Koorai', 'The Koorai'),
 (2, 'Zedro', 'The Zedro.');
-
-CREATE TABLE IF NOT EXISTS `user_pets` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `pet_id` int(11) NOT NULL,
-  `active` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `pet_id` (`pet_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;

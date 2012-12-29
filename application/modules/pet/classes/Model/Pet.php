@@ -1,26 +1,23 @@
-<?php defined('SYSPATH') OR die('No direct access allowed.');
+<?php defined('SYSPATH') OR die('No direct script access.');
 
-class Model_Pet extends ORM
-{
+class Model_Pet extends ORM {
 
 	protected $_has_one = array(
 		'user' => array(
-			'model' => 'User_Pet',
-			'foreign_key' => 'pet_id',
+			'model' => 'User',
+			'foreign_key' => 'id',
 		),
 	);
-	
+
 	protected $_belongs_to = array(
 		'race' => array(
 			'model' => 'Pet_Race',
-			'foreign_key' => 'race_id',
 		),
 		'colour' => array(
 			'model' => 'Pet_Colour',
-			'foreign_key' => 'colour_id',
-		),
+		)
 	);
-	
+
 	public function rules()
 	{
 		return array(
@@ -34,7 +31,6 @@ class Model_Pet extends ORM
 
 	public function create_pet($values, $expected)
 	{
-		// Validation for id
 		$extra_validation = Validation::Factory($values)
 			->rule('race_id', 'Model_Pet_Race::race_exists')
 			->rule('colour_id', 'Model_Pet_Colour::colour_exists');
@@ -43,6 +39,5 @@ class Model_Pet extends ORM
 			->create($extra_validation);
 	}
 
+}
 
-
-} // End Pet Model

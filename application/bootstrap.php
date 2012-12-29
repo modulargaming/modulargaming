@@ -123,7 +123,7 @@ I18n::lang('en-gb');
 Kohana::modules(array(
 	// Modular Gaming modules
 	'forum'         => APPPATH.'modules/forum',
-
+	'pet'			=> APPPATH.'modules/pet',
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
 	'auth'          => MODPATH.'auth',       // Basic authentication
