@@ -41,7 +41,7 @@ Import modulargaming.sql using your tool of choice (MySQL client, PHPMyAdmin etc
 
 Open `application/bootstrap.php` and make the following changes: 
 
-* Set the default directory for your application
+* Set the default directory for your application if it does not automatically work
 
 * Set the default cookie salt
 
