@@ -3,6 +3,12 @@
 class Model_Message extends ORM
 {
 
+	protected $_created_column = array(
+		'column' => 'created',
+		'format' => TRUE,
+
+	);
+
 	protected $_belongs_to = array(
 		'receiver' => array(
 			'model' => 'User',

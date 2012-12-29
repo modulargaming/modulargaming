@@ -25,7 +25,6 @@ class Controller_Messages extends Controller_Frontend {
 			{
 				$array = Arr::merge($this->request->post(), array(
 					'sender_id' => $this->user->id,
-					'time'      => time(),
 				));
 
 				$message = ORM::factory('Message')
@@ -34,7 +33,6 @@ class Controller_Messages extends Controller_Frontend {
 						'subject',
 						'text',
 						'sender_id',
-						'time',
 					));
 
 				Hint::success('You have sent a message');

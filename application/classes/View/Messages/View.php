@@ -12,7 +12,7 @@ class View_Messages_View extends View_Base {
         public function message()
         {
                 $message = $this->message;
-                $message['time'] = Date::format($message['time']);
+                $message['created'] = Date::format($message['created']);
 
                 return $message;
         }
