@@ -65,7 +65,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 
 		}
 
-		$this->view = new View_Forum_Post_Create;
+		$this->view = new View_Forum_Post_Reply;
 
 	}
 
