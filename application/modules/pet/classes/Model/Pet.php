@@ -2,6 +2,12 @@
 
 class Model_Pet extends ORM {
 
+	protected $_created_column = array(
+		'column' => 'created',
+		'format' => TRUE,
+
+	);
+
 	protected $_has_one = array(
 		'user' => array(
 			'model' => 'User',

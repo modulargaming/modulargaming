@@ -11,7 +11,6 @@ class Controller_Pet_Create extends Controller_Frontend {
 				$array = Arr::merge($this->request->post(), array(
 					'user_id' => $this->user->id,
 					'active' => time(),
-					'created' => time(),
 				));
 
 				$new_pet = ORM::factory('Pet')
@@ -22,7 +21,6 @@ class Controller_Pet_Create extends Controller_Frontend {
 						'gender',
 						'name',
 						'active',
-						'created',
 					));
 				Hint::success('You have created a pet named '.$new_pet->name);
 				$this->redirect('pets');
