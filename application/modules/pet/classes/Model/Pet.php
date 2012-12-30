@@ -18,9 +18,11 @@ class Model_Pet extends ORM {
 	protected $_belongs_to = array(
 		'race' => array(
 			'model' => 'Pet_Race',
+			'foreign_key' => 'race_id',
 		),
 		'colour' => array(
 			'model' => 'Pet_Colour',
+			'foreign_key' => 'colour_id',
 		)
 	);
 
