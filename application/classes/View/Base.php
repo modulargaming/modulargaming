@@ -37,8 +37,6 @@ class View_Base
 	{
 		$breadcrumb = array();
 
-		//Breadcrumb::get();
-
 		foreach (Breadcrumb::get() as $item)
 		{
 			$breadcrumb[] = array(
