@@ -43,32 +43,32 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 			try
 			{
-				$array = Arr::merge($this->request->post(), array(
+				$topic_data = Arr::merge($this->request->post(), array(
 					'category_id' => $this->category->id,
-					'user_id'	=> $this->user->id,
+					'user_id'     => $this->user->id,
 				));
 
 				$topic = ORM::factory('Forum_Topic')
-					->create_topic($array, array(
+					->create_topic($topic_data, array(
 						'category_id',
 						'user_id',
 						'title',
 					));
 
-				$array = Arr::merge($array, array(
+				$post_data = Arr::merge($this->request->post(), array(
 					'topic_id' => $topic->id,
-					'user_id'	=> $this->user->id,
+					'user_id'  => $this->user->id,
 				));
 
 				$post = ORM::factory('Forum_Post')
-					->create_post($array, array(
+					->create_post($post_data, array(
 						'topic_id',
 						'user_id',
 						'content',
 					));
 
 				Hint::success('You have created a topic');
-				$this->redirect("forum/topic/$topic->id");
+				$this->redirect(Route::get('forum/topic')->uri(array('id' => $topic->id)));
 			}
 			catch (ORM_Validation_Exception $e)
 			{
