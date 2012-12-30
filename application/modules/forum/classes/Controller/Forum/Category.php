@@ -33,11 +33,10 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 	public function action_create()
 	{
-                Breadcrumb::add('Create', Route::url('forum/category', array(
-                        'id'     => $this->category->id,
-                        'action' => 'create'
-                )));
-
+		Breadcrumb::add('Create', Route::url('forum/category', array(
+			'id'     => $this->category->id,
+			'action' => 'create'
+		)));
 
 		if ($_POST)
 		{
@@ -79,7 +78,6 @@ class Controller_Forum_Category extends Controller_Frontend {
 		}
 
 		$this->view = new View_Forum_Topic_Create;
-
 
 	}
 
