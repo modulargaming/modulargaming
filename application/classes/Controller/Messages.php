@@ -63,7 +63,7 @@ class Controller_Messages extends Controller_Frontend {
                         throw HTTP_Exception::Factory('404', 'No such message');
                 }
 
-		if ( $message->receiver_id != $this->user->id )
+		if ($message->receiver_id != $this->user->id)
 		{
 			throw HTTP_Exception::Factory('403', 'Message does not belong to you');
 		}

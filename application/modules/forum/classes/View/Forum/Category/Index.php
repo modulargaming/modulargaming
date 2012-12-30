@@ -7,7 +7,7 @@ class View_Forum_Category_Index extends View_Base {
 
 	public function title()
 	{
-		return 'Forum - ' . $this->category->title;
+		return 'Forum - '.$this->category->title;
 	}
 
 	public function category()
