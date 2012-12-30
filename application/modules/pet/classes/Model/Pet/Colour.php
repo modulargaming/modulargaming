@@ -2,6 +2,13 @@
 
 class Model_Pet_Colour extends ORM {
 
+	protected $_has_many = array(
+		'pets' => array(
+			'model' => 'Pet',
+			'foreign_key' => 'race_id',
+		),
+	);
+
 	static public function colour_exists($id)
 	{
 		$colour = ORM::factory('Pet_Colour', $id);
