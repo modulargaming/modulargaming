@@ -43,13 +43,13 @@ class Controller_Forum_Topic extends Controller_Frontend {
 
 			try
 			{
-				$array = Arr::merge($this->request->post(), array(
+				$post_data = Arr::merge($this->request->post(), array(
 					'topic_id' => $this->topic->id,
 					'user_id'	=> $this->user->id,
 				));
 
 				$topic = ORM::factory('Forum_Post')
-					->create_post($array, array(
+					->create_post($post_data, array(
 						'topic_id',
 						'user_id',
 						'content',
