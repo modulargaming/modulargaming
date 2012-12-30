@@ -44,7 +44,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 	/**
 	 * Check if specified user exists.
 	 *
-	 * @param   $id User id
+	 * @param   integer $id User id
 	 * @return  bool
 	 */
 	static public function user_exists($id)
@@ -80,11 +80,11 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 
 		try
 		{
-			$refl = new ReflectionClass('Policy_' . $policy_name);
+			$refl = new ReflectionClass('Policy_'.$policy_name);
 			$class = $refl->newInstanceArgs();
 			$status = $class->execute($this, $args);
 
-			if (TRUE === $status)
+			if ($status === TRUE)
 				return TRUE;
 		}
 		catch (ReflectionException $ex) // try and find a message based policy
@@ -94,19 +94,21 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 			{
 				$status = Kohana::message('policy', $policy_name.'.'.$role->id);
 				if ($status)
+				{
 					return TRUE;
+				}
 			}
 		}
 
 		// We don't know what kind of specific error this was
-		if (FALSE === $status)
+		if ($status === FALSE)
 		{
 			$status = Policy::GENERAL_FAILURE;
 		}
 
 		Policy::$last_code = $status;
 
-		return TRUE === $status;
+		return $status === TRUE;
 	}
 
 	/**
