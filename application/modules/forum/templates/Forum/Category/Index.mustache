@@ -1,14 +1,22 @@
-<h2>{{category.title}}</h2>
-
-<ul>
-{{#topics}}
-    <li>
-        <a href="{{href}}">{{title}}</a>
-        {{user.username}}
-        {{created}}
-
-    </li>
-{{/topics}}
-</ul>
-
-<a href="{{href.create}}" class="btn">New thread</a>
+<h3>{{category.title}}</h3>
+<table class="table table-striped">
+	<thead>
+ 		<tr>
+			<th>Suject</th>
+			<th>Posted by</th>
+			<th>Time</th>
+		</tr>
+	</thead>
+	<tbody>
+	{{#topics}}
+		<tr>
+			<td><a href="{{href}}">{{title}}</a></td>
+			<td>{{user.username}}</td>
+			<td>{{created}}</td>
+		</tr>
+	{{/topics}}
+	</tbody>
+</table>
+<div class="form-actions">
+	<a href="{{href.create}}" class="btn">New thread</a>
+</div>

@@ -19,9 +19,11 @@ class View_Forum_Topic_Index extends View_Base {
 	{
 		$posts = array();
 
-		foreach ($this->posts as $post)
+		foreach ($this->posts as $key => $post)
 		{
 			$posts[] = array(
+				'i' => $key + 1,
+				'id' => $post->id,
 				'content' => $post->content,
 				'href' => Route::url('forum/post', array('id' => $post->id)),
 				'created' =>  Date::format($post->created),

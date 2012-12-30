@@ -1,13 +1,20 @@
-<h2>{{topic.title}}</h2>
-
-
+<h3>{{topic.title}}</h3>
 
 {{#posts}}
-    <p>
-	{{content}}
-	{{user.username}}
-	{{created}}
-    </p>
+	<div class="media">
+		<a class="pull-left" href="#">
+			<img class="media-object" src="{{base_url}}assets/img/avatar.png">
+		</a>
+		<div class="media-body">
+			<h5 class="media-heading"><a href="{{href}}"><small>#{{i}}</small></a> Posted by {{user.username}}</h5>
+			<blockquote>
+				<p>{{content}}</p>
+				<small>{{created}}</small>
+			</blockquote>
+		</div>
+	</div>
+	<hr>
 {{/posts}}
-
-<a href="{{href.reply}}" class="btn">Reply</a>
+<div class="form-actions">
+	<a href="{{href.reply}}" class="btn">Reply</a>
+</div>
