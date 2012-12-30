@@ -23,12 +23,12 @@ class Controller_Messages extends Controller_Frontend {
 		{
 			try
 			{
-				$array = Arr::merge($this->request->post(), array(
+				$message_data = Arr::merge($this->request->post(), array(
 					'sender_id' => $this->user->id,
 				));
 
 				$message = ORM::factory('Message')
-					->create_message($array, array(
+					->create_message($message_data, array(
 						'receiver_id',
 						'subject',
 						'text',
