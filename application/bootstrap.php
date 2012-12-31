@@ -136,7 +136,7 @@ Kohana::modules(array(
 	'minion'        => MODPATH.'minion',     // CLI Tasks
 	'migrations'    => MODPATH.'tasks-migrations',
 	'orm'           => MODPATH.'orm',        // Object Relationship Mapping
-	'profiler'	=> MODPATH.'profiler',	 // HTML Purifier
+	'purifier'	=> MODPATH.'purifier',	 // HTML Purifier
 	'unittest'      => MODPATH.'unittest',   // Unit testing
 	'userguide'     => MODPATH.'userguide',  // User guide and API documentation
 	));
