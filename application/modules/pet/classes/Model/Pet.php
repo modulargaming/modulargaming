@@ -33,6 +33,7 @@ class Model_Pet extends ORM {
 				array('not_empty'),
 				array('max_length', array(':value', 255)),
 				array(array($this, 'unique'), array('name', ':value')),
+				array('regex', array(':value', '/^[a-zA-Z0-9-_]++$/iD')),
 			),
 		);
 	}
