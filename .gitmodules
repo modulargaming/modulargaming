@@ -31,3 +31,6 @@
 [submodule "modules/acl"]
 	path = modules/acl
 	url = git://github.com/modulargaming/acl.git
+[submodule "modules/purifier"]
+	path = modules/purifier
+	url = git://github.com/modulargaming/purifier.git
