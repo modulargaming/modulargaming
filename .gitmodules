@@ -34,3 +34,6 @@
 [submodule "modules/purifier"]
 	path = modules/purifier
 	url = git://github.com/modulargaming/purifier.git
+[submodule "modules/email"]
+	path = modules/email
+	url = git://github.com/modulargaming/email.git
