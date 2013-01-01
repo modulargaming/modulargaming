@@ -157,6 +157,12 @@ Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
 		'action'     => 'index',
 	));
 
+Route::set('user', 'user(/<action>(/<id>))')
+	->defaults(array(
+		'controller' => 'user',
+		'action'     => 'index',
+	));
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'controller' => 'welcome',
