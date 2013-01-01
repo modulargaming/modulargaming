@@ -60,7 +60,6 @@ Open `.htaccess` and make the following changes:
 ### Step 5: Permissions
 
 	$ chmod 0777 application/{cache,logs}
-	$ chmod 0777 modules/purifier/vendor/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 ## Testing
 
 We use BDD, with 2 different tools, phpspec and behat.
