@@ -121,9 +121,11 @@ I18n::lang('en-gb');
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
+	
 	// Modular Gaming modules
 	'forum'         => APPPATH.'modules/forum',
 	'pet'			=> APPPATH.'modules/pet',
+	
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
 	'auth'          => MODPATH.'auth',       // Basic authentication
@@ -131,6 +133,7 @@ Kohana::modules(array(
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	'database'      => MODPATH.'database',   // Database access
 	'debug-toolbar' => MODPATH.'debug-toolbar',
+	'email'		=> MODPATH.'email',      // Email manipulation
 	// 'image'      => MODPATH.'image',      // Image manipulation
 	'kostache'      => MODPATH.'kostache',   // Mustache template system
 	'minion'        => MODPATH.'minion',     // CLI Tasks
