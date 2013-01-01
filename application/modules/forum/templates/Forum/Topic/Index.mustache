@@ -1,20 +1,21 @@
 <h3>{{topic.title}}</h3>
 
 {{#posts}}
-	<div class="media">
+	<div id="post{{id}}" class="media">
 		<a class="pull-left" href="#">
 			<img class="media-object" src="{{base_url}}assets/img/avatar.png">
 		</a>
 		<div class="media-body">
-			<h5 class="media-heading"><a href="{{href}}"><small>#{{i}}</small></a> Posted by {{user.username}}</h5>
+			<h5 class="media-heading"><a href="#post{{id}}"><small>#{{i}}</small></a> Posted by <a href="{{user.href}}">{{user.username}}</a></h5>
 			<blockquote>
 				<p>{{{content}}}</p>
 				<small>{{created}}</small>
 			</blockquote>
+			<a href="{{links.edit}}">edit</a>
 		</div>
 	</div>
 	<hr>
 {{/posts}}
 <div class="form-actions">
-	<a href="{{href.reply}}" class="btn">Reply</a>
+	<a href="{{links.reply}}" class="btn">Reply</a>
 </div>

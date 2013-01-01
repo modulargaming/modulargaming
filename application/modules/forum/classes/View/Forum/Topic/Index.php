@@ -22,19 +22,30 @@ class View_Forum_Topic_Index extends View_Base {
 		foreach ($this->posts as $key => $post)
 		{
 			$posts[] = array(
-				'i' => $key + 1,
+				'i' => $key + 1, // TODO: This won't work if we use pagination, do we need it? consider using id.
 				'id' => $post->id,
-				'content' => $post->content,
-				'href' => Route::url('forum/post', array('id' => $post->id)),
+				'content' => $post->content, // TODO: Is this escaped properly at save?
 				'created' =>  Date::format($post->created),
-				'user' => $post->user->as_array()
+				'user' => array(
+					'username' => $post->user->username,
+					'href' => Route::url('user', array(
+						'action' => 'view',
+						'id'     => $post->user->id,
+					)),
+				),
+				'links' => array(
+					'edit' => Route::url('forum/post', array(
+						'action' => 'edit',
+						'id'     => $post->id,
+					)),
+				),
 			);
 		}
 
 		return $posts;
 	}
 
-	public function href()
+	public function links()
 	{
 		return array(
 			'reply' => Route::url('forum/topic', array(
