@@ -1,0 +1,14 @@
+<form method="post">
+	<fieldset>
+		<legend>Edit post</legend>
+
+		<input type="hidden" name="csrf" value="{{csrf}}">
+
+		<textarea name="content" id="message" class="textarea">{{{post.content}}}</textarea>
+
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Update</button>
+		</div>
+
+	</fieldset>
+</form>

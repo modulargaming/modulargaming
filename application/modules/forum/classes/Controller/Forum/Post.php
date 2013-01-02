@@ -4,7 +4,7 @@ class Controller_Forum_Post extends Controller_Frontend {
 
 	protected $protected = TRUE;
 
-	public function action_view()
+	public function action_edit()
 	{
 		$id = $this->request->param('id');
 
@@ -15,8 +15,13 @@ class Controller_Forum_Post extends Controller_Frontend {
 			throw HTTP_Exception::factory('404', 'Forum post not found');
 		}
 
-		$this->view = new View_Forum_Post_Index;
-		$this->view->post = $post->as_array();
+		if ( ! $this->user->can('forum_post_edit', array('post' => $post)))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to edit post');
+		}
+
+		$this->view = new View_Forum_Post_Edit;
+		$this->view->post = $post;
 	}
 
 }
