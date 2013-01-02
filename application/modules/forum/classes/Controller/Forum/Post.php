@@ -20,6 +20,21 @@ class Controller_Forum_Post extends Controller_Frontend {
 			throw HTTP_Exception::factory('403', 'Permission denied to edit post');
 		}
 
+		if ($_POST)
+		{
+			try {
+				$post->values($this->request->post(), array('content'))
+					->save();
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				Hint::error($e->errors('models'));
+			}
+
+			Hint::success('Updated post');
+			$this->redirect(Route::get('forum/topic')->uri(array('id' => $post->topic->id)));
+		}
+
 		$this->view = new View_Forum_Post_Edit;
 		$this->view->post = $post;
 	}
