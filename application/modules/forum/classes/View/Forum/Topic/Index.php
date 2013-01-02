@@ -56,5 +56,30 @@ class View_Forum_Topic_Index extends View_Base {
 		);
 	}
 
+	public function actions()
+	{
+		$actions = array();
+		$user = Auth::instance()->get_user();
+
+		if ($user->can('Forum_Topic_Delete'))
+		{
+			$actions[] = array(
+				'title' => 'Delete',
+				'href'  => Route::url('forum/topic', array(
+					'action' => 'delete',
+					'id'     => $this->topic->id,
+				)),
+			);
+		}
+
+		return $actions;
+	}
+
+	public function has_actions()
+	{
+		$actions = $this->actions();
+		return ! empty($actions);
+	}
+
 }
 

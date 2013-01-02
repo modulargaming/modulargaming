@@ -76,9 +76,7 @@ class Controller_User extends Controller_Frontend {
 		{
 			$post = $this->request->post();
 
-			$remember = isset($post['remember']) ? (bool) $post['remember'] : FALSE;
-
-			if ($this->auth->login($post['username'], $post['password'], $remember))
+			if ($this->auth->login($post['username'], $post['password'], isset($post['remember'])))
 			{
 				Hint::success(Kohana::message('user', 'login.success'));
 				$this->redirect('');

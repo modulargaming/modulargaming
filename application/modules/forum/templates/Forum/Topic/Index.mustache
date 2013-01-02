@@ -20,4 +20,20 @@
 {{/posts}}
 <div class="form-actions">
 	<a href="{{links.reply}}" class="btn">Reply</a>
+
+	{{#has_actions}}
+	<div class="btn-group">
+		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			<i class="icon-wrench"></i>
+			Action
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			{{#actions}}
+				<li><a href="{{href}}">{{title}}</a></li>
+			{{/actions}}
+			<!-- dropdown menu links -->
+		</ul>
+	</div>
+	{{/has_actions}}
 </div>
