@@ -7,13 +7,16 @@
 	</li>
 	<li class="span2">
 		<ul>
-			<li>ID: {{pet.id}}</li>
-			<li>User: {{pet.user.username}} ({{pet.user_id}})</li>
-			<li>Name: {{pet.name}}</li>
-			<li>Gender: {{pet.gender}}</li>
-			<li>Race: {{pet.race.name}}</li>
-			<li>Colour: {{pet.colour.name}}</li>
-			<li>Created: {{pet.created}}</li>
+{{#pet}}
+			<li>ID: {{id}}</li>
+			<li>User: <a href={{user.href}}>{{user.username}}</a></li>
+			<li>Name: {{name}}</li>
+			<li>Gender: {{gender}}</li>
+			<li>Race: {{race.name}}</li>
+			<li>Colour: {{colour.name}}</li>
+			<li>Created: {{created}}</li>
+{{/pet}}
+
 		</ul>
 	</li>
 </ul>
