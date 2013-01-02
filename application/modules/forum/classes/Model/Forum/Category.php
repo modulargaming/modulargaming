@@ -9,6 +9,12 @@ class Model_Forum_Category extends ORM {
 		),
 	);
 
+	static public function category_exists($id)
+	{
+		$category = ORM::factory('Forum_Category', $id);
+
+		return $category->loaded();
+	}
 
 	public function rules()
 	{
@@ -30,13 +36,5 @@ class Model_Forum_Category extends ORM {
 		return $this->values($values, $expected)
 			->create();
 	}
-
-	static public function category_exists($id)
-	{
-		$category = ORM::factory('Forum_Category', $id);
-
-		return $category->loaded();
-	}
-
 
 }
