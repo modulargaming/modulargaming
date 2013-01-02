@@ -15,7 +15,7 @@ class Controller_Forum_Post extends Controller_Frontend {
 			throw HTTP_Exception::factory('404', 'Forum post not found');
 		}
 
-		if ( ! $this->user->can('forum_post_edit', array('post' => $post)))
+		if ( ! $this->user->can('Forum_Post_Edit', array('post' => $post)))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to edit post');
 		}
