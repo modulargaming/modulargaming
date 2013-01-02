@@ -24,7 +24,7 @@ class View_Forum_Topic_Index extends View_Base {
 			$posts[] = array(
 				'i' => $key + 1, // TODO: This won't work if we use pagination, do we need it? consider using id.
 				'id' => $post->id,
-				'content' => $post->content, // TODO: Is this escaped properly at save?
+				'content' => Security::xss_clean($post->content), // TODO: Is this escaped properly at save?
 				'created' =>  Date::format($post->created),
 				'user' => array(
 					'username' => $post->user->username,

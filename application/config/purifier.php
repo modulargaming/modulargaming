@@ -3,8 +3,6 @@
 return array(
         'finalize' => TRUE,
         'preload'  => FALSE,
-);
-
 
         'settings' => array(
                 /**
@@ -15,3 +13,4 @@ return array(
         'Cache.SerializerPath' => APPPATH.'cache',
         ),
 
+);
