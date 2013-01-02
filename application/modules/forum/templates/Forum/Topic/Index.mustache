@@ -11,7 +11,9 @@
 				<p>{{{content}}}</p>
 				<small>{{created}}</small>
 			</blockquote>
-			<a href="{{links.edit}}">edit</a>
+			{{#can_edit}}
+				<a href="{{links.edit}}" class="btn btn-small">edit</a>
+			{{/can_edit}}
 		</div>
 	</div>
 	<hr>

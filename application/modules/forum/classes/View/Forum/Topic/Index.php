@@ -39,6 +39,7 @@ class View_Forum_Topic_Index extends View_Base {
 						'id'     => $post->id,
 					)),
 				),
+				'can_edit' => Auth::instance()->get_user()->can('forum_post_edit', array('post' => $post)),
 			);
 		}
 
