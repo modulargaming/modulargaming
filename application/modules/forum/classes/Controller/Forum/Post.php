@@ -20,6 +20,16 @@ class Controller_Forum_Post extends Controller_Frontend {
 			throw HTTP_Exception::factory('403', 'Permission denied to edit post');
 		}
 
+		$topic = $post->topic;
+		
+		Breadcrumb::add('Forum', Route::url('forum'));
+		Breadcrumb::add($topic->category->title, Route::url('forum/category', array('id' => $topic->category->id)));
+		Breadcrumb::add($topic->title, Route::url('forum/topic', array('id' => $topic->id)));
+		Breadcrumb::add('Edit #'.$post->id, Route::url('forum/post', array(
+			'action' => 'edit',
+			'id'     => $post->id,
+		)));
+
 		if ($_POST)
 		{
 			try {
