@@ -7,7 +7,6 @@ class Model_Forum_Post extends ORM {
 		'format' => TRUE
 	);
 
-
 	protected $_updated_column = array(
 		'column' => 'updated',
 		'format' => TRUE,
@@ -16,6 +15,7 @@ class Model_Forum_Post extends ORM {
 	protected $_belongs_to = array(
 		'topic' => array(
 			'model' => 'Forum_Topic',
+			'foreign_key' => 'topic_id',
 		),
 		'user' => array(
 			'model' => 'User',
