@@ -37,6 +37,15 @@ class Model_Forum_Post extends ORM {
 		);
 	}
 
+	public function filters()
+	{
+		return array(
+			'content' => array(
+				array('Security::xss_clean'),
+			),
+		);
+	}
+
 	public function create_post($values, $expected)
 	{
 		// Validation for topic
