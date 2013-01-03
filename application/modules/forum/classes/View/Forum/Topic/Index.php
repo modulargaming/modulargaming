@@ -27,8 +27,9 @@ class View_Forum_Topic_Index extends View_Base {
 				'content' => Security::xss_clean($post->content), // TODO: Is this escaped properly at save?
 				'created' =>  Date::format($post->created),
 				'user' => array(
-					'username' => $post->user->username,
-					'href' => Route::url('user', array(
+					'username'  => $post->user->username,
+					'signature' => $post->user->signature,
+					'href'      => Route::url('user', array(
 						'action' => 'view',
 						'id'     => $post->user->id,
 					)),

@@ -26,15 +26,16 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(127) NOT NULL,
-  `username` VARCHAR(32) NOT NULL DEFAULT '',
-  `password` CHAR(64) NOT NULL,
-  `logins` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created` INT(10) UNSIGNED DEFAULT NULL,
-  `last_login` INT(10) UNSIGNED DEFAULT NULL,
-  `timezone_id` INT(11) UNSIGNED DEFAULT NULL,
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(127) NOT NULL,
+  `username` varchar(32) NOT NULL DEFAULT '',
+  `password` char(64) NOT NULL,
+  `logins` int(10) unsigned NOT NULL DEFAULT '0',
+  `created` int(10) unsigned DEFAULT NULL,
+  `last_login` int(10) unsigned DEFAULT NULL,
+  `timezone_id` int(11) unsigned DEFAULT NULL,
+  `signature` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)

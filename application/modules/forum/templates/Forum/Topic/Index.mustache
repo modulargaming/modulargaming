@@ -8,6 +8,13 @@
 		<div class="media-body">
 			<h5 class="media-heading"><a href="#post{{id}}"><small>#{{i}}</small></a> Posted by <a href="{{user.href}}">{{user.username}}</a></h5>
 				<p>{{{content}}}</p>
+
+				{{#user.signature}}
+					<div class="signature">
+						<p>{{user.signature}}</p>
+					</div>
+				{{/user.signature}}
+
 				<small>{{created}}</small>
 			{{#can_edit}}
 				<a href="{{links.edit}}" class="btn btn-small">edit</a>
@@ -16,6 +23,7 @@
 	</div>
 	<hr>
 {{/posts}}
+
 <div class="form-actions">
 	<a href="{{links.reply}}" class="btn">Reply</a>
 
