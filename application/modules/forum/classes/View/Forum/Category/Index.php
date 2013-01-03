@@ -21,6 +21,8 @@ class View_Forum_Category_Index extends View_Base {
 
 		foreach ($this->topics as $topic)
 		{
+			$last_post = $topic->last_post;
+
 			$topics[] = array(
 				'title' => $topic->title,
 				'href' => Route::url('forum/topic', array('id' => $topic->id)),
@@ -33,9 +35,10 @@ class View_Forum_Category_Index extends View_Base {
 					))
 				),
 				'last_post' => array(
-					'created' => Date::format($topic->last_post->created),
+					'created' => Date::format($last_post->created),
 					'user'    => array(
-						'username' => $topic->last_post->user->username,
+						'username' => $last_post->user->username,
+						'href'     => Route::url('user', array('action' => 'view', 'id' => $last_post->user->id)),
 					),
 				)
 			);

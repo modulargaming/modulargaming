@@ -14,7 +14,7 @@
 		<tr>
 			<td><a href="{{href}}">{{title}}</a></td>
 			<td><a href="{{user.href}}">{{user.username}}</a></td>
-			<td>{{last_post.user.username}} - {{last_post.created}}</td>
+			<td><a href="{{last_post.user.href}}">{{last_post.user.username}}</a> - {{last_post.created}}</td>
 			<td>{{created}}</td>
 		</tr>
 	{{/topics}}
