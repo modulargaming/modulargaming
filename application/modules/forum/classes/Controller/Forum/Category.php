@@ -24,7 +24,10 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 	public function action_view()
 	{
-		$topics = $this->category->topics->order_by('last_post_time', 'DESC')->find_all();
+		$topics = $this->category->topics
+			->with('last_post')
+			->order_by('last_post.created', 'DESC')
+			->find_all();
 
 		$this->view = new View_Forum_Category_Index;
 		$this->view->category = $this->category;
@@ -40,7 +43,6 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 		if ($_POST)
 		{
-
 			try
 			{
 				$topic_data = Arr::merge($this->request->post(), array(
@@ -68,8 +70,11 @@ class Controller_Forum_Category extends Controller_Frontend {
 						'user_id',
 						'content',
 					));
-				$topic->last_post_time = time();
+
+				// Set the last post id.
+				$topic->last_post_id = $post->id;
 				$topic->save();
+
 				Hint::success('You have created a topic');
 				$this->redirect(Route::get('forum/topic')->uri(array('id' => $topic->id)));
 			}
@@ -77,11 +82,9 @@ class Controller_Forum_Category extends Controller_Frontend {
 			{
 				Hint::error($e->errors('models'));
 			}
-
 		}
 
 		$this->view = new View_Forum_Topic_Create;
-
 	}
 
 }

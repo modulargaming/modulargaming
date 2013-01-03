@@ -46,14 +46,17 @@ class Controller_Forum_Topic extends Controller_Frontend {
 					'topic_id' => $this->topic->id,
 					'user_id'	=> $this->user->id,
 				));
-				$topic = ORM::factory('Forum_Post')
+
+				$post = ORM::factory('Forum_Post')
 					->create_post($post_data, array(
 						'topic_id',
 						'user_id',
 						'content',
 					));
-				$this->topic->last_post_time = time();
+
+				$this->topic->last_post_id = $post->id;
 				$this->topic->save();
+
 				Hint::success('You have created a post!');
 				$this->redirect("forum/topic/$topic->topic_id");
 			}

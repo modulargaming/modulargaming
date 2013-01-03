@@ -15,6 +15,10 @@ class Model_Forum_Topic extends ORM {
 			'model' => 'User',
 			'foreign_key' => 'user_id',
 		),
+		'last_post' => array(
+			'model' => 'Forum_Post',
+			'foreign_key' => 'last_post_id',
+		),
 	);
 
 	protected $_has_many = array(
