@@ -8,13 +8,6 @@ class Model_Pet extends ORM {
 
 	);
 
-	protected $_has_one = array(
-		'user' => array(
-			'model' => 'User',
-			'foreign_key' => 'id',
-		),
-	);
-
 	protected $_belongs_to = array(
 		'race' => array(
 			'model' => 'Pet_Race',
@@ -23,7 +16,11 @@ class Model_Pet extends ORM {
 		'colour' => array(
 			'model' => 'Pet_Colour',
 			'foreign_key' => 'colour_id',
-		)
+		),
+		'user' => array(
+			'model' => 'User',
+			'foreign_key' => 'user_id',
+		),
 	);
 
 	public function rules()
