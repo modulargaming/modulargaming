@@ -7,6 +7,11 @@ class Model_Forum_Topic extends ORM {
 		'format' => TRUE,
 	);
 
+	protected $_updated_column = array(
+		'column' => 'updated',
+		'format' => TRUE,
+	);
+
 	protected $_belongs_to = array(
 		'category' => array(
 			'model' => 'Forum_Category',
