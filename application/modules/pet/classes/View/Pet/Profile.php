@@ -9,13 +9,13 @@ class View_Pet_Profile extends View_Base {
 		$pet = $this->pet;
 
 		return array(
-			'id'           => $pet->id,
-			'created'      => Date::format($pet->created),
-			'name'         => $pet->name,
-			'gender'       => $pet->gender,
-			'race'         => $pet->race,
-			'colour'       => $pet->colour,
-			'user'         => array(
+			'id'      => $pet->id,
+			'created' => Date::format($pet->created),
+			'name'    => $pet->name,
+			'gender'  => $pet->gender,
+			'race'    => $pet->race,
+			'colour'  => $pet->colour,
+			'user'    => array(
 				'username' => $pet->user->username,
 				'id'   => $pet->user->id,
 				'href' => Route::url('user', array(
@@ -26,7 +26,7 @@ class View_Pet_Profile extends View_Base {
 			'race' => array(
 				'name' => $pet->race->name,
 				'id'   => $pet->race->id,
-			)
+			),
 		);
 	}
 

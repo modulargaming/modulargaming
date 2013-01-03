@@ -9,10 +9,6 @@ class Model_Pet extends ORM {
 	);
 
 	protected $_belongs_to = array(
-		'user' => array(
-			'model' => 'User',
-			'foreign_key' => 'user_id',
-		),
 		'race' => array(
 			'model' => 'Pet_Race',
 			'foreign_key' => 'race_id',
@@ -20,7 +16,11 @@ class Model_Pet extends ORM {
 		'colour' => array(
 			'model' => 'Pet_Colour',
 			'foreign_key' => 'colour_id',
-		)
+		),
+		'user' => array(
+			'model' => 'User',
+			'foreign_key' => 'user_id',
+		),
 	);
 
 	protected $_load_with = array(
