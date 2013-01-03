@@ -12,7 +12,6 @@ class View_Forum_Post_Edit extends View_Base {
 	public function post()
 	{
 		$post = $this->post->as_array();
-		$post['content'] = Security::xss_clean($post['content']);
 		return $post;
 	}
 

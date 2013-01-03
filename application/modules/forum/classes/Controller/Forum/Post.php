@@ -33,7 +33,9 @@ class Controller_Forum_Post extends Controller_Frontend {
 		if ($_POST)
 		{
 			try {
-				$post->values($this->request->post(), array('content'))
+				$post_data = $this->request->post();
+				$post_data['content'] = Security::xss_clean($post_data['content']);
+				$post->values($post_data, array('content'))
 					->save();
 			}
 			catch (ORM_Validation_Exception $e)

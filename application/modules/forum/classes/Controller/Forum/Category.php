@@ -60,6 +60,8 @@ class Controller_Forum_Category extends Controller_Frontend {
 					'user_id'  => $this->user->id,
 				));
 
+				$post_data['content'] = Security::xss_clean($post_data['content']);
+
 				$post = ORM::factory('Forum_Post')
 					->create_post($post_data, array(
 						'topic_id',
