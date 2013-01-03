@@ -33,7 +33,7 @@ class Controller_Forum_Post extends Controller_Frontend {
 		if ($_POST)
 		{
 			try {
-			$post->values($this->request->post(), array('content'))->save();
+				$post->values($this->request->post(), array('content'))->save();
 			}
 			catch (ORM_Validation_Exception $e)
 			{
