@@ -4,27 +4,38 @@ class Controller_Forum_Post extends Controller_Frontend {
 
 	protected $protected = TRUE;
 
-	public function action_edit()
+	private $post;
+	private $topic;
+	private $category;
+
+	public function before()
 	{
 		$id = $this->request->param('id');
 
-		$post = ORM::factory('Forum_Post', $id);
+		$this->post = $post = ORM::factory('Forum_Post', $id);
 
-		if ( ! $post->loaded())
+		if ( ! $this->post->loaded())
 		{
 			throw HTTP_Exception::factory('404', 'Forum post not found');
 		}
+
+		$this->topic = $this->post->topic;
+		$this->category = $this->topic->category;
+
+		Breadcrumb::add('Forum', Route::url('forum'));
+		Breadcrumb::add($this->category->title, Route::url('forum/category', array('id' => $this->category->id)));
+		Breadcrumb::add($this->topic->title, Route::url('forum/topic', array('id' => $this->topic->id)));
+	}
+
+	public function action_edit()
+	{
+		$post = $this->post;
 
 		if ( ! $this->user->can('Forum_Post_Edit', array('post' => $post)))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to edit post');
 		}
 
-		$topic = $post->topic;
-		
-		Breadcrumb::add('Forum', Route::url('forum'));
-		Breadcrumb::add($topic->category->title, Route::url('forum/category', array('id' => $topic->category->id)));
-		Breadcrumb::add($topic->title, Route::url('forum/topic', array('id' => $topic->id)));
 		Breadcrumb::add('Edit #'.$post->id, Route::url('forum/post', array(
 			'action' => 'edit',
 			'id'     => $post->id,
@@ -49,27 +60,15 @@ class Controller_Forum_Post extends Controller_Frontend {
 	}
 
 
-public function action_delete()
+	public function action_delete()
 	{
-		$id = $this->request->param('id');
-
-		$post = ORM::factory('Forum_Post', $id);
-
-		if ( ! $post->loaded())
-		{
-			throw HTTP_Exception::factory('404', 'Forum post not found');
-		}
+		$post = $this->post;
 
 		if ( ! $this->user->can('Forum_Post_Delete', array('post' => $post)))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to delete post');
 		}
 
-		$topic = $post->topic;
-		
-		Breadcrumb::add('Forum', Route::url('forum'));
-		Breadcrumb::add($topic->category->title, Route::url('forum/category', array('id' => $topic->category->id)));
-		Breadcrumb::add($topic->title, Route::url('forum/topic', array('id' => $topic->id)));
 		Breadcrumb::add('Delete #'.$post->id, Route::url('forum/post', array(
 			'action' => 'delete',
 			'id'     => $post->id,
@@ -79,13 +78,16 @@ public function action_delete()
 		{
 			$topic_redirect = Route::get('forum/topic')->uri(array('id' => $post->topic->id));
 			try {
-				$post_redirect = $post->topic->id;
+
+				// First post? delete the topic.
 				if ($post->id == $post->topic->posts->limit(1)->find()->id)
 				{
 					$topic_redirect = Route::get('forum/category')->uri(array('id' => $post->topic->category));
+
 					$post->topic->delete_posts();
 					$post->topic->delete();
 				}
+
 				$user = $post->user;
 				$post->delete();
 				$user->calculate_post_count();
@@ -94,6 +96,7 @@ public function action_delete()
 			{
 				Hint::error($e->errors('models'));
 			}
+
 			Hint::success('Deleted post');
 			$this->redirect($topic_redirect);
 		}
@@ -102,6 +105,4 @@ public function action_delete()
 		$this->view->post = $post;
 	}
 
-
 }
-
