@@ -1,24 +1,22 @@
-<h3>{{topic.title}}</h3>
-
 {{#posts}}
-	<div id="post{{id}}" class="media">
-		<div class="pull-left">
+	<div class="row-fluid">
+		<div class="thumbnail center span2">
 			<a href="#">
-				<img class="media-object" src="{{user.avatar}}">
+				<img class="img-polaroid" src="{{user.avatar}}">
 			</a><br>
-			Post count: {{user.post_count}}
+			<a href="{{user.href}}">{{user.username}}</a><br>
+			Posts: {{user.post_count}}
 		</div>
-		<div class="media-body">
-			<h5 class="media-heading"><a href="#post{{id}}"><small>#{{i}}</small></a> Posted by <a href="{{user.href}}">{{user.username}}</a></h5>
-				<p>{{{content}}}</p>
+		<div class="span10" id="post{{id}}">
+			<h5><a href="#post{{id}}"><small>#{{id}}</small></a> {{title}}<span class="pull-right">{{created}}</span></h5>
+				<p class="wrap">{{{content}}}</p>
 
 				{{#user.signature}}
 					<div class="signature">
-						<p>{{user.signature}}</p>
+						<p>{{{user.signature}}}</p>
 					</div>
 				{{/user.signature}}
 
-				<small>{{created}}</small>
 			{{#can_edit}}
 				<a href="{{links.edit}}" class="btn btn-small">edit</a>
 			{{/can_edit}}

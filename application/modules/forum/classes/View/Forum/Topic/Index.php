@@ -19,11 +19,11 @@ class View_Forum_Topic_Index extends View_Base {
 	{
 		$posts = array();
 
-		foreach ($this->posts as $key => $post)
+		foreach ($this->posts as $post)
 		{
 			$posts[] = array(
-				'i' => $key + 1, // TODO: This won't work if we use pagination, do we need it? consider using id.
 				'id' => $post->id,
+				'title' => $this->topic->title,
 	//			'content' => Security::xss_clean($post->content), // TODO: Is this escaped properly at save?
 				'content' => $post->content, // Escaped properly at create now
 				'created' =>  Date::format($post->created),
@@ -32,6 +32,7 @@ class View_Forum_Topic_Index extends View_Base {
 					'username'  => $post->user->username,
 					'signature' => $post->user->signature,
 					'post_count' => number_format($post->user->post_count),
+					'created' => Date::format($post->user->created),
 					'href'      => Route::url('user', array(
 						'action' => 'view',
 						'id'     => $post->user->id,
