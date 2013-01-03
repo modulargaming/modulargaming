@@ -24,7 +24,7 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 	public function action_view()
 	{
-		$topics = $this->category->topics->order_by('updated', 'DESC')->find_all();
+		$topics = $this->category->topics->order_by('last_post_time', 'DESC')->find_all();
 		$this->view = new View_Forum_Category_Index;
 		$this->view->category = $this->category;
 		$this->view->topics = $topics;
@@ -68,7 +68,7 @@ class Controller_Forum_Category extends Controller_Frontend {
 						'user_id',
 						'content',
 					));
-				$topic->last_post_id = $post->id;
+				$topic->last_post_time = time();
 				$topic->save();
 				Hint::success('You have created a topic');
 				$this->redirect(Route::get('forum/topic')->uri(array('id' => $topic->id)));
