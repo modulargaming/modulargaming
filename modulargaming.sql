@@ -97,8 +97,10 @@ CREATE TABLE IF NOT EXISTS `forum_topics` (
   `status` varchar(12) NOT NULL,
   `total` int(6) NOT NULL,
   `created` int(10) NOT NULL,
+  `last_post_id` int(11) NOT NULL,
+  `last_post_time` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE IF NOT EXISTS `messages` (
