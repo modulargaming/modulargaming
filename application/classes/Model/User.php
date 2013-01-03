@@ -65,7 +65,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		return $user->loaded();
 	}
 
-	public function post_count()
+	public function calculate_post_count()
 	{
 		$posts = ORM::factory('Forum_Post')
 				->where('user_id', '=', $this->id)

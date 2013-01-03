@@ -77,17 +77,25 @@ public function action_delete()
 
 		if ($_POST)
 		{
+			$topic_redirect = Route::get('forum/topic')->uri(array('id' => $post->topic->id));
 			try {
 				$post_redirect = $post->topic->id;
+				if ($post->id == $post->topic->posts->limit(1)->find()->id)
+				{
+					$topic_redirect = Route::get('forum/category')->uri(array('id' => $post->topic->category));
+					$post->topic->delete_posts();
+					$post->topic->delete();
+				}
+				$user = $post->user;
 				$post->delete();
+				$user->calculate_post_count();
 			}
 			catch (ORM_Validation_Exception $e)
 			{
 				Hint::error($e->errors('models'));
 			}
-
 			Hint::success('Deleted post');
-			$this->redirect(Route::get('forum/topic')->uri(array('id' => $post_redirect)));
+			$this->redirect($topic_redirect);
 		}
 
 		$this->view = new View_Forum_Post_Delete;

@@ -56,7 +56,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 
 				$this->topic->last_post_id = $post->id;
 				$this->topic->save();
-				$this->user->post_count();
+				$this->user->calculate_post_count();
 				Hint::success('You have created a post!');
 				$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
 			}
@@ -90,6 +90,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 			try
 			{
 				$topic_redirect = $this->topic->category;
+				$this->topic->delete_posts();
 				$this->topic->delete();
 
 				Hint::success('You have deleted a topic!');
