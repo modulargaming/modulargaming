@@ -1,5 +1,6 @@
 <h3>{{category.title}}</h3>
 
+{{#topics_count}}
 <table class="table table-striped">
 
 	<thead>
@@ -10,6 +11,8 @@
 			<th>Created</th>
 		</tr>
 	</thead>
+{{/topics_count}}
+
 {{#topics}}
 
 	<tbody>
@@ -22,7 +25,10 @@
 	</tbody>
 {{/topics}}
 
+{{#topics_count}}
+
 </table>
+{{/topics_count}}
 
 {{^topics}}
         <div class="alert alert-error">No forum topics</div>
