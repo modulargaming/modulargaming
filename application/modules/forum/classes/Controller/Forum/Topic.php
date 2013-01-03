@@ -53,7 +53,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 						'user_id',
 						'content',
 					));
-				$this->topic->last_post_id = $topic->id;
+				$this->topic->last_post_time = time();
 				$this->topic->save();
 				Hint::success('You have created a post!');
 				$this->redirect("forum/topic/$topic->topic_id");

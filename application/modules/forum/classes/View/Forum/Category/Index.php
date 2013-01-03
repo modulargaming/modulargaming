@@ -21,7 +21,7 @@ class View_Forum_Category_Index extends View_Base {
 
 		foreach ($this->topics as $topic)
 		{
-			$last_post = $topic->last_post->as_array();
+			$last_post = $topic->posts->order_by('created', 'desc')->limit(1)->find()->as_array();
 			$last_post['created'] = Date::format($last_post['created']);
 			$topics[] = array(
 				'title' => $topic->title,

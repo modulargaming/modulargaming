@@ -7,11 +7,6 @@ class Model_Forum_Topic extends ORM {
 		'format' => TRUE,
 	);
 
-	protected $_updated_column = array(
-		'column' => 'updated',
-		'format' => TRUE,
-	);
-
 	protected $_belongs_to = array(
 		'category' => array(
 			'model' => 'Forum_Category',
@@ -19,10 +14,6 @@ class Model_Forum_Topic extends ORM {
 		'user' => array(
 			'model' => 'User',
 			'foreign_key' => 'user_id',
-		),
-		'last_post' => array(
-			'model' => 'Forum_Post',
-			'foreign_key' => 'last_post_id',
 		),
 	);
 
