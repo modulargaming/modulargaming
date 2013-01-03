@@ -2,9 +2,12 @@
 
 {{#posts}}
 	<div id="post{{id}}" class="media">
-		<a class="pull-left" href="#">
-			<img class="media-object" src="{{base_url}}assets/img/avatar.png">
-		</a>
+		<div class="pull-left">
+			<a href="#">
+				<img class="media-object" src="{{base_url}}assets/img/avatar.png">
+			</a><br>
+			Post count: {{user.post_count}}
+		</div>
 		<div class="media-body">
 			<h5 class="media-heading"><a href="#post{{id}}"><small>#{{i}}</small></a> Posted by <a href="{{user.href}}">{{user.username}}</a></h5>
 				<p>{{{content}}}</p>

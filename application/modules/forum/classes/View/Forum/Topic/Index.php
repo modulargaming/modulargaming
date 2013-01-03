@@ -30,6 +30,7 @@ class View_Forum_Topic_Index extends View_Base {
 				'user' => array(
 					'username'  => $post->user->username,
 					'signature' => $post->user->signature,
+					'post_count' => number_format($post->user->post_count),
 					'href'      => Route::url('user', array(
 						'action' => 'view',
 						'id'     => $post->user->id,
