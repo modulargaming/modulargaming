@@ -86,7 +86,8 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => (DIRECTORY_SEPARATOR == '/' ? dirname($_SERVER['SCRIPT_NAME']): str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']))),
+	'base_url'   => (DIRECTORY_SEPARATOR == '/' ? dirname($_SERVER['SCRIPT_NAME']): str_replace('\\', '/', 
+			dirname($_SERVER['SCRIPT_NAME']))),
 	'index_file' => FALSE,
 	'profile'    => Kohana::$environment !== Kohana::PRODUCTION,
 	'caching'    => Kohana::$environment === Kohana::PRODUCTION,
@@ -129,7 +130,7 @@ Kohana::modules(array(
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
 	'auth'          => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+	'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	'database'      => MODPATH.'database',   // Database access
 	'debug-toolbar' => MODPATH.'debug-toolbar',
