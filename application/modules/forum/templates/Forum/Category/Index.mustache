@@ -1,6 +1,7 @@
 <h3>{{category.title}}</h3>
 
 <table class="table table-striped">
+
 	<thead>
  		<tr>
 			<th>Subject</th>
@@ -9,18 +10,27 @@
 			<th>Created</th>
 		</tr>
 	</thead>
+{{#topics}}
+
 	<tbody>
-	{{#topics}}
 		<tr>
 			<td><a href="{{href}}">{{title}}</a></td>
 			<td><a href="{{user.href}}">{{user.username}}</a></td>
 			<td><a href="{{last_post.user.href}}">{{last_post.user.username}}</a> - {{last_post.created}}</td>
 			<td>{{created}}</td>
 		</tr>
-	{{/topics}}
 	</tbody>
+{{/topics}}
+
 </table>
+
+{{^topics}}
+        <div class="alert alert-error">No forum topics</div>
+{{/topics}}
+
 
 <div class="form-actions">
 	<a href="{{links.create}}" class="btn">New thread</a>
 </div>
+
+
