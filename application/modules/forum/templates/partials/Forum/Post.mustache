@@ -1,0 +1,41 @@
+<div class="post">
+	<div class="row-fluid">
+		<div class="thumbnail center span2">
+			<a href="#">
+				<img class="img-polaroid" src="{{user.avatar}}">
+			</a>
+
+			<br>
+
+			<a href="{{user.href}}">{{user.username}}</a>
+
+			<br>
+
+			Posts: {{user.post_count}}
+		</div>
+		<div class="span10" id="post{{id}}">
+			<h5>
+				<a href="#post{{id}}">
+					<small>#{{id}}</small>
+				</a>
+				{{title}}
+				<span class="pull-right">{{created}}</span>
+			</h5>
+
+			<p class="wrap">{{{content}}}</p>
+
+			{{#user.signature}}
+				<div class="signature">
+					<p>{{{user.signature}}}</p>
+				</div>
+			{{/user.signature}}
+
+			{{#can_edit}}
+				<a href="{{links.edit}}" class="btn btn-small">edit</a>
+			{{/can_edit}}
+			{{#can_delete}}
+				<a href="{{links.delete}}" class="btn btn-small">delete</a>
+			{{/can_delete}}
+		</div>
+	</div>
+</div>
