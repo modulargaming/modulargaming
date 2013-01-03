@@ -36,6 +36,7 @@ CREATE TABLE `users` (
   `last_login` int(10) unsigned DEFAULT NULL,
   `timezone_id` int(11) unsigned DEFAULT NULL,
   `signature` varchar(255) DEFAULT NULL,
+  `post_count` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
