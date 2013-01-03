@@ -51,6 +51,12 @@ class Model_Forum_Topic extends ORM {
 		);
 	}
 
+	public function delete()
+	{
+		$this->delete_posts();
+		parent::delete();
+	}
+
 	public function delete_posts()
 	{
 		$post_users = array();

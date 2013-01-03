@@ -83,8 +83,6 @@ class Controller_Forum_Post extends Controller_Frontend {
 				if ($post->id == $post->topic->posts->limit(1)->find()->id)
 				{
 					$topic_redirect = Route::get('forum/category')->uri(array('id' => $post->topic->category));
-
-					$post->topic->delete_posts();
 					$post->topic->delete();
 				}
 

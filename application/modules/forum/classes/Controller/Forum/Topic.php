@@ -90,7 +90,6 @@ class Controller_Forum_Topic extends Controller_Frontend {
 			try
 			{
 				$topic_redirect = $this->topic->category;
-				$this->topic->delete_posts();
 				$this->topic->delete();
 
 				Hint::success('You have deleted a topic!');
