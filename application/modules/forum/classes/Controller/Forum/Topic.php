@@ -71,4 +71,39 @@ class Controller_Forum_Topic extends Controller_Frontend {
 
 	}
 
+	public function action_delete()
+	{
+		if ( ! $this->user->can('Forum_Topic_Delete', array('topic' => $this->topic)))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to delete topic');
+		}
+
+
+		Breadcrumb::add('Delete', Route::url('forum/topic', array(
+			'id'     => $this->topic->id,
+			'action' => 'delete'
+		)));
+
+		if ($_POST)
+		{
+
+			try
+			{
+				$topic_redirect = $this->topic->category;
+				$this->topic->delete();
+
+				Hint::success('You have deleted a topic!');
+				$this->redirect(Route::get('forum/category')->uri(array('id' => $topic_redirect)));
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				Hint::error($e->errors('models'));
+			}
+
+		}
+
+		$this->view = new View_Forum_Topic_Delete;
+
+	}
+
 }
