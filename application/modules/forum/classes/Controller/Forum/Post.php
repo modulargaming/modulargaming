@@ -12,7 +12,7 @@ class Controller_Forum_Post extends Controller_Frontend {
 	{
 		$id = $this->request->param('id');
 
-		$this->post = $post = ORM::factory('Forum_Post', $id);
+		$this->post = ORM::factory('Forum_Post', $id);
 
 		if ( ! $this->post->loaded())
 		{
