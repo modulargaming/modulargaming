@@ -33,12 +33,37 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 
 	public function rules()
 	{
-		return Arr::merge(parent::rules(), array(
+		return array(
+			'username' => array(
+				array('not_empty'),
+				array('max_length', array(':value', 32)),
+				array(array($this, 'unique'), array('username', ':value')),
+			),
+			'password' => array(
+				array('not_empty'),
+			),
+			'email' => array(
+				array('not_empty'),
+				array('email'),
+				array(array($this, 'unique'), array('email', ':value')),
+			),
 			'timezone_id' => array(
 				array('not_empty'),
 				array('Model_User_Timezone::timezone_exists')
-			)
-		));
+			),
+		);
+	}
+
+	public function filters()
+	{
+		return array(
+			'password' => array(
+				array(array(Auth::instance(), 'hash'))
+			),
+			'signature' => array(
+				array('Security::xss_clean'),
+			),
+		);
 	}
 
 	/**

@@ -36,7 +36,8 @@ class Controller_User extends Controller_Frontend {
 					$this->user->update_user($this->request->post(), array(
 						'email',
 						'password',
-						'timezone_id'
+						'timezone_id',
+						'signature',
 					));
 
 					Hint::success(Kohana::message('user', 'edit.success'));
