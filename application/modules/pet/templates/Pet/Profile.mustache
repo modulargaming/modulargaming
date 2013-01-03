@@ -1,22 +1,21 @@
-<h2>{{pet.name}} the {{pet.colour.name}} {{pet.race.name}}</h2>
-<ul class="thumbnails">
-	<li class="span4">
-		<div class="thumbnail">
-			<img src="{{base_url}}assets/img/pets/{{pet.race}}/{{pet.colour.image}}" />
-		</div>
-	</li>
-	<li class="span2">
-		<ul>
 {{#pet}}
-			<li>ID: {{id}}</li>
-			<li>User: <a href={{user.href}}>{{user.username}}</a></li>
-			<li>Name: {{name}}</li>
-			<li>Gender: {{gender}}</li>
-			<li>Race: {{race.name}}</li>
-			<li>Colour: {{colour.name}}</li>
-			<li>Created: {{created}}</li>
+	<h2>{{name}} the {{colour.name}} {{race.name}}</h2>
+	<ul class="thumbnails">
+		<li class="span4">
+			<div class="thumbnail">
+				<img src="{{base_url}}assets/img/pets/{{race.id}}/{{colour.image}}"/>
+			</div>
+		</li>
+		<li class="span2">
+			<ul>
+				<li>ID: {{id}}</li>
+				<li>User: <a href={{user.href}}>{{user.username}}</a></li>
+				<li>Name: {{name}}</li>
+				<li>Gender: {{gender}}</li>
+				<li>Race: {{race.name}}</li>
+				<li>Colour: {{colour.name}}</li>
+				<li>Created: {{created}}</li>
+			</ul>
+		</li>
+	</ul>
 {{/pet}}
-
-		</ul>
-	</li>
-</ul>
