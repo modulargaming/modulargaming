@@ -10,6 +10,7 @@ class Controller_Forum_Post extends Controller_Frontend {
 
 	public function before()
 	{
+		parent::before();
 		$id = $this->request->param('id');
 
 		$this->post = ORM::factory('Forum_Post', $id);
@@ -30,7 +31,6 @@ class Controller_Forum_Post extends Controller_Frontend {
 	public function action_edit()
 	{
 		$post = $this->post;
-
 		if ( ! $this->user->can('Forum_Post_Edit', array('post' => $post)))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to edit post');
