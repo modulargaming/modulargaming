@@ -7,20 +7,6 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		'format' => TRUE
 	);
 
-	protected $_has_many = array(
-		'user_tokens' => array(
-			'model' => 'user_token'
-		),
-		'roles' => array(
-			'model' => 'Role',
-			'through' => 'roles_users'
-		),
-		'pets' => array(
-			'model' => 'Pet',
-			'through' => 'user_pets'
-		),
-	);
-
 	protected $_belongs_to = array(
 		'timezone' => array(
 			'model' => 'User_Timezone',
@@ -77,6 +63,15 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		$user = ORM::factory('User', $id);
 
 		return $user->loaded();
+	}
+
+	public function post_count()
+	{
+		$posts = ORM::factory('Forum_Post')
+				->where('user_id', '=', $this->id)
+				->count_all();
+		$this->post_count = $posts;
+		$this->save();
 	}
 
 	public function create_user($values, $expected)
