@@ -24,7 +24,6 @@ class View_Forum_Topic_Index extends View_Base {
 			$posts[] = array(
 				'id' => $post->id,
 				'title' => $this->topic->title,
-	//			'content' => Security::xss_clean($post->content), // TODO: Is this escaped properly at save?
 				'content' => $post->content, // Escaped properly at create now
 				'created' =>  Date::format($post->created),
 				'user' => array(

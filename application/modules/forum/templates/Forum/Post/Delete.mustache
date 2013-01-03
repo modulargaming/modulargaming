@@ -1,11 +1,19 @@
 <form method="post">
 	<fieldset>
-		<legend>Delete post</legend>
+		<div class="alert alert-error">
+			<h4>Are you sure?</h4>
+			Deleting a post is irreversible!
+		</div>
+
+		{{#post}}
+			{{>Forum/Post}}
+		{{/post}}
 
 		<input type="hidden" name="csrf" value="{{csrf}}">
 
 		<div class="form-actions">
-			<button type="submit" class="btn btn-primary">Delete</button>
+			<button type="submit" class="btn btn-danger">Yes, I'm sure delete this post</button>
+			<a href="#" class="btn btn-success">No, go back!</a>
 		</div>
 
 	</fieldset>
