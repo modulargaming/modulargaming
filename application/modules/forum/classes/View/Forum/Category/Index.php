@@ -41,7 +41,7 @@ class View_Forum_Category_Index extends View_Base {
 		return $topics;
 	}
 
-	public function href()
+	public function links()
 	{
 		return array(
 			'create' => Route::url('forum/category', array(
