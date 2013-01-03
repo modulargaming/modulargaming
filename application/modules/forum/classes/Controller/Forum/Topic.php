@@ -46,7 +46,6 @@ class Controller_Forum_Topic extends Controller_Frontend {
 					'topic_id' => $this->topic->id,
 					'user_id'	=> $this->user->id,
 				));
-				$post_data['content'] = Security::xss_clean($post_data['content']);
 				$topic = ORM::factory('Forum_Post')
 					->create_post($post_data, array(
 						'topic_id',
