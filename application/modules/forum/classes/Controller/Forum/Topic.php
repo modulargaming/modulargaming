@@ -58,7 +58,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 				$this->topic->save();
 
 				Hint::success('You have created a post!');
-				$this->redirect("forum/topic/$topic->topic_id");
+				$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
 			}
 			catch (ORM_Validation_Exception $e)
 			{
