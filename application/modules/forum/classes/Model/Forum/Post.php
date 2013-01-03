@@ -2,16 +2,6 @@
 
 class Model_Forum_Post extends ORM {
 
-	protected $_created_column = array(
-		'column' => 'created',
-		'format' => TRUE
-	);
-
-	protected $_updated_column = array(
-		'column' => 'updated',
-		'format' => TRUE,
-	);
-
 	protected $_belongs_to = array(
 		'topic' => array(
 			'model' => 'Forum_Topic',
@@ -27,6 +17,15 @@ class Model_Forum_Post extends ORM {
 		'user'
 	);
 
+	protected $_created_column = array(
+		'column' => 'created',
+		'format' => TRUE
+	);
+
+	protected $_updated_column = array(
+		'column' => 'updated',
+		'format' => TRUE,
+	);
 
 	public function rules()
 	{
@@ -48,12 +47,4 @@ class Model_Forum_Post extends ORM {
 			->create($extra_validation);
 	}
 
-	static public function post_exists($id)
-	{
-		$post = ORM::factory('Forum_Post', $id);
-
-		return $post->loaded();
-	}
-
 }
-

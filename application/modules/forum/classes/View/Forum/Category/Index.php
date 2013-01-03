@@ -22,17 +22,23 @@ class View_Forum_Category_Index extends View_Base {
 		foreach ($this->topics as $topic)
 		{
 			$topics[] = array(
-				'title' => $topic->title,
-				'href' => Route::url('forum/topic', array('id' => $topic->id)),
-				'created' =>  Date::format($topic->created),
-				'user' => $topic->user->as_array()
+				'title'   => $topic->title,
+				'href'    => Route::url('forum/topic', array('id' => $topic->id)),
+				'created' => Date::format($topic->created),
+				'user'    => array(
+					'username' => $topic->user->username,
+					'href'     => Route::url('user', array(
+						'action' => 'view',
+						'id'     => $topic->user->id,
+					))
+				),
 			);
 		}
 
 		return $topics;
 	}
 
-	public function href()
+	public function links()
 	{
 		return array(
 			'create' => Route::url('forum/category', array(
