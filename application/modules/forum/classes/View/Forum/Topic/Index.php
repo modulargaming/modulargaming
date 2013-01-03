@@ -40,8 +40,13 @@ class View_Forum_Topic_Index extends View_Base {
 						'action' => 'edit',
 						'id'     => $post->id,
 					)),
+					'delete' => Route::url('forum/post', array(
+						'action' => 'delete',
+						'id'     => $post->id,
+					)),
 				),
 				'can_edit' => Auth::instance()->get_user()->can('Forum_Post_Edit', array('post' => $post)),
+				'can_delete' => Auth::instance()->get_user()->can('Forum_Post_Delete', array('post' => $post)),
 			);
 		}
 
