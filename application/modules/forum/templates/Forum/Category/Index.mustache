@@ -1,42 +1,32 @@
 <h3>{{category.title}}</h3>
 
-{{#topics_count}}
 <table class="table table-striped">
 
 	<thead>
- 		<tr>
+		<tr>
 			<th>Subject</th>
 			<th>Posted by</th>
 			<th>Last post</th>
 			<th>Created</th>
 		</tr>
 	</thead>
-{{/topics_count}}
-
-{{#topics}}
 
 	<tbody>
-		<tr>
-			<td><a href="{{href}}">{{title}}</a></td>
-			<td><a href="{{user.href}}">{{user.username}}</a></td>
-			<td><a href="{{last_post.user.href}}">{{last_post.user.username}}</a> - {{last_post.created}}</td>
-			<td>{{created}}</td>
-		</tr>
+		{{#topics}}
+			<tr>
+				<td><a href="{{href}}">{{title}}</a></td>
+				<td><a href="{{user.href}}">{{user.username}}</a></td>
+				<td><a href="{{last_post.user.href}}">{{last_post.user.username}}</a> - {{last_post.created}}</td>
+				<td>{{created}}</td>
+			</tr>
+		{{/topics}}
 	</tbody>
-{{/topics}}
-
-{{#topics_count}}
-
 </table>
-{{/topics_count}}
 
 {{^topics}}
-        <div class="alert alert-error">No forum topics</div>
+	<div class="alert alert-error">No forum topics</div>
 {{/topics}}
-
 
 <div class="form-actions">
 	<a href="{{links.create}}" class="btn">New thread</a>
 </div>
-
-
