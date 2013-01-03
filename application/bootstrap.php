@@ -86,7 +86,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => dirname($_SERVER['SCRIPT_NAME']),
+	'base_url'   => (DIRECTORY_SEPARATOR == '/' ? dirname($_SERVER['SCRIPT_NAME']): str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']))),
 	'index_file' => FALSE,
 	'profile'    => Kohana::$environment !== Kohana::PRODUCTION,
 	'caching'    => Kohana::$environment === Kohana::PRODUCTION,
