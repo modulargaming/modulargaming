@@ -24,8 +24,7 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 	public function action_view()
 	{
-		$topics = $this->category->topics->find_all();
-
+		$topics = $this->category->topics->order_by('last_post_time', 'DESC')->find_all();
 		$this->view = new View_Forum_Category_Index;
 		$this->view->category = $this->category;
 		$this->view->topics = $topics;
@@ -46,6 +45,7 @@ class Controller_Forum_Category extends Controller_Frontend {
 				$topic_data = Arr::merge($this->request->post(), array(
 					'category_id' => $this->category->id,
 					'user_id'     => $this->user->id,
+					'last_post_time' => time(),
 				));
 
 				$topic = ORM::factory('Forum_Topic')
@@ -53,13 +53,13 @@ class Controller_Forum_Category extends Controller_Frontend {
 						'category_id',
 						'user_id',
 						'title',
+						'last_post_time',
 					));
 
 				$post_data = Arr::merge($this->request->post(), array(
 					'topic_id' => $topic->id,
 					'user_id'  => $this->user->id,
 				));
-
 				$post_data['content'] = Security::xss_clean($post_data['content']);
 
 				$post = ORM::factory('Forum_Post')
@@ -68,7 +68,8 @@ class Controller_Forum_Category extends Controller_Frontend {
 						'user_id',
 						'content',
 					));
-
+				$topic->last_post_id = $post->id;
+				$topic->save();
 				Hint::success('You have created a topic');
 				$this->redirect(Route::get('forum/topic')->uri(array('id' => $topic->id)));
 			}

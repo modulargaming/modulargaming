@@ -3,8 +3,9 @@
 <table class="table table-striped">
 	<thead>
  		<tr>
-			<th>Suject</th>
+			<th>Subject</th>
 			<th>Posted by</th>
+			<th>Last post</th>
 			<th>Created</th>
 		</tr>
 	</thead>
@@ -13,6 +14,7 @@
 		<tr>
 			<td><a href="{{href}}">{{title}}</a></td>
 			<td><a href="{{user.href}}">{{user.username}}</a></td>
+			<td>{{last_post.user.username}} - {{last_post.created}}</td>
 			<td>{{created}}</td>
 		</tr>
 	{{/topics}}

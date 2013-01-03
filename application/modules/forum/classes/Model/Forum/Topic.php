@@ -5,7 +5,6 @@ class Model_Forum_Topic extends ORM {
 	protected $_created_column = array(
 		'column' => 'created',
 		'format' => TRUE,
-
 	);
 
 	protected $_belongs_to = array(
@@ -15,6 +14,10 @@ class Model_Forum_Topic extends ORM {
 		'user' => array(
 			'model' => 'User',
 			'foreign_key' => 'user_id',
+		),
+		'last_post' => array(
+			'model' => 'Forum_Post',
+			'foreign_key' => 'last_post_id',
 		),
 	);
 

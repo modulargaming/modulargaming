@@ -25,7 +25,6 @@ class Controller_Forum_Topic extends Controller_Frontend {
 	public function action_view()
 	{
 		$posts = $this->topic->posts->find_all();
-
 		$this->view = new View_Forum_Topic_Index;
 		$this->view->topic = $this->topic;
 		$this->view->posts = $posts;
@@ -47,16 +46,16 @@ class Controller_Forum_Topic extends Controller_Frontend {
 					'topic_id' => $this->topic->id,
 					'user_id'	=> $this->user->id,
 				));
-
 				$post_data['content'] = Security::xss_clean($post_data['content']);
-
 				$topic = ORM::factory('Forum_Post')
 					->create_post($post_data, array(
 						'topic_id',
 						'user_id',
 						'content',
 					));
-
+				$this->topic->last_post_id = $topic->id;
+				$this->topic->last_post_time = time();
+				$this->topic->save();
 				Hint::success('You have created a post!');
 				$this->redirect("forum/topic/$topic->topic_id");
 			}
@@ -72,4 +71,3 @@ class Controller_Forum_Topic extends Controller_Frontend {
 	}
 
 }
-
