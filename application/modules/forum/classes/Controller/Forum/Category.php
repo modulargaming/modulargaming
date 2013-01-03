@@ -48,7 +48,6 @@ class Controller_Forum_Category extends Controller_Frontend {
 				$topic_data = Arr::merge($this->request->post(), array(
 					'category_id' => $this->category->id,
 					'user_id'     => $this->user->id,
-					'last_post_time' => time(),
 				));
 
 				$topic = ORM::factory('Forum_Topic')
@@ -56,7 +55,6 @@ class Controller_Forum_Category extends Controller_Frontend {
 						'category_id',
 						'user_id',
 						'title',
-						'last_post_time',
 					));
 
 				$post_data = Arr::merge($this->request->post(), array(
