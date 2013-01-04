@@ -52,8 +52,8 @@
 <script>
 var pet_race = 1,
 	pet_colour = 1,
-	colour_name = ['', 'Black', 'Blue', 'Green', 'Red', 'White', 'Yellow'],
-	colour_image = ['', 'black.png', 'blue.png', 'green.png', 'red.png', 'white.png', 'yellow.png'];
+	colour_name = ['', {{#colours}}'{{name}}', {{/colours}}''],
+	colour_image = ['', {{#colours}}'{{image}}', {{/colours}}''];
 function pet_image() {
 	$('#pet_image').attr('src', '{{base_url}}assets/img/pets/' + pet_race + '/' + colour_image[pet_colour]);
 }

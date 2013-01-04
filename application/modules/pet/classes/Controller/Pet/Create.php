@@ -35,7 +35,7 @@ class Controller_Pet_Create extends Controller_Frontend {
 		$races = ORM::factory('Pet_Race')->find_all();
 		$this->view = new View_Pet_Create;
 		
-		$colours = ORM::factory('Pet_Colour')->find_all();
+		$colours = ORM::factory('Pet_Colour')->where('locked', '=', 0)->find_all();
 		$this->view->colours = $colours;
 
 		$this->view->races = $races;
