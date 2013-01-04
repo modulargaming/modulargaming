@@ -44,7 +44,8 @@ class Model_Pet extends ORM {
 	{
 		$extra_validation = Validation::Factory($values)
 			->rule('race_id', 'Model_Pet_Race::race_exists')
-			->rule('colour_id', 'Model_Pet_Colour::colour_exists');
+			->rule('colour_id', 'Model_Pet_Colour::colour_exists')
+			->rule('colour_id', 'Model_Pet_Colour::colour_free');
 
 		return $this->values($values, $expected)
 			->create($extra_validation);

@@ -16,4 +16,11 @@ class Model_Pet_Colour extends ORM {
 		return $colour->loaded();
 	}
 
+	static public function colour_free($id)
+	{
+		$colour = ORM::factory('Pet_Colour', $id);
+
+		return $colour->locked == 0;
+	}
+
 }
