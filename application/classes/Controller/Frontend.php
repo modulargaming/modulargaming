@@ -16,6 +16,8 @@ abstract class Controller_Frontend extends Controller {
 	protected $protected = FALSE; // Require user to be logged in.
 	protected $view; // View to render.
 
+	protected $layout = 'layout';
+
 	public function before()
 	{
 		$this->check_csrf();
@@ -35,6 +37,7 @@ abstract class Controller_Frontend extends Controller {
 		if ($this->view)
 		{
 			$renderer = Kostache_Layout::factory();
+			$renderer->set_layout($this->layout);
 			$this->response->body($renderer->render($this->view));
 		}
 	}

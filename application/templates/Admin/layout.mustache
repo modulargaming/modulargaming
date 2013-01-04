@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset=utf-8>
+	<title>{{title}} - Modular Gaming Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{{base_url}}assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{base_url}}assets/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="{{base_url}}assets/css/bootstrap-wysihtml5.css">
+    <link rel="stylesheet" href="{{base_url}}assets/css/style.css">
+</head>
+<body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="{{base_url}}">Modular Gaming Admin</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="{{base_url}}">Dashboard</a></li>
+						<li><a href="{{base_url}}">Return to site</a></li>
+					</ul>
+
+					<ul class="nav pull-right">
+                        <form class="navbar-search" action="{{base_url}}search/" method="get">
+                            <input type="text" name="query" class="search-query" placeholder="Search">
+                        </form>
+						{{#logged_in}}
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									{{user.username}}
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="{{base_url}}user/">Profile</a></li>
+									<li><a href="{{base_url}}user/edit/">Settings</a></li>
+									<li class="divider"></li>
+									<li><a href="{{base_url}}user/logout/">Logout</a></li>
+								</ul>
+							</li>
+						{{/logged_in}}
+						{{^logged_in}}
+							<li><a href="{{base_url}}user/login/">Login</a></li>
+							<li><a href="{{base_url}}user/register/">Register</a></li>
+						{{/logged_in}}
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row-fluid">
+			<div class="span3">
+				<div class="well" style="padding: 8px 0">
+					<ul class="nav nav-list">
+						<li class="nav-header">Navigation</li>
+						<li class="active"><a href="#"><i class="icon-home"></i>Dashboard</a></li>
+						<li><a href="#">Library</a></li>
+						...
+					</ul>
+				</div>
+			</div>
+			<div class="span9">
+				{{#has_breadcrumb}}
+					<ul class="breadcrumb">
+						{{#breadcrumb}}
+							{{#active}}
+								<li class="active">
+									{{title}}
+									{{#divider}}<span class="divider">/</span>{{/divider}}
+								</li>
+							{{/active}}
+							{{^active}}
+								<li>
+									<a href="{{href}}">{{title}}</a>
+									{{#divider}}<span class="divider">/</span>{{/divider}}
+								</li>
+							{{/active}}
+						{{/breadcrumb}}
+					</ul>
+				{{/has_breadcrumb}}
+
+				{{>hints}}
+
+				{{>content}}
+			</div>
+		</div>
+
+		<hr>
+
+		<footer>
+			<p>&copy; Modular Gaming 2013</p>
+		</footer>
+	</div>
+
+	<script src="{{base_url}}assets/js/libs/jquery.js"></script>
+	<script src="{{base_url}}assets/js/libs/bootstrap.min.js"></script>
+
+	<script src="{{base_url}}assets/js/libs/wysihtml5.js"></script>
+	<script src="{{base_url}}assets/js/libs/bootstrap-wysihtml5.js"></script>
+
+	<script src="{{base_url}}assets/js/script.js"></script>
+</body>
+</html>
