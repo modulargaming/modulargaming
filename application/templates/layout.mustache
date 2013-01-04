@@ -44,7 +44,12 @@
 									<li><a href="{{base_url}}user/">Profile</a></li>
 									<li><a href="{{base_url}}user/edit/">Settings</a></li>
 									<li class="divider"></li>
-									<li><a href="{{base_url}}user/logout/">Logout</a></li>
+									<li>
+										<a href="/user/logout/"><label for="logout">Logout</label></a>
+										<form action="{{base_url}}user/logout/" method="post" class="hide">
+											<button class="btn btn-link" name="csrf" value="{{csrf}}" id="logout">Logout</button>
+										</form>
+									</li>
 								</ul>
 							</li>
 						{{/logged_in}}

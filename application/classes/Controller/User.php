@@ -136,10 +136,17 @@ class Controller_User extends Controller_Frontend {
 	 */
 	public function action_logout()
 	{
-		Hint::success(Kohana::message('user', 'logout.success'));
+		if ($_POST)
+		{
+			Hint::success(Kohana::message('user', 'logout.success'));
 
-		$this->auth->logout();
-		$this->redirect('');
+			$this->auth->logout();
+			$this->redirect('');
+		}
+		else
+		{
+			$this->view = new View_User_Logout;
+		}
 	}
 
 	/**
