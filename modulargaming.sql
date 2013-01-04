@@ -360,20 +360,22 @@ CREATE TABLE IF NOT EXISTS `pets` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
 CREATE TABLE IF NOT EXISTS `pet_colours` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `locked` int(1) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` longtext NOT NULL,
   `image` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
-INSERT INTO `pet_colours` (`id`, `name`, `description`, `image`) VALUES
-(1, 'Black', 'Black colour', 'black.png'),
-(2, 'Blue', 'Blue colour', 'blue.png'),
-(3, 'Green', 'Green colour', 'green.png'),
-(4, 'Red', 'Red colour', 'red.png'),
-(5, 'White', 'White colour', 'white.png'),
-(6, 'Yellow', 'Yellow colour', 'yellow.png');
+INSERT INTO `pet_colours` (`id`, `locked`, `name`, `description`, `image`) VALUES
+(1, 0, 'Black', 'Black colour', 'black.png'),
+(2, 0, 'Blue', 'Blue colour', 'blue.png'),
+(3, 0, 'Green', 'Green colour', 'green.png'),
+(4, 0, 'Red', 'Red colour', 'red.png'),
+(5, 0, 'White', 'White colour', 'white.png'),
+(6, 0, 'Yellow', 'Yellow colour', 'yellow.png'),
+(7, 1, 'Outline', 'Special outline colour', 'outline.png');
 
 CREATE TABLE IF NOT EXISTS `pet_races` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
