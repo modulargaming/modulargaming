@@ -4,8 +4,12 @@
 {{/posts}}
 
 <div class="form-actions">
+    {{#topic.locked}}
+    <p>This topic is locked - {{topic.locked_date}}</p>
+    {{/topic.locked}}
+    {{^topic.locked}}
 	<a href="{{links.reply}}" class="btn">Reply</a>
-
+    {{/topic.locked}}
 	{{#has_actions}}
 	<div class="btn-group">
 		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

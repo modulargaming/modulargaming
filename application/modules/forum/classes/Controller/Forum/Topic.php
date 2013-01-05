@@ -32,6 +32,10 @@ class Controller_Forum_Topic extends Controller_Frontend {
 
 	public function action_reply()
 	{
+		if ($this->topic->locked)
+		{
+			throw HTTP_Exception::factory('403', 'Topic is locked');
+		}
 		Breadcrumb::add('Reply', Route::url('forum/topic', array(
 			'id'     => $this->topic->id,
 			'action' => 'reply'
@@ -123,6 +127,33 @@ class Controller_Forum_Topic extends Controller_Frontend {
 			{
 				$this->topic->sticky = time();
 				Hint::success('You have stuck the topic!');
+			}
+			$this->topic->save();
+			$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
+		}
+		catch (ORM_Validation_Exception $e)
+		{
+			Hint::error($e->errors('models'));
+		}
+	}
+
+	public function action_lock()
+	{
+		if ( ! $this->user->can('Forum_Topic_Lock', array('topic' => $this->topic)))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to sticky topic');
+		}
+		try
+		{
+			if ($this->topic->locked)
+			{
+				$this->topic->locked = 0;
+				Hint::success('You have unlocked the topic!');
+			}
+			else
+			{
+				$this->topic->locked = time();
+				Hint::success('You have locked the topic!');
 			}
 			$this->topic->save();
 			$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));

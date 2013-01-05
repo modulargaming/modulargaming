@@ -12,7 +12,9 @@ class View_Forum_Topic_Index extends View_Base {
 
 	public function topic()
 	{
-		return $this->topic->as_array();
+		$topic = $this->topic->as_array();
+		$topic['locked_date'] = Date::format($topic['locked']);
+		return $topic;
 	}
 
 	public function posts()
@@ -84,9 +86,20 @@ class View_Forum_Topic_Index extends View_Base {
 		if ($user->can('Forum_Topic_Sticky'))
 		{
 			$actions[] = array(
-				'title' => $this->topic->sticky == 0 ? 'Stick' : 'Unstick',
+				'title' => $this->topic->sticky ? 'Unstick' : 'Stick',
 				'href'  => Route::url('forum/topic', array(
 					'action' => 'sticky',
+					'id'     => $this->topic->id,
+				)),
+			);
+		}
+
+		if ($user->can('Forum_Topic_Lock'))
+		{
+			$actions[] = array(
+				'title' => $this->topic->locked ? 'Unlock' : 'Lock',
+				'href'  => Route::url('forum/topic', array(
+					'action' => 'lock',
 					'id'     => $this->topic->id,
 				)),
 			);

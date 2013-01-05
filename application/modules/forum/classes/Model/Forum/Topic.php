@@ -81,6 +81,13 @@ class Model_Forum_Topic extends ORM {
 			->create($extra_validation);
 	}
 
+	static public function topic_open($id)
+	{
+		$topic = ORM::factory('Forum_Topic', $id);
+
+		return $topic->locked == 0;
+	}
+
 	static public function topic_exists($id)
 	{
 		$topic = ORM::factory('Forum_Topic', $id);

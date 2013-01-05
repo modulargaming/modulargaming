@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `forum_topics` (
   `created` int(10) NOT NULL,
   `last_post_id` int(11) unsigned NOT NULL,
   `sticky` int(10) NOT NULL,
+  `locked` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
