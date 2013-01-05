@@ -29,7 +29,7 @@ class View_Forum_Topic_Index extends View_Base {
 				'content' => $post->content, // Escaped properly at create now
 				'created' =>  Date::format($post->created),
 				'user' => array(
-					'avatar' => 'http://www.gravatar.com/avatar/' . md5(strtolower($post->user->email)) . '?s=64',
+					'avatar' => $post->user->avatar,
 					'username'  => $post->user->username,
 					'signature' => $post->user->signature,
 					'post_count' => number_format($post->user->post_count),
