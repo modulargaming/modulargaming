@@ -14,7 +14,10 @@
 	<tbody>
 		{{#topics}}
 			<tr>
-				<td><a href="{{href}}">{{title}}</a></td>
+				<td>
+				{{#sticky}}<i class="icon-bullhorn"></i> {{/sticky}}
+				{{#locked}}<i class="icon-lock"></i> {{/locked}}
+				<a href="{{href}}">{{title}}</a></td>
 				<td><a href="{{user.href}}">{{user.username}}</a></td>
 				<td><a href="{{last_post.user.href}}">{{last_post.user.username}}</a> - {{last_post.created}}</td>
 				<td>{{created}}</td>
