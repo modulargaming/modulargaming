@@ -26,6 +26,7 @@ class Controller_Forum_Category extends Controller_Frontend {
 	{
 		$topics = $this->category->topics
 			->with('last_post')
+			->order_by('sticky', 'DESC')
 			->order_by('last_post.created', 'DESC')
 			->find_all();
 

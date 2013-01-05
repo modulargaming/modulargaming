@@ -81,6 +81,17 @@ class View_Forum_Topic_Index extends View_Base {
 			);
 		}
 
+		if ($user->can('Forum_Topic_Sticky'))
+		{
+			$actions[] = array(
+				'title' => $this->topic->sticky == 0 ? 'Stick' : 'Unstick',
+				'href'  => Route::url('forum/topic', array(
+					'action' => 'sticky',
+					'id'     => $this->topic->id,
+				)),
+			);
+		}
+
 		return $actions;
 	}
 

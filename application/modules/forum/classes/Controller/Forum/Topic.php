@@ -106,4 +106,31 @@ class Controller_Forum_Topic extends Controller_Frontend {
 
 	}
 
+	public function action_sticky()
+	{
+		if ( ! $this->user->can('Forum_Topic_Sticky', array('topic' => $this->topic)))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to sticky topic');
+		}
+		try
+		{
+			if ($this->topic->sticky)
+			{
+				$this->topic->sticky = 0;
+				Hint::success('You have unstuck the topic!');
+			}
+			else
+			{
+				$this->topic->sticky = time();
+				Hint::success('You have stuck the topic!');
+			}
+			$this->topic->save();
+			$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
+		}
+		catch (ORM_Validation_Exception $e)
+		{
+			Hint::error($e->errors('models'));
+		}
+	}
+
 }
