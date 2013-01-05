@@ -135,7 +135,7 @@ Kohana::modules(array(
 	'database'      => MODPATH.'database',   // Database access
 	'debug-toolbar' => MODPATH.'debug-toolbar',
 	'email'		=> MODPATH.'email',      // Email manipulation
-	// 'image'      => MODPATH.'image',      // Image manipulation
+	'image'      => MODPATH.'image',      // Image manipulation
 	'kostache'      => MODPATH.'kostache',   // Mustache template system
 	'kostache-pagination'      => MODPATH.'kostache-pagination',   // Kostache helper
 	'minion'        => MODPATH.'minion',     // CLI Tasks
