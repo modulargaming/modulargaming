@@ -28,31 +28,53 @@ class Controller_User extends Controller_Frontend {
 		if ($_POST)
 		{
 			$post = $this->request->post();
-
-			if ($this->auth->check_password($post['password_current']))
+			try
 			{
-				try
+				if (array_key_exists('update_preferences', $post))
 				{
 					$this->user->update_user($this->request->post(), array(
-						'email',
-						'password',
-						'timezone_id',
-						'signature',
+							'email',
+							'timezone_id',
 					));
-
 					Hint::success(Kohana::message('user', 'edit.success'));
 					$this->redirect('user/edit');
 				}
-				catch (ORM_Validation_Exception $e)
+				if (array_key_exists('update_forum', $post))
 				{
-					Hint::error($e->errors('models'));
+					$this->user->update_user($this->request->post(), array(
+							'signature',
+					));
+					Hint::success(Kohana::message('user', 'edit.success'));
+					$this->redirect('user/edit');
+				}
+				if (array_key_exists('update_profile', $post))
+				{
+					$this->user->update_user($this->request->post(), array(
+							'about',
+					));
+					Hint::success(Kohana::message('user', 'edit.success'));
+					$this->redirect('user/edit');
+				}
+				if (array_key_exists('update_password', $post))
+				{
+					if ($this->auth->check_password($post['password_current']))
+					{
+						$this->user->update_user($this->request->post(), array(
+							'password',
+						));
+						Hint::success(Kohana::message('user', 'edit.success'));
+					}
+					else
+					{
+						Hint::error('Incorrect password');
+					}
+					$this->redirect('user/edit');
 				}
 			}
-			else
+			catch (ORM_Validation_Exception $e)
 			{
-				Hint::error('Incorrect password');
+				Hint::error($e->errors('models'));
 			}
-
 		}
 
 		$timezones = ORM::factory('User_Timezone')
