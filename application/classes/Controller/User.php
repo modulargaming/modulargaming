@@ -49,8 +49,19 @@ class Controller_User extends Controller_Frontend {
 				}
 				if (array_key_exists('update_profile', $post))
 				{
-					$this->user->update_user($this->request->post(), array(
+					if (array_key_exists('gravatar', $post))
+					{
+						$post['avatar'] = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->user->email));
+						$post['gravatar'] = 1;
+ 					}
+ 					else
+ 					{
+ 						$post['gravatar'] = 0;
+ 					}
+					$this->user->update_user($post, array(
 							'about',
+							'avatar',
+							'gravatar',
 					));
 					Hint::success(Kohana::message('user', 'edit.success'));
 					$this->redirect('user/edit');

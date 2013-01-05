@@ -37,6 +37,8 @@ CREATE TABLE `users` (
   `timezone_id` int(11) unsigned DEFAULT NULL,
   `signature` varchar(255) DEFAULT NULL,
   `about` mediumtext DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `gravatar` int(1) DEFAULT NULL,
   `post_count` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
