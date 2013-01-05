@@ -65,8 +65,7 @@ class Controller_User extends Controller_Frontend {
 						)
 					);
 					Hint::success('You have removed your avatar.');
-					$this->redirect('user/edit');
-					die();
+					return $this->redirect('user/edit');
 				}
 				if (array_key_exists('update_profile', $post))
 				{
