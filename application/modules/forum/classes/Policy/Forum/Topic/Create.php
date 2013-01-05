@@ -6,7 +6,7 @@ class Policy_Forum_Topic_Create extends Policy {
 	{
 		$category = $extra['category'];
 
-		if ($user->has('roles', Model_Role::ADMIN) OR $category->locked == 0)
+		if ($category->locked == 0 OR $user->has('roles', Model_Role::ADMIN))
 		{
 			return TRUE;
 		}
