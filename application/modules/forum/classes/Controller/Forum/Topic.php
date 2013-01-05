@@ -3,6 +3,7 @@
 class Controller_Forum_Topic extends Controller_Frontend {
 
 	protected $protected = TRUE;
+
 	protected $topic;
 
 	public function before()
@@ -10,6 +11,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 		parent::before();
 
 		$id = $this->request->param('id');
+
 		$this->topic = ORM::Factory('Forum_Topic', $id);
 
 		if ( ! $this->topic->loaded())
@@ -36,6 +38,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 		{
 			throw HTTP_Exception::factory('403', 'Topic is locked');
 		}
+
 		Breadcrumb::add('Reply', Route::url('forum/topic', array(
 			'id'     => $this->topic->id,
 			'action' => 'reply'

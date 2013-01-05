@@ -61,9 +61,16 @@
 				<div class="well" style="padding: 8px 0">
 					<ul class="nav nav-list">
 						<li class="nav-header">Navigation</li>
-						<li class="active"><a href="#"><i class="icon-home"></i>Dashboard</a></li>
-						<li><a href="#">Library</a></li>
-						...
+						{{#navigation}}
+							<li {{#active}}class="active"{{/active}}>
+								<a href="{{link}}">
+									{{#icon}}
+										<i class="{{icon}}"></i>
+									{{/icon}}
+									{{title}}
+								</a>
+							</li>
+						{{/navigation}}
 					</ul>
 				</div>
 			</div>

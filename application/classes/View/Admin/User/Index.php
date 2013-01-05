@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Admin_User_Index extends View_Base {
+class View_Admin_User_Index extends View_Admin_Base {
 
 	public $title = 'Users';
 
