@@ -67,7 +67,6 @@ class Controller_User extends Controller_Frontend {
 	 */
 	public function action_login()
 	{
-
 		if ($this->auth->logged_in())
 		{
 			$this->redirect('user');
@@ -93,6 +92,11 @@ class Controller_User extends Controller_Frontend {
 
 	public function action_register()
 	{
+		if ($this->auth->logged_in())
+		{
+			$this->redirect('user');
+		}
+
 		if ($_POST)
 		{
 			// Honeypot check.
@@ -110,9 +114,9 @@ class Controller_User extends Controller_Frontend {
 					$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
 
 					$email = Email::factory('New Registration', 'Thank you for registering on our game.')
-					->to($user->email)
-					->from('support@modulargaming.com', 'Modular Gaming')
-					->send();
+						->to($user->email)
+						->from('support@modulargaming.com', 'Modular Gaming')
+						->send();
 
 					$this->auth->force_login($user);
 					$this->redirect('');
