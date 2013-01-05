@@ -141,7 +141,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 	{
 		if ( ! $this->user->can('Forum_Topic_Lock', array('topic' => $this->topic)))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to sticky topic');
+			throw HTTP_Exception::factory('403', 'Permission denied to lock topic');
 		}
 		try
 		{
