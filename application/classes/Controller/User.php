@@ -146,9 +146,10 @@ class Controller_User extends Controller_Frontend {
 
 					$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
 
-					$email = Email::factory('New Registration', 'Thank you for registering on our game.')
-						->to($user->email)
-						->from('support@modulargaming.com', 'Modular Gaming')
+					// Send the welcome email.
+					$view = new View_Email_Welcome;
+					Email::factory($view)
+						->to($this->user->email)
 						->send();
 
 					$this->auth->force_login($user);
