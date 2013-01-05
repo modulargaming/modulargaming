@@ -31,6 +31,7 @@ class Controller_Forum_Category extends Controller_Frontend {
 			->find_all();
 
 		$this->view = new View_Forum_Category_Index;
+		$this->view->can_create = $this->user->can('Forum_Topic_Create', array('category' => $this->category));
 		$this->view->category = $this->category;
 		$this->view->topics = $topics;
 		$this->view->topics_count = count($topics);
@@ -38,6 +39,10 @@ class Controller_Forum_Category extends Controller_Frontend {
 
 	public function action_create()
 	{
+		if (!$this->user->can('Forum_Topic_Create', array('category' => $this->category)))
+		{
+			throw HTTP_Exception::factory('403', 'Category is locked');
+		}
 		Breadcrumb::add('Create', Route::url('forum/category', array(
 			'action' => 'create',
 			'id'     => $this->category->id,

@@ -64,19 +64,17 @@ ALTER TABLE `user_tokens`
   ADD CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 CREATE TABLE IF NOT EXISTS `forum_categories` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(30) NOT NULL,
-  `description` VARCHAR(50) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `locked` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
---
--- Dumping data for table `forum_categories`
---
-
-INSERT INTO `forum_categories` (`id`, `title`, `description`) VALUES
-(1, 'General', 'General Discussions'),
-(2, 'Marketplace', 'Buy and sell items.');
+INSERT INTO `forum_categories` (`id`, `title`, `description`, `locked`) VALUES
+(1, 'News', 'Only admins can create topics here', 1),
+(2, 'General', 'General discussions', 0),
+(3, 'Marketplace', 'Buy and sell items', 0);
 
 
 CREATE TABLE IF NOT EXISTS `forum_posts` (
