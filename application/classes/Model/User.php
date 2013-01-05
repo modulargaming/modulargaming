@@ -49,6 +49,9 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 			'signature' => array(
 				array('Security::xss_clean'),
 			),
+			'about' => array(
+				array('Security::xss_clean'),
+			),
 		);
 	}
 
