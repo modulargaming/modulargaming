@@ -1,12 +1,13 @@
 <h2 class="page-title">{{title}}</h2>
 <ul>
-        {{#profile_user}}
-                <li>User ID {{id}}</li>
-                <li>Username {{username}}</li>
-                <li>Email {{email}}</li>
-                <li>Logins {{logins}}</li>
-                <li>Last Login {{last_login}}</li>
-                <li>Created {{created}}</li>
-        {{/profile_user}}
+	{{#profile_user}}
+	<li>User ID {{id}}</li>
+	<li>Username {{username}}</li>
+	<li>Email {{email}}</li>
+	<li>Logins {{logins}}</li>
+	<li>Last Login {{last_login}}</li>
+	<li>Created {{created}}</li>
+	<li>About: <p>{{{about}}}</p></li>
+	{{/profile_user}}
 </ul>
 
