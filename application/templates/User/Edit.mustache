@@ -1,33 +1,58 @@
-<form method="post">
-	<fieldset>
-		<legend>Update Profile</legend>
-
-		<input type="hidden" name="csrf" value="{{csrf}}">
-
-		<label for="password_current">Password</label>
-		<input type="password" name="password_current" id="password_current">
-
-		<label for="email">Email</label>
-		<input type="email" name="email" id="email" value="{{user.email}}">
-
-		<label for="password">New Password</label>
-		<input type="password" name="password" id="password">
-
-		<label for="password_confirm">Confirm Password</label>
-		<input type="password" name="password_confirm" id="password_confirm">
-
-		<label for="timezone">Timezone</label>
-		<select name="timezone_id" id="timezone">
-			{{#timezones}}
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#preferences" data-toggle="tab">Preferences</a></li>
+	<li><a href="#forum" data-toggle="tab">Forum settings</a></li>
+	<li><a href="#profile" data-toggle="tab">Profile</a></li>
+	<li><a href="#password" data-toggle="tab">Password</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+	<div class="tab-pane active in" id="preferences">
+		<form id="tab" method="post">
+			<input type="hidden" name="csrf" value="{{csrf}}">
+			<label for="email">Email</label>
+			<input type="email" name="email" id="email" value="{{user.email}}" class="input-xlarge">
+			<label for="timezone">Timezone</label>
+			<select name="timezone_id" id="timezone" class="input-xlarge">
+				{{#timezones}}
 				<option value="{{id}}" {{#selected}}selected{{/selected}}>{{name}}</option>
-			{{/timezones}}
-		</select>
-
-		<label for="signature">Signature</label>
-		<textarea id="signature" name="signature" class="textarea-basic">{{user.signature}}</textarea>
-
-		<div class="form-actions">
-			<button type="submit" class="btn btn-primary">Save</button>
-		</div>
-	</fieldset>
-</form>
+				{{/timezones}}
+			</select>
+			<div class="form-actions">
+				<button class="btn btn-success" name="update_preferences">Update</button>
+			</div>
+		</form>
+	</div>
+	<div class="tab-pane fade" id="forum">
+		<form id="tab2" method="post">
+			<input type="hidden" name="csrf" value="{{csrf}}">
+       		<label for="signature">Signature</label>
+			<textarea id="signature" name="signature" class="textarea-basic">{{{user.signature}}}</textarea>
+			<div class="form-actions">
+				<button class="btn btn-success" name="update_forum" name="update_forum">Update</button>
+			</div>
+		</form>
+	</div>
+	<div class="tab-pane fade" id="profile">
+		<form id="tab2" method="post">
+			<input type="hidden" name="csrf" value="{{csrf}}">
+       		<label for="about">About me</label>
+			<textarea id="about" name="about" class="textarea">{{{user.about}}}</textarea>
+			<div class="form-actions">
+				<button class="btn btn-success" name="update_profile">Update</button>
+			</div>
+		</form>
+	</div>
+	<div class="tab-pane fade" id="password">
+		<form id="tab2" method="post">
+			<input type="hidden" name="csrf" value="{{csrf}}">
+			<label for="password_current">Password</label>
+			<input type="password" name="password_current" id="password_current" class="input-xlarge">
+			<label for="password">New Password</label>
+			<input type="password" name="password" id="password" class="input-xlarge">
+			<label for="password_confirm">Confirm Password</label>
+			<input type="password" name="password_confirm" id="password_confirm" class="input-xlarge">
+			<div class="form-actions">
+				<button class="btn btn-success" name="update_password">Update</button>
+			</div>
+		</form>
+	</div>
+</div>
