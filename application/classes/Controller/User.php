@@ -70,7 +70,7 @@ class Controller_User extends Controller_Frontend {
 				}
 				if (array_key_exists('update_profile', $post))
 				{
-					$avatar = ';'
+					$avatar = '';
 					if (array_key_exists('gravatar', $post))
 					{
 						$avatar = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->user->email));
