@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `forum_categories` (
   `description` varchar(50) NOT NULL,
   `locked` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=4;
 
 INSERT INTO `forum_categories` (`id`, `title`, `description`, `locked`) VALUES
 (1, 'News', 'Only admins can create topics here', 1),
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `forum_posts` (
   `created` int(10) NOT NULL,
   `updated` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS `forum_topics` (
@@ -100,7 +100,8 @@ CREATE TABLE IF NOT EXISTS `forum_topics` (
   `sticky` int(10) NOT NULL,
   `locked` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
+
 
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -110,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `subject` varchar(255) NOT NULL,
   `text` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 CREATE TABLE IF NOT EXISTS `user_timezones` (
@@ -357,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `pets` (
   `race_id` int(6) NOT NULL,
   `colour_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS `pet_colours` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
@@ -382,7 +383,7 @@ CREATE TABLE IF NOT EXISTS `pet_races` (
   `name` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `pet_races` (`id`, `name`, `description`) VALUES
 (1, 'Koorai', 'The Koorai'),
