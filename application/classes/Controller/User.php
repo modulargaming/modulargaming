@@ -47,18 +47,51 @@ class Controller_User extends Controller_Frontend {
 					Hint::success(Kohana::message('user', 'edit.success'));
 					$this->redirect('user/edit');
 				}
+				if (array_key_exists('remove_avatar', $post))
+				{
+					$avatar = 'assets/img/avatars/'.$this->user->id.'.png';
+					if (file_exists($avatar))
+					{
+						unlink($avatar);
+					}
+					$this->user->update_user(
+						array(
+							'avatar' => '',
+							'gravatar' => '0',
+						),
+						array(
+							'avatar',
+							'gravatar',
+						)
+					);
+					Hint::success('You have removed your avatar.');
+					$this->redirect('user/edit');
+					die();
+				}
 				if (array_key_exists('update_profile', $post))
 				{
 					if (array_key_exists('gravatar', $post))
 					{
-						$post['avatar'] = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->user->email));
+						$avatar = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->user->email));
 						$post['gravatar'] = 1;
  					}
  					else
  					{
  						$post['gravatar'] = 0;
+ 						$filename = NULL;
+ 						if (isset($_FILES['avatar']))
+						{
+							$upload = $this->_save_image($_FILES['avatar'], $this->user->id);
+							$post['avatar'] = URL::base().'assets/img/avatars/'.$this->user->id.'.png';
+							if (!$upload)
+							{
+								$avatar = '';
+								Hint::error('There was a problem while uploading your avatar. Make sure it is a JPG/PNG/GIF file.');
+							}
+						}
  					}
-					$this->user->update_user($post, array(
+ 					$post['avatar'] = $avatar;
+ 					$this->user->update_user($post, array(
 							'about',
 							'avatar',
 							'gravatar',
@@ -168,6 +201,26 @@ class Controller_User extends Controller_Frontend {
 
 		$this->view = new View_User_Register;
 	}
+	protected function _save_image($image, $user_id)
+	{
+		if (
+			! Upload::valid($image) OR
+			! Upload::not_empty($image) OR
+			! Upload::type($image, array('jpg', 'jpeg', 'png', 'gif')))
+		{
+			return FALSE;
+		}
+		$directory = 'assets/img/avatars/';
+		if ($file = Upload::save($image, NULL, $directory))
+		{
+			Image::factory($file)
+				->resize(64, 64, Image::AUTO)
+				->save($directory.$user_id.'.png');
+				unlink($file);
+			return TRUE;
+		}
+		return FALSE;
+    }
 
 	/**
 	 * Sign out the user and redirect him to the frontpage.
