@@ -18,8 +18,8 @@ Released under a [BSD license](http://www.modulargaming.com/license), Modular Ga
 
 ### Requirements
 
-* PHP 5.3+
-* MySQL 5.1+
+* PHP 5.3.3+
+* MySQL
 
 ## Installation
 
