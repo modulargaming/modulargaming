@@ -3,7 +3,7 @@
 		<div class="span3">
 			<div class="row well">
 				<h3>{{profile_user.username}}</h3>
-				<img src="{{profile_user.avatar}}" alt="" class="img-polaroid">
+				<img src="{{#profile_user.avatar}}{{profile_user.avatar}}{{/profile_user.avatar}}{{^profile_user.avatar}}{{base_url}}assets/img/avatars/default.png{{/profile_user.avatar}}" alt="" class="img-polaroid">
 				<p>
 					<ul class="unstyled">
 						<li>Created: {{profile_user.created}}</li>
@@ -22,9 +22,12 @@
 				<div class="tab-pane active in" id="pets">
 					<div class="row">
 						{{#pets}}
-						<div class="span3 thumbnail center">
-							<a href="{{href}}"><img src="{{src}}" alt=""></a>
-							<h4><a href="{{href}}">{{name}} the {{colour}} {{race}}</a></h4>
+						<div class="span3 center">
+							<span class="thumbnail">
+								<a href="{{href}}"><img src="{{src}}" alt=""></a>
+								<h4><a href="{{href}}">{{name}} the {{colour}} {{race}}</a></h4>
+							</span>
+							<br>
 						</div>
 						{{/pets}}
 						{{^pets}}
