@@ -70,6 +70,7 @@ class Controller_User extends Controller_Frontend {
 				}
 				if (array_key_exists('update_profile', $post))
 				{
+					$avatar = ';'
 					if (array_key_exists('gravatar', $post))
 					{
 						$avatar = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->user->email));
@@ -82,7 +83,7 @@ class Controller_User extends Controller_Frontend {
  						if (isset($_FILES['avatar']))
 						{
 							$upload = $this->_save_image($_FILES['avatar'], $this->user->id);
-							$post['avatar'] = URL::base().'assets/img/avatars/'.$this->user->id.'.png';
+							$avatar = URL::base().'assets/img/avatars/'.$this->user->id.'.png';
 							if (!$upload)
 							{
 								$avatar = '';
