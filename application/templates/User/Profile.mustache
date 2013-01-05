@@ -1,13 +1,41 @@
-<h2 class="page-title">{{title}}</h2>
-<ul>
-	{{#profile_user}}
-	<li>User ID {{id}}</li>
-	<li>Username {{username}}</li>
-	<li>Email {{email}}</li>
-	<li>Logins {{logins}}</li>
-	<li>Last Login {{last_login}}</li>
-	<li>Created {{created}}</li>
-	<li>About: <p>{{{about}}}</p></li>
-	{{/profile_user}}
-</ul>
-
+<div class="container">
+	<div class="row">
+		<div class="span3">
+			<div class="row well">
+				<h3>{{profile_user.username}}</h3>
+				<img src="{{profile_user.avatar}}" alt="" class="img-polaroid">
+				<p>
+					<ul class="unstyled">
+						<li>Created: {{profile_user.created}}</li>
+						<li>Last Login: {{profile_user.last_login}}</li>
+						<li>Forum posts: {{profile_user.post_count}}</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+		<div class="span9">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#pets" data-toggle="tab">Pets</a></li>
+				<li><a href="#about" data-toggle="tab">About me</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active in" id="pets">
+					<div class="row">
+						{{#pets}}
+						<div class="span3 thumbnail center">
+							<a href="{{href}}"><img src="{{src}}" alt=""></a>
+							<h4><a href="{{href}}">{{name}} the {{colour}} {{race}}</a></h4>
+						</div>
+						{{/pets}}
+						{{^pets}}
+						<p class="span5">{{profile_user.username}} has no pets.</p>
+						{{/pets}}
+					</div>
+				</div>
+				<div class="tab-pane fade" id="about">
+				{{{profile_user.about}}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

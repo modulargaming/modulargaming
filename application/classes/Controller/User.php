@@ -257,6 +257,7 @@ class Controller_User extends Controller_Frontend {
 
 		$this->view = new View_User_Profile;
 		$this->view->profile_user = $user->as_array();
+		$this->view->pets = ORM::factory('Pet')->where('user_id', '=', $user->id)->order_by('active', 'desc')->find_all()->as_array();
 	}
 
 
