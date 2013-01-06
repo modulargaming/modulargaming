@@ -7,18 +7,18 @@ class View_User_Profile extends View_Base {
 
         public function title()
         {
-        	return $this->profile_user['username'] . '\'s Profile';
+        	return $this->profile_user->username . '\'s Profile';
         }
 
         public function profile_user()
 	{
 		$profile_user = $this->profile_user;
 		$profile_user = array(
-			'id'      => $profile_user['id'],
-			'created' => Date::format($profile_user['created']),
-			'last_login' => Date::format($profile_user['last_login']),
-			'post_count'    => $profile_user['post_count'],
-			'avatar'    => $profile_user['avatar'],
+			'id'      => $profile_user->id,
+			'created' => Date::format($profile_user->created),
+			'last_login' => Date::format($profile_user->last_login),
+			'post_count'    => $profile_user->post_count,
+			'avatar'    => $profile_user->avatar,
 			'title'    => $this->profile_user->title->title,
 		);
 
