@@ -182,7 +182,7 @@ class Controller_User extends Controller_Frontend {
 					// Send the welcome email.
 					$view = new View_Email_Welcome;
 					Email::factory($view)
-						->to($this->user->email)
+						->to($user->email)
 						->send();
 
 					$this->auth->force_login($user);

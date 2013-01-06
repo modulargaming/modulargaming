@@ -31,6 +31,7 @@ CREATE TABLE `users` (
   `email` varchar(127) NOT NULL,
   `username` varchar(32) NOT NULL DEFAULT '',
   `password` char(64) NOT NULL,
+  `title` char(64) DEFAULT 'User' NOT NULL,
   `logins` int(10) unsigned NOT NULL DEFAULT '0',
   `created` int(10) unsigned DEFAULT NULL,
   `last_login` int(10) unsigned DEFAULT NULL,
