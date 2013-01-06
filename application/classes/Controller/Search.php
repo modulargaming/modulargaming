@@ -25,6 +25,7 @@ class Controller_Search extends Controller_Frontend {
 			// TODO: Decide how to display the search results.
 
 			$this->view->query = $query;
+			$this->view->users = $users;
 		}
 
 	}

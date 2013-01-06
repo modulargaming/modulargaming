@@ -4,4 +4,6 @@ class View_Search extends View_Base {
 
 	public $title = 'Search';
 
+	public $user;
+
 }
