@@ -31,7 +31,7 @@ CREATE TABLE `users` (
   `email` varchar(127) NOT NULL,
   `username` varchar(32) NOT NULL DEFAULT '',
   `password` char(64) NOT NULL,
-  `title` char(64) DEFAULT 'User' NOT NULL,
+  `title` int(11) DEFAULT '1' NOT NULL,
   `logins` int(10) unsigned NOT NULL DEFAULT '0',
   `created` int(10) unsigned DEFAULT NULL,
   `last_login` int(10) unsigned DEFAULT NULL,
@@ -67,6 +67,18 @@ ALTER TABLE `roles_users`
 ALTER TABLE `user_tokens`
   ADD CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
+
+CREATE TABLE IF NOT EXISTS `user_titles` (
+  `id` int(11) NOT NULL DEFAULT '1',
+  `title` varchar(55) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+INSERT INTO `user_titles` (`id`, `title`, `description`) VALUES
+(1, 'User', 'Standard User'),
+(2, 'Administrator', 'Administrator user');
 CREATE TABLE IF NOT EXISTS `forum_categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(30) NOT NULL,
