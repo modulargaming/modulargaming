@@ -12,6 +12,13 @@
 			<br>
 
 			Posts: {{user.post_count}}
+			
+			<br>
+
+			Roles:
+			{{#user.role}}
+			{{name}}
+			{{/user.role}}		
 		</div>
 		<div class="span10" id="post{{id}}">
 			<h5>
