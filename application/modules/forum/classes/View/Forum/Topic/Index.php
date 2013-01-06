@@ -31,7 +31,7 @@ class View_Forum_Topic_Index extends View_Base {
 				'user' => array(
 					'avatar' => $post->user->avatar,
 					'username'  => $post->user->username,
-					'title'  => $post->user->title,
+					'title'  => $post->user->title->title,
 					'signature' => $post->user->signature,
 					'post_count' => number_format($post->user->post_count),
 					'created' => Date::format($post->user->created),

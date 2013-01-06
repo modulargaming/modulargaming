@@ -11,10 +11,14 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		'timezone' => array(
 			'model' => 'User_Timezone',
 		),
+		'title' => array(
+			'model' => 'User_Title',
+		),
 	);
 
 	protected $_load_with = array(
-		'timezone'
+		'timezone',
+		'title',
 	);
 
 	public function rules()
