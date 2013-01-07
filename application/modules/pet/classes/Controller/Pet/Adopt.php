@@ -11,7 +11,7 @@ class Controller_Pet_Adopt extends Controller_Frontend {
 				if ($this->request->post('adopt'))
 				{
 					$pet = ORM::factory('Pet')
-					->where('id', '=', $this->request->post('adopt'))
+					->where('pet.id', '=', $this->request->post('adopt'))
 					->where('user_id', '=', 0)
 					->find();
 					$pet->user_id = $this->user->id;

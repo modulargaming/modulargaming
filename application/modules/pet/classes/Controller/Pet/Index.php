@@ -11,7 +11,7 @@ class Controller_Pet_Index extends Controller_Frontend {
 				if ($this->request->post('active'))
 				{
 					$pet = ORM::factory('Pet')
-					->where('id', '=', $this->request->post('active'))
+					->where('pet.id', '=', $this->request->post('active'))
 					->where('user_id', '=', $this->user->id)
 					->find();
 					$pet->active = time();
@@ -21,7 +21,7 @@ class Controller_Pet_Index extends Controller_Frontend {
 				if ($this->request->post('abandon'))
 				{
 					$pet = ORM::factory('Pet')
-					->where('id', '=', $this->request->post('abandon'))
+					->where('pet.id', '=', $this->request->post('abandon'))
 					->where('user_id', '=', $this->user->id)
 					->find();
 					$pet->user_id = 0;
