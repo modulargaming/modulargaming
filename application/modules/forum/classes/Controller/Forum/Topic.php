@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Forum Topic controller.
+ * Handles viewing a topic and replying to it.
+ *
+ * @package    MG Forum
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Controller_Forum_Topic extends Controller_Abstract_Forum {
 
 	protected $topic;
