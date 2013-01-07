@@ -1,27 +1,29 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Controller_Pet_Index extends Controller_Frontend {
+
 	protected $protected = TRUE;
+
 	public function action_index()
 	{
 		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try
 			{
-				if (array_key_exists('active', $_POST))
+				if ($this->request->post('active'))
 				{
 					$pet = ORM::factory('Pet')
-					->where('id', '=', $_POST['active'])
+					->where('pet.id', '=', $this->request->post('active'))
 					->where('user_id', '=', $this->user->id)
 					->find();
 					$pet->active = time();
 					$pet->save();
 					Hint::success($pet->name . ' is now your active pet.');
 				}
-				if (array_key_exists('abandon', $_POST))
+				if ($this->request->post('abandon'))
 				{
 					$pet = ORM::factory('Pet')
-					->where('id', '=', $_POST['abandon'])
+					->where('pet.id', '=', $this->request->post('abandon'))
 					->where('user_id', '=', $this->user->id)
 					->find();
 					$pet->user_id = 0;

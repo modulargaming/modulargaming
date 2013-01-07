@@ -92,6 +92,28 @@ INSERT INTO `forum_categories` (`id`, `title`, `description`, `locked`) VALUES
 (2, 'General', 'General discussions', 0),
 (3, 'Marketplace', 'Buy and sell items', 0);
 
+CREATE TABLE IF NOT EXISTS `forum_polls` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `topic_id` int(11) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `votes` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `forum_poll_options` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `poll_id` int(11) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `votes` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `forum_poll_votes` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `option_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `forum_posts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

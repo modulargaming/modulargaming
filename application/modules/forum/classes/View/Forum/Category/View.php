@@ -28,6 +28,7 @@ class View_Forum_Category_View extends View_Base {
 				'title'   => $topic->title,
 				'locked'  => $topic->locked,
 				'sticky'  => $topic->sticky,
+				'poll'    => $topic->poll->loaded(),
 				'href'    => Route::url('forum/topic', array('id' => $topic->id)),
 				'created' =>  Date::format($topic->created),
 				'user'    => array(

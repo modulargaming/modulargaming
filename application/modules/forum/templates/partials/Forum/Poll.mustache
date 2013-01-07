@@ -1,0 +1,15 @@
+<div>
+  <h5>Poll: {{title}}</h5>
+  {{#options}}
+  <strong>{{title}}</strong><span class="pull-right">{{percent}}% Votes: {{votes}}</span>
+  <div class="progress progress-{{colour}}">
+      <div class="bar" style="width: {{percent}}%;"></div>
+  </div>
+  {{/options}}
+  <p>
+  	<a href="{{links.poll}}" class="btn btn-success">Vote</a>
+    {{#can_edit}}<hr><a href="{{links.poll}}" class="btn btn-small">Edit poll</a>{{/can_edit}}
+    {{#can_delete}}<a href="{{links.poll}}" class="btn btn-small btn-danger">Delete poll</a>{{/can_delete}}
+  </p>
+</div>
+<hr>
