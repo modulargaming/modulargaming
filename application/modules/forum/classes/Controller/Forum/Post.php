@@ -2,8 +2,6 @@
 
 class Controller_Forum_Post extends Controller_Frontend {
 
-	protected $protected = TRUE;
-
 	private $post;
 	private $topic;
 	private $category;
@@ -11,6 +9,7 @@ class Controller_Forum_Post extends Controller_Frontend {
 	public function before()
 	{
 		parent::before();
+
 		$id = $this->request->param('id');
 
 		$this->post = ORM::factory('Forum_Post', $id);
@@ -23,7 +22,6 @@ class Controller_Forum_Post extends Controller_Frontend {
 		$this->topic = $this->post->topic;
 		$this->category = $this->topic->category;
 
-		Breadcrumb::add('Forum', Route::url('forum'));
 		Breadcrumb::add($this->category->title, Route::url('forum/category', array('id' => $this->category->id)));
 		Breadcrumb::add($this->topic->title, Route::url('forum/topic', array('id' => $this->topic->id)));
 	}

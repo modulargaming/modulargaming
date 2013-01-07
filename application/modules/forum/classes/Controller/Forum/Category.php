@@ -1,8 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Forum_Category extends Controller_Frontend {
+class Controller_Forum_Category extends Controller_Abstract_Forum {
 
-	protected $protected = TRUE;
 	protected $category;
 
 	public function before()
@@ -18,7 +17,6 @@ class Controller_Forum_Category extends Controller_Frontend {
 			throw HTTP_Exception::factory('404', 'Forum category not found');
 		}
 
-		Breadcrumb::add('Forum', Route::url('forum'));
 		Breadcrumb::add($this->category->title, Route::url('forum/category', array('id' => $id)));
 	}
 
