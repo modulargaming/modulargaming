@@ -27,6 +27,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 	public function action_view()
 	{
 		$posts = $this->topic->posts->find_all();
+
 		$this->view = new View_Forum_Topic_Index;
 		$this->view->topic = $this->topic;
 		$this->view->posts = $posts;
@@ -63,7 +64,9 @@ class Controller_Forum_Topic extends Controller_Frontend {
 
 				$this->topic->last_post_id = $post->id;
 				$this->topic->save();
+
 				$this->user->calculate_post_count();
+
 				Hint::success('You have created a post!');
 				$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
 			}
@@ -84,7 +87,6 @@ class Controller_Forum_Topic extends Controller_Frontend {
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to delete topic');
 		}
-
 
 		Breadcrumb::add('Delete', Route::url('forum/topic', array(
 			'id'     => $this->topic->id,
@@ -110,7 +112,6 @@ class Controller_Forum_Topic extends Controller_Frontend {
 		}
 
 		$this->view = new View_Forum_Topic_Delete;
-
 	}
 
 	public function action_sticky()
@@ -158,6 +159,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 				$this->topic->locked = time();
 				Hint::success('You have locked the topic!');
 			}
+
 			$this->topic->save();
 			$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
 		}
