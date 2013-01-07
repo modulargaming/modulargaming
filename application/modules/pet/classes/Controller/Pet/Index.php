@@ -1,7 +1,9 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Controller_Pet_Index extends Controller_Frontend {
+
 	protected $protected = TRUE;
+
 	public function action_index()
 	{
 		if ($this->request->method() == HTTP_Request::POST)
