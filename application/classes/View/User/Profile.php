@@ -19,7 +19,7 @@ class View_User_Profile extends View_Base {
 			'last_login' => Date::format($profile_user->last_login),
 			'post_count'    => $profile_user->post_count,
 			'avatar'    => $profile_user->avatar,
-			'title'    => $profile_user->title,
+			'title'    => $profile_user->title->title,
 		);
 
 		return $profile_user;
