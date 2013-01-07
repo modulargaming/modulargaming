@@ -20,15 +20,16 @@ class HTTP_Exception extends Kohana_HTTP_Exception {
 			// Show the normal Kohana error page.
 			return parent::get_response();
 		}
-		else
-		{
-			$response = Response::factory();
-			$view = new View_Error;
-			$view->title = $this->getCode();
-			$view->message = $this->getMessage();
-			$renderer = Kostache_Layout::factory();
-			$response->body ($renderer->render($view));
-			return $response;
-   		}
-    	}
+
+		$response = Response::factory();
+
+		$view = new View_Error;
+		$view->title = $this->getCode();
+		$view->message = $this->getMessage();
+
+		$renderer = Kostache_Layout::factory();
+		$response->body($renderer->render($view));
+
+		return $response;
+    }
 }
