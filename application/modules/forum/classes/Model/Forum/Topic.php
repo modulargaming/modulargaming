@@ -37,7 +37,7 @@ class Model_Forum_Topic extends ORM {
 
 	protected $_load_with = array(
 		'user',
-		'poll',
+		'poll'
 	);
 
 	public function rules()
