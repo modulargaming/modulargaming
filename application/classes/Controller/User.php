@@ -25,7 +25,7 @@ class Controller_User extends Controller_Frontend {
 			$this->redirect('user/login');
 		}
 
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			$post = $this->request->post();
 			try
@@ -138,7 +138,7 @@ class Controller_User extends Controller_Frontend {
 			$this->redirect('user');
 		}
 
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			$post = $this->request->post();
 
@@ -163,7 +163,7 @@ class Controller_User extends Controller_Frontend {
 			$this->redirect('user');
 		}
 
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			// Honeypot check.
 			if ($this->request->post('full_name') == "")
@@ -227,7 +227,7 @@ class Controller_User extends Controller_Frontend {
 	 */
 	public function action_logout()
 	{
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			Hint::success(Kohana::message('user', 'logout.success'));
 

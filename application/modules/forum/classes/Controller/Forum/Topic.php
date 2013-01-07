@@ -44,7 +44,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 			'action' => 'reply'
 		)));
 
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 
 			try
@@ -91,7 +91,7 @@ class Controller_Forum_Topic extends Controller_Frontend {
 			'action' => 'delete'
 		)));
 
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 
 			try

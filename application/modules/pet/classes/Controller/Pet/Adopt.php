@@ -4,7 +4,7 @@ class Controller_Pet_Adopt extends Controller_Frontend {
 	protected $protected = TRUE;
 	public function action_index()
 	{
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try
 			{

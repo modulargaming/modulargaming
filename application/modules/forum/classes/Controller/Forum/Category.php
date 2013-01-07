@@ -48,7 +48,7 @@ class Controller_Forum_Category extends Controller_Frontend {
 			'id'     => $this->category->id,
 		)));
 
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try
 			{

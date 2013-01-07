@@ -41,7 +41,7 @@ class Controller_Forum_Post extends Controller_Frontend {
 			'id'     => $post->id,
 		)));
 
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try {
 				$post->values($this->request->post(), array('content'))->save();
@@ -74,7 +74,7 @@ class Controller_Forum_Post extends Controller_Frontend {
 			'id'     => $post->id,
 		)));
 
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			$topic_redirect = Route::get('forum/topic')->uri(array('id' => $post->topic->id));
 			try {

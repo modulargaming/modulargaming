@@ -19,7 +19,7 @@ class Controller_Messages extends Controller_Frontend {
 
 	public function action_create()
 	{
-		if ($_POST)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try
 			{
