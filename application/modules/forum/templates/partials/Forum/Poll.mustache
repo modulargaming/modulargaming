@@ -8,6 +8,8 @@
   {{/options}}
   <p>
   	<a href="{{links.poll}}" class="btn btn-success">Vote</a>
+    {{#can_edit}}<hr><a href="{{links.poll}}" class="btn btn-small">Edit poll</a>{{/can_edit}}
+    {{#can_delete}}<a href="{{links.poll}}" class="btn btn-small btn-danger">Delete poll</a>{{/can_delete}}
   </p>
 </div>
 <hr>

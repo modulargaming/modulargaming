@@ -29,8 +29,20 @@ class View_Forum_Topic_Index extends View_Base {
 				);
 			}
 			$topic['poll']['options'] = $options;
+			$topic['poll']['can_edit'] = Auth::instance()->get_user()->can('Forum_Poll_Edit', array('poll' => $this->topic->poll));
+			$topic['poll']['can_delete'] = Auth::instance()->get_user()->can('Forum_Poll_Delete', array('poll' => $this->topic->poll));
+		}
+		else
+		{
+			$topic['poll'] = NULL;
 		}
 		return $topic;
+	}
+
+	public function can_create_poll()
+	{
+		return true;
+		//return Auth::instance()->get_user()->can('Forum_Poll_Create', array('topic' => $this->topic));
 	}
 
 	public function posts()
@@ -77,6 +89,10 @@ class View_Forum_Topic_Index extends View_Base {
 	public function links()
 	{
 		return array(
+			'poll' => Route::url('forum/topic', array(
+				'action' => 'poll',
+				'id'     => $this->topic->id
+			)),
 			'reply' => Route::url('forum/topic', array(
 				'action' => 'reply',
 				'id'     => $this->topic->id

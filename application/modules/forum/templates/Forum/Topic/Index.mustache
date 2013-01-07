@@ -1,6 +1,12 @@
 {{#topic.poll}}
 	{{>Forum/Poll}}
 {{/topic.poll}}
+{{^topic.poll}}
+	{{#can_create_poll}}
+	<a class="btn btn-primary" href="{{links.poll}}">Add a poll</a>
+	<hr>
+	{{/can_create_poll}}
+{{/topic.poll}}
 {{#posts}}
 	{{>Forum/Post}}
 	<hr>
