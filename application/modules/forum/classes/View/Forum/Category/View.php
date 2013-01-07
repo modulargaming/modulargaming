@@ -1,9 +1,10 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Forum_Category_Index extends View_Base {
+class View_Forum_Category_View extends View_Base {
 
 	public $category;
 	public $topics;
+	public $can_create;
 
 	public function title()
 	{
@@ -24,10 +25,10 @@ class View_Forum_Category_Index extends View_Base {
 			$last_post = $topic->last_post;
 
 			$topics[] = array(
-				'title' => $topic->title,
-				'locked' => $topic->locked,
-				'sticky' => $topic->sticky,
-				'href' => Route::url('forum/topic', array('id' => $topic->id)),
+				'title'   => $topic->title,
+				'locked'  => $topic->locked,
+				'sticky'  => $topic->sticky,
+				'href'    => Route::url('forum/topic', array('id' => $topic->id)),
 				'created' =>  Date::format($topic->created),
 				'user'    => array(
 					'username' => $topic->user->username,

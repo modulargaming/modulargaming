@@ -29,8 +29,9 @@
 {{^topics}}
 	<div class="alert alert-error">No forum topics</div>
 {{/topics}}
+
 {{#can_create}}
-<div class="form-actions">
-	<a href="{{links.create}}" class="btn">New thread</a>
-</div>
+	<div class="form-actions">
+		<a href="{{links.create}}" class="btn">New thread</a>
+	</div>
 {{/can_create}}

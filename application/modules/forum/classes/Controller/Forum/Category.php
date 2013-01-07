@@ -30,11 +30,10 @@ class Controller_Forum_Category extends Controller_Frontend {
 			->order_by('last_post.created', 'DESC')
 			->find_all();
 
-		$this->view = new View_Forum_Category_Index;
+		$this->view = new View_Forum_Category_View;
 		$this->view->can_create = $this->user->can('Forum_Topic_Create', array('category' => $this->category));
 		$this->view->category = $this->category;
 		$this->view->topics = $topics;
-		$this->view->topics_count = count($topics);
 	}
 
 	public function action_create()
