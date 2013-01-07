@@ -15,6 +15,7 @@ class View_User_Profile extends View_Base {
 		$profile_user = $this->profile_user;
 		$profile_user = array(
 			'id'      => $profile_user->id,
+			'username'      => $profile_user->username,
 			'created' => Date::format($profile_user->created),
 			'last_login' => Date::format($profile_user->last_login),
 			'post_count'    => $profile_user->post_count,
