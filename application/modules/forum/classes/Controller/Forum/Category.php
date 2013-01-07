@@ -79,7 +79,9 @@ class Controller_Forum_Category extends Controller_Frontend {
 				// Set the last post id.
 				$topic->last_post_id = $post->id;
 				$topic->save();
+
 				$this->user->calculate_post_count();
+
 				Hint::success('You have created a topic');
 				$this->redirect(Route::get('forum/topic')->uri(array('id' => $topic->id)));
 			}

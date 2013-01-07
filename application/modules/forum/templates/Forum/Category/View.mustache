@@ -1,4 +1,9 @@
-<h3>{{category.title}}</h3>
+<h2>
+	{{category.title}}
+	{{#category.locked}}
+		<span class="label label-warning" title="Category is locked">Locked</span>
+	{{/category.locked}}
+</h2>
 
 <table class="table table-striped">
 
@@ -29,10 +34,6 @@
 {{^topics}}
 	<div class="alert alert-error">No forum topics</div>
 {{/topics}}
-
-{{#category.locked}}
-	<div class="alert alert-warning">Category is locked</div>
-{{/category.locked}}
 
 {{#can_create}}
 	<div class="form-actions">
