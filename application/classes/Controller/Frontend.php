@@ -20,7 +20,7 @@ abstract class Controller_Frontend extends Controller {
 
 	public function before()
 	{
-		$this->check_csrf();
+		$this->validate_csrf();
 
 		$this->auth = Auth::instance();
 		$this->user = $this->auth->get_user();
@@ -42,7 +42,7 @@ abstract class Controller_Frontend extends Controller {
 		}
 	}
 
-	private function check_csrf()
+	private function validate_csrf()
 	{
 		if ($this->request->method() == HTTP_Request::POST)
 		{
