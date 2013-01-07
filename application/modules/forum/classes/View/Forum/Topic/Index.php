@@ -14,6 +14,22 @@ class View_Forum_Topic_Index extends View_Base {
 	{
 		$topic = $this->topic->as_array();
 		$topic['locked_date'] = Date::format($topic['locked']);
+		if ($this->topic->poll->loaded())
+		{
+			$topic['poll'] = $this->topic->poll->as_array();
+			$options = array();
+			$colours = array('info', 'success', 'warning', 'danger');
+			foreach ($this->topic->poll->options->find_all() as $key => $value)
+			{
+				$options[] = array(
+					'title' => $value->title,
+					'votes' => $value->votes,
+					'colour' => $colours[$key],
+					'percent' => $topic['poll']['votes'] ? $value->votes/$topic['poll']['votes']*100 : 0,
+				);
+			}
+			$topic['poll']['options'] = $options;
+		}
 		return $topic;
 	}
 

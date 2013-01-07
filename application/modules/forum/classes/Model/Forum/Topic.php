@@ -21,6 +21,13 @@ class Model_Forum_Topic extends ORM {
 		),
 	);
 
+	protected $_has_one = array(
+		'poll' => array(
+			'model' => 'Forum_Poll',
+			'foreign_key' => 'topic_id',
+		),
+	);
+
 	protected $_has_many = array(
 		'posts' => array(
 			'model' => 'Forum_Post',
