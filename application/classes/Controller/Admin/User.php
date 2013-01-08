@@ -7,7 +7,7 @@ class Controller_Admin_User extends Controller_Admin {
 
 		if ( ! $this->user->can('Admin_User_Index') )
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin panel');
+			throw HTTP_Exception::factory('403', 'Permission denied to access admin user index');
 		}
 
 		$users = ORM::factory('User')
@@ -22,7 +22,7 @@ class Controller_Admin_User extends Controller_Admin {
 
 		if ( ! $this->user->can('Admin_User_View') )
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin panel');
+			throw HTTP_Exception::factory('403', 'Permission denied to access admin user view');
 		}
 
 		$id = $this->request->param('id');
