@@ -38,5 +38,5 @@ return array(
 	/**
 	 * Redirect all emails to this email rather than the specified to.
 	 */
-	'redirect' => 'hinton.oscar@gmail.com',
+	'redirect' => 'support@modulargaming.com',
 );
