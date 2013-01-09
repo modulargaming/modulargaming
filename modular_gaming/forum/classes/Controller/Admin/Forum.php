@@ -7,7 +7,7 @@ class Controller_Admin_Forum extends Controller_Admin {
 
 		if ( ! $this->user->can('Admin_Forum_Index') )
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to access admin forum index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin forum index');
 		}
 
 		$this->view = new View_Admin_Dashboard;

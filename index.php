@@ -16,6 +16,11 @@ $application = 'application';
 $modules = 'modules';
 
 /**
+ * The directory in which your moduler gaming modules are located.
+ */
+$modular_gaming = 'modular_gaming';
+
+/**
  * The directory in which the Kohana resources are located. The system
  * directory must contain the classes/kohana.php file.
  *
@@ -64,17 +69,22 @@ if ( ! is_dir($application) AND is_dir(DOCROOT.$application))
 if ( ! is_dir($modules) AND is_dir(DOCROOT.$modules))
 	$modules = DOCROOT.$modules;
 
+// Make the modular_gaming modules relative to the docroot, for symlink'd index.php
+if ( ! is_dir($modular_gaming) AND is_dir(DOCROOT.$modular_gaming))
+	$modular_gaming = DOCROOT.$modular_gaming;
+
 // Make the system relative to the docroot, for symlink'd index.php
 if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
 	$system = DOCROOT.$system;
 
 // Define the absolute paths for configured directories
 define('APPPATH', realpath($application).DIRECTORY_SEPARATOR);
+define('MGPATH', realpath($modular_gaming).DIRECTORY_SEPARATOR);
 define('MODPATH', realpath($modules).DIRECTORY_SEPARATOR);
 define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
 
 // Clean up the configuration vars
-unset($application, $modules, $system);
+unset($application, $modules, $system, $modular_gaming);
 
 // Uncomment to run install check.
 // return include 'install'.EXT;

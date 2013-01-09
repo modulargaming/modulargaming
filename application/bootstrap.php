@@ -86,8 +86,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => (DIRECTORY_SEPARATOR == '/' ? dirname($_SERVER['SCRIPT_NAME']): str_replace('\\', '/', 
-			dirname($_SERVER['SCRIPT_NAME']))),
+	'base_url'   => 'http://localhost/mg/',
 	'index_file' => FALSE,
 	'profile'    => Kohana::$environment !== Kohana::PRODUCTION,
 	'caching'    => Kohana::$environment === Kohana::PRODUCTION,
@@ -124,8 +123,8 @@ I18n::lang('en-gb');
 Kohana::modules(array(
 	
 	// Modular Gaming modules
-	'forum'         => APPPATH.'modules/forum',
-	'pet'			=> APPPATH.'modules/pet',
+	'forum'         => MGPATH.'forum',
+	'pet'			=> MGPATH.'pet',
 	
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
