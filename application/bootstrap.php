@@ -125,6 +125,7 @@ Kohana::modules(array(
 	// Modular Gaming modules
 	'forum'         => MGPATH.'forum',
 	'pet'			=> MGPATH.'pet',
+	'core'			=> MGPATH.'core', //Modular gaming core module
 	
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
