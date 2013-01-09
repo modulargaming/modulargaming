@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `receiver_id` int(11) NOT NULL,
   `created` int(10) NOT NULL,
   `subject` varchar(255) NOT NULL,
-  `text` mediumtext NOT NULL,
+  `content` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

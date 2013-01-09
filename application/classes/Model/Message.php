@@ -28,7 +28,7 @@ class Model_Message extends ORM
 				array('not_empty'),
 				array('max_length', array(':value', 255)),
 			),
-			'text' => array(
+			'content' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 1024)),
 
@@ -39,7 +39,7 @@ class Model_Message extends ORM
 	public function filters()
 	{
 		return array(
-			'text' => array(
+			'content' => array(
 				array('Security::xss_clean'),
 			),
 		);

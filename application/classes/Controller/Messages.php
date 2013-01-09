@@ -31,7 +31,7 @@ class Controller_Messages extends Controller_Frontend {
 					->create_message($message_data, array(
 						'receiver_id',
 						'subject',
-						'text',
+						'content',
 						'sender_id',
 					));
 
