@@ -36,6 +36,15 @@ class Model_Message extends ORM
 		);
 	}
 
+	public function filters()
+	{
+		return array(
+			'text' => array(
+				array('Security::xss_clean'),
+			),
+		);
+	}
+
 	public function create_message($values, $expected)
 	{
 		// Validation for id
