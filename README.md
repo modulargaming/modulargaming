@@ -57,6 +57,11 @@ Open `.htaccess` and make the following changes:
 
 * Set the correct environment, either development or production.
 
+
+Open `application/config/email.php` and make the following changes:
+
+* Set the default from address
+
 ### Step 5: Permissions
 
 	$ chmod 0777 application/{cache,logs}
