@@ -13,7 +13,6 @@ class View_Messages_View extends View_Base {
         {
                 $message = $this->message;
                 $message['created'] = Date::format($message['created']);
-		$message['text'] = Security::xss_clean ($message['text']);
 
                 return $message;
         }

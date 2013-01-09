@@ -12,7 +12,7 @@ class View_Messages_Index extends View_Base
 		{
 			$messages[] = array(
 				'subject' => $message->subject,
-				'text' => $message->text,
+				'content' => $message->content,
 				'sender' => $message->sender,
 				'id'	=> $message->id,
 			);
