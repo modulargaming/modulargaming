@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
+Route::set('user', 'user(/<controller>(/<action>(/<id>)))')
 ->defaults(array(
-'directory'  => 'admin',
+'directory'  => 'user',
 'controller' => 'dashboard',
 'action'     => 'index',
 ));
