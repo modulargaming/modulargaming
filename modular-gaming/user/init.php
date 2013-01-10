@@ -7,7 +7,7 @@ Route::set('user', 'user(/<controller>(/<action>(/<id>)))')
 		'action'     => 'index',
 ));
 
-Route::set('user', 'user/view/(<id>)', array('id' => '[0-9]+'))
+Route::set('user/view/(<id>)', 'user/view/index(/<id>)', array('id' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'user',
 		'controller' => 'view',
