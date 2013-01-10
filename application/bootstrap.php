@@ -124,6 +124,7 @@ Kohana::modules(array(
 	
 	// Modular Gaming modules
 	'forum'         => MGPATH.'forum',
+	'items'         => MGPATH.'item',
 	'pet'			=> MGPATH.'pet',
 	'core'			=> MGPATH.'core', //Modular gaming core module
 	

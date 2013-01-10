@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `receiver_id` int(11) NOT NULL,
   `created` int(10) NOT NULL,
   `subject` varchar(255) NOT NULL,
-  `content` mediumtext NOT NULL,
+  `text` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -426,3 +426,40 @@ CREATE TABLE IF NOT EXISTS `pet_races` (
 INSERT INTO `pet_races` (`id`, `name`, `description`) VALUES
 (1, 'Koorai', 'The Koorai'),
 (2, 'Zedro', 'The Zedro.');
+
+CREATE TABLE IF NOT EXISTS `items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `status` enum('draft','released','retired') NOT NULL DEFAULT 'draft',
+  `unique` tinyint(1) NOT NULL,
+  `transferable` tinyint(1) NOT NULL,
+  `command` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+CREATE TABLE IF NOT EXISTS `item_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `action` varchar(200) NOT NULL,
+  `default_command` varchar(100) NOT NULL,
+  `img_dir` varchar(50) NOT NULL,
+  `load_pet_list` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+CREATE TABLE IF NOT EXISTS `user_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `location` varchar(60) NOT NULL,
+  `parameter` varchar(255) NOT NULL COMMENT 'e.g. when location is usershop this would contain its price',
+  PRIMARY KEY (`id`),
+  KEY `user_items_ibfk_1` (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `user_items`
+  ADD CONSTRAINT `user_items_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE;
