@@ -139,11 +139,10 @@ Kohana::modules(array(
 	'email'         => MODPATH.'email',      // Email manipulation
 	'image'         => MODPATH.'image',      // Image manipulation
 	'kostache'      => MODPATH.'kostache',   // Mustache template system
-	'kostache-pagination'      => MODPATH.'kostache-pagination',   // Kostache helper
 	'minion'        => MODPATH.'minion',     // CLI Tasks
 	'migrations'    => MODPATH.'tasks-migrations',
 	'orm'           => MODPATH.'orm',       // Object Relationship Mapping
-	'pagination'    => MODPATH.'purifier',  // Pagination
+	'pagination'    => MODPATH.'pagination',  // Pagination
 	'purifier'      => MODPATH.'purifier',  // HTML Purifier
 	'unittest'      => MODPATH.'unittest',  // Unit testing
 	'userguide'     => MODPATH.'userguide', // User guide and API documentation

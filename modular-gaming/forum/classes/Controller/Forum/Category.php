@@ -13,6 +13,10 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 
 	protected $category;
 
+	/**
+	 * Attempt to load the forum category using the id parameter from the url
+	 * and throw an HTTP_Exception if it fails.
+	 */
 	public function before()
 	{
 		parent::before();
@@ -29,20 +33,39 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 		Breadcrumb::add($this->category->title, Route::url('forum/category', array('id' => $id)));
 	}
 
+	/**
+	 * View topics in category.
+	 */
 	public function action_view()
 	{
+		$count_topics = $this->category->topics
+			->count_all();
+
+		$pagination = Pagination::factory(array(
+			'current_page' => array('source' => 'query_string', 'key' => 'page'),
+			'view' => 'Pagination',
+			'items_per_page'    => 1,
+			'total_items' => $count_topics,
+		));
+
 		$topics = $this->category->topics
 			->with('last_post')
 			->order_by('sticky', 'DESC')
 			->order_by('last_post.created', 'DESC')
+			->limit($pagination->items_per_page)
+			->offset($pagination->offset)
 			->find_all();
 
 		$this->view = new View_Forum_Category_View;
 		$this->view->can_create = $this->user->can('Forum_Topic_Create', array('category' => $this->category));
 		$this->view->category = $this->category;
 		$this->view->topics = $topics;
+		$this->view->pagination = $pagination;
 	}
 
+	/**
+	 * Create new topic.
+	 */
 	public function action_create()
 	{
 		if ( ! $this->user->can('Forum_Topic_Create', array('category' => $this->category)))

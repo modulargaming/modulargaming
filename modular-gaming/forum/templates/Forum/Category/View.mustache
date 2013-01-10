@@ -5,6 +5,8 @@
 	{{/category.locked}}
 </h2>
 
+{{{pagination}}}
+
 <table class="table table-striped">
 
 	<thead>
@@ -35,6 +37,8 @@
 {{^topics}}
 	<div class="alert alert-error">No forum topics</div>
 {{/topics}}
+
+{{{pagination}}}
 
 {{#can_create}}
 	<div class="form-actions">

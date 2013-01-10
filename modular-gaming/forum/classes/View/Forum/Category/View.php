@@ -5,6 +5,7 @@ class View_Forum_Category_View extends View_Base {
 	public $category;
 	public $topics;
 	public $can_create;
+	public $pagination;
 
 	public function title()
 	{
