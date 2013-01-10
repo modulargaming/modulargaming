@@ -5,7 +5,7 @@ class Pagination extends Kohana_Pagination {
 	/**
 	 * Renders the pagination links.
 	 *
-	 * @param   mixed   $view  View object
+	 * @param   View   $view  View object
 	 * @return  string  Pagination output (HTML)
 	 */
 	public function render($view = NULL)
@@ -23,19 +23,8 @@ class Pagination extends Kohana_Pagination {
 
 		$view->pagination = $this;
 
-		/*
-		if ( ! $view instanceof View_Pagination)
-		{
-			// Load the view file
-			$view = View::factory($view);
-		}
-		*/
-
 		$renderer = Kostache::factory();
 		return $renderer->render($view);
-
-		// Pass on the whole Pagination object
-		//return $view->set(get_object_vars($this))->set('page', $this)->render();
 	}
 
 }
