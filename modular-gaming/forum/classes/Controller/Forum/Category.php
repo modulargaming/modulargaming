@@ -42,10 +42,9 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 			->count_all();
 
 		$pagination = Pagination::factory(array(
-			'current_page' => array('source' => 'query_string', 'key' => 'page'),
-			'view' => 'Pagination',
-			'items_per_page'    => 1,
-			'total_items' => $count_topics,
+			'current_page'   => array('source' => 'query_string', 'key' => 'page'),
+			'items_per_page' => 1,
+			'total_items'    => $count_topics,
 		));
 
 		$topics = $this->category->topics
