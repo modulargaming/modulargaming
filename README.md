@@ -87,3 +87,7 @@ If you've stumbled across a bug, please help us out by [reporting the bug](https
 * Actual result
 
 This will help us to fix the bug as quickly as possible, and if you'd like to fix it yourself feel free to fork us on GitHub and submit a pull request!
+
+## Contributing
+
+Contributions are encouraged and welcome; however, please review the Developer Certificate of Origin in the LICENSE.md file included in the repository. All commits must be signed off using the -s switch.
