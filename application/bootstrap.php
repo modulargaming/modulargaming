@@ -123,31 +123,30 @@ I18n::lang('en-gb');
 Kohana::modules(array(
 	
 	// Modular Gaming modules
-	'forum'         => MGPATH.'forum',
-	'items'         => MGPATH.'item',
-	'pet'			=> MGPATH.'pet',
-	'user'			=> MGPATH.'user',
-	'admin'			=> MGPATH.'admin',
-	'core'			=> MGPATH.'core', //Modular gaming core module
-	
+	'forum' => MGPATH.'forum',
+	'items' => MGPATH.'item',
+	'pet'   => MGPATH.'pet',
+	'user'  => MGPATH.'user',
+	'admin' => MGPATH.'admin',
+	'core'  => MGPATH.'core', //Modular gaming core module
+
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
 	'auth'          => MODPATH.'auth',       // Basic authentication
-	'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
+	'cache'         => MODPATH.'cache',      // Caching with multiple backends
 	'database'      => MODPATH.'database',   // Database access
 	'debug-toolbar' => MODPATH.'debug-toolbar',
-	'email'		=> MODPATH.'email',      // Email manipulation
-	'image'      => MODPATH.'image',      // Image manipulation
+	'email'         => MODPATH.'email',      // Email manipulation
+	'image'         => MODPATH.'image',      // Image manipulation
 	'kostache'      => MODPATH.'kostache',   // Mustache template system
 	'kostache-pagination'      => MODPATH.'kostache-pagination',   // Kostache helper
 	'minion'        => MODPATH.'minion',     // CLI Tasks
 	'migrations'    => MODPATH.'tasks-migrations',
-	'orm'           => MODPATH.'orm',        // Object Relationship Mapping
-	'pagination'	=> MODPATH.'purifier',	 // Pagination
-	'purifier'	=> MODPATH.'purifier',	 // HTML Purifier
-	'unittest'      => MODPATH.'unittest',   // Unit testing
-	'userguide'     => MODPATH.'userguide',  // User guide and API documentation
+	'orm'           => MODPATH.'orm',       // Object Relationship Mapping
+	'pagination'    => MODPATH.'purifier',  // Pagination
+	'purifier'      => MODPATH.'purifier',  // HTML Purifier
+	'unittest'      => MODPATH.'unittest',  // Unit testing
+	'userguide'     => MODPATH.'userguide', // User guide and API documentation
 	));
 
 /**
