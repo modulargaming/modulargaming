@@ -10,7 +10,13 @@ class Controller_Admin_Forum extends Controller_Admin {
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin forum index');
 		}
 
-		$this->view = new View_Admin_Dashboard;
+
+		$categories = ORM::factory('Forum_Category')
+			->find_all();
+
+		$this->view = new View_Admin_Forum_Index;
+		$this->view->categories = $categories->as_array();
+		
 	}
 
 }

@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `forum_categories` (
   `title` varchar(30) NOT NULL,
   `description` varchar(50) NOT NULL,
   `locked` int(1) NOT NULL,
+  `created` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=4;
 

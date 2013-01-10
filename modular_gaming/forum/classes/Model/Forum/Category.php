@@ -2,6 +2,12 @@
 
 class Model_Forum_Category extends ORM {
 
+
+	protected $_created_column = array(
+		'column' => 'created',
+		'format' => TRUE,
+	);
+
 	protected $_has_many = array(
 		'topics' => array(
 			'model' => 'Forum_Topic',
