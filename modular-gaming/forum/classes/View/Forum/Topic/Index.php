@@ -63,8 +63,7 @@ class View_Forum_Topic_Index extends View_Base {
 					'signature' => $post->user->signature,
 					'post_count' => number_format($post->user->post_count),
 					'created' => Date::format($post->user->created),
-					'href'      => Route::url('user', array(
-						'action' => 'view',
+					'href'      => Route::url('user/view', array(
 						'id'     => $post->user->id,
 					)),
 				),

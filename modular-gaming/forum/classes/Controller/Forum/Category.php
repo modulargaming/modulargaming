@@ -42,8 +42,8 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 			->count_all();
 
 		$pagination = Pagination::factory(array(
-			'route'       => Route::get('forum/category'),
-			'total_items' => $count_topics,
+			'route'          => Route::get('forum/category'),
+			'total_items'    => $count_topics,
 		));
 
 		$topics = $this->category->topics

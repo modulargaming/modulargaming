@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-Route::set('user/view)', 'user/view(/<id>)', array('id' => '[0-9]+'))
+Route::set('user/view', 'user/view(/<id>)', array('id' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'user',
 		'controller' => 'view',

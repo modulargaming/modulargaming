@@ -34,8 +34,7 @@ class View_Forum_Category_View extends View_Base {
 				'created' =>  Date::format($topic->created),
 				'user'    => array(
 					'username' => $topic->user->username,
-					'href'     => Route::url('user', array(
-						'action' => 'view',
+					'href'     => Route::url('user/view', array(
 						'id'     => $topic->user->id,
 					))
 				),
