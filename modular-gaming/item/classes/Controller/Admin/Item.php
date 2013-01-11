@@ -87,7 +87,18 @@ class Controller_Admin_Item extends Controller_Admin {
 		}
 		catch(ORM_Validation_Exception $e)
 		{
-			$this->response->body(json_encode(array('action' => 'error', 'errors' => $e->errors('models'))));
+			$errors = array();
+			
+			$list = $e->errors('models');
+			
+			foreach($list as $field => $er){
+				if(!is_array($er))
+					$er = array($er);
+				
+				$errors[] = array('field' => $field, 'msg' => $er);
+			}
+			
+			$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
 		}
 	}
 	

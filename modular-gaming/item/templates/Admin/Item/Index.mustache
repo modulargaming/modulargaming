@@ -1,11 +1,11 @@
 <ul class="nav nav-tabs" id="item_tab_list">
-  <li class="active"><a href="#list">List</a></li>
+  <li class="active"><a href="#items">Items</a></li>
   <li><a href="#item_types">Types</a></li>
   <li><a href="#item_recipes">Recipes</a></li>
 </ul>
  
 <div class="tab-content">
- 	<div class="tab-pane active" id="list">
+ 	<div class="tab-pane active" id="items">
  		<div class="row">
 			<div class="span12">
 					<ul class="nav nav-pills">
@@ -31,10 +31,10 @@
 					</thead>
 					<tbody>
 					{{#items}}
-					<tr>
+					<tr id="item-container-{{id}}">
 						<td><img src="{{base_url}}{{image}}" /></td>
-						<td>{{name}}</td>
-						<td>{{type}}</td>
+						<td id="item-container-name-{{id}}">{{name}}</td>
+						<td id="item-container-type-{{id}}">{{type}}</td>
 						<td><button class="btn" onclick="openForm({{id}});">Edit</button> <button class="btn btn-warning" onclick="deleteItem({{id}}, '{{name}}');">Delete</button></td>
 						</tr>
 					{{/items}}
@@ -67,10 +67,10 @@
 				<input type="hidden" name="id" value="" id="input-id" />
 				<input type="hidden" name="csrf" value="{{csrf}}">
 				<div class="control-group">
-					<label class="control-label" for="input00">Status</label>
+					<label class="control-label" for="form-item-status">Status</label>
 
 					<div class="controls">
-						<select name="status" id="input00" class="input-small">
+						<select name="status" id="form-item-status" class="input-small">
 							<option value="draft">Draft</option>
 							<option value="released">Released</option>
 							<option value="retired">Retired</option>
@@ -78,41 +78,44 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="input01">Name</label>
+					<label class="control-label" for="form-item-name">Name</label>
 
 					<div class="controls">
-						<input type="text" class="input-medium" id="input01" name="name" value="" maxlength="50">
+						<input type="text" class="input-medium" id="form-item-name" name="name" value="" maxlength="50">
+						<a href="#" id="form-error-name" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="input02">Description</label>
+					<label class="control-label" for="form-item-description">Description</label>
 
 					<div class="controls">
-						<textarea class="input-large" id="input02" name="description"></textarea>
+						<textarea class="input-large" id="form-item-description" name="description"></textarea>
+						<a href="#" id="form-error-description" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="input03">Image name</label>
+					<label class="control-label" for="form-item-image">Image name</label>
 
 					<div class="controls">
-						<input type="text" class="input-medium" id="input03" name="image" value="" maxlength="200">
+						<input type="text" class="input-medium" id="form-item-image" name="image" value="" maxlength="200">
+						<a href="#" id="form-error-image" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="input04">Unique?</label>
+					<label class="control-label" for="form-item-unique">Unique?</label>
 
 					<div class="controls">
-						<select id="input04" name="unique" class="input-small">
+						<select id="form-item-unique" name="unique" class="input-small">
 							<option value="0">No</option>
 							<option value="1">Yes</option>
 						</select>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="input05">Transferable?</label>
+					<label class="control-label" for="form-item-transferable">Transferable?</label>
 
 					<div class="controls">
-						<select id="input05" name="transferable" class="input-small">
+						<select id="input05" name="form-item-transferable" class="input-small">
 							<option value="1">Yes</option>
 							<option value="0">No</option>
 						</select>
@@ -121,7 +124,7 @@
 			</fieldset>
 			<fieldset>
 				<div class="control-group">
-									<label class="control-label" for="input06">Type</label>
+									<label class="control-label" for="form-item-type">Type</label>
 
 									<div class="controls">
 										<select name="type_id" id="input06" class="input-small">

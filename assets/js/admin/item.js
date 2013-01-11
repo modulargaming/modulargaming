@@ -25,6 +25,11 @@ function openForm(id, checker) {
 	//reset form values
 	$('#item-form')[0].reset();
 	
+	//reset form errors
+	$('#form-error-name').addClass('hide').attr('title', '');
+	$('#form-error-description').addClass('hide').attr('title', '');
+	$('#form-error-image').addClass('hide').attr('title', '');
+	
 	//reset commands
 	
 	if(typeof id === 'undefined') {
@@ -41,13 +46,13 @@ function openForm(id, checker) {
 		$.get('./item/retrieve/', param, function (data) {
 			$('h3#item-modal-header').html('Editing "'+data.name+'"');
 			$('#input-id').val(data.id);
-			$('#input00').val(data.status);
-			$('#input01').val(data.name);
-			$('#input02').val(data.description);
-			$('#input03').val(data.image);
-			$('#input04').val(data.unique);
-			$('#input05').val(data.transferable);
-			$('#input06').val(data.type_id);
+			$('#form-item-status').val(data.status);
+			$('#form-item-name').val(data.name);
+			$('#form-item-description').val(data.description);
+			$('#form-item-image').val(data.image);
+			$('#form-item-unique').val(data.unique);
+			$('#form-item-transferable').val(data.transferable);
+			$('#form-item-type').val(data.type_id);
 			
 			//set the commands
 			
@@ -58,18 +63,29 @@ function openForm(id, checker) {
 
 function saveForm(){
 	var values = $('#item-form').serialize();
-	
+	var item_id = $('#input-id').val();
 	$.post("./item/save/", values,
 	function(data) {
 		if(data.action == 'saved') {
 			$('.bottom-right').notify({
-			    message: { text: $('#input01').val()+' has been saved successfully!' }
+			    message: { text: $('#form-item-name').val()+' has been saved successfully!' }
 			  }).show();
 			$('#item-modal').modal('hide');
+			
+			//update the item list table
+			if(item_id != 0 && $("#item-container-"+item_id).length != 0) {
+				$('#item-container-name-'+item_id).text($('#form-item-name').val());
+				$('#item-container-type-'+item_id).text($('#form-item-type').val());
+			}
 		}
 		else {
 			//mark the errors on the form
-			alert('error!!!!');
+			$.each(data.errors, function(){
+				var e = $('#form-error-'+this.field);
+				e.removeClass('hide');
+				e.attr('title', this.msg.join('<br />'));
+			});
+			$('[rel=tooltip]').tooltip();
 		}
 	});
 }
@@ -82,17 +98,27 @@ function deleteItem(id, name) {
 }
 
 function doDelete(){
-	$.post("./item/delete/", {id: $('#item-modal-delete').data('item-id')},
+	var item_id = $('#item-modal-delete').data('item-id');
+	
+	$.post("./item/delete/", {id: item_id},
 		function(data) {
 			if(data.action == 'deleted') {
 				$('.bottom-right').notify({
 					message: { text: $('#item-modal-delete').data('item-name')+' has been deleted successfully!' }
 				}).show();
 				$('#item-modal-delete').modal('hide');
+				
+				//remove the item from the interface
+				if($('item-container-'+item_id).length != 0)
+					$('item-container-'+item_id).slideUp();
 			}
 			else {
-				//mark the errors on the form
-				alert('error!!!!');
+				//error deleting
+				$('.bottom-right').notify({
+					type: 'error',
+					message: { text: $('#item-modal-delete').data('item-name')+' could not be deleted!' }
+				}).show();
+				$('#item-modal-delete').modal('hide');
 			}
 		}
 	);
