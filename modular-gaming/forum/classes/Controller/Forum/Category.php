@@ -43,7 +43,7 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 
 		$pagination = Pagination::factory(array(
 			'current_page'   => array('source' => 'query_string', 'key' => 'page'),
-			'items_per_page' => 1,
+			'items_per_page' => 10,
 			'total_items'    => $count_topics,
 		));
 
