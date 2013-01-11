@@ -44,7 +44,7 @@ abstract class Controller_Frontend extends Controller {
 
 	private function validate_csrf()
 	{
-		if ($this->request->method() == HTTP_Request::POST)
+		if ($this->request->method() == HTTP_Request::POST && $this->request->directory() != 'Admin')
 		{
 			$validation = Validation::factory($this->request->post())
 				->rule('csrf', 'not_empty')
