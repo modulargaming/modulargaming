@@ -1,5 +1,15 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
+/**
+ * Laravel 3's Event class
+ * 
+ * Modified Event::first to use reset() instead of Laravel's head() function.
+ * 
+ * @author Taylor Otwell
+ * @license http://opensource.org/licenses/mit-license.php
+ * @tutorial http://laravel.com/docs/events
+ *
+ */
 class Event {
 
 	/**
