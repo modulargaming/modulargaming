@@ -11,11 +11,11 @@ class View_Admin_Forum_Index extends View_Admin_Base {
 		foreach ($this->categories as $category)
 		{
 			$categories[] = array(
-				'id'         => $category->id,
-				'title'   => $category->title,
-				'description'      => $category->description,
-				'locked' => $category->locked,
-				'created'    => Date::format($category->created),
+				'id'          => $category->id,
+				'title'       => $category->title,
+				'description' => $category->description,
+				'locked'      => $category->is_locked(),
+				'created'     => Date::format($category->created),
 			);
 		}
 

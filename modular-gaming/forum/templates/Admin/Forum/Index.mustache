@@ -4,18 +4,23 @@
 			<th>ID</th>
 			<th>Title</th>
 			<th>Description</th>
-			<th>Locked</th>
 			<th>Created</th>
+			<th>Edit</th>
 		</tr>
 	</thead>
 	<tbody>
 		{{#categories}}
 			<tr>
 				<td>{{id}}</td>
-				<td>{{title}}</td>
+				<td>
+					{{title}}
+					{{#locked}}
+						<span class="label label-warning">Locked</span>
+					{{/locked}}
+				</td>
 				<td>{{description}}</td>
-				<td>{{locked}}</td>
 				<td>{{created}}</td>
+				<td><a href="{{edit}}" class="btn btn-warning">Edit</a></td>
 			</tr>
 		{{/categories}}
 	</tbody>

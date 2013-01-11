@@ -2,7 +2,6 @@
 
 class Model_Forum_Category extends ORM {
 
-
 	protected $_created_column = array(
 		'column' => 'created',
 		'format' => TRUE,
@@ -15,6 +14,7 @@ class Model_Forum_Category extends ORM {
 		),
 	);
 
+	// TODO: This looks bad, remove it?
 	static public function category_open($id)
 	{
 		$category = ORM::factory('Forum_Category', $id);
@@ -51,6 +51,11 @@ class Model_Forum_Category extends ORM {
 	{
 		return $this->values($values, $expected)
 			->create();
+	}
+
+	public function is_locked()
+	{
+		return $this->locked === '1';
 	}
 
 }
