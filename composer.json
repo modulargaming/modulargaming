@@ -1,14 +1,11 @@
 {
-    "require-dev": {
-        "phpspec/phpspec2": "*"
-    },
-
     "require": {
         "php": ">=5.3.3",
         "behat/behat": "2.4.*@stable",
         "behat/mink": "1.4@stable",
         "behat/mink-extension": "*",
-        "behat/mink-goutte-driver": "*"
+        "behat/mink-goutte-driver": "*",
+	    "phpspec/phpspec2": "*"
     },
 
     "config": {
