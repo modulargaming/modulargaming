@@ -1,9 +1,17 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-Route::set('user', 'user(/<action>(/<id>))')
-->defaults(array(
-'controller' => 'user',
-'action'     => 'index',
+Route::set('user/view', 'user/view(/<id>)', array('id' => '[0-9]+'))  	
+  ->defaults(array(  	
+    'directory'  => 'user',	  	
+    'controller' => 'view',	  	
+    'action'     => 'index',	  	
+  ));
+  	
+Route::set('user', 'user(/<controller>(/<action>(/<id>)))')
+  ->defaults(array(
+    'directory'  => 'user',
+    'controller' => 'dashboard',
+    'action'     => 'index',
 ));
 
 //Add link to manage users in admin
