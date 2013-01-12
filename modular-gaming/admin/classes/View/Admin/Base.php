@@ -19,6 +19,11 @@ class View_Admin_Base extends View_Base {
 				'title' => 'Forum',
 				'link'  => URL::site('admin/forum'),
 				'icon'  => 'icon-comment'
+			),
+			array(
+				'title' => 'Item',
+				'link'  => URL::site('admin/item'),
+				'icon'  => 'icon-comment'
 			)
 		);
 	}
