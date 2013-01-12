@@ -464,3 +464,16 @@ CREATE TABLE IF NOT EXISTS `user_items` (
 
 ALTER TABLE `user_items`
   ADD CONSTRAINT `user_items_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE;
+
+
+
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `log_id` int(11) unsigned DEFAULT NULL,
+  `user_id` int(11) unsigned DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `message` text,
+  `type` enum('success','alert','warning') DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
