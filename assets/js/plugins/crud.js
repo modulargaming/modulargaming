@@ -31,7 +31,6 @@
             });
            	
            	$(this).bind('adminFormOpen', {f: form}, function(e, param){
-           		alert('invocation ' + form.e.attr('id'));
            		methods.show.apply(e.data.f, [0, param]);
            	});
             
@@ -76,8 +75,7 @@
         			
         			//set the field values
         			$.each(data, function(key,val){
-        				alert(this.fields[key].type);
-        			    $('#input-'+type+'-'+key).val(val);
+        				$('#input-'+type+'-'+key).val(val);
         			});
         			
         			//do the fill callback
@@ -96,14 +94,15 @@
             });
         },
         save : function() { 
-        	var values = this.e.serialize();
+        	var values = $('#form-'+type).serialize();
         	var id = $('#input-'+type+'-id').val();
         	
         	$.post(opts.save.url, values, function(data) {
         		if(data.action == 'saved') {
         			$('.bottom-right').notify({
-        			    message: { text: $('#input-'+type+'-'+opts.identifier).text()+' has been saved successfully!' }
+        			    message: { text: $('#input-'+type+'-'+opts.identifier).val()+' has been saved successfully!' }
         			  }).show();
+        			
         			$('#modal-'+type).modal('hide');
         			
         			//update the item list table
@@ -114,7 +113,8 @@
         				});
         			}
         			
-        			opts.save.success.apply(this, [data]);
+        			//@todo implement save callback
+        			//opts.save.success.apply(this, [data]);
         		}
         		else {
         			//mark the errors on the form

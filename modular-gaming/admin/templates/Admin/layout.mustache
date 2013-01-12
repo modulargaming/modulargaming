@@ -25,7 +25,6 @@
 				<a class="brand" href="{{base_url}}admin">Modular Gaming Admin</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="{{base_url}}admin/dashboard">Dashboard</a></li>
 						<li><a href="{{base_url}}">Return to site</a></li>
 					</ul>
 
@@ -78,6 +77,20 @@
 				</div>
 			</div>
 			<div class="span9">
+				{{#has_subnav}}
+					<div class="row">
+						<div class="span12 pagination-centered btn-group">
+						{{#subnav}}
+							{{#active}}
+								<a href="{{base_url}}admin/{{link}}" class="btn disabled">{{title}}</a>
+							{{/active}}
+							{{^active}}
+								<a href="{{base_url}}admin/{{link}}" class="btn">{{title}}</a>
+							{{/active}}
+						{{/subnav}}
+						</div>
+					</div>
+				{{/has_subnav}}
 				{{#has_breadcrumb}}
 					<ul class="breadcrumb">
 						{{#breadcrumb}}
@@ -118,6 +131,7 @@
 	<script src="{{base_url}}assets/js/plugins/bootstrap-notify.js"></script>
 
 	<script src="{{base_url}}assets/js/script.js"></script>
+	<script src="{{base_url}}assets/js/admin/crud.js"></script>
 	<script src="{{base_url}}assets/js/admin/item.js"></script>
 </body>
 </html>

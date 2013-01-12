@@ -14,7 +14,7 @@ abstract class Controller_Frontend extends Controller {
 	protected $user; // Current logged in user.
 
 	protected $protected = FALSE; // Require user to be logged in.
-	protected $view; // View to render.
+	protected $view = null; // View to render.
 
 	protected $layout = 'layout';
 
@@ -34,7 +34,7 @@ abstract class Controller_Frontend extends Controller {
 
 	public function after()
 	{
-		if ($this->view)
+		if ($this->view != null)
 		{
 			$renderer = Kostache_Layout::factory();
 			$renderer->set_layout($this->layout);

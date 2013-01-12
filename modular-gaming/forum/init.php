@@ -7,11 +7,11 @@ Route::set('forum', 'forum')
 		'action'     => 'index',
 	));
 
-Route::set('forum/category', 'forum/category/<id>(/<action>(/<page>))', array('id' => '[0-9]+', 'page' => '[0-9]+'))
+Route::set('forum/category', 'forum/category/<id>(/<action>)', array('id' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'forum',
 		'controller' => 'category',
-		'action'     => 'page',
+		'action'     => 'view',
 	));
 
 Route::set('forum/topic', 'forum/topic/<id>(/<action>)', array('id' => '[0-9]+'))
@@ -27,3 +27,12 @@ Route::set('forum/post', 'forum/post/<id>(/<action>)', array('id' => '[0-9]+'))
 		'controller' => 'post',
 		'action'     => 'view',
 	));
+
+	//Add link to manage forums in admin
+	Event::listen('admin.nav_list', function(){
+		return array(
+				'title' => 'Forum',
+				'link'  => URL::site('admin/forum'),
+				'icon'  => 'icon-comment'
+		);
+	});
