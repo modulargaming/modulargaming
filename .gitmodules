@@ -37,9 +37,6 @@
 [submodule "modules/email"]
 	path = modules/email
 	url = git://github.com/modulargaming/email.git
-[submodule "modules/kostache-pagination"]
-	path = modules/kostache-pagination
-	url = git://github.com/modulargaming/kostache-pagination.git
 [submodule "modules/pagination"]
 	path = modules/pagination
 	url = git://github.com/modulargaming/pagination.git
