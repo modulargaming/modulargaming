@@ -11,8 +11,13 @@
  */
 class Controller_Assets extends Controller {
 
+	// Extensions to cache in assets directory
+	private $_cache_extensions = array(
+		'jpe', 'jpeg', 'png', 'gif' // Image extensions.
+	);
+
 	/**
-	 * Serve the file to the browser and save it for direct access if in STAGING or PRODUCTION.
+	 * Serve the file to the browser and cache it for direct access if in STAGING or PRODUCTION.
 	 */
 	public function action_index()
 	{
@@ -26,23 +31,28 @@ class Controller_Assets extends Controller {
 			throw HTTP_Exception::factory('404', 'File not found!');
 		}
 
-		$content = file_get_contents($path);
-
 		$dir = DOCROOT.'assets'.DIRECTORY_SEPARATOR;
 
-		// Set the proper headers to allow caching
+		// Set the proper headers for browser caching
 		$this->response->headers('content-type', File::mime_by_ext($ext));
 		$this->response->headers('last-modified', date('r', filemtime($path)));
 
+		$content = file_get_contents($path);
 		$this->response->body($content);
 
-		// Cache the image?
+		// Don't cache the assets unless we are in STAGING or PRODUCTION.
 		if (Kohana::$environment >= Kohana::STAGING)
 		{
 			return;
 		}
 
-		// Check if assets sub dir exsist.
+		// Only cache for specific extensions.
+		if ( ! in_array($ext, $this->_cache_extensions))
+		{
+			return;
+		}
+
+		// Check if assets sub dir exist.
 		$parts = explode('/', $file);
 		$file = array_pop($parts);
 		foreach($parts as $part)
