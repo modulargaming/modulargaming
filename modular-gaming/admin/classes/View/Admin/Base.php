@@ -23,7 +23,7 @@ class View_Admin_Base extends View_Base {
 			array(
 				'title' => 'Item',
 				'link'  => URL::site('admin/item'),
-				'icon'  => 'icon-comment'
+				'icon'  => 'icon-shopping-cart'
 			)
 		);
 	}
