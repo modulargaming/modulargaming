@@ -465,6 +465,32 @@ CREATE TABLE IF NOT EXISTS `user_items` (
 ALTER TABLE `user_items`
   ADD CONSTRAINT `user_items_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE;
 
+<<<<<<< HEAD
+=======
+CREATE TABLE IF NOT EXISTS `item_recipes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `crafted_item_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `item_recipes`
+  ADD CONSTRAINT `item_recipes_ibfk_1` FOREIGN KEY (`crafted_item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS `item_recipe_materials` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_recipe_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `item_recipe_materials`
+  ADD CONSTRAINT `item_recipe_materials_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE;
+ALTER TABLE `item_recipe_materials`
+  ADD CONSTRAINT `item_recipe_materials_ibfk_2` FOREIGN KEY (`item_recipe_id`) REFERENCES `item_recipes` (`id`) ON DELETE CASCADE;
+>>>>>>> Started on item crafting
 
 
 

@@ -1,10 +1,9 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-class Model_Item_type extends ORM {
+class Model_Item_Type extends ORM {
 
 	public function rules()
 	{
-		//@todo make sure img_dir has a trailing slash
 		return array(
 			'name' => array(
 				array('not_empty'),
@@ -23,6 +22,19 @@ class Model_Item_type extends ORM {
 				array('max_length', array(':value', 50)),
 			),
 		);
+	}
+	
+	public function filters()
+	{
+		return array(
+			'img_dir' => array(
+				array(array($this, 'dir_check'))
+			)
+		);
+	}
+	
+	public function dir_check($value){
+		return (substr($value, -1) != '/') ? $value.'/' : $value;
 	}
 
 } // End Item Type Model
