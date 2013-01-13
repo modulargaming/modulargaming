@@ -4,6 +4,7 @@ class Controller_Search extends Controller_Frontend {
 
 	public function action_index()
 	{
+		Model_Notification::add_notification($this->user, 'Test', 'description');
 		$this->view = new View_Search;
 
 		if (isset($_GET['query']))
