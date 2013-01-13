@@ -14,11 +14,16 @@ class Controller_Admin extends Controller_Frontend {
 	}
 	
 	public function after() {
-		if(count($this->_nav) > 0 && $this->view != null) {
-			if(array_key_exists($this->request->action(), $this->_nav))
+		// TODO: This might fit better in the view class?
+		if ( ! empty($this->_nav) AND $this->view !== null) {
+			if (array_key_exists($this->request->action(), $this->_nav))
+			{
 				$this->_nav[$this->request->action()]['active'] = true;
+			}
+
 			$this->view->subnav = $this->_nav;
 		}
+
 		parent::after();
 	}
 
