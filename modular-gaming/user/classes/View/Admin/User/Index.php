@@ -16,6 +16,7 @@ class View_Admin_User_Index extends View_Admin_Base {
 				'email'      => $user->email,
 				'last_login' => Date::format($user->last_login),
 				'created'    => Date::format($user->created),
+				'profile'    => Route::url('user.view', array('id' => $user->id)),
 			);
 		}
 
