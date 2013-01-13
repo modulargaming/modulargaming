@@ -26,8 +26,8 @@ class Controller_Forum_Topic extends Controller_Abstract_Forum {
 			throw HTTP_Exception::factory('404', 'Forum topic not found');
 		}
 
-		Breadcrumb::add($this->topic->category->title, Route::url('forum/category', array('id' => $this->topic->category->id)));
-		Breadcrumb::add($this->topic->title, Route::url('forum/topic', array('id' => $this->topic->id)));
+		Breadcrumb::add($this->topic->category->title, Route::url('forum.category', array('id' => $this->topic->category->id)));
+		Breadcrumb::add($this->topic->title, Route::url('forum.topic', array('id' => $this->topic->id)));
 	}
 
 	public function action_view()
@@ -46,7 +46,7 @@ class Controller_Forum_Topic extends Controller_Abstract_Forum {
 			throw HTTP_Exception::factory('403', 'Topic is locked');
 		}
 
-		Breadcrumb::add('Reply', Route::url('forum/topic', array(
+		Breadcrumb::add('Reply', Route::url('forum.topic', array(
 			'id'     => $this->topic->id,
 			'action' => 'reply'
 		)));
@@ -74,7 +74,7 @@ class Controller_Forum_Topic extends Controller_Abstract_Forum {
 				$this->user->calculate_post_count();
 
 				Hint::success('You have created a post!');
-				$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
+				$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
 			}
 			catch (ORM_Validation_Exception $e)
 			{
@@ -94,7 +94,7 @@ class Controller_Forum_Topic extends Controller_Abstract_Forum {
 			throw HTTP_Exception::factory('403', 'Permission denied to delete topic');
 		}
 
-		Breadcrumb::add('Delete', Route::url('forum/topic', array(
+		Breadcrumb::add('Delete', Route::url('forum.topic', array(
 			'id'     => $this->topic->id,
 			'action' => 'delete'
 		)));
@@ -108,7 +108,7 @@ class Controller_Forum_Topic extends Controller_Abstract_Forum {
 				$this->topic->delete();
 
 				Hint::success('You have deleted a topic!');
-				$this->redirect(Route::get('forum/category')->uri(array('id' => $topic_redirect)));
+				$this->redirect(Route::get('forum.category')->uri(array('id' => $topic_redirect)));
 			}
 			catch (ORM_Validation_Exception $e)
 			{
@@ -139,7 +139,7 @@ class Controller_Forum_Topic extends Controller_Abstract_Forum {
 				Hint::success('You have stuck the topic!');
 			}
 			$this->topic->save();
-			$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
+			$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
 		}
 		catch (ORM_Validation_Exception $e)
 		{
@@ -167,7 +167,7 @@ class Controller_Forum_Topic extends Controller_Abstract_Forum {
 			}
 
 			$this->topic->save();
-			$this->redirect(Route::get('forum/topic')->uri(array('id' => $this->topic->id)));
+			$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
 		}
 		catch (ORM_Validation_Exception $e)
 		{

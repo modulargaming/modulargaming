@@ -30,7 +30,7 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 			throw HTTP_Exception::factory('404', 'Forum category not found');
 		}
 
-		Breadcrumb::add($this->category->title, Route::url('forum/category', array('id' => $id)));
+		Breadcrumb::add($this->category->title, Route::url('forum.category', array('id' => $id)));
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 			->count_all();
 
 		$pagination = Pagination::factory(array(
-			'route'          => Route::get('forum/category'),
+			'route'          => Route::get('forum.category'),
 			'total_items'    => $count_topics,
 		));
 
@@ -71,7 +71,7 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 			throw HTTP_Exception::factory('403', 'Category is locked');
 		}
 
-		Breadcrumb::add('Create', Route::url('forum/category', array(
+		Breadcrumb::add('Create', Route::url('forum.category', array(
 			'action' => 'create',
 			'id'     => $this->category->id,
 		)));
@@ -111,7 +111,7 @@ class Controller_Forum_Category extends Controller_Abstract_Forum {
 				$this->user->calculate_post_count();
 
 				Hint::success('You have created a topic');
-				$this->redirect(Route::get('forum/topic')->uri(array('id' => $topic->id)));
+				$this->redirect(Route::get('forum.topic')->uri(array('id' => $topic->id)));
 			}
 			catch (ORM_Validation_Exception $e)
 			{

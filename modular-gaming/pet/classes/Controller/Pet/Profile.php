@@ -31,7 +31,7 @@ class Controller_Pet_Profile extends Controller_Frontend {
 
 		$this->view->pet = $pet;
 		$this->view->href = array(
-				'create' => Route::url('pet/create'),
+				'create' => Route::url('pet.create'),
 			);
 	}
 

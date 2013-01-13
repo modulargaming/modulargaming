@@ -27,7 +27,7 @@ class Controller_Pet_Adopt extends Controller_Frontend {
 			}
 		}
 		Breadcrumb::add('Your pets', Route::url('pets'));
-		Breadcrumb::add('Adopt a pet', Route::url('pet/adopt'));
+		Breadcrumb::add('Adopt a pet', Route::url('pet.adopt'));
 		$this->view = new View_Pet_Adopt;
 		$pets = ORM::factory('Pet')
 		->where('user_id', '=', 0)
@@ -41,7 +41,7 @@ class Controller_Pet_Adopt extends Controller_Frontend {
 		$this->view->pets = $array;
 		$this->view->pets_count = count($array);
 		$this->view->href = array(
-				'create' => Route::url('pet/create'),
+				'create' => Route::url('pet.create'),
 			);
 	}
 

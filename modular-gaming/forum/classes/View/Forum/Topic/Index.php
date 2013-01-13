@@ -63,16 +63,16 @@ class View_Forum_Topic_Index extends View_Base {
 					'signature' => $post->user->signature,
 					'post_count' => number_format($post->user->post_count),
 					'created' => Date::format($post->user->created),
-					'href'      => Route::url('user/view', array(
+					'href'      => Route::url('user.view', array(
 						'id'     => $post->user->id,
 					)),
 				),
 				'links' => array(
-					'edit' => Route::url('forum/post', array(
+					'edit' => Route::url('forum.post', array(
 						'action' => 'edit',
 						'id'     => $post->id,
 					)),
-					'delete' => Route::url('forum/post', array(
+					'delete' => Route::url('forum.post', array(
 						'action' => 'delete',
 						'id'     => $post->id,
 					)),
@@ -88,11 +88,11 @@ class View_Forum_Topic_Index extends View_Base {
 	public function links()
 	{
 		return array(
-			'poll' => Route::url('forum/topic', array(
+			'poll' => Route::url('forum.topic', array(
 				'action' => 'poll',
 				'id'     => $this->topic->id
 			)),
-			'reply' => Route::url('forum/topic', array(
+			'reply' => Route::url('forum.topic', array(
 				'action' => 'reply',
 				'id'     => $this->topic->id
 			)),
@@ -108,7 +108,7 @@ class View_Forum_Topic_Index extends View_Base {
 		{
 			$actions[] = array(
 				'title' => 'Delete',
-				'href'  => Route::url('forum/topic', array(
+				'href'  => Route::url('forum.topic', array(
 					'action' => 'delete',
 					'id'     => $this->topic->id,
 				)),
@@ -119,7 +119,7 @@ class View_Forum_Topic_Index extends View_Base {
 		{
 			$actions[] = array(
 				'title' => $this->topic->sticky ? 'Unstick' : 'Stick',
-				'href'  => Route::url('forum/topic', array(
+				'href'  => Route::url('forum.topic', array(
 					'action' => 'sticky',
 					'id'     => $this->topic->id,
 				)),
@@ -130,7 +130,7 @@ class View_Forum_Topic_Index extends View_Base {
 		{
 			$actions[] = array(
 				'title' => $this->topic->locked ? 'Unlock' : 'Lock',
-				'href'  => Route::url('forum/topic', array(
+				'href'  => Route::url('forum.topic', array(
 					'action' => 'lock',
 					'id'     => $this->topic->id,
 				)),

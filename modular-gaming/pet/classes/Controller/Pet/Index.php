@@ -61,8 +61,8 @@ class Controller_Pet_Index extends Controller_Frontend {
 		$this->view->pets = $array;
 		$this->view->pets_count = count($array);
 		$this->view->href = array(
-				'create' => Route::url('pet/create'),
-				'adopt' => Route::url('pet/adopt'),
+				'create' => Route::url('pet.create'),
+				'adopt' => Route::url('pet.adopt'),
 			);
 	}
 

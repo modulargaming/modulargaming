@@ -13,7 +13,7 @@ class View_Forum_Index extends View_Base {
 			$categories[] = array(
 				'title'       => $category->title,
 				'description' => $category->description,
-				'href'        => Route::url('forum/category', array(
+				'href'        => Route::url('forum.category', array(
 					'id' => $category->id
 				)),
 			);

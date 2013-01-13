@@ -31,7 +31,7 @@ class Controller_Pet_Create extends Controller_Frontend {
 			}
 		}
 		Breadcrumb::add('Your pets', Route::url('pets'));
-		Breadcrumb::add('Create a pet', Route::url('pet/create'));
+		Breadcrumb::add('Create a pet', Route::url('pet.create'));
 		$races = ORM::factory('Pet_Race')->find_all();
 		$this->view = new View_Pet_Create;
 		
@@ -40,7 +40,7 @@ class Controller_Pet_Create extends Controller_Frontend {
 
 		$this->view->races = $races;
 		$this->view->href = array(
-				'adopt' => Route::url('pet/adopt'),
+				'adopt' => Route::url('pet.adopt'),
 			);
 	}
 

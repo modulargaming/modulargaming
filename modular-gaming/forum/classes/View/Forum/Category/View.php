@@ -30,11 +30,11 @@ class View_Forum_Category_View extends View_Base {
 				'locked'  => $topic->locked,
 				'sticky'  => $topic->sticky,
 				'poll'    => $topic->poll->loaded(),
-				'href'    => Route::url('forum/topic', array('id' => $topic->id)),
+				'href'    => Route::url('forum.topic', array('id' => $topic->id)),
 				'created' =>  Date::format($topic->created),
 				'user'    => array(
 					'username' => $topic->user->username,
-					'href'     => Route::url('user/view', array(
+					'href'     => Route::url('user.view', array(
 						'id'     => $topic->user->id,
 					))
 				),
@@ -54,7 +54,7 @@ class View_Forum_Category_View extends View_Base {
 	public function links()
 	{
 		return array(
-			'create' => Route::url('forum/category', array(
+			'create' => Route::url('forum.category', array(
 				'action' => 'create',
 				'id'     => $this->category->id
 			)),

@@ -7,14 +7,14 @@ Route::set('pets', 'pets')
 		'action'     => 'index',
 	));
 
-Route::set('pet/adopt', 'pet/adopt')
+Route::set('pet.adopt', 'pet/adopt')
 	->defaults(array(
 		'directory'  => 'pet',
 		'controller' => 'adopt',
 		'action'     => 'index',
 	));
 
-Route::set('pet/create', 'pet/create')
+Route::set('pet.create', 'pet/create')
 	->defaults(array(
 		'directory'  => 'pet',
 		'controller' => 'create',
