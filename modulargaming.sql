@@ -498,3 +498,13 @@ CREATE TABLE `notifications` (
   `type` enum('success','alert','warning') DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `logs` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `time` int(10) unsigned DEFAULT NULL,
+  `message` text,
+  `params` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
