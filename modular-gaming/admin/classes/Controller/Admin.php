@@ -3,7 +3,7 @@
 class Controller_Admin extends Controller_Frontend {
 
 	protected $layout = 'Admin/layout';
-	protected $protected = true;
+	protected $protected = TRUE;
 	
 	protected $_nav = array();
 	
