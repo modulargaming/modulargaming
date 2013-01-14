@@ -29,7 +29,28 @@ abstract class Controller_Frontend extends Controller {
 		{
 			throw HTTP_Exception::Factory(403, 'Login to access this page!');
 		}
-
+		
+		$assets = Kohana::$config->load('assets.global');
+		$this->_load_assets($assets);
+	}
+	
+	protected function _load_assets($config) {
+		if(isset($config['head']))
+			$this->_register_assets('head', $config['head']);
+		if(isset($config['body']))
+			$this->_register_assets('body', $config['body']);
+	}
+	
+	protected function _register_assets($location, $config) {
+		foreach($config as $type => $files) {
+			if(count($files) > 0) {
+				foreach($files as $desc) {
+					$position = (isset($desc['location'])) ? $desc['location'] : 'end';
+					$relative = (isset($desc['location'])) ? $desc['relative'] : null;
+					Assets::add($type, $desc['name'], $desc['file'], $location, $position, $relative);
+				}
+			}
+		}
 	}
 
 	public function after()

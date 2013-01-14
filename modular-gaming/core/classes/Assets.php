@@ -14,7 +14,7 @@ class Assets {
 	
 	static public function add($type, $name, $file, $location, $position='end', $relative=null) {
 		//assign the file
-		self::$_files[$type][$name] = $file;
+		self::$_files[$type][$name] = 'assets/'.$type.'/'.$file;
 		
 		//place the file
 		switch($position) {
@@ -42,26 +42,31 @@ class Assets {
 	}
 	
 	static public function head($type=null) {
-		if($type = null)
-			return array_merge(self::retrieve('css', 'head'), self::retrieve('js', 'head'));
+		if($type == null){
+			return array('css' => self::retrieve('css', 'head'), 'js' => self::retrieve('js', 'head'));
+		}
 		else
-			self::retrieve($type, 'head');
+			return self::retrieve($type, 'head');
 	}
 	
 	static public function body($type=null) {
-		if($type = null)
-			return array_merge(self::retrieve('css', 'body'), self::retrieve('js', 'body'));
+		if($type == null)
+			return array('css' => self::retrieve('css', 'body'), 'js' => self::retrieve('js', 'body'));
 		else
-			self::retrieve($type, 'body');
+			return self::retrieve($type, 'body');
 	}
 	
 	static public function retrieve($type, $location) {
 		$collection = self::$_collection[$location];
 		$list = array();
 		
-		foreach($collection as $type => $files) {
-			foreach($files as $item)
-				$list[] = self::$_files[$type][$item];
+		if(isset($collection[$type])) {
+			foreach($collection as $ctype => $files) {
+				if(count($files) > 0) {
+					foreach($files as $item)
+						$list[] = array('file' => self::$_files[$type][$item]);
+				}
+			}
 		}
 		
 		return $list;

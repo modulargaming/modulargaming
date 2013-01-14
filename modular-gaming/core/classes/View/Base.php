@@ -9,6 +9,14 @@ class View_Base
 		return URL::base();
 	}
 	
+	public function assets_head() {
+		return Assets::head();
+	}
+	
+	public function assets_body() {
+		return Assets::body();
+	}
+	
 	public function csrf()
 	{
 		return Security::token();
