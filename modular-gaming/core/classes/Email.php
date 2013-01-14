@@ -17,11 +17,11 @@ class Email extends Kohana_Email {
 		$from = Kohana::$config->load('email.from');
 		$this->from($from['email'], $from['name']);
 
-		$html = Email_Kostache::factory();
+		$html = Kostache_Email::factory();
 		$html->set_type('html');
 		$this->message($html->render($view), 'text/html');
 
-		$text = Email_Kostache::factory();
+		$text = Kostache_Email::factory();
 		$text->set_type('text');
 		$this->message($text->render($view), 'text/plain');
 	}

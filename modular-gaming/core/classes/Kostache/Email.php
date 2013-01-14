@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Email_Kostache extends Kostache_Layout {
+class Kostache_Email extends Kostache_Layout {
 
 	private $type;
 
