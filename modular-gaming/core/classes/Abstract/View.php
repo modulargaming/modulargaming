@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Base {
+abstract class Abstract_View {
 
 	/**
 	 * @var  string  Page title

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Forum_Post_Edit extends View_Base {
+class View_Forum_Post_Edit extends Abstract_View {
 
 	public $post;
 

@@ -7,7 +7,7 @@ class Email extends Kohana_Email {
 		return new Email($view);
 	}
 
-	public function __construct(View_Email_Base $view)
+	public function __construct(Abstract_View_Email $view)
 	{
 		// Create a new message, match internal character set
 		$this->_message = Swift_Message::newInstance();
