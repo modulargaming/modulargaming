@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Admin extends Abstract_Controller_Frontend {
+class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 
 	protected $layout = 'Admin/layout';
 	protected $protected = TRUE;

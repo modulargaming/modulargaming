@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Admin_Base extends Abstract_View {
+class Abstract_View_Admin extends Abstract_View {
 	public $subnav = array();
 	
 	function navigation()

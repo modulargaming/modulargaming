@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Admin_Item extends Controller_Admin {
+class Controller_Admin_Item extends Abstract_Controller_Admin {
 	protected $_nav = array(
 			'index' => array('link' => 'item/', 'title' => 'Items', 'active' => false),	
 			'types' => array('link' => 'item/types', 'title' => 'Types', 'active' => false),
