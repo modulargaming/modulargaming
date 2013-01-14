@@ -59,4 +59,9 @@ class View_Base
 		return ! empty($breadcrumb);
 	}
 
+	public function debug_toolbar()
+	{
+		return DebugToolbar::render();
+	}
+
 }

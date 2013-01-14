@@ -135,17 +135,17 @@ Kohana::modules(array(
 	'auth'          => MODPATH.'auth',       // Basic authentication
 	'cache'         => MODPATH.'cache',      // Caching with multiple backends
 	'database'      => MODPATH.'database',   // Database access
-	//'debug-toolbar' => MODPATH.'debug-toolbar',
+	'debug-toolbar' => MODPATH.'debug-toolbar',
 	'email'         => MODPATH.'email',      // Email manipulation
 	'image'         => MODPATH.'image',      // Image manipulation
 	'kostache'      => MODPATH.'kostache',   // Mustache template system
 	'minion'        => MODPATH.'minion',     // CLI Tasks
 	'migrations'    => MODPATH.'tasks-migrations',
-	'orm'           => MODPATH.'orm',       // Object Relationship Mapping
-	'pagination'    => MODPATH.'pagination',  // Pagination
-	'purifier'      => MODPATH.'purifier',  // HTML Purifier
-	'unittest'      => MODPATH.'unittest',  // Unit testing
-	'userguide'     => MODPATH.'userguide', // User guide and API documentation
+	'orm'           => MODPATH.'orm',        // Object Relationship Mapping
+	'pagination'    => MODPATH.'pagination', // Pagination
+	'purifier'      => MODPATH.'purifier',   // HTML Purifier
+	'unittest'      => MODPATH.'unittest',   // Unit testing
+	'userguide'     => MODPATH.'userguide',  // User guide and API documentation
 	));
 
 /**

@@ -32,7 +32,7 @@ class Controller_Admin_User extends Controller_Admin {
 			throw HTTP_Exception::factory('404', 'No such user');
 		}
 
-		if ($this->request->is_ajax())
+		//if ($this->request->is_ajax())
 		{
 			$this->response->headers('Content-Type', 'application/json');
 			return $this->response->body(json_encode(array(
