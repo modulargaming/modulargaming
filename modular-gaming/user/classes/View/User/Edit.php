@@ -8,7 +8,7 @@ class View_User_Edit extends View_Base {
 	public function timezones()
 	{
 		$timezones = array();
-		$user = $this->user();
+		$user = $this->player();
 
 		foreach ($this->timezones as $timezone)
 		{

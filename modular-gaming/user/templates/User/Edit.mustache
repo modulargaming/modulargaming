@@ -9,7 +9,7 @@
 		<form id="tab" method="post">
 			<input type="hidden" name="csrf" value="{{csrf}}">
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email" value="{{user.email}}" class="input-xlarge">
+			<input type="email" name="email" id="email" value="{{player.email}}" class="input-xlarge">
 			<label for="timezone">Timezone</label>
 			<select name="timezone_id" id="timezone" class="input-xlarge">
 				{{#timezones}}
@@ -25,7 +25,7 @@
 		<form id="tab2" method="post">
 			<input type="hidden" name="csrf" value="{{csrf}}">
        		<label for="signature">Signature</label>
-			<textarea id="signature" name="signature" class="textarea-basic">{{{user.signature}}}</textarea>
+			<textarea id="signature" name="signature" class="textarea-basic">{{{player.signature}}}</textarea>
 			<div class="form-actions">
 				<button class="btn btn-success" name="update_forum" name="update_forum">Update</button>
 			</div>
@@ -35,17 +35,17 @@
 		<form id="tab3" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="csrf" value="{{csrf}}">
 			<label>Avatar</label>
-			<div class="fileupload fileupload-new" data-provides="fileupload"{{#user.gravatar}} style="opacity:.5;"{{/user.gravatar}}>
-				<div class="fileupload-new thumbnail" style="width: 64px; height: 64px;"><img src="{{#user.avatar}}{{user.avatar}}{{/user.avatar}}{{^user.avatar}}{{base_url}}assets/img/avatars/default.png{{/user.avatar}}" /></div>
+			<div class="fileupload fileupload-new" data-provides="fileupload"{{#player.gravatar}} style="opacity:.5;"{{/player.gravatar}}>
+				<div class="fileupload-new thumbnail" style="width: 64px; height: 64px;"><img src="{{#player.avatar}}{{player.avatar}}{{/player.avatar}}{{^player.avatar}}{{base_url}}assets/img/avatars/default.png{{/player.avatar}}" /></div>
 				<div class="fileupload-preview fileupload-exists thumbnail" style="width: 64px; height: 64px; line-height: 20px;"></div>
-				<span class="btn btn-file{{#user.gravatar}} disabled{{/user.gravatar}}" id="avatar_button"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="avatar" id="avatar"{{#user.gravatar}} disabled{{/user.gravatar}}></span>
+				<span class="btn btn-file{{#player.gravatar}} disabled{{/player.gravatar}}" id="avatar_button"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="avatar" id="avatar"{{#player.gravatar}} disabled{{/player.gravatar}}></span>
 			</div>
 			<label class="checkbox">
-				<input type="checkbox" name="gravatar" onchange="$('#avatar').attr('disabled', this.checked);if(this.checked){$('.fileupload').css('opacity','.5');$('#avatar_button').addClass('disabled');}else{$('.fileupload').css('opacity','1');$('#avatar_button').removeClass('disabled');}"{{#user.gravatar}} checked{{/user.gravatar}}> Use gravatar
+				<input type="checkbox" name="gravatar" onchange="$('#avatar').attr('disabled', this.checked);if(this.checked){$('.fileupload').css('opacity','.5');$('#avatar_button').addClass('disabled');}else{$('.fileupload').css('opacity','1');$('#avatar_button').removeClass('disabled');}"{{#player.gravatar}} checked{{/player.gravatar}}> Use gravatar
 			</label>
-			{{#user.avatar}}<button class="btn btn-small btn-danger" name="remove_avatar" value="1">Remove avatar</button>{{/user.avatar}}
+			{{#player.avatar}}<button class="btn btn-small btn-danger" name="remove_avatar" value="1">Remove avatar</button>{{/player.avatar}}
        		<label for="about">About me</label>
-			<textarea id="about" name="about" class="textarea">{{{user.about}}}</textarea>
+			<textarea id="about" name="about" class="textarea">{{{player.about}}}</textarea>
 			<div class="form-actions">
 				<button class="btn btn-success" name="update_profile">Update</button>
 			</div>

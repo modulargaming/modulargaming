@@ -1,27 +1,57 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Base
-{
+class View_Base {
+
+	/**
+	 * @var  string  Page title
+	 */
 	public $title = 'Welcome';
 
+	/**
+	 * Get the page title.
+	 *
+	 * @return string
+	 */
+	public function title()
+	{
+		return $this->title;
+	}
+
+	// TODO: We want to avoid using base_url() inside templates,
 	public function base_url()
 	{
 		return URL::base();
 	}
-	
+
+	/**
+	 * Get the current CSRF (Cross-site request forgery) token
+	 *
+	 * @return string
+	 */
 	public function csrf()
 	{
 		return Security::token();
 	}
 
+	/**
+	 * Is the player logged in?
+	 *
+	 * @return boolean
+	 */
 	public function logged_in()
 	{
 		return Auth::instance()->logged_in();
 	}
 
-	public function user()
+	/**
+	 * Get the logged in users information.
+	 *
+	 * @return  array
+	 */
+	public function player()
 	{
 		$user = Auth::instance()->get_user()->as_array();
+
 		$user['last_login'] = Date::format($user['last_login']);
 		$user['created'] = Date::format($user['created']);
 
@@ -59,6 +89,11 @@ class View_Base
 		return ! empty($breadcrumb);
 	}
 
+	/**
+	 * Return the debug toolbar template.
+	 *
+	 * @return  mixed
+	 */
 	public function debug_toolbar()
 	{
 		return DebugToolbar::render();
