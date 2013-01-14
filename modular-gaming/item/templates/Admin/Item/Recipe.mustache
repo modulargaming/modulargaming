@@ -1,0 +1,105 @@
+ 		<div class="row">
+			<div class="span12">
+					<ul class="nav nav-pills">
+						<li class="offset1 pull-left"><button class="btn btn-success btn-create">Create recipe</button></li>
+					    <li class="pull-right">
+					    	<form class="navbar-form">
+					        	<input type="text" class="input-medium" placeholder="Look up recipe" id="search" data-provide="typeahead">
+					      	</form>
+					    </li>
+					</ul>
+  			</div>
+  		</div>
+  		<div class="row">
+			<div class="span6 offset3">
+				<table class="table table-striped table-hover" id="crud-container">
+					<thead>
+						<tr>
+							<th class="span2">Name</th>
+							<th class="span1">Ingredients</th>
+							<th class="span1">Result</th>
+							<th class="span3">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+					{{#recipes}}
+					<tr id="container-{{id}}">
+						<td id="container-name-{{id}}">{{name}}</td>
+						<td id="container-ingredients-{{id}}">{{ingredients}}</td>
+						<td><img src="{{crafted}}" /></td>
+						<td><button class="btn btn-edit">Edit</button> <button class="btn btn-warning btn-delete">Delete</button></td>
+						</tr>
+					{{/recipes}}
+					<tr>
+						<td colspan="3">
+						</td>
+						<td>
+							<button class="btn btn-success pull-right btn-create">Create recipe</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+<div class="modal hide fade" id="modal-crud">
+	<div class="modal-header"> 
+		<button class="close" data-dismiss="modal">x</button>
+		<a href="#" class="btn btn-danger modal-options pull-right" id="option-delete" style="margin-right: 15px;">Delete</a>
+		<h3 id="modal-header"></h3>
+	</div>
+	<div class="modal-body">
+
+		<form class="form-horizontal" id="modal-crud-form">
+			<fieldset>
+				<input type="hidden" name="id" value="" id="input-id" />
+				
+				<div class="control-group">
+					<label class="control-label" for="input-name">Name</label>
+
+					<div class="controls">
+						<input type="text" class="input-medium" id="input-name" name="name" value="" maxlength="50 /">
+						<a href="#" id="modal-crud-error-name" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-description">Description</label>
+
+					<div class="controls">
+						<textarea class="input-medium" id="input-description" name="description"></textarea>
+						<a href="#" id="modal-crud-error-description" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-crafted_item">Crafted item</label>
+
+					<div class="controls">
+						<input type="text" class="input-medium" id="input-crafted_item" name="crafted_item" value="" maxlength="50 /">
+						<a href="#" id="modal-crud-error-crafted_item" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+					</div>
+				</div>
+				</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-success" id="modal-crud-save">Save</button>
+	</div>
+</div>
+
+
+{{! Delete modal}}
+<div class="modal hide fade" id="modal-delete">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3>Delete</h3>
+	</div>
+	<div class="modal-body">
+		Are you sure you want to delete <strong id="modal-delete-name"></strong>?
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-danger" id="btn-remove">Delete</button>
+		<button class="btn" data-dismiss="modal" id="modal-delete-keep">Keep the <span id="modal-delete-type"></span></button>
+	</div>
+</div>
+<div class='notifications bottom-right'></div>

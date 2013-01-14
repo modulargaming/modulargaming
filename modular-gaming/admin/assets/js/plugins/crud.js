@@ -1,6 +1,5 @@
 (function( $ ){
 	var form = {};
-	var type = '';
 	opts = {};
 	
 	var methods = {
@@ -8,21 +7,10 @@
 			opts = $.extend({}, $.fn.mgForm.defaults, options);
 		
 			//get the table containing all the data
-			type = this.attr('id').replace('container-','');
 			var tableEl = $(this);
 			
 			//get a map of the form fields
-            form.fields = {};
-            form.e = $('#form-'+type);
-            
-            form.e.find(':input').map(function(index, elm) {
-            	var e = $(elm);
-            	var id = e.attr('id').replace('input-'+form.type+'-','');
-            	
-            	//buttons get ignored
-            	if(elm.type != 'button')
-            		form.fields[id] = {name: elm.name, id: id, element: e, type: elm.type};
-            }); 
+            form = $('#modal-crud-form');
             
           //bind events to create buttons
            	$('.btn-create').click(function(e){
@@ -30,7 +18,7 @@
            		methods.show.apply(form, [0, {}]);
             });
            	
-           	$(this).bind('adminFormOpen', {f: form}, function(e, param){
+           	$(this).bind('crud.FormOpen', {f: form}, function(e, param){
            		methods.show.apply(e.data.f, [0, param]);
            	});
             
@@ -38,78 +26,91 @@
             tableEl.find('tbody > tr').each(function(){
             	var tr = $(this);
             	var id = tr.attr('id');
-            	id = id.replace('container-'+type+'-','');
-            	
+            	id = id.replace('container-','');
+            	 
             	tr.find('.btn-edit').click(function(e){
             		e.preventDefault();
             		methods.show.apply(form, [id, {id: id}]);
             	});
             	tr.find('.btn-delete').click(function(e){
             		e.preventDefault();
-            		methods.showDelete.apply(form, [id, $('#container-'+type+'-'+opts.identifier+'-'+id).text()]);
+            		methods.showDelete.apply(form, [id, $('#container-'+opts.identifier+'-'+id).text()]);
             	});
             });
             return this;
 		},
 		show : function(id, param) {
-			this.e[0].reset();
-			opts.clean.apply(this, [type]);
+			$('#modal-crud-form')[0].reset();
 			
-
+			//@todo add clean callback
+			
+			$('.modal-options').addClass('hide');
+			
 			//reset errors
-        	$.each(this.fields, function(key, val){
-        		$('#form-'+type+'-error-'+val.name).addClass('hide').attr('title', '');
+        	$('#modal-crud-form :input[type!=button]').each(function(){
+        		$('#form-error-'+$(this).attr('name')).addClass('hide').attr('title', '');
         	});
         	
         	//if no id is specified we're creating
-        	if((typeof id === 'undefined' || id == 0) && typeof param === 'undefined') {
-        		$('h3#modal-'+type+'-header').html('Creating');
-        		$('#input-'+type+'-id').val('0');
-        		$('#modal-'+type).modal();
+        	if(id == 0 || typeof param === 'undefined') {
+        		$('h3#modal-header').html('Creating');
+        		$('#input-id').val('0');
+        		$('#modal-crud').modal();
         	}
         	else {
         		var req_data = opts.retrieve;
         		
         		$.get(req_data, param, function (data) {
-        			$('h3#modal-'+type+'-header').html('Editing "'+data[opts.identifier]+'"');
+        			$('h3#modal-header').html('Editing "'+data[opts.identifier]+'"');
+        			$('.modal-options').removeClass('hide');
         			
+        			//register option buttons
+        			$('#crud-container').trigger('crud.options', [data.id, data]);
+        			
+        			$('#option-delete').click(function(e){
+        				e.preventDefault();
+        				$('#modal-crud').modal('hide');
+        				$('#modal-delete-keep').click(function(e){
+        					e.preventDefault();
+        					$('#modal-delete').modal('hide');
+        					$('#modal-crud').modal('show');
+        				});
+        				methods.showDelete.call(form, [data.id, data[opts.identifier]]);
+        			});
         			//set the field values
         			$.each(data, function(key,val){
-        				$('#input-'+type+'-'+key).val(val);
+        				$('#input-'+key).val(val);
         			});
         			
-        			//do the fill callback
-        			opts.fill.call(this, [data, type]);
-        			
         			//show the modal
-        			$('#modal-'+type).modal();
+        			$('#modal-crud').modal();
         		});
         	}
         	
         	var form = this;
         	//bind the save button
-            $('#btn-save').click(function(e){
+            $('#modal-crud-save').one('click', function(e){
             	e.preventDefault();
             	methods.save.apply(form);
             });
         },
         save : function() { 
-        	var values = $('#form-'+type).serialize();
-        	var id = $('#input-'+type+'-id').val();
+        	var values = $('#modal-crud-form').serialize();
+        	var id = $('#input-id').val();
         	
-        	$.post(opts.save.url, values, function(data) {
+        	$.post(opts.save, values, function(data) {
         		if(data.action == 'saved') {
         			$('.bottom-right').notify({
-        			    message: { text: $('#input-'+type+'-'+opts.identifier).val()+' has been saved successfully!' }
+        			    message: { text: $('#input-'+opts.identifier).val()+' has been saved successfully!' }
         			  }).show();
         			
-        			$('#modal-'+type).modal('hide');
+        			$('#modal-crud').modal('hide');
         			
         			//update the item list table
-        			if(id != 0 && $("#container-"+type+"-"+id).length != 0 && opts.save.in_table.length > 0) {
-        				$.each(opts.save.in_table, function(key, val) {
-        					var c = $('#container-'+type+'-'+val+'-'+id);
-        					c.text($('#input-'+type+'-'+val).val());
+        			if(id != 0 && $("#container-"+id).length != 0 && opts.data_in_table.length > 0) {
+        				$.each(opts.data_in_table, function(key, val) {
+        					var c = $('#container-'+val+'-'+id);
+        					c.text($('#input-'+val).val());
         				});
         			}
         			
@@ -119,7 +120,7 @@
         		else {
         			//mark the errors on the form
         			$.each(data.errors, function(key, val){
-        				var e = $('#form-'+type+'-error-'+val.field);
+        				var e = $('#modal-crud-error-'+val.field);
         				e.removeClass('hide');
         				e.attr('title', val.msg.join('<br />'));
         			});
@@ -129,7 +130,7 @@
         },
         showDelete : function(id, name) {
         	$('#modal-delete-name').text(name);
-        	$('#modal-delete-type').text(type.replace('-', '').replace('_', ' '));
+        	$('#modal-delete-type').text($($('.btn-create')[0]).text().replace('Create ', ''));
         	$('#modal-delete').modal();
         
         	//bind the delete button
@@ -147,8 +148,8 @@
             		$('#modal-delete').modal('hide');
             				
             		//remove the item from the interface
-            		if($('container-'+type+'-'+id).length != 0)
-            			$('container-'+type+'-'+id).fadeOut();
+            		if($('#container-'+id).length != 0)
+            			$('#container-'+id).addClass('warning');
             		}
             		else {
             			//error deleting
@@ -175,10 +176,9 @@
 	};
   
   	$.fn.mgForm.defaults = {
-  		clean: function(type) {return true;},
         retrieve: '', //url to retrieve a data entiry from
-        fill: function(data, type){return true;}, //callback that's run after retrieving data
-        save: {url: '', in_table: {}, success: function(data){return true;}}, //url to post the form values to
+        save: '', //url to post the form values to
+        data_in_table: {},
         remove: '', // url to send a delete request to
         identifier: 'name' //the property used as an identifier
 	};

@@ -2,6 +2,16 @@
 
 return array (
 	'admin' => array(
+		'head' => array(
+			'css' => array(
+				array (
+					'name' => 'bootstrap.notify',
+					'file' => 'bootstrap-notify.css',
+					'location' => 'after',
+					'relative' => 'bootstrap'
+				)
+			)		
+		),
 		'body' => array(
 			'js' => array(
 				array(
