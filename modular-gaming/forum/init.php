@@ -3,7 +3,7 @@
 /**
  * Routes for Forum.
  */
-Route::set('forum.index', 'forum')
+Route::set('forum', 'forum')
 	->defaults(array(
 		'directory'  => 'forum',
 		'controller' => 'index',
