@@ -29,14 +29,14 @@ class Assets {
 			case 'before':
 			case 'after':
 				$insertion = array_search($relative, self::$_collection[$location][$type]);
-		
+				
 				if($possition == 'after')
 					$insertion++;
 		
-				$before = array_slice(self::$_collection[$location], 0, $insertion, true);
-				$after  = array_slice(self::$_collection[$location], $insertion, null, true);
+				$before = array_slice(self::$_collection[$location][$type], 0, $insertion, true);
+				$after  = array_slice(self::$_collection[$location][$type], $insertion, null, true);
 		
-				self::$_collection[$location] = array_merge($before, array($name), $after);
+				self::$_collection[$location][$type] = array_merge($before, array($name), $after);
 			break;
 		}
 	}
