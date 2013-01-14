@@ -4,7 +4,6 @@ class Controller_Admin_User extends Controller_Admin {
 
 	public function action_index()
 	{
-
 		if ( ! $this->user->can('Admin_User_Index') )
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to access admin user index');
@@ -17,10 +16,9 @@ class Controller_Admin_User extends Controller_Admin {
 		$this->view->users = $users->as_array();
 	}
 
-	public function action_view()
+	public function action_edit()
 	{
-
-		if ( ! $this->user->can('Admin_User_View') )
+		if ( ! $this->user->can('Admin_User_Edit') )
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to access admin user view');
 		}
@@ -34,7 +32,17 @@ class Controller_Admin_User extends Controller_Admin {
 			throw HTTP_Exception::factory('404', 'No such user');
 		}
 
+		if ($this->request->is_ajax())
+		{
+			$this->response->headers('Content-Type', 'application/json');
+			return $this->response->body(json_encode(array(
+				'username' => $user->username,
+				'email'    => $user->email,
+			)));
+		}
 
+		$this->view = new View_Admin_User_Edit;
+		$this->view->user = $user;
 	}
 
 }
