@@ -8,7 +8,7 @@
  * @copyright  (c) 2012 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-abstract class Controller_Frontend extends Controller {
+abstract class Abstract_Controller_Frontend extends Controller {
 
 	protected $auth; // Auth instance.
 	protected $user; // Current logged in user.

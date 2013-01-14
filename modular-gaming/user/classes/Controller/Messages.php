@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 
-class Controller_Messages extends Controller_Frontend {
+class Controller_Messages extends Abstract_Controller_Frontend {
 
 	protected $protected = TRUE;
 

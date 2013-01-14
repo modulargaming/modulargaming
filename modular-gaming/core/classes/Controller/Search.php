@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Search extends Controller_Frontend {
+class Controller_Search extends Abstract_Controller_Frontend {
 
 	public function action_index()
 	{

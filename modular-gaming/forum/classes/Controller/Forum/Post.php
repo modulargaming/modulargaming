@@ -8,7 +8,7 @@
  * @copyright  (c) 2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Controller_Forum_Post extends Controller_Frontend {
+class Controller_Forum_Post extends Abstract_Controller_Frontend {
 
 	private $post;
 	private $topic;
