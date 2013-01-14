@@ -23,6 +23,14 @@ class View_Base {
 		return URL::base();
 	}
 
+	public function assets_head() {
+		return Assets::head();
+	}
+
+	public function assets_body() {
+		return Assets::body();
+	}
+
 	/**
 	 * Get the current CSRF (Cross-site request forgery) token
 	 *

@@ -10,6 +10,8 @@ class Controller_Admin extends Controller_Frontend {
 	public function before(){
 		parent::before();
 		
+		$assets = Kohana::$config->load('assets.admin');
+		$this->_load_assets($assets);
 		$permission = $this->request->controller() . '_' . $this->request->action();
 	}
 	
