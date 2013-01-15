@@ -26,7 +26,7 @@ RewriteBase /
 </Files>
 
 # Remove trailing slash
-RewriteRule ^(.*)\/(\?.*)?$ $1$2 [R=301,L]
+#RewriteRule ^(.*)\/(\?.*)?$ $1$2 [R=301,L]
 
 # Protect application and system files from being viewed
 RewriteRule ^(?:application|modules|system)\b.* index.php/$0 [L]
