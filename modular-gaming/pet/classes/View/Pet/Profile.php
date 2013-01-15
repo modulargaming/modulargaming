@@ -18,8 +18,7 @@ class View_Pet_Profile extends Abstract_View {
 			'user'    => array(
 				'username' => $pet->user->username,
 				'id'   => $pet->user->id,
-				'href' => Route::url('user', array(
-					'action' => 'view',
+				'href' => Route::url('user.view', array(
 					'id'     => $pet->user->id,
 				)),
 			),
