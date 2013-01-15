@@ -21,6 +21,7 @@ class View_User_Profile extends Abstract_View {
 			'post_count'    => $profile_user->post_count,
 			'avatar'    => $profile_user->avatar,
 			'title'    => $profile_user->title->title,
+			'about'    => $profile_user->about,
 		);
 
 		return $profile_user;
