@@ -34,11 +34,14 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Rewrite all other URLs to index.php/URL
-#RewriteRule .* index.php/$0 [PT]
+# RewriteRule .* index.php/$0 [PT]
 RewriteRule .* index.php [PT]
 
 # Remove trailing slash
-RewriteRule ^(.*)\/(\?.*)?$ $1$2 [R=301,L]
+# RewriteRule ^(.*)\/(\?.*)?$ $1$2 [R=301,L]
+# RewriteRule ^(.+)/$ /$1 [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ $1 [L,R=301]
 
 </IfModule>
 
