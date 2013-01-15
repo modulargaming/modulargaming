@@ -41,7 +41,7 @@ $(document).ready(function() {
 					amount : $('#modal-gift-amount').val()
 				};
 				
-				$.post('./gift/', f, function(data) {
+				$.post('./item/gift/', f, function(data) {
 	        		if(data.action == 'success') {
 	        			$('.bottom-right').notify({
 	        			    message: { text: f.amount+' copies of '+data.name+' have been sent to '+f.username+' successfully!' }
