@@ -27,6 +27,12 @@ return array (
 					'relative' => 'bootstrap'
 				),
 				array(
+					'name' => 'templates',
+					'file' => 'admin/templates.js',
+					'location' => 'after',
+					'relative' => 'mustache'
+				),
+				array(
 					'name' => 'admin.crud',
 					'file'  => 'plugins/crud.js'
 				)
