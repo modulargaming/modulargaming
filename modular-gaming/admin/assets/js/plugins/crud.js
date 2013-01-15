@@ -107,10 +107,19 @@
         			$('#modal-crud').modal('hide');
         			
         			//update the item list table
-        			if(id != 0 && $("#container-"+id).length != 0 && opts.data_in_table.length > 0) {
+        			var container = $("#container-"+id);
+        			if(id != 0 && container.length != 0 && opts.data_in_table.length > 0) {
         				$.each(opts.data_in_table, function(key, val) {
-        					var c = $('#container-'+val+'-'+id);
-        					c.text($('#input-'+val).val());
+        					var c = container.find('[data-prop="'+val+'"]');
+        					var input = $('#input-'+val);
+        					if(c.length > 0){
+        						if(input.is('select')) {
+        							c.text(input.find(':selected').text());
+        						}
+        						else if(!input.is('checkbox') && !input.is('radio'))
+        							c.text(input.val());
+        					}
+        						
         				});
         			}
         			

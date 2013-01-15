@@ -25,8 +25,8 @@
 					{{#items}}
 					<tr id="container-{{id}}">
 						<td><img src="{{base_url}}{{image}}" /></td>
-						<td id="container-name-{{id}}">{{name}}</td>
-						<td id="container-type_id-{{id}}">{{type}}</td>
+						<td data-prop="name">{{name}}</td>
+						<td data-prop="type_id">{{type}}</td>
 						<td><button class="btn btn-edit">Edit</button> <button class="btn btn-warning btn-delete">Delete</button></td>
 						</tr>
 					{{/items}}
