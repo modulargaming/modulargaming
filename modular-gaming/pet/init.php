@@ -27,3 +27,11 @@ Route::set('pet', 'pet/<name>', array('name' => '[a-zA-Z0-9-_]+'))
 		'controller' => 'profile',
 		'action'     => 'index',
 	));
+//Add link to manage forums in admin
+Event::listen('admin.nav_list', function(){
+	return array(
+			'title' => 'Pets',
+			'link'  => URL::site('admin/pets'),
+			'icon'  => 'icon-picture'
+	);
+});
