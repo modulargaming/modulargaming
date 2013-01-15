@@ -2,6 +2,12 @@
 
 class Controller_Admin_User extends Abstract_Controller_Admin {
 
+	public function before()
+	{
+		parent::before();
+		$this->_load_assets(Kohana::$config->load('assets.admin_user'));
+	}
+
 	public function action_index()
 	{
 		if ( ! $this->user->can('Admin_User_Index') )
