@@ -31,6 +31,14 @@ Route::set('forum.post', 'forum/post/<id>(/<action>)', array('id' => '[0-9]+'))
 		'action'     => 'view',
 	));
 
+
+Route::set('forum.admin', 'admin/forum(/<action>(/<id>))', array('id' => '[0-9]+'))
+	->defaults(array(
+		'directory'  => 'admin',
+		'controller' => 'forum',
+		'action'     => 'index',
+	));
+
 //Add link to manage forums in admin
 Event::listen('admin.nav_list', function(){
 	return array(

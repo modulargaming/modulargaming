@@ -16,6 +16,7 @@ class View_Admin_Forum_Index extends Abstract_View_Admin {
 				'description' => $category->description,
 				'locked'      => $category->is_locked(),
 				'created'     => Date::format($category->created),
+				'edit'        => Route::url('forum.admin', array('action' => 'edit', 'id' => $category->id)),
 			);
 		}
 

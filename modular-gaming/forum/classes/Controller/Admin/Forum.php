@@ -19,4 +19,30 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 		
 	}
 
+	public function action_edit()
+	{
+		$id = $this->request->param('id');
+
+		$category = ORM::factory('Forum_Category', $id);
+
+		if ( ! $category->loaded())
+		{
+			throw HTTP_Exception::factory('404', 'No such category');
+		}
+
+		/*
+		if ($this->request->is_ajax())
+		{
+			$this->response->headers('Content-Type', 'application/json');
+			return $this->response->body(json_encode(array(
+				'username' => $user->username,
+				'email'    => $user->email,
+			)));
+		}
+		*/
+
+		$this->view = new View_Admin_Forum_Edit;
+		$this->view->category = $category;
+	}
+
 }

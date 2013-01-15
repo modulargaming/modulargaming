@@ -1,0 +1,21 @@
+<h3>Edit Category <small>{{category.title}}</small></h3>
+
+{{#category}}
+	<form method="post">
+		<fieldset>
+
+			<input type="hidden" name="csrf" value="{{csrf}}">
+
+			<label for="title">Title</label>
+			<input type="text" name="title" id="title" value="{{title}}">
+
+			<label for="description">Description</label>
+			<textarea name="description" id="description">{{description}}</textarea>
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</div>
+
+		</fieldset>
+	</form>
+{{/category}}
