@@ -25,6 +25,7 @@ RewriteBase /
 	Deny From All
 </Files>
 
+# Remove trailing slash
 RewriteRule ^(.*)\/(\?.*)?$ $1$2 [R=301,L]
 
 # Protect application and system files from being viewed
