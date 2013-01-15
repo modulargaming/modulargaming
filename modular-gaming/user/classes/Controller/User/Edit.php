@@ -115,5 +115,26 @@ class Controller_User_Edit extends Controller_User {
 		$this->view->timezones = $timezones->as_array();
 	}
 
+	protected function _save_image($image, $user_id)
+	{
+		if (
+			! Upload::valid($image) OR
+			! Upload::not_empty($image) OR
+			! Upload::type($image, array('jpg', 'jpeg', 'png', 'gif')))
+		{
+			return FALSE;
+		}
+		$directory = 'assets/img/avatars/';
+		if ($file = Upload::save($image, NULL, $directory))
+		{
+			Image::factory($file)
+				->resize(64, 64, Image::AUTO)
+				->save($directory.$user_id.'.png');
+				unlink($file);
+			return TRUE;
+		}
+		return FALSE;
+    }
+
 
 }
