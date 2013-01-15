@@ -135,7 +135,7 @@ Kohana::modules(array(
 	'auth'          => MODPATH.'auth',       // Basic authentication
 	'cache'         => MODPATH.'cache',      // Caching with multiple backends
 	'database'      => MODPATH.'database',   // Database access
-//	'debug-toolbar' => MODPATH.'debug-toolbar',
+	'debug-toolbar' => MODPATH.'debug-toolbar',
 	'email'         => MODPATH.'email',      // Email manipulation
 	'image'         => MODPATH.'image',      // Image manipulation
 	'kostache'      => MODPATH.'kostache',   // Mustache template system
