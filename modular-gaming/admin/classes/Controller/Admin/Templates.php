@@ -6,6 +6,7 @@ class Controller_Admin_Templates extends Abstract_Controller_Admin {
 
 	public function action_index()
 	{
+		// TODO: Cache it!!!
 		$templates = Kohana::list_files($this->_directory);
 		$content = array();
 
