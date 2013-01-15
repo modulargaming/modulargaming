@@ -24,8 +24,8 @@
 					<tbody>
 					{{#recipes}}
 					<tr id="container-{{id}}">
-						<td id="container-name-{{id}}">{{name}}</td>
-						<td id="container-ingredients-{{id}}">{{ingredients}}</td>
+						<td data-prop="name">{{name}}</td>
+						<td data-prop="ingredients">{{ingredients}}</td>
 						<td><img src="{{crafted}}" /></td>
 						<td><button class="btn btn-edit">Edit</button> <button class="btn btn-warning btn-delete">Delete</button></td>
 						</tr>
