@@ -10,16 +10,23 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 			{
 				if ($this->request->post('adopt'))
 				{
-					$pet = ORM::factory('Pet')
-					->where('pet.id', '=', $this->request->post('adopt'))
-					->where('user_id', '=', 0)
-					->find();
-					$pet->user_id = $this->user->id;
-					$pet->abandoned = time();
-					$pet->save();
-					Hint::success('You have adopted ' . $pet->name . '.');
+					if(ORM::factory('Pet')->where('user_id', '=', $this->user->id)->count_all() < 6)
+					{
+						$pet = ORM::factory('Pet')
+						->where('pet.id', '=', $this->request->post('adopt'))
+						->where('user_id', '=', 0)
+						->find();
+						$pet->user_id = $this->user->id;
+						$pet->abandoned = time();
+						$pet->save();
+						Hint::success('You have adopted ' . $pet->name . '.');
+						$this->redirect('pets');
+					}
+					else
+					{
+						Hint::error('You already have 6 pets.');
+					}
 				}
-				$this->redirect('pets');
 			}
 			catch (ORM_Validation_Exception $e)
 			{

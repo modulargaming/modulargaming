@@ -27,10 +27,17 @@ class Model_Pet extends ORM {
 		'user'
 	);
 
+	public static function pet_limit($user_id)
+	{
+		return ORM::factory('Pet')->where('user_id', '=', $user_id)->count_all() < 6;
+	}
 
 	public function rules()
 	{
 		return array(
+			'user_id' => array(
+				array('Model_Pet::pet_limit')
+			),
 			'name' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 255)),
