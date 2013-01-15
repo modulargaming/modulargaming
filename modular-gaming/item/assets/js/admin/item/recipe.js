@@ -15,9 +15,9 @@ $(document).ready(function() {
 	});
 	
 	$('#crud-container').mgForm({
-		retrieve: '../recipes/retrieve/',
-		save: '../recipes/save/',
+		retrieve: './recipes/retrieve/',
+		save: './recipes/save/',
 		data_in_table: ['name'],
-		remove: '../recipes/delete/'
+		remove: './recipes/delete/'
 	});
 });

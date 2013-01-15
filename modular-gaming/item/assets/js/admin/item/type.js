@@ -15,9 +15,9 @@ $(document).ready(function() {
 	});
 	
 	$('#crud-container').mgForm({
-		retrieve: '../types/retrieve/',
-		save: '../types/save/',
+		retrieve: './types/retrieve/',
+		save: './types/save/',
 		data_in_table: ['name'],
-		remove: '../types/delete/'
+		remove: './types/delete/'
 	});
 });
