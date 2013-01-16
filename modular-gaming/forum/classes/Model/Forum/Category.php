@@ -58,4 +58,26 @@ class Model_Forum_Category extends ORM {
 		return $this->locked === '1';
 	}
 
+	/**
+	 * Delete all topics for this category, delegates the work to Forum_Topic model.
+	 *
+	 * @see Model_Forum_Topic::delete_all_topics_for_category
+	 */
+	public function delete_all_topics()
+	{
+		return Model_Forum_Topic::delete_all_topics_for_category($this->id);
+	}
+
+	/**
+	 * Move all topics for this category to the new category, delegates the work to Forum_Topic model.
+	 *
+	 * @see Model_Forum_Topic::move_all_topics_for_category
+	 * @param  int $new_id category_id to move to.
+	 * @return mixed
+	 */
+	public function move_all_topics_to($new_id)
+	{
+		return Model_Forum_Topic::move_all_topics_for_category($this->id, $new_id);
+	}
+
 }

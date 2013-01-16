@@ -103,5 +103,34 @@ class Model_Forum_Topic extends ORM {
 		return $topic->loaded();
 	}
 
+	/**
+	 * Delete all topics for the specified category.
+	 * Mysql will delete all related topics and posts using "On Delete CASCADE".
+	 *
+	 * @param   int  $category category_id to delete from
+	 * @return  object
+	 */
+	public static function delete_all_topics_for_category($category)
+	{
+		return DB::delete('Forum_Topic')
+			->where('category_id', '=', $category)
+			->execute();
+	}
+
+	/**
+	 * Move all topics for the specified category to the new category.
+	 *
+	 * @param  int $old_category category_id to move from
+	 * @param  int $new_category category_id to move to
+	 * @return mixed
+	 */
+	public static function move_all_topics_for_category($old_category, $new_category)
+	{
+		return DB::update('Forum_Topic')
+			->where('category_id', '=', $old_category)
+			->value('category_id', $new_category)
+			->execute();
+	}
+
 
 }
