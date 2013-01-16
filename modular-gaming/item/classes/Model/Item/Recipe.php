@@ -12,7 +12,7 @@ class Model_Item_Recipe extends ORM {
 	protected $_belongs_to = array(
 		'item' => array(
 			'model' => 'Item',
-			'foreign_key' => 'item_id'
+			'foreign_key' => 'crafted_item_id'
 		),
 	);
 	
@@ -35,6 +35,40 @@ class Model_Item_Recipe extends ORM {
 				array('digit'),
 			),
 		);
+	}
+	
+	static public function validate_material_names($validation, $materials, $name_key='name'){
+		$mat_names = array();
+		
+		foreach($materials as $material){
+			$mat_names[] = $material[$name_key];
+		}
+		
+		try{
+			$item = ORM::factory('Item')
+				->where('item.name', 'IN', $mat_names)
+				->find_all();
+		}
+		catch(ORM_Validation_Exception $e) {
+			$validation->error('materials', $e->errors());
+			return false;
+		}
+		
+		return true;
+	}
+	
+	static public function validate_material_amounts($validation, $materials, $amount_key='amount', $name_key='name') {
+		$status = true;
+		
+		foreach($materials as $material){
+			if(!Valid::digit($material[$amount_key]))
+			{
+				$status = $false;
+				$validation->error('materials', $material[$name_key].'\'s amount should be a number.');
+			}
+		}
+		
+		return $status;
 	}
 
 } // End Item Recipe Model

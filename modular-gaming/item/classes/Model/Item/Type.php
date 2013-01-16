@@ -28,13 +28,9 @@ class Model_Item_Type extends ORM {
 	{
 		return array(
 			'img_dir' => array(
-				array(array($this, 'dir_check'))
+				array('Item::filter_type_dir')
 			)
 		);
-	}
-	
-	public function dir_check($value){
-		return (substr($value, -1) != '/') ? $value.'/' : $value;
 	}
 
 } // End Item Type Model

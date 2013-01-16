@@ -115,5 +115,30 @@ class Model_User_Item extends ORM {
 		
 		return $user_item;
 	}
+	
+	public function amount($type, $amount=1) {
+		if($amount < 0)
+			return false;
+		
+		switch($type) {
+			case '+':
+				$this->amount = $this->amount + $amount;
+				$this->save();
+			break;
+			case '-':
+				if($this->amount > $amount)
+				{
+					$this->amount = $this->amount - $amount;
+					$this->save();
+				}
+				else if($amount == $this->amount)
+				{
+					$this->delete();
+				}
+				else 
+					return false;
+			break;
+		}
+	}
 
 } // End User_Item Model

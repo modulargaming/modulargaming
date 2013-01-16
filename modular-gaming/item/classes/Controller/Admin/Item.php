@@ -95,7 +95,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$property = 'name';
 				
 			$items = ORM::factory('Item_Recipe')
-			->where('name', 'LIKE', '%'.$item_name.'%')
+			->where('item_recipe.name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
 		
@@ -253,14 +253,29 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->view = null;
 	
 		$item_id = $this->request->query('id');
-	
-		$item = ORM::factory('Item_Recipe', $item_id);
-	
+		
+		if($item_id != null)
+			$item = ORM::factory('Item_Recipe', $item_id);
+		else 
+			$item = ORM::factory('Item_Recipe')->where('item_recipe.name', '=', $this->request->query('name'))->find();
+		
+		$materials = $item->materials->find_all();
+		$ingredients = array();
+		
+		foreach($materials as $ingredient) {
+			$ingredients[] = array(
+				'id' => $ingredient->id,
+				'name' => $ingredient->item->name,
+				'amount' => $ingredient->amount		
+			);
+		}
+		
 		$list = array(
 				'id' => $item->id,
 				'name' => $item->name,
 				'description' => $item->description,
 				'crafted_item' => $item->item->name,
+				'materials' => $ingredients
 		);
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
@@ -276,18 +291,63 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->response->headers('Content-Type','application/json');
 	
 		try {
+			//validate crafted item
 			$crafted = ORM::factory('Item')
 				->where('item.name', '=', $values['crafted_item'])
 				->find();
 			
+			
 			if($crafted->loaded()) {
-				$values['crafted_item_id'] = $crafted->id;
+				//validate item materials
+				$materials = $this->request->post('materials');
+				$values['materials'] = $materials;
 				
-				$item = ORM::factory('Item_Recipe', $values['id']);
-				$item->values($values, array('name', 'description', 'crafted_item_id'));
-				$item->save();
-		
-				$this->response->body(json_encode(array('action' => 'saved')));
+				$mat_fail = false;
+			
+				if(count($materials) > 0) {
+					foreach($materials as $index => $material){
+						$mat = ORM::factory('Item')
+							->where('item.name', '=', $material['name'])
+							->find();
+						if(!$mat->loaded()) {
+							$mat_fail = $material['name'] . ' does not exist';
+							break;
+						}
+						else if(!Valid::digit($material['amount'])) {
+							$mat_fail = $material['name'] . '\'s amount should be a number';
+							break;
+						}
+						else 
+							$materials[$index]['item'] = $mat->id;
+					}
+				}
+				if($mat_fail == false) {
+					$values['crafted_item_id'] = $crafted->id;
+					
+					$item = ORM::factory('Item_Recipe', $values['id']);
+					$item->values($values, array('name', 'description', 'crafted_item_id'));
+					$item->save();
+					
+					if(count($materials) > 0) {
+						//if we're updating delete old data
+						if($values['id'] != null) {
+							foreach($item->materials->find_all() as $mat)
+								$mat->delete();
+						}
+						
+						foreach($materials as $key => $ingredient) {
+							$mat = ORM::factory('Item_Recipe_Material');
+							$mat->item_id = $ingredient['item'];
+							$mat->amount = $ingredient['amount'];
+							$mat->item_recipe_id = $item->id;
+							$mat->save();
+						}
+					}
+					$this->response->body(json_encode(array('action' => 'saved')));
+				}
+				else {
+					return $this->response->body(json_encode(array('action' => 'error', 'errors' => array(array('field' => 'ingredients', 'msg' => array($mat_fail))))));
+				}
 			}
 			else {
 				return $this->response->body(json_encode(array('action' => 'error', 'errors' => array(array('field' => 'crafted_item', 'msg' => array('This item does not seem to exist.'))))));
@@ -325,16 +385,18 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->view = null;
 	
 		//gift the item
-		$item = $this->request->post('id');
+		$item = Item::factory($this->request->post('id'));
+		
 		$user = ORM::factory('User')
 		->where('username', '=', $this->request->post('username'))
 		->find();
-		$user_item = ORM::factory('User_Item')->recieve($user, $item, $this->request->post('amount'));
-	
-		if(!is_array($user_item))
+		
+		try {
+			$item->to_user($user, $this->request->post('amount'));
 			$list = array('action' => 'success');
-		else {
-			$list = array('action' => 'error', 'errors' => (array) $user_item);
+		}
+		catch(Item_Exception $e) {
+			$list = array('action' => 'error', 'errors' => (array) $e->errors());
 		}
 		//return response
 		$this->response->headers('Content-Type','application/json');

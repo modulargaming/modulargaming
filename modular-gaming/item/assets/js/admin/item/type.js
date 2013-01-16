@@ -5,7 +5,7 @@
 $(document).ready(function() {
 	$('#search').typeahead({
 	    source: function (query, process) {
-	        return $.get('../search/', { type: 'item_type', item: query }, function (data) {
+	        return $.get('./search/', { type: 'item_type', item: query }, function (data) {
 	            return process(data);
 	        });
 	    },

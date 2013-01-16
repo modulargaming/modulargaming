@@ -15,25 +15,25 @@ $(document).ready(function() {
 	});
 	
 	$('#crud-container').on('crud.options', function (e, id, data){
+		$('#modal-gift').on('hidden', function(){
+			$('#modal-crud').modal('show');
+		});
 		$('#option-gift').click(function(e){
 			e.preventDefault();
 			$('#modal-gift-username').typeahead({
 			    source: function (query, process) {
-			        return $.get('./item/search', { type: 'user', item: query }, function (data) {
-			            return process(data);
+			        return $.get('./item/search', { type: 'user', item: query }, function (search_data) {
+			            return process(search_data);
 			        });
 			    }
 			});
 			$('#modal-crud').modal('hide');
 			$('#modal-gift').modal('show');
-			$('#modal-gift').on('hidden', function(){
-				$('#modal-crud').modal('show');
-			});
 			
-			$("#modal-gift-username").val();
+			$("#modal-gift-username").val('');
 			$('#modal-gift-amount').val('1');
 			
-			$('#modal-gift-send').click(function(e){
+			$('#modal-gift-send').one('click', function(e){
 				e.preventDefault();
 				var f = {
 					id : id,
