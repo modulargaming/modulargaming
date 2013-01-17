@@ -13,7 +13,7 @@ class View_Admin_Pets_Index extends Abstract_View_Admin {
 			$pets[] = array(
 				'id'          => $pet->id,
 				'name'        => $pet->name,
-				'race'        => $pet->race,
+				'specie'        => $pet->specie,
 				'colour'      => $pet->colour,
 				'created'     => Date::format($pet->created),
 			);

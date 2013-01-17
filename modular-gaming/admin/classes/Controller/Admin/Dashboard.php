@@ -9,7 +9,7 @@ class Controller_Admin_Dashboard extends Abstract_Controller_Admin {
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to access admin dashboard index ');
 		}
-		$this->view = new View_Admin_Dashboard;
+		$this->view = new View_Admin_Dashboard_Index;
 	}
 
 }
