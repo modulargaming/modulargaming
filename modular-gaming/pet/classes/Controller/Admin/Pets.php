@@ -14,7 +14,7 @@ class Controller_Admin_Pets extends Abstract_Controller_Admin {
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin pets index');
 		}
 
-		$pets = ORM::factory('Pet')
+		$pets = ORM::factory(User_Pet)
 			->find_all();
 
 		$this->view = new View_Admin_Pets_Index;

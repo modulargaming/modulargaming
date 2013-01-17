@@ -10,10 +10,10 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 			{
 				if ($this->request->post('adopt'))
 				{
-					if(ORM::factory('Pet')->where('user_id', '=', $this->user->id)->count_all() < 6)
+					if(ORM::factory('User_Pet')->where('user_id', '=', $this->user->id)->count_all() < 6)
 					{
-						$pet = ORM::factory('Pet')
-						->where('pet.id', '=', $this->request->post('adopt'))
+						$pet = ORM::factory('User_Pet')
+						->where('user_pet.id', '=', $this->request->post('adopt'))
 						->where('user_id', '=', 0)
 						->find();
 						$pet->user_id = $this->user->id;
@@ -36,7 +36,7 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 		Breadcrumb::add('Your pets', Route::url('pets'));
 		Breadcrumb::add('Adopt a pet', Route::url('pet.adopt'));
 		$this->view = new View_Pet_Adopt;
-		$pets = ORM::factory('Pet')
+		$pets = ORM::factory('User_Pet')
 		->where('user_id', '=', 0)
 		->order_by('abandoned', 'desc')
 		->find_all();

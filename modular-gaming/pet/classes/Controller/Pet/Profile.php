@@ -4,7 +4,7 @@ class Controller_Pet_Profile extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 	public function action_index()
 	{
-		$pet = ORM::factory('Pet')
+		$pet = ORM::factory('User_Pet')
 		->where('name', '=', $this->request->param('name'))
 		->find();
 		if (!$pet->loaded())

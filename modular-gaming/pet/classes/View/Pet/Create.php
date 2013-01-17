@@ -4,20 +4,20 @@ class View_Pet_Create extends Abstract_View
 {
 	public $title = 'Create a pet';
 
-	public function races()
+	public function species()
 	{
-		$races = array();
+		$species = array();
 
-		foreach ($this->races as $race)
+		foreach ($this->species as $specie)
 		{
-			$races[] = array(
-				'id' => $race->id,
-				'name' => $race->name,
-				'description' => $race->description,
+			$species[] = array(
+				'id' => $specie->id,
+				'name' => $specie->name,
+				'description' => $specie->description,
 			);
 		}
 
-		return $races;
+		return $species;
 	}
 	
 	public function colours()

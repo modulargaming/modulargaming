@@ -386,7 +386,7 @@ INSERT INTO `user_timezones` (`id`, `timezone`, `name`) VALUES
 (223, 'Pacific/Auckland', '(GMT+12:00) Auckland'),
 (224, 'Pacific/Fiji', '(GMT+12:00) Fiji');
 
-CREATE TABLE IF NOT EXISTS `pets` (
+CREATE TABLE IF NOT EXISTS `user_pets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `created` int(10) NOT NULL,
@@ -394,7 +394,7 @@ CREATE TABLE IF NOT EXISTS `pets` (
   `active` int(10) NOT NULL,
   `name` varchar(255) NOT NULL,
   `gender` enum('male','female') NOT NULL,
-  `race_id` int(6) NOT NULL,
+  `specie_id` int(6) NOT NULL,
   `colour_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -417,14 +417,14 @@ INSERT INTO `pet_colours` (`id`, `locked`, `name`, `description`, `image`) VALUE
 (6, 0, 'Yellow', 'Yellow colour', 'yellow.png'),
 (7, 1, 'Outline', 'Special outline colour', 'outline.png');
 
-CREATE TABLE IF NOT EXISTS `pet_races` (
+CREATE TABLE IF NOT EXISTS `pet_species` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `pet_races` (`id`, `name`, `description`) VALUES
+INSERT INTO `pet_species` (`id`, `name`, `description`) VALUES
 (1, 'Koorai', 'The Koorai'),
 (2, 'Zedro', 'The Zedro.');
 

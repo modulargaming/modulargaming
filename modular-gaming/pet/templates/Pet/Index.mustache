@@ -6,9 +6,9 @@
 {{#pets}}
 		<li class="span4">
 			<div class="thumbnail center">
-				<a href="{{link}}"><img src="{{base_url}}assets/img/pets/{{race.id}}/{{colour.image}}" alt=""></a>
+				<a href="{{link}}"><img src="{{base_url}}assets/img/pets/{{specie.id}}/{{colour.image}}" alt=""></a>
 				<div class="caption">
-					<h3>{{name}} the {{colour.name}} {{race.name}}</h3>
+					<h3>{{name}} the {{colour.name}} {{specie.name}}</h3>
 					<form method="post">
 						<input type="hidden" name="csrf" value="{{csrf}}">
 						{{^active}}<button class="btn" name="active" value="{{id}}">Set active</button>{{/active}}

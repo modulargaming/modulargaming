@@ -13,7 +13,7 @@ class View_Pet_Profile extends Abstract_View {
 			'created' => Date::format($pet->created),
 			'name'    => $pet->name,
 			'gender'  => $pet->gender,
-			'race'    => $pet->race,
+			'specie'    => $pet->specie,
 			'colour'  => $pet->colour,
 			'user'    => array(
 				'username' => $pet->user->username,
@@ -21,10 +21,6 @@ class View_Pet_Profile extends Abstract_View {
 				'href' => Route::url('user.view', array(
 					'id'     => $pet->user->id,
 				)),
-			),
-			'race' => array(
-				'name' => $pet->race->name,
-				'id'   => $pet->race->id,
 			),
 		);
 	}

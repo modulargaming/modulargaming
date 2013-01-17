@@ -12,8 +12,8 @@ class Controller_Pet_Index extends Abstract_Controller_Frontend {
 			{
 				if ($this->request->post('active'))
 				{
-					$pet = ORM::factory('Pet')
-					->where('pet.id', '=', $this->request->post('active'))
+					$pet = ORM::factory('User_Pet')
+					->where('user_pet.id', '=', $this->request->post('active'))
 					->where('user_id', '=', $this->user->id)
 					->find();
 					$pet->active = time();
@@ -22,8 +22,8 @@ class Controller_Pet_Index extends Abstract_Controller_Frontend {
 				}
 				if ($this->request->post('abandon'))
 				{
-					$pet = ORM::factory('Pet')
-					->where('pet.id', '=', $this->request->post('abandon'))
+					$pet = ORM::factory('User_Pet')
+					->where('user_pet.id', '=', $this->request->post('abandon'))
 					->where('user_id', '=', $this->user->id)
 					->find();
 					$pet->user_id = 0;
@@ -40,7 +40,7 @@ class Controller_Pet_Index extends Abstract_Controller_Frontend {
 		}
 		Breadcrumb::add('Your pets', Route::url('pets'));
 		$this->view = new View_Pet_Index;
-		$pets = ORM::factory('Pet')
+		$pets = ORM::factory('User_Pet')
 		->where('user_id', '=', $this->user->id)
 		->order_by('active', 'desc')
 		->find_all();
@@ -53,7 +53,7 @@ class Controller_Pet_Index extends Abstract_Controller_Frontend {
 				'name' => $value->name,
 				'active' => ($key ? 0 : $value->active),
 				'link' => Route::url('pet', array('name' => strtolower($value->name))),
-				'race' => $value->race,
+				'specie' => $value->specie,
 				'colour' => $value->colour,
 				'created' => Date::format($value->created),
 			);

@@ -2,27 +2,27 @@
 <hr>
 <form method="post">
 	<input type="hidden" name="csrf" value="{{csrf}}">
-	<input type="hidden" name="race_id" value="1" id="race_id" />
+	<input type="hidden" name="specie_id" value="1" id="specie_id" />
 	<input type="hidden" name="colour_id" id="colour_id" value="1" />
 	<input type="hidden" name="gender" id="gender" value="male" />
 	<ul class="thumbnails">
 		<li class="span4">
 			<div class="thumbnail center">
 				<img src="{{base_url}}assets/img/pets/1/black.png" id="pet_image" />
-				<h3><span id="pet_colour">Black</span> <span id="pet_race">Koorai</span></h3>
+				<h3><span id="pet_colour">Black</span> <span id="pet_specie">Koorai</span></h3>
 				<p id="pet_description">The Koorai</p>
 			</div>
 		</li>
 		<li class="span8">
-			<label>Race</label>
+			<label>Specie</label>
 			<ul class="thumbnails">
-				{{#races}}
+				{{#species}}
 				<li>
-					<a href="#" class="thumbnail" rel="popover" data-trigger="hover" data-placement="bottom" data-content="{{description}}" data-original-title="{{name}}" data-race="{{id}}">
-						<img src="{{base_url}}assets/img/pets/{{id}}/black.png" class="pet_race" />
+					<a href="#" class="thumbnail" rel="popover" data-trigger="hover" data-placement="bottom" data-content="{{description}}" data-original-title="{{name}}" data-specie="{{id}}">
+						<img src="{{base_url}}assets/img/pets/{{id}}/black.png" class="pet_specie" />
 					</a>
 				</li>
-				{{/races}}
+				{{/species}}
 			</ul>
 			<label>Colour</label>
 			<div class="btn-group" data-toggle="buttons-radio">
@@ -44,25 +44,25 @@
 	</div>
 </form>
 <style>
-.pet_race {
+.pet_specie {
 	width: 100px;
 	height: 100px;
 }
 </style>
 <script>
-var pet_race = 1,
+var pet_specie = 1,
 	pet_colour = 1,
 	colour_name = ['', {{#colours}}'{{name}}', {{/colours}}''],
 	colour_image = ['', {{#colours}}'{{image}}', {{/colours}}''];
 function pet_image() {
-	$('#pet_image').attr('src', '{{base_url}}assets/img/pets/' + pet_race + '/' + colour_image[pet_colour]);
+	$('#pet_image').attr('src', '{{base_url}}assets/img/pets/' + pet_specie + '/' + colour_image[pet_colour]);
 }
 window.onload = function() {
 	$("a[rel=popover]").click(function(e) {
-		pet_race = $(this).data('race');
-		$('#race_id').val(pet_race);
+		pet_specie = $(this).data('specie');
+		$('#specie_id').val(pet_specie);
 		pet_image();
-		$('#pet_race').text($(this).data('original-title'));
+		$('#pet_specie').text($(this).data('original-title'));
 		$('#pet_description').text($(this).data('content'));
 		e.preventDefault();
 	}).popover();

@@ -13,10 +13,10 @@ class Controller_Pet_Create extends Abstract_Controller_Frontend {
 					'active' => time(),
 				));
 
-				$new_pet = ORM::factory('Pet')
+				$new_pet = ORM::factory('User_Pet')
 					->create_pet($array, array(
 						'user_id',
-						'race_id',
+						'specie_id',
 						'colour_id',
 						'gender',
 						'name',
@@ -32,13 +32,13 @@ class Controller_Pet_Create extends Abstract_Controller_Frontend {
 		}
 		Breadcrumb::add('Your pets', Route::url('pets'));
 		Breadcrumb::add('Create a pet', Route::url('pet.create'));
-		$races = ORM::factory('Pet_Race')->find_all();
+		$species = ORM::factory('Pet_Specie')->find_all();
 		$this->view = new View_Pet_Create;
 		
 		$colours = ORM::factory('Pet_Colour')->where('locked', '=', 0)->find_all();
 		$this->view->colours = $colours;
 
-		$this->view->races = $races;
+		$this->view->species = $species;
 		$this->view->href = array(
 				'adopt' => Route::url('pet.adopt'),
 			);
