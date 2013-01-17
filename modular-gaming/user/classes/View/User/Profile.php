@@ -35,10 +35,10 @@ class View_User_Profile extends Abstract_View {
                 foreach ($pets as $pet)
                 {
                         $user_pets[] = array(
-                                'src' => URL::base().'assets/img/pets/'.$pet->race->id.'/'.$pet->colour->image,
+                                'src' => URL::base().'assets/img/pets/'.$pet->specie->id.'/'.$pet->colour->image,
                                 'href' => Route::url('pet', array('name' => strtolower($pet->name))),
                                 'name' => $pet->name,
-                                'race' => $pet->race->name,
+                                'specie' => $pet->specie->name,
                                 'colour' => $pet->colour->name,
                         );
                 }
