@@ -12,7 +12,7 @@
   		</div>
   		<div class="row">
 			<div class="span5 offset4">
-				<table class="table table-striped table-hover" id="crud-container">
+				<table class="table table-striped table-hover" id="crud-container" data-pagination="{{paginate_max}}">
 					<thead>
 						<tr>
 							<th class="span2">Name</th>
@@ -26,7 +26,7 @@
 						<td><button class="btn btn-edit">Edit</button> <button class="btn btn-warning btn-delete">Delete</button></td>
 						</tr>
 					{{/types}}
-					<tr>
+					<tr id="crud-container-bottom">
 						<td>
 						</td>
 						<td>

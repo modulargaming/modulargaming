@@ -67,7 +67,8 @@ $(document).ready(function() {
 		retrieve: './item/retrieve/',
 		save: './item/save/',
 		data_in_table: ['name', 'type_id'],
-		remove: './item/delete/'
+		remove: './item/delete/',
+		identifier: 'name'
 	});
 	
 });

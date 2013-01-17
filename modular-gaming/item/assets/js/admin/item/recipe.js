@@ -68,6 +68,7 @@ $(document).ready(function() {
 		retrieve: './recipes/retrieve/',
 		save: './recipes/save/',
 		data_in_table: ['name'],
-		remove: './recipes/delete/'
+		remove: './recipes/delete/',
+		identifier: 'name'
 	});
 });

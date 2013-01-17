@@ -18,6 +18,7 @@ $(document).ready(function() {
 		retrieve: './types/retrieve/',
 		save: './types/save/',
 		data_in_table: ['name'],
-		remove: './types/delete/'
+		remove: './types/delete/',
+		identifier: 'name'
 	});
 });

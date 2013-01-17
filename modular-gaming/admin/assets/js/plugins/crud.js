@@ -12,6 +12,8 @@
 			//get a map of the form fields
             form = $('#modal-crud-form');
             
+            $('#modal-delete-type').text($($('.btn-create')[0]).text().replace('Create ', ''));
+            
           //bind events to create buttons
            	$('.btn-create').click(function(e){
            		e.preventDefault();
@@ -22,21 +24,19 @@
            		methods.show.apply(e.data.f, [0, param]);
            	});
             
-            //bind events to edit and delete buttons
-            tableEl.find('tbody > tr').each(function(){
-            	var tr = $(this);
-            	var id = tr.attr('id');
-            	id = id.replace('container-','');
-            	 
-            	tr.find('.btn-edit').click(function(e){
-            		e.preventDefault();
-            		methods.show.apply(form, [id, {id: id}]);
-            	});
-            	tr.find('.btn-delete').click(function(e){
-            		e.preventDefault();
-            		methods.showDelete.apply(form, [id, $('#container-'+opts.identifier+'-'+id).text()]);
-            	});
-            });
+          //bind events to edit and delete buttons
+           	$('#crud-container > tbody > tr').on('click', '.btn-edit', function(e){
+        		e.preventDefault();
+        		var id = $(this).parents('tr').attr('id').replace('container-', '');
+        		methods.show.apply(form, [id, {id: id}]);
+        	});
+           	$('#crud-container > tbody > tr').on('click', '.btn-delete', function(e){
+        		e.preventDefault();
+        		var id = $(this).parents('tr').attr('id').replace('container-', '');
+        		var name = $(this).parents('tr').find('td[data-prop="'+opts.identifier+'"]').text();
+        		methods.showDelete.apply(form, [id, name]);
+        	});
+
             return this;
 		},
 		show : function(id, param) {
@@ -122,9 +122,26 @@
         						
         				});
         			}
-        			
-        			//@todo implement save callback
-        			//opts.save.success.apply(this, [data]);
+        			else {
+        				//we're dealing with a new table row
+        				var max_results = $('#crud-container').data('pagination');
+        				
+        				if(max_results.length == 0 || max_results > ($('#crud-container > tbody > tr').length - 1)) {
+        					var tpl = $('#crud-container > tbody > tr:first').clone();
+        					tpl.attr('id', 'container-'+data.row.id);
+        					
+        					//add new row
+        					var td = 1;
+        					$.each(data.row, function(key, val){
+        						if(key != 'id') {
+        							tpl.find('td:nth-child('+td+')').html(val);
+        							td++;
+        						}
+        					});
+        					
+        					tpl.insertBefore('#crud-container-bottom');
+        				}
+        			}
         		}
         		else {
         			//mark the errors on the form
@@ -139,12 +156,13 @@
         },
         showDelete : function(id, name) {
         	$('#modal-delete-name').text(name);
-        	$('#modal-delete-type').text($($('.btn-create')[0]).text().replace('Create ', ''));
+        	$('#btn-remove').prop('disabled', false);
         	$('#modal-delete').modal();
         
         	//bind the delete button
-            $('#btn-remove').click(function(e){
+            $('#btn-remove').one('click', function(e){
             	e.preventDefault();
+            	$(this).prop('disabled', true);
             	methods.doDelete.apply(this, [id, name]);
             });
         },

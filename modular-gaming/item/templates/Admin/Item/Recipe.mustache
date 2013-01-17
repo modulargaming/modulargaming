@@ -12,7 +12,7 @@
   		</div>
   		<div class="row">
 			<div class="span6 offset3">
-				<table class="table table-striped table-hover" id="crud-container">
+				<table class="table table-striped table-hover" id="crud-container" data-pagination="{{paginate_max}}">
 					<thead>
 						<tr>
 							<th class="span2">Name</th>
@@ -30,7 +30,7 @@
 						<td><button class="btn btn-edit">Edit</button> <button class="btn btn-warning btn-delete">Delete</button></td>
 						</tr>
 					{{/recipes}}
-					<tr>
+					<tr id="crud-container-bottom">
 						<td colspan="3">
 						</td>
 						<td>
@@ -67,7 +67,7 @@
 					<label class="control-label" for="input-description">Description</label>
 
 					<div class="controls">
-						<textarea class="input-medium" id="input-description" name="description"></textarea>
+						<textarea class="input-medium" id="input-description" name="description" rows="2"></textarea>
 						<a href="#" id="modal-crud-error-description" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
@@ -77,6 +77,20 @@
 					<div class="controls">
 						<input type="text" class="input-medium" id="input-crafted_item" name="crafted_item" value="" maxlength="50 /">
 						<a href="#" id="modal-crud-error-crafted_item" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-crafted_item">Ingredients</label>
+
+					<div class="controls">
+						<div class="row span9">
+							<a href="#" class="btn btn-success btn-small pull-right" id="btn-add-ingredient">+</a>
+						</div>
+						<table class="table table-condensed span5" style="margin-bottom: 5px;">
+						<tbody id="ingredient-body">
+						</tbody>
+						</table>
+						<a href="#" id="modal-crud-error-materials" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
 				</fieldset>

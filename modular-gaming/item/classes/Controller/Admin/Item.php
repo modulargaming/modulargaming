@@ -150,7 +150,16 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id'));
 			$item->save();
 			
-			$this->response->body(json_encode(array('action' => 'saved')));
+			$data = array(
+				'action' => 'saved',
+				'row' => array(
+					'id' => $item->id,
+					'img' => '<img src="'.URL::base().$item->img().'" />',
+					'name' => $item->name,
+					'type' => $item->type->name
+				)
+			);
+			$this->response->body(json_encode($data));
 		}
 		catch(ORM_Validation_Exception $e)
 		{
@@ -218,8 +227,15 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$item = ORM::factory('Item_Type', $values['id']);
 			$item->values($values, array('name', 'status', 'action', 'default_command', 'img_dir', 'load_pet_list'));
 			$item->save();
-				
-			$this->response->body(json_encode(array('action' => 'saved')));
+			
+			$data = array(
+				'action' => 'saved',
+				'row' => array(
+					'id' => $item->id,
+					'name' => $item->name		
+				)
+			);
+			$this->response->body(json_encode($data));
 		}
 		catch(ORM_Validation_Exception $e)
 		{
@@ -343,7 +359,16 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 							$mat->save();
 						}
 					}
-					$this->response->body(json_encode(array('action' => 'saved')));
+					$data = array(
+						'action' => 'saved',
+						'row' => array(
+							'id' => $item->id,
+							'name' => $item->name,
+							'ingredients' => $item->materials->count_all(),
+							'result' => '<img src="' . URL::base().$item->item->img(). '" />'
+						)
+					);
+					$this->response->body(json_encode($data));
 				}
 				else {
 					return $this->response->body(json_encode(array('action' => 'error', 'errors' => array(array('field' => 'ingredients', 'msg' => array($mat_fail))))));
