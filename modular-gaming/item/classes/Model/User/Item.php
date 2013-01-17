@@ -53,6 +53,18 @@ class Model_User_Item extends ORM {
 	}
 	
 	/**
+	 * Return the item's name prefixed with its amount
+	 * 
+	 * @return string
+	 */
+	public function name() {		
+		if($this->amount > 1)
+			return $this->amount . ' ' . Inflector::plural($this->name, $this->amount);
+		else
+			return $this->amount . ' ' . $this->name;
+	}
+	
+	/**
 	 * Transfer the initialised item to a different user.
 	 * 
 	 * Returns false if you're trying to transfer a higher amount of this item than the owner already has,
@@ -60,12 +72,12 @@ class Model_User_Item extends ORM {
 	 * 
 	 * @param Model_User $user A user model instance of the new owner
 	 * @param Integer $amount The amount of copies you want to transfer
-	 * @throws Kohana_Exception When trying to transfer an untrasferable item
+	 * @throws Item_Exception When trying to transfer an untrasferable item
 	 * @return boolean|Model_User_Item
 	 */
 	public function transfer(Model_User $user, $amount=1) {
 		if($this->item->transferable == false)
-			Throw new Kohana_Exception('":item" is bound to your account only.', array(':item' => $this->item->name));
+			Throw new Item_Exception('":item" is bound to your account only.', array(':item' => $this->item->name));
 		else
 			return $this->_relocate($user->id, 'inventory', $amount);
 	}
@@ -116,24 +128,36 @@ class Model_User_Item extends ORM {
 		return $user_item;
 	}
 	
+	/**
+	 * Change the amount of the loaded item.
+	 * 
+	 * @param string $type (add|+|substract|-)
+	 * @param integer $amount
+	 * @return boolean
+	 */
 	public function amount($type, $amount=1) {
 		if($amount < 0)
 			return false;
 		
 		switch($type) {
+			case 'add':
 			case '+':
 				$this->amount = $this->amount + $amount;
 				$this->save();
+				return true;
 			break;
+			case 'substract':
 			case '-':
 				if($this->amount > $amount)
 				{
 					$this->amount = $this->amount - $amount;
 					$this->save();
+					return true;
 				}
 				else if($amount == $this->amount)
 				{
 					$this->delete();
+					return true;
 				}
 				else 
 					return false;

@@ -48,5 +48,18 @@ class Model_Item extends ORM {
 	public function in_circulation(){
 		return ($this->status == 'released');
 	}
+	
+	/**
+	 * Get the item's name based on an amount
+	 * 
+	 * @param integer $amount
+	 * @return string
+	 */
+	public function name($amount) {
+		if($amount > 1)
+			return $amount . Inflector::plural($this->name, $amount);
+		else
+			return $amount . $this->name;
+	}
 
 } // End Item Model
