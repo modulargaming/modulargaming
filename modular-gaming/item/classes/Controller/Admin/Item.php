@@ -294,7 +294,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 	
 		try {
 			$item = ORM::factory('Item_Type', $values['id']);
-			$item->values($values, array('name', 'status', 'action', 'default_command', 'img_dir', 'load_pet_list'));
+			$item->values($values, array('name', 'status', 'action', 'default_command', 'img_dir'));
 			$item->save();
 			
 			$data = array(
@@ -327,7 +327,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->view = null;
 		$values = $this->request->post();
 	
-		$item = ORM::factory('Item_type', $values['id']);
+		$item = ORM::factory('Item_Type', $values['id']);
 		$item->delete();
 	
 		$this->response->headers('Content-Type','application/json');
