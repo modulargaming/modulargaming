@@ -396,8 +396,8 @@ CREATE TABLE IF NOT EXISTS `user_pets` (
   `gender` enum('male','female') NOT NULL,
   `specie_id` int(6) NOT NULL,
   `colour_id` int(6) NOT NULL,
-  `hunger` int(10) NOT NULL,
-  `happiness` int(10) NOT NULL,
+  `hunger` int(3) NOT NULL DEFAULT 100,
+  `happiness` int(3) NOT NULL DEFAULT 100,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

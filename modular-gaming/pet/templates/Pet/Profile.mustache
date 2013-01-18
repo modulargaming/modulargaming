@@ -14,8 +14,14 @@
 				<li>Gender: {{gender}}</li>
 				<li>Specie: {{specie.name}}</li>
 				<li>Colour: {{colour.name}}</li>
-				<li>Hunger: {{hunger}}</li>
-				<li>Happiness: {{happiness}}</li>
+				<li>Hunger: 
+				<div class="progress progress-info progress-striped">
+    				<div class="bar" style="width: {{hunger}}%"></div>
+    				</div></li>
+				<li>Happiness: 
+				<div class="progress progress-info progress-striped">
+    				<div class="bar" style="width: {{happiness}}%"></div>
+    				</div></li>
 				<li>Created: {{created}}</li>
 			</ul>
 		</li>
