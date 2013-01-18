@@ -84,6 +84,52 @@ class Item {
 		return new Item($item);
 	}
 	
+	static public function list_commands() {
+		static $commands = null;
+		
+		if($commands == null)
+		{
+			// Include paths must be searched in reverse
+			$paths = array_reverse(Kohana::include_paths());
+			
+			$base = 'classes/Item/Command/';
+			
+			// Array of class names that have been found
+			$found = array();
+			
+			foreach ($paths as $dir)
+			{
+				if (is_dir($dir.$base))
+				{
+					$found = array_merge($found, self::_read_command_dir($dir.$base, true, $dir.$base));
+				}
+			}
+			
+			$commands = $found;
+		}
+		
+		return $commands;
+	}
+	
+	static protected function _read_command_dir($dir, $top_level = false, $replace) {
+		$found = array();
+		$handle = opendir($dir);
+			
+		while (false !== ($entry = readdir($handle))) {
+			if($entry == '.' || $entry == '..')
+				continue;
+			else if(is_dir($dir.$entry))
+				$found = array_merge($found, self::_read_command_dir($dir.$entry.'/', false, $replace));
+			else if(is_file($dir.$entry) && $top_level == false) {
+				$found[] = array('name' => str_replace('/', '_', str_replace('.php', '', str_replace($replace, '', $dir).$entry)));
+			}
+		}
+		
+		closedir($handle);
+		
+		return $found;
+	}
+	
 	static public function filter_type_dir($value){
 		return (substr($value, -1) != '/') ? $value.'/' : $value;
 	}

@@ -23,7 +23,7 @@
 					{{#types}}
 					<tr id="container-{{id}}">
 						<td data-prop="name">{{name}}</td>
-						<td><button class="btn btn-edit">Edit</button> <button class="btn btn-warning btn-delete">Delete</button></td>
+						<td><button class="btn btn-warning btn-edit">Edit</button> <button class="btn btn-danger btn-delete">Delete</button></td>
 						</tr>
 					{{/types}}
 					<tr id="crud-container-bottom">
@@ -49,7 +49,7 @@
 		<form class="form-horizontal" id="modal-crud-form">
 			<fieldset>
 				<input type="hidden" name="id" value="" id="input-id" />
-				<legend>General</legend>
+				
 				<div class="control-group">
 					<label class="control-label" for="input-name">Name</label>
 
@@ -74,28 +74,19 @@
 						<a href="#" id="modal-crud-error-img_dir" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
-				</fieldset>
-				<fieldset>
-				<legend>Commands</legend>
 				<div class="control-group">
 					<label class="control-label" for="input-default_command">Default command</label>
 
 					<div class="controls">
-						<input type="text" class="input-medium" id="input-default_command" name="default_command" value="" maxlength="100">
+						<select id="input-default_command" name="default_command">
+							{{#commands}}
+								<option value="{{value}}">{{name}}</option>
+							{{/commands}}
+						</select>
 						<a href="#" id="modal-crud-error-default_command" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
-				<div class="control-group">
-					<label class="control-label" for="input-load_pet_list">Load pet list?</label>
-
-					<div class="controls">
-						<select id="input-load_pet_list" name="load_pet_list" class="input-small">
-							<option value="0">No</option>
-							<option value="1">Yes</option>
-						</select>
-					</div>
-				</div>
-			</fieldset
+			</fieldset>
 		</form>
 	</div>
 	<div class="modal-footer">

@@ -26,7 +26,20 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->view->item_types = $types->as_array();
 		$this->view->items = $items;
 
-		$this->view->js_file = 'type';
+		$commands = Item::list_commands();
+		$input_c = array();
+		
+		foreach($commands as $cmd) {
+			$name = 'Item_Command_'.$cmd['name'];
+			$command = new $name;
+			
+			if($command->is_default() == false)
+			{
+				$input_c[] = $command->build_form();
+			}
+		}
+		
+		$this->view->input_commands = $input_c;
 	}
 	
 	public function action_types()
@@ -42,6 +55,24 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 	
 		$this->view = new View_Admin_Item_Type;
 		$this->view->types = $types->as_array();
+		
+		$commands = Item::list_commands();
+		$list_c = array();
+		
+		foreach($commands as $cmd) {
+			$name = 'Item_Command_'.$cmd['name'];
+			$command = new $name;
+			
+			if($command->is_default() == false)
+			{
+				$list_c[] = array(
+					'name' => str_replace('_', ' - ', $cmd['name']),
+					'value' => $cmd['name']		
+				);
+			}
+		}
+		$this->view->commands = $list_c;
+		
 	}
 	
 	public function action_recipes()

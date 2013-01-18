@@ -34,5 +34,4 @@ class View_Admin_Item_Index extends Abstract_View_Admin {
 		
 		return $list;
 	}
-
 }
