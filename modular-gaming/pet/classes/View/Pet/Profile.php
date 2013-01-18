@@ -15,6 +15,8 @@ class View_Pet_Profile extends Abstract_View {
 			'gender'  => $pet->gender,
 			'specie'    => $pet->specie,
 			'colour'  => $pet->colour,
+			'hunger'  => $pet->hunger,
+			'happiness'  => $pet->happiness,
 			'user'    => array(
 				'username' => $pet->user->username,
 				'id'   => $pet->user->id,
