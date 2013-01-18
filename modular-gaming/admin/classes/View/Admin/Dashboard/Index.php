@@ -2,6 +2,12 @@
 
 class View_Admin_Dashboard_Index extends Abstract_View_Admin {
 
-	public $title = 'Dashboard index';
+	public $title = 'Admin - Dashboard - Index';
+
+	public function feed()
+	{
+		$feed = $this->feed;
+	}
+
 
 }

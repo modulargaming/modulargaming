@@ -37,9 +37,6 @@
 [submodule "modules/email"]
 	path = modules/email
 	url = git://github.com/modulargaming/email.git
-[submodule "modules/pagination"]
-	path = modules/pagination
-	url = git://github.com/modulargaming/pagination.git
 [submodule "modules/cache"]
 	path = modules/cache
 	url = git://github.com/kohana/cache.git
