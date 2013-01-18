@@ -42,7 +42,8 @@
 		show : function(id, param) {
 			$('#modal-crud-form')[0].reset();
 			
-			//@todo add clean callback
+			// clean callback
+			$('#crud-container').trigger('crud.clean');
 			
 			$('.modal-options').addClass('hide');
 			
@@ -66,6 +67,7 @@
         			
         			//register option buttons
         			$('#crud-container').trigger('crud.options', [data.id, data]);
+        			$('#crud-container').trigger('crud.load', [data]);
         			
         			$('#option-delete').click(function(e){
         				e.preventDefault();
@@ -103,6 +105,8 @@
         			$('.bottom-right').notify({
         			    message: { text: $('#input-'+opts.identifier).val()+' has been saved successfully!' }
         			  }).show();
+        			
+        			$('#crud-container').trigger('crud.save', [values, data]);
         			
         			$('#modal-crud').modal('hide');
         			

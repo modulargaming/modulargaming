@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function() {
+	//page autocomplete search
 	$('#item_search').typeahead({
 	    source: function (query, process) {
 	        return $.get('./item/search', { type: 'item', item: query }, function (data) {
@@ -14,6 +15,40 @@ $(document).ready(function() {
 	    }
 	});
 	
+	//set up item command searches
+	$('.pet-color-search').typeahead({
+	    source: function (query, process) {
+	        return $.get('./item/search', { type: 'pet-color', item: query }, function (data) {
+	            return process(data);
+	        });
+	    }
+	});
+	
+	$('.pet-specie-search').typeahead({
+	    source: function (query, process) {
+	        return $.get('./item/search', { type: 'pet-specie', item: query }, function (data) {
+	            return process(data);
+	        });
+	    }
+	});
+	
+	$('.recipe-search').typeahead({
+	    source: function (query, process) {
+	        return $.get('./item/search', { type: 'recipe', item: query }, function (data) {
+	            return process(data);
+	        });
+	    }
+	});
+	
+	$('.item-search').typeahead({
+	    source: function (query, process) {
+	        return $.get('./item/search', { type: 'item', item: query }, function (data) {
+	            return process(data);
+	        });
+	    }
+	});
+	
+	//Define extra option buttons that show when editing an item
 	$('#crud-container').on('crud.options', function (e, id, data){
 		$('#modal-gift').on('hidden', function(){
 			$('#modal-crud').modal('show');
@@ -63,6 +98,7 @@ $(document).ready(function() {
 		});
 	});
 	
+	//Activate crud UI behaviour
 	$('#crud-container').mgForm({
 		retrieve: './item/retrieve/',
 		save: './item/save/',

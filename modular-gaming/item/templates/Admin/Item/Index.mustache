@@ -24,10 +24,10 @@
 					<tbody>
 					{{#items}}
 					<tr id="container-{{id}}">
-						<td><img src="{{base_url}}{{image}}" /></td>
+						<td><img src="{{base_url}}{{img}}" /></td>
 						<td data-prop="name">{{name}}</td>
 						<td data-prop="type_id">{{type}}</td>
-						<td><button class="btn btn-edit">Edit</button> <button class="btn btn-warning btn-delete">Delete</button></td>
+						<td><button class="btn btn-warning btn-edit">Edit</button> <button class="btn btn-danger btn-delete">Delete</button></td>
 						</tr>
 					{{/items}}
 					<tr id="crud-container-bottom">
@@ -181,6 +181,13 @@
 	</div>
 </div>
 
+<div class="hide" id="item-command-input-collection">
+<table>
+{{#input_commands}}
+{{> admin/item/commands}}
+{{/input_commands}}
+</table>
+</div>
 
 {{! Delete modal}}
 <div class="modal hide fade" id="modal-delete">
