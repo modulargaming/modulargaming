@@ -28,18 +28,25 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 		$commands = Item::list_commands();
 		$input_c = array();
+		$menu_c = array();
 		
 		foreach($commands as $cmd) {
-			$name = 'Item_Command_'.$cmd['name'];
-			$command = new $name;
+			$name = str_replace('/', '_', $cmd['name']);
+			$class = 'Item_Command_'.$name;
+			$command = new $class;
 			
 			if($command->is_default() == false)
 			{
-				$input_c[] = $command->build_form();
+				$input_c[] = $command->build_form($name);
+				$menu_c[] = array(
+					'name' => str_replace('_', ' ', $name),
+					'cmd' => $name		
+				);
 			}
 		}
 		
 		$this->view->input_commands = $input_c;
+		$this->view->menu_commands = $menu_c;
 	}
 	
 	public function action_types()
@@ -60,7 +67,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$list_c = array();
 		
 		foreach($commands as $cmd) {
-			$name = 'Item_Command_'.$cmd['name'];
+			$name = 'Item_Command_'.str_replace('/', '_', $cmd['name']);;
 			$command = new $name;
 			
 			if($command->is_default() == false)
@@ -105,7 +112,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				->where('item.name', 'LIKE', '%'.$item_name.'%')
 				->find_all();
 		}
-		else if($type == 'item_type') {
+		else if($type == 'item_type') 
+		{
 			$item_name = $this->request->query('item');
 			$property = 'name';
 			
@@ -113,7 +121,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				->where('name', 'LIKE', '%'.$item_name.'%')
 				->find_all();
 		}
-		else if($type == 'user') {
+		else if($type == 'user') 
+		{
 			$item_name = $this->request->query('username');
 			$property = 'username';
 			
@@ -121,12 +130,31 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				->where('username', 'LIKE', '%'.$item_name.'%')
 				->find_all();
 		}
-		else if($type == 'recipe') {
+		else if($type == 'recipe') 
+		{
 			$item_name = $this->request->query('name');
 			$property = 'name';
 				
 			$items = ORM::factory('Item_Recipe')
 			->where('item_recipe.name', 'LIKE', '%'.$item_name.'%')
+			->find_all();
+		}
+		else if($type == 'pet-specie') 
+		{
+			$item_name = $this->request->query('name');
+			$property = 'name';
+		
+			$items = ORM::factory('Pet_Specie')
+			->where('name', 'LIKE', '%'.$item_name.'%')
+			->find_all();
+		}
+		else if($type == 'pet-color') 
+		{
+			$item_name = $this->request->query('name');
+			$property = 'name';
+		
+			$items = ORM::factory('Pet_Colour')
+			->where('name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
 		
@@ -161,7 +189,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			'description' => $item->description,
 			'unique' => $item->unique,
 			'transferable' => $item->transferable,
-			'type_id' => $item->type_id		
+			'type_id' => $item->type_id,
+			'commands' => json_decode($item->commands)		
 		);
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
@@ -177,8 +206,17 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->response->headers('Content-Type','application/json');
 		
 		try {
+			$cmd = $values['commands'];
+			$commands = array();
+			
+			foreach($cmd as $k => $c) {
+				$commands[] = array('name' => $k, 'param' => $c);
+			}
+			
+			$values['commands'] = json_encode($commands);
+			
 			$item = ORM::factory('Item', $values['id']);
-			$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id'));
+			$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id', 'commands'));
 			$item->save();
 			
 			$data = array(

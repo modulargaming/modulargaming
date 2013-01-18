@@ -97,6 +97,8 @@
             });
         },
         save : function() { 
+        	$('#crud-container').trigger('crud.preSave');
+        	
         	var values = $('#modal-crud-form').serialize();
         	var id = $('#input-id').val();
         	

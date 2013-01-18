@@ -1,6 +1,6 @@
-<tr id="command-{{name}}">
-	<td>{{title}}</td>
-	<td>
+<tr>
+	<td class="span3">{{title}}</td>
+	<td class="span4">
 	{{#fields}}
 		{{#input}}
 			<input type="text" name="{{name}}" class="{{class}}" />
@@ -8,6 +8,6 @@
 	{{/fields}}
 	</td>
 	<td class="span1">
-		<a href="#" class="btn btn-mini btn-danger">x</a>
+		<a href="#" class="btn btn-mini btn-danger pull-right btn-cmd-close">x</a>
 	</td>
 </tr>

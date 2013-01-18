@@ -127,6 +127,7 @@
 
 									<div class="controls">
 										<select name="type_id" id="input-type_id" class="input-small">
+										<option>Select</option>
 										{{#item_types}}
 										<option value="{{id}}">{{name}}</option>
 										{{/item_types}}
@@ -136,8 +137,24 @@
 				<div class="control-group">
 									<label class="control-label">Commands</label>
 
-									<div class="controls" id="Commands">
-										
+									<div class="controls span8" id="Commands">
+									<table class="table table-condensed">
+									<thead>
+									<tr>
+									<td colspan="3" class="dropup">
+									<a href="#" class="btn btn-mini btn-success pull-right dropdown-toggle" data-toggle="dropdown" id="modal-crud-cmd-add">+</a>
+									<ul class="dropdown-menu pull-right" role="menu" id="modal-crud-cmd-options">
+									{{#menu_commands}}
+									<li><a href="#" data-command="{{cmd}}">{{name}}</a></li>
+									{{/menu_commands}}
+									</ul>
+									</td>
+									</tr>
+									</thead>
+									<tbody id="modal-crud-commands">
+							
+									</tdbody>
+									</table>
 									</div>
 								</div>
 			</fieldset
@@ -204,3 +221,11 @@
 	</div>
 </div>
 <div class='notifications bottom-right'></div>
+
+<script type="text/javascript">
+var cmd_map = {
+	{{#item_types}}
+	{{id}} : '{{command}}',
+	{{/item_types}}
+};
+</script>

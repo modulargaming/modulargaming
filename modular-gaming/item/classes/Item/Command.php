@@ -5,7 +5,7 @@ abstract class Item_Command {
 	public $default = false;
 	public $load_pets = false;
 	
-	abstract public function build_form();
+	abstract public function build_form($name);
 	abstract public function validate($param);
 	abstract public function perform($item, $data);
 	
