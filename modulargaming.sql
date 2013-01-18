@@ -437,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `status` enum('draft','released','retired') NOT NULL DEFAULT 'draft',
   `unique` tinyint(1) NOT NULL,
   `transferable` tinyint(1) NOT NULL,
-  `command` text NOT NULL,
+  `commands` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -447,7 +447,6 @@ CREATE TABLE IF NOT EXISTS `item_types` (
   `action` varchar(200) NOT NULL,
   `default_command` varchar(100) NOT NULL,
   `img_dir` varchar(50) NOT NULL,
-  `load_pet_list` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
