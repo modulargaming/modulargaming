@@ -1,7 +1,13 @@
+News Feed:<br /><br />
+
 {{^feed}}
 No feed.
 {{/feed}}
 
 {{#feed}}
-{{title}}
+<p>
+<a href="{{link}}">{{title}}</a><br /><br />
+{{description}}<br /><br />
+Created: {{pubDate}}
+</p>
 {{/feed}}

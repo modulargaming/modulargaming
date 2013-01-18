@@ -7,6 +7,7 @@ class View_Admin_Dashboard_Index extends Abstract_View_Admin {
 	public function feed()
 	{
 		$feed = $this->feed;
+		return $feed;
 	}
 
 
