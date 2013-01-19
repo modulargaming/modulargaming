@@ -5,7 +5,7 @@ class Controller_Message_View extends Controller_Abstract_Message {
 
 
         /**
-         * View users profile
+         * View message
          */
         public function action_index()
         {
