@@ -12,6 +12,7 @@ You have {{total_messages}} messages.
 		<tr>
 			<th>Subject</th>
 			<th>Sender</th>
+			<th>Time</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -19,6 +20,7 @@ You have {{total_messages}} messages.
 			<tr>
 				<td><a href="{{href}}">{{subject}}</a></td>
 				<td><a href="{{sender.href}}">{{sender.username}}</a></td>
+				<td>{{created}}</td>
 			</tr>
 		{{/messages}}
 	</tbody>

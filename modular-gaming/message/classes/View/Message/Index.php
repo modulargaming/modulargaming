@@ -11,6 +11,7 @@ class View_Message_Index extends Abstract_View
 		foreach ($this->messages as $message)
 		{
 			$messages[] = array(
+				'created' => Date::format($message->created),
 				'subject' => $message->subject,
 				'content' => $message->content,
 				'sender' => $message->sender,
