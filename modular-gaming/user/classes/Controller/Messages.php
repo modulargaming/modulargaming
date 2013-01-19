@@ -12,6 +12,7 @@ class Controller_Messages extends Abstract_Controller_Frontend {
 		// TODO: Add pagination
 		$messages = ORM::factory('Message')
 			->where('receiver_id', '=', $this->user->id)
+			->order_by('created', 'DESC')
 			->find_all();
 
 		$this->view->messages = $messages;
