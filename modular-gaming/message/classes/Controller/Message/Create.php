@@ -5,6 +5,8 @@ class Controller_Message_Create extends Controller_Message {
 
 	public function action_index()
 	{
+		$id = $this->request->param('id');
+
 		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try
@@ -32,6 +34,7 @@ class Controller_Message_Create extends Controller_Message {
 		}
 
 		$this->view = new View_Message_Create;
+		$this->view->id = $id;
 	}
 
 }

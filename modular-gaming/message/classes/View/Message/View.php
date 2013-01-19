@@ -31,6 +31,16 @@ class View_Message_View extends Abstract_View {
                 return $message;
         }
 
+	public function links()
+	{
+		return array(
+			'reply' => Route::url('message.create', array(
+				'action' => 'index',
+				'id'     => $this->message->sender->id
+			)),
+		);
+	}
+
 
 }
 
