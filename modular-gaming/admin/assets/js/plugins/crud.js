@@ -48,9 +48,11 @@
 			$('.modal-options').addClass('hide');
 			
 			//reset errors
-        	$('#modal-crud-form :input[type!=button]').each(function(){
-        		$('#form-error-'+$(this).attr('name')).addClass('hide').attr('title', '');
+        	$('#modal-crud-form .btn-mini').each(function(){
+        		$(this).addClass('hide').attr('title', '');
         	});
+        	
+        	methods.bindSave.call(this);
         	
         	//if no id is specified we're creating
         	if(id == 0 && typeof param === 'undefined') {
@@ -88,15 +90,6 @@
         			$('#modal-crud').modal();
         		});
         	}
-        	
-        	methods.bindSave.call(this);
-        },
-        bindSave: function () {
-        	//bind the save button
-            $('#modal-crud-save').one('click', function(e){
-            	e.preventDefault();
-            	methods.save.apply(this);
-            });
         },
         save : function() { 
         	$('#crud-container').trigger('crud.preSave');
@@ -133,8 +126,10 @@
         			else {
         				//we're dealing with a new table row
         				var max_results = $('#crud-container').data('pagination');
+        				var rows = $('#crud-container > tbody > tr').length;
         				
-        				if(max_results.length == 0 || max_results > ($('#crud-container > tbody > tr').length - 1)) {
+        				if(max_results.length == 0 || (rows != 1 && max_results > (rows - 1))) {
+        					
         					var tpl = $('#crud-container > tbody > tr:first').clone();
         					tpl.attr('id', 'container-'+data.row.id);
         					
@@ -148,10 +143,20 @@
         					});
         					
         					tpl.insertBefore('#crud-container-bottom');
+        					
+        					//bind the delete and edit buttons
+        					methods.bindTblEdit.call(this, tpl.find('.btn-edit'), data.row.id);
+        					methods.bindTblDelete.call(this, tpl.find('.btn-delete'));
+        				}
+        				else if(rows == 1) {
+        					alert('This is your first time adding a row, reload your page please.');
         				}
         			}
         		}
         		else {
+        			//rebind the save button
+        			methods.bindSave.call(this);
+        			
         			//mark the errors on the form
         			$.each(data.errors, function(key, val){
         				var e = $('#modal-crud-error-'+val.field);
@@ -159,8 +164,6 @@
         				e.attr('title', val.msg.join('<br />'));
         			});
         			$('[rel=tooltip]').tooltip();
-        			
-        			methods.bindSave.call(this);
         		}
         	});
         },
@@ -187,6 +190,11 @@
             		//remove the item from the interface
             		if($('#container-'+id).length != 0)
             			$('#container-'+id).addClass('warning');
+            			//disable all links
+            			$('#container-'+id+' td:last').find('button').each(function(){
+            				console.log('disable');
+            				$(this).addClass('disabled');
+            			});
             		}
             		else {
             			//error deleting
@@ -199,6 +207,28 @@
             	}
             );
         },
+        bindSave: function () {
+        	$('#modal-crud-save').unbind('click');
+        	//bind the save button
+            $('#modal-crud-save').one('click', function(e){
+            	e.preventDefault();
+            	methods.save.apply(this);
+            });
+        },
+        bindTblEdit: function(element, id){
+			element.click(function(e){
+				e.preventDefault();
+        		methods.show.apply(form, [id, {id: id}]);
+			});
+		},
+		bindTblDelete: function(element){
+			$(element).click(function(e){
+				e.preventDefault();
+				var id = element.parents('tr').attr('id').replace('container-', '');
+        		var name = element.parents('tr').find('td[data-prop="'+opts.identifier+'"]').text();
+        		methods.showDelete.apply(form, [id, name]);
+			});
+		},
 	};
 
 	$.fn.mgForm = function( method ) {

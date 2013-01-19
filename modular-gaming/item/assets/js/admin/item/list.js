@@ -58,6 +58,9 @@ $(document).ready(function() {
 	$('#crud-container').on('crud.clean', function (e){
 		$('#modal-crud-commands tr').remove();
 		
+		//reset tabs
+		$('#modal-crud-tab a:first').tab('show');
+		
 		//Add command to list
 		$('.modal-crud-cmd-options').click(function(e){
 			e.preventDefault();

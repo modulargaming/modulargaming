@@ -25,11 +25,18 @@ class View_Admin_Item_Index extends Abstract_View_Admin {
 		$list = array();
 		
 		foreach($this->items as $item) {
+			$status = false;
+			if($item->status != 'released')
+			{
+				$status = array('name' => $item->status);
+			}
+			
 			$list[] = array(
 				'id' => $item->id,
 				'img' => $item->img(),
 				'name' => $item->name,
-				'type' => $item->type->name
+				'type' => $item->type->name,
+				'status' => $status
 			);
 		}
 		

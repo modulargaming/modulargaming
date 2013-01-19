@@ -28,7 +28,10 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 		$commands = Item::list_commands();
 		$input_c = array();
-		$menu_c = array();
+		$menu_c = array(
+			array('name' => 'General', 'commands' => array()),
+			array('name' => 'Pet', 'commands' => array()),
+		);
 		
 		foreach($commands as $cmd) {
 			$name = str_replace('/', '_', $cmd['name']);
@@ -37,9 +40,11 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			
 			if($command->is_default() == false)
 			{
+				$struct = explode('_', $name);
 				$input_c[] = $command->build_form($name);
-				$menu_c[] = array(
-					'name' => str_replace('_', ' ', $name),
+				$loc = (in_array($struct[0], array('General', 'User'))) ? 0 : 1;
+				$menu_c[$loc]['commands'][] = array(
+					'name' => $struct[1],
 					'cmd' => $name		
 				);
 			}

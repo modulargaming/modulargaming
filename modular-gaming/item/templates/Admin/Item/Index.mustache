@@ -25,7 +25,7 @@
 					{{#items}}
 					<tr id="container-{{id}}">
 						<td><img src="{{base_url}}{{img}}" /></td>
-						<td data-prop="name">{{name}}</td>
+						<td data-prop="name">{{name}} {{#status}}<span class="pull-right label label-info">{{name}}</span>{{/status}}</td>
 						<td data-prop="type_id">{{type}}</td>
 						<td><button class="btn btn-warning btn-edit">Edit</button> <button class="btn btn-danger btn-delete">Delete</button></td>
 						</tr>
@@ -67,7 +67,7 @@
 			  <li><a href="#crud-tab-settings">Settings</a></li>
 			</ul>
 			<form class="form-horizontal" id="modal-crud-form">
-			<div class="tab-content" style="height: 265px;">
+			<div class="tab-content" style="height: 280px;">
 			
 	 			<div class="tab-pane active" id="crud-tab-general">
 				
