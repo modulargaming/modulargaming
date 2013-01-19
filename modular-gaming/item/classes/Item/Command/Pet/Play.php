@@ -20,16 +20,16 @@ class Item_Command_Pet_Play extends Item_Command_Pet {
 	public function perform($item, $data) {
 		$pet = $data['pet'];
 		
-		if($pet->mood == 100)
+		if($pet->happiness == 100)
 			return $pet->name.' is already too happy';
 		else
 		{
-			$level = $pet->mood + $data['param'];
+			$level = $pet->happiness + $data['param'];
 			
 			if($level > 100)
-				$pet->mood = 100;
+				$pet->happiness = 100;
 			else 
-				$pet->mood = $level;
+				$pet->happiness = $level;
 			
 			$pet->save();
 			
