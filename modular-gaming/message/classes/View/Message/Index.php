@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Messages_Index extends Abstract_View
+class View_Message_Index extends Abstract_View
 {
 	public $title = 'Messages';
 
@@ -15,6 +15,15 @@ class View_Messages_Index extends Abstract_View
 				'content' => $message->content,
 				'sender' => $message->sender,
 				'id'	=> $message->id,
+				'href'    => Route::url('message.view', array('id' => $message->id)),
+
+				'sender' => array(
+					'id' => $message->sender->id,
+					'username'  => $message->sender->username,
+					'href'      => Route::url('user.view', array(
+						'id'     => $message->sender->id,
+					)),
+				),
 			);
 		}
 

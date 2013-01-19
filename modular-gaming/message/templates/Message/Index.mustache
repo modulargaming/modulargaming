@@ -17,8 +17,8 @@ You have {{total_messages}} messages.
 	<tbody>
 		{{#messages}}
 			<tr>
-				<td><a href="{{base_url}}messages/view/{{id}}">{{subject}}</a></td>
-				<td><a href="{{base_url}}user/view/{{sender.id}}">{{sender.username}}</a></td>
+				<td><a href="{{href}}">{{subject}}</a></td>
+				<td><a href="{{sender.href}}">{{sender.username}}</a></td>
 			</tr>
 		{{/messages}}
 	</tbody>
