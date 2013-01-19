@@ -17,7 +17,7 @@
           //bind events to create buttons
            	$('.btn-create').click(function(e){
            		e.preventDefault();
-           		methods.show.apply(form, [0, {}]);
+           		methods.show.apply(form, [0]);
             });
            	
            	$(this).bind('crud.FormOpen', {f: form}, function(e, param){
@@ -53,7 +53,7 @@
         	});
         	
         	//if no id is specified we're creating
-        	if(id == 0 || typeof param === 'undefined') {
+        	if(id == 0 && typeof param === 'undefined') {
         		$('h3#modal-header').html('Creating');
         		$('#input-id').val('0');
         		$('#modal-crud').modal();
@@ -72,12 +72,12 @@
         			$('#option-delete').click(function(e){
         				e.preventDefault();
         				$('#modal-crud').modal('hide');
-        				$('#modal-delete-keep').click(function(e){
+        				$('#modal-delete-keep').one('click', function(e){
         					e.preventDefault();
         					$('#modal-delete').modal('hide');
         					$('#modal-crud').modal('show');
         				});
-        				methods.showDelete.call(form, [data.id, data[opts.identifier]]);
+        				methods.showDelete.call(form, data.id, data[opts.identifier]);
         			});
         			//set the field values
         			$.each(data, function(key,val){
@@ -89,11 +89,13 @@
         		});
         	}
         	
-        	var form = this;
+        	methods.bindSave.call(this);
+        },
+        bindSave: function () {
         	//bind the save button
             $('#modal-crud-save').one('click', function(e){
             	e.preventDefault();
-            	methods.save.apply(form);
+            	methods.save.apply(this);
             });
         },
         save : function() { 
@@ -157,6 +159,8 @@
         				e.attr('title', val.msg.join('<br />'));
         			});
         			$('[rel=tooltip]').tooltip();
+        			
+        			methods.bindSave.call(this);
         		}
         	});
         },
