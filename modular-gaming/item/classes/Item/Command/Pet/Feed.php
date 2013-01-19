@@ -18,6 +18,22 @@ class Item_Command_Pet_Feed extends Item_Command_Pet {
 	}
 	
 	public function perform($item, $data) {
-		return null;
+		$pet = $data['pet'];
+		
+		if($pet->hunger == 100)
+			return $pet->name.' is already full';
+		else
+		{
+			$level = $pet->hunger + $data['param'];
+			
+			if($level > 100)
+				$pet->hunger = 100;
+			else 
+				$pet->hunger = $level;
+			
+			$pet->save();
+			
+			return $pet->name.' has been fed '. $item->name;
+		}
 	}
 }
