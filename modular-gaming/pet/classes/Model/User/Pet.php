@@ -29,7 +29,8 @@ class Model_User_Pet extends ORM {
 
 	public static function pet_limit($user_id)
 	{
-		return ORM::factory('User_Pet')->where('user_id', '=', $user_id)->count_all() < 6;
+		$limit = Kohana::$config->load('pet.limit');
+		return ORM::factory('User_Pet')->where('user_id', '=', $user_id)->count_all() < $limit;
 	}
 
 	public function rules()
