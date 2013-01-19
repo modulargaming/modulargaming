@@ -27,7 +27,8 @@ class Controller_User_Register extends Controller_User {
 					$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
 
 					// Send the welcome email.
-					$view = new View_Email_Welcome;
+					$view = new View_Email_User_Welcome;
+					$view->user = $user;
 					Email::factory($view)
 						->to($user->email)
 						->send();
