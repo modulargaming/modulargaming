@@ -18,7 +18,7 @@ class Controller_Message_View extends Controller_Abstract_Message {
                         throw HTTP_Exception::Factory('404', 'No such message');
                 }
 
-		if ($message->receiver_id != $this->user->id)
+		if ( ! $this->user->can('Message_View_Index', array('message' => $message)))
 		{
 			throw HTTP_Exception::Factory('403', 'Message does not belong to you');
 		}
