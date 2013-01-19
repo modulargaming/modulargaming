@@ -69,7 +69,7 @@ class Controller_Messages extends Abstract_Controller_Frontend {
 		}
 
                 $this->view = new View_Messages_View;
-                $this->view->message = $message->as_array();
+                $this->view->message = $message;
         }
 
 
