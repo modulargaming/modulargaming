@@ -61,103 +61,118 @@
 		<h3 id="modal-header"></h3>
 	</div>
 	<div class="modal-body">
-
-		<form class="form-horizontal" id="modal-crud-form">
-			<fieldset>
-				<input type="hidden" name="id" value="" id="input-id" />
-				<div class="control-group">
-					<label class="control-label" for="input-status">Status</label>
-
-					<div class="controls">
-						<select name="status" id="input-status" class="input-small">
-							<option value="draft">Draft</option>
-							<option value="released">Released</option>
-							<option value="retired">Retired</option>
-						</select>
+		
+			<ul class="nav nav-tabs" id="modal-crud-tab">
+			  <li class="active"><a href="#crud-tab-general">General</a></li>
+			  <li><a href="#crud-tab-settings">Settings</a></li>
+			</ul>
+			<form class="form-horizontal" id="modal-crud-form">
+			<div class="tab-content" style="height: 265px;">
+			
+	 			<div class="tab-pane active" id="crud-tab-general">
+				
+					<input type="hidden" name="id" value="" id="input-id" />
+					
+					<div class="control-group">
+						<label class="control-label" for="input-name">Name</label>
+	
+						<div class="controls">
+							<input type="text" class="input-medium" id="input-name" name="name" value="" maxlength="50">
+							<a href="#" id="modal-crud-error-name" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="input-description">Description</label>
+	
+						<div class="controls">
+							<textarea class="input-large" id="input-description" name="description" rows="2"></textarea>
+							<a href="#" id="modal-crud-error-description" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="input-image">Image name</label>
+	
+						<div class="controls">
+							<input type="text" class="input-medium" id="input-image" name="image" value="" maxlength="200">
+							<a href="#" id="modal-crud-error-image" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="input-unique">Unique?</label>
+	
+						<div class="controls">
+							<select id="input-unique" name="unique" class="input-small">
+								<option value="0">No</option>
+								<option value="1">Yes</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="input-transferable">Transferable?</label>
+	
+						<div class="controls">
+							<select id="input-transferable" name="transferable" class="input-small">
+								<option value="1">Yes</option>
+								<option value="0">No</option>
+							</select>
+						</div>
 					</div>
 				</div>
-				<div class="control-group">
-					<label class="control-label" for="input-name">Name</label>
-
-					<div class="controls">
-						<input type="text" class="input-medium" id="input-name" name="name" value="" maxlength="50">
-						<a href="#" id="modal-crud-error-name" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+				<div class="tab-pane" id="crud-tab-settings">
+					<div class="control-group">
+						<label class="control-label" for="input-status">Status</label>
+	
+						<div class="controls">
+							<select name="status" id="input-status" class="input-small">
+								<option value="draft">Draft</option>
+								<option value="released">Released</option>
+								<option value="retired">Retired</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="input-description">Description</label>
-
-					<div class="controls">
-						<textarea class="input-large" id="input-description" name="description" rows="2"></textarea>
-						<a href="#" id="modal-crud-error-description" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+					<div class="control-group">
+						<label class="control-label" for="input-type_id">Type</label>
+	
+						<div class="controls">
+							<select name="type_id" id="input-type_id" class="input-small">
+								<option>Select</option>
+								{{#item_types}}
+									<option value="{{id}}">{{name}}</option>
+								{{/item_types}}
+							</select>
+						</div>
 					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="input-image">Image name</label>
-
-					<div class="controls">
-						<input type="text" class="input-medium" id="input-image" name="image" value="" maxlength="200">
-						<a href="#" id="modal-crud-error-image" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="input-unique">Unique?</label>
-
-					<div class="controls">
-						<select id="input-unique" name="unique" class="input-small">
-							<option value="0">No</option>
-							<option value="1">Yes</option>
-						</select>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="input-transferable">Transferable?</label>
-
-					<div class="controls">
-						<select id="input-transferable" name="transferable" class="input-small">
-							<option value="1">Yes</option>
-							<option value="0">No</option>
-						</select>
-					</div>
-				</div>
-			</fieldset>
-			<fieldset>
-				<div class="control-group">
-									<label class="control-label" for="input-type_id">Type</label>
-
-									<div class="controls">
-										<select name="type_id" id="input-type_id" class="input-small">
-										<option>Select</option>
-										{{#item_types}}
-										<option value="{{id}}">{{name}}</option>
-										{{/item_types}}
-										</select>
-									</div>
-								</div>
-				<div class="control-group">
-									<label class="control-label">Commands</label>
-
-									<div class="controls span8" id="Commands">
-									<table class="table table-condensed">
-									<thead>
-									<tr>
-									<td colspan="3" class="dropup">
-									<a href="#" class="btn btn-mini btn-success pull-right dropdown-toggle" data-toggle="dropdown" id="modal-crud-cmd-add">+</a>
-									<ul class="dropdown-menu pull-right" role="menu" id="modal-crud-cmd-options">
-									{{#menu_commands}}
-									<li><a href="#" data-command="{{cmd}}">{{name}}</a></li>
-									{{/menu_commands}}
-									</ul>
-									</td>
-									</tr>
-									</thead>
-									<tbody id="modal-crud-commands">
+					<div class="control-group">
+						<label class="control-label">
+						<div class="btn-group">
+							<a href="#" class="btn btn-link dropdown-toggle" data-toggle="dropdown" id="modal-crud-cmd-add">Commands <span class="caret"></span></a>
 							
-									</tdbody>
-									</table>
-									</div>
-								</div>
-			</fieldset
+							<ul class="dropdown-menu" role="menu">
+								{{#menu_commands}}
+								<li class="dropdown-submenu">
+									<a tabindex="-1" href="#">{{name}}</a>
+									<ul class="dropdown-menu">
+										{{#commands}}
+											<li><a href="#" class="modal-crud-cmd-options" data-command="{{cmd}}">{{name}}</a></li>
+										{{/commands}}
+									</ul>
+								</li>
+								{{/menu_commands}}
+							</ul>
+						</div>
+						</label>
+	
+						<div class="controls span8" id="Commands">
+							<table class="table table-condensed">
+								<tbody id="modal-crud-commands">
+								
+								</tdbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+			</div>
 		</form>
 	</div>
 	<div class="modal-footer">

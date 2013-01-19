@@ -15,6 +15,11 @@ $(document).ready(function() {
 	    }
 	});
 	
+	$('#modal-crud-tab a').click(function (e) {
+		e.preventDefault();
+		$(this).tab('show');
+	});
+	
 	//set up item command searches
 	//find a way to bind these to the elements, currently does not work.
 	$('.pet-color-search').typeahead({
@@ -54,7 +59,7 @@ $(document).ready(function() {
 		$('#modal-crud-commands tr').remove();
 		
 		//Add command to list
-		$('#modal-crud-cmd-options > li > a').click(function(e){
+		$('.modal-crud-cmd-options').click(function(e){
 			e.preventDefault();
 			var cmd = $(this).data('command');
 			if($('#modal-crud-commands').find('[name="'+cmd+'"]').length == 0) {
