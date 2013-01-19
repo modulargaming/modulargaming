@@ -14,6 +14,13 @@ Route::set('message.view', 'message/view(/<id>)', array('id' => '[0-9]+'))
     'controller' => 'view',	  	
     'action'     => 'index',	  	
   ));
+
+Route::set('message.create', 'message/create(/<id>)', array('id' => '[0-9]+'))
+  ->defaults(array(  	
+    'directory'  => 'message',	  	
+    'controller' => 'create',	  	
+    'action'     => 'index',	  	
+  ));
   	
 Route::set('message', 'message(/<controller>(/<action>(/<id>)))')
   ->defaults(array(

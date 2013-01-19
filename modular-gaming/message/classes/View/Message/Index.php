@@ -35,5 +35,14 @@ class View_Message_Index extends Abstract_View
 		return count($this->messages);
 	}
 
+	public function links()
+	{
+		return array(
+			'create' => Route::url('message.create', array(
+				'action' => 'create',
+			)),
+		);
+	}
+
 
 }
