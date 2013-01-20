@@ -96,7 +96,7 @@ $(document).ready(function() {
 				
 				//bind autocomplete search if needed
 				if(cmd_definitions[cmd].search != 0) {
-					input.find('.search').typeahead({
+					tpl.find('.search').typeahead({
 					    source: function (query, process) {
 					        return $.get('./item/search', { type: cmd_definitions[cmd].search, item: query }, function (data) {
 					            return process(data);
