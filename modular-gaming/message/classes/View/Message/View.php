@@ -13,7 +13,7 @@ class View_Message_View extends Abstract_View {
         {
 		$message[] = array(
 				'id' => $this->message->id,
-				'title' => $this->message->subject,
+				'subject' => $this->message->subject,
 				'content' => $this->message->content, // Escaped properly at create now
 				'created' =>  Date::format($this->message->created),
 				'sender' => array(

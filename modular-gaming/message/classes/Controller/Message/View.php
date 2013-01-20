@@ -23,7 +23,9 @@ class Controller_Message_View extends Abstract_Controller_Message {
 			throw HTTP_Exception::Factory('403', 'Message does not belong to you');
 		}
 
-                $this->view = new View_Message_View;
+		Breadcrumb::add($message->subject, Route::url('message.view', array('id' => $message->id)));
+                
+		$this->view = new View_Message_View;
                 $this->view->message = $message;
         }
 
