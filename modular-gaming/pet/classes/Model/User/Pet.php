@@ -30,26 +30,15 @@ class Model_User_Pet extends ORM {
 	public static function pet_limit($user_id)
 	{
 		$limit = Kohana::$config->load('pet.limit');
-		$pet_count = DB::select(array(DB::expr('COUNT(*)'), $limit))
+		$pet_count = DB::select(array(DB::expr('COUNT(*)'), 'total'))
 		->from('user_pets')
 		->where('user_id', '=', $user_id)
 		->execute()
-		->get($limit);
+		->get('total');
 		if ($user_id !=0)
-		{
-			if ($pet_count < 6)
-			{
-			return TRUE;
-			}
-			if ($pet_count >=6)
-			{
-			return FALSE;
-			}
-		}
+			return ($pet_count < $limit);
 		else
-		{
-		return TRUE;
-		}
+			return TRUE;
 	}
 
 	public function rules()
