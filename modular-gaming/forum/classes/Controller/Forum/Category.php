@@ -9,7 +9,7 @@
  * @copyright  (c) 2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Controller_Forum_Category extends Controller_Abstract_Forum {
+class Controller_Forum_Category extends Abstract_Controller_Forum {
 
 	protected $category;
 

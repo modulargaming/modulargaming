@@ -8,7 +8,7 @@
  * @copyright  (c) 2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Controller_Abstract_Forum extends Abstract_Controller_Frontend {
+class Abstract_Controller_Forum extends Abstract_Controller_Frontend {
 
 	protected $protected = TRUE;
 

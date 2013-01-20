@@ -9,7 +9,7 @@
  * @copyright  (c) 2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Controller_Forum_Index extends Controller_Abstract_Forum {
+class Controller_Forum_Index extends Abstract_Controller_Forum {
 
 	public function action_index()
 	{
