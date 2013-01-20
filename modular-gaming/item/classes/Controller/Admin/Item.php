@@ -32,6 +32,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			array('name' => 'General', 'commands' => array()),
 			array('name' => 'Pet', 'commands' => array()),
 		);
+		$def_c = array();
 		
 		foreach($commands as $cmd) {
 			$name = str_replace('/', '_', $cmd['name']);
@@ -41,7 +42,14 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			if($command->is_default() == false)
 			{
 				$struct = explode('_', $name);
-				$input_c[] = $command->build_form($name);
+				$admin = $command->build_admin($name);
+				$input_c[] = array('title' => $admin['title'], 'fields' => $admin['fields']);
+				$def_c[] = array(
+					'name' => $name,
+					'multiple' => $admin['multiple'],
+					'pets' => $admin['pets'],
+					'search' => $admin['search']
+				);
 				$loc = (in_array($struct[0], array('General', 'User'))) ? 0 : 1;
 				$menu_c[$loc]['commands'][] = array(
 					'name' => $struct[1],
@@ -52,6 +60,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		
 		$this->view->input_commands = $input_c;
 		$this->view->menu_commands = $menu_c;
+		$this->view->command_definitions = $def_c;
 	}
 	
 	public function action_types()
@@ -282,7 +291,6 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				'action' => $item->action,
 				'default_command' => $item->default_command,
 				'img_dir' => $item->img_dir,
-				'load_pet_list' => $item->load_pet_list,
 		);
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));

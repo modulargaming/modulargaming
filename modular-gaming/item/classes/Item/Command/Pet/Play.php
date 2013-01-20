@@ -1,6 +1,6 @@
 <?php
 class Item_Command_Pet_Play extends Item_Command_Pet {
-	public function build_form($name){
+	protected function _build($name){
 		return array(
 			'title' => 'Pet mood', 
 			'fields' => array(

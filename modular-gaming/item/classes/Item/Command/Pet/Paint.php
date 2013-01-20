@@ -1,12 +1,13 @@
 <?php
 class Item_Command_Pet_Paint extends Item_Command_Pet {
-	public function build_form($name){
+	protected function _build($name){
 		return array(
 			'title' => 'Pet color', 
+			'search' => 'pet-color',
 			'fields' => array(
 				array(
 					'input' => array(
-						'name' => $name, 'class' => 'input-small pet-color-search'
+						'name' => $name, 'class' => 'input-small search'
 					)
 				)
 			)	

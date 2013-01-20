@@ -1,12 +1,13 @@
 <?php
 class Item_Command_General_Cook extends Item_Command {
-	public function build_form($name){
+	protected function _build($name){
 		return array(
 			'title' => 'Recipe', 
+			'search' => 'recipe',
 			'fields' => array(
 				array(
 					'input' => array(
-						'name' => $name, 'class' => 'input-small recipe-search'
+						'name' => $name, 'class' => 'input-small search'
 					)
 				)
 			)	
