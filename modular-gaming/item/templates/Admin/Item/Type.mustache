@@ -43,6 +43,16 @@
 	<div class="modal-header"> 
 		<button class="close" data-dismiss="modal">x</button>
 		<a href="#" class="modal-options btn btn-danger pull-right" id="option-delete" style="margin-right: 15px;">Delete</a>
+		<div class="btn-group pull-right hide" id="modal-crud-errors" style="margin-right: 15px;">
+		  <a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+		    <i class="icon-exclamation-sign icon-white"> </i> Errors
+		    <span class="caret"></span>
+		  </a>
+		  <ul class="dropdown-menu" id="modal-crud-error-list">
+		    <!-- error messages -->
+		  </ul>
+		</div>
+		
 		<h3 id="modal-header"></h3>
 	</div>
 	<div class="modal-body">
@@ -55,7 +65,6 @@
 
 					<div class="controls">
 						<input type="text" class="input-medium" id="input-name" name="name" value="" maxlength="50 /">
-						<a href="#" id="modal-crud-error-name" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
 				<div class="control-group">
@@ -63,7 +72,7 @@
 
 					<div class="controls">
 						<input type="text" class="input-medium" id="input-action" name="action" value="" maxlength="200">
-						<a href="#" id="modal-crud-error-action" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
+						
 					</div>
 				</div>
 				<div class="control-group">
@@ -71,7 +80,6 @@
 
 					<div class="controls">
 						<input type="text" class="input-medium" id="input-img_dir" name="img_dir" value="" maxlength="200">
-						<a href="#" id="modal-crud-error-img_dir" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
 				<div class="control-group">
@@ -83,7 +91,6 @@
 								<option value="{{value}}">{{name}}</option>
 							{{/commands}}
 						</select>
-						<a href="#" id="modal-crud-error-default_command" rel="tooltip" class="btn btn-mini btn-danger hide"><i class="icon-white icon-exclamation-sign"></i></a>
 					</div>
 				</div>
 			</fieldset>
@@ -108,4 +115,4 @@
 		<button class="btn" data-dismiss="modal" id="modal-delete-keep">Keep the <span id="modal-delete-type"></span></button>
 	</div>
 </div>
-<div class='notifications bottom-right'></div>
+<div class="notifications bottom-right" id="crud-notify"></div>

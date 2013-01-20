@@ -1,3 +1,7 @@
+/**
+ * Admin CRUD plugin.
+ */
+
 (function( $ ){
 	var form = {};
 	opts = {};
@@ -14,6 +18,8 @@
             
             $('#modal-delete-type').text($($('.btn-create')[0]).text().replace('Create ', ''));
             
+            $('#modal-crud-error-list').on('click', 'li > a', function(e){e.preventDefault();});
+            
           //bind events to create buttons
            	$('.btn-create').click(function(e){
            		e.preventDefault();
@@ -28,7 +34,8 @@
            	$('#crud-container > tbody > tr').on('click', '.btn-edit', function(e){
         		e.preventDefault();
         		var id = $(this).parents('tr').attr('id').replace('container-', '');
-        		methods.show.apply(form, [id, {id: id}]);
+        		$(this).text('loading');
+        		methods.show.apply(form, [id, {id: id}, $(this)]);
         	});
            	$('#crud-container > tbody > tr').on('click', '.btn-delete', function(e){
         		e.preventDefault();
@@ -39,18 +46,17 @@
 
             return this;
 		},
-		show : function(id, param) {
+		show : function(id, param, element) {
 			$('#modal-crud-form')[0].reset();
-			
+			$('.control-group').each(function(){$(this).removeClass('error');});
 			// clean callback
 			$('#crud-container').trigger('crud.clean');
 			
 			$('.modal-options').addClass('hide');
 			
 			//reset errors
-        	$('#modal-crud-form .btn-mini').each(function(){
-        		$(this).addClass('hide').attr('title', '');
-        	});
+			$('#modal-crud-errors').addClass('hide');
+			$('#modal-crud-error-list > li').remove();
         	
         	methods.bindSave.call(this);
         	
@@ -64,6 +70,9 @@
         		var req_data = opts.retrieve;
         		
         		$.get(req_data, param, function (data) {
+        			if(typeof element != 'undefined') {
+        				element.text('Edit');
+        			}
         			$('h3#modal-header').html('Editing "'+data[opts.identifier]+'"');
         			$('.modal-options').removeClass('hide');
         			
@@ -99,7 +108,7 @@
         	
         	$.post(opts.save, values, function(data) {
         		if(data.action == 'saved') {
-        			$('.bottom-right').notify({
+        			$('#crud-notify').notify({
         			    message: { text: $('#input-'+opts.identifier).val()+' has been saved successfully!' }
         			  }).show();
         			
@@ -149,7 +158,11 @@
         					methods.bindTblDelete.call(this, tpl.find('.btn-delete'));
         				}
         				else if(rows == 1) {
-        					alert('This is your first time adding a row, reload your page please.');
+        					$('#crud-notify').notify({
+        						message: { text: 'This is your first time adding a row, reload your page please.'},
+        						type: 'info',
+        						fadeOut: { enabled: false }
+        					}).show();
         				}
         			}
         		}
@@ -159,11 +172,11 @@
         			
         			//mark the errors on the form
         			$.each(data.errors, function(key, val){
-        				var e = $('#modal-crud-error-'+val.field);
-        				e.removeClass('hide');
-        				e.attr('title', val.msg.join('<br />'));
+        				$('#input-'+val.field).parents('.control-group').addClass('error');
+        				$('#modal-crud-error-list').append('<li><a href="#">'+val.msg.join('<br />')+'</a></li>');
         			});
-        			$('[rel=tooltip]').tooltip();
+        			$('#modal-crud-errors').removeClass('hide');
+        			
         		}
         	});
         },
@@ -182,8 +195,9 @@
         doDelete : function(id, name) { 
         	$.post(opts.remove, {id: id}, function(data) {
         		if(data.action == 'deleted') {
-        			$('.bottom-right').notify({
-        				message: { text: name+' has been deleted successfully!' }
+        			$('#crud-notify').notify({
+        				message: { text: name+' has been deleted successfully!' },
+        				type: 'warning'
             		}).show();
             		$('#modal-delete').modal('hide');
             				
@@ -198,9 +212,10 @@
             		}
             		else {
             			//error deleting
-            			$('.bottom-right').notify({
-            				type: 'error',
-            				message: { text: name+' could not be deleted!' }
+            			$('#crud-notify').notify({
+            				type: 'danger',
+            				message: { text: name+' could not be deleted!' },
+            				fadeOut: { enabled: false}
             			}).show();
             			$('#modal-delete').modal('hide');
             		}
@@ -209,16 +224,21 @@
         },
         bindSave: function () {
         	$('#modal-crud-save').unbind('click');
+        	$('#modal-crud-save').text('Save');
+        	$('#modal-crud-save').prop('disabled', false);
         	//bind the save button
             $('#modal-crud-save').one('click', function(e){
             	e.preventDefault();
+            	$('#modal-crud-save').text('Saving');
+            	$('#modal-crud-save').prop('disabled', true);
             	methods.save.apply(this);
             });
         },
         bindTblEdit: function(element, id){
 			element.click(function(e){
 				e.preventDefault();
-        		methods.show.apply(form, [id, {id: id}]);
+				element.text('loading');
+        		methods.show.apply(form, [id, {id: id}, element]);
 			});
 		},
 		bindTblDelete: function(element){

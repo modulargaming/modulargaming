@@ -1,5 +1,5 @@
 /**
- * Modular Gaming js file.
+ * Item admin list.
  */
 
 $(document).ready(function() {
@@ -20,43 +20,17 @@ $(document).ready(function() {
 		$(this).tab('show');
 	});
 	
-	//set up item command searches
-	//find a way to bind these to the elements, currently does not work.
-	$('.pet-color-search').typeahead({
-	    source: function (query, process) {
-	        return $.get('./item/search', { type: 'pet-color', item: query }, function (data) {
-	            return process(data);
-	        });
-	    }
-	});
-	
-	$('.pet-specie-search').typeahead({
-	    source: function (query, process) {
-	        return $.get('./item/search', { type: 'pet-specie', item: query }, function (data) {
-	            return process(data);
-	        });
-	    }
-	});
-	
-	$('.recipe-search').typeahead({
-	    source: function (query, process) {
-	        return $.get('./item/search', { type: 'recipe', item: query }, function (data) {
-	            return process(data);
-	        });
-	    }
-	});
-	
-	$('.item-search').typeahead({
-	    source: function (query, process) {
-	        return $.get('./item/search', { type: 'item', item: query }, function (data) {
-	            return process(data);
-	        });
-	    }
-	});
+	var default_command = '';
 	
 	//set up item commands
 	$('#crud-container').on('crud.clean', function (e){
 		$('#modal-crud-commands tr').remove();
+		
+		//unbind any events previously set
+		$('.modal-crud-cmd-options').unbind('click');
+		$('.btn-cmd-close').unbind('click');
+		$('#input-type_id').unbind('change');
+		default_command = '';
 		
 		//reset tabs
 		$('#modal-crud-tab a:first').tab('show');
@@ -65,8 +39,37 @@ $(document).ready(function() {
 		$('.modal-crud-cmd-options').click(function(e){
 			e.preventDefault();
 			var cmd = $(this).data('command');
-			if($('#modal-crud-commands').find('[name="'+cmd+'"]').length == 0) {
+			
+			if(cmd_definitions[default_command].pets == 0 && cmd_definitions[cmd].pets == 1) {
+				//error, can't add a pet related command to an item that doesn't load the pet list
+				$('#modal-notify').notify({
+					message: { text: 'You can\'t add command "'+cmd.replace('_', ' ')+'" because it requires pets.'},
+					type: 'info',
+					fadeOut: { enabled: true, delay: 6000 }
+				}).show();
+			}
+			else if($('#modal-crud-commands').find('[name="'+cmd+'"]').length > 0 && cmd_definitions[cmd].multiple == 0) {
+				$('#modal-notify').notify({
+					message: { text: 'You can\'t add command "'+cmd.replace('_', ' ')+'" more than once to an item.'},
+					type: 'info',
+					fadeOut: { enabled: true, delay: 6000 }
+				}).show();
+			}
+			else {
 				var tpl = $('#item-command-input-collection').find('[name="'+cmd+'"]').parents('tr').clone(true);
+				
+				//bind autocomplete search if needed
+				if(cmd_definitions[cmd].search != 0) {
+					tpl.find('.search').typeahead({
+					    source: function (query, process) {
+					        return $.get('./item/search', { type: cmd_definitions[cmd].search, item: query }, function (data) {
+					            return process(data);
+					        });
+					    }
+					});
+				}
+				
+				//add the action to the row
 				$('#modal-crud-commands').append(tpl);
 			}
 		});
@@ -82,7 +85,7 @@ $(document).ready(function() {
 		$('#input-type_id').change(function(e){
 			//remove the first tr
 			$('#modal-crud-commands tr:first').remove();
-			var cmd = cmd_map[$('#input-type_id').val()];
+			var cmd = cmd_type_map[$('#input-type_id').val()];
 			
 			var tpl = $('#item-command-input-collection').find('[name="'+cmd+'"]').parents('tr').clone(true);
 			tpl.find('a').addClass('disabled');
@@ -90,15 +93,27 @@ $(document).ready(function() {
 			//if it's already in the action list, remove existing
 			if($('#modal-crud-commands').find('[name="'+cmd+'"]').length > 0) {
 				var input = $('#modal-crud-commands').find('[name="'+cmd+'"]');
+				
+				//bind autocomplete search if needed
+				if(cmd_definitions[cmd].search != 0) {
+					input.find('.search').typeahead({
+					    source: function (query, process) {
+					        return $.get('./item/search', { type: cmd_definitions[cmd].search, item: query }, function (data) {
+					            return process(data);
+					        });
+					    }
+					});
+				}
 				//assign the value so we don't lose it
 				tpl.find('[name="'+cmd+'"]').val(input.val());
 				input.parents('tr').remove();
 			}
-			
+			default_command = cmd;
 			$('#modal-crud-commands').prepend(tpl);
 		});
 	});
 	
+	//load in any predefined commands
 	$('#crud-container').on('crud.load', function(e, data){
 		var first = true;
 		
@@ -107,6 +122,7 @@ $(document).ready(function() {
 			
 			if(first == true) {
 				tpl.find('a').addClass('disabled');
+				default_command = v.name;
 				first = false;
 			}
 			tpl.find('[name="'+v.name+'"]').val(v.param);
@@ -115,9 +131,21 @@ $(document).ready(function() {
 		});
 	});
 	
+	//namespace the command input elements properly before sending
 	$('#crud-container').on('crud.preSave', function(e){
-		$('#modal-crud-commands').find('input').each(function(){
-			this.name = 'commands['+this.name+']';
+		var counters = [];
+		$('#modal-crud-commands').find(':input').each(function(){
+			if(cmd_definitions[this.name].multiple == true)
+			{
+				if(typeof counters[this.name] == 'undefined')
+					counters[this.name] = 0;
+				else
+					counters[this.name]++;
+				
+				this.name = 'commands['+this.name+']['+counter[this.name]+']';
+			}
+			else
+				this.name = 'commands['+this.name+']';
 		});
 	});
 	
