@@ -10,7 +10,7 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 			{
 				if ($this->request->post('adopt'))
 				{
-					if(ORM::factory('User_Pet')->where('user_id', '=', $this->user->id)->count_all() < 6)
+					if(Model_User_Pet::pet_limit($this->user->id))
 					{
 						$pet = ORM::factory('User_Pet')
 						->where('user_pet.id', '=', $this->request->post('adopt'))
