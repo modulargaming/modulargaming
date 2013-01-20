@@ -4,7 +4,7 @@ class View_Admin_Item_Recipe extends Abstract_View_Admin {
 
 	public $title = 'Recipes';
 	public $paginate_max = 20;
-
+	
 	public function recipes()
 	{
 		$list = array();

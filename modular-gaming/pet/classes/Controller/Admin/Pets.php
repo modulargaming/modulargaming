@@ -1,11 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Controller_Admin_Pets extends Abstract_Controller_Admin {
-	protected $_nav = array(
-			'index' => array('link' => 'pets', 'title' => 'Pets', 'active' => false),	
-			'species' => array('link' => 'pets/species', 'title' => 'Species', 'active' => false),
-			'colours' =>	array('link' => 'pets/colours', 'title' => 'Colours', 'active' => false),
-		);
+	
 	public function action_index()
 	{
 

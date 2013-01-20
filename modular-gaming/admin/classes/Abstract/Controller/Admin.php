@@ -5,7 +5,6 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 	protected $layout = 'Admin/layout';
 	protected $protected = TRUE;
 	
-	protected $_nav = array();
 	
 	public function before(){
 		parent::before();
@@ -16,17 +15,23 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 	}
 	
 	public function after() {
-		// TODO: This might fit better in the view class?
-		if ( ! empty($this->_nav) AND $this->view !== null) {
-			if (array_key_exists($this->request->action(), $this->_nav))
-			{
-				$this->_nav[$this->request->action()]['active'] = true;
-			}
-
-			$this->view->subnav = $this->_nav;
+		//if no subnav has been defined search for one
+		if($this->view !== null AND !$this->view->has_subnav())
+		{
+			$this->_nav(strtolower($this->request->controller()), $this->request->action());
 		}
-
+		
 		parent::after();
 	}
-
+	
+	protected function _nav($type, $action='index') {
+		$nav = Kohana::$config->load('admin.'.$type.'.nav');
+		
+		if($nav != FALSE) 
+		{
+			$nav[$action]['active'] = true;
+			$this->view->subnav = $nav;
+		}
+	}
+	
 }
