@@ -28,7 +28,7 @@ return array (
 			'js' => array(
 				array(
 					'name' => 'jquery',
-					'file'  => 'libs/jquery.js'
+					'file'  => 'libs/jquery-1.9.0.min.js'
 				),
 				array(
 					'name' => 'bootstrap',
