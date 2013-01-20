@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_User_Login extends Controller_User {
+class Controller_User_Login extends Abstract_Controller_User {
 
 	/**
 	 * Display the login page and handle login attempts.

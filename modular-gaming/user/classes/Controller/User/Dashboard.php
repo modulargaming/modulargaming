@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 
-class Controller_User_Dashboard extends Controller_User {
+class Controller_User_Dashboard extends Abstract_Controller_User {
 
 	/**
 	 * Show the user dashboard.

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_User_View extends Controller_User {
+class Controller_User_View extends Abstract_Controller_User {
 
 
 	/**
