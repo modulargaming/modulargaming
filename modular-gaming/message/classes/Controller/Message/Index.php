@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 
-class Controller_Message_Index extends Controller_Abstract_Message {
+class Controller_Message_Index extends Abstract_Controller_Message {
 
 	public function action_index()
 	{
