@@ -128,7 +128,7 @@ Kohana::modules(array(
 	'pet'   => MGPATH.'pet',
 	'message' => MGPATH.'message',
 	'user'  => MGPATH.'user',
-	'admin' => MGPATH.'message',
+	'admin' => MGPATH.'admin',
 	'core'  => MGPATH.'core', //Modular gaming core module
 
 	// Kohana modules
