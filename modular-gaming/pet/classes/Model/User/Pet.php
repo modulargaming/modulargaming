@@ -35,10 +35,7 @@ class Model_User_Pet extends ORM {
 		->where('user_id', '=', $user_id)
 		->execute()
 		->get('total');
-		if ($user_id !=0)
-			return ($pet_count < $limit);
-		else
-			return TRUE;
+		return ($user_id == 0 OR $pet_count < $limit);
 	}
 
 	public function rules()
