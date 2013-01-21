@@ -9,6 +9,8 @@ class Model_Item extends ORM {
 		),
 	);
 
+	protected $_serialize_columns = array('commands');
+	
 	protected $_load_with = array('type');
 
 	public function rules()
@@ -30,6 +32,10 @@ class Model_Item extends ORM {
 				array('not_empty'),
 				array('in_array', array(':value', array('draft', 'released', 'retired'))),
 			),
+			'commands' => array(
+				array('not_empty'),
+				array('Item::validate_commands', array(':validation', ':value'))		
+			)
 		);
 	}
 	

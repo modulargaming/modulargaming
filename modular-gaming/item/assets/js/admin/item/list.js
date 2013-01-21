@@ -135,6 +135,8 @@ $(document).ready(function() {
 	$('#crud-container').on('crud.preSave', function(e){
 		var counters = [];
 		$('#modal-crud-commands').find(':input').each(function(){
+			$(this).data('item-command', this.name);
+			
 			if(cmd_definitions[this.name].multiple == true)
 			{
 				if(typeof counters[this.name] == 'undefined')
@@ -142,10 +144,19 @@ $(document).ready(function() {
 				else
 					counters[this.name]++;
 				
-				this.name = 'commands['+this.name+']['+counter[this.name]+']';
+				this.name = 'commands['+this.name+']['+counter+']';
 			}
 			else
 				this.name = 'commands['+this.name+']';
+		});
+	});
+	
+	$('#crud-container').on('crud.error', function(){
+		$('#modal-crud-commands').find(':input').each(function(){
+			if(this.name.substring(0, 8) == 'commands')
+			{
+				this.name = $(this).data('item-command');
+			}
 		});
 	});
 	

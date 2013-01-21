@@ -84,6 +84,24 @@ class Item {
 		return new Item($item);
 	}
 	
+	static public function parse_commands($input) {
+		$commands = array();
+			
+		foreach($input as $k => $c) {
+			//if we're dealing string as parameter or an assoc array
+			if(!is_array($c) OR count(array_filter(array_keys($c), 'is_string')) > 0) {
+				$commands[] = array('name' => $k, 'param' => $c);
+			}
+			else {
+				//if multiple command instances were defined (non-assoc array)
+				foreach($c as $p) {
+					$commands[] = array('name' => $k, 'param' => $p);
+				}
+			}
+		}
+		return $commands;
+	}
+	
 	static public function list_commands() {
 		static $commands = null;
 		
@@ -134,5 +152,16 @@ class Item {
 		return (substr($value, -1) != '/') ? $value.'/' : $value;
 	}
 	
-	//@todo validate item commands
+	static public function validate_commands($validation, $value) {
+		$values = json_decode($value, true);
+		
+		foreach($values as $command) {
+			$cmd = Item_Command::factory($command['name']);
+			
+			if(!$cmd->validate($command['param']))
+			{
+				$validation->error('commands', $command['name']);
+			}
+		}
+	}
 }

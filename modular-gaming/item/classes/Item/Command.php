@@ -2,6 +2,10 @@
 
 abstract class Item_Command {
 	
+	static public function factory($command) {
+		$cmd = 'Item_Command_'.$command;
+		return new $cmd;
+	}
 	public $default = false;
 	public $load_pets = false;
 	

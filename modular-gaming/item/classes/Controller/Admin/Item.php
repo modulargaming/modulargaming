@@ -151,7 +151,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			'unique' => $item->unique,
 			'transferable' => $item->transferable,
 			'type_id' => $item->type_id,
-			'commands' => json_decode($item->commands)		
+			'commands' => $item->commands		
 		);
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
@@ -166,15 +166,9 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		
 		$this->response->headers('Content-Type','application/json');
 		
-		try {
-			$cmd = $values['commands'];
-			$commands = array();
-			
-			foreach($cmd as $k => $c) {
-				$commands[] = array('name' => $k, 'param' => $c);
-			}
-			
-			$values['commands'] = json_encode($commands);
+		try {			
+			if(isset($values['commands']))
+				$values['commands'] = Item::parse_commands($values['commands']);
 			
 			$item = ORM::factory('Item', $values['id']);
 			$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id', 'commands'));

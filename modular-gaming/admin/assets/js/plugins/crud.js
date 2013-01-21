@@ -53,10 +53,6 @@
 			$('#crud-container').trigger('crud.clean');
 			
 			$('.modal-options').addClass('hide');
-			
-			//reset errors
-			$('#modal-crud-errors').addClass('hide');
-			$('#modal-crud-error-list > li').remove();
         	
         	methods.bindSave.call(this);
         	
@@ -169,7 +165,7 @@
         		else {
         			//rebind the save button
         			methods.bindSave.call(this);
-        			
+        			$('#crud-container').trigger('crud.error');
         			//mark the errors on the form
         			$.each(data.errors, function(key, val){
         				$('#input-'+val.field).parents('.control-group').addClass('error');
@@ -231,6 +227,11 @@
             	e.preventDefault();
             	$('#modal-crud-save').text('Saving');
             	$('#modal-crud-save').prop('disabled', true);
+            	
+            	//reset errors
+    			$('#modal-crud-errors').addClass('hide');
+    			$('#modal-crud-error-list > li').remove();
+    			
             	methods.save.apply(this);
             });
         },
