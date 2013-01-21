@@ -3,24 +3,20 @@
 		<tr>
 			<th>ID</th>
 			<th>Name</th>
-			<th>Specie</th>
-			<th>Colour</th>
-			<th>Created</th>
+			<th>Description</th>
 			<th>Edit</th>
 			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
-		{{#pets}}
+		{{#species}}
 			<tr>
 				<td>{{id}}</td>
-				<td><a href="{{links.profile}}">{{name}}</a></td>
-				<td>{{specie.name}} ({{specie.id}})</td>
-				<td>{{colour.name}} ({{colour.id}})</td>
-				<td>{{created}}</td>
+				<td><a href="{{links.specie}}">{{name}}</a></td>
+				<td>{{description}}</td>
 				<td><a class="btn btn-warning" href="{{links.edit}}">Edit</a></td>
 				<td><a class="btn btn-danger" href="{{links.delete}}">Delete</a></td>
 			</tr>
-		{{/pets}}
+		{{/species}}
 	</tbody>
 </table>

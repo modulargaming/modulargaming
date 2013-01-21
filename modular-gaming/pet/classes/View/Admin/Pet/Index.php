@@ -2,24 +2,21 @@
 
 class View_Admin_Pet_Index extends Abstract_View_Admin {
 
-	public $title = 'Pet';
+	public $title = 'Pet species';
 
-	public function pets()
+	public function species()
 	{
-		$pets = array();
+		$species = array();
 
-		foreach ($this->pets as $pet)
+		foreach ($this->species as $specie)
 		{
-			$pets[] = array(
-				'id'          => $pet->id,
-				'name'        => $pet->name,
-				'specie'        => $pet->specie,
-				'colour'      => $pet->colour,
-				'created'     => Date::format($pet->created),
+			$species[] = array(
+				'id'          => $specie->id,
+				'name'        => $specie->name,
 			);
 		}
 
-		return $pets;
+		return $species;
 	}
 
 }

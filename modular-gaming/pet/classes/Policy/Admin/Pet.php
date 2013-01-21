@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Policy_Admin_Pets_Index extends Policy_Admin_Pets {
+class Policy_Admin_Pet extends Policy_Admin {
 
 }

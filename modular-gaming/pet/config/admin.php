@@ -3,8 +3,8 @@
 return array (
 	'pet' => array(
 		'nav' => array(
-			'index' => array('link' => 'pets', 'title' => 'Species', 'active' => false),
-			'colours' => array('link' => 'pets/colours', 'title' => 'Colours', 'active' => false),
+			'index' => array('link' => 'pet', 'title' => 'Species', 'active' => false),
+			'colours' => array('link' => 'pet/colours', 'title' => 'Colours', 'active' => false),
 		)
 	)
 );

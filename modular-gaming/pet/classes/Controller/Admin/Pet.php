@@ -5,16 +5,16 @@ class Controller_Admin_Pet extends Abstract_Controller_Admin {
 	public function action_index()
 	{
 
-		if ( ! $this->user->can('Admin_Pets_Index') )
+		if ( ! $this->user->can('Admin_Pet_Index') )
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin pets index');
 		}
 
-		$pets = ORM::factory('User_Pet')
+		$species = ORM::factory('Pet_Specie')
 			->find_all();
 
 		$this->view = new View_Admin_Pet_Index;
-		$this->view->pets = $pets->as_array();
+		$this->view->species = $species->as_array();
 	}
 
 }
