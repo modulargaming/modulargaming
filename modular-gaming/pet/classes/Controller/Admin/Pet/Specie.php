@@ -14,6 +14,7 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 			->find_all();
 
 		$this->view = new View_Admin_Pet_Specie_Index;
+		$this->_nav('pet', 'specie');
 		$this->view->species = $species->as_array();
 	}
 

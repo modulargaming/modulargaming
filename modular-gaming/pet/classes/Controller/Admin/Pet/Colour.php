@@ -14,6 +14,7 @@ class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
 			->find_all();
 
 		$this->view = new View_Admin_Pet_Colour_Index;
+		$this->_nav('pet', 'colour');
 		$this->view->colours = $colours->as_array();
 	}
 
