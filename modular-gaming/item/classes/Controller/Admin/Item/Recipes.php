@@ -73,8 +73,8 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 				//validate item materials				
 				$mat_fail = false;
 			
-				if(count($materials) > 0) {
-					foreach($materials as $index => $material){
+				if(count($values['materials']) > 0) {
+					foreach($values['materials'] as $index => $material){
 						$mat = ORM::factory('Item')
 							->where('item.name', '=', $material['name'])
 							->find();
@@ -87,7 +87,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 							break;
 						}
 						else 
-							$materials[$index]['item'] = $mat->id;
+							$values['materials'][$index]['item'] = $mat->id;
 					}
 				}
 				if($mat_fail == false) {
@@ -97,14 +97,14 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 					$item->values($values, array('name', 'description', 'crafted_item_id'));
 					$item->save();
 					
-					if(count($materials) > 0) {
+					if(count($values['materials']) > 0) {
 						//if we're updating delete old data
 						if($values['id'] != null) {
 							foreach($item->materials->find_all() as $mat)
 								$mat->delete();
 						}
 						
-						foreach($materials as $key => $ingredient) {
+						foreach($values['materials'] as $key => $ingredient) {
 							$mat = ORM::factory('Item_Recipe_Material');
 							$mat->item_id = $ingredient['item'];
 							$mat->amount = $ingredient['amount'];

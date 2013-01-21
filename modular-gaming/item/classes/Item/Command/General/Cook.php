@@ -16,7 +16,7 @@ class Item_Command_General_Cook extends Item_Command {
 	
 	public function validate($param) {
 		$recipe = ORM::factory('Item_Recipe')
-			->where('name', '=', $param)
+			->where('item_recipe.name', '=', $param)
 			->find();
 		
 		return $recipe->loaded();

@@ -16,7 +16,7 @@ class Item_Command_Pet_Paint extends Item_Command_Pet {
 	
 	public function validate($param) {
 		$color = ORM::factory('Pet_Colour')
-			->where('name', '=', $param)
+			->where('pet_colour.name', '=', $param)
 			->find();
 		return $color->loaded();
 	}
