@@ -13,6 +13,7 @@ class View_Admin_Pet_Index extends Abstract_View_Admin {
 			$species[] = array(
 				'id'          => $specie->id,
 				'name'        => $specie->name,
+				'description'        => $specie->description,
 			);
 		}
 

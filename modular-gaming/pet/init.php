@@ -30,7 +30,7 @@ Route::set('pet', 'pet/<name>', array('name' => '[a-zA-Z0-9-_]+'))
 
 Route::set('pet.admin.colour', 'admin/pet/colour')
 	->defaults(array(
-		'directory'  => 'admin/pet',
+		'directory'  => 'Admin/Pet',
 		'controller' => 'colour',
 		'action'     => 'index',
 ));
