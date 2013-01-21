@@ -3,7 +3,7 @@
 return array (
 	'pet' => array(
 		'nav' => array(
-			'index' => array('link' => 'pet', 'title' => 'Species', 'active' => false),
+			'specie' => array('link' => 'pet/specie', 'title' => 'Species', 'active' => false),
 			'colour' => array('link' => 'pet/colour', 'title' => 'Colours', 'active' => false),
 		)
 	)

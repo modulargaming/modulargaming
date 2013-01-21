@@ -28,10 +28,22 @@ Route::set('pet', 'pet/<name>', array('name' => '[a-zA-Z0-9-_]+'))
 		'action'     => 'Index',
 	));
 
+Route::set('pet.admin.index', 'admin/pet')
+	->defaults(array(
+		'directory'  => 'Admin',
+		'controller' => 'Pet',
+		'action'     => 'Index',
+));
 Route::set('pet.admin.colour', 'admin/pet/colour')
 	->defaults(array(
 		'directory'  => 'Admin/Pet',
 		'controller' => 'Colour',
+		'action'     => 'Index',
+));
+Route::set('pet.admin.specie', 'admin/pet/specie')
+	->defaults(array(
+		'directory'  => 'Admin/Pet',
+		'controller' => 'Specie',
 		'action'     => 'Index',
 ));
 //Add link to manage forums in admin
