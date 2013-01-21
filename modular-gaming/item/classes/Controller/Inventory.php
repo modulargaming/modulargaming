@@ -5,7 +5,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 	
 	public function action_index()
 	{
-		$this->view = new View_Inventory_Index;
+		$this->view = new View_Item_Inventory_Index;
 		
 		//$max_items = Kohana::$config->load('items.inventory.pagination');
 		
@@ -18,8 +18,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 	}
 	
 	public function action_view() {
-		$item = ORM::factory('User_Item')
-			->where('id', '=', $this->request->param('id'))
+		$item = ORM::factory('User_Item', $this->request->param('id'))
 			->find();
 		
 		$errors = array();
@@ -30,7 +29,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			$errors[] = 'The item you want to view is not located in your inventory.';
 		
 		if(count($errors) == 0) {
-			$this->view = new View_Inventory_View;
+			$this->view = new View_Item_Inventory_View;
 			$this->view->item = $item;
 			
 			//generate action list
@@ -61,7 +60,10 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		}
 		else 
 		{
-			//return error
+			foreach($errors as $er)
+				Hint::error($er);
+
+			$this->redirect(Route::get('item.inventory'));
 		}
 	}
 
@@ -103,7 +105,6 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					$db = Database::instance();
 					$db->begin();
 					
-					//rework to use events to events can be stopped on errors
 					foreach($commands as $command) {
 						$cmd = Item_Command::factory($command['name']);
 						$res = $cmd->perform($item, $command['param'], $pet);
@@ -121,6 +122,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					if(count($errors) == 0) {
 						$db->commit();
 						
+						//@todo log
+						
 						Hint::success($results[0]);
 						$this->redirect(Route::get('item.inventory'));
 					}
@@ -130,37 +133,30 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				$results = array();
 				
 				switch($action) {
-					default :
-						if(substr($action, 0, 5) == 'move_') { //Moving items can take an amount
-							$location = substr($action, 4);
-							$cmd = Item_Command::factory('Move_'.ucfirst($location));
+					case 'consume' : 
+						$commands = $item->commands;
+						$results = array();
 							
-							$amount = $this->request->post('amount');
-							
-							if($amount == null)
-								$amount = 1;
-							
-							if(!Valid::digit($amount)) {
-								$errors[] = 'The amount you submitted isn\'t a number.';
+						$db = Database::instance();
+						$db->begin();
+						
+						foreach($commands as $command) {
+							$cmd = Item_Command::factory($command['name']);
+							$res = $cmd->perform($item, $command['param']);
+						
+							if($res == false) {
+								//the command couldn't be performed, spit out error, rollback changes and break the loop
+								$errors[] = __(':item_name could not be used', array(':item_name' => $item->name));
+								$db->rollback();
+								break;
 							}
-							else if($amount <= 0 OR $amount > $item->amount) {
-								$errors[] = 'You only have '.$item->name().', not '.$amount;
-							}
-							else {
-								$res = $cmd->perform($item, $amount);
-								
-								if($res == TRUE) {
-									$name = ($amount > 1) ? Inflector::plural($item->item->name, $amount) : $item->item->name;
-									
-									$results = __(':amount :items have been moved to your :location', array(
-										':amount' => $amount, ':items' => $name, ':location' => $location		
-									));
-								}
-							}
-							
+							else
+								$results[] = $res;
 						}
-						else //fallback to any unexisting item actions
-							$errors[] = 'The action you want to perform with this item does not exist';
+							
+						if(count($errors) == 0) 
+							$db->commit();
+						
 						break;
 					case 'remove' : //takes an amount
 						$amount = $this->request->post('amount');
@@ -185,11 +181,61 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							}
 							
 							$item->amount('-', $amount);
-							$results = $amount.' '.$name.' '.$verb.' deleted';
+							$results = __(':amount :item :verb deleted successfully', array(
+								':amount' => $amount, ':verb' => $verb, ':item' => $name		
+							));
 						}
 						break;
-					case 'gift' :
+					case 'gift' : //takes a username
+						$username = $this->request->post('username');
+						$user = ORM::factory('User')
+							->where('username', '=', $username)
+							->find();
 						
+						if($user->loaded()) {
+							$item->transfer($user);
+							//@todo notification
+							
+							$results = __('You\'ve successfully sent :item to :username', array(
+								':item' => $item->item->name, ':username' => $user->username
+							));
+						}
+						else
+							$errors[] = __('Couldn\'t find a user named ":username"', array(':username' => $username));
+						
+						break;
+					default :
+						if(substr($action, 0, 5) == 'move_') { //Moving items can take an amount
+							$location = substr($action, 4);
+							$cmd = Item_Command::factory('Move_'.ucfirst($location));
+									
+							$amount = $this->request->post('amount');
+									
+							if($amount == null)
+								$amount = 1;
+									
+							if(!Valid::digit($amount)) {
+								$errors[] = 'The amount you submitted isn\'t a number.';
+							}
+							else if($amount <= 0 OR $amount > $item->amount) {
+								$errors[] = 'You only have '.$item->name().', not '.$amount;
+							}
+							else {
+								$res = $cmd->perform($item, $amount);
+						
+								if($res == TRUE) {
+									$name = ($amount > 1) ? Inflector::plural($item->item->name, $amount) : $item->item->name;
+									$verb = ($amount > 1) ? 'were' : 'was';
+									
+									$results = __(':amount :items :verb been moved to your :location', array(
+										':amount' => $amount, ':items' => $name, ':location' => $location, ':verb' => $verb
+									));
+								}
+							}
+									
+						}
+						else //fallback to any unexisting item actions
+							$errors[] = 'The action you want to perform with this item does not exist';
 						break;
 				}
 			}
@@ -197,10 +243,15 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		
 		if(count($errors) > 0) {
 			foreach($errors as $er)
-				Hint::ERROR($er);
+				Hint::error($er);
 		}
 		else {
-			Hint::success($results);
+			if(!is_array($results))
+				Hint::success($results);
+			else {
+				foreach($results as $re)
+					Hint::success($re);
+			}
 		}
 		
 		$this->redirect(Route::get('item.inventory'));

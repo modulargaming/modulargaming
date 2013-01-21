@@ -4,7 +4,6 @@ class View_Admin_Item_Index extends Abstract_View_Admin {
 
 	public $title = 'Items';
 	public $paginate_max = 20;
-	
 
 	public function item_types()
 	{

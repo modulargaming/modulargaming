@@ -59,9 +59,9 @@ class Model_User_Item extends ORM {
 	 */
 	public function name() {		
 		if($this->amount > 1)
-			return $this->amount . ' ' . Inflector::plural($this->name, $this->amount);
+			return $this->amount . ' ' . Inflector::plural($this->item->name, $this->amount);
 		else
-			return $this->amount . ' ' . $this->name;
+			return $this->amount . ' ' . $this->item->name;
 	}
 	
 	/**
@@ -125,6 +125,8 @@ class Model_User_Item extends ORM {
 			$this->save();
 		}
 		
+		//@todo log
+		
 		return $user_item;
 	}
 	
@@ -144,6 +146,8 @@ class Model_User_Item extends ORM {
 			case '+':
 				$this->amount = $this->amount + $amount;
 				$this->save();
+				
+				//@todo log
 				return true;
 			break;
 			case 'substract':
@@ -152,11 +156,15 @@ class Model_User_Item extends ORM {
 				{
 					$this->amount = $this->amount - $amount;
 					$this->save();
+					
+					//@todo log
 					return true;
 				}
 				else if($amount == $this->amount)
 				{
 					$this->delete();
+					
+					//@todo log
 					return true;
 				}
 				else 

@@ -98,3 +98,13 @@ Route::set('item.admin.list.index', 'admin/item(/<page>)', array('page' => '[0-9
 		'controller' => 'Item',
 		'action'     => 'Index',
 ));
+Route::set('item.inventory.view', 'inventory/view/<id>', array('id' => '[0-9]+'))
+	->defaults(array(
+	'controller' => 'Inventory',
+	'action'     => 'view',
+));
+Route::set('item.inventory', 'inventory(/<action>(/<id>))', array('id' => '[0-9]+'))
+	->defaults(array(
+	'controller' => 'Inventory',
+	'action'     => 'Index',
+));
