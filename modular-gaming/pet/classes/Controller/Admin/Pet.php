@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Admin_Pets extends Abstract_Controller_Admin {
+class Controller_Admin_Pet extends Abstract_Controller_Admin {
 	
 	public function action_index()
 	{
@@ -13,7 +13,7 @@ class Controller_Admin_Pets extends Abstract_Controller_Admin {
 		$pets = ORM::factory('User_Pet')
 			->find_all();
 
-		$this->view = new View_Admin_Pets_Index;
+		$this->view = new View_Admin_Pet_Index;
 		$this->view->pets = $pets->as_array();
 	}
 
