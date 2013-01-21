@@ -2,30 +2,30 @@
 
 Route::set('messages', 'messages')
   ->defaults(array(  	
-    'directory'  => 'message',	  	
-    'controller' => 'index',	  	
-    'action'     => 'index',	  	
+    'directory'  => 'Message',	  	
+    'controller' => 'Index',	  	
+    'action'     => 'Index',	  	
   ));
 
 
 Route::set('message.view', 'message/view(/<id>)', array('id' => '[0-9]+'))
   ->defaults(array(  	
-    'directory'  => 'message',	  	
-    'controller' => 'view',	  	
-    'action'     => 'index',	  	
+    'directory'  => 'Message',	  	
+    'controller' => 'View',	  	
+    'action'     => 'Index',	  	
   ));
 
 Route::set('message.create', 'message/create(/<id>)', array('id' => '[0-9]+'))
   ->defaults(array(  	
-    'directory'  => 'message',	  	
-    'controller' => 'create',	  	
-    'action'     => 'index',	  	
+    'directory'  => 'Message',	  	
+    'controller' => 'Create',	  	
+    'action'     => 'Index',	  	
   ));
   	
 Route::set('message', 'message(/<controller>(/<action>(/<id>)))')
   ->defaults(array(
-    'directory'  => 'message',
-    'controller' => 'index',
-    'action'     => 'index',
+    'directory'  => 'Message',
+    'controller' => 'Index',
+    'action'     => 'Index',
 ));
 

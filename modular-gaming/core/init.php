@@ -2,6 +2,6 @@
 
 Route::set('assets', 'assets/(<file>)', array('file' => '.+.(?:jpe?g|png|gif|css|js)'))
 	->defaults(array(
-		'controller' => 'assets',
-		'action'     => 'index',
+		'controller' => 'Assets',
+		'action'     => 'Index',
 	));

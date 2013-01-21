@@ -5,38 +5,38 @@
  */
 Route::set('forum', 'forum')
 	->defaults(array(
-		'directory'  => 'forum',
-		'controller' => 'index',
-		'action'     => 'index',
+		'directory'  => 'Forum',
+		'controller' => 'Index',
+		'action'     => 'Index',
 	));
 
 Route::set('forum.category', 'forum/category/<id>(/<action>(/<page>))', array('id' => '[0-9]+', 'page' => '[0-9]+'))
 	->defaults(array(
-		'directory'  => 'forum',
-		'controller' => 'category',
-		'action'     => 'page',
+		'directory'  => 'Forum',
+		'controller' => 'Category',
+		'action'     => 'Page',
 	));
 
 Route::set('forum.topic', 'forum/topic/<id>(/<action>)', array('id' => '[0-9]+'))
 	->defaults(array(
-		'directory'  => 'forum',
-		'controller' => 'topic',
-		'action'     => 'view',
+		'directory'  => 'Forum',
+		'controller' => 'Topic',
+		'action'     => 'View',
 	));
 
 Route::set('forum.post', 'forum/post/<id>(/<action>)', array('id' => '[0-9]+'))
 	->defaults(array(
-		'directory'  => 'forum',
-		'controller' => 'post',
-		'action'     => 'view',
+		'directory'  => 'Forum',
+		'controller' => 'Post',
+		'action'     => 'View',
 	));
 
 
 Route::set('forum.admin', 'admin/forum(/<action>(/<id>))', array('id' => '[0-9]+'))
 	->defaults(array(
-		'directory'  => 'admin',
-		'controller' => 'forum',
-		'action'     => 'index',
+		'directory'  => 'Admin',
+		'controller' => 'Forum',
+		'action'     => 'Index',
 	));
 
 //Add link to manage forums in admin

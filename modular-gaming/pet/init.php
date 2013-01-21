@@ -2,37 +2,37 @@
 
 Route::set('pets', 'pets')
 	->defaults(array(
-		'directory'  => 'pet',
-		'controller' => 'index',
-		'action'     => 'index',
+		'directory'  => 'Pet',
+		'controller' => 'Index',
+		'action'     => 'Index',
 	));
 
 Route::set('pet.adopt', 'pet/adopt')
 	->defaults(array(
-		'directory'  => 'pet',
-		'controller' => 'adopt',
-		'action'     => 'index',
+		'directory'  => 'Pet',
+		'controller' => 'Adopt',
+		'action'     => 'Index',
 	));
 
 Route::set('pet.create', 'pet/create')
 	->defaults(array(
-		'directory'  => 'pet',
-		'controller' => 'create',
-		'action'     => 'index',
+		'directory'  => 'Pet',
+		'controller' => 'Create',
+		'action'     => 'Index',
 	));
 
 Route::set('pet', 'pet/<name>', array('name' => '[a-zA-Z0-9-_]+'))
 	->defaults(array(
-		'directory'  => 'pet',
-		'controller' => 'profile',
-		'action'     => 'index',
+		'directory'  => 'Pet',
+		'controller' => 'Profile',
+		'action'     => 'Index',
 	));
 
 Route::set('pet.admin.colour', 'admin/pet/colour')
 	->defaults(array(
 		'directory'  => 'Admin/Pet',
-		'controller' => 'colour',
-		'action'     => 'index',
+		'controller' => 'Colour',
+		'action'     => 'Index',
 ));
 //Add link to manage forums in admin
 Event::listen('admin.nav_list', function(){
