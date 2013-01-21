@@ -79,7 +79,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$property = 'name';
 			
 			$items = ORM::factory('Item_Type')
-				->where('name', 'LIKE', '%'.$item_name.'%')
+				->where('item_type.name', 'LIKE', '%'.$item_name.'%')
 				->find_all();
 		}
 		else if($type == 'user') 
@@ -106,7 +106,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$property = 'name';
 		
 			$items = ORM::factory('Pet_Specie')
-			->where('name', 'LIKE', '%'.$item_name.'%')
+			->where('pet_specie.name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
 		else if($type == 'pet-color') 
@@ -115,7 +115,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$property = 'name';
 		
 			$items = ORM::factory('Pet_Colour')
-			->where('name', 'LIKE', '%'.$item_name.'%')
+			->where('pet_colour.name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
 		

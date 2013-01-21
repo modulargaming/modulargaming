@@ -2,16 +2,22 @@
 
 abstract class Item_Command {
 	
-	static public function factory($command) {
+	static public function factory($command, $validation=null) {
 		$cmd = 'Item_Command_'.$command;
-		return new $cmd;
+		return new $cmd($validation);
 	}
+	
 	public $default = false;
 	public $load_pets = false;
+	protected $_validation = null;
 	
 	abstract protected function _build($name);
 	abstract public function validate($param);
-	abstract public function perform($item, $data);
+	abstract public function perform($item, $param, $data=null);
+	
+	public function __construct(Kohana_Validation $validation) {
+		$this->_validation = $validation;
+	}
 	
 	public function build_admin($name) {
 		$def = $this->_build($name);

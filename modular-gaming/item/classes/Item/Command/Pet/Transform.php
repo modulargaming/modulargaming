@@ -22,7 +22,7 @@ class Item_Command_Pet_Transform extends Item_Command_Pet {
 		return $specie->loaded();
 	}
 	
-	public function perform($item, $data) {
+	public function perform($item, $param, $data=null) {
 		return null;
 	}
 }

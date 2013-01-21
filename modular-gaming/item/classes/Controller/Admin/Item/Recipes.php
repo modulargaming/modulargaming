@@ -70,10 +70,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 			
 			
 			if($crafted->loaded()) {
-				//validate item materials
-				$materials = $this->request->post('materials');
-				$values['materials'] = $materials;
-				
+				//validate item materials				
 				$mat_fail = false;
 			
 				if(count($materials) > 0) {

@@ -17,14 +17,14 @@ class Item_Command_Pet_Feed extends Item_Command_Pet {
 		return (Valid::digit($param) && $param > 0);
 	}
 	
-	public function perform($item, $data) {
+	public function perform($item, $param, $data=null) {
 		$pet = $data['pet'];
 		
 		if($pet->hunger == 100)
 			return $pet->name.' is already full';
 		else
 		{
-			$level = $pet->hunger + $data['param'];
+			$level = $pet->hunger +  $param;
 			
 			if($level > 100)
 				$pet->hunger = 100;

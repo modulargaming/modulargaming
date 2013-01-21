@@ -17,14 +17,14 @@ class Item_Command_Pet_Play extends Item_Command_Pet {
 		return (Valid::digit($param) && $param > 0);
 	}
 	
-	public function perform($item, $data) {
+	public function perform($item, $param, $data=null) {
 		$pet = $data['pet'];
 		
 		if($pet->happiness == 100)
 			return $pet->name.' is already too happy';
 		else
 		{
-			$level = $pet->happiness + $data['param'];
+			$level = $pet->happiness + $param;
 			
 			if($level > 100)
 				$pet->happiness = 100;

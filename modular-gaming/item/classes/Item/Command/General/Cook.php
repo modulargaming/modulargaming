@@ -22,7 +22,7 @@ class Item_Command_General_Cook extends Item_Command {
 		return $recipe->loaded();
 	}
 	
-	public function perform($item, $data) {
+	public function perform($item, $param, $data=null) {
 		return null;
 	}
 }
