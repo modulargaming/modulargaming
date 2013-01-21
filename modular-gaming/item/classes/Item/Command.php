@@ -15,7 +15,7 @@ abstract class Item_Command {
 	abstract public function validate($param);
 	abstract public function perform($item, $param, $data=null);
 	
-	public function __construct(Kohana_Validation $validation) {
+	public function __construct(Kohana_Validation $validation=null) {
 		$this->_validation = $validation;
 	}
 	
