@@ -17,8 +17,8 @@ class Item_Command_Pet_Feed extends Item_Command_Pet {
 		return (Valid::digit($param) && $param > 0);
 	}
 	
-	public function perform($item, $param, $data=null) {
-		$pet = $data['pet'];
+	public function perform($item, $param, $pet=null) {
+	
 		
 		if($pet->hunger == 100)
 			return $pet->name.' is already full';

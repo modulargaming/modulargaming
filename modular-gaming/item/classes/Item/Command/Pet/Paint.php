@@ -21,7 +21,8 @@ class Item_Command_Pet_Paint extends Item_Command_Pet {
 		return $color->loaded();
 	}
 	
-	public function perform($item, $param, $data=null) {
+	public function perform($item, $param, $pet=null) {
+	
 		return null;
 	}
 }
