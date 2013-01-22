@@ -175,4 +175,46 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		}
 	}
 
+	public function action_poll()
+	{
+		if ($this->request->method() == HTTP_Request::POST)
+		{
+			try
+			{
+				$post_data = Arr::merge($this->request->post(), array(
+							'user_id'	=> $this->user->id,
+						));
+				if (isset($post_data['vote']))
+				{
+					if (ORM::factory('Forum_Poll_Vote')->where('poll_id', '=', $this->topic->poll->id)->where('user_id', '=', $this->user->id)->count_all())
+					{
+						Hint::error('You have already voted on the poll.');
+					}
+					else
+					{
+						$this->topic->poll->votes++;
+						$this->topic->poll->save();
+						$post_data['poll_id'] = $this->topic->poll->id;
+						ORM::factory('Forum_Poll_Vote')
+							->create_vote($post_data, array(
+							'poll_id',
+							'user_id',
+							'option_id',
+						));
+						$option = ORM::factory('Forum_Poll_Option', $post_data['option_id']);
+						$option->votes++;
+						$option->save();
+						Hint::success('You have voted on the poll.');
+					}
+					$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
+				}
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				Hint::error($e->errors('models'));
+			}
+		}
+		$this->view = new View_Forum_Topic_Poll;
+	}
+
 }

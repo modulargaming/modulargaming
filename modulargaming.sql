@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `forum_poll_options` (
 
 CREATE TABLE IF NOT EXISTS `forum_poll_votes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `poll_id` int(11) unsigned NOT NULL,
   `option_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)

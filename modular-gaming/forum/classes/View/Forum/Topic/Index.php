@@ -21,16 +21,23 @@ class View_Forum_Topic_Index extends Abstract_View {
 			$colours = array('info', 'success', 'warning', 'danger');
 			foreach ($this->topic->poll->options->find_all() as $key => $value)
 			{
+				$colour = $key;
+				while ($colour >= 4)
+				{
+					$colour -= 4;
+				}
 				$options[] = array(
+					'id' => $value->id,
 					'title' => $value->title,
 					'votes' => $value->votes,
-					'colour' => $colours[$key],
-					'percent' => $topic['poll']['votes'] ? $value->votes/$topic['poll']['votes']*100 : 0,
+					'colour' => $colours[$colour],
+					'percent' => $topic['poll']['votes'] ? round($value->votes/$topic['poll']['votes']*100) : 0,
 				);
 			}
 			$topic['poll']['options'] = $options;
 			$topic['poll']['can_edit'] = Auth::instance()->get_user()->can('Forum_Poll_Edit', array('poll' => $this->topic->poll));
 			$topic['poll']['can_delete'] = Auth::instance()->get_user()->can('Forum_Poll_Delete', array('poll' => $this->topic->poll));
+			$topic['poll']['voted'] = ORM::factory('Forum_Poll_Vote')->where('poll_id', '=', $this->topic->poll->id)->where('user_id', '=', Auth::instance()->get_user()->id)->count_all();
 		}
 		else
 		{

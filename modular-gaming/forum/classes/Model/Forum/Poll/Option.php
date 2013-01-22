@@ -9,6 +9,12 @@ class Model_Forum_Poll_Option extends ORM {
 		),
 	);
 
+	static public function option_exists($id)
+	{
+		$option = ORM::factory('Forum_Poll_Option', $id);
+		return $option->loaded();
+	}
+
 	public function rules()
 	{
 		return array(
