@@ -4,4 +4,22 @@ class View_Forum_Topic_Poll extends Abstract_View {
 
 	public $title = 'Poll';
 
+	public function options()
+	{
+		if (isset($this->poll))
+		{
+			$options = $this->poll->options->find_all()->as_array();
+			foreach ($options as $key => $value) {
+				$options[$key] = $value->as_array();
+				$options[$key]['i'] = $key + 1;
+			}
+			$i = count($options);
+			while ($i < 5)
+			{
+				$i ++;
+				$options[] = array('title' => '', 'i' => $i);
+			}
+			return $options;
+		}
+	}
 }

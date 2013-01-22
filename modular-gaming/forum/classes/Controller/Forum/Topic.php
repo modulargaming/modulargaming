@@ -245,6 +245,29 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 					}
 					Hint::success('You have created a poll for this topic.');
 				}
+				if (isset($post_data['edit']))
+				{
+					if ( ! $this->user->can('Forum_Poll_Edit', array('poll' => $this->topic->poll)))
+					{
+						throw HTTP_Exception::factory('403', 'Permission denied to edit poll');
+					}
+					$this->topic->poll->title = $post_data['title'];
+					$this->topic->poll->save();
+					foreach ($post_data['options'] as $key => $value)
+					{
+						$option = ORM::factory('Forum_Poll_Option')->where('id', '=', $key)->where('poll_id', '=', $this->topic->poll->id)->find();
+						if ($option->loaded())
+						{
+							$option->title = $value;
+							$option->save();
+						}
+						else if(trim($value))
+						{
+							ORM::factory('Forum_Poll_Option')->create_option(array('poll_id' => $this->topic->poll->id, 'title' => $value), array('poll_id', 'title'));
+						}
+					}
+					Hint::success('You have edited the poll.');
+				}
 				if (isset($post_data['delete']))
 				{
 					if ( ! $this->user->can('Forum_Poll_Delete', array('poll' => $this->topic->poll)))
