@@ -13,6 +13,7 @@ class Model_Forum_Poll_Vote extends ORM {
 	{
 		// Validation for vote
 		$extra_validation = Validation::Factory($values)
+			->rule('poll_id', 'Model_Forum_Poll::poll_exists')
 			->rule('option_id', 'Model_Forum_Poll_Option::option_exists');
  		return $this->values($values, $expected)
 			->create($extra_validation);

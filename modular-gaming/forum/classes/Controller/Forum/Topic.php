@@ -206,15 +206,74 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 						$option->save();
 						Hint::success('You have voted on the poll.');
 					}
-					$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
 				}
+				if (isset($post_data['create']))
+				{
+					if ( ! $this->user->can('Forum_Poll_Create', array('topic' => $this->topic)))
+					{
+						throw HTTP_Exception::factory('403', 'Permission denied to create poll');
+					}
+					if ($this->topic->poll->loaded())
+					{
+						$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
+					}
+					$options = $options = array_slice($post_data['options'], 0, 5);
+					foreach($options as $key => $value)
+					{
+						if (!trim($value))
+						{
+							unset($options[$key]);
+						}
+					}
+					if (count($options) < 2)
+					{
+						Hint::error('There must be at least 2 options.');
+						$this->redirect(Route::url('forum.topic', array(
+							'action' => 'poll',
+							'id'     => $this->topic->id
+						)));
+					}
+					$post_data['topic_id'] = $this->topic->id;
+					$poll = ORM::factory('Forum_Poll')
+							->create_poll($post_data, array(
+							'topic_id',
+							'title',
+						));
+					foreach ($options as $option)
+					{
+						ORM::factory('Forum_Poll_Option')->create_option(array('poll_id' => $poll->id, 'title' => $option), array('poll_id', 'title'));
+					}
+					Hint::success('You have created a poll for this topic.');
+				}
+				if (isset($post_data['delete']))
+				{
+					if ( ! $this->user->can('Forum_Poll_Delete', array('poll' => $this->topic->poll)))
+					{
+						throw HTTP_Exception::factory('403', 'Permission denied to delete poll');
+					}
+					$this->topic->poll->delete();
+					Hint::success('You have deleted the poll.');
+				}
+				$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
 			}
 			catch (ORM_Validation_Exception $e)
 			{
 				Hint::error($e->errors('models'));
 			}
 		}
+		if ( ! $this->user->can('Forum_Poll_Edit', array('poll' => $this->topic->poll)))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to edit poll');
+		}
+		Breadcrumb::add('Poll', Route::url('forum.topic', array(
+			'id'     => $this->topic->id,
+			'action' => 'poll'
+		)));
 		$this->view = new View_Forum_Topic_Poll;
+		if ($this->topic->poll->loaded())
+		{
+			$this->view->poll = $this->topic->poll;
+		}
 	}
 
 }

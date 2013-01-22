@@ -16,6 +16,12 @@ class Model_Forum_Poll extends ORM {
 		),
 	);
 
+	static public function poll_exists($id)
+	{
+		$poll = ORM::factory('Forum_Poll', $id);
+		return $poll->loaded();
+	}
+
 	public function rules()
 	{
 		return array(
@@ -28,12 +34,23 @@ class Model_Forum_Poll extends ORM {
 
 	public function create_poll($values, $expected)
 	{
-		// Validation for topic
+		// Validation for poll
 		$extra_validation = Validation::Factory($values)
 			->rule('topic_id', 'Model_Forum_Topic::topic_exists');
 
 		return $this->values($values, $expected)
 			->create($extra_validation);
+	}
+
+	public function delete()
+	{
+		DB::delete('Forum_Poll_Options')
+			->where('poll_id', '=', $this->id)
+			->execute();
+		DB::delete('Forum_Poll_Votes')
+			->where('poll_id', '=', $this->id)
+			->execute();
+		parent::delete();
 	}
 
 }

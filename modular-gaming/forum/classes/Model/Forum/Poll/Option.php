@@ -25,4 +25,13 @@ class Model_Forum_Poll_Option extends ORM {
 		);
 	}
 
+	public function create_option($values, $expected)
+	{
+		// Validation for option
+		$extra_validation = Validation::Factory($values)
+			->rule('poll_id', 'Model_Forum_Poll::poll_exists');
+ 		return $this->values($values, $expected)
+			->create($extra_validation);
+	}
+
 }
