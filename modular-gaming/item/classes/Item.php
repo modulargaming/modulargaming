@@ -49,7 +49,7 @@ class Item {
 		else 
 		{
 			if($this->_type == 'item') {
-				$user_item = ORM::factory('User_item')
+				$user_item = ORM::factory('User_Item')
 					->where('user_id', '=', $user->id)
 					->where('item_id', '=', $this->_item->id)
 					->where('location', '=', $location)
