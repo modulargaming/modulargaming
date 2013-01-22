@@ -4,7 +4,7 @@ class Task_Pet extends Minion_Task
 {
     protected $_options = array(
         'limit' => 4,
-        'color' => NULL,
+        'amount' => 1,
     );
  
     /**
@@ -14,7 +14,7 @@ class Task_Pet extends Minion_Task
      */
     protected function _execute(array $params)
     {
-$query = DB::update('user_pets')->set(array('hunger' => DB::expr('`hunger` - 1')))->execute();
-$query = DB::update('user_pets')->set(array('happiness' => DB::expr('`happiness` - 1')))->execute();
+$query = DB::update('user_pets')->set(array('hunger' => DB::expr("hunger - $params[amount]")))->execute();
+$query = DB::update('user_pets')->set(array('happiness' => DB::expr("happiness - $params[amount]")))->execute();
     }
 }
