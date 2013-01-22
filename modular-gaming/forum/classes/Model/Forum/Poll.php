@@ -44,10 +44,10 @@ class Model_Forum_Poll extends ORM {
 
 	public function delete()
 	{
-		DB::delete('Forum_Poll_Options')
+		DB::delete('forum_poll_options')
 			->where('poll_id', '=', $this->id)
 			->execute();
-		DB::delete('Forum_Poll_Votes')
+		DB::delete('forum_poll_votes')
 			->where('poll_id', '=', $this->id)
 			->execute();
 		parent::delete();
