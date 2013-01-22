@@ -184,7 +184,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 				$post_data = Arr::merge($this->request->post(), array(
 							'user_id'	=> $this->user->id,
 						));
-				if (isset($post_data['vote']))
+				if (isset($post_data['vote']) && isset($post_data['option_id']))
 				{
 					if (ORM::factory('Forum_Poll_Vote')->where('poll_id', '=', $this->topic->poll->id)->where('user_id', '=', $this->user->id)->count_all())
 					{
@@ -284,10 +284,6 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 				Hint::error($e->errors('models'));
 			}
 		}
-		if ( ! $this->user->can('Forum_Poll_Edit', array('poll' => $this->topic->poll)))
-		{
-			throw HTTP_Exception::factory('403', 'Permission denied to edit poll');
-		}
 		Breadcrumb::add('Poll', Route::url('forum.topic', array(
 			'id'     => $this->topic->id,
 			'action' => 'poll'
@@ -295,7 +291,15 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		$this->view = new View_Forum_Topic_Poll;
 		if ($this->topic->poll->loaded())
 		{
+			if ( ! $this->user->can('Forum_Poll_Edit', array('poll' => $this->topic->poll)))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to edit poll');
+			}
 			$this->view->poll = $this->topic->poll;
+		}
+		if ( ! $this->user->can('Forum_Poll_Create', array('topic' => $this->topic)))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to edit poll');
 		}
 	}
 
