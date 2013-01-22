@@ -24,7 +24,7 @@ class Controller_Message_Create extends Abstract_Controller_Message {
 					));
 
 				Hint::success('You have sent a message');
-				$this->redirect('messages');
+				$this->redirect(Route::get('messages')->uri());
 			}
 			catch (ORM_Validation_Exception $e)
 			{

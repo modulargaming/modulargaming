@@ -7,7 +7,7 @@ class Controller_User_Register extends Abstract_Controller_User {
 	{
 		if ($this->auth->logged_in())
 		{
-			$this->redirect('user');
+			$this->redirect(Route::get('user')->uri());
 		}
 
 		if ($this->request->method() == HTTP_Request::POST)
@@ -34,7 +34,7 @@ class Controller_User_Register extends Abstract_Controller_User {
 						->send();
 
 					$this->auth->force_login($user);
-					$this->redirect('');
+					$this->redirect(Route::get('user')->uri());	
 				}
 				catch (ORM_Validation_Exception $e)
 				{

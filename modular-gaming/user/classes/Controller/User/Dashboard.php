@@ -10,7 +10,7 @@ class Controller_User_Dashboard extends Abstract_Controller_User {
 	{
 		if ( ! $this->auth->logged_in())
 		{
-			$this->redirect('user/login');
+			$this->redirect(Route::get('user.login')->uri());
 		}
 		
 		$this->view = new View_User_Dashboard;

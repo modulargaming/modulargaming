@@ -6,6 +6,21 @@ Route::set('user.view', 'user/view(/<id>)', array('id' => '[0-9]+'))
     'controller' => 'View',	  	
     'action'     => 'Index',	  	
   ));
+
+Route::set('user.edit', 'user/edit')
+  ->defaults(array(  	
+    'directory'  => 'User',	  	
+    'controller' => 'Edit',	  	
+    'action'     => 'Index',	  	
+  ));
+
+Route::set('user.login', 'user/login')
+  ->defaults(array(  	
+    'directory'  => 'User',	  	
+    'controller' => 'Login',	  	
+    'action'     => 'Index',	  	
+  ));
+
   	
 Route::set('user', 'user(/<controller>(/<action>(/<id>)))')
   ->defaults(array(

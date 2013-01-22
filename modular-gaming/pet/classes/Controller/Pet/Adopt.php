@@ -20,7 +20,7 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 						$pet->abandoned = time();
 						$pet->save();
 						Hint::success('You have adopted ' . $pet->name . '.');
-						$this->redirect('pets');
+						$this->redirect(Route::get('pets')->uri());
 					}
 					else
 					{

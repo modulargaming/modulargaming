@@ -31,7 +31,7 @@ class Controller_Pet_Index extends Abstract_Controller_Frontend {
 					$pet->save();
 					Hint::success('You have abandoned ' . $pet->name . '.');
 				}
-				$this->redirect('pets');
+				$this->redirect(Route::get('pets')->uri());
 			}
 			catch (ORM_Validation_Exception $e)
 			{

@@ -23,7 +23,7 @@ class Controller_Pet_Create extends Abstract_Controller_Frontend {
 						'active',
 					));
 				Hint::success('You have created a pet named '.$new_pet->name);
-				$this->redirect('pets');
+				$this->redirect(Route::get('pets')->uri());
 			}
 			catch (ORM_Validation_Exception $e)
 			{

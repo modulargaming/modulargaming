@@ -9,7 +9,7 @@ class Controller_User_Edit extends Abstract_Controller_User {
 	{
 		if ( ! $this->auth->logged_in())
 		{
-			$this->redirect('user/login');
+			$this->redirect(Route::get('user.login')->uri());
 		}
 
 		if ($this->request->method() == HTTP_Request::POST)
@@ -24,7 +24,7 @@ class Controller_User_Edit extends Abstract_Controller_User {
 							'timezone_id',
 					));
 					Hint::success(Kohana::message('user', 'edit.success'));
-					$this->redirect('user/edit');
+					$this->redirect(Route::get('user.edit')->uri());
 				}
 				if (array_key_exists('update_forum', $post))
 				{
@@ -32,8 +32,7 @@ class Controller_User_Edit extends Abstract_Controller_User {
 							'signature',
 					));
 					Hint::success(Kohana::message('user', 'edit.success'));
-					$this->redirect('user/edit');
-				}
+					$this->redirect(Route::get('user.edit')->uri());				}
 				if (array_key_exists('remove_avatar', $post))
 				{
 					$avatar = 'assets/img/avatars/'.$this->user->id.'.png';
@@ -52,7 +51,7 @@ class Controller_User_Edit extends Abstract_Controller_User {
 						)
 					);
 					Hint::success('You have removed your avatar.');
-					return $this->redirect('user/edit');
+					$this->redirect(Route::get('user.edit')->uri());
 				}
 				if (array_key_exists('update_profile', $post))
 				{
@@ -84,7 +83,7 @@ class Controller_User_Edit extends Abstract_Controller_User {
 							'gravatar',
 					));
 					Hint::success(Kohana::message('user', 'edit.success'));
-					$this->redirect('user/edit');
+					$this->redirect(Route::get('user.edit')->uri());
 				}
 				if (array_key_exists('update_password', $post))
 				{
@@ -99,7 +98,7 @@ class Controller_User_Edit extends Abstract_Controller_User {
 					{
 						Hint::error('Incorrect password');
 					}
-					$this->redirect('user/edit');
+					$this->redirect(Route::get('user.edit')->uri());
 				}
 			}
 			catch (ORM_Validation_Exception $e)

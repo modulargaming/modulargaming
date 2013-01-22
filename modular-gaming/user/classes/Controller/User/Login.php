@@ -10,7 +10,7 @@ class Controller_User_Login extends Abstract_Controller_User {
 	{
 		if ($this->auth->logged_in())
 		{
-			$this->redirect('user');
+			$this->redirect(Route::get('user')->uri());
 		}
 
 		if ($this->request->method() == HTTP_Request::POST)
@@ -20,7 +20,7 @@ class Controller_User_Login extends Abstract_Controller_User {
 			if ($this->auth->login($post['username'], $post['password'], isset($post['remember'])))
 			{
 				Hint::success(Kohana::message('user', 'login.success'));
-				$this->redirect('');
+			$this->redirect(Route::get('user')->uri());
 			}
 			else
 			{
