@@ -21,6 +21,13 @@ Route::set('user.login', 'user/login')
     'action'     => 'Index',	  	
   ));
 
+Route::set('user.register', 'user/register')
+  ->defaults(array(  	
+    'directory'  => 'User',	  	
+    'controller' => 'Register',	  	
+    'action'     => 'Index',	  	
+  ));
+
   	
 Route::set('user', 'user(/<controller>(/<action>(/<id>)))')
   ->defaults(array(
