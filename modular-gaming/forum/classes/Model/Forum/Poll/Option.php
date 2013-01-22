@@ -9,6 +9,12 @@ class Model_Forum_Poll_Option extends ORM {
 		),
 	);
 
+	static public function option_exists($id)
+	{
+		$option = ORM::factory('Forum_Poll_Option', $id);
+		return $option->loaded();
+	}
+
 	public function rules()
 	{
 		return array(
@@ -17,6 +23,15 @@ class Model_Forum_Poll_Option extends ORM {
 				array('max_length', array(':value', 255)),
 			),
 		);
+	}
+
+	public function create_option($values, $expected)
+	{
+		// Validation for option
+		$extra_validation = Validation::Factory($values)
+			->rule('poll_id', 'Model_Forum_Poll::poll_exists');
+ 		return $this->values($values, $expected)
+			->create($extra_validation);
 	}
 
 }

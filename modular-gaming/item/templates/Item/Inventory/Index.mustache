@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="span10">
+	<div class="span10" id="inventory-container">
 		<ul class="thumbnails">
 		  {{#items}}
 			<li class="span2 pagination-centered">
@@ -20,9 +20,9 @@
 			</div>
 		</div>
 		<div class="row" style="padding-left: 45px; padding-top: 10px;">
-			<div data-spy="affix" data-offset-top="20" class="hide" id="item_consume" style="width: 180px;">
-				<h5></h5>
-				<ul class="nav nav-tabs nav-stacked" id="item_actions" style="width: 180px;">
+			<div data-spy="affix" data-offset-top="20" class="hide" id="item-consume" style="width: 180px;">
+				<a href="#" id="item-action-close" class="muted pull-right">&times;</a><h5></h5>
+				<ul class="nav nav-tabs nav-stacked" id="item-actions" style="width: 180px;">
 				</ul>
 			</div>
 		</div>

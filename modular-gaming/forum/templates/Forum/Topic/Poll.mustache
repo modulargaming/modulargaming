@@ -1,0 +1,26 @@
+<form method="post">
+	<input type="hidden" name="csrf" value="{{csrf}}">
+	<fieldset>
+		<legend>Title</legend>
+		<input type="text" name="title" value="{{poll.title}}">
+	</fieldset>
+	<fieldset>
+		<legend>Options</legend>
+		{{#options}}
+		<input type="text" name="options[{{id}}]" placeholder="Option {{i}}" value="{{title}}"><br>
+		{{/options}}
+		{{^poll}}
+		<input type="text" name="options[]" placeholder="Option 1"><br>
+		<input type="text" name="options[]" placeholder="Option 2"><br>
+		<input type="text" name="options[]" placeholder="Option 3"><br>
+		<input type="text" name="options[]" placeholder="Option 4"><br>
+		<input type="text" name="options[]" placeholder="Option 5"><br>
+		{{/poll}}
+	</fieldset>
+	{{#poll}}
+	<button class="btn btn-primary" name="edit">Edit poll</button>
+	{{/poll}}
+	{{^poll}}
+	<button class="btn btn-primary" name="create">Create poll</button>
+	{{/poll}}
+</form>

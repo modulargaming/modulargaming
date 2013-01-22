@@ -1,15 +1,22 @@
-<div>
+<form action="{{links.poll}}" method="post">
+  <input type="hidden" name="csrf" value="{{csrf}}">
   <h5>Poll: {{title}}</h5>
   {{#options}}
-  <strong>{{title}}</strong><span class="pull-right">{{percent}}% Votes: {{votes}}</span>
+  {{^voted}}
+  <label class="radio">
+    <input type="radio" name="option_id" value="{{id}}">
+  {{/voted}}
+  <strong>{{title}}</strong>
+  <span class="pull-right">{{percent}}% Votes: {{votes}}</span>
+  {{^voted}}</label>{{/voted}}
   <div class="progress progress-{{colour}}">
       <div class="bar" style="width: {{percent}}%;"></div>
   </div>
   {{/options}}
   <p>
-  	<a href="{{links.poll}}" class="btn btn-success">Vote</a>
+  	{{^voted}}<button class="btn btn-success" name="vote">Vote</button>{{/voted}}
     {{#can_edit}}<hr><a href="{{links.poll}}" class="btn btn-small">Edit poll</a>{{/can_edit}}
-    {{#can_delete}}<a href="{{links.poll}}" class="btn btn-small btn-danger">Delete poll</a>{{/can_delete}}
+    {{#can_delete}}<button class="btn btn-small btn-danger" name="delete">Delete poll</button>{{/can_delete}}
   </p>
-</div>
+</form>
 <hr>
