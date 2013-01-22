@@ -76,8 +76,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		{
 			foreach($errors as $er)
 				Hint::error($er);
-
-			$this->redirect(Route::get('item.inventory'));
+			$this->redirect(Route::get('item.inventory')->uri());
 		}
 		
 		$this->view = new View_Item_Inventory_View;
