@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="span10">
-		<ul class="thumbnails clearfix">
+		<ul class="thumbnails">
 		  {{#items}}
 			<li class="span2 pagination-centered">
 			    <a href="{{action_link}}" class="thumbnail">
@@ -12,6 +12,19 @@
 		</ul>
 	</div>
 	<div class="span2">
-		Safe - shop - gallery
+		<div class="row" style="padding-left: 45px;">
+			<div class="btn-group">
+				<a href="#" class="btn">Safe</a>
+				<a href="#" class="btn">Shop</a>
+				<a href="#" class="btn">Gallery</a>
+			</div>
+		</div>
+		<div class="row" style="padding-left: 45px; padding-top: 10px;">
+			<div data-spy="affix" data-offset-top="20" class="hide" id="item_consume" style="width: 180px;">
+				<h5></h5>
+				<ul class="nav nav-tabs nav-stacked" id="item_actions" style="width: 180px;">
+				</ul>
+			</div>
+		</div>
 	</div>
 </div>

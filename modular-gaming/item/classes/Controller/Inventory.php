@@ -7,7 +7,12 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 	{
 		$this->view = new View_Item_Inventory_Index;
 		
-		//$max_items = Kohana::$config->load('items.inventory.pagination');
+		$config = Kohana::$config->load('items.inventory');
+		//$max_items = $config['pagination'];
+		
+		if($config['ajax'] === true) {
+			Assets::js('item.inventory', 'item/inventory.js');
+		}
 		
 		$items = ORM::factory('User_Item')
 			->where('user_id', '=', $this->user->id)
@@ -18,8 +23,9 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 	}
 	
 	public function action_view() {
-		$item = ORM::factory('User_Item', $this->request->param('id'))
-			->find();
+		$id = $this->request->param('id');
+		
+		$item = ORM::factory('User_Item', $id);
 		
 		$errors = array();
 		
@@ -28,15 +34,12 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		if($item->location != 'inventory')
 			$errors[] = 'The item you want to view is not located in your inventory.';
 		
-		if(count($errors) == 0) {
-			$this->view = new View_Item_Inventory_View;
-			$this->view->item = $item;
-			
+		if(count($errors) == 0) {			
 			//generate action list
 			$actions = array();
 			$default_command = Item_Command::factory($item->item->type->default_command);
 			
-			if($default_command->pets_required()) {
+			if($default_command->pets_required() == true) {
 				$pets = ORM::factory('User_Pet')
 					->where('user_id', '=', $this->user->id)
 					->find_all();
@@ -56,7 +59,18 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				$actions['gift'] = 'Send as gift';
 			
 			$actions['remove'] = 'Remove item';
-			$this->view->action_list = $actions;
+			
+			if ($this->request->is_ajax())
+			{
+				$this->response->headers('Content-Type', 'application/json');
+				return $this->response->body(json_encode(array('status' => 'success', 'actions' => $actions, 'name' => $item->item->name)));
+			}
+			
+		}
+		else if ($this->request->is_ajax())
+		{
+			$this->response->headers('Content-Type', 'application/json');
+			return $this->response->body(json_encode(array('status' => 'error', 'errors' => $errors)));
 		}
 		else 
 		{
@@ -65,6 +79,10 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 			$this->redirect(Route::get('item.inventory'));
 		}
+		
+		$this->view = new View_Item_Inventory_View;
+		$this->view->item = $item;
+		$this->view->action_list = $actions;
 	}
 
 	public function action_consume() {
