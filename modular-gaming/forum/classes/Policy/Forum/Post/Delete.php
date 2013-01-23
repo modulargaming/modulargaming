@@ -1,14 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Policy_Forum_Post_Delete extends Policy {
+class Policy_Forum_Post_Delete extends Policy_Forum_Post {
 
-	public function execute(Model_ACL_User $user, array $extra = NULL)
-	{
-		if ($user->has('roles', Model_Role::ADMIN))
-		{
-			return TRUE;
-		}
-
-		return FALSE;
-	}
 }
