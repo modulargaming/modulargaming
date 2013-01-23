@@ -4,6 +4,10 @@ class Controller_Search extends Abstract_Controller_Frontend {
 
 	public function action_index()
 	{
+		if ($this->request->is_ajax()) {
+			return $this->_search($this->request->query('type'), $this->request->query('item'));
+		}
+		
 		$this->view = new View_Search;
 
 		if (isset($_GET['query']))
@@ -30,5 +34,24 @@ class Controller_Search extends Abstract_Controller_Frontend {
 
 	}
 
-
+	protected function _search($type, $item) {
+		switch($type) {
+			case 'user' : 
+				$users = ORM::factory('User')
+					->where('username', 'LIKE', '%'.$item.'%')
+					->find_all();
+				$output = array();
+				
+				foreach($users as $user) {
+					$output[] = $user->username;
+				}
+				break;
+			default:
+				$output = 'ERROR';
+				break;
+		}
+		
+		$this->response->headers('Content-Type', 'application/json');
+		return $this->response->body(json_encode($output));
+	}
 }

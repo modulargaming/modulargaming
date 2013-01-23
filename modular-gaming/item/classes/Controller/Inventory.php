@@ -97,7 +97,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		{
 			foreach($errors as $er)
 				Hint::error($er);
-			$this->redirect(Route::get('item.inventory')->uri());
+
+			$this->redirect(Route::get('item.inventory'));
 		}
 		
 		$this->view = new View_Item_Inventory_View;
@@ -133,11 +134,11 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					$errors[] = 'No existing pet has been specified';
 				if($pet->user_id != $this->user->id)
 					$errors[] = 'You can\'t let a pet comsume this item if it\'s not yours';				
-				if($def_cmd->pets_required == false)
+				if($def_cmd->pets_required() == false)
 					$errors[] = 'can\'t perform this item action on a pet';
 				
 				if(count($errors) == 0) {
-					$commands = $item->commands;
+					$commands = $item->item->commands;
 					$results = array();
 					
 					$db = Database::instance();
@@ -216,37 +217,40 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						}
 						else {
 							if ($amount > 1) {
-								$name = Inflector::plural($item->name, $amount);
+								$name = Inflector::plural($item->name(), $amount);
 								$verb = 'were';
 							}
 							else {
-								$name = $item->name;
+								$name = $item->name();
 								$verb = 'was';
 							}
 							
 							$item->amount('-', $amount);
-							$results = __(':amount :item :verb deleted successfully', array(
-								':amount' => $amount, ':verb' => $verb, ':item' => $name		
+							$results = __(':item :verb deleted successfully', array(
+								':verb' => $verb, ':item' => $name		
 							));
 						}
 						break;
 					case 'gift' : //takes a username
 						$username = $this->request->post('username');
-						$user = ORM::factory('User')
-							->where('username', '=', $username)
-							->find();
-						
-						if($user->loaded()) {
-							$item->transfer($user);
-							//@todo notification
+						if($this->user->username == $username)
+							$errors[] = 'You can\'t send a gift to yourself';
+						else {
+							$user = ORM::factory('User')
+								->where('username', '=', $username)
+								->find();
 							
-							$results = __('You\'ve successfully sent :item to :username', array(
-								':item' => $item->item->name, ':username' => $user->username
-							));
+							if($user->loaded()) {
+								$item->transfer($user);
+								//@todo notification
+								
+								$results = __('You\'ve successfully sent :item to :username', array(
+									':item' => $item->item->name, ':username' => $user->username
+								));
+							}
+							else
+								$errors[] = __('Couldn\'t find a user named ":username"', array(':username' => $username));
 						}
-						else
-							$errors[] = __('Couldn\'t find a user named ":username"', array(':username' => $username));
-						
 						break;
 					default :
 						if(substr($action, 0, 5) == 'move_') { //Moving items can take an amount
@@ -265,16 +269,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 								$errors[] = 'You only have '.$item->name().', not '.$amount;
 							}
 							else {
-								$res = $cmd->perform($item, $amount);
-						
-								if($res == TRUE) {
-									$name = ($amount > 1) ? Inflector::plural($item->item->name, $amount) : $item->item->name;
-									$verb = ($amount > 1) ? 'were' : 'was';
-									
-									$results = __(':amount :items :verb been moved to your :location', array(
-										':amount' => $amount, ':items' => $name, ':location' => $location, ':verb' => $verb
-									));
-								}
+								$results = $cmd->perform($item, $amount);
 							}
 									
 						}

@@ -1,6 +1,6 @@
 <?php
 
-class Item_Command_General_Gift extends Item_Command_Move {
+class Item_Command_General_Gift extends Item_Command {
 	public $default = true;
 	
 	protected function _build($name){

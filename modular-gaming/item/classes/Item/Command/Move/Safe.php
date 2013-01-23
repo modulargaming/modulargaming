@@ -17,7 +17,7 @@ class Item_Command_Move_Safe extends Item_Command_Move {
 		if(!$item->move('safe', $amount))
 			return false;
 		else
-			'You have successfully moved ' . $name . ' to your safe.';
+			return 'You have successfully moved ' . $name . ' to your safe.';
 	}
 	
 }

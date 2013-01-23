@@ -63,9 +63,9 @@ class Model_Item extends ORM {
 	 */
 	public function name($amount) {
 		if($amount > 1)
-			return $amount . Inflector::plural($this->name, $amount);
+			return $amount . ' ' . Inflector::plural($this->name, $amount);
 		else
-			return $amount . $this->name;
+			return $amount . ' ' . $this->name;
 	}
 
 } // End Item Model

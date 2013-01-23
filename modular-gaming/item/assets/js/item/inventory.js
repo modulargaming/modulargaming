@@ -100,10 +100,7 @@ $(document).ready(function() {
 			}
 			else {
 				$.each(data.errors, function(k, v) {
-					$('#notifications').append('<div class="alert alert-error">'+
-							  +'<button type="button" class="close" data-dismiss="alert">&times;</button>' 
-							  +'<strong>Error: </strong> '+ v
-							+'</div>');
+					$('#notifications').append('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button> <strong>Error: </strong> '+v+'</div>');
 				});
 			}
 		}).fail(function(jqXHR, textStatus, errorThrown) {
@@ -130,8 +127,10 @@ function handle_consume(data) {
 			$('#notifications').append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>' + v +'</div>');
 		});
 		
-		if(data.new_amount == '0')
+		if(data.new_amount == '0') {
+			item.removeAttr('href');
 			item.css('background-color', '#fcf8e3').find('span').text('none');
+		}
 		else {
 			item.find('span').text(data.new_amount);
 		}
