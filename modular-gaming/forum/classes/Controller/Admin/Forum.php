@@ -2,8 +2,11 @@
 
 class Controller_Admin_Forum extends Abstract_Controller_Admin {
 
-	private $_category;
+	private $_category; // Forum Category
 
+	/**
+	 * Load the Forum category if an ID is specified, if the category isn't found throw a 404 exception.
+	 */
 	public function before()
 	{
 		parent::before();
@@ -20,14 +23,12 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 			{
 				throw HTTP_Exception::factory('404', 'No such category');
 			}
-
-			Breadcrumb::add('Edit category - '.$this->_category->title, Route::url('forum.admin', array(
-				'action' => 'edit',
-				'id'     => $this->_category->id
-			)));
 		}
 	}
 
+	/**
+	 * Display a list of categories.
+	 */
 	public function action_index()
 	{
 		if ( ! $this->user->can('Admin_Forum_Index') )
@@ -42,8 +43,42 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 		$this->view->categories = $categories->as_array();
 	}
 
+	public function action_create()
+	{
+		Breadcrumb::add('Create category', Route::url('forum.admin', array(
+			'action' => 'create'
+		)));
+
+		if ($this->request->method() == HTTP_REQUEST::POST)
+		{
+			try
+			{
+				ORM::factory('Forum_Category')
+					->create_category($this->request->post(), array(
+						'title',
+						'locked',
+						'description'
+					));
+
+				Hint::success('Forum Category created');
+
+				$this->redirect(Route::get('forum.admin')->uri());
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				Hint::error($e->errors('models'));
+			}
+		}
+
+		$this->view = new View_Admin_Forum_Create;
+	}
+
 	public function action_edit()
 	{
+		Breadcrumb::add('Edit category - '.$this->_category->title, Route::url('forum.admin', array(
+			'action' => 'edit',
+			'id'     => $this->_category->id
+		)));
 
 		// Edit!
 		if ($this->request->method() == HTTP_Request::POST)
@@ -52,7 +87,8 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 			{
 				$this->_category->values($this->request->post(), array(
 					'title',
-					'description'
+					'description',
+					'locked'
 				));
 				$this->_category->save();
 
@@ -81,6 +117,12 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
+		Breadcrumb::add('Delete category - '.$this->_category->title, Route::url('forum.admin', array(
+			'action' => 'delete',
+			'id'     => $this->_category->id
+		)));
+
+		// Get possible categories to move posts to.
 		$categories = ORM::factory('Forum_Category')
 			->where('id', '<>', $this->_category->id)
 			->find_all();
@@ -92,6 +134,7 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 			// Either delete all posts, or move them to another category.
 			if (isset($post['delete']))
 			{
+				// TODO, Possible change the API to only have move_topics and keep delete_all_topics as a sql "rule".
 				$this->_category->delete_all_topics();
 			}
 			else

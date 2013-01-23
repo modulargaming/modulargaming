@@ -23,4 +23,11 @@ class View_Admin_Forum_Index extends Abstract_View_Admin {
 		return $categories;
 	}
 
+	public function links()
+	{
+		return array(
+			'create' => Route::url('forum.admin', array('action' => 'create'))
+		);
+	}
+
 }
