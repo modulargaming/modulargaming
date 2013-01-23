@@ -1,0 +1,24 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Locked</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#species}}
+			<tr>
+				<td>{{id}}</td>
+				<td><a href="{{links.colour}}">{{name}}</a></td>
+				<td>{{description}}</td>
+				<td>{{locked}}</td>
+				<td><a class="btn btn-warning" href="{{links.edit}}">Edit</a></td>
+				<td><a class="btn btn-danger" href="{{links.delete}}">Delete</a></td>
+			</tr>
+		{{/species}}
+	</tbody>
+</table>
