@@ -108,11 +108,12 @@ class Model_User_Item extends ORM {
 			$user_item->save();
 		}
 		else { //doesn't seem like it, let's create a new stack
-			$user_item = ORM::factory('User_Item');
-			$user_item->user_id = $user_id;
-			$user_item->item_id = $this->item_id;
-			$user_item->location = $location;
-			$user_item->save();
+			$item = ORM::factory('User_Item');
+			$item->user_id = $user_id;
+			$item->item_id = $this->item_id;
+			$item->location = $location;
+			$item->amount = $amount;
+			$item->save();
 		}
 		
 		//update the amount

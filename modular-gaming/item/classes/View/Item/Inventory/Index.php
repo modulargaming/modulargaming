@@ -12,6 +12,7 @@ class View_Item_Inventory_Index extends Abstract_View {
 				'action_link' => Route::get('item.inventory.view')->uri(array('id' => $item->id)),
 				'img' => $item->item->img(),
 				'name' => $item->name(),
+				'id' => $item->id
 			);
 		}
 		

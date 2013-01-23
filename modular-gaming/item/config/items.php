@@ -3,6 +3,7 @@
 return array (
 	'inventory' => array(
 		'pagination' => 20,
-		'ajax' => true
+		'ajax' => true,
+		'consume_show_results' => 'all', // (all|first)
 	),
 );

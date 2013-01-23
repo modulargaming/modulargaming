@@ -23,7 +23,11 @@ class Item_Command_Pet_Transform extends Item_Command_Pet {
 	}
 	
 	public function perform($item, $param, $pet=null) {
-	
-		return null;
+		$specie = ORM::factory('Pet_Specie', $param);
+		
+		$pet->specie_id = $param;
+		$pet-save();
+		
+		return 'Your ' . $pet->name . ' has changed in to a ' . $specie->name;
 	}
 }

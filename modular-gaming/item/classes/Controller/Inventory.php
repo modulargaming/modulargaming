@@ -29,14 +29,18 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		
 		$errors = array();
 		
-		if($item->user_id != $this->user->id)
+		if(!$item->loaded())
+			$errors[] = 'Item could not be found';
+		else if($item->user_id != $this->user->id)
 			$errors[] = 'You can\'t access another player\'s item';
-		if($item->location != 'inventory')
+		else if($item->location != 'inventory')
 			$errors[] = 'The item you want to view is not located in your inventory.';
 		
 		if(count($errors) == 0) {			
 			//generate action list
 			$actions = array();
+			$extra_action_fields = array();
+			
 			$default_command = Item_Command::factory($item->item->type->default_command);
 			
 			if($default_command->pets_required() == true) {
@@ -46,19 +50,36 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				
 				if(count($pets) > 0) {
 					foreach($pets as $pet) {
-						$actions[$pet->id] = __($item->item->type->action, array(':pet_name' => $pet->name));
+						$actions[$pet->id] = array(
+							'item' => __($item->item->type->action, array(':pet_name' => $pet->name)),
+							'extra' => $default_command->inventory()
+						);
 					}
 				}
 			}
-			else
-				$actions['consume'] = $item->item->type->action;
+			else {
+				$actions['consume'] = array(
+					'item' => $item->item->type->action,
+					'extra' => $default_command->inventory()
+				);
+			}
 			
-			$actions['move_safe'] = 'Move to safe';
+			$actions['move_safe'] = array(
+					'item' => 'Move to safe',
+					'extra' => Item_Command::factory('Move_Safe')->inventory()
+				);
 			
-			if($item->item->transferable == true)
-				$actions['gift'] = 'Send as gift';
+			if($item->item->transferable == true) {
+				$actions['gift'] = array(
+					'item' =>  'Send as gift',
+					'extra' => Item_Command::factory('General_Gift')->inventory()
+				);
+			}
 			
-			$actions['remove'] = 'Remove item';
+			$actions['remove'] = array(
+					'item' => 'Remove item',
+					'extra' => Item_Command::factory('General_Remove')->inventory()
+			);
 			
 			if ($this->request->is_ajax())
 			{
@@ -102,7 +123,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			$errors[] = 'No action to perform has been specified';
 		
 		if(count($errors) == 0) {
-			$def_cmd = Item_Command::factory($item->type->default_command);
+			$def_cmd = Item_Command::factory($item->item->type->default_command);
 			
 			if(Valid::digit($action)) {
 				//we'll want to perform an action on a pet
@@ -140,8 +161,14 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						$db->commit();
 						
 						//@todo log
+						$show = Kohana::$config->load('items.inventory.consume_show_results');
 						
-						Hint::success($results[0]);
+						if($show == 'first')
+							Hint::success($results[0]);
+						else {
+							foreach($results as $result)
+								Hint::success($result);
+						}
 						$this->redirect(Route::get('item.inventory'));
 					}
 				}
@@ -223,7 +250,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						break;
 					default :
 						if(substr($action, 0, 5) == 'move_') { //Moving items can take an amount
-							$location = substr($action, 4);
+							$location = substr($action, 5);
 							$cmd = Item_Command::factory('Move_'.ucfirst($location));
 									
 							$amount = $this->request->post('amount');
@@ -258,7 +285,34 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			}
 		}
 		
-		if(count($errors) > 0) {
+		if ($this->request->is_ajax()) {
+			$return = array();
+			
+			if(count($errors) > 0) {
+				$return = array('status' => 'error', 'errors' => $errors);
+			}
+			else {
+				$show = Kohana::$config->load('items.inventory.consume_show_results');
+				$output = array();
+				
+				if(!is_array($results))
+					$output = $results;
+				else if($show == 'first')
+					$output = $results[0];
+				else {
+					foreach($results as $result)
+						$output[] = $result;
+				}
+				
+				$amount = ($item->loaded()) ? $item->name() : 0;
+				
+				$return = array('status' => 'success', 'result' => $output, 'new_amount' => $amount);
+			}
+			
+			$this->response->headers('Content-Type', 'application/json');
+			return $this->response->body(json_encode($return));
+		}
+		else if(count($errors) > 0) {
 			foreach($errors as $er)
 				Hint::error($er);
 		}

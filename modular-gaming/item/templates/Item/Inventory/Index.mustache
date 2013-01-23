@@ -1,11 +1,16 @@
 <div class="row">
+	<div class="span10" id="notifications">
+	
+	</div>
+</div>
+<div class="row">
 	<div class="span10" id="inventory-container">
 		<ul class="thumbnails">
 		  {{#items}}
 			<li class="span2 pagination-centered">
-			    <a href="{{action_link}}" class="thumbnail">
+			    <a href="{{action_link}}" class="thumbnail" data-item-id="{{id}}">
 			      	<img src="{{img}}" alt="" />
-			      	<br /> {{name}}
+			      	<br /> <span class="item-name">{{name}}</span>
 				</a>
 			</li>
 		{{/items}}
@@ -20,8 +25,8 @@
 			</div>
 		</div>
 		<div class="row" style="padding-left: 45px; padding-top: 10px;">
-			<div data-spy="affix" data-offset-top="20" class="hide" id="item-consume" style="width: 180px;">
-				<a href="#" id="item-action-close" class="muted pull-right">&times;</a><h5></h5>
+			<div data-spy="affix" data-offset-top="20" data-offset-bottom="100" class="hide" id="item-consume" style="width: 180px;">
+				<a href="#" id="item-action-close" class="muted pull-right" style="text-decoration: none; font-size: 16px;"><strong>&times;</strong></a><h5></h5>
 				<ul class="nav nav-tabs nav-stacked" id="item-actions" style="width: 180px;">
 				</ul>
 			</div>

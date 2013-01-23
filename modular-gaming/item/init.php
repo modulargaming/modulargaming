@@ -103,7 +103,17 @@ Route::set('item.inventory.view', 'inventory/view/<id>', array('id' => '[0-9]+')
 	'controller' => 'Inventory',
 	'action'     => 'view',
 ));
-Route::set('item.inventory', 'inventory(/<action>(/<id>))', array('id' => '[0-9]+'))
+Route::set('item.inventory.consume', 'inventory/consume/<id>', array('id' => '[0-9]+'))
+	->defaults(array(
+	'controller' => 'Inventory',
+	'action'     => 'consume',
+));
+Route::set('item.inventory', 'inventory/search')
+	->defaults(array(
+	'controller' => 'Search',
+	'action'     => 'Index',
+));
+Route::set('item.inventory', 'inventory(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 	'controller' => 'Inventory',
 	'action'     => 'Index',
