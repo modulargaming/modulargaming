@@ -16,5 +16,6 @@ class Policy_Forum_Post_Edit extends Policy_Forum_Post {
 			return TRUE;
 		}
 
+		return FALSE;
 	}
 }
