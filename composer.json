@@ -1,22 +1,25 @@
 {
-    "require": {
-        "php": ">=5.3.3",
-        "behat/behat": "2.4.*@stable",
-        "behat/mink": "1.4@stable",
-        "behat/mink-extension": "*",
-        "behat/mink-goutte-driver": "*",
-	    "phpspec/phpspec2": "*"
-    },
+	"require": {
+		"php": ">=5.3.3",
+		"phploc/phploc": "dev-master",
+		"squizlabs/php_codesniffer": "dev-master",
 
-    "config": {
-        "bin-dir": "bin/"
-    },
+		"behat/behat": "2.4.*@stable",
+		"behat/mink": "1.4@stable",
+		"behat/mink-extension": "*",
+		"behat/mink-goutte-driver": "*",
+		"phpspec/phpspec2": "*"
+	},
 
-    "autoload": {
-        "psr-0": {
-            "": "application/classes"
-        }
-    },
-    
-    "minimum-stability": "dev"
+	"config": {
+		"bin-dir": "bin/"
+	},
+
+	"autoload": {
+		"psr-0": {
+			"": "application/classes"
+		}
+	},
+
+	"minimum-stability": "dev"
 }
