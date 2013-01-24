@@ -145,4 +145,4 @@ function handle_consume(data) {
 		
 		item.css('border-color', '#953b39');
 	}
-});
+}

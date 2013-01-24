@@ -20,7 +20,7 @@ class Item_Command_User_Item extends Item_Command {
 			->where('item.name', '=', $param)
 			->find();
 		
-		return $recipe->loaded();
+		return $item->loaded();
 	}
 	
 	public function perform($item, $param, $data=null) {

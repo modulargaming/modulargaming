@@ -8,18 +8,21 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		$this->view = new View_Item_Inventory_Index;
 		
 		$config = Kohana::$config->load('items.inventory');
-		//$max_items = $config['pagination'];
+		$max_items = $config['pagination'];
 		
 		if($config['ajax'] === true) {
 			Assets::js('item.inventory', 'item/inventory/index.js');
 		}
 		
+		
 		$items = ORM::factory('User_Item')
 			->where('user_id', '=', $this->user->id)
-			->where('location', '=', 'inventory')
-			->find_all();
+			->where('location', '=', 'inventory');
 		
-		$this->view->items = $items;
+		$paginate = Paginate::factory($items)->execute();
+		
+		$this->view->pagination = $paginate->kostache();
+		$this->view->items = $paginate->result();
 		$this->view->links = array(
 			array('name' => 'Safe', 'link' => "#"),
 			array('name' => 'Shop', 'link' => "#"),
