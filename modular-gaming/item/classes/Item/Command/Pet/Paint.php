@@ -22,7 +22,16 @@ class Item_Command_Pet_Paint extends Item_Command_Pet {
 	}
 	
 	public function perform($item, $param, $pet=null) {
-	
-		return null;
+		$colour = ORM::factory('Pet_Colour')
+		->where('pet_colour.name', '=', $param)
+		->find();
+		
+		if($pet->specie->has('colours', $color)) {
+			$pet->colour_id = $colour->id;
+			$pet->save();
+			return $pet->name . ' changed into ' . $colour->name;
+		}
+		else
+			return FALSE;
 	}
 }

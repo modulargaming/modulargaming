@@ -41,6 +41,7 @@ CREATE TABLE `users` (
   `avatar` varchar(255) DEFAULT NULL,
   `gravatar` int(1) DEFAULT NULL,
   `post_count` int(10) unsigned DEFAULT NULL,
+  `avatar_id` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
@@ -510,3 +511,21 @@ CREATE TABLE `logs` (
   `params` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `avatars` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `img` varchar(120) NOT NULL,
+  `default` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `pet_species_colors` (
+  `pet_specie_id` int(11) NOT NULL,
+  `pet_color_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `users_avatars` (
+  `user_id` int(11) NOT NULL,
+  `avatar_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -1,0 +1,29 @@
+<?php defined('SYSPATH') OR die('No direct access allowed.');
+
+class Model_Avatar extends ORM {
+
+	protected $_belongs_to = array(
+		'user' => array(
+			'model' => 'User',
+		)
+	);
+
+	public function rules()
+	{
+		return array(
+			'title' => array(
+				array('not_empty'),
+				array('max_length', array(':value', 30)),
+				array('min_length', array(':value', 4)),
+			),
+			'img' => array(
+				array('not_empty'),
+				array('max_length', array(':value', 120)),
+			),
+			'default' => array(
+				array('in_array', array(':value', array(0,1))),
+			),
+		);
+	}
+
+} // End Avatar Model

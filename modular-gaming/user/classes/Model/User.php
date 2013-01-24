@@ -14,6 +14,16 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		'title' => array(
 			'model' => 'User_Title',
 		),
+		'avatar' => array(
+			'foreign_key' => 'avatar_id',
+			'model' => 'Avatar'		
+		)
+	);
+	
+	protected $_has_many = array(
+		'avatars' => array(
+			'through' => 'users_avatars'		
+		)		
 	);
 
 	protected $_load_with = array(

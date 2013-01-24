@@ -159,6 +159,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					}
 					
 					if(count($errors) == 0) {
+						$item->amount('-', 1);
 						$db->commit();
 						
 						//@todo log
@@ -199,8 +200,10 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 								$results[] = $res;
 						}
 							
-						if(count($errors) == 0) 
+						if(count($errors) == 0) {
+							$item->amount('-', 1);
 							$db->commit();
+						}
 						
 						break;
 					case 'remove' : //takes an amount
