@@ -144,7 +144,6 @@ Kohana::modules(array(
 	'migrations'    => MODPATH.'tasks-migrations',
 	'orm'           => MODPATH.'orm',        // Object Relationship Mapping
 	'pagination'    => MODPATH.'pagination', // Pagination
-	'pagination_new'    => MODPATH.'pagination_new', // Pagination
 	'purifier'      => MODPATH.'purifier',   // HTML Purifier
 	'unittest'      => MODPATH.'unittest',   // Unit testing
 	'userguide'     => MODPATH.'userguide',  // User guide and API documentation
