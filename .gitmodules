@@ -43,9 +43,3 @@
 [submodule "modules/image"]
 	path = modules/image
 	url = git://github.com/kohana/image.git
-[submodule "modules/pagination"]
-	path = modules/pagination
-	url = git://github.com/modulargaming/pagination.git
-[submodule "modules/pagination_new"]
-	path = modules/pagination_new
-	url = git://github.com/morgan/kohana-paginate.git

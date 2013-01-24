@@ -1,3 +1,0 @@
-## [Paginate]()
- - [The Basics](basics)
- 
