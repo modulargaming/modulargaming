@@ -5,7 +5,7 @@ abstract class Paginate extends Kohana_Paginate {
 	public $cfg = null;
 	public $current_page = false;
 	
-	public static function factory($object, $config='default', $driver = NULL)
+	public static function factory($object, $config = 'default', $driver = NULL)
 	{		
 		$object = parent::factory($object, $driver);
 		
@@ -27,7 +27,7 @@ abstract class Paginate extends Kohana_Paginate {
 		return $object;
 	}
 	
-	public function set_config($config='default')
+	public function set_config($config = 'default')
 	{
 		if ($config == 'default')
 		{
@@ -67,7 +67,7 @@ abstract class Paginate extends Kohana_Paginate {
 			$page_count = $this->pages();
 			$pages = array();
 			
-			for ($i=1; $i<=$page_count;$i++)
+			for ($i = 1; $i <= $page_count; $i++)
 			{
 				$active = ($this->current_page == $i);
 				
