@@ -44,7 +44,7 @@ class Model_Item extends ORM {
 	 * @return string
 	 */
 	public function img(){
-		return URL::base().'assets/img/items/'.$this->type->img_dir.$this->image;
+		return URL::site('assets/img/items/'.$this->type->img_dir.$this->image);
 	}
 	
 	/**

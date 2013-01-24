@@ -11,6 +11,7 @@ abstract class Item_Command {
 	//@todo include in admin, this command would be the only one, no extra commands would be assigned
 	public $allow_more = true;
 	public $load_pets = false;
+	public $delete_after_consume = true;
 	protected $_validation = null;
 	
 	abstract protected function _build($name);

@@ -14,12 +14,11 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			Assets::js('item.inventory', 'item/inventory/index.js');
 		}
 		
-		
 		$items = ORM::factory('User_Item')
 			->where('user_id', '=', $this->user->id)
 			->where('location', '=', 'inventory');
 		
-		$paginate = Paginate::factory($items)->execute();
+		$paginate = Paginate::factory($items, array('total_items' => $max_items))->execute();
 		
 		$this->view->pagination = $paginate->kostache();
 		$this->view->items = $paginate->result();
@@ -168,7 +167,9 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					}
 					
 					if(count($errors) == 0) {
-						$item->amount('-', 1);
+						if($def_cmd->delete_after_consume == true)
+							$item->amount('-', 1);
+						
 						$db->commit();
 						
 						//@todo log
@@ -189,7 +190,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				
 				switch($action) {
 					case 'consume' : 
-						$commands = $item->commands;
+						$commands = $item->item->commands;
 						$results = array();
 							
 						$db = Database::instance();
@@ -209,8 +210,11 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 								$results[] = $res;
 						}
 							
-						if(count($errors) == 0) {
-							$item->amount('-', 1);
+						if(count($errors) == 0) 
+						{
+							if($def_cmd->delete_after_consume == true)
+								$item->amount('-', 1);
+							
 							$db->commit();
 						}
 						
@@ -221,18 +225,22 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						if($amount == null)
 							$amount = 1;
 							
-						if(!Valid::digit($amount)) {
+						if(!Valid::digit($amount)) 
+						{
 							$errors[] = 'The amount you submitted isn\'t a number.';
 						}
-						else if($amount <= 0 OR $amount > $item->amount) {
+						else if($amount <= 0 OR $amount > $item->amount) 
+						{
 							$errors[] = 'You only have '.$item->name().', not '.$amount;
 						}
 						else {
-							if ($amount > 1) {
+							if ($amount > 1) 
+							{
 								$name = Inflector::plural($item->name(), $amount);
 								$verb = 'were';
 							}
-							else {
+							else 
+							{
 								$name = $item->name();
 								$verb = 'was';
 							}
@@ -247,7 +255,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						$username = $this->request->post('username');
 						if($this->user->username == $username)
 							$errors[] = 'You can\'t send a gift to yourself';
-						else {
+						else 
+						{
 							$user = ORM::factory('User')
 								->where('username', '=', $username)
 								->find();

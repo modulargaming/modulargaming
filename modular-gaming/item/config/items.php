@@ -6,4 +6,7 @@ return array (
 		'ajax' => true,
 		'consume_show_results' => 'all', // (all|first)
 	),
+	'cookbook' => array(
+		'ajax' => true		
+	)
 );

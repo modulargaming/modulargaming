@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="span8 offset1" id="recipe-container">
+	<div id="notifications">
+	</div>
+		<ul class="inline">
+		  {{#recipes}}
+			<li class="span2 pagination-centered" data-id="{{id}}">
+			    <img src="{{img}}" /><br />
+			    <form action="{{url}}">
+			    <input type="submit" value="Cook {{name}}" />
+			    </form>
+			</li>
+		{{/recipes}}
+		{{^recipes}}
+		<li class="span3 offset2">You have no recipes in your cookbook</li>
+		{{/recipes}}
+		</ul>
+	</div>
+	<div class="span2" style="padding-left: 35px;">
+		<div class="btn-group">
+			{{#links}}
+				<a href="{{link}}" class="btn">{{name}}</a>
+			{{/links}}
+		</div>
+	</div>
+</div>

@@ -1,4 +1,4 @@
-<?php
+<?php defined('SYSPATH') OR die('No direct script access.');
 
 class Item {
 	
@@ -35,20 +35,32 @@ class Item {
 			throw new Item_Exception('Item ":name" could not be loaded', array(':name' => $item->name));
 	}
 	
+	/**
+	 * Send x copies of the registered item to a user.
+	 * 
+	 * @param integer|Model_User $user
+	 * @param integer $amount
+	 * @param string $location
+	 * @throws Item_Exception
+	 */
 	public function to_user($user, $amount=1, $location='inventory') {
 		if(!Valid::digit($amount))
 			throw new Item_Exception('The supplied amount should be a number.');
 		
 		if(Valid::digit($user))
+		{
 			$user = ORM::factory('User', $id);
+		}
 		else if(!is_a($user, 'Model_User'))
 			throw new Item_Exception('The supplied user does not come from a model.');
+		
 		
 		if(!$user->loaded())
 			throw new Item_Exception('The supplied user does not exist.');
 		else 
 		{
-			if($this->_type == 'item') {
+			if($this->_type == 'item') 
+			{
 				$user_item = ORM::factory('User_Item')
 					->where('user_id', '=', $user->id)
 					->where('item_id', '=', $this->_item->id)
@@ -59,6 +71,7 @@ class Item {
 				$user_item = $this->_item;
 			
 			$action = ($amount > 0) ? '+' : '-';
+			
 			if($user_item->loaded())
 			{
 				//update item amount
@@ -76,8 +89,28 @@ class Item {
 		}
 	}
 	
-	public function from_user($user, $amount=1, $location='inventory') {
-		$this->to_user($user, '-'.$amount);
+	/**
+	 * Check if the user has this item in location x.
+	 * 
+	 * Optionally check if the user has atleast $amount.
+	 * 
+	 * @param string $location
+	 * @param integer $amount
+	 * @return Ambigous <ORM, Database_Result, Kohana_ORM, object, mixed, number, Database_Result_Cached, multitype:>|boolean
+	 */
+	public function user_has($location='inventory', $amount=false) {
+		$user_item = ORM::factory('User_Item')
+			->where('item_id', '=', $this->_item->id)
+			->where('location', '=', $location)
+			->where('user_id', '=', Auth::instance()->get_user()->id)
+			->find();
+		
+		if($user_item->loaded() && $amount == FALSE)
+			return $user_item;
+		else if($user_item->loaded() AND $user_item->amount >= $amount)
+			return $user_item;
+		else
+			return FALSE;
 	}
 	
 	static public function factory($item) {
