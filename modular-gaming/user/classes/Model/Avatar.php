@@ -25,5 +25,9 @@ class Model_Avatar extends ORM {
 			),
 		);
 	}
+	
+	public function img() {
+		return 'assets/avatars/'.$this->img;
+	}
 
 } // End Avatar Model

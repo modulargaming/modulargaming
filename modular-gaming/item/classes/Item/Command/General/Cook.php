@@ -1,5 +1,7 @@
 <?php
 class Item_Command_General_Cook extends Item_Command {
+	public $allow_more = false;
+	
 	protected function _build($name){
 		return array(
 			'title' => 'Recipe', 
@@ -23,6 +25,8 @@ class Item_Command_General_Cook extends Item_Command {
 	}
 	
 	public function perform($item, $param, $data=null) {
-		return null;
+		$item->move('cookbook');
+		
+		return $item->name . ' has been moved to your cookbook.';
 	}
 }

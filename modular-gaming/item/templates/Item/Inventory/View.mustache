@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="span8 offset3">
+		<div class="row">
+		{{#item}}
+			<div class="span1"><img src="{{image}}" /></div>
+			<div class="span4">
+				<strong>{{name}}</strong><br />
+				<em>Amount: {{amount}}</em>
+				
+				<p>
+				<ul class="nav nav-tabs nav-stacked" id="item-actions">
+					{{#menu}}
+						{{#extra}}
+							<li class="dropdown">
+							  <a class="dropdown-toggle" href="#">{{text}} <span class="caret pull-right"></span></a>
+							  <ul class="dropdown-menu pull-right" role="menu" style="width: 180px;">
+							  	<li>
+							  		<form class="form-inline" method="post" action="{{url}}">
+							  			<input type="hidden" name="action" value="{{action}}" />
+							  			<input type="hidden" name="csrf" value="{{csrf}}" />
+							  			<input style="margin-left: 10px;" type="{{field_type}}" name="{{field_name}}" class="{{field_classes}}" /> 
+							 			<input type="submit" class="btn btn-primary" value="{{field_button}}" />
+							  		</form>
+							  	</li>
+							  </ul>
+							</li>
+						{{/extra}}
+						{{#normal}}
+							<li>
+								<a href="#">{{text}}</a>
+								<form method="post" action="{{url}}" class="hide"><input type="hidden" name="csrf" value="{{csrf}}" /><input type="hidden" name="action" value="{{action}}" /></form>
+							</li>
+						{{/normal}}
+					{{/menu}}
+				</ul>
+				</p>
+			</div>
+		</div>
+		{{/item}}
+	</div>
+</div>

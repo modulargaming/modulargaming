@@ -1,5 +1,5 @@
 /**
- * Modular Gaming js file.
+ * Admin item recipe's js file.
  */
 
 $(document).ready(function() {

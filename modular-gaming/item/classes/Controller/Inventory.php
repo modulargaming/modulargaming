@@ -11,7 +11,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		//$max_items = $config['pagination'];
 		
 		if($config['ajax'] === true) {
-			Assets::js('item.inventory', 'item/inventory.js');
+			Assets::js('item.inventory', 'item/inventory/index.js');
 		}
 		
 		$items = ORM::factory('User_Item')
@@ -20,6 +20,11 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			->find_all();
 		
 		$this->view->items = $items;
+		$this->view->links = array(
+			array('name' => 'Safe', 'link' => "#"),
+			array('name' => 'Shop', 'link' => "#"),
+			array('name' => 'Cookbook', 'link' => Route::get('item.cookbook')->uri())
+		);
 	}
 	
 	public function action_view() {
@@ -98,12 +103,13 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			foreach($errors as $er)
 				Hint::error($er);
 
-			$this->redirect(Route::get('item.inventory'));
+			$this->redirect(Route::get('item.inventory')->uri());
 		}
 		
 		$this->view = new View_Item_Inventory_View;
 		$this->view->item = $item;
 		$this->view->action_list = $actions;
+		Assets::js('item.inventory', 'item/inventory/view.js');
 	}
 
 	public function action_consume() {
@@ -171,7 +177,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							foreach($results as $result)
 								Hint::success($result);
 						}
-						$this->redirect(Route::get('item.inventory'));
+						$this->redirect(Route::get('item.inventory')->uri());
 					}
 				}
 			}
@@ -323,6 +329,6 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			}
 		}
 		
-		$this->redirect(Route::get('item.inventory'));
+		$this->redirect(Route::get('item.inventory')->uri());
 	}
 }

@@ -100,7 +100,7 @@ $(document).ready(function() {
 			}
 			else {
 				$.each(data.errors, function(k, v) {
-					$('#notifications').append('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button> <strong>Error: </strong> '+v+'</div>');
+					$('#notifications').append('<div class="alert alert-error fade"> <button type="button" class="close" data-dismiss="alert">&times;</button> <strong>Error: </strong> '+v+'</div>');
 				});
 			}
 		}).fail(function(jqXHR, textStatus, errorThrown) {
@@ -124,7 +124,7 @@ function handle_consume(data) {
 			data.result = [data.result];
 		
 		$.each(data.result, function(k, v){
-			$('#notifications').append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>' + v +'</div>');
+			$('#notifications').append('<div class="alert alert-success fade"><button type="button" class="close" data-dismiss="alert">&times;</button>' + v +'</div>');
 		});
 		
 		if(data.new_amount == '0') {
@@ -140,9 +140,9 @@ function handle_consume(data) {
 	}
 	else {
 		$.each(data.errors, function(k,v){
-			$('#notifications').append('<div class="alert alert-error"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ v +'</div>');
+			$('#notifications').append('<div class="alert alert-error fade"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ v +'</div>');
 		});
 		
 		item.css('border-color', '#953b39');
 	}
-}
+});

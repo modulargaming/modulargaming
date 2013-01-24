@@ -16,7 +16,7 @@ class Item_Command_User_Item extends Item_Command {
 	}
 	
 	public function validate($param) {
-		$recipe = ORM::factory('Item')
+		$item = ORM::factory('Item')
 			->where('item.name', '=', $param)
 			->find();
 		
@@ -24,6 +24,12 @@ class Item_Command_User_Item extends Item_Command {
 	}
 	
 	public function perform($item, $param, $data=null) {
-		return null;
+		$item = ORM::factory('Item')
+			->where('item.name', '=', $param)
+			->find();
+		
+		Item::factory($item)->to_user(Auth::instance()->get_user()->id);
+		
+		return 'You\'ve recieved a' . $item->name;
 	}
 }
