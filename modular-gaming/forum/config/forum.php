@@ -2,7 +2,7 @@
 
 return array (
 	'topic' => array(
-		'pagination' => 20,
+		'pagination' => 5,
 		'ajax' => false,
 	),
 );
