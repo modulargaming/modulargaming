@@ -20,7 +20,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		
 		$paginate = Paginate::factory($items, array('total_items' => $max_items))->execute();
 		
-		$this->view->pagination = $paginate->kostache();
+		$this->view->pagination = $paginate->render();
 		$this->view->items = $paginate->result();
 		$this->view->links = array(
 			array('name' => 'Safe', 'link' => "#"),
