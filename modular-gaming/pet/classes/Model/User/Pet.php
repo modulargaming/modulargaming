@@ -27,22 +27,11 @@ class Model_User_Pet extends ORM {
 		'user'
 	);
 
-	public static function pet_limit($user_id)
-	{
-		$limit = Kohana::$config->load('pet.limit');
-		$pet_count = DB::select(array(DB::expr('COUNT(*)'), 'total'))
-		->from('user_pets')
-		->where('user_id', '=', $user_id)
-		->execute()
-		->get('total');
-		return ($user_id == 0 OR $pet_count < $limit);
-	}
-
 	public function rules()
 	{
 		return array(
 			'user_id' => array(
-				array('Model_User_Pet::pet_limit')
+				array('Valid_Pet::limit', array(':value'))
 			),
 			'name' => array(
 				array('not_empty'),
@@ -50,15 +39,20 @@ class Model_User_Pet extends ORM {
 				array(array($this, 'unique'), array('name', ':value')),
 				array('regex', array(':value', '/^[a-zA-Z0-9-_]++$/iD')),
 			),
+			'specie_id' => array(
+				array('Valid_Pet::specie_exists', array(':value'))
+			),
+			'colour_id' => array(
+				array('Valid_Pet::colour_exists', array(':value')),
+				array('Valid_Pet::colour_available', array(':value', ':model'))
+			)
 		);
 	}
 
 	public function create_pet($values, $expected)
 	{
 		$extra_validation = Validation::Factory($values)
-			->rule('specie_id', 'Model_Pet_Specie::specie_exists')
-			->rule('colour_id', 'Model_Pet_Colour::colour_exists')
-			->rule('colour_id', 'Model_Pet_Colour::colour_free');
+			->rule('colour_id', 'Valid_Pet::colour_free', array(':value'));
 
 		return $this->values($values, $expected)
 			->create($extra_validation);
