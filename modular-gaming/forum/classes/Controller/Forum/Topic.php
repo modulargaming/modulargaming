@@ -32,11 +32,19 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 
 	public function action_view()
 	{
-		$posts = $this->topic->posts->find_all();
+		$count_posts = $this->topic->posts->count_all();
 
+		$posts = $this->topic->posts;
+			
 		$this->view = new View_Forum_Topic_Index;
+
+		$paginate = Paginate::factory($posts)
+			->execute();
+
+		$this->view->pagination = $paginate->render();
 		$this->view->topic = $this->topic;
 		$this->view->posts = $posts;
+		$this->view->posts = $paginate->result();
 	}
 
 	public function action_reply()
