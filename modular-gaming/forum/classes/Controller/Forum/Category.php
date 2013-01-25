@@ -47,8 +47,7 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 			$topics = $this->category->topics
 			->with('last_post')
 			->order_by('sticky', 'DESC')
-			->order_by('last_post.created', 'DESC')
-			->find_all();
+			->order_by('last_post.created', 'DESC');
 		$max_topics = $config['pagination'];
 		$paginate = Paginate::factory($topics, array('total_items' => $max_topics))->execute();
 
