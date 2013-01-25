@@ -12,124 +12,124 @@ Route::set('item.admin.list.search', 'admin/item/search')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Search',
+		'action'     => 'search',
 ));
 Route::set('item.admin.list.retrieve', 'admin/item/retrieve')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Retrieve',
+		'action'     => 'retrieve',
 ));
 Route::set('item.admin.list.save', 'admin/item/save')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Save',
+		'action'     => 'save',
 ));
 Route::set('item.admin.list.delete', 'admin/item/delete')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Delete',
+		'action'     => 'delete',
 ));
 Route::set('item.admin.type.search', 'admin/item/types/search')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Search',
+		'action'     => 'search',
 ));
 Route::set('item.admin.type.save', 'admin/item/types/save')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Types',
-		'action'     => 'Save',
+		'action'     => 'save',
 ));
 Route::set('item.admin.type.retrieve', 'admin/item/types/retrieve')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Types',
-		'action'     => 'Retrieve',
+		'action'     => 'retrieve',
 ));
 Route::set('item.admin.type.delete', 'admin/item/types/delete')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Types',
-		'action'     => 'Delete',
+		'action'     => 'delete',
 ));
 Route::set('item.admin.recipe.search', 'admin/item/recipes/search')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Search',
+		'action'     => 'search',
 ));
 Route::set('item.admin.recipe.retrieve', 'admin/item/recipes/retrieve')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Recipes',
-		'action'     => 'Retrieve',
+		'action'     => 'retrieve',
 ));
 Route::set('item.admin.recipe.save', 'admin/item/recipes/save')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Recipes',
-		'action'     => 'Save',
+		'action'     => 'save',
 ));
 Route::set('item.admin.recipe.delete', 'admin/item/recipes/delete')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Recipes',
-		'action'     => 'Delete',
+		'action'     => 'delete',
 ));
 Route::set('item.admin.recipe.index', 'admin/item/recipes(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Recipes',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.admin.types.index', 'admin/item/types(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Types',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.admin.list.index', 'admin/item(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.inventory.view', 'inventory/view/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Inventory',
-		'action'     => 'View',
+		'action'     => 'view',
 ));
 Route::set('item.inventory.consume', 'inventory/consume/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Inventory',
-		'action'     => 'Consume',
+		'action'     => 'consume',
 ));
 Route::set('item.inventory.search', 'inventory/search')
 	->defaults(array(
 		'controller' => 'Search',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.inventory', 'inventory(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Inventory',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.cookbook.view', 'cookbook/view/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Cookbook',
-		'action'     => 'View',
+		'action'     => 'view',
 ));
 Route::set('item.cookbook.complete', 'cookbook/complete/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Cookbook',
-		'action'     => 'Complete',
+		'action'     => 'complete',
 ));
 Route::set('item.cookbook', 'cookbook')
 	->defaults(array(
 		'controller' => 'Cookbook',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));

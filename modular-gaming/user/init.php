@@ -4,28 +4,28 @@ Route::set('user.view', 'user/view(/<id>)', array('id' => '[0-9]+'))
   ->defaults(array(  	
     'directory'  => 'User',	  	
     'controller' => 'View',	  	
-    'action'     => 'Index',	  	
+    'action'     => 'index',	  	
   ));
 
 Route::set('user.edit', 'user/edit')
   ->defaults(array(  	
     'directory'  => 'User',	  	
     'controller' => 'Edit',	  	
-    'action'     => 'Index',	  	
+    'action'     => 'index',	  	
   ));
 
 Route::set('user.login', 'user/login')
   ->defaults(array(  	
     'directory'  => 'User',	  	
     'controller' => 'Login',	  	
-    'action'     => 'Index',	  	
+    'action'     => 'index',	  	
   ));
 
 Route::set('user.register', 'user/register')
   ->defaults(array(  	
     'directory'  => 'User',	  	
     'controller' => 'Register',	  	
-    'action'     => 'Index',	  	
+    'action'     => 'index',	  	
   ));
 
   	
@@ -33,7 +33,7 @@ Route::set('user', 'user(/<controller>(/<action>(/<id>)))')
   ->defaults(array(
     'directory'  => 'User',
     'controller' => 'Dashboard',
-    'action'     => 'Index',
+    'action'     => 'index',
 ));
 
 //Add link to manage users in admin
