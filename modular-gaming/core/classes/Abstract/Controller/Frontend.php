@@ -5,7 +5,7 @@
  * @package    Modular Gaming
  * @category   Controller
  * @author     Modular Gaming Team
- * @copyright  (c) 2012 Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
 abstract class Abstract_Controller_Frontend extends Controller {

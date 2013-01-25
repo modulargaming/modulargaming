@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Abstract base view for normal purposes.
+ *
+ * @package    Modular Gaming
+ * @category   View
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 abstract class Abstract_View {
 
 	/**
@@ -23,11 +31,13 @@ abstract class Abstract_View {
 		return URL::base();
 	}
 
-	public function assets_head() {
+	public function assets_head()
+	{
 		return Assets::head();
 	}
 
-	public function assets_body() {
+	public function assets_body()
+	{
 		return Assets::body();
 	}
 
