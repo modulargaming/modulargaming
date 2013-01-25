@@ -25,7 +25,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		$this->view->links = array(
 			array('name' => 'Safe', 'link' => "#"),
 			array('name' => 'Shop', 'link' => "#"),
-			array('name' => 'Cookbook', 'link' => Route::get('item.cookbook')->uri())
+			array('name' => 'Cookbook', 'link' => Route::url('item.cookbook'))
 		);
 	}
 	

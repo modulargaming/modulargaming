@@ -2,13 +2,13 @@
 	<div class="span6 offset3">
 		<div class="row">
 		{{#recipe}}
-			<div class="span4 offset1 pagination-centered"><img src="{{img}}" /> <br/> {{name}}</div>
+			<div class="span4 offset1 pagination-centered"><img src="{{img}}" /> <br/> <strong>{{name}}</strong></div>
 		{{/recipe}}
 		</div>
 		<div class="row" align="center">
-		<ul class="inline">
+		<ul class="thumbnails">
 		{{#materials}}
-			<li class="pagination-centered"><img src="{{img}}" /><br /> <strong><em>{{name}}</em></strong><br /> <span style="color: {{color}};">{{amount_owned}}/{{amount_needed}}</span></li>
+			<li style="display: inline-block; float: none;"><div class="thumbnail span2 pagination-centered"><img src="{{img}}" /><br /> <em>{{name}}</em><br /> <span style="color: {{color}};">{{amount_owned}}/{{amount_needed}}</span></div></li>
 		{{/materials}}
 		</ul>
 		</div>

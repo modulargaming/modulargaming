@@ -26,7 +26,7 @@ class Item_Command_Pet_Paint extends Item_Command_Pet {
 		->where('pet_colour.name', '=', $param)
 		->find();
 		
-		if($pet->specie->has('colours', $color)) {
+		if($pet->specie->has('colours', $colour)) {
 			$pet->colour_id = $colour->id;
 			$pet->save();
 			return $pet->name . ' changed into ' . $colour->name;

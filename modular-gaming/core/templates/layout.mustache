@@ -29,7 +29,7 @@
 						<li><a href="{{base_url}}">Home</a></li>
 						{{#logged_in}}
 							<li><a href="{{base_url}}pets/">Pets</a></li>
-							<li><a href="{{base_url}}messages/">Messages</a></li>
+							<li><a href="{{base_url}}inventory/">Inventory</a></li>
 							<li><a href="{{base_url}}forum/">Forum</a></li>
 						{{/logged_in}}
 					</ul>
@@ -46,6 +46,7 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li><a href="{{base_url}}user/view/{{player.id}}">Profile</a></li>
+									<li><a href="{{base_url}}messages/">Messages</a></li>
 									<li><a href="{{base_url}}user/edit/">Settings</a></li>
 									<li class="divider"></li>
 									<li>

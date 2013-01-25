@@ -3,6 +3,11 @@
 class Controller_Cookbook extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 	
+	public function before() {
+		Breadcrumb::add('Cook book', Route::url('item.cookbook'));
+		parent::before();
+	}
+	
 	public function action_index()
 	{
 		$this->view = new View_Item_Cookbook_Index;
@@ -28,9 +33,10 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 	}
 	
 	public function action_view() {
-		$id = $this->request->param('id');
-		
+		$id = $this->request->param('id');		
 		$item = ORM::factory('User_Item', $id);
+		
+		Breadcrumb::add('Cook '.$item->item->name, URL::site(Route::get('item.cookbook.view')->uri(array('id' => $id))));
 		
 		$errors = array();
 		
@@ -156,9 +162,9 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 			
 			foreach($coll as $material) {
 				$user_item = Item::factory($material->item)
-					->user_has('inventory', $material->amount);
+					->user_has('inventory');
 				
-				if($user_item != FALSE)
+				if($user_item != FALSE && $user_item->amount >= $material->amount)
 				{
 					$user_item->amount('-', $material->amount);
 					$materials++;

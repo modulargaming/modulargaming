@@ -102,6 +102,7 @@ $(document).ready(function() {
 				$.each(data.errors, function(k, v) {
 					$('#notifications').append('<div class="alert alert-error fade"> <button type="button" class="close" data-dismiss="alert">&times;</button> <strong>Error: </strong> '+v+'</div>');
 				});
+				$('#notifications').find('.alert').addClass('in');;
 			}
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			console.log(errorThrown);
@@ -126,6 +127,7 @@ function handle_consume(data) {
 		$.each(data.result, function(k, v){
 			$('#notifications').append('<div class="alert alert-success fade"><button type="button" class="close" data-dismiss="alert">&times;</button>' + v +'</div>');
 		});
+		$('#notifications').find('.alert').addClass('in');;
 		
 		if(data.new_amount == '0') {
 			item.removeAttr('href');
@@ -143,6 +145,7 @@ function handle_consume(data) {
 			$('#notifications').append('<div class="alert alert-error fade"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ v +'</div>');
 		});
 		
+		$('#notifications').find('.alert').addClass('in');
 		item.css('border-color', '#953b39');
 	}
 }
