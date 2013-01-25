@@ -2,29 +2,57 @@
 
 abstract class Paginate extends Kohana_Paginate {
 
+	// Config array
 	private $config = null;
+
+	// Request object
+	private $request;
+
+	// Route
+	private $route;
+
+	// Route parameters.
+	private $route_params;
+
+	// Current page
 	public $current_page = false;
 	
-	public static function factory($object, $config = 'default', $driver = NULL)
+	public static function factory($object, $config = array(), Request $request = NULL)
 	{		
-		$object = parent::factory($object, $driver);
-		
-		$object->set_config($config);
-		
+		$instance = parent::factory($object);
+
+		$instance->set_config();
+		$instance->set_config($config);
+
+		if ($request === NULL)
+		{
+			$request = Request::initial();
+		}
+
+		$instance->request = $request;
+		$instance->route = $request->route();
+
+		// Assign default route params
+		$instance->route_params = array(
+			'directory'  => $request->directory(),
+			'controller' => $request->controller(),
+			'action'     => $request->action(),
+		) + $request->param();
+
 		//get the current page
-		$page = Request::initial()->param($object->config['param']);
-		
+		$page = $request->param($instance->config['param']);
+
 		if ( ! Valid::digit($page))
 		{
 			$page = 1;
 		}
-		
-		$object->current_page = $page;
+
+		$instance->current_page = (int) $page;
 		
 		//limit the pagination results
-		$object->limit(($page - 1) * $object->config['total_items'], $object->config['total_items']);
+		$instance->limit(($page - 1) * $instance->config['total_items'], $instance->config['total_items']);
 		
-		return $object;
+		return $instance;
 	}
 	
 	public function set_config($config = 'default')
@@ -49,33 +77,74 @@ abstract class Paginate extends Kohana_Paginate {
 			$this->config = Kohana::$config->load($config)->as_array();
 		}
 	}
-	
+
+	/**
+	 * Get the number of pages for the paginate
+	 *
+	 * @return int
+	 */
 	public function pages()
 	{
 		return ceil($this->_count_total / $this->config['total_items']);
 	}
 
-	public function kostache()
+	/**
+	 * Generate the url for the specified page.
+	 *
+	 * @param  int  $page
+	 * @return  String
+	 */
+	public function url($page = 1)
 	{
-		//if we only have 1 page and autohide is on return nothing
-		if ($this->_count == $this->_count_total AND $this->config['auto_hide'] == TRUE)
+		// Clean the page number
+		$page = max(1, (int) $page);
+
+		// No page number in URLs to first page
+		if ($page === 1 AND ! $this->config['first_page_in_url'])
 		{
-			return false;
+			$page = NULL;
 		}
-		else
+
+		$params = array_merge(
+			$this->route_params,
+			array($this->config['param'] => $page)
+		);
+		
+		return URL::site($this->route->uri($params));
+	}
+
+	/**
+	 * Renders the pagination links.
+	 *
+	 * @param View $view View object
+	 * @return string Pagination output (HTML)
+	 */
+	public function render($view = NULL)
+	{
+		// Automatically hide pagination whenever it is superfluous
+		if ($this->config['auto_hide'] === TRUE AND $this->pages() <= 1)
+			return '';
+
+		if ($view === NULL)
 		{
-			$page_count = $this->pages();
-			$pages = array();
-			
-			for ($i = 1; $i <= $page_count; $i++)
-			{
-				$active = ($this->current_page == $i);
-				
-				$link = URL::site(Request::initial()->route()->uri(array($this->config['param'] => $i)));
-				$pages[] = array('num' => $i, 'link' => $link, 'active' => $active);
-			}
-			
-			return array('pages' => $pages);
+			// Use the view class from config
+			$refl = new ReflectionClass('View_'.$this->config['view']);
+			$view = $refl->newInstanceArgs();
 		}
+
+		$view->paginate = $this;
+
+		$renderer = Kostache::factory();
+		return $renderer->render($view);
+	}
+
+	/**
+	 * Magic method to auto render when cast to string.
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->render();
 	}
 }
