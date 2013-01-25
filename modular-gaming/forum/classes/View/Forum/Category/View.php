@@ -30,7 +30,7 @@ class View_Forum_Category_View extends Abstract_View {
 				'sticky'  => $topic->sticky,
 				'poll'    => $topic->poll->loaded(),
 				'href'    => Route::url('forum.topic', array('id' => $topic->id)),
-				'created' =>  Date::format($topic->created),
+				'created' => Date::format($topic->created),
 				'user'    => array(
 					'username' => $topic->user->username,
 					'href'     => Route::url('user.view', array(
