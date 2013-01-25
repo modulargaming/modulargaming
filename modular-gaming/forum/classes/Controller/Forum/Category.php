@@ -38,27 +38,25 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 	 */
 	public function action_page()
 	{
+		$this->view = new View_Forum_Category_View;
+
+		$config = Kohana::$config->load('forum.topic');
 		$count_topics = $this->category->topics
 			->count_all();
 
-		$pagination = Pagination::factory(array(
-			'route'          => Route::get('forum.category'),
-			'total_items'    => $count_topics,
-		));
-
-		$topics = $this->category->topics
+			$topics = $this->category->topics
 			->with('last_post')
 			->order_by('sticky', 'DESC')
 			->order_by('last_post.created', 'DESC')
-			->limit($pagination->items_per_page)
-			->offset($pagination->offset)
 			->find_all();
+		$max_topics = $config['pagination'];
+		$paginate = Paginate::factory($topics, array('total_items' => $max_topics))->execute();
 
-		$this->view = new View_Forum_Category_View;
 		$this->view->can_create = $this->user->can('Forum_Topic_Create', array('category' => $this->category));
 		$this->view->category = $this->category;
-		$this->view->topics = $topics;
-		$this->view->pagination = $pagination;
+		$this->view->pagination = $paginate->kostache();
+		$this->view->topics = $paginate->result();
+
 	}
 
 	/**

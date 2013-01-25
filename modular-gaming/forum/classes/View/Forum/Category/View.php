@@ -5,7 +5,6 @@ class View_Forum_Category_View extends Abstract_View {
 	public $category;
 	public $topics;
 	public $can_create;
-	public $pagination;
 
 	public function title()
 	{

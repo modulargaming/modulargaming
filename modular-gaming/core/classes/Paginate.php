@@ -31,13 +31,13 @@ abstract class Paginate extends Kohana_Paginate {
 	{
 		if ($config == 'default')
 		{
-			$this->cfg = Kohana::$config->load('pagination_new')->as_array();
+			$this->cfg = Kohana::$config->load('pagination')->as_array();
 		}
 		elseif (is_array($config))
 		{
 			if (count($config) < 4)
 			{
-				$this->cfg = array_merge(Kohana::$config->load('pagination_new')->as_array(), $config);
+				$this->cfg = array_merge(Kohana::$config->load('pagination')->as_array(), $config);
 			}
 			else
 			{
