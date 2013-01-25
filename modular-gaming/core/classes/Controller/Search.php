@@ -1,10 +1,19 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Search controller.
+ *
+ * @package    Modular Gaming
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Controller_Search extends Abstract_Controller_Frontend {
 
 	public function action_index()
 	{
-		if ($this->request->is_ajax()) {
+		if ($this->request->is_ajax())
+		{
 			return $this->_search($this->request->query('type'), $this->request->query('item'));
 		}
 		
@@ -34,15 +43,18 @@ class Controller_Search extends Abstract_Controller_Frontend {
 
 	}
 
-	protected function _search($type, $item) {
-		switch($type) {
+	protected function _search($type, $item)
+	{
+		switch($type)
+		{
 			case 'user' : 
 				$users = ORM::factory('User')
 					->where('username', 'LIKE', '%'.$item.'%')
 					->find_all();
 				$output = array();
 				
-				foreach($users as $user) {
+				foreach($users as $user)
+				{
 					$output[] = $user->username;
 				}
 				break;
