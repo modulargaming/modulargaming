@@ -109,7 +109,7 @@ abstract class Paginate extends Kohana_Paginate {
 			$this->route_params,
 			array($this->config['param'] => $page)
 		);
-		
+
 		return URL::site($this->route->uri($params));
 	}
 

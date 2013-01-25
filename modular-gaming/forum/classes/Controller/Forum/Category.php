@@ -41,6 +41,8 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 		$this->view = new View_Forum_Category_View;
 
 		//$config = Kohana::$config->load('forum.topic');
+		$count_topics = $this->category->topics
+			->count_all();
 
 		$topics = $this->category->topics
 			->with('last_post')
