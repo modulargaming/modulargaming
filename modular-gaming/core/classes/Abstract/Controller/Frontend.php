@@ -34,17 +34,28 @@ abstract class Abstract_Controller_Frontend extends Controller {
 		$this->_load_assets($assets);
 	}
 	
-	protected function _load_assets($config) {
-		if(isset($config['head']))
+	protected function _load_assets($config)
+	{
+		if (isset($config['head']))
+		{
 			$this->_register_assets('head', $config['head']);
-		if(isset($config['body']))
+		}
+
+		if (isset($config['body']))
+		{
 			$this->_register_assets('body', $config['body']);
+		}
+
 	}
 	
-	protected function _register_assets($location, $config) {
-		foreach($config as $type => $files) {
-			if(count($files) > 0) {
-				foreach($files as $desc) {
+	protected function _register_assets($location, $config)
+	{
+		foreach ($config as $type => $files)
+		{
+			if (count($files) > 0)
+			{
+				foreach($files as $desc)
+				{
 					$position = (isset($desc['location'])) ? $desc['location'] : 'end';
 					$relative = (isset($desc['location'])) ? $desc['relative'] : null;
 					Assets::add($type, $desc['name'], $desc['file'], $location, $position, $relative);
@@ -65,16 +76,19 @@ abstract class Abstract_Controller_Frontend extends Controller {
 
 	private function validate_csrf()
 	{
-		if ($this->request->is_ajax()) {
+		if ($this->request->is_ajax())
+		{
 			$url = URL::base('http');
 			$base_url = Kohana::$base_url;
 			$root = str_replace($base_url, '', $url);
 			
-			if($this->request->method() == HTTP_Request::POST AND $this->request->headers('Origin') != $root
-					AND strpos($this->request->headers('Referer'), $root.$base_url) === FALSE)
+			if ($this->request->method() == HTTP_Request::POST AND $this->request->headers('Origin') != $root
+			    AND strpos($this->request->headers('Referer'), $root.$base_url) === FALSE)
+			{
 				throw HTTP_Exception::Factory(403, 'CSRF2 check failed!');
+			}
 		}
-		else if ($this->request->method() == HTTP_Request::POST AND substr($this->request->directory(), 0, 5) != 'Admin')
+		elseif ($this->request->method() == HTTP_Request::POST AND substr($this->request->directory(), 0, 5) != 'Admin')
 		{
 			$validation = Validation::factory($this->request->post())
 				->rule('csrf', 'not_empty')
