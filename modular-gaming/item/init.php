@@ -101,12 +101,12 @@ Route::set('item.admin.list.index', 'admin/item(/<page>)', array('page' => '[0-9
 Route::set('item.inventory.view', 'inventory/view/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Inventory',
-		'action'     => 'view',
+		'action'     => 'View',
 ));
 Route::set('item.inventory.consume', 'inventory/consume/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Inventory',
-		'action'     => 'consume',
+		'action'     => 'Consume',
 ));
 Route::set('item.inventory.search', 'inventory/search')
 	->defaults(array(
@@ -121,15 +121,15 @@ Route::set('item.inventory', 'inventory(/<page>)', array('page' => '[0-9]+'))
 Route::set('item.cookbook.view', 'cookbook/view/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Cookbook',
-		'action'     => 'view',
+		'action'     => 'View',
 ));
 Route::set('item.cookbook.complete', 'cookbook/complete/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Cookbook',
-		'action'     => 'complete',
+		'action'     => 'Complete',
 ));
 Route::set('item.cookbook', 'cookbook')
 	->defaults(array(
 		'controller' => 'Cookbook',
-		'action'     => 'index',
+		'action'     => 'Index',
 ));
