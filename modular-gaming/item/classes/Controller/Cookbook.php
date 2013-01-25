@@ -17,6 +17,7 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 		if($config['ajax'] === true) 
 		{
 			Assets::js('item.cookbook', 'item/cookbook.js');
+			$this->view->ajax = true;
 		}
 		
 		$items = ORM::factory('User_Item')
@@ -101,11 +102,11 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 				
 				return $this->response->body(json_encode(array(
 					'status' => 'success', 
-					'material' => $materials,
+					'materials' => $materials,
 					'name' => $recipe->name,
-					'id' => $item->id,
 					'img' => $recipe->item->img(),
-					'collected' => $collect_count
+					'collected' => $collect_count,
+					'csrf' => Security::token()
 				)));
 			}
 			
@@ -185,15 +186,29 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 			}
 		}
 		
-		if(count($errors) > 0)
+		if($this->request->is_ajax()) {
+			if(count($errors) > 0)
+			{
+				$return = array('status' => 'error', 'errors' => $errors);
+			}
+			else
+			{
+				$return = array('status' => 'success', 'result' => $result, 'item' => $item->amount);
+			}
+			
+			$this->response->headers('Content-Type', 'application/json');
+			
+			return $this->response->body(json_encode($return));
+		}
+		else if(count($errors) > 0)
 		{
 			Hint::error($errors[0]);
+			$this->redirect(Route::get('item.cookbook')->uri());
 		}
 		else
 		{
 			Hint::success($result);
+			$this->redirect(Route::get('item.cookbook')->uri());
 		}
-		
-		$this->redirect(Route::get('item.cookbook')->uri());
 	}
 }

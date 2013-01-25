@@ -127,7 +127,7 @@ function handle_consume(data) {
 		$.each(data.result, function(k, v){
 			$('#notifications').append('<div class="alert alert-success fade"><button type="button" class="close" data-dismiss="alert">&times;</button>' + v +'</div>');
 		});
-		$('#notifications').find('.alert').addClass('in');;
+		$('#notifications').find('.alert').addClass('in');
 		
 		if(data.new_amount == '0') {
 			item.removeAttr('href');
