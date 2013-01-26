@@ -13,6 +13,11 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 
 	protected $topic;
 
+	/**
+	 * Attempt to load the Topic using the 'ID' parameter in the url.
+	 *
+	 * @throws HTTP_Exception_404 if topic is not found
+	 */
 	public function before()
 	{
 		parent::before();
@@ -33,15 +38,13 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 	public function action_view()
 	{
 		$posts = $this->topic->posts;
-			
-		$this->view = new View_Forum_Topic_Index;
 
 		$paginate = Paginate::factory($posts)
 			->execute();
 
+		$this->view = new View_Forum_Topic_Index;
 		$this->view->pagination = $paginate->render();
 		$this->view->topic = $this->topic;
-		$this->view->posts = $posts;
 		$this->view->posts = $paginate->result();
 	}
 
