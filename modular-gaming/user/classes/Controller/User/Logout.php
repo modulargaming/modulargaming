@@ -1,7 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Controller for logging out the user.
+ *
+ * @package    Modular Gaming
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Controller_User_Logout extends Abstract_Controller_User {
-
 
 	/**
 	 * Sign out the user and redirect him to the frontpage.
