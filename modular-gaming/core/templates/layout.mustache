@@ -70,22 +70,7 @@
 
 	<div class="container">
 		{{#has_breadcrumb}}
-			<ul class="breadcrumb">
-				{{#breadcrumb}}
-					{{#active}}
-						<li class="active">
-							{{title}}
-							{{#divider}}<span class="divider">/</span>{{/divider}}
-						</li>
-					{{/active}}
-					{{^active}}
-						<li>
-							<a href="{{href}}">{{title}}</a>
-							{{#divider}}<span class="divider">/</span>{{/divider}}
-						</li>
-					{{/active}}
-				{{/breadcrumb}}
-			</ul>
+			{{>breadcrumb}}
 		{{/has_breadcrumb}}
 
 		{{>hints}}
