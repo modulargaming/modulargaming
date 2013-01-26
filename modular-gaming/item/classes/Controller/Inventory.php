@@ -10,7 +10,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		$config = Kohana::$config->load('items.inventory');
 		$max_items = $config['pagination'];
 		
-		if($config['ajax'] === true) {
+		if($config['ajax'] === true) 
+		{
 			Assets::js('item.inventory', 'item/inventory/index.js');
 		}
 		
@@ -18,14 +19,14 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			->where('user_id', '=', $this->user->id)
 			->where('location', '=', 'inventory');
 		
-		$paginate = Paginate::factory($items, array('total_items' => $max_items))->execute();
+		$paginate = Paginate::factory($items, array ('total_items' => $max_items), $this->request)->execute();
 		
 		$this->view->pagination = $paginate->render();
 		$this->view->items = $paginate->result();
-		$this->view->links = array(
-			array('name' => 'Safe', 'link' => "#"),
-			array('name' => 'Shop', 'link' => "#"),
-			array('name' => 'Cookbook', 'link' => Route::url('item.cookbook'))
+		$this->view->links = array (
+			array ('name' => 'Safe', 'link' => "#"),
+			array ('name' => 'Shop', 'link' => "#"),
+			array ('name' => 'Cookbook', 'link' => Route::url('item.cookbook'))
 		);
 	}
 	
@@ -37,13 +38,18 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		$errors = array();
 		
 		if(!$item->loaded())
-			$errors[] = 'Item could not be found';
+		{
+			Hint::error('Item could not be found');
+		}
 		else if($item->user_id != $this->user->id)
-			$errors[] = 'You can\'t access another player\'s item';
+		{
+			Hint::error('You can\'t access another player\'s item');
+		}
 		else if($item->location != 'inventory')
-			$errors[] = 'The item you want to view is not located in your inventory.';
-		
-		if(count($errors) == 0) {			
+		{
+			Hint::error('The item you want to view is not located in your inventory.');
+		}
+		else {			
 			//generate action list
 			$actions = array();
 			$extra_action_fields = array();
@@ -76,7 +82,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					'extra' => Item_Command::factory('Move_Safe')->inventory()
 				);
 			
-			if($item->item->transferable == true) {
+			if($item->item->transferable == true) 
+			{
 				$actions['gift'] = array(
 					'item' =>  'Send as gift',
 					'extra' => Item_Command::factory('General_Gift')->inventory()
@@ -88,26 +95,36 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					'extra' => Item_Command::factory('General_Remove')->inventory()
 			);
 			
+			$ajax = array();
+			
 			if ($this->request->is_ajax())
 			{
-				$this->response->headers('Content-Type', 'application/json');
-				return $this->response->body(json_encode(array('status' => 'success', 'actions' => $actions, 'name' => $item->item->name)));
+				$ajax = array('actions' => $actions, 'name' => $item->item->name);
 			}
 			
 		}
-		else if ($this->request->is_ajax())
+		
+		//get a normaized array based on Hints' types
+		$dump = Hint::dump();
+		
+		if ($this->request->is_ajax())
 		{
 			$this->response->headers('Content-Type', 'application/json');
-			return $this->response->body(json_encode(array('status' => 'error', 'errors' => $errors)));
-		}
-		else 
-		{
-			foreach($errors as $er)
-				Hint::error($er);
-
-			$this->redirect(Route::get('item.inventory')->uri());
+			
+			//Delete the Hints from sessions
+			Hint::ajax_dump();
+			
+			//return normalized ajax response
+			return $this->response->body(json_encode(array_merge($dump, $ajax)));
 		}
 		
+		//if the response's status is an error there's nothing to show anymore
+		if($dump['status'] == 'error') 
+		{
+			return $this->redirect(Route::get('item.inventory')->uri());
+		}
+		
+		//otherwise render the page
 		$this->view = new View_Item_Inventory_View;
 		$this->view->item = $item;
 		$this->view->action_list = $actions;
@@ -121,17 +138,22 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		$errors = array();
 		
 		if(!$item->loaded())
-			$errors[] = 'You can\'t use an item that does not exist';
-		else {
-			if($item->user_id != $this->user->id)
-				$errors[] = 'You can\'t access another player\'s item';
-			if($item->location != 'inventory')
-				$errors[] = 'The item you want to view is not located in your inventory';
+		{
+			Hint::error('You can\'t use an item that does not exist');
 		}
-		if($action == null)
-			$errors[] = 'No action to perform has been specified';
-		
-		if(count($errors) == 0) {
+		else if($item->user_id != $this->user->id) {
+			Hint::error('You can\'t access another player\'s item');
+		}
+		else if($item->location != 'inventory')
+		{
+				Hint::error('The item you want to view is not located in your inventory');
+		}
+		else if($action == null)
+		{
+			Hint::error('No action to perform has been specified');
+		}
+		else 
+		{
 			$def_cmd = Item_Command::factory($item->item->type->default_command);
 			
 			if(Valid::digit($action)) {
@@ -139,26 +161,32 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				$pet = ORM::factory('User_Pet', $action);
 				
 				if(!$pet->loaded())
-					$errors[] = 'No existing pet has been specified';
-				if($pet->user_id != $this->user->id)
-					$errors[] = 'You can\'t let a pet comsume this item if it\'s not yours';				
-				if($def_cmd->pets_required() == false)
-					$errors[] = 'can\'t perform this item action on a pet';
-				
-				if(count($errors) == 0) {
+				{
+					Hint::error('No existing pet has been specified');
+				}
+				else if($pet->user_id != $this->user->id)
+				{
+					Hint::error('You can\'t let a pet comsume this item if it\'s not yours');	
+				}			
+				else if($def_cmd->pets_required() == false)
+				{
+					Hint::error('can\'t perform this item action on a pet');
+				}
+				else {
 					$commands = $item->item->commands;
 					$results = array();
 					
 					$db = Database::instance();
 					$db->begin();
-					
+					$error = false;
 					foreach($commands as $command) {
 						$cmd = Item_Command::factory($command['name']);
 						$res = $cmd->perform($item, $command['param'], $pet);
 						
-						if($res == false) {
+						if($res == FALSE) {
 							//the command couldn't be performed, spit out error, rollback changes and break the loop
-							$errors[] = __(':item_name could not be used on :pet_name', array(':item_name' => $item->name, ':pet_name' => $pet->name));
+							Hint::error(__(':item_name could not be used on :pet_name', array(':item_name' => $item->name, ':pet_name' => $pet->name)));
+							$error = TRUE;
 							$db->rollback();
 							break;
 						}
@@ -166,22 +194,13 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							$results[] = $res;
 					}
 					
-					if(count($errors) == 0) {
-						if($def_cmd->delete_after_consume == true)
+					if($error == FALSE) {
+						if($def_cmd->delete_after_consume == TRUE)
 							$item->amount('-', 1);
 						
 						$db->commit();
 						
 						//@todo log
-						$show = Kohana::$config->load('items.inventory.consume_show_results');
-						
-						if($show == 'first')
-							Hint::success($results[0]);
-						else {
-							foreach($results as $result)
-								Hint::success($result);
-						}
-						$this->redirect(Route::get('item.inventory')->uri());
 					}
 				}
 			}
@@ -195,22 +214,23 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							
 						$db = Database::instance();
 						$db->begin();
-						
+						$error = FALSE;
 						foreach($commands as $command) {
 							$cmd = Item_Command::factory($command['name']);
 							$res = $cmd->perform($item, $command['param']);
 						
 							if($res == false) {
 								//the command couldn't be performed, spit out error, rollback changes and break the loop
-								$errors[] = __(':item_name could not be used', array(':item_name' => $item->name));
+								Hint::error(__(':item_name could not be used', array(':item_name' => $item->name)));
 								$db->rollback();
+								$error = TRUE;
 								break;
 							}
 							else
 								$results[] = $res;
 						}
 							
-						if(count($errors) == 0) 
+						if($error = FALSE) 
 						{
 							if($def_cmd->delete_after_consume == true)
 								$item->amount('-', 1);
@@ -227,11 +247,11 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							
 						if(!Valid::digit($amount)) 
 						{
-							$errors[] = 'The amount you submitted isn\'t a number.';
+							Hint::error('The amount you submitted isn\'t a number.');
 						}
 						else if($amount <= 0 OR $amount > $item->amount) 
 						{
-							$errors[] = 'You only have '.$item->name().', not '.$amount;
+							Hint::error('You only have '.$item->name().', not '.$amount);
 						}
 						else {
 							if ($amount > 1) 
@@ -241,7 +261,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							}
 							else 
 							{
-								$name = $item->name();
+								$name = $item->item->name(1);
 								$verb = 'was';
 							}
 							
@@ -253,8 +273,11 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						break;
 					case 'gift' : //takes a username
 						$username = $this->request->post('username');
+						
 						if($this->user->username == $username)
-							$errors[] = 'You can\'t send a gift to yourself';
+						{
+							Hint::error('You can\'t send a gift to yourself');
+						}
 						else 
 						{
 							$user = ORM::factory('User')
@@ -270,7 +293,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 								));
 							}
 							else
-								$errors[] = __('Couldn\'t find a user named ":username"', array(':username' => $username));
+								Hint::error(__('Couldn\'t find a user named ":username"', array(':username' => $username)));
 						}
 						break;
 					default :
@@ -283,11 +306,13 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							if($amount == null)
 								$amount = 1;
 									
-							if(!Valid::digit($amount)) {
-								$errors[] = 'The amount you submitted isn\'t a number.';
+							if(!Valid::digit($amount)) 
+							{
+								Hint::error('The amount you submitted isn\'t a number.');
 							}
-							else if($amount <= 0 OR $amount > $item->amount) {
-								$errors[] = 'You only have '.$item->name().', not '.$amount;
+							else if($amount <= 0 OR $amount > $item->amount) 
+							{
+								Hint::error('You only have '.$item->name().', not '.$amount);
 							}
 							else {
 								$results = $cmd->perform($item, $amount);
@@ -295,52 +320,53 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 									
 						}
 						else //fallback to any unexisting item actions
-							$errors[] = 'The action you want to perform with this item does not exist';
+							Hint::error('The action you want to perform with this item does not exist');
 						break;
 				}
 			}
 		}
 		
-		if ($this->request->is_ajax()) {
+		$show = Kohana::$config->load('items.inventory.consume_show_results');
+		$output = array();
+		
+		if(!is_array($results))
+		{
+			$output[] = $results;
+		}
+		else if($show == 'first')
+		{
+			$output[] = $results[0];
+		}
+		else if(!empty($results)) 
+		{
+			foreach($results as $result)
+				$output[] = $result;
+		}
+		
+		if ($this->request->is_ajax()) 
+		{
 			$return = array();
 			
-			if(count($errors) > 0) {
-				$return = array('status' => 'error', 'errors' => $errors);
-			}
-			else {
-				$show = Kohana::$config->load('items.inventory.consume_show_results');
-				$output = array();
-				
-				if(!is_array($results))
-					$output = $results;
-				else if($show == 'first')
-					$output = $results[0];
-				else {
-					foreach($results as $result)
-						$output[] = $result;
-				}
-				
+			$return = Hint::dump();
+			Hint::ajax_dump();
+			
+			if($return['status'] == 'success') 
+			{	
 				$amount = ($item->loaded()) ? $item->name() : 0;
 				
-				$return = array('status' => 'success', 'result' => $output, 'new_amount' => $amount);
+				$return = array_merge($return, array('result' => $output, 'new_amount' => $amount));
 			}
 			
 			$this->response->headers('Content-Type', 'application/json');
 			return $this->response->body(json_encode($return));
 		}
-		else if(count($errors) > 0) {
-			foreach($errors as $er)
-				Hint::error($er);
-		}
-		else {
-			if(!is_array($results))
-				Hint::success($results);
-			else {
-				foreach($results as $re)
-					Hint::success($re);
+		
+		if(count($output) > 0)
+		{
+			foreach($output as $result) {
+				Hint::success($result);
 			}
 		}
-		
 		$this->redirect(Route::get('item.inventory')->uri());
 	}
 }

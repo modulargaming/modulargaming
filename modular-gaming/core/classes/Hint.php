@@ -242,5 +242,31 @@ class Hint {
 			Hint::get($type, NULL, TRUE);
 		}
 	}
+	
+	public static function ajax_dump() {
+		$error_messages = Hint::get(Hint::ERROR);
+		
+		if(count($error_messages) > 0) 
+		{
+			Hint::delete(Hint::ERROR);
+		}
+		else 
+		{
+			Hint::delete(Hint::SUCCESS);
+		}
+	}
+	
+	public static function dump() {
+		$error_messages = Hint::get(Hint::ERROR);
+		
+		if(count($error_messages) > 0)
+		{
+			return array('status' => 'error', 'errors' => $error_messages);
+		}
+		else
+		{
+			return array('status' => 'success', 'result' => Hint::get(Hint::SUCCESS));
+		}
+	}
 
 } // End Message

@@ -41,6 +41,7 @@ CREATE TABLE `users` (
   `avatar` varchar(255) DEFAULT NULL,
   `gravatar` int(1) DEFAULT NULL,
   `post_count` int(10) unsigned DEFAULT NULL,
+  `points` int(10) unsigned DEFAULT NULL,
   `avatar_id` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
@@ -491,6 +492,16 @@ ALTER TABLE `item_recipe_materials`
   ADD CONSTRAINT `item_recipe_materials_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE;
 ALTER TABLE `item_recipe_materials`
   ADD CONSTRAINT `item_recipe_materials_ibfk_2` FOREIGN KEY (`item_recipe_id`) REFERENCES `item_recipes` (`id`) ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS `user_shops` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(70) NOT NULL,
+  `description` text NOT NULL,
+  `size` int(11) NOT NULL DEFAULT '0',
+  `till` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

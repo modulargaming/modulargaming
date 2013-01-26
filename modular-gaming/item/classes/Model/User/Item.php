@@ -49,6 +49,9 @@ class Model_User_Item extends ORM {
 	 * @return boolean|Model_User_Item
 	 */
 	public function move($location, $amount=1) {
+		if($amount == '*')
+			$amount = $this->amount;
+		
 		return $this->_relocate($this->user_id, $location, $amount);
 	}
 	
