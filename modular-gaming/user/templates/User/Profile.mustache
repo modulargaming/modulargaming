@@ -19,10 +19,13 @@
 				<li class="active"><a href="#pets" data-toggle="tab">Pets</a></li>
 				<li><a href="#about" data-toggle="tab">About me</a></li>
 			</ul>
+{{& pagination}}
 			<div class="tab-content">
 				<div class="tab-pane active in" id="pets">
 					<div class="row">
 						{{#pets}}
+
+						
 						<div class="span3 center">
 							<span class="thumbnail">
 								<a href="{{href}}"><img src="{{src}}" alt=""></a>

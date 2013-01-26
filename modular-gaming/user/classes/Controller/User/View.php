@@ -17,9 +17,18 @@ class Controller_User_View extends Abstract_Controller_User {
 			throw HTTP_Exception::Factory('404', 'No such user');
 		}
 
+		$pets = ORM::factory('User_Pet')
+		->where('user_id', '=', $user->id)
+		->order_by('active', 'desc');
+
+		$paginate = Paginate::factory($pets)
+			->execute();
+		
 		$this->view = new View_User_Profile;
+		$this->view->pagination = $paginate->render();
 		$this->view->profile_user = $user;
-		$this->view->pets = ORM::factory('User_Pet')->where('user_id', '=', $user->id)->order_by('active', 'desc')->find_all()->as_array();
+		//$this->view->pets = ORM::factory('User_Pet')->where('user_id', '=', $user->id)->order_by('active', 'desc')->find_all()->as_array();
+		$this->view->pets = $paginate->result();
 	}
 
 }
