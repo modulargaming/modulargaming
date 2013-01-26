@@ -10,7 +10,7 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 			{
 				if ($this->request->post('adopt'))
 				{
-					if(Model_User_Pet::pet_limit($this->user->id))
+					if(Valid_Pet::limit($this->user->id))
 					{
 						$pet = ORM::factory('User_Pet')
 						->where('user_pet.id', '=', $this->request->post('adopt'))
@@ -38,15 +38,14 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 		$this->view = new View_Pet_Adopt;
 		$pets = ORM::factory('User_Pet')
 		->where('user_id', '=', 0)
-		->order_by('abandoned', 'desc')
-		->find_all();
-		$array = array();
-		foreach ($pets as $pet)
-		{
-			$array[] = $pet;
-		}
-		$this->view->pets = $array;
-		$this->view->pets_count = count($array);
+		->order_by('abandoned', 'desc');
+		
+		$paginate = Paginate::factory($pets)
+			->execute();
+
+		$this->view->pagination = $paginate->render();
+		$this->view->pets	= $paginate->result();
+		$this->view->pets_count = count($pets);
 		$this->view->href = array(
 				'create' => Route::url('pet.create'),
 			);

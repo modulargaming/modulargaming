@@ -1,13 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-Route::set('pets', 'pets')
+Route::set('pets', 'pets(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Pet',
 		'controller' => 'Index',
 		'action'     => 'index',
 	));
 
-Route::set('pet.adopt', 'pet/adopt')
+Route::set('pet.adopt', 'pet/adopt(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Pet',
 		'controller' => 'Adopt',

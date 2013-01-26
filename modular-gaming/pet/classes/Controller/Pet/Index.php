@@ -42,24 +42,13 @@ class Controller_Pet_Index extends Abstract_Controller_Frontend {
 		$this->view = new View_Pet_Index;
 		$pets = ORM::factory('User_Pet')
 		->where('user_id', '=', $this->user->id)
-		->order_by('active', 'desc')
-		->find_all();
-		$array = array();
-		foreach ($pets as $key => $value)
-		{
-			$array[] = array(
-				'id' => $value->id,
-				'user_id' => $value->user_id,
-				'name' => $value->name,
-				'active' => ($key ? 0 : $value->active),
-				'link' => Route::url('pet', array('name' => strtolower($value->name))),
-				'specie' => $value->specie,
-				'colour' => $value->colour,
-				'created' => Date::format($value->created),
-			);
-		}
-		$this->view->pets = $array;
-		$this->view->pets_count = count($array);
+		->order_by('active', 'desc');
+
+		$paginate = Paginate::factory($pets)
+			->execute();
+		$this->view->pagination = $paginate->render();
+		$this->view->pets = $paginate->result();
+		$this->view->pets_count = count($pets);
 		$this->view->href = array(
 				'create' => Route::url('pet.create'),
 				'adopt' => Route::url('pet.adopt'),

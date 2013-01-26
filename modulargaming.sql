@@ -541,7 +541,7 @@ CREATE TABLE IF NOT EXISTS `pet_species_colours` (
   `colour_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO  `pet_species_colors` (`pet_specie_id` , `pet_color_id`)
+INSERT INTO  `pet_species_colours` (`pet_specie_id` , `colour_id`)
 VALUES ('1',  '1'), ('1',  '2'), ('1',  '3'), 
 ('1',  '4'), ('1',  '5'), ('1',  '6'), ('2',  '1'), 
 ('2',  '2'), ('2',  '3'), ('2',  '4'), ('2',  '5'), ('2',  '6');
