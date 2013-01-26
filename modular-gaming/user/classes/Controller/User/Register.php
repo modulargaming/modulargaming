@@ -1,8 +1,18 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Controller for registering a new user.
+ *
+ * @package    Modular Gaming
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Controller_User_Register extends Abstract_Controller_User {
 
-	
+	/**
+	 * Display and handle the register form.
+	 */
 	public function action_index()
 	{
 		if ($this->auth->logged_in())
@@ -19,11 +29,12 @@ class Controller_User_Register extends Abstract_Controller_User {
 				{
 					$user = ORM::factory('User')
 						->create_user($this->request->post(), array(
-						'username',
-						'email',
-						'password'
-					));
+							'username',
+							'email',
+							'password'
+						));
 
+					// Add the login role.
 					$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
 
 					// Send the welcome email.
@@ -50,5 +61,4 @@ class Controller_User_Register extends Abstract_Controller_User {
 		$this->view = new View_User_Register;
 	}
 
-
-}
+} // End User_Register

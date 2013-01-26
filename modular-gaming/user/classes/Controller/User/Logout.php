@@ -28,4 +28,4 @@ class Controller_User_Logout extends Abstract_Controller_User {
 		}
 	}
 
-}
+} // End User_Logout

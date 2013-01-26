@@ -1,7 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * View a users public profile.
+ *
+ * @package    Modular Gaming
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Controller_User_View extends Abstract_Controller_User {
-
 
 	/**
 	 * View users profile
@@ -17,9 +24,10 @@ class Controller_User_View extends Abstract_Controller_User {
 			throw HTTP_Exception::Factory('404', 'No such user');
 		}
 
+		// @TODO, This belongs to the pet module, better to use events?
 		$pets = ORM::factory('User_Pet')
-		->where('user_id', '=', $user->id)
-		->order_by('active', 'desc');
+			->where('user_id', '=', $user->id)
+			->order_by('active', 'desc');
 
 		$paginate = Paginate::factory($pets)
 			->execute();
