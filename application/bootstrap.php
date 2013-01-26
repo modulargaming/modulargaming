@@ -123,13 +123,13 @@ I18n::lang('en-gb');
 Kohana::modules(array(
 	
 	// Modular Gaming modules
-	'forum' => MGPATH.'forum',
-	'item' => MGPATH.'item',
-	'pet'   => MGPATH.'pet',
+	'forum'   => MGPATH.'forum',
+	'item'    => MGPATH.'item',
+	'pet'     => MGPATH.'pet',
 	'message' => MGPATH.'message',
-	'user'  => MGPATH.'user',
-	'admin' => MGPATH.'admin',
-	'core'  => MGPATH.'core', //Modular gaming core module
+	'user'    => MGPATH.'user',
+	'admin'   => MGPATH.'admin',
+	'core'    => MGPATH.'core', //Modular gaming core module
 
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
