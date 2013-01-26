@@ -18,7 +18,7 @@ class Email extends Kohana_Email {
 	 * @param   string              $type
 	 * @return  Email
 	 */
-	public static function factory(Abstract_View_Email $view = NULL, $message = NULL, $type = NULL)
+	public static function factory($view = NULL, $message = NULL, $type = NULL)
 	{
 		return new Email($view);
 	}
