@@ -2,6 +2,7 @@
 
 <project name="Modular Gaming" default="build">
 	<target name="build" depends="prepare, phploc, phpcs" />
+	<target name="build-ci" depends="prepare, phploc-ci, phpcs-ci" />
 
 	<target name="prepare" depends="clean" description="Create the directories required for building.">
 		<mkdir dir="${basedir}/build/logs"/>
@@ -11,7 +12,24 @@
 		<delete dir="${basedir}/build/logs"/>
 	</target>
 
-	<target name="phploc" description="Measure project size using PHPLOC">
+	<!-- Command line builds -->
+	<target name="phploc" description="Output the project size using PHPLOC">
+		<exec executable="bin/phploc">
+			<arg path="${basedir}/application/classes" />
+			<arg path="${basedir}/modular-gaming" />
+		</exec>
+	</target>
+
+	<target name="phpcs" description="Check the codestyle using PHP_CodeSniffer">
+		<exec executable="bin/phpcs">
+			<arg value="--standard=${basedir}/build/cs/PHP/CodeSniffer/Standards/Kohana" />
+			<arg path="${basedir}/application/classes" />
+			<arg path="${basedir}/modular-gaming" />
+		</exec>
+	</target>
+
+	<!-- Automated builds -->
+	<target name="phploc-ci" description="Measure project size using PHPLOC">
 		<exec executable="bin/phploc">
 			<arg value="--log-csv" />
 			<arg value="${basedir}/build/logs/phploc.csv" />
@@ -20,7 +38,7 @@
 		</exec>
 	</target>
 
-	<target name="phpcs" description="Generate checkstyle.xml using PHP_CodeSniffer">
+	<target name="phpcs-ci" description="Generate checkstyle.xml using PHP_CodeSniffer">
 		<exec executable="bin/phpcs">
 			<arg value="--report=checkstyle" />
 			<arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
