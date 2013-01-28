@@ -148,6 +148,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		
 		$this->view->items = $pagination->result();
 		$this->view->pagination = $pagination->render();
+		$this->view->inventory_url = Route::url('item.user_shop.inventory');
 	}
 	
 	public function action_inventory() {
@@ -248,15 +249,12 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		
 		$shop = ORM::factory('User_Shop', $id);
 		
-		if(!$shop->loaded())
+		$this->view = new View_Item_Shop_View;
+		$this->view->shop = $shop->as_array();
+		$this->view->owner = $shop->user->as_array();
+		
+		if($shop->loaded())
 		{
-			$this->view = new View_Item_Shop_Empty;
-		}
-		else 
-		{
-			$this->view = new View_Item_Shop_View;
-			$this->view->shop = $shop;
-			
 			$inventory = ORM::factory('User_Item')
 				->where('user_id', '=', $shop->user_id)
 				->where('location', '=', 'shop')
