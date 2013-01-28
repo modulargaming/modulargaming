@@ -11,10 +11,10 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		$shop = $this->_check_shop();
 		
 		if($shop == FALSE) 
-			$this->redirect(Route::get('items.user_shop.create')->uri());
+			$this->redirect(Route::get('item.user_shop.create')->uri());
 		
 		$this->view = new View_Item_Shop_Index;
-		$this->view->shop = $this->_shop;
+		$this->view->shop = $this->_shop->as_array();
 		
 		$this->view->units = ($config['size']['active']) ? $config['size'] : false;
 		
@@ -25,7 +25,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		
 		//if the user already has a shop redirect to index
 		if($shop == true)
-			$this->redirect(Route::get('items.user_shop.index')->uri());
+			$this->redirect(Route::get('item.user_shop.index')->uri());
 		
 		$config = Kohana::$config->load('items.user_shop.size');
 		
@@ -48,7 +48,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 			}
 		}
 		
-		$this->redirect(Route::get('items.user_shop.index')->uri());
+		$this->redirect(Route::get('item.user_shop.index')->uri());
 	}
 	
 	public function action_update() {
@@ -56,7 +56,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 	
 		//if the user already has a shop redirect to index
 		if($shop == true)
-			$this->redirect(Route::get('items.user_shop.index')->uri());
+			$this->redirect(Route::get('item.user_shop.index')->uri());
 	
 		if($this->request->method() == HTTP_Request::POST)
 		{
@@ -75,7 +75,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 			}
 		}
 	
-		$this->redirect(Route::get('items.user_shop.index')->uri());
+		$this->redirect(Route::get('item.user_shop.index')->uri());
 	}
 	
 	public function action_create() {
@@ -83,7 +83,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		
 		//if the user already has a shop redirect to index
 		if($shop == true)
-			$this->redirect(Route::get('items.user_shop.index')->uri());
+			$this->redirect(Route::get('item.user_shop.index')->uri());
 		
 		$config = Kohana::$config->load('items.user_shop');
 		
@@ -95,7 +95,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 					if($this->user->points < $config['creation_cost'])
 					{
 						Hint::error('You can\'t afford to open a shop!');
-						$this->redirect(Route::get('items.user_shop.create')->uri());
+						return $this->redirect(Route::get('item.user_shop.create')->uri());
 					}
 					
 					$this->user->points = $this->user->points - $config['creation_cost'];
@@ -107,6 +107,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 				->values($this->request->post(), array('title', 'description'));
 				
 				$shop->user_id = $this->user->id;
+				$shop->size = 1;
 				$shop->save();
 			
 			} catch (ORM_Validation_Exception $e) {
@@ -115,20 +116,19 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 				foreach($errors as $error) {
 					Hint::error($error);
 				}
-				$this->redirect(Route::get('items.user_shop.create')->uri());
+				return $this->redirect(Route::get('item.user_shop.create')->uri());
 			}
 			
 			Hint::success('You\'ve successfully created your own shop, congratulations!');
-			$this->redirect(Route::get('items.user_shop.index')->uri());
+			$this->redirect(Route::get('item.user_shop.index')->uri());
 		}
 		
 		$this->view = new View_Item_Shop_Create;
 		$this->view->creation = false;
 		
-		if($config['creation_cost'] != false || $config['creation_cost'] > 0) {
-			$this->view->affordable = ($this->user->points < $config['creation_cost']);
-			
-			$this->view->creation = $config['creation_cost'];
+		if($config['creation_cost'] != false || $config['creation_cost'] > 0) 
+		{			
+			$this->view->creation = array('cost' => $config['creation_cost'], 'affordable' => ($this->user->points < $config['creation_cost']));
 		}
 	}
 	
@@ -136,7 +136,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		$shop = $this->_check_shop();
 		
 		if($shop == false)
-			$this->redirect(Route::get('items.user_shop.create')->uri());
+			$this->redirect(Route::get('item.user_shop.create')->uri());
 		
 		$this->view = new View_Item_Shop_Stock;
 		
@@ -154,7 +154,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		$shop = $this->_check_shop();
 		
 		if($shop == false)
-			$this->redirect(Route::get('items.user_shop.create')->uri());
+			$this->redirect(Route::get('item.user_shop.create')->uri());
 		
 		if($this->request->method() == HTTP_Request::POST)
 		{
@@ -197,14 +197,14 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 				Hint::success('You\'ve successfully updated your shop\'s stock.');
 		}
 		
-		$this->redirect(Route::get('items.user_shop.stock'), array('page' => $this->request->param('page')));
+		$this->redirect(Route::get('item.user_shop.stock'), array('page' => $this->request->param('page')));
 	}
 	
 	public function action_logs() {
 		$shop = $this->_check_shop();
 		
 		if($shop == false)
-			$this->redirect(Route::get('items.user_shop.create')->uri());
+			$this->redirect(Route::get('item.user_shop.create')->uri());
 		
 		$this->view = new View_Item_Shop_Logs;
 		//@todo implement after logs and notifications are done
@@ -214,7 +214,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		$shop = $this->_check_shop();
 		
 		if($shop == false)
-			$this->redirect(Route::get('items.user_shop.create')->uri());
+			$this->redirect(Route::get('item.user_shop.create')->uri());
 		
 		if($this->request->method() == HTTP_Request::POST)
 		{
@@ -240,7 +240,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 			}
 		}
 		
-		$this->redirect(Route::get('items.user_shop.logs')->uri());
+		$this->redirect(Route::get('item.user_shop.logs')->uri());
 	}
 	
 	public function action_view() {
@@ -305,22 +305,23 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 	public function after() {
 		if($this->view !== null)
 		{
+			$map_links = array('index' => 0, 'stock' => 1, 'logs' => 2);
 			$this->view->links = array(
-					'index' => array('name' => 'Shop', 'link' => Route::url('items.user_shop.index')),
-					'stock' => array('name' => 'Stock', 'link' => Route::url('items.user_shop.stock')),
-					'logs' => array('name' => 'Logs', 'link' => Route::url('items.user_shop.log')),
-					array('name' => 'View', 'link' => $this->_view_shop())
+				array('name' => 'Shop', 'link' => Route::url('item.user_shop.index')),
+				array('name' => 'Stock', 'link' => Route::url('item.user_shop.stock')),
+				array('name' => 'Logs', 'link' => Route::url('item.user_shop.logs')),
+				array('name' => 'View', 'link' => $this->_view_shop())
 			);
 				
-			if(in_array($this->request->action(), $this->view->links))
-				$this->view->links[$this->request->action()]['active'] = true;
+			if(array_key_exists($this->request->action(), $map_links))
+				$this->view->links[$map_links[$this->request->action()]]['active'] = true;
 		}
 		parent::after();
 	}
 	
 	protected function _view_shop() {
 		if($this->_shop != null && $this->_shop->loaded())
-			return Route::url('items.user_shop.view', array('id' => $this->_shop->id));
+			return Route::url('item.user_shop.view', array('id' => $this->_shop->id));
 		else
 			return null;
 	}
@@ -328,7 +329,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 	protected function _check_shop() {
 		$this->_shop = ORM::factory('User_Shop')
 		->where('user_id', '=', $this->user->id)
-		->find_all();
+		->find();
 		
 		return $this->_shop->loaded();
 	}

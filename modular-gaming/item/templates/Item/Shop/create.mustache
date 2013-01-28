@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="span12">
+		<form class="form-horizontal" method="post">
+		<input type="hidden" name="csrf" value="{{csrf}}" />
+			<div class="control-group">
+		    	<label class="control-label" for="input-title">Title</label>
+		    	<div class="controls">
+		      		<input type="text" id="input-title" class="span2" name="title">
+		    	</div>
+		  	</div>
+		  	<div class="control-group">
+		    	<label class="control-label" for="input-description">Description</label>
+		    	<div class="controls">
+		      		<textarea name="description" class="span3" rows="5"></textarea>
+		      		{{#creation}}
+		      			<span class="help-block">It costs {{cost}} to create a shop.</span>
+		      		{{/creation}}
+		    	</div>
+		  	</div>
+		  	<div class="form-actions">
+		  		<input type="submit" class="btn btn-primary" value="Create shop"></button>
+			</div>
+		</form>
+	</div>
+</div>

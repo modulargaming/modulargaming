@@ -2,9 +2,7 @@
 	<div class="span10" id="inventory-container">
 	<div id="notifications">
 	</div>
-	{{#pagination}}
-		{{> pagination}}
-	{{/pagination}}
+	{{& pagination}}
 		<ul class="thumbnails">
 		  {{#items}}
 			<li class="span2 pagination-centered">
@@ -15,9 +13,7 @@
 			</li>
 		{{/items}}
 		</ul>
-	{{#pagination}}
-		{{> pagination}}
-	{{/pagination}}
+	{{& pagination}}
 	</div>
 	<div class="span2">
 		<div class="row" style="padding-left: 35px;">
