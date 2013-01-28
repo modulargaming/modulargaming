@@ -20,6 +20,24 @@ class View_Pet_Create extends Abstract_View
 		return $species;
 	}
 	
+	public function compose() {
+		$list = array();
+		
+		foreach($this->colours as $colour) {
+			$has_colour = array();
+			
+			foreach($this->species as $specie) {
+				if($specie->has('colours', $colour))
+				{
+					$has_colour[] = $specie->id;
+				}
+			}
+			$list[$colour->name] = $has_colour;
+		}
+		
+		return json_encode($list, JSON_NUMERIC_CHECK);
+	}
+	
 	public function colours()
 	{
 		$colours = array();

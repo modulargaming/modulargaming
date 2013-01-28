@@ -53,13 +53,24 @@
 var pet_specie = 1,
 	pet_colour = 1,
 	colour_name = ['', {{#colours}}'{{name}}', {{/colours}}''],
-	colour_image = ['', {{#colours}}'{{image}}', {{/colours}}''];
+	colour_image = ['', {{#colours}}'{{image}}', {{/colours}}''],
+	map = {{& compose}};
 function pet_image() {
 	$('#pet_image').attr('src', '{{base_url}}assets/img/pets/' + pet_specie + '/' + colour_image[pet_colour]);
 }
 window.onload = function() {
 	$("a[rel=popover]").click(function(e) {
 		pet_specie = $(this).data('specie');
+		
+		$.each(map, function(colour, species){
+			var colour_id = colour_name.indexOf(colour);
+			if(species.indexOf(pet_specie) < 0) {
+				$('button.pet_colour[value="'+colour_id+'"]').addClass('disabled');
+			}
+			else {
+				$('button.pet_colour[value="'+colour_id+'"]').removeClass('disabled');
+			}
+		});
 		$('#specie_id').val(pet_specie);
 		pet_image();
 		$('#pet_specie').text($(this).data('original-title'));
