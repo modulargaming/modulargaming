@@ -24,7 +24,8 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 	
 		$item_id = $this->request->query('id');
 	
-		if($item_id == null) {
+		if($item_id == null) 
+		{
 			$specie = ORM::factory('Pet_Specie')
 			->where('pet_specie.name', '=', $this->request->query('name'))
 			->find();
@@ -33,9 +34,9 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 			$specie = ORM::factory('Pet_Specie', $item_id);
 	
 		$list = array(
-				'id' => $specie->id,
-				'name' => $specie->name,
-				'description' => $specie->description,
+			'id' => $specie->id,
+			'name' => $specie->name,
+			'description' => $specie->description,
 		);
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
@@ -58,8 +59,8 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 			$data = array(
 					'action' => 'saved',
 					'row' => array(
-							'id' => $specie->id,
-							'name' => $specie->name,
+						'id' => $specie->id,
+						'name' => $specie->name,
 					)
 			);
 			$this->response->body(json_encode($data));

@@ -17,6 +17,7 @@ class Controller_Admin_Pet extends Abstract_Controller_Admin {
 	
 	public function action_search() {
 		$this->view = null;
+		
 		$type = $this->request->query('type');
 		$item_name = $this->request->query('name');
 		
@@ -26,7 +27,7 @@ class Controller_Admin_Pet extends Abstract_Controller_Admin {
 			->where('pet_specie.name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
-		else if($type == 'pet-color')
+		else if($type == 'pet-colour')
 		{
 			$items = ORM::factory('Pet_Colour')
 			->where('pet_colour.name', 'LIKE', '%'.$item_name.'%')
