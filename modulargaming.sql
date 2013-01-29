@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `sender_id` int(11) NOT NULL,
   `receiver_id` int(11) NOT NULL,
   `created` int(10) NOT NULL,
-  `subject` varchar(255) NOT NULL,
+  `subject` varchar(55) NOT NULL,
   `content` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -395,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `user_pets` (
   `created` int(10) NOT NULL,
   `abandoned` int(10) NOT NULL,
   `active` int(10) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(35) NOT NULL,
   `gender` enum('male','female') NOT NULL,
   `specie_id` int(6) NOT NULL,
   `colour_id` int(6) NOT NULL,
@@ -407,8 +407,8 @@ CREATE TABLE IF NOT EXISTS `user_pets` (
 CREATE TABLE IF NOT EXISTS `pet_colours` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `locked` int(1) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` longtext NOT NULL,
+  `name` varchar(35) NOT NULL,
+  `description` text NOT NULL,
   `image` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
@@ -424,8 +424,8 @@ INSERT INTO `pet_colours` (`id`, `locked`, `name`, `description`, `image`) VALUE
 
 CREATE TABLE IF NOT EXISTS `pet_species` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` longtext NOT NULL,
+  `name` varchar(35) NOT NULL,
+  `description` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -509,7 +509,7 @@ CREATE TABLE `notifications` (
   `user_id` int(11) unsigned DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `message` text,
-  `type` enum('success','alert','warning') DEFAULT NULL,
+  `type` enum('success','alert','warning', 'info') DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
