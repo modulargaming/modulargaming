@@ -83,6 +83,38 @@
 	</div>
 </div>
 
+{{!colour modal}}
+<div class="modal hide fade" id="modal-colour">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3>Colours</h3>
+	</div>
+	<div class="modal-body">
+		<button class="btn btn-success pull-right" id="add-colour">Add colour(s)</button>
+		<form id="colour-form">
+		<input type="hidden" id="csrf" name="csrf" value="{{csrf}}" />
+		<input type="hidden" name="specie_id" id="specie-id" />
+		<select id="colour-list-options" name="colours[]" multiple="multiple">
+		</select>
+		</form>
+		
+		<table class="table" id="colour-list">
+			<thead>
+				<th class="span2">Name</th>
+				<th class="span1"></th>
+			</thead>
+			<tbody>
+				<td></td>
+				<td></td>
+			</tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-danger" id="btn-remove">Delete</button>
+		<button class="btn" data-dismiss="modal" id="modal-delete-keep">Keep the <span id="modal-delete-type"></span></button>
+	</div>
+</div>
+
 {{! Delete modal}}
 <div class="modal hide fade" id="modal-delete">
 	<div class="modal-header">
@@ -93,8 +125,10 @@
 		Are you sure you want to delete <strong id="modal-delete-name"></strong>?
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-danger" id="btn-remove">Delete</button>
-		<button class="btn" data-dismiss="modal" id="modal-delete-keep">Keep the <span id="modal-delete-type"></span></button>
+		<button class="btn" data-dismiss="modal">Done</button>
 	</div>
 </div>
 <div class="notifications bottom-right" id="crud-notify"></div>
+<script type="text/javascript">
+var pet_colours = {{& pet_colours}};
+</script>

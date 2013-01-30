@@ -59,6 +59,24 @@ Route::set('pet.admin.specie.save', 'admin/pet/specie/save')
 		'controller' => 'Specie',
 		'action'     => 'save',
 ));
+Route::set('pet.admin.specie.col.load', 'admin/pet/specie/col/load')
+	->defaults(array(
+		'directory'  => 'Admin/Pet',
+		'controller' => 'Specie',
+		'action'     => 'col_load',
+));
+Route::set('pet.admin.specie.col.update', 'admin/pet/specie/col/update')
+	->defaults(array(
+		'directory'  => 'Admin/Pet',
+		'controller' => 'Specie',
+		'action'     => 'col_update',
+));
+Route::set('pet.admin.specie.col.delete', 'admin/pet/specie/col/delete')
+	->defaults(array(
+		'directory'  => 'Admin/Pet',
+		'controller' => 'Specie',
+		'action'     => 'col_delete',
+));
 Route::set('pet.admin.specie.index', 'admin/pet/specie')
 	->defaults(array(
 		'directory'  => 'Admin/Pet',

@@ -12,11 +12,15 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 
 		$species = ORM::factory('Pet_Specie')
 			->find_all();
-
+	
+		$colours = ORM::factory('Pet_Colour')
+			->find_all();
+		
 		$this->view = new View_Admin_Pet_Specie_Index;
 		$this->_load_assets(Kohana::$config->load('assets.admin_pet.specie'));
 		$this->_nav('pet', 'specie');
 		$this->view->species = $species->as_array();
+		$this->view->colours = $colours->as_array();
 	}
 
 	public function action_retrieve() {
@@ -91,5 +95,52 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 	
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode(array('action' => 'deleted')));
+	}
+	
+	public function action_col_load() {
+		$specie = ORM::factory('Pet_Specie', $this->request->query('id'));
+		
+		$colours = $specie->colours->find_all();
+		$list = array();
+		
+		foreach($colours as $colour) {
+			$list[] = $colour->id;
+		}
+		
+		$this->response->headers('Content-Type','application/json');
+		$this->response->body(json_encode(array('colours' => $list)));
+	}
+	
+	public function action_col_delete() {
+		$specie = ORM::factory('Pet_Specie', $this->request->query('specie_id'));
+		$colour = ORM::factory('Pet_Colour', $this->request->query('colour_id'));
+		
+		if($specie->has('colours', $colour))
+			$specie->remove('colours', $colour);
+	
+		$this->response->headers('Content-Type','application/json');
+		$this->response->body(json_encode(array('action' => 'deleted')));
+	}
+	
+	public function action_col_update() {
+		$specie = ORM::factory('Pet_Specie', $this->request->post('specie_id'));
+		
+		$colours = $this->request->post('colours');
+		$updated = array();
+		
+		if(count($colours) > 0) {
+			foreach($colours as $colour) {
+				$c = ORM::factory('Pet_Colour', $colour);
+				
+				if(!$specie->has('colours', $c))
+				{
+					$specie->add('colours', $c);
+					$updated[] = $colour;
+				}
+			}
+		}
+	
+		$this->response->headers('Content-Type','application/json');
+		$this->response->body(json_encode(array($updated)));
 	}
 }
