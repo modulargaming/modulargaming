@@ -36,7 +36,7 @@ class Model_User_Shop extends ORM {
 	public function inventory_count() {
 		return DB::select(array(DB::expr('COUNT(*)'), 'total'))
 		->from('user_items')
-		->where('user_id', '=', $user_id)
+		->where('user_id', '=', $this->user_id)
 		->where('location', '=', 'shop')
 		->execute()
 		->get('total');

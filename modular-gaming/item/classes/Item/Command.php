@@ -12,10 +12,10 @@
 abstract class Item_Command {
 	
 	/**
-	 * 
-	 * @param unknown_type $command
-	 * @param unknown_type $validation
-	 * @return unknown
+	 * Spew out a command
+	 * @param string $command
+	 * @param Kohana_Validation $validation
+	 * @return Item_Command
 	 */
 	static public function factory($command, $validation=null) {
 		$cmd = 'Item_Command_'.$command;
