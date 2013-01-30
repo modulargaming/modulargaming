@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Item type admin controller
+ *
+ * Manage site item types
+ *
+ * @package    ModularGaming/Items
+ * @category   Admin
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 	
 	public function action_index()

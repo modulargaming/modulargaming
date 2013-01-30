@@ -1,4 +1,14 @@
-<?php
+<?php defined('SYSPATH') OR die('No direct script access.');
+/**
+ * Item command class
+ *
+ * Give the player an avatar
+ *
+ * @package    ModularGaming/Items
+ * @category   Commands
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Item_Command_User_Avatar extends Item_Command {
 	protected function _build($name){
 		return array(

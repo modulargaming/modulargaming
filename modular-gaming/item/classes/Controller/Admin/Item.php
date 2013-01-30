@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Item admin controller
+ * 
+ * Manage site items
+ *
+ * @package    ModularGaming/Items
+ * @category   Admin
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_index()
@@ -46,7 +55,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					'name' => $name,
 					'multiple' => $admin['multiple'],
 					'pets' => $admin['pets'],
-					'search' => $admin['search']
+					'search' => $admin['search'],
+					'only' => (!$command->allow_more)
 				);
 				$loc = (in_array($struct[0], array('General', 'User'))) ? 0 : 1;
 				$menu_c[$loc]['commands'][] = array(

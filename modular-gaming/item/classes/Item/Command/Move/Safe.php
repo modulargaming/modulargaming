@@ -1,7 +1,15 @@
-<?php
-
+<?php defined('SYSPATH') OR die('No direct script access.');
+/**
+ * Item command class
+ *
+ * Move an item to the player's safe
+ *
+ * @package    ModularGaming/Items
+ * @category   Commands
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Item_Command_Move_Safe extends Item_Command_Move {
-	public $default = true;
 	
 	protected function _build($name){
 		return null;

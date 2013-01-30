@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Cookbook controller
+ *
+ * Use recipes to cook items
+ *
+ * @package    ModularGaming/Items
+ * @category   Controller
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Controller_Cookbook extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 	

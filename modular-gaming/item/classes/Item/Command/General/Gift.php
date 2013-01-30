@@ -1,5 +1,14 @@
-<?php
-
+<?php defined('SYSPATH') OR die('No direct script access.');
+/**
+ * Item command class
+ *
+ * Send the item to another user.
+ *
+ * @package    ModularGaming/Items
+ * @category   Commands
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Item_Command_General_Gift extends Item_Command {
 	public $default = true;
 	

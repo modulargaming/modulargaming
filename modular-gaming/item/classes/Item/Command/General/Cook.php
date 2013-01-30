@@ -1,4 +1,14 @@
-<?php
+<?php defined('SYSPATH') OR die('No direct script access.');
+/**
+ * Item command class
+ *
+ * Move the recipe to the cookbook
+ *
+ * @package    ModularGaming/Items
+ * @category   Commands
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Item_Command_General_Cook extends Item_Command {
 	public $allow_more = false;
 	public $delete_after_consume = false;

@@ -1,4 +1,14 @@
-<?php
+<?php defined('SYSPATH') OR die('No direct script access.');
+/**
+ * Item command class
+ *
+ * Change a pet's colour (if possible)
+ *
+ * @package    ModularGaming/Items
+ * @category   Commands
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Item_Command_Pet_Paint extends Item_Command_Pet {
 	protected function _build($name){
 		return array(

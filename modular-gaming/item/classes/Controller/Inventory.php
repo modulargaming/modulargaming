@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Item inventory controller
+ *
+ * List and consume items
+ *
+ * @package    ModularGaming/Items
+ * @category   Controller
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Controller_Inventory extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 	
@@ -25,7 +34,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		$this->view->items = $paginate->result();
 		$this->view->links = array (
 			array ('name' => 'Safe', 'link' => "#"),
-			array ('name' => 'Shop', 'link' => "#"),
+			array ('name' => 'Shop', 'link' => Route::url('item.user_shop.index')),
 			array ('name' => 'Cookbook', 'link' => Route::url('item.cookbook'))
 		);
 	}
@@ -81,6 +90,18 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					'item' => 'Move to safe',
 					'extra' => Item_Command::factory('Move_Safe')->inventory()
 				);
+			
+			$user_shop = ORM::factory('User_Shop')
+				->where('user_id', '=', $this->user->id)
+				->find();
+			
+			if($user_shop->loaded() && $user_shop->inventory_space())
+			{
+				$actions['move_shop'] = array(
+						'item' => 'Move to your shop',
+						'extra' => Item_Command::factory('Move_Shop')->inventory()
+				);
+			}
 			
 			if($item->item->transferable == true) 
 			{

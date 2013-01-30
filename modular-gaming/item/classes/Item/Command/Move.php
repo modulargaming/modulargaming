@@ -2,6 +2,7 @@
 
 class Item_Command_Move extends Item_Command {
 	public $default = true;
+	public $delete_after_consume = false;
 	
 	protected function _build($name){
 		return null;

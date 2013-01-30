@@ -1,5 +1,14 @@
-<?php
-
+<?php defined('SYSPATH') OR die('No direct script access.');
+/**
+ * Item command class
+ *
+ * Move an item to the player's shop
+ *
+ * @package    ModularGaming/Items
+ * @category   Commands
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Item_Command_Move_Shop extends Item_Command_Move {
 	public $default = true;
 	

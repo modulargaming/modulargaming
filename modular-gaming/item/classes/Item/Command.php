@@ -1,17 +1,47 @@
-<?php
-
+<?php defined('SYSPATH') OR die('No direct script access.');
+/**
+ * Item command base class
+ *
+ * Define commands that items perform when they're consumed
+ *
+ * @package    ModularGaming/Items
+ * @category   Commands
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 abstract class Item_Command {
 	
+	/**
+	 * 
+	 * @param unknown_type $command
+	 * @param unknown_type $validation
+	 * @return unknown
+	 */
 	static public function factory($command, $validation=null) {
 		$cmd = 'Item_Command_'.$command;
 		return new $cmd($validation);
 	}
 	
+	/**
+	 * If a command is a default one it won't be shown in the admin
+	 * @var boolean
+	 */
 	public $default = false;
 	//@todo include in admin, this command would be the only one, no extra commands would be assigned
 	public $allow_more = true;
+	
+	/**
+	 * Does the command require a pet to be loaded?
+	 * @var bool
+	 */
 	public $load_pets = false;
+	
+	/**
+	 * Does the item automatically gets destroyed after performing its actions?
+	 * @var bool
+	 */
 	public $delete_after_consume = true;
+	
 	protected $_validation = null;
 	
 	/**

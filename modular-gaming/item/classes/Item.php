@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Item helper
+ * 
+ * A collection of usefull functions that relate to items.
+ *
+ * @package    ModularGaming/Items
+ * @author     Maxim Kerstens
+ * @copyright  (c) Modular gaming
+ */
 class Item {
 	
 	protected $_item = null;
@@ -49,7 +57,7 @@ class Item {
 		
 		if(Valid::digit($user))
 		{
-			$user = ORM::factory('User', $id);
+			$user = ORM::factory('User', $user);
 		}
 		else if(!is_a($user, 'Model_User'))
 			throw new Item_Exception('The supplied user does not come from a model.');
