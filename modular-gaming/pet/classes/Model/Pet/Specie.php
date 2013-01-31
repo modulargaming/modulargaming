@@ -8,15 +8,9 @@ class Model_Pet_Specie extends ORM {
 			'foreign_key' => 'specie_id',
 		),
 		'colours' => array(
-			'through' => 'pet_species_colours'		
+			'through' => 'pet_species_colours',
+			'model' => 'Pet_Colour'
 		)
 	);
-
-	static public function specie_exists($id)
-	{
-		$specie = ORM::factory('Pet_Specie', $id);
-
-		return $specie->loaded();
-	}
 
 }

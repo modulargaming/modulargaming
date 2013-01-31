@@ -58,5 +58,8 @@ class Model_User_Pet extends ORM {
 			->create($extra_validation);
 	}
 
+	public function img() {
+		return URL::base() . 'assets/img/pets/'.$this->specie->dir.'/'.$this->colour->image;
+	}
 }
 

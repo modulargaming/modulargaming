@@ -425,13 +425,14 @@ INSERT INTO `pet_colours` (`id`, `locked`, `name`, `description`, `image`) VALUE
 CREATE TABLE IF NOT EXISTS `pet_species` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(35) NOT NULL,
+  `dir` varchar(40) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `pet_species` (`id`, `name`, `description`) VALUES
-(1, 'Koorai', 'The Koorai'),
-(2, 'Zedro', 'The Zedro.');
+(1, 'Koorai', '1', 'The Koorai'),
+(2, 'Zedro', '2', 'The Zedro.');
 
 CREATE TABLE IF NOT EXISTS `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

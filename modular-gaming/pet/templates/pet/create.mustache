@@ -8,6 +8,7 @@
 	<ul class="thumbnails">
 		<li class="span4">
 			<div class="thumbnail center">
+			{{! this image path should not be hard coded}}
 				<img src="{{base_url}}assets/img/pets/1/black.png" id="pet_image" />
 				<h3><span id="pet_colour">Black</span> <span id="pet_specie">Koorai</span></h3>
 				<p id="pet_description">The Koorai</p>
@@ -19,6 +20,7 @@
 				{{#species}}
 				<li>
 					<a href="#" class="thumbnail" rel="popover" data-trigger="hover" data-placement="bottom" data-content="{{description}}" data-original-title="{{name}}" data-specie="{{id}}">
+						{{! should not be hard coded}}
 						<img src="{{base_url}}assets/img/pets/{{id}}/black.png" class="pet_specie" />
 					</a>
 				</li>
