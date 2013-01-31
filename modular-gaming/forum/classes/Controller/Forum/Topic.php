@@ -30,9 +30,6 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		{
 			throw HTTP_Exception::factory('404', 'Forum topic not found');
 		}
-
-		Breadcrumb::add($this->topic->category->title, Route::url('forum.category', array('id' => $this->topic->category->id)));
-		Breadcrumb::add($this->topic->title, Route::url('forum.topic', array('id' => $this->topic->id)));
 	}
 
 	public function action_view()

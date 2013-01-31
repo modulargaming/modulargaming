@@ -17,8 +17,6 @@ class Abstract_Controller_Forum extends Abstract_Controller_Frontend {
 		parent::before();
 
 		// TODO: Check if user can view forum?
-
-		Breadcrumb::add('Forum', Route::url('forum'));
 	}
 
 }

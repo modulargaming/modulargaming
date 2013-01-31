@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Forum_Category_View extends Abstract_View {
+class View_Forum_Category_View extends Abstract_View_Forum {
 
 	public $category;
 	public $topics;
@@ -48,6 +48,16 @@ class View_Forum_Category_View extends Abstract_View {
 		}
 
 		return $topics;
+	}
+
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => $this->category->title,
+				'href'  => Route::url('forum.category', array('id' => $this->category->id))
+			)
+		));
 	}
 
 	public function links()

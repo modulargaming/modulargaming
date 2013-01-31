@@ -85,7 +85,7 @@ abstract class Abstract_View {
 	{
 		$breadcrumb = array();
 
-		foreach (Breadcrumb::get() as $item)
+		foreach ($this->get_breadcrumb() as $item)
 		{
 			$breadcrumb[] = array(
 				'title'   => $item['title'],
@@ -101,10 +101,21 @@ abstract class Abstract_View {
 		return $breadcrumb;
 	}
 
+	protected function get_breadcrumb()
+	{
+		return array(
+			array(
+				'title' => 'Home',
+				'href'  => '/'
+			)
+		);
+	}
+
 	public function has_breadcrumb()
 	{
-		$breadcrumb = Breadcrumb::get();
-		return ! empty($breadcrumb);
+		//$breadcrumb = $this->breadcrumb();
+		//return ! empty($breadcrumb);
+		return TRUE;
 	}
 
 	/**

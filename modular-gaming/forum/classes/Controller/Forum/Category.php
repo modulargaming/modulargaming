@@ -29,8 +29,6 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 		{
 			throw HTTP_Exception::factory('404', 'Forum category not found');
 		}
-
-		Breadcrumb::add($this->category->title, Route::url('forum.category', array('id' => $id)));
 	}
 
 	/**
