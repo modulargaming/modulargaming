@@ -57,7 +57,7 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 	
 		try {				
 			$specie = ORM::factory('Pet_Specie', $values['id']);
-			$specie->values($values, array('name', 'description'));
+			$specie->values($values, array('name', 'description', 'dir'));
 			$specie->save();
 				
 			$data = array(

@@ -70,6 +70,13 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label" for="input-dir">Image directory</label>
+	
+				<div class="controls">
+					<input type="text" class="input-medium" id="input-dir" name="dir" value="" maxlength="40">
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label" for="input-description">Description</label>
 	
 				<div class="controls">
@@ -110,8 +117,7 @@
 		</table>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-danger" id="btn-remove">Delete</button>
-		<button class="btn" data-dismiss="modal" id="modal-delete-keep">Keep the <span id="modal-delete-type"></span></button>
+		<button class="btn" data-dismiss="modal">Done</button>
 	</div>
 </div>
 
@@ -125,7 +131,8 @@
 		Are you sure you want to delete <strong id="modal-delete-name"></strong>?
 	</div>
 	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal">Done</button>
+		<button class="btn btn-danger" id="btn-remove">Delete</button>
+		<button class="btn" data-dismiss="modal" id="modal-delete-keep">Keep the <span id="modal-delete-type"></span></button>
 	</div>
 </div>
 <div class="notifications bottom-right" id="crud-notify"></div>
