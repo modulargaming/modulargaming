@@ -37,8 +37,8 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 		$this->view->recipes = $items;
 		$this->view->links = array(
 				array('name' => 'Inventory', 'link' => Route::get('item.inventory')->uri()),
-				array('name' => 'Safe', 'link' => "#"),
-				array('name' => 'Shop', 'link' => "#"),
+				array('name' => 'Safe', 'link' => Route::url('item.safe')),
+				array('name' => 'Shop', 'link' => Route::url('item.user_shop.index')),
 		);
 	}
 	

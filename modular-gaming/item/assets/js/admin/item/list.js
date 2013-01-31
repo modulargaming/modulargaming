@@ -87,6 +87,13 @@ $(document).ready(function() {
 			$('#modal-crud-commands tr:first').remove();
 			var cmd = cmd_type_map[$('#input-type_id').val()];
 			
+			if(cmd_definitions[cmd].only == 1) {
+				$('#modal-crud-cmd-add').addClass('disabled');
+			}
+			else {
+				$('#modal-crud-cmd-add').removeClass('disabled');
+			}
+			
 			var tpl = $('#item-command-input-collection').find('[name="'+cmd+'"]').parents('tr').clone(true);
 			tpl.find('a').addClass('disabled');
 			

@@ -33,7 +33,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		$this->view->pagination = $paginate->render();
 		$this->view->items = $paginate->result();
 		$this->view->links = array (
-			array ('name' => 'Safe', 'link' => "#"),
+			array ('name' => 'Safe', 'link' => Route::url('item.safe')),
 			array ('name' => 'Shop', 'link' => Route::url('item.user_shop.index')),
 			array ('name' => 'Cookbook', 'link' => Route::url('item.cookbook'))
 		);
@@ -94,8 +94,13 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			$user_shop = ORM::factory('User_Shop')
 				->where('user_id', '=', $this->user->id)
 				->find();
+			$shop_item = ORM::factory('User_Item')
+			->where('user_id', '=', $this->user->id)
+			->where('location', '=', 'shop')
+			->where('item_id', '=', $item->item_id)
+			->find();
 			
-			if($user_shop->loaded() && $user_shop->inventory_space())
+			if($user_shop->loaded() && ($user_shop->inventory_space() == true || ($user_shop->inventory_space() == false && $shop_item->loaded())))
 			{
 				$actions['move_shop'] = array(
 						'item' => 'Move to your shop',

@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="span9">
+		{{& pagination}}
+		<form method="post" action="{{process_url}}">
+		<input type="hidden" name="csrf" value="{{csrf}}" />
+		<table class="table table-condense table-striped span6 offset1">
+			<thead>
+				<tr>
+					<th class="span1"></th>
+					<th class="span2">Name</th>
+					<th class="span1">#</th>
+					<th class="span1">Location</th>
+					<th class="span1">Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+		  {{#items}}
+		  	<tr>
+		  		<td><img src="{{img}}" /></td>
+		  		<td>{{name}}</td>
+		  		<td>{{amount}}</td>
+		  		<td>
+		  			<select class="input-small" name="items[{{id}}][location]">
+		  			{{#options}}
+		  				<option value="{{value}}">
+		  					{{name}}
+		  				</option>
+		  			{{/options}}
+		  			</select>
+		  		</td>
+		  		<td><input type="text" class="input-mini" name="items[{{id}}][amount]" value="0" /></td>
+		  	</tr>
+		{{/items}}
+		{{^items}}
+		<tr>
+			<td colspan="5" align="center">You have no items in your safe</td>
+		</tr>
+		{{/items}}
+		<tr>
+		<td colspan="3"></td>
+		<td colspan="2"><input type="submit" class="btn btn-primary pull-right" value="Update" /></td>
+		</tr>
+		</tbody>
+		</table>
+		</form>
+		{{& pagination}}
+	</div>
+	<div class="span2" style="padding-left: 35px;">
+		<div class="btn-group">
+			{{#links}}
+				<a href="{{link}}" class="btn">{{name}}</a>
+			{{/links}}
+		</div>
+	</div>
+</div>

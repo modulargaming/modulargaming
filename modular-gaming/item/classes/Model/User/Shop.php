@@ -29,6 +29,15 @@ class Model_User_Shop extends ORM {
 		);
 	}
 	
+	public function filters()
+	{
+		return array(
+			'description' => array(
+				array('Security::xss_clean'),
+			),
+		);
+	}
+	
 	/**
 	 * Count how many item stacks there are in the inventory
 	 * @return integer

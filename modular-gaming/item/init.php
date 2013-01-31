@@ -183,3 +183,13 @@ Route::set('item.user_shop.index', 'shop')
 		'controller' => 'Shop',
 		'action'     => 'index',
 ));
+Route::set('item.safe.move', 'safe/move')
+	->defaults(array(
+		'controller' => 'Safe',
+		'action'     => 'move',
+));
+Route::set('item.safe', 'safe')
+	->defaults(array(
+		'controller' => 'Safe',
+		'action'     => 'index',
+));
