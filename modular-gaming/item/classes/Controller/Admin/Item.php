@@ -35,7 +35,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 		$commands = Item::list_commands();
 		$input_c = array();
-		$menu_c = array(
+		$menu_c = array (
 			array('name' => 'General', 'commands' => array()),
 			array('name' => 'Pet', 'commands' => array()),
 		);
@@ -51,7 +51,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				$struct = explode('_', $name);
 				$admin = $command->build_admin($name);
 				$input_c[] = array('title' => $admin['title'], 'fields' => $admin['fields']);
-				$def_c[] = array(
+				$def_c[] = array (
 					'name' => $name,
 					'multiple' => $admin['multiple'],
 					'pets' => $admin['pets'],
@@ -59,7 +59,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					'only' => (!$command->allow_more)
 				);
 				$loc = (in_array($struct[0], array('General', 'User'))) ? 0 : 1;
-				$menu_c[$loc]['commands'][] = array(
+				$menu_c[$loc]['commands'][] = array (
 					'name' => $struct[1],
 					'cmd' => $name		
 				);
@@ -144,7 +144,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 	
 		$item_id = $this->request->query('id');
 		
-		if($item_id == null) {
+		if($item_id == null) 
+		{
 			$item = ORM::factory('Item')
 				->where('item.name', '=', $this->request->query('name'))
 				->find();
@@ -152,7 +153,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		else
 			$item = ORM::factory('Item', $item_id);
 	
-		$list = array(
+		$list = array (
 			'id' => $item->id,
 			'name' => $item->name,
 			'status' => $item->status,
@@ -184,9 +185,9 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id', 'commands'));
 			$item->save();
 			
-			$data = array(
+			$data = array (
 				'action' => 'saved',
-				'row' => array(
+				'row' => array (
 					'id' => $item->id,
 					'img' => '<img src="'.URL::base().$item->img().'" />',
 					'name' => $item->name,
@@ -201,7 +202,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			
 			$list = $e->errors('models');
 			
-			foreach($list as $field => $er){
+			foreach($list as $field => $er) {
 				if(!is_array($er))
 					$er = array($er);
 				
@@ -240,6 +241,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		catch(Item_Exception $e) {
 			$list = array('action' => 'error', 'errors' => (array) $e->errors());
 		}
+		
 		//return response
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));

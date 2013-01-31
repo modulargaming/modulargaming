@@ -72,7 +72,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				
 				if(count($pets) > 0) {
 					foreach($pets as $pet) {
-						$actions[$pet->id] = array(
+						$actions[$pet->id] = array (
 							'item' => __($item->item->type->action, array(':pet_name' => $pet->name)),
 							'extra' => $default_command->inventory()
 						);
@@ -80,13 +80,13 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				}
 			}
 			else {
-				$actions['consume'] = array(
+				$actions['consume'] = array (
 					'item' => $item->item->type->action,
 					'extra' => $default_command->inventory()
 				);
 			}
 			
-			$actions['move_safe'] = array(
+			$actions['move_safe'] = array (
 					'item' => 'Move to safe',
 					'extra' => Item_Command::factory('Move_Safe')->inventory()
 				);
@@ -94,6 +94,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			$user_shop = ORM::factory('User_Shop')
 				->where('user_id', '=', $this->user->id)
 				->find();
+			
 			$shop_item = ORM::factory('User_Item')
 			->where('user_id', '=', $this->user->id)
 			->where('location', '=', 'shop')
@@ -102,7 +103,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			
 			if($user_shop->loaded() && ($user_shop->inventory_space() == true || ($user_shop->inventory_space() == false && $shop_item->loaded())))
 			{
-				$actions['move_shop'] = array(
+				$actions['move_shop'] = array (
 						'item' => 'Move to your shop',
 						'extra' => Item_Command::factory('Move_Shop')->inventory()
 				);
@@ -110,13 +111,13 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			
 			if($item->item->transferable == true) 
 			{
-				$actions['gift'] = array(
+				$actions['gift'] = array (
 					'item' =>  'Send as gift',
 					'extra' => Item_Command::factory('General_Gift')->inventory()
 				);
 			}
 			
-			$actions['remove'] = array(
+			$actions['remove'] = array (
 					'item' => 'Remove item',
 					'extra' => Item_Command::factory('General_Remove')->inventory()
 			);
@@ -167,7 +168,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		{
 			Hint::error('You can\'t use an item that does not exist');
 		}
-		else if($item->user_id != $this->user->id) {
+		else if($item->user_id != $this->user->id) 
+		{
 			Hint::error('You can\'t access another player\'s item');
 		}
 		else if($item->location != 'inventory')
@@ -182,7 +184,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		{
 			$def_cmd = Item_Command::factory($item->item->type->default_command);
 			
-			if(Valid::digit($action)) {
+			if(Valid::digit($action)) 
+			{
 				//we'll want to perform an action on a pet
 				$pet = ORM::factory('User_Pet', $action);
 				
@@ -209,7 +212,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						$cmd = Item_Command::factory($command['name']);
 						$res = $cmd->perform($item, $command['param'], $pet);
 						
-						if($res == FALSE) {
+						if($res == FALSE) 
+						{
 							//the command couldn't be performed, spit out error, rollback changes and break the loop
 							Hint::error(__(':item_name could not be used on :pet_name', array(':item_name' => $item->name, ':pet_name' => $pet->name)));
 							$error = TRUE;
@@ -220,7 +224,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							$results[] = $res;
 					}
 					
-					if($error == FALSE) {
+					if($error == FALSE) 
+					{
 						if($def_cmd->delete_after_consume == TRUE)
 							$item->amount('-', 1);
 						
@@ -230,7 +235,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					}
 				}
 			}
-			else {
+			else 
+			{
 				$results = array();
 				
 				switch($action) {
@@ -245,7 +251,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							$cmd = Item_Command::factory($command['name']);
 							$res = $cmd->perform($item, $command['param']);
 						
-							if($res == false) {
+							if($res == false) 
+							{
 								//the command couldn't be performed, spit out error, rollback changes and break the loop
 								Hint::error(__(':item_name could not be used', array(':item_name' => $item->name)));
 								$db->rollback();
@@ -279,7 +286,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						{
 							Hint::error('You only have '.$item->name().', not '.$amount);
 						}
-						else {
+						else 
+						{
 							if ($amount > 1) 
 							{
 								$name = Inflector::plural($item->name(), $amount);
@@ -310,7 +318,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 								->where('username', '=', $username)
 								->find();
 							
-							if($user->loaded()) {
+							if($user->loaded()) 
+							{
 								$item->transfer($user);
 								//@todo notification
 								
@@ -323,7 +332,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 						}
 						break;
 					default :
-						if(substr($action, 0, 5) == 'move_') { //Moving items can take an amount
+						if(substr($action, 0, 5) == 'move_') //Moving items can take an amount
+						{ 
 							$location = substr($action, 5);
 							$cmd = Item_Command::factory('Move_'.ucfirst($location));
 									

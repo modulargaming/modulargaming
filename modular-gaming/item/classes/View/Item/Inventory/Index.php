@@ -4,16 +4,37 @@ class View_Item_Inventory_Index extends Abstract_View {
 
 	public $title = 'Inventory';
 	
+	/**
+	 * Store the pagination HTML.
+	 * @var string
+	 */
+	public $pagination = false;
+	
+	/**
+	 * Stores the user's inventory items
+	 * @var unknown_type
+	 */
+	public $item = array();
+	
+	/**
+	 * Build the item nav
+	 * @var array
+	 */
+	public $links = array();
+	
 	public function items(){
 		$list = array();
 		
-		foreach($this->items as $item) {			
-			$list[] = array(
-				'action_link' => URL::site(Route::get('item.inventory.view')->uri(array('id' => $item->id))),
-				'img' => $item->item->img(),
-				'name' => $item->name(),
-				'id' => $item->id
-			);
+		if(count($this->items) > 0)
+		{
+			foreach($this->items as $item) {			
+				$list[] = array (
+					'action_link' => URL::site(Route::get('item.inventory.view')->uri(array('id' => $item->id))),
+					'img' => $item->item->img(),
+					'name' => $item->name(),
+					'id' => $item->id
+				);
+			}
 		}
 		
 		return $list;

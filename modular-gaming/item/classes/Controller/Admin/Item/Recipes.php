@@ -44,20 +44,21 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		$ingredients = array();
 		
 		foreach($materials as $ingredient) {
-			$ingredients[] = array(
+			$ingredients[] = array (
 				'id' => $ingredient->id,
 				'name' => $ingredient->item->name,
 				'amount' => $ingredient->amount		
 			);
 		}
 		
-		$list = array(
-				'id' => $item->id,
-				'name' => $item->name,
-				'description' => $item->description,
-				'crafted_item' => $item->item->name,
-				'materials' => $ingredients
+		$list = array (
+			'id' => $item->id,
+			'name' => $item->name,
+			'description' => $item->description,
+			'crafted_item' => $item->item->name,
+			'materials' => $ingredients
 		);
+		
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
 	}
@@ -78,20 +79,24 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 				->find();
 			
 			
-			if($crafted->loaded()) {
+			if($crafted->loaded()) 
+			{
 				//validate item materials				
 				$mat_fail = false;
 			
-				if(count($values['materials']) > 0) {
-					foreach($values['materials'] as $index => $material){
+				if(count($values['materials']) > 0) 
+				{
+					foreach($values['materials'] as $index => $material) {
 						$mat = ORM::factory('Item')
 							->where('item.name', '=', $material['name'])
 							->find();
-						if(!$mat->loaded()) {
+						if(!$mat->loaded()) 
+						{
 							$mat_fail = $material['name'] . ' does not exist';
 							break;
 						}
-						else if(!Valid::digit($material['amount'])) {
+						else if(!Valid::digit($material['amount'])) 
+						{
 							$mat_fail = $material['name'] . '\'s amount should be a number';
 							break;
 						}
@@ -99,16 +104,19 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 							$values['materials'][$index]['item'] = $mat->id;
 					}
 				}
-				if($mat_fail == false) {
+				if($mat_fail == false) 
+				{
 					$values['crafted_item_id'] = $crafted->id;
 					
 					$item = ORM::factory('Item_Recipe', $values['id']);
 					$item->values($values, array('name', 'description', 'crafted_item_id'));
 					$item->save();
 					
-					if(count($values['materials']) > 0) {
+					if(count($values['materials']) > 0) 
+					{
 						//if we're updating delete old data
-						if($values['id'] != null) {
+						if($values['id'] != null) 
+						{
 							foreach($item->materials->find_all() as $mat)
 								$mat->delete();
 						}
@@ -121,9 +129,9 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 							$mat->save();
 						}
 					}
-					$data = array(
+					$data = array (
 						'action' => 'saved',
-						'row' => array(
+						'row' => array (
 							'id' => $item->id,
 							'name' => $item->name,
 							'ingredients' => $item->materials->count_all(),
@@ -132,11 +140,13 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 					);
 					$this->response->body(json_encode($data));
 				}
-				else {
+				else 
+				{
 					return $this->response->body(json_encode(array('action' => 'error', 'errors' => array(array('field' => 'ingredients', 'msg' => array($mat_fail))))));
 				}
 			}
-			else {
+			else 
+			{
 				return $this->response->body(json_encode(array('action' => 'error', 'errors' => array(array('field' => 'crafted_item', 'msg' => array('This item does not seem to exist.'))))));
 			}
 		}
@@ -146,7 +156,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 	
 			$list = $e->errors('models');
 	
-			foreach($list as $field => $er){
+			foreach($list as $field => $er) {
 				if(!is_array($er))
 					$er = array($er);
 	
