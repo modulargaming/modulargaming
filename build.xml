@@ -28,6 +28,11 @@
 		</exec>
 	</target>
 
+	<target name="phpcs-html" depends="prepare, phpcs-ci" description="Generate a html report from the checkstyle.xml file">
+		<xslt in="${basedir}/build/logs/checkstyle.xml" out="${basedir}/build/phpcs-report.html"
+		      style="${basedir}/build/checkstyle-noframes.xsl"/>
+	</target>
+
 	<!-- Automated builds -->
 	<target name="phploc-ci" description="Measure project size using PHPLOC">
 		<exec executable="bin/phploc">
