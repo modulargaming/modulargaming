@@ -113,8 +113,6 @@ abstract class Abstract_View {
 
 	public function has_breadcrumb()
 	{
-		//$breadcrumb = $this->breadcrumb();
-		//return ! empty($breadcrumb);
 		return TRUE;
 	}
 
