@@ -32,6 +32,7 @@ class Controller_Pet_Create extends Abstract_Controller_Frontend {
 		}
 		Breadcrumb::add('Your pets', Route::url('pets'));
 		Breadcrumb::add('Create a pet', Route::url('pet.create'));
+		
 		$species = ORM::factory('Pet_Specie')->find_all();
 		$this->view = new View_Pet_Create;
 		
@@ -39,9 +40,15 @@ class Controller_Pet_Create extends Abstract_Controller_Frontend {
 		$this->view->colours = $colours;
 
 		$this->view->species = $species;
+		
+		$this->view->default_specie = $species[0]->dir;
+		$this->view->default_colour = $colours[0]->image;
+		
 		$this->view->href = array(
 				'adopt' => Route::url('pet.adopt'),
 			);
+		
+		Assets::add('js', 'pets.create', 'pets/create.js', 'body');
 	}
 
 }

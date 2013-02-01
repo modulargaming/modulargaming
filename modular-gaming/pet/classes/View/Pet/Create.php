@@ -4,6 +4,34 @@ class View_Pet_Create extends Abstract_View
 {
 	public $title = 'Create a pet';
 
+	/**
+	 * A list of pet species
+	 * @var array
+	 */
+	public $species = array();
+	
+	/**
+	 * A list of non-locked pet colours
+	 * @var array
+	 */
+	public $colours = array();
+	
+	/**
+	 * Contains the default pet specie dir
+	 * @var string
+	 */
+	public $default_specie = false;
+	
+	/**
+	 * Contains the default colour image name
+	 * @var string
+	 */
+	public $default_colour = false;
+	
+	/**
+	 * Simplify specie data
+	 * @return array
+	 */
 	public function species()
 	{
 		$species = array();
@@ -14,30 +42,45 @@ class View_Pet_Create extends Abstract_View
 				'id' => $specie->id,
 				'name' => $specie->name,
 				'description' => $specie->description,
+				'dir' => $specie->dir
 			);
 		}
 
 		return $species;
 	}
 	
+	/**
+	 * Javascript reference point for species and colours
+	 * 
+	 * @return string JSON
+	 */
 	public function compose() {
 		$list = array();
 		
+		foreach($this->species as $specie) {
+			$list['species'][$specie->id] = array('dir' => $specie->dir, 'colours' => array());
+		}
+		
 		foreach($this->colours as $colour) {
-			$has_colour = array();
+			$list['colours'][$colour->id] = array(
+				'name' => $colour->name,
+				'img' => $colour->image
+			);
 			
-			foreach($this->species as $specie) {
-				if($specie->has('colours', $colour))
-				{
-					$has_colour[] = $specie->id;
-				}
-			}
-			$list[$colour->name] = $has_colour;
+			$species = $colour->species->find_all();
+			
+			foreach($species as $specie) {
+				$list['species'][$specie->id]['colours'][] = $colour->id;
+			}			
 		}
 		
 		return json_encode($list, JSON_NUMERIC_CHECK);
 	}
 	
+	/**
+	 * Simplify pet colour data
+	 * @return array
+	 */
 	public function colours()
 	{
 		$colours = array();
