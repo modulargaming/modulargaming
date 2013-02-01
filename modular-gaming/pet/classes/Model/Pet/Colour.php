@@ -7,6 +7,12 @@ class Model_Pet_Colour extends ORM {
 			'model' => 'User_Pet',
 			'foreign_key' => 'colour_id',
 		),
+		'species' => array(
+			'model' => 'Pet_Specie',
+			'through' => 'pet_species_colours',
+			'foreign_key' => 'colour_id',
+			'far_key' => 'pet_specie_id'		
+		)
 	);
 
 }
