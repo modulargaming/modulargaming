@@ -91,6 +91,7 @@ abstract class Abstract_View {
 				'title'   => $item['title'],
 				'href'    => $item['href'],
 				'active'  => $item['href'] == Request::current()->url(),
+				'icon'    => isset($item['icon']) ? $item['icon'] : FALSE,
 				'divider' => TRUE,
 			);
 		}
@@ -106,7 +107,8 @@ abstract class Abstract_View {
 		return array(
 			array(
 				'title' => 'Home',
-				'href'  => '/'
+				'href'  => '/',
+				'icon'  => 'home'
 			)
 		);
 	}
