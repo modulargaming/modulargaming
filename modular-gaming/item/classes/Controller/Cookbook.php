@@ -31,7 +31,7 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 			->find_all();
 		
 		$this->view->recipes = $items;
-		$this->view->links = array(
+		$this->view->links = array (
 				array('name' => 'Inventory', 'link' => Route::get('item.inventory')->uri()),
 				array('name' => 'Safe', 'link' => Route::url('item.safe')),
 				array('name' => 'Shop', 'link' => Route::url('item.user_shop.index')),
@@ -89,7 +89,7 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 					}	
 				}
 				
-				$materials[] = array(
+				$materials[] = array (
 					'name' => $material->item->name,
 					'img' => $material->item->img(),
 					'amount_needed' => $material->amount,
@@ -103,7 +103,7 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 			{
 				$this->response->headers('Content-Type', 'application/json');
 				
-				return $this->response->body(json_encode(array(
+				return $this->response->body(json_encode(array (
 					'status' => 'success', 
 					'materials' => $materials,
 					'name' => $recipe->name,

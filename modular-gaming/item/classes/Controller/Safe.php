@@ -55,7 +55,7 @@ class Controller_Safe extends Abstract_Controller_Frontend {
 						if($item['amount'] > $i->amount)
 						{
 							Hint::error(__('You can\'t move :name, you only have :amount.', 
-								array(
+								array (
 									':amount' => $i->amount,
 									':name' => $i->item->name($item['amount'])
 								))
@@ -86,7 +86,8 @@ class Controller_Safe extends Abstract_Controller_Frontend {
 								Hint::success(__('You\'ve moved :items to your shop.', array(':items' => $i->item->name($item['amount']))));
 							}
 						}
-						else if($item['location'] == 'inventory') {
+						else if($item['location'] == 'inventory') 
+						{
 							$i->move('inventory', $item['amount']);
 							Hint::success(__('You\'ve moved :items to your inventory.', array(':items' => $i->item->name($item['amount']))));
 						}

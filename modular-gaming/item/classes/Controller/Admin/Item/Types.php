@@ -17,6 +17,7 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
+		
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.type'));
 	
 		$types = ORM::factory('Item_Type')
@@ -24,25 +25,7 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 	
 		$this->view = new View_Admin_Item_Type;
 		$this->_nav('items', 'types');
-		$this->view->types = $types->as_array();
-		
-		$commands = Item::list_commands();
-		$list_c = array();
-		
-		foreach($commands as $cmd) {
-			$name = 'Item_Command_'.str_replace('/', '_', $cmd['name']);;
-			$command = new $name;
-			
-			if($command->is_default() == false)
-			{
-				$list_c[] = array(
-					'name' => str_replace('_', ' - ', $cmd['name']),
-					'value' => $cmd['name']		
-				);
-			}
-		}
-		$this->view->commands = $list_c;
-		
+		$this->view->types = $types->as_array();		
 	}
 	
 	public function action_retrieve() {
@@ -50,7 +33,8 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 	
 		$item_id = $this->request->query('id');
 	
-		if($item_id == null) {
+		if($item_id == null) 
+		{
 			$item = ORM::factory('Item_Type')
 			->where('item.name', '=', $this->request->query('name'))
 			->find();
@@ -58,13 +42,14 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 		else
 			$item = ORM::factory('Item_Type', $item_id);
 	
-		$list = array(
-				'id' => $item->id,
-				'name' => $item->name,
-				'action' => $item->action,
-				'default_command' => $item->default_command,
-				'img_dir' => $item->img_dir,
+		$list = array (
+			'id' => $item->id,
+			'name' => $item->name,
+			'action' => $item->action,
+			'default_command' => $item->default_command,
+			'img_dir' => $item->img_dir,
 		);
+		
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
 	}
@@ -83,9 +68,9 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 			$item->values($values, array('name', 'status', 'action', 'default_command', 'img_dir'));
 			$item->save();
 			
-			$data = array(
+			$data = array (
 				'action' => 'saved',
-				'row' => array(
+				'row' => array (
 					'id' => $item->id,
 					'name' => $item->name		
 				)
@@ -98,7 +83,7 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 				
 			$list = $e->errors('models');
 				
-			foreach($list as $field => $er){
+			foreach($list as $field => $er) {
 				if(!is_array($er))
 					$er = array($er);
 	

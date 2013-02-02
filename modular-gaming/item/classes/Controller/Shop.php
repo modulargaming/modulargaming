@@ -126,6 +126,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 				foreach($errors as $error) {
 					Hint::error($error);
 				}
+				
 				return $this->redirect(Route::get('item.user_shop.create')->uri());
 			}
 			
@@ -282,7 +283,6 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		if(!$shop->loaded())
 			$this->redirect($this->request->referrer());
 		
-		
 		if($this->request->method() == HTTP_Request::POST)
 		{
 			$item_id = $this->request->post('item_id');
@@ -297,7 +297,8 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 			{
 				Hint::error(__('You don\'t have enough :currency to buy a ":item_name"', array(':item_name' => $item->item->name)));
 			}
-			else {
+			else 
+			{
 				$this->user->points = $this->user->points - $item->parameter;
 				$this->user->save();
 				
@@ -314,11 +315,11 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		if($this->view !== null)
 		{
 			$map_links = array('index' => 0, 'stock' => 1, 'logs' => 2);
-			$this->view->links = array(
-				array('name' => 'Shop', 'link' => Route::url('item.user_shop.index')),
-				array('name' => 'Stock', 'link' => Route::url('item.user_shop.stock')),
-				array('name' => 'Logs', 'link' => Route::url('item.user_shop.logs')),
-				array('name' => 'View', 'link' => $this->_view_shop())
+			$this->view->links = array (
+				array ('name' => 'Shop', 'link' => Route::url('item.user_shop.index')),
+				array ('name' => 'Stock', 'link' => Route::url('item.user_shop.stock')),
+				array ('name' => 'Logs', 'link' => Route::url('item.user_shop.logs')),
+				array ('name' => 'View', 'link' => $this->_view_shop())
 			);
 				
 			if(array_key_exists($this->request->action(), $map_links))

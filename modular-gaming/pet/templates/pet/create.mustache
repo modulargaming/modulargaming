@@ -2,14 +2,13 @@
 <hr>
 <form method="post">
 	<input type="hidden" name="csrf" value="{{csrf}}">
-	<input type="hidden" name="specie_id" value="1" id="specie_id" />
+	<input type="hidden" name="specie_id" id="specie_id" value="1" />
 	<input type="hidden" name="colour_id" id="colour_id" value="1" />
 	<input type="hidden" name="gender" id="gender" value="male" />
 	<ul class="thumbnails">
 		<li class="span4">
 			<div class="thumbnail center">
-			{{! this image path should not be hard coded}}
-				<img src="{{base_url}}assets/img/pets/1/black.png" id="pet_image" />
+				<img src="{{base_url}}assets/img/pets/{{default_specie}}/{{default_colour}}" id="pet_image" />
 				<h3><span id="pet_colour">Black</span> <span id="pet_specie">Koorai</span></h3>
 				<p id="pet_description">The Koorai</p>
 			</div>
@@ -20,8 +19,7 @@
 				{{#species}}
 				<li>
 					<a href="#" class="thumbnail" rel="popover" data-trigger="hover" data-placement="bottom" data-content="{{description}}" data-original-title="{{name}}" data-specie="{{id}}">
-						{{! should not be hard coded}}
-						<img src="{{base_url}}assets/img/pets/{{id}}/black.png" class="pet_specie" />
+						<img src="{{base_url}}assets/img/pets/{{dir}}/{{default_colour}}" class="pet_specie" />
 					</a>
 				</li>
 				{{/species}}
@@ -52,41 +50,6 @@
 }
 </style>
 <script>
-var pet_specie = 1,
-	pet_colour = 1,
-	colour_name = ['', {{#colours}}'{{name}}', {{/colours}}''],
-	colour_image = ['', {{#colours}}'{{image}}', {{/colours}}''],
-	map = {{& compose}};
-function pet_image() {
-	$('#pet_image').attr('src', '{{base_url}}assets/img/pets/' + pet_specie + '/' + colour_image[pet_colour]);
-}
-window.onload = function() {
-	$("a[rel=popover]").click(function(e) {
-		pet_specie = $(this).data('specie');
-		
-		$.each(map, function(colour, species){
-			var colour_id = colour_name.indexOf(colour);
-			if(species.indexOf(pet_specie) < 0) {
-				$('button.pet_colour[value="'+colour_id+'"]').addClass('disabled');
-			}
-			else {
-				$('button.pet_colour[value="'+colour_id+'"]').removeClass('disabled');
-			}
-		});
-		$('#specie_id').val(pet_specie);
-		pet_image();
-		$('#pet_specie').text($(this).data('original-title'));
-		$('#pet_description').text($(this).data('content'));
-		e.preventDefault();
-	}).popover();
-	$(".pet_colour").click(function() {
-		pet_colour = $(this).val();
-		$('#pet_colour').text(colour_name[pet_colour]);
-		$("#colour_id").val(pet_colour);
-		pet_image();
-	});
-	$(".gender button").click(function() {
-		$("#gender").val($(this).val());
-	});
-};
+var pet_data = {{& compose}},
+ base_url = '{{base_url}}assets/img/pets/';
 </script>
