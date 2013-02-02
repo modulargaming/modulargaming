@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Pet_Create extends Abstract_View_pet {
+class View_Pet_Create extends Abstract_View_Pet {
 
 	public $title = 'Create a pet';
 
