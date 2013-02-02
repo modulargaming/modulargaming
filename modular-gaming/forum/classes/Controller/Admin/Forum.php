@@ -11,8 +11,6 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 	{
 		parent::before();
 
-		Breadcrumb::add('Forum', Route::url('forum.admin'));
-
 		$id = $this->request->param('id');
 
 		if ($id !== NULL)
@@ -45,10 +43,6 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 
 	public function action_create()
 	{
-		Breadcrumb::add('Create category', Route::url('forum.admin', array(
-			'action' => 'create'
-		)));
-
 		if ($this->request->method() == HTTP_REQUEST::POST)
 		{
 			try
@@ -75,11 +69,6 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 
 	public function action_edit()
 	{
-		Breadcrumb::add('Edit category - '.$this->_category->title, Route::url('forum.admin', array(
-			'action' => 'edit',
-			'id'     => $this->_category->id
-		)));
-
 		// Edit!
 		if ($this->request->method() == HTTP_Request::POST)
 		{
@@ -117,11 +106,6 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
-		Breadcrumb::add('Delete category - '.$this->_category->title, Route::url('forum.admin', array(
-			'action' => 'delete',
-			'id'     => $this->_category->id
-		)));
-
 		// Get possible categories to move posts to.
 		$categories = ORM::factory('Forum_Category')
 			->where('id', '<>', $this->_category->id)

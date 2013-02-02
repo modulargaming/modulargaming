@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Abstract base view for forum.
+ * Abstract base view for forum admin.
  *
  * @package    MG Forum
  * @category   View
@@ -8,16 +8,16 @@
  * @copyright  (c) 2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Abstract_View_Forum extends Abstract_View {
+class Abstract_View_Admin_Forum extends Abstract_View_Admin {
 
 	protected function get_breadcrumb()
 	{
 		return array_merge(parent::get_breadcrumb(), array(
 			array(
 				'title' => 'Forum',
-				'href'  => Route::url('forum')
+				'href'  => Route::url('forum.admin')
 			)
 		));
 	}
 
-} // End Abstract_View_Forum
+}
