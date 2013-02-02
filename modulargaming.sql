@@ -430,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `pet_species` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `pet_species` (`id`, `name`, `description`) VALUES
+INSERT INTO `pet_species` (`id`, `name`, `dir`, `description`) VALUES
 (1, 'Koorai', '1', 'The Koorai'),
 (2, 'Zedro', '2', 'The Zedro.');
 
