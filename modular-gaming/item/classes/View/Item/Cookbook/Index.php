@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Cookbook_Index extends Abstract_View {
+class View_Item_Cookbook_Index extends Abstract_View_Cookbook {
 
 	public $title = 'Cook book';
 	

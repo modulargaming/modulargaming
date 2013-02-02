@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Cookbook_View extends Abstract_View {
+class View_Item_Cookbook_View extends Abstract_View_Cookbook {
 
 	public $title = 'Cook book';
 	
@@ -29,5 +29,15 @@ class View_Item_Cookbook_View extends Abstract_View {
 				'csrf' => $this->csrf()		
 			);
 		}
+	}
+
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Cook '.$this->recipe->item->name,
+				'href'  => Route::url('item.cookbook.view', array('id' => $this->id))
+			)
+		));
 	}
 }
