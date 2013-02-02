@@ -1,35 +1,35 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Message_View extends Abstract_View {
+class View_Message_View extends Abstract_View_Message {
 
-        public $message;
+	public $message;
 
-        public function title()
-        {
-                return $this->message->subject;
-        }
+	public function title()
+	{
+		return $this->message->subject;
+	}
 
-        public function message()
-        {
+	public function message()
+	{
 		$message[] = array(
-				'id' => $this->message->id,
-				'subject' => $this->message->subject,
-				'content' => $this->message->content, // Escaped properly at create now
-				'created' =>  Date::format($this->message->created),
-				'sender' => array(
-					'avatar' => $this->message->sender->avatar,
-					'username'  => $this->message->sender->username,
-					'title'  => $this->message->sender->title->title,
-					'signature' => $this->message->sender->signature,
-					'created' => Date::format($this->message->created),
-					'href'      => Route::url('user.view', array(
-						'id'     => $this->message->sender->id,
-					)),
-				),
+			'id' => $this->message->id,
+			'subject' => $this->message->subject,
+			'content' => $this->message->content, // Escaped properly at create now
+			'created' =>  Date::format($this->message->created),
+			'sender' => array(
+				'avatar' => $this->message->sender->avatar,
+				'username'  => $this->message->sender->username,
+				'title'  => $this->message->sender->title->title,
+				'signature' => $this->message->sender->signature,
+				'created' => Date::format($this->message->created),
+				'href'      => Route::url('user.view', array(
+					'id'     => $this->message->sender->id,
+				)),
+			),
 
-				);
-                return $message;
-        }
+		);
+		return $message;
+	}
 
 	public function links()
 	{
@@ -41,6 +41,14 @@ class View_Message_View extends Abstract_View {
 		);
 	}
 
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => $this->message->subject,
+				'href'  => Route::url('message.view', array('id' => $this->message->id))
+			)
+		));
+	}
 
 }
-

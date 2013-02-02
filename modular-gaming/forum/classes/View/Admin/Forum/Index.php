@@ -1,8 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Admin_Forum_Index extends Abstract_View_Admin {
+class View_Admin_Forum_Index extends Abstract_View_Admin_Forum {
 
 	public $title = 'Categories';
+
+	/**
+	 * @var Database_Result Categories
+	 */
+	public $categories;
 
 	public function categories()
 	{

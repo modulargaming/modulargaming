@@ -29,23 +29,16 @@ class Controller_Forum_Post extends Abstract_Controller_Forum {
 
 		$this->topic = $this->post->topic;
 		$this->category = $this->topic->category;
-
-		Breadcrumb::add($this->category->title, Route::url('forum.category', array('id' => $this->category->id)));
-		Breadcrumb::add($this->topic->title, Route::url('forum.topic', array('id' => $this->topic->id)));
 	}
 
 	public function action_edit()
 	{
 		$post = $this->post;
+
 		if ( ! $this->user->can('Forum_Post_Edit', array('post' => $post)))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to edit post');
 		}
-
-		Breadcrumb::add('Edit #'.$post->id, Route::url('forum.post', array(
-			'action' => 'edit',
-			'id'     => $post->id,
-		)));
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
@@ -74,11 +67,6 @@ class Controller_Forum_Post extends Abstract_Controller_Forum {
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to delete post');
 		}
-
-		Breadcrumb::add('Delete #'.$post->id, Route::url('forum.post', array(
-			'action' => 'delete',
-			'id'     => $post->id,
-		)));
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{

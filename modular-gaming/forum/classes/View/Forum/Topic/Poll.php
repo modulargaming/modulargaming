@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Forum_Topic_Poll extends Abstract_View {
+class View_Forum_Topic_Poll extends Abstract_View_Forum_Topic {
 
 	public $title = 'Poll';
 
@@ -21,5 +21,18 @@ class View_Forum_Topic_Poll extends Abstract_View {
 			}
 			return $options;
 		}
+	}
+
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Poll',
+				'href' => Route::url('forum.topic', array(
+					'id'     => $this->topic->id,
+					'action' => 'poll'
+				))
+			)
+		));
 	}
 }

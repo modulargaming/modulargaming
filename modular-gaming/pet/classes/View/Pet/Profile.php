@@ -28,5 +28,37 @@ class View_Pet_Profile extends Abstract_View {
 		);
 	}
 
+	protected function get_breadcrumb()
+	{
+		$array = array();
 
+		if ($this->pet->user_id == $this->player()['id'])
+		{
+			$array[] = array(
+				'title' => 'Your pets',
+				'href'  => Route::url('pets')
+			);
+		}
+		elseif ($this->pet->user_id)
+		{
+			$array[] = array(
+				'title' => $this->pet->user->username . "'" . ($this->pet->user->username[strlen($this->pet->user->username)-1] == 's' ? '' : 's') . ' pets',
+				'href'  => '#'
+			);
+		}
+		else
+		{
+			$array[] = array(
+				'title' => 'Abandoned pets',
+				'href'  => Route::url('pets')
+			);
+		}
+
+		$array[] = array(
+			'title' => $this->pet->name,
+			'href'  => Route::url('pet', array('name' => strtolower($this->pet->name)))
+		);
+
+		return array_merge(parent::get_breadcrumb(), $array);
+	}
 }

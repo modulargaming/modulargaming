@@ -29,8 +29,6 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 		{
 			throw HTTP_Exception::factory('404', 'Forum category not found');
 		}
-
-		Breadcrumb::add($this->category->title, Route::url('forum.category', array('id' => $id)));
 	}
 
 	/**
@@ -38,8 +36,6 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 	 */
 	public function action_page()
 	{
-		$this->view = new View_Forum_Category_View;
-
 		$topics = $this->category->topics
 			->with('last_post')
 			->order_by('sticky', 'DESC')
@@ -48,13 +44,14 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 		$paginate = Paginate::factory($topics)
 			->execute();
 
+		$this->view = new View_Forum_Category_View;
+
 		// TODO: This belongs to the view class.
 		$this->view->can_create = $this->user->can('Forum_Topic_Create', array('category' => $this->category));
 
 		$this->view->pagination = $paginate->render();
 		$this->view->category = $this->category;
 		$this->view->topics = $paginate->result();
-
 	}
 
 	/**
@@ -66,11 +63,6 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 		{
 			throw HTTP_Exception::factory('403', 'Category is locked');
 		}
-
-		Breadcrumb::add('Create', Route::url('forum.category', array(
-			'action' => 'create',
-			'id'     => $this->category->id,
-		)));
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
@@ -116,6 +108,7 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 		}
 
 		$this->view = new View_Forum_Topic_Create;
+		$this->view->category = $this->category;
 	}
 
 }

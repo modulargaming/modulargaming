@@ -10,12 +10,8 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Cookbook extends Abstract_Controller_Frontend {
+
 	protected $protected = TRUE;
-	
-	public function before() {
-		Breadcrumb::add('Cook book', Route::url('item.cookbook'));
-		parent::before();
-	}
 	
 	public function action_index()
 	{
@@ -45,8 +41,6 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 	public function action_view() {
 		$id = $this->request->param('id');		
 		$item = ORM::factory('User_Item', $id);
-		
-		Breadcrumb::add('Cook '.$item->item->name, URL::site(Route::get('item.cookbook.view')->uri(array('id' => $id))));
 		
 		$errors = array();
 		

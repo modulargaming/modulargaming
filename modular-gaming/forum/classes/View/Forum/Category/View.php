@@ -1,8 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Forum_Category_View extends Abstract_View {
+class View_Forum_Category_View extends Abstract_View_Forum_Category {
 
-	public $category;
 	public $topics;
 	public $can_create;
 

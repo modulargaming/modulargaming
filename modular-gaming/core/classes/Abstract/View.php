@@ -85,12 +85,13 @@ abstract class Abstract_View {
 	{
 		$breadcrumb = array();
 
-		foreach (Breadcrumb::get() as $item)
+		foreach ($this->get_breadcrumb() as $item)
 		{
 			$breadcrumb[] = array(
 				'title'   => $item['title'],
 				'href'    => $item['href'],
 				'active'  => $item['href'] == Request::current()->url(),
+				'icon'    => isset($item['icon']) ? $item['icon'] : FALSE,
 				'divider' => TRUE,
 			);
 		}
@@ -101,10 +102,20 @@ abstract class Abstract_View {
 		return $breadcrumb;
 	}
 
+	protected function get_breadcrumb()
+	{
+		return array(
+			array(
+				'title' => 'Home',
+				'href'  => '/',
+				'icon'  => 'home'
+			)
+		);
+	}
+
 	public function has_breadcrumb()
 	{
-		$breadcrumb = Breadcrumb::get();
-		return ! empty($breadcrumb);
+		return TRUE;
 	}
 
 	/**

@@ -11,7 +11,10 @@
  */
 class Controller_Forum_Topic extends Abstract_Controller_Forum {
 
-	protected $topic;
+	/**
+	 * @var Model_Forum_Topic Topic
+	 */
+	private $topic;
 
 	/**
 	 * Attempt to load the Topic using the 'ID' parameter in the url.
@@ -30,9 +33,6 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		{
 			throw HTTP_Exception::factory('404', 'Forum topic not found');
 		}
-
-		Breadcrumb::add($this->topic->category->title, Route::url('forum.category', array('id' => $this->topic->category->id)));
-		Breadcrumb::add($this->topic->title, Route::url('forum.topic', array('id' => $this->topic->id)));
 	}
 
 	public function action_view()
@@ -54,11 +54,6 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		{
 			throw HTTP_Exception::factory('403', 'Topic is locked');
 		}
-
-		Breadcrumb::add('Reply', Route::url('forum.topic', array(
-			'id'     => $this->topic->id,
-			'action' => 'reply'
-		)));
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
@@ -93,7 +88,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		}
 
 		$this->view = new View_Forum_Post_Reply;
-
+		$this->view->topic = $this->topic;
 	}
 
 	public function action_delete()
@@ -102,11 +97,6 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to delete topic');
 		}
-
-		Breadcrumb::add('Delete', Route::url('forum.topic', array(
-			'id'     => $this->topic->id,
-			'action' => 'delete'
-		)));
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
@@ -127,6 +117,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		}
 
 		$this->view = new View_Forum_Topic_Delete;
+		$this->view->topic = $this->topic;
 	}
 
 	public function action_sticky()
@@ -293,11 +284,9 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 				Hint::error($e->errors('models'));
 			}
 		}
-		Breadcrumb::add('Poll', Route::url('forum.topic', array(
-			'id'     => $this->topic->id,
-			'action' => 'poll'
-		)));
+
 		$this->view = new View_Forum_Topic_Poll;
+		$this->view->topic = $this->topic;
 		if ($this->topic->poll->loaded())
 		{
 			if ( ! $this->user->can('Forum_Poll_Edit', array('poll' => $this->topic->poll)))

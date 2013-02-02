@@ -1,8 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Forum_Topic_Index extends Abstract_View {
+class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 
-	public $topic;
 	public $posts;
 
 	public function title()

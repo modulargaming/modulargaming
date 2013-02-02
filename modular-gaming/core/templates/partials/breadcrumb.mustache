@@ -1,16 +1,23 @@
 <ul class="breadcrumb">
 	{{#breadcrumb}}
-		{{#active}}
-			<li class="active">
-				{{title}}
-				{{#divider}}<span class="divider">/</span>{{/divider}}
-			</li>
-		{{/active}}
-		{{^active}}
-			<li>
-				<a href="{{href}}">{{title}}</a>
-				{{#divider}}<span class="divider">/</span>{{/divider}}
-			</li>
-		{{/active}}
+		<li {{#active}}class="active"{{/active}}>
+
+			{{^active}}
+				<a href="{{href}}" title="{{title}}">
+			{{/active}}
+
+				{{#icon}}
+					<i class="icon-{{icon}}"></i>
+				{{/icon}}
+				{{^icon}}
+					{{title}}
+				{{/icon}}
+
+			{{^active}}
+				</a>
+			{{/active}}
+
+			{{#divider}}<span class="divider">/</span>{{/divider}}
+		</li>
 	{{/breadcrumb}}
 </ul>
