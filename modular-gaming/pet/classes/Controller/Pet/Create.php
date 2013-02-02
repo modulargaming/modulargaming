@@ -30,8 +30,7 @@ class Controller_Pet_Create extends Abstract_Controller_Frontend {
 				Hint::error($e->errors('models'));
 			}
 		}
-		Breadcrumb::add('Your pets', Route::url('pets'));
-		Breadcrumb::add('Create a pet', Route::url('pet.create'));
+
 		$species = ORM::factory('Pet_Specie')->find_all();
 		$this->view = new View_Pet_Create;
 		

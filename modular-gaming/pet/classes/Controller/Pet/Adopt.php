@@ -33,8 +33,7 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 				Hint::error($e->errors('models'));
 			}
 		}
-		Breadcrumb::add('Your pets', Route::url('pets'));
-		Breadcrumb::add('Adopt a pet', Route::url('pet.adopt'));
+
 		$this->view = new View_Pet_Adopt;
 		$pets = ORM::factory('User_Pet')
 		->where('user_id', '=', 0)

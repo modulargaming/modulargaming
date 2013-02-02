@@ -38,7 +38,7 @@ class Controller_Pet_Index extends Abstract_Controller_Frontend {
 				Hint::error($e->errors('models'));
 			}
 		}
-		Breadcrumb::add('Your pets', Route::url('pets'));
+
 		$this->view = new View_Pet_Index;
 		$pets = ORM::factory('User_Pet')
 		->where('user_id', '=', $this->user->id)
