@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Message_Index extends Abstract_View
-{
+class View_Message_Index extends Abstract_View_Message {
+
 	public $title = 'Messages';
 
 	public function messages()
