@@ -8,7 +8,7 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Controller_User_Forgot extends Abstract_Controller_User {
+class Controller_User_Reset extends Abstract_Controller_User {
 
 	/**
 	 * Display the login page and handle login attempts.
@@ -25,7 +25,7 @@ class Controller_User_Forgot extends Abstract_Controller_User {
 
 		}
 
-		$this->view = new View_User_Forgot;
+		$this->view = new View_User_Reset;
 	}
 
 } // End User_Forgot

@@ -28,10 +28,10 @@ Route::set('user.register', 'user/register')
 		'action'     => 'index',
 	));
 
-Route::set('user.forgot', 'user/forgot(/<hash>)')
+Route::set('user.reset', 'user/reset(/<hash>)')
 	->defaults(array(
 		'directory'  => 'User',
-		'controller' => 'Forgot',
+		'controller' => 'Reset',
 		'action'     => 'index',
 	));
   	
