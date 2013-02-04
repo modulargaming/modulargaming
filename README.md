@@ -7,6 +7,10 @@ A modular [persistent browser based game](http://www.pbbg.org) framework using [
 [Kohana](http://kohanaframework.org) is an elegant, open source, and object oriented [HMVC](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller) framework built using [PHP5](http://www.php.net), by a team of volunteers.
 It aims to be swift, secure, and small.
 
+### ORM
+
+ORM is a a powerful Object Relational Mapping (ORM) module that uses the active record pattern and database introspection to determine a model's column information. 
+
 ### KOstache
 
 Kostache is a Kohana 3.3 module for using [Mustache](https://github.com/mustache) templates in your application.
