@@ -10,8 +10,15 @@
  */
 abstract class Abstract_Controller_Frontend extends Controller {
 
-	protected $auth; // Auth instance.
-	protected $user; // Current logged in user.
+	/**
+	 * @var Auth $auth
+	 */
+	protected $auth;
+
+	/**
+	 * @var Model_User $user Current user
+	 */
+	protected $user;
 
 	protected $protected = FALSE; // Require user to be logged in.
 	protected $view = null; // View to render.
