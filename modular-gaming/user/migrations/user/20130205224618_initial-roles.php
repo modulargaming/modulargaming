@@ -51,8 +51,8 @@ class Migration_User_20130205224618 extends Minion_Migration_Base {
 	 */
 	public function down(Kohana_Database $db)
 	{
-		$db->query(NULL, 'DROP TABLE roles');
 		$db->query(NULL, 'DROP TABLE roles_users');
+		$db->query(NULL, 'DROP TABLE roles');
 	}
 
 }
