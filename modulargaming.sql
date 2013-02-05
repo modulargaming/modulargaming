@@ -312,8 +312,6 @@ INSERT INTO `user_timezones` (`id`, `timezone`, `name`) VALUES
 (223, 'Pacific/Auckland', '(GMT+12:00) Auckland'),
 (224, 'Pacific/Fiji', '(GMT+12:00) Fiji');
 
-*/
-
 CREATE TABLE IF NOT EXISTS `forum_categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(30) NOT NULL,
@@ -362,7 +360,6 @@ CREATE TABLE IF NOT EXISTS `forum_posts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
-
 CREATE TABLE IF NOT EXISTS `forum_topics` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `category_id` int(11) unsigned NOT NULL,
@@ -377,6 +374,7 @@ CREATE TABLE IF NOT EXISTS `forum_topics` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
+*/
 
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
