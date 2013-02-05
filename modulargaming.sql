@@ -1,9 +1,32 @@
+/*
 CREATE TABLE IF NOT EXISTS `sessions` (
   `session_id` varchar(24) NOT NULL,
   `last_active` int(10) unsigned NOT NULL,
   `contents` text NOT NULL,
   PRIMARY KEY (`session_id`),
   KEY `last_active` (`last_active`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `users` (
+	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+	`email` varchar(127) NOT NULL,
+	`username` varchar(32) NOT NULL DEFAULT '',
+	`password` char(64) NOT NULL,
+	`title_id` int(11) unsigned DEFAULT '1' NOT NULL,
+	`logins` int(10) unsigned NOT NULL DEFAULT '0',
+	`created` int(10) unsigned DEFAULT NULL,
+	`last_login` int(10) unsigned DEFAULT NULL,
+	`timezone_id` int(11) unsigned DEFAULT NULL,
+	`signature` varchar(255) DEFAULT NULL,
+	`about` mediumtext DEFAULT NULL,
+	`avatar` varchar(255) DEFAULT NULL,
+	`gravatar` int(1) DEFAULT NULL,
+	`post_count` int(10) unsigned DEFAULT NULL,
+	`points` int(10) unsigned DEFAULT NULL,
+	`avatar_id` int(11) unsigned DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `uniq_username` (`username`),
+	UNIQUE KEY `uniq_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -25,30 +48,6 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
   KEY `fk_role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
-CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(127) NOT NULL,
-  `username` varchar(32) NOT NULL DEFAULT '',
-  `password` char(64) NOT NULL,
-  `title_id` int(11) unsigned DEFAULT '1' NOT NULL,
-  `logins` int(10) unsigned NOT NULL DEFAULT '0',
-  `created` int(10) unsigned DEFAULT NULL,
-  `last_login` int(10) unsigned DEFAULT NULL,
-  `timezone_id` int(11) unsigned DEFAULT NULL,
-  `signature` varchar(255) DEFAULT NULL,
-  `about` mediumtext DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  `gravatar` int(1) DEFAULT NULL,
-  `post_count` int(10) unsigned DEFAULT NULL,
-  `points` int(10) unsigned DEFAULT NULL,
-  `avatar_id` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_username` (`username`),
-  UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
 CREATE TABLE IF NOT EXISTS `user_tokens` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` INT(11) UNSIGNED NOT NULL,
@@ -68,7 +67,7 @@ ALTER TABLE `roles_users`
 
 ALTER TABLE `user_tokens`
   ADD CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
+*/
 
 CREATE TABLE IF NOT EXISTS `user_titles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
