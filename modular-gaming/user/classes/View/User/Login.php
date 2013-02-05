@@ -7,7 +7,7 @@ class View_User_Login extends Abstract_View {
 	public function links()
 	{
 		return array(
-			'forgot' => Route::url('user.forgot')
+			'forgot' => Route::url('user.reset')
 		);
 	}
 
