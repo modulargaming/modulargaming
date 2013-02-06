@@ -68,6 +68,19 @@ ALTER TABLE `roles_users`
 ALTER TABLE `user_tokens`
   ADD CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
+CREATE TABLE IF NOT EXISTS `avatars` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `img` varchar(120) NOT NULL,
+  `default` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `users_avatars` (
+  `user_id` int(11) NOT NULL,
+  `avatar_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS `user_titles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(55) NOT NULL,
@@ -374,8 +387,6 @@ CREATE TABLE IF NOT EXISTS `forum_topics` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
-*/
-
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sender_id` int(11) NOT NULL,
@@ -385,6 +396,8 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `content` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+*/
 
 CREATE TABLE IF NOT EXISTS `user_pets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -520,19 +533,6 @@ CREATE TABLE `logs` (
   `params` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `avatars` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(30) NOT NULL,
-  `img` varchar(120) NOT NULL,
-  `default` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-CREATE TABLE IF NOT EXISTS `users_avatars` (
-  `user_id` int(11) NOT NULL,
-  `avatar_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `pet_species_colours` (
   `pet_specie_id` int(11) NOT NULL,
