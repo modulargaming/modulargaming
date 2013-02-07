@@ -20,7 +20,7 @@ class Migration_Forum_20130205230339 extends Minion_Migration_Base {
 			  `locked` int(1) NOT NULL,
 			  `created` int(10) unsigned DEFAULT NULL,
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=4;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 		");
 
 		$db->query(NULL, "
@@ -37,7 +37,7 @@ class Migration_Forum_20130205230339 extends Minion_Migration_Base {
 			  `title` varchar(255) NOT NULL,
 			  `votes` int(11) NOT NULL,
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 		");
 
 		$db->query(NULL, "
@@ -47,7 +47,7 @@ class Migration_Forum_20130205230339 extends Minion_Migration_Base {
 			  `title` varchar(255) NOT NULL,
 			  `votes` int(11) NOT NULL,
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 		");
 
 		$db->query(NULL, "
@@ -57,7 +57,7 @@ class Migration_Forum_20130205230339 extends Minion_Migration_Base {
 			  `option_id` int(11) unsigned NOT NULL,
 			  `user_id` int(11) unsigned NOT NULL,
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 		");
 
 		$db->query(NULL, "
@@ -73,7 +73,7 @@ class Migration_Forum_20130205230339 extends Minion_Migration_Base {
 			  `sticky` int(10) NOT NULL,
 			  `locked` int(10) NOT NULL,
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 		");
 
 		$db->query(NULL, "
@@ -85,7 +85,7 @@ class Migration_Forum_20130205230339 extends Minion_Migration_Base {
 			  `created` int(10) NOT NULL,
 			  `updated` int(10) NOT NULL,
 			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 		");
 	}
 
