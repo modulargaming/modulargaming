@@ -28,7 +28,7 @@ Route::set('user.register', 'user/register')
 		'action'     => 'index',
 	));
 
-Route::set('user.reset', 'user/reset(/<hash>)')
+Route::set('user.reset', 'user/reset(/<token>)')
 	->defaults(array(
 		'directory'  => 'User',
 		'controller' => 'Reset',

@@ -22,7 +22,21 @@ class Controller_User_Reset extends Abstract_Controller_User {
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
+			$user = ORM::factory('User')
+				->where('email', '=', $this->request->post('email'))
+				->find();
 
+			// TODO: Generate a token
+			$token = "Hax1234";
+
+			// Send the reset email.
+			$view = new View_Email_User_Reset;
+			$view->user = $user;
+			$view->token = $token;
+
+			Email::factory($view)
+				->to($user->email)
+				->send();
 		}
 
 		$this->view = new View_User_Reset;
