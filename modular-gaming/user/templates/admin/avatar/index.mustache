@@ -1,0 +1,110 @@
+<span class="hide" id="csrf">{{csrf}}</span>
+
+<div class="row">
+	<div class="span8 offset2">
+		<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="data-table">
+	<thead>
+		<tr>
+			<th class="span1"></th>
+			<th class="span2">Title</th>
+			<th class="span1">Default</th>
+			<th class="span2">Options</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="4" class="dataTables_empty">Loading data from server</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="4"><button class="btn btn-success pull-right btn-create">Create Avatar</button></td>
+		</tr>
+	</tfoot>
+</table>
+	</div>
+</div>
+
+<div class="modal hide fade" id="modal-crud">
+	<div class="modal-header"> 
+		<button class="close" data-dismiss="modal">x</button>
+		<a href="#" class="modal-options btn btn-danger pull-right" id="option-delete" style="margin-right: 15px;">Delete</a>
+		<div class="btn-group pull-right hide" id="modal-crud-errors" style="margin-right: 15px;">
+		  <a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+		    <i class="icon-exclamation-sign icon-white"> </i> Errors
+		    <span class="caret"></span>
+		  </a>
+		  <ul class="dropdown-menu" id="modal-crud-error-list">
+		    <!-- error messages -->
+		  </ul>
+		</div>
+		
+		<h3 id="modal-header"></h3>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal" id="modal-crud-form">
+			<fieldset>
+				<input type="hidden" name="id" value="" id="input-id" />
+				<input type="hidden" name="csrf" value="" />
+				
+				<div class="control-group">
+					<label class="control-label" for="input-title">Title</label>
+
+					<div class="controls">
+						<input type="text" class="input-medium" id="input-title" name="title" value="" maxlength="30" required />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-default">Default</label>
+
+					<div class="controls">
+						<label class="checkbox">
+						  <input type="checkbox" id="input-default" name="default">
+						</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-img">Image</label>
+
+					<div class="controls">
+						<div class="fileupload fileupload-new" data-provides="fileupload" id="input-img">
+							<div class="fileupload-new thumbnail" style="width: {{image.width}}px; height: {{image.heigth}}px;">
+						  		<img src="http://www.placehold.it/{{image.width}}x{{image.heigth}}/EFEFEF/AAAAAA" />
+						  	</div>
+						 	<div class="fileupload-preview fileupload-exists thumbnail" style="width: {{image.width}}px; height: {{image.heigth}}px;"></div>
+						  	<span class="btn btn-file">
+						  		<span class="fileupload-new">Select image</span>
+						  		<span class="fileupload-exists">Change</span>
+						  		<input type="file" />
+						  	</span>
+						  	<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div class="progress progress-striped active span8 hide">
+		  <div id="modal-footer-upload-progress" class="bar bar-success" style="width: 1%;"></div>
+		</div>
+		<button type="submit" class="btn btn-success" id="modal-crud-save">Save</button>
+		
+	</div>
+</div>
+
+{{! Delete modal}}
+<div class="modal hide fade" id="modal-delete">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3>Delete</h3>
+	</div>
+	<div class="modal-body">
+		Are you sure you want to delete <strong id="modal-delete-name"></strong>?
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-danger" id="btn-remove">Delete</button>
+		<button class="btn" data-dismiss="modal">Keep the <span id="modal-delete-type"></span></button>
+	</div>
+</div>
+<div class="notifications bottom-right" id="crud-notify"></div>
