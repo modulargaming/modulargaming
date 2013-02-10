@@ -2,14 +2,14 @@
 
 Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'directory'  => 'Admin',
-		'controller' => 'Dashboard',
+		'directory'  => 'admin',
+		'controller' => 'dashboard',
 		'action'     => 'index',
 	));
 
 Route::set('admin.templates', 'assets/js/admin/templates.js')
 	->defaults(array(
-	'directory'  => 'Admin',
-	'controller' => 'Templates',
+	'directory'  => 'admin',
+	'controller' => 'templates',
 	'action'     => 'index',
 ));

@@ -38,5 +38,53 @@ return array (
 				)
 			)
 		),
+	),
+	'data_tables' => array(
+		'head' => array(
+			'css' => array(
+				array (
+					'name' => 'jquery.dataTables',
+					'file' => 'DT_bootstrap.css',
+				)
+			)
+		),
+		'body' => array(
+			'js' => array(
+				array(
+					'name' => 'dataTables',
+					'file'  => 'plugins/jquery.dataTables.js',
+					'location' => 'after',
+					'relative' => 'jquery'
+				),
+				array(
+					'name' => 'dataTables.bootstrap',
+					'file'  => 'plugins/DT_bootstrap.js',
+					'location' => 'after',
+					'relative' => 'bootstrap'
+				)
+			)
+		),
+	),
+	'upload' => array(
+		'head' => array(
+			'css' => array(
+				array (
+					'name' => 'upload.img',
+					'file' => 'bootstrap-fileupload.min.css',
+					'location' => 'after',
+					'relative' => 'bootstrap'
+				)
+			)
+		),
+		'body' => array(
+			'js' => array(
+				array(
+					'name' => 'upload.img',
+					'file'  => 'plugins/bootstrap-fileupload.min.js',
+					'location' => 'after',
+					'relative' => 'bootstrap'
+				)
+			)
+		),
 	)
 );
