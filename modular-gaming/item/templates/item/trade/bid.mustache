@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="span8 offset2">
+			<div class="row-fluid">
+				<div class="span12 pagination-centered">
+					<p>
+					<div class="btn-group">
+					{{#trade_nav}}
+					<a href="{{url}}" class="btn{{#active}} active{{/active}}">{{name}}</a>
+					{{/trade_nav}}
+					</div>
+					</p>
+				</div>
+			</div>
+			
+			{{#lot}}
+			<div class="row">
+				You are bidding on lot <strong>#{{id}}</strong> - by <em><a href="{{profile}}">{{username}}</a></em>
+			</div>
+			<div class="row">
+			<div class="media">
+				{{#inventory}}
+					<img class="media-object pull-left" src="{{img}}" width="45" heigth="45" />
+				  <div class="media-body">
+				    {{name}}
+				  </div>
+				{{/inventory}}
+			</div>
+			<div class="row">
+			<em>{{description}}</em><br />
+			</div>
+			{{/lot}}
+			</div>
+			<form action="{{process_url}}" method="post">
+			<input type="hidden" name="csrf" value="{{csrf}}" />
+			<div class="row muted">
+				You can selected up to {{max_items}} {{max_type}}
+			</div>
+			<div class="row">
+				<ul class="thumbnails">
+					{{#items}}
+						<li class="span2">
+							<div class="thumbnail pagination-centered">
+								<img src="{{img}}" />
+								<p>
+									{{name}} <br />
+								 	<input class="input-mini" type="number" name="items[{{id}}]" value="0" />
+								</p>
+					  		</div>
+					  	</li>
+					{{/items}}
+				</ul>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">Points: </div>
+				<div class="span10">
+					<input type="number" class="input-small" name="points" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="media-body pagination-centered"><input type="submit" class="btn btn-primary" value="Bid" /></div>
+			  	</form>
+			  </div>
+			</div>
+	</div>
+</div>

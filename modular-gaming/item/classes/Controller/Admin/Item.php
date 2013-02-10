@@ -18,20 +18,17 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
 		
-		
+		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
+		$this->_load_assets(Kohana::$config->load('assets.upload'));
+		Assets::js('admin.crud', 'plugins/admin.js');
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.list'));
 		
 		$types = ORM::factory('Item_Type')
-			->find_all();
-		
-		//@todo limit when pagination arrives
-		$items = ORM::factory('Item')
 			->find_all();
 
 		$this->view = new View_Admin_Item_Index;
 		$this->_nav('items', 'index');
 		$this->view->item_types = $types->as_array();
-		$this->view->items = $items;
 
 		$commands = Item::list_commands();
 		$input_c = array();
@@ -42,7 +39,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$def_c = array();
 		
 		foreach($commands as $cmd) {
-			$name = str_replace('/', '_', $cmd['name']);
+			$name = str_replace(DIRECTORY_SEPARATOR, '_', $cmd);
 			$class = 'Item_Command_'.$name;
 			$command = new $class;
 			
@@ -69,6 +66,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->view->input_commands = $input_c;
 		$this->view->menu_commands = $menu_c;
 		$this->view->command_definitions = $def_c;
+		$this->view->image = Kohana::$config->load('items.image');
 	}
 	
 	public function action_search() {
@@ -138,26 +136,47 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
 	}
+	
+	public function action_paginate() {
+		if (DataTables::is_request())
+		{
+			$orm = ORM::factory('Item');
+	
+			$paginate = Paginate::factory($orm)
+			->columns(array('id', 'name', 'image', 'status', 'type'));
+	
+			$datatables = DataTables::factory($paginate)->execute();
+	
+			foreach ($datatables->result() as $item)
+			{
+				$datatables->add_row(array (
+						$item->img(),
+						$item->name,
+						$item->status,
+						$item->type->name,
+						$item->id
+					)
+				);
+			}
+	
+			$datatables->render($this->response);
+		}
+		else
+			throw new HTTP_Exception_500();
+	}
 	 
 	public function action_retrieve() {
 		$this->view = null;
 	
 		$item_id = $this->request->query('id');
-		
-		if($item_id == null) 
-		{
-			$item = ORM::factory('Item')
-				->where('item.name', '=', $this->request->query('name'))
-				->find();
-		}
-		else
-			$item = ORM::factory('Item', $item_id);
+
+		$item = ORM::factory('Item', $item_id);
 	
 		$list = array (
 			'id' => $item->id,
 			'name' => $item->name,
 			'status' => $item->status,
-			'image' => $item->image,
+			'image' => $item->img(),
 			'description' => $item->description,
 			'unique' => $item->unique,
 			'transferable' => $item->transferable,
@@ -175,23 +194,90 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		if($values['id'] == 0)
 			$values['id'] = null;
 		
-		$this->response->headers('Content-Type','application/json');
+		$id = $values['id'];
 		
+		$this->response->headers('Content-Type','application/json');
+
 		try {			
 			if(isset($values['commands']))
 				$values['commands'] = Item::parse_commands($values['commands']);
 			
 			$item = ORM::factory('Item', $values['id']);
+			
+			$img = $item->image;
+			$dir = $item->type->img_dir;
+			
+			$values['image'] = (isset($_FILES['image'])) ? 'tmp' : $img;
 			$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id', 'commands'));
 			$item->save();
 			
+			$file = array('status' => 'empty', 'msg' => '');
+			
+			if(isset($_FILES['image']))
+			{
+				$image = $_FILES['image'];
+				$cfg = Kohana::$config->load('items.image');
+				
+				if(!Upload::valid($image))
+				{
+					//error not valid upload
+					$file = array('status' => 'error', 'msg' => 'You did not provide a valid file to upload.');
+				}
+				else if(!Upload::image($image, $cfg['width'], $cfg['heigth'], true))
+				{
+					//not the right image dimensions
+					$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :heigth.', array(
+						':width' => $cfg['width'], ':heigth' => $cfg['heigth']
+					));
+				}
+				else 
+				{
+					$msg = '';
+					if($id != null && !empty($img) && file_exists(DOCROOT.'assets/img/items/'.$dir.$img))
+					{
+						//move the previously stored item to the graveyard
+						$new_name = Text::random('alnum', 4).$img;
+						copy(DOCROOT.'assets/img/items/'.$dir.$img, DOCROOT.'assets/graveyard/items/'.$new_name);
+						unlink(DOCROOT.'assets/img/items/'.$dir.$img);
+						$msg = 'The old image has been moved to the graveyard and renamed to '.$new_name;
+					}
+					
+					$up = Upload::save($image, $image['name'], DOCROOT.'assets/img/items/'.$item->type->img_dir);
+					
+					if($up != false)
+					{
+						$file['status'] = 'success';
+						$file['msg'] = 'You\'ve successfully uploaded your item image';
+						
+						if(!empty($msg))
+							$file['msg'] .= '<br />'.$msg;
+						
+						$item->image = $image['name'];
+						$item->save();
+					}
+					else 
+					{
+						$file = array('status' => 'error', 'msg' => 'There was an error uploading your file.');
+					}
+				}
+			}
+			else if($dir != $item->type->img_dir && file_exists(DOCROOT.'assets/img/items/'.$dir.$img))
+			{
+				//item type changed, move the item image
+				copy(DOCROOT.'assets/img/items/'.$dir.$item->image, DOCROOT.'assets/img/items/'.$item->type->img_dir.$item->image);
+				unlink(DOCROOT.'assets/img/items/'.$dir.$item->image);
+			}
+			
 			$data = array (
 				'action' => 'saved',
+				'type' => ($id == null) ? 'new' : 'update',
+				'file' => $file,
 				'row' => array (
-					'id' => $item->id,
-					'img' => '<img src="'.URL::base().$item->img().'" />',
-					'name' => $item->name,
-					'type' => $item->type->name
+					$item->img(),
+					$item->name,
+					$item->status,
+					$item->type->name,
+					$item->id,
 				)
 			);
 			$this->response->body(json_encode($data));

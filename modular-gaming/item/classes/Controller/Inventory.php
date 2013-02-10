@@ -24,9 +24,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			Assets::js('item.inventory', 'item/inventory/index.js');
 		}
 		
-		$items = ORM::factory('User_Item')
-			->where('user_id', '=', $this->user->id)
-			->where('location', '=', 'inventory');
+		$items = Item::location('inventory');
 		
 		$paginate = Paginate::factory($items, array ('total_items' => $max_items), $this->request)->execute();
 		

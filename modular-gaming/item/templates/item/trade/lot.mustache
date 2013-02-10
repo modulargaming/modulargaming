@@ -1,0 +1,86 @@
+<div class="row">
+	<div class="span6 offset3">
+			<div class="row-fluid">
+				<div class="span12 pagination-centered">
+				<p>
+					<div class="btn-group">
+					{{#trade_nav}}
+					<a href="{{url}}" class="btn{{#active}} active{{/active}}">{{name}}</a>
+					{{/trade_nav}}
+					</div>
+				</p>
+				</div>
+			</div>
+			<div class="row-fluid">
+			{{#lot}}
+			<div class="span7 offset3">
+			<div class="row pagination-centered">
+				<em><a href="{{user_profile}}">{{username}}</a></em>
+				{{#is_owner}}<div class="pull-right"><a href="{{trade_delete}}" class="btn btn-danger">Remove</a></div>{{/is_owner}}
+				{{#can_bid}}<div class="pull-right"><a href="{{bid_link}}" class="btn">Bid</a></div>{{/can_bid}}
+				<span class="pull-left"><strong>#{{id}}</strong></span>
+			</div>
+			<div class="media">
+				{{#inventory}}
+					<img class="media-object pull-left" src="{{img}}" width="45" heigth="45" />
+				  <div class="media-body">
+				    {{name}}
+				  </div>
+				{{/inventory}}
+			</div>
+			<div class="row">{{description}}</div>
+			{{#is_owner}}
+				{{#bids}}
+					<div class="row">
+						Bid made by <a href="{{profile}}">{{username}}</a>
+						<span class="pull-right">
+							<a href="{{accept}}" class="btn btn-success">Accept</a> <a href="{{reject}}" class="btn tn-warning">Reject</a> 
+						</span>
+					</div>
+					<div class="media">
+						{{#inventory}}
+							<img class="media-object pull-left" src="{{img}}" width="45" heigth="45" />
+						  <div class="media-body">
+						    {{name}}
+						  </div>
+						{{/inventory}}
+						{{#points}}
+						{{#currency_image}}
+							<img class="media-object pull-left" src="{{.}}" />
+						{{/currency_image}}
+						<div class="media-body">
+						    {{amount}}
+						  </div>
+						{{/points}}
+					</div>
+				{{/bids}}
+			{{/is_owner}}
+			{{! if a bid was made}}
+			{{#bid}}
+				<div class="row">
+						<span class="pull-right">
+							<a href="{{retract}}" class="btn btn-warning">Retract</a> 
+						</span>
+					</div>
+					<div class="media">
+						{{#inventory}}
+							<img class="media-object pull-left" src="{{img}}" width="45" heigth="45" />
+						  <div class="media-body">
+						    {{name}}
+						  </div>
+						{{/inventory}}
+						{{#points}}
+						{{#currency_image}}
+							<img class="media-object pull-left" src="{{.}}" />
+						{{/currency_image}}
+						<div class="media-body">
+						    {{amount}}
+						  </div>
+						{{/points}}
+					</div>
+			{{/bid}}
+			</div>
+			{{/lot}}
+		</div>
+	</div>
+</div>

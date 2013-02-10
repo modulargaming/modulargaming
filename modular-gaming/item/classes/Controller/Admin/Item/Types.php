@@ -18,14 +18,37 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
 		
+		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
+		Assets::js('admin.crud', 'plugins/admin.js');
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.type'));
-	
-		$types = ORM::factory('Item_Type')
-		->find_all();
-	
+		
 		$this->view = new View_Admin_Item_Type;
-		$this->_nav('items', 'types');
-		$this->view->types = $types->as_array();		
+		$this->_nav('items', 'types');		
+	}
+	
+	public function action_paginate() {
+		if (DataTables::is_request())
+		{
+			$orm = ORM::factory('Item_Type');
+	
+			$paginate = Paginate::factory($orm)
+			->columns(array('id', 'name'));
+	
+			$datatables = DataTables::factory($paginate)->execute();
+	
+			foreach ($datatables->result() as $avatar)
+			{
+				$datatables->add_row(array (
+						$avatar->name,
+						$avatar->id
+				)
+				);
+			}
+	
+			$datatables->render($this->response);
+		}
+		else
+			throw new HTTP_Exception_500();
 	}
 	
 	public function action_retrieve() {
@@ -33,14 +56,7 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 	
 		$item_id = $this->request->query('id');
 	
-		if($item_id == null) 
-		{
-			$item = ORM::factory('Item_Type')
-			->where('item.name', '=', $this->request->query('name'))
-			->find();
-		}
-		else
-			$item = ORM::factory('Item_Type', $item_id);
+		$item = ORM::factory('Item_Type', $item_id);
 	
 		$list = array (
 			'id' => $item->id,
@@ -61,6 +77,8 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 		if($values['id'] == 0)
 			$values['id'] = null;
 	
+		$id = $values['id'];
+		
 		$this->response->headers('Content-Type','application/json');
 	
 		try {
@@ -70,9 +88,10 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 			
 			$data = array (
 				'action' => 'saved',
+				'type' => ($id == null) ? 'new' : 'update',
 				'row' => array (
-					'id' => $item->id,
-					'name' => $item->name		
+					$item->name,
+					$item->id
 				)
 			);
 			$this->response->body(json_encode($data));

@@ -151,9 +151,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		
 		$this->view = new View_Item_Shop_Stock;
 		
-		$items = ORM::factory('User_item')
-			->where('location', '=', 'shop')
-			->where('user_id', '=', $this->user->id);
+		$items = Item::location('shop');
 		
 		$pagination = Paginate::factory($items, array(), $this->request);
 		
@@ -266,9 +264,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		
 		if($shop->loaded())
 		{
-			$inventory = ORM::factory('User_Item')
-				->where('user_id', '=', $shop->user_id)
-				->where('location', '=', 'shop')
+			$inventory = Item::location('shop')
 				->where('parameter', '>', '0')
 				->find_all();
 			

@@ -2,18 +2,7 @@
  * Admin item recipe's js file.
  */
 
-$(document).ready(function() {
-	$('#search').typeahead({
-	    source: function (query, process) {
-	        return $.get('./search/', { type: 'recipe', item: query }, function (data) {
-	            return process(data);
-	        });
-	    },
-	    updater: function(obj){
-	    	$('#crud-container').trigger('crud.FormOpen', {name: obj});
-	    }
-	});
-	
+$(document).ready(function() {	
 	$('#input-crafted_item').typeahead({
 	    source: function (query, process) {
 	        return $.get('./search/', { type: 'item', item: query }, function (data) {
@@ -25,13 +14,13 @@ $(document).ready(function() {
 	var ingrEl = 0;
 	var ingrCount = 0;
 	
-	$('#crud-container').on('crud.clean', function(){
+	$('#data-table').on('crud.clean', function(){
 		$('#ingredient-body > tr').each(function(){$(this).remove();});
 		ingrCount = 0;
 		ingrEl = 0;
 	});
 	
-	$('#crud-container').on('crud.load', function(e, data){
+	$('#data-table').on('crud.load', function(e, data){
 		if(data.materials.length > 0){
 			$.each(data.materials, function(key, val){
 				$('#ingredient-body').append('<tr><td><input type="text" class="input-small disabled" name="materials['+val.id+'][name]" value="'+val.name+'" /></td><td><input type="text" class="input-mini" name="materials['+val.id+'][amount]" value="'+val.amount+'" /></td><td><a href="#" class="btn btn-mini btn-danger ingredient-remove">x</a></td></tr>');
@@ -40,7 +29,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$('#crud-container').on('crud.save', function(e, values, data){
+	$('#data-table').on('crud.save', function(e, values, data){
 		$('#container-'+$('#input-id').val()).find('[data-prop="ingredients"]').text($('#ingredient-body > tr').length);
 	});
 	
@@ -58,17 +47,36 @@ $(document).ready(function() {
 		ingrCount++;
 		ingrEl++;
 	});
+	
 	$('#ingredient-body').on('click', 'tr > td.ingredient-remove', function(e){
 		e.preventDefault();
 		$(this).parents('tr').remove();
 		ingrCount--;
 	});
 	
-	$('#crud-container').mgForm({
-		retrieve: './recipes/retrieve/',
-		save: './recipes/save/',
-		data_in_table: ['name'],
-		remove: './recipes/delete/',
-		identifier: 'name'
+	$('#data-table').CRUD({
+		base_url: './recipes/',
+		identifier: {data: 'name', table: 1},
+		upload: true,
+		dataTable: {
+			"aoColumnDefs": [
+			    { 
+			        "aTargets": [ 2 ], 
+			        "mRender": function ( data, type, full ) {
+			        	return '<img src="'+data+'" />';
+			        } 
+			    },
+			    { 
+			        "aTargets": [ 1 ],
+			        "mRender": function ( data, type, full ) {
+			        	return '<span class="badge badge-info offset4">'+data+'</span>';
+			        } 
+			    }
+			]
+		},
+		table: {
+			span: 6,
+			offset: 3
+		}
 	});
 });

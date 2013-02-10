@@ -44,15 +44,16 @@ class Model_User_Item extends ORM {
 	 * Returns false if you're trying to move a higher amount of this item than you already have,
 	 * if successfull it will return the instance of the user item stack where the copies have moved to.
 	 * 
-	 * @param string $location
-	 * @param integer $amount
+	 * @param string $location Location to send the item to
+	 * @param integer $amount How many are moving to $location
+	 * @param boolean $single_stack Add to an existing stack or alway create a new stack
 	 * @return boolean|Model_User_Item
 	 */
-	public function move($location, $amount=1) {
+	public function move($location, $amount=1, $single_stack=true) {
 		if($amount == '*')
 			$amount = $this->amount;
 		
-		return $this->_relocate($this->user_id, $location, $amount);
+		return $this->_relocate($this->user_id, $location, $amount, $single_stack);
 	}
 	
 	/**
@@ -93,22 +94,27 @@ class Model_User_Item extends ORM {
 	 * @param integer $user_id The (new) owner of the item
 	 * @param string $location The new location of the item
 	 * @param integer $amount The amount of copies to relocate
+	 * @param boolean $single_stack Add to an existing stack or alway create a new stack
 	 * @return boolean|Model_User_Item
 	 */
-	protected function _relocate($user_id, $location, $amount) {
+	protected function _relocate($user_id, $location, $amount, $single_stack=true) {
 		if($amount > $this->amount)
 			return false;
 		
-		//check if the item already has a stack for its new location
-		$user_item = ORM::factory('User_Item')
-		->where('user_id', '=', $user_id)
-		->where('item_id', '=', $this->item_id)
-		->where('location', '=', $location)
-		->find();
+		$item = ORM::factory('User_Item');
 		
-		if($user_item->loaded()) {
-			$user_item->amount = $user_item->amount + $amount;
-			$user_item->save();
+		if($single_stack == true) 
+		{
+			//check if the item already has a stack for its new location
+			$item->where('user_id', '=', $user_id)
+			->where('item_id', '=', $this->item_id)
+			->where('location', '=', $location)
+			->find();
+		}
+		
+		if($item->loaded()) {
+			$item->amount = $user_item->amount + $amount;
+			$item->save();
 		}
 		else { //doesn't seem like it, let's create a new stack
 			$item = ORM::factory('User_Item');
@@ -131,7 +137,7 @@ class Model_User_Item extends ORM {
 		
 		//@todo log
 		
-		return $user_item;
+		return $item;
 	}
 	
 	/**

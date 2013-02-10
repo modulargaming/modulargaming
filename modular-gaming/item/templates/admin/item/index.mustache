@@ -1,47 +1,27 @@
- 		<div class="row">
-			<div class="span12">
-					<ul class="nav nav-pills">
-						<li class="offset1 pull-left"><button class="btn btn-success btn-create">Create item</button></li>
-					    <li class="pull-right">
-					    	<form class="navbar-form">
-					        	<input type="text" class="input-medium" placeholder="Look up item name" id="item_search" data-provide="typeahead">
-					      	</form>
-					    </li>
-					</ul>
-  			</div>
-  		</div>
-  		<div class="row">
-			<div class="span8 offset2">
-				<table class="table table-striped table-hover" id="crud-container" data-pagination="{{paginate_max}}">
-					<thead>
-						<tr>
-							<th class="span1"></th>
-							<th class="span3">Name</th>
-							<th class="span2">Type</th>
-							<th class="span3">Options</th>
-						</tr>
-					</thead>
-					<tbody>
-					{{#items}}
-					<tr id="container-{{id}}">
-						<td><img src="{{img}}" /></td>
-						<td data-prop="name">{{name}} {{#status}}<span class="pull-right label label-info">{{name}}</span>{{/status}}</td>
-						<td data-prop="type_id">{{type}}</td>
-						<td><button class="btn btn-warning btn-edit">Edit</button> <button class="btn btn-danger btn-delete">Delete</button></td>
-						</tr>
-					{{/items}}
-					<tr id="crud-container-bottom">
-						<td colspan="3">
-						</td>
-						<td>
-							<button class="btn btn-success pull-right btn-create">Create item</button>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
- 	</div>
+<span class="hide" id="csrf">{{csrf}}</span>
+
+		<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="crud-container">
+			<thead>
+				<tr>
+					<th class="span1"></th>
+					<th class="span2">Name</th>
+					<th class="span1"></th>
+					<th class="span2">Type</th>
+					<th class="span2">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="5" class="dataTables_empty pagination-centered">Loading data from server</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5"><button class="btn btn-success pull-right btn-create">Create item</button></td>
+				</tr>
+			</tfoot>
+		</table>
+
 
 {{! item modal}}
 
@@ -81,6 +61,7 @@
 	 			<div class="tab-pane active" id="crud-tab-general">
 				
 					<input type="hidden" name="id" value="" id="input-id" />
+				<input type="hidden" name="csrf" value="" />
 					
 					<div class="control-group">
 						<label class="control-label" for="input-name">Name</label>
@@ -100,7 +81,18 @@
 						<label class="control-label" for="input-image">Image name</label>
 	
 						<div class="controls">
-							<input type="text" class="input-medium" id="input-image" name="image" value="" maxlength="200">
+								<div class="fileupload fileupload-new" data-provides="fileupload" id="input-image">
+									<div class="fileupload-new thumbnail" style="width: {{image.width}}px; height: {{image.heigth}}px;">
+								  		<img src="http://www.placehold.it/{{image.width}}x{{image.heigth}}/EFEFEF/AAAAAA" />
+								  	</div>
+								 	<div class="fileupload-preview fileupload-exists thumbnail" style="width: {{image.width}}px; height: {{image.heigth}}px;"></div>
+								  	<span class="btn btn-file">
+								  		<span class="fileupload-new">Select image</span>
+								  		<span class="fileupload-exists">Change</span>
+								  		<input type="file" />
+								  	</span>
+								  	<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+								</div>
 						</div>
 					</div>
 					<div class="control-group">
@@ -183,6 +175,9 @@
 		<div class="notifications top-right" id="modal-notify"></div>
 	</div>
 	<div class="modal-footer">
+		<div class="progress progress-striped active span8 hide">
+		  <div id="modal-footer-upload-progress" class="bar bar-success" style="width: 1%;"></div>
+		</div>
 		<button type="submit" class="btn btn-success" id="modal-crud-save">Save</button>
 	</div>
 </div>
@@ -255,7 +250,8 @@ var cmd_definitions = {
 		{{name}} : {
 			multiple: {{multiple}},
 			pets: {{pets}},
-			search: '{{search}}'
+			search: '{{search}}',
+			only: '{{only}}'
 		},
 	{{/command_definitions}}
 };

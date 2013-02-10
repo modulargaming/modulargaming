@@ -2,24 +2,20 @@
  * Item admin list.
  */
 
-$(document).ready(function() {
-	//page autocomplete search
-	$('#item_search').typeahead({
-	    source: function (query, process) {
-	        return $.get('./item/search', { type: 'item', item: query }, function (data) {
-	            return process(data);
-	        });
-	    },
-	    updater: function(obj){
-	    	$('#crud-container').trigger('crud.FormOpen', {name: obj});
-	    }
-	});
-	
+$(document).ready(function() {	
 	$('#modal-crud-tab a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
 	});
+	$('#input-image').fileupload({uploadtype: 'image', name: 'image'});
 	
+	$('#crud-container').on('crud.clean', function (e){
+		$('#input-image').fileupload('reset');
+	});
+	$('#crud-container').on('crud.load', function (e, data){
+		$('#input-image > .fileupload-preview').append('<img src="'+data.image+'" />');
+		$('#input-image').addClass('fileupload-exists').removeClass('fileupload-new');
+	});
 	var default_command = '';
 	
 	//set up item commands
@@ -192,7 +188,8 @@ $(document).ready(function() {
 				var f = {
 					id : id,
 					username : $('#modal-gift-username').val(),
-					amount : $('#modal-gift-amount').val()
+					amount : $('#modal-gift-amount').val(),
+					csrf: $('span#csrf').text()
 				};
 				
 				$.post('./item/gift/', f, function(data) {
@@ -218,12 +215,36 @@ $(document).ready(function() {
 	});
 	
 	//Activate crud UI behaviour
-	$('#crud-container').mgForm({
-		retrieve: './item/retrieve/',
-		save: './item/save/',
-		data_in_table: ['name', 'type_id'],
-		remove: './item/delete/',
-		identifier: 'name'
+	$('#crud-container').CRUD({
+		base_url: './item/',
+		identifier: {data: 'name', table: 2},
+		upload: true,
+		dataTable: {
+			"aoColumnDefs": [
+			    { 
+			        "bSortable": false, 
+			        "aTargets": [ 0 ], 
+			        "mRender": function ( data, type, full ) {
+			        	return '<img src="'+data+'" />';
+			        } 
+			    },
+			    { 
+			        "aTargets": [ 2 ],
+			        "mRender": function ( data, type, full ) {
+			        	if(data == 'draft')
+			        		return '<span class="label label-warning offset3">Draft</span>';
+			        	else if(data == 'retired')
+			        		return '<span class="label label-important offset1">Retired</span>';
+			        	else
+			        		return '<span class="label offset1">'+data.charAt(0).toUpperCase()+data.substr(1)+'</span>';
+			        } 
+			    }
+			]
+		},
+		table: {
+			span: 8,
+			offset: 2
+		}
 	});
 	
 });

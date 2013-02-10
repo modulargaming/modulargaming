@@ -1,46 +1,26 @@
- 		<div class="row">
-			<div class="span12">
-					<ul class="nav nav-pills">
-						<li class="offset1 pull-left"><button class="btn btn-success btn-create">Create recipe</button></li>
-					    <li class="pull-right">
-					    	<form class="navbar-form">
-					        	<input type="text" class="input-medium" placeholder="Look up recipe" id="search" data-provide="typeahead">
-					      	</form>
-					    </li>
-					</ul>
-  			</div>
-  		</div>
-  		<div class="row">
-			<div class="span6 offset3">
-				<table class="table table-striped table-hover" id="crud-container" data-pagination="{{paginate_max}}">
-					<thead>
-						<tr>
-							<th class="span2">Name</th>
-							<th class="span1">Ingredients</th>
-							<th class="span1">Result</th>
-							<th class="span3">Options</th>
-						</tr>
-					</thead>
-					<tbody>
-					{{#recipes}}
-					<tr id="container-{{id}}">
-						<td data-prop="name">{{name}}</td>
-						<td data-prop="ingredients">{{ingredients}}</td>
-						<td><img src="{{crafted}}" /></td>
-						<td><button class="btn btn-warning btn-edit">Edit</button> <button class="btn btn-danger btn-delete">Delete</button></td>
-						</tr>
-					{{/recipes}}
-					<tr id="crud-container-bottom">
-						<td colspan="3">
-						</td>
-						<td>
-							<button class="btn btn-success pull-right btn-create">Create recipe</button>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+<span class="hide" id="csrf">{{csrf}}</span>
+
+
+		<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="data-table">
+			<thead>
+				<tr>
+					<th class="span2">Name</th>
+					<th class="span1">Ingredients</th>
+					<th class="span1">Result</th>
+					<th class="span2">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="4" class="dataTables_empty pagination-centered">Loading data from server</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="4"><button class="btn btn-success pull-right btn-create">Create recipe</button></td>
+				</tr>
+			</tfoot>
+		</table>
 
 
 <div class="modal hide fade" id="modal-crud">
@@ -64,6 +44,7 @@
 		<form class="form-horizontal" id="modal-crud-form">
 			<fieldset>
 				<input type="hidden" name="id" value="" id="input-id" />
+				<input type="hidden" name="csrf" value="" />
 				
 				<div class="control-group">
 					<label class="control-label" for="input-name">Name</label>

@@ -27,7 +27,8 @@ abstract class Item_Command {
 	 * @var boolean
 	 */
 	public $default = false;
-	//@todo include in admin, this command would be the only one, no extra commands would be assigned
+	
+	//this command would be the only one, no extra commands would be able to get assigned
 	public $allow_more = true;
 	
 	/**

@@ -21,6 +21,8 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
 		
+		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
+		Assets::js('admin.crud', 'plugins/admin.js');
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.recipe'));
 	
 	
@@ -30,15 +32,40 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		$this->view->recipes = $types;
 	}
 	
+	public function action_paginate() {
+		if (DataTables::is_request())
+		{
+			$orm = ORM::factory('Item_Recipe');
+	
+			$paginate = Paginate::factory($orm)
+			->columns(array('id', 'name', 'materials', 'item'));
+	
+			$datatables = DataTables::factory($paginate)->execute();
+	
+			foreach ($datatables->result() as $recipe)
+			{
+				$datatables->add_row(array (
+						$recipe->name,
+						$recipe->materials->count_all(),
+						$recipe->item->img(),
+						$recipe->id
+				)
+				);
+			}
+	
+			$datatables->render($this->response);
+		}
+		else
+			throw new HTTP_Exception_500();
+	}
+	
 	public function action_retrieve() {
 		$this->view = null;
 	
 		$item_id = $this->request->query('id');
 		
-		if($item_id != null)
-			$item = ORM::factory('Item_Recipe', $item_id);
-		else 
-			$item = ORM::factory('Item_Recipe')->where('item_recipe.name', '=', $this->request->query('name'))->find();
+		$item = ORM::factory('Item_Recipe', $item_id);
+
 		
 		$materials = $item->materials->find_all();
 		$ingredients = array();
@@ -70,6 +97,8 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		if($values['id'] == 0)
 			$values['id'] = null;
 	
+		$id = $values['id'];
+		
 		$this->response->headers('Content-Type','application/json');
 	
 		try {
@@ -131,11 +160,12 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 					}
 					$data = array (
 						'action' => 'saved',
+						'type' => ($id == null) ? 'new' : 'update',
 						'row' => array (
-							'id' => $item->id,
-							'name' => $item->name,
-							'ingredients' => $item->materials->count_all(),
-							'result' => '<img src="' . URL::base().$item->item->img(). '" />'
+							$item->name,
+							$item->materials->count_all(),
+							URL::base().$item->item->img(),
+							$item->id
 						)
 					);
 					$this->response->body(json_encode($data));

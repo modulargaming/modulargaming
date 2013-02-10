@@ -19,9 +19,7 @@ class Controller_Safe extends Abstract_Controller_Frontend {
 		$config = Kohana::$config->load('items.safe');
 		$max_items = $config['pagination'];
 		
-		$items = ORM::factory('User_Item')
-			->where('user_id', '=', $this->user->id)
-			->where('location', '=', 'safe');
+		$items = Item::location('safe');
 		
 		$paginate = Paginate::factory($items, array ('total_items' => $max_items), $this->request)->execute();
 		

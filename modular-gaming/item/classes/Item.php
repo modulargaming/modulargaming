@@ -4,35 +4,41 @@
  * 
  * A collection of usefull functions that relate to items.
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming
  */
 class Item {
 	
+	/**
+	 * Contains a Model_Item instance
+	 * @var Model_Item
+	 */
 	protected $_item = null;
-	protected $_type = '';
 	
+	/**
+	 * Load up the class by assigning a Model_Item
+	 * 
+	 * @param integer|Model_Item $item Either an id or a model instance
+	 * @throws Item_Exception
+	 */
 	public function __construct($item) {
 		if(Valid::digit($item)) 
 		{
 			$id = $item;
 			$item = ORM::factory('Item', $id);
+			
 			if($item->loaded())
 			{
 				$this->_item = $item;
-				$this->_type = 'item';
 			}
 			else
 				throw new Item_Exception('Item ":id" could not be loaded', array(':id' => $id));
 		}
 		else if($item->loaded())
-		{
-			$this->_item = $item;
+		{	
 			if(is_a($item, 'Model_Item'))
-				$this->_type = 'item';
-			else if(is_a($item, 'Model_User_Item'))
-				$this->_type = 'user_item';
+				$this->_item = $item;
 			else
 			{
 				throw new Item_Exception('The supplied item\'s resource does not come from a model.');
@@ -121,10 +127,67 @@ class Item {
 			return FALSE;
 	}
 	
+	/**
+	 * Retrieve a user's items. 
+	 * 
+	 * By default the logged in player is used to retrieve items from.
+	 * Optionally limit to only transferable items
+	 * Optionally look for a relation through Item->parameter_id
+	 * 
+	 * @param string $location The location to look for items
+	 * @param boolean $transferable_check Check if we need to load only transferable items
+	 * @param integer $parameter_id Look for a specific linked id
+	 * @param User $other_user Provide a user whose item's we'll be looking up
+	 * @return User_Item|NULL
+	 */
+	static public function location($location='inventory', $transferable_check=false, $parameter_id=null, $other_user=null) {
+		static $user = null;
+		
+		if($user == null && $other_user == null)
+		{
+			$user = Auth::instance()->get_user();
+		}
+		else if($other_user != null)
+		{
+			$user = $other_user;
+		}
+		
+		if($user != null)
+		{
+			$items = ORM::factory('User_Item')
+				->where('user_id', '=', $user->id)
+				->where('location', '=', $location);
+			
+			if($transferable_check == true)
+			{
+				$items = $items->where('transferable', '=', 1);
+			}
+			if($parameter_id != null)
+			{
+				$items = $items->where('parameter_id', '=', $parameter_id);
+			}
+			
+			return $items;
+		}
+		return null;
+	}
+	
+	/**
+	 * Build an Item instance
+	 * 
+	 * @param Model_Item|integer $item Could be an item id or an item model instance
+	 * @return Item
+	 */
 	static public function factory($item) {
 		return new Item($item);
 	}
 	
+	/**
+	 * Parse item commands before saving
+	 * 
+	 * @param array $input User command definition
+	 * @return array Formatted commands array
+	 */
 	static public function parse_commands($input) {
 		$commands = array();
 			
@@ -143,56 +206,58 @@ class Item {
 		return $commands;
 	}
 	
+	/**
+	 * Load all item command classes 
+	 * @return array
+	 */
 	static public function list_commands() {
 		static $commands = null;
 		
 		if($commands == null)
 		{
 			// Include paths must be searched in reverse
-			$paths = array_reverse(Kohana::include_paths());
-			
-			$base = 'classes/Item/Command/';
+			$paths = array_reverse(Kohana::list_files('classes/Item/Command/'));
 			
 			// Array of class names that have been found
 			$found = array();
 			
-			foreach ($paths as $dir)
+			foreach ($paths as $files)
 			{
-				if (is_dir($dir.$base))
-				{
-					$found = array_merge($found, self::_read_command_dir($dir.$base, true, $dir.$base));
+				$replacements = array_merge(Kohana::$_paths, 
+						array('classes'.DIRECTORY_SEPARATOR.'Item'.DIRECTORY_SEPARATOR.'Command'.DIRECTORY_SEPARATOR, '.php'));
+				
+				if(is_array($files)){
+					foreach($files as $file)
+					{
+						foreach($replacements as $replace)
+							$file = str_replace($replace, '', $file);
+						
+						$found[] = $file;
+					}
 				}
 			}
-			
 			$commands = $found;
 		}
 		
 		return $commands;
 	}
 	
-	static protected function _read_command_dir($dir, $top_level = false, $replace) {
-		$found = array();
-		$handle = opendir($dir);
-			
-		while (false !== ($entry = readdir($handle))) {
-			if($entry == '.' || $entry == '..')
-				continue;
-			else if(is_dir($dir.$entry))
-				$found = array_merge($found, self::_read_command_dir($dir.$entry.'/', false, $replace));
-			else if(is_file($dir.$entry) && $top_level == false) {
-				$found[] = array('name' => str_replace('/', '_', str_replace('.php', '', str_replace($replace, '', $dir).$entry)));
-			}
-		}
-		
-		closedir($handle);
-		
-		return $found;
-	}
-	
+	/**
+	 * Make sure directories have a trailing slash
+	 * 
+	 * @param string $value
+	 * @return string
+	 */
 	static public function filter_type_dir($value){
 		return (substr($value, -1) != '/') ? $value.'/' : $value;
 	}
 	
+	/**
+	 * Validate item command input when creating an item
+	 * 
+	 * @param Validation $validation Validation objec
+	 * @param JSON $value Command to validate
+	 */
 	static public function validate_commands($validation, $value) {
 		$values = json_decode($value, true);
 		

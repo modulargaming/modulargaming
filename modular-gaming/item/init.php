@@ -12,116 +12,128 @@ Route::set('item.admin.list.search', 'admin/item/search')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Search',
+		'action'     => 'search',
 ));
 Route::set('item.admin.list.retrieve', 'admin/item/retrieve')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Retrieve',
+		'action'     => 'retrieve',
+));
+Route::set('item.admin.list.paginate', 'admin/item/paginate')
+	->defaults(array(
+		'directory'  => 'Admin',
+		'controller' => 'Item',
+		'action'     => 'paginate',
 ));
 Route::set('item.admin.list.save', 'admin/item/save')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Save',
+		'action'     => 'save',
 ));
-Route::set('item.admin.list.delete', 'admin/item/delete')
+Route::set('item.admin.list.delete', 'admin/item/remove')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Delete',
-));
-Route::set('item.admin.type.search', 'admin/item/types/search')
-	->defaults(array(
-		'directory'  => 'Admin',
-		'controller' => 'Item',
-		'action'     => 'Search',
+		'action'     => 'delete',
 ));
 Route::set('item.admin.type.save', 'admin/item/types/save')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Types',
-		'action'     => 'Save',
+		'action'     => 'save',
 ));
 Route::set('item.admin.type.retrieve', 'admin/item/types/retrieve')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Types',
-		'action'     => 'Retrieve',
+		'action'     => 'retrieve',
 ));
-Route::set('item.admin.type.delete', 'admin/item/types/delete')
+Route::set('item.admin.type.delete', 'admin/item/types/remove')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Types',
-		'action'     => 'Delete',
+		'action'     => 'delete',
+));
+Route::set('item.admin.type.paginate', 'admin/item/types/paginate')
+	->defaults(array(
+		'directory'  => 'Admin/Item',
+		'controller' => 'Types',
+		'action'     => 'paginate',
 ));
 Route::set('item.admin.recipe.search', 'admin/item/recipes/search')
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Search',
+		'action'     => 'search',
 ));
 Route::set('item.admin.recipe.retrieve', 'admin/item/recipes/retrieve')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Recipes',
-		'action'     => 'Retrieve',
+		'action'     => 'retrieve',
 ));
 Route::set('item.admin.recipe.save', 'admin/item/recipes/save')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Recipes',
-		'action'     => 'Save',
+		'action'     => 'save',
 ));
-Route::set('item.admin.recipe.delete', 'admin/item/recipes/delete')
+Route::set('item.admin.recipe.remove', 'admin/item/recipes/remove')
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Recipes',
-		'action'     => 'Delete',
+		'action'     => 'delete',
+));
+Route::set('item.admin.recipe.paginate', 'admin/item/recipes/paginate')
+	->defaults(array(
+		'directory'  => 'Admin/Item',
+		'controller' => 'Recipes',
+		'action'     => 'paginate',
 ));
 Route::set('item.admin.recipe.index', 'admin/item/recipes(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Recipes',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.admin.types.index', 'admin/item/types(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Admin/Item',
 		'controller' => 'Types',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.admin.list.index', 'admin/item(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Admin',
 		'controller' => 'Item',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.inventory.view', 'inventory/view/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Inventory',
-		'action'     => 'View',
+		'action'     => 'view',
 ));
 Route::set('item.inventory.consume', 'inventory/consume/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Inventory',
-		'action'     => 'Consume',
+		'action'     => 'consume',
 ));
 Route::set('item.inventory.search', 'inventory/search')
 	->defaults(array(
 		'controller' => 'Search',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.inventory', 'inventory(/<page>)', array('page' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Inventory',
-		'action'     => 'Index',
+		'action'     => 'index',
 ));
 Route::set('item.cookbook.view', 'cookbook/view/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'Cookbook',
-		'action'     => 'View',
+		'action'     => 'view',
 ));
 Route::set('item.cookbook.complete', 'cookbook/complete/<id>', array('id' => '[0-9]+'))
 	->defaults(array(
@@ -192,4 +204,71 @@ Route::set('item.safe', 'safe')
 	->defaults(array(
 		'controller' => 'Safe',
 		'action'     => 'index',
+));
+Route::set('item.trade.create', 'trade/create')
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'create',
+));
+Route::set('item.trade.create.process', 'trade/create/process')
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'process_create',
+));
+Route::set('item.trade.lots', 'trade/lots')
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'lots',
+));
+Route::set('item.trade.lot', 'trade/lot/<id>', array('id' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'lot',
+));
+Route::set('item.trade.delete', 'trade/lot/<id>/delete', array('id' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'delete',
+));
+Route::set('item.trade.bid', 'trade/lot/<id>/bid', array('id' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'bid',
+));
+Route::set('item.trade.bid.process', 'trade/lot/<id>/process', array('id' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'process_bid',
+));
+Route::set('item.trade.bids', 'trade/bids')
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'bids',
+));
+Route::set('item.trade.bids.accept', 'trade/bid/<id>/accept', array('id' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'accept',
+));
+Route::set('item.trade.bids.reject', 'trade/bid/<id>/reject', array('id' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'reject',
+));
+Route::set('item.trade.bids.retract', 'trade/bid/<id>/retract', array('id' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'retract',
+));
+Route::set('item.trade.search', 'trade/search(/<page>)', array('page' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'search',
+		'page'		 => 1
+));
+Route::set('item.trade.index', 'trade(/<page>)', array('page' => '[0-9]+'))
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'index',
+		'page'		 => 1
 ));
