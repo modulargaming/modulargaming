@@ -14,7 +14,7 @@ class Abstract_View_Cookbook extends Abstract_View {
 	{
 		return array_merge(parent::get_breadcrumb(), array(
 			array(
-				'title' => 'Cook book',
+				'title' => 'Cookbook',
 				'href'  => Route::url('item.cookbook')
 			)
 		));

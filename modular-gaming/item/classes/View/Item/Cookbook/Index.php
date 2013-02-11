@@ -41,6 +41,7 @@ class View_Item_Cookbook_Index extends Abstract_View_Cookbook {
 		return $list;
 	}
 
+/**
 	protected function get_breadcrumb()
 	{
 		return array_merge(parent::get_breadcrumb(), array(
@@ -50,4 +51,5 @@ class View_Item_Cookbook_Index extends Abstract_View_Cookbook {
 			)
 		));
 	}
+**/
 }
