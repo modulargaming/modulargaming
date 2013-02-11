@@ -217,7 +217,14 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 			$this->redirect(Route::get('item.user_shop.create')->uri());
 		
 		$this->view = new View_Item_Shop_Logs;
-		//@todo implement after logs and notifications are done
+		
+		$logs = ORM::factory('Log')
+			->where('alias', '=', 'user_shop.'.$shop->id)
+			->where('time', '>', strtotime('-30 days'))
+			->limit(35)
+			->find_all();
+		
+		$this->view->logs = $logs;
 	}
 	
 	public function action_collect() {
@@ -298,7 +305,17 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 				$this->user->points = $this->user->points - $item->parameter;
 				$this->user->save();
 				
+				//log this action
+				$log = Item::log('user_shop.'.$shop->id, 'Bought 1 :item_name for :amount from :user', array(
+					'item' => $item->item,
+					'item_name' => $item->item->name,
+					'user' => $item->user->username,
+					'amount' => $item->parameter
+				));
+				
 				$item->transfer($this->user);
+				
+				Item::notify($log, $shop->user, 'user_shop.buy');
 				
 				Hint::success(__('You\'ve successfully bought :item_name from :shop_owner for :amount :currency_short', array(':owner' => $shop->user->username, ':item_name' => $item->item->name('1'))));
 			}

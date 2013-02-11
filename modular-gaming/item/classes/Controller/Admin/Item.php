@@ -321,7 +321,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		->find();
 		
 		try {
-			$item->to_user($user, $this->request->post('amount'));
+			$item->to_user($user, 'admin.'.$this->user->username, $this->request->post('amount'));
 			$list = array('action' => 'success');
 		}
 		catch(Item_Exception $e) {
