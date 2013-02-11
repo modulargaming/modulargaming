@@ -185,6 +185,15 @@ class Item {
 		return null;
 	}
 	
+	/**
+	 * Create a new log
+	 * 
+	 * @param string $alias An identifier to help index logs
+	 * @param string $message A general message describing the action
+	 * @param array $params Parameters that give insight into the action that has been performed
+	 * @param Model_User $user The user that did an action
+	 * @return Ambigous <ORM, Kohana_ORM>
+	 */
 	static public function log($alias, $message, $params=array(), $user=null) {
 		if($user == null)
 		{
@@ -192,7 +201,7 @@ class Item {
 		}
 		
 		$values = array(
-			'alias' => $alias,
+			'alias'    => $alias,
 			'message'  => $message,
 			'user_id'  => $user->id,
 			'agent'    => Request::user_agent(array('browser', 'platform')),
@@ -207,7 +216,17 @@ class Item {
 			->create();
 	}
 	
-	public static function notify($log, $user, $notification, $type="info", $param = array()) {
+	/**
+	 * Send a notification to a user based on a log.
+	 * 
+	 * @param Moel_Log $log Which log we'll be basing our notification on.
+	 * @param Model_User $user User instance we'll be notifying
+	 * @param string $notification A string that can be parsed through __()
+	 * @param array $param Params to parse the notification with (combined with $log->params)
+	 * @param string $type Type of notification (info, error, success, warning)
+	 * @return User_Notification
+	 */
+	public static function notify($log, $user, $notification, $param = array(), $type="info") {
 		
 		$notify = Kohana::$config->load('notify.'.$notification);
 		
@@ -278,7 +297,7 @@ class Item {
 			
 			foreach ($paths as $files)
 			{
-				$replacements = array('classes'.DIRECTORY_SEPARATOR.'Item'.DIRECTORY_SEPARATOR.'Command'.DIRECTORY_SEPARATOR, '.php');
+				$replacements = array_merge(Kohana::include_paths(), array('classes'.DIRECTORY_SEPARATOR.'Item'.DIRECTORY_SEPARATOR.'Command'.DIRECTORY_SEPARATOR, '.php'));
 				
 				if(is_array($files)){
 					foreach($files as $file)

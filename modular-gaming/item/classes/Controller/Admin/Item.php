@@ -39,8 +39,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$def_c = array();
 		
 		foreach($commands as $cmd) {
-			$name = str_replace(Kohana::include_paths(), '', $cmd);
-			$name = str_replace(DIRECTORY_SEPARATOR, '_', $name);
+			$name = str_replace(DIRECTORY_SEPARATOR, '_', $cmd);
 			$class = 'Item_Command_'.$name;
 			$command = new $class;
 			
