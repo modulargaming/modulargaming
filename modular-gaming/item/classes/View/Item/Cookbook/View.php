@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Cookbook_View extends Abstract_View_Cookbook {
+class View_Item_Cookbook_View extends Abstract_View_Inventory {
 
 	public $title = 'Cook book';
 	
@@ -70,5 +70,21 @@ class View_Item_Cookbook_View extends Abstract_View_Cookbook {
 				'csrf' => $this->csrf()		
 			);
 		}
+	}
+
+	protected function get_breadcrumb()
+	{
+		$item = $this->item;
+
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Cookbook',
+				'href'  => Route::url('item.cookbook', array('id' => $item->id))
+			),
+			array(
+				'title' => $item->id,
+				'href'  => Route::url('item.cookbook.view', array('id' => $item->id))
+			)
+		));
 	}
 }

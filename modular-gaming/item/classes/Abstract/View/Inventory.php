@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Abstract base view for Cookbook.
+ * Abstract base view for Inventory.
  *
  * @package    MG Item
  * @category   View
@@ -8,16 +8,16 @@
  * @copyright  (c) 2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Abstract_View_Cookbook extends Abstract_View {
+class Abstract_View_Inventory extends Abstract_View {
 
 	protected function get_breadcrumb()
 	{
 		return array_merge(parent::get_breadcrumb(), array(
 			array(
-				'title' => 'Cookbook',
-				'href'  => Route::url('item.cookbook')
+				'title' => 'Inventory',
+				'href'  => Route::url('item.inventory')
 			)
 		));
 	}
 
-} // End Abstract_View_Cookbook
+} // End Abstract_View_Inventory

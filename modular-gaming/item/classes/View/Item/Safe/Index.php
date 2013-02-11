@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Safe_Index extends Abstract_View {
+class View_Item_Safe_Index extends Abstract_View_Inventory {
 
 	public $title = 'Safe';
 	/**
@@ -62,5 +62,15 @@ class View_Item_Safe_Index extends Abstract_View {
 		}
 		
 		return $list;
+	}
+
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Safe',
+				'href'  => Route::url('item.safe')
+			)
+		));
 	}
 }

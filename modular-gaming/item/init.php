@@ -205,6 +205,11 @@ Route::set('item.safe', 'safe')
 		'controller' => 'Safe',
 		'action'     => 'index',
 ));
+Route::set('item.trade.index', 'trade')
+	->defaults(array(
+		'controller' => 'Trade',
+		'action'     => 'index',
+));
 Route::set('item.trade.create', 'trade/create')
 	->defaults(array(
 		'controller' => 'Trade',

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Shop_Create extends Abstract_View {
+class View_Item_Shop_Create extends Abstract_View_Inventory {
 
 	public $title = 'Shop';
 	
@@ -11,4 +11,19 @@ class View_Item_Shop_Create extends Abstract_View {
 	 * @var array
 	 */
 	public $creation = false;
+
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Shop',
+				'href'  => Route::url('item.user_shop.index')
+			),
+			array(
+				'title' => 'Create',
+				'href'  => Route::url('item.user_shop.create')
+			)
+		));
+	}
+
 }

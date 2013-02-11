@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Shop_Index extends Abstract_View {
+class View_Item_Shop_Index extends Abstract_View_Inventory {
 
 	public $title = 'Shop';
 	
@@ -33,5 +33,15 @@ class View_Item_Shop_Index extends Abstract_View {
 			'link' => Route::url('item.user_shop.upgrade')
 		);
 		return array_merge($this->units,$extra);
+	}
+
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Shop',
+				'href'  => Route::url('item.user_shop.index')
+			)
+		));
 	}
 }

@@ -41,8 +41,6 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 		$id = $this->request->param('id');		
 		$item = ORM::factory('User_Item', $id);
 		
-		Breadcrumb::add('Cook '.$item->item->name, URL::site(Route::get('item.cookbook.view')->uri(array('id' => $id))));
-		
 		$errors = array();
 		
 		if(!$item->loaded()) 

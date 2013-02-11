@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Cookbook_Index extends Abstract_View_Cookbook {
+class View_Item_Cookbook_Index extends Abstract_View_Inventory {
 
-	public $title = 'Cook book';
+	public $title = 'Cookbook';
 	
 	/**
 	 * Offer ajax capabilities
@@ -41,7 +41,7 @@ class View_Item_Cookbook_Index extends Abstract_View_Cookbook {
 		return $list;
 	}
 
-/**
+
 	protected function get_breadcrumb()
 	{
 		return array_merge(parent::get_breadcrumb(), array(
@@ -51,5 +51,5 @@ class View_Item_Cookbook_Index extends Abstract_View_Cookbook {
 			)
 		));
 	}
-**/
+
 }

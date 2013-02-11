@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Inventory_View extends Abstract_View {
+class View_Item_Inventory_View extends Abstract_View_Inventory {
 
 	public $title = 'Inventory';
 	
@@ -59,5 +59,17 @@ class View_Item_Inventory_View extends Abstract_View {
 			}
 		}
 		return $return;
+	}
+
+	protected function get_breadcrumb()
+	{
+		$item = $this->item;
+
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => $shop->id,
+				'href'  => Route::url('item.inventory.view', array('id' => $item->id))
+			)
+		));
 	}
 }

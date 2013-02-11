@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Item_Trade_Lot extends Abstract_View {
+class View_Item_Trade_Lot extends Abstract_View_Lot {
 
 	public $title = 'Trade lots';
 	
@@ -118,5 +118,19 @@ class View_Item_Trade_Lot extends Abstract_View {
 		}
 		
 		return $list;
+	}
+
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Trade',
+				'href'  => Route::url('item.trade.index')
+			),
+			array(
+				'title' => 'Lot',
+				'href'  => Route::url('item.trade.lot')
+			)
+		));
 	}
 }
