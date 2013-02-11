@@ -57,7 +57,7 @@ class Item {
 	 * @param string $location
 	 * @throws Item_Exception
 	 */
-	public function to_user($user, $amount=1, $location='inventory') {
+	public function to_user($user, $origin="app", $amount=1, $location='inventory') {
 		if(!Valid::digit($amount))
 			throw new Item_Exception('The supplied amount should be a number.');
 		
@@ -100,6 +100,13 @@ class Item {
 					->values(array('user_id' => $user->id, 'item_id' => $id, 'location' => $location, 'amount' => $amount))
 					->save();
 			}
+			
+			Item::log('item.in.'.$origin, 'Player recieved :amount :item_name @ :origin', array(
+				':amount' => $amount,
+				':item_name' => $user_item->item->name($amount, false),
+				':origin' => str_replace('.', ' ', $origin)
+			));
+			
 		}
 	}
 	
@@ -112,11 +119,17 @@ class Item {
 	 * @param integer $amount
 	 * @return Ambigous <ORM, Database_Result, Kohana_ORM, object, mixed, number, Database_Result_Cached, multitype:>|boolean
 	 */
-	public function user_has($location='inventory', $amount=false) {
+	public function user_has($location='inventory', $amount=false, $user=null) {
+		
+		if($user == null)
+		{
+			$user = Auth::instance()->get_user();
+		}
+		
 		$user_item = ORM::factory('User_Item')
 			->where('item_id', '=', $this->_item->id)
 			->where('location', '=', $location)
-			->where('user_id', '=', Auth::instance()->get_user()->id)
+			->where('user_id', '=', $user->id)
 			->find();
 		
 		if($user_item->loaded() && $amount == FALSE)
@@ -172,6 +185,48 @@ class Item {
 		return null;
 	}
 	
+	static public function log($alias, $message, $params=array(), $user=null) {
+		if($user == null)
+		{
+			$user = Auth::instance()->get_user();
+		}
+		
+		$values = array(
+			'alias' => $alias,
+			'message'  => $message,
+			'user_id'  => $user->id,
+			'agent'    => Request::user_agent(array('browser', 'platform')),
+			'ip'	   => Request::$client_ip,
+			'location' => Request::current()->uri(),
+			'type' 	   => 'item',
+			'params'   => $params,
+		);
+		
+		return ORM::factory('Log')
+			->values($values)
+			->create();
+	}
+	
+	public static function notify($log, $user, $notification, $type="info", $param = array()) {
+		
+		$notify = Kohana::$config->load('notify.'.$notification);
+		
+		$param['username'] = $log->user->username;
+		
+		$values = array(
+			'log_id' => $log->id,
+			'user_id' => $user->id,
+			'title' => $notify['title'],
+			'message' => __($notify['message'], $log->params + $param),
+			'icon' => $notify['icon'],
+			'type' => $type
+		);
+		
+		return ORM::factory('User_Notification')
+		->values($values)
+		->create();
+	}
+	
 	/**
 	 * Build an Item instance
 	 * 
@@ -223,8 +278,7 @@ class Item {
 			
 			foreach ($paths as $files)
 			{
-				$replacements = array_merge(Kohana::$_paths, 
-						array('classes'.DIRECTORY_SEPARATOR.'Item'.DIRECTORY_SEPARATOR.'Command'.DIRECTORY_SEPARATOR, '.php'));
+				$replacements = array('classes'.DIRECTORY_SEPARATOR.'Item'.DIRECTORY_SEPARATOR.'Command'.DIRECTORY_SEPARATOR, '.php');
 				
 				if(is_array($files)){
 					foreach($files as $file)
