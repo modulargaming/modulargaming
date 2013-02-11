@@ -67,7 +67,7 @@ class View_Item_Inventory_View extends Abstract_View_Inventory {
 
 		return array_merge(parent::get_breadcrumb(), array(
 			array(
-				'title' => $shop->id,
+				'title' => $item->id,
 				'href'  => Route::url('item.inventory.view', array('id' => $item->id))
 			)
 		));
