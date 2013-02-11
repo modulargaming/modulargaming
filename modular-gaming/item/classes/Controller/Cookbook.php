@@ -12,9 +12,8 @@
 class Controller_Cookbook extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 	
-	public function before() {
-		Breadcrumb::add('Cook book', Route::url('item.cookbook'));
-		parent::before();
+	public function before() 
+	{
 	}
 	
 	public function action_index()
