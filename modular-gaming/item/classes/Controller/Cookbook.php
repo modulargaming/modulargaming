@@ -12,10 +12,6 @@
 class Controller_Cookbook extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 	
-	public function before() 
-	{
-	}
-	
 	public function action_index()
 	{
 		$this->view = new View_Item_Cookbook_Index;
