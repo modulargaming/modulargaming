@@ -46,3 +46,6 @@
 [submodule "modules/paginate"]
 	path = modules/paginate
 	url = git://github.com/modulargaming/paginate.git
+[submodule "modules/datatables"]
+	path = modules/datatables
+	url = git://github.com/morgan/koana-datatables.git

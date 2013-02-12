@@ -16,7 +16,7 @@ $(document).ready(function() {
 	$('#item-actions').on('click', '.form-inline > input[type="submit"]', function(e){
 		e.preventDefault();
 		
-		var param = $(this).parent('form').serialize() + '&action='+$(this).parent('form').data('action')+ '&csrf:='+$('#csrf').text();
+		var param = $(this).parent('form').serialize() + '&action='+$(this).parent('form').data('action')+ '&csrf='+$('#csrf').text();
 		
 		$.post($(this).parent('form').data('follow'), param, function(data) {
 			  handle_consume(data);
