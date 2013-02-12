@@ -7,7 +7,7 @@ $(document).ready(function() {
 	$('#item-actions').on('click', 'li[class!="dropdown"] > a', function(e){
 		e.preventDefault();
 		
-		$.post($(this).parent('li').data('follow'), {action: $(this).parent('li').data('action')}, function(data) {
+		$.post($(this).parent('li').data('follow'), {action: $(this).parent('li').data('action'), csrf: $('#csrf').text()}, function(data) {
 			  handle_consume(data);
 		});
 		
@@ -16,7 +16,7 @@ $(document).ready(function() {
 	$('#item-actions').on('click', '.form-inline > input[type="submit"]', function(e){
 		e.preventDefault();
 		
-		var param = $(this).parent('form').serialize() + '&action='+$(this).parent('form').data('action');
+		var param = $(this).parent('form').serialize() + '&action='+$(this).parent('form').data('action')+ '&csrf:='+$('#csrf').text();
 		
 		$.post($(this).parent('form').data('follow'), param, function(data) {
 			  handle_consume(data);
