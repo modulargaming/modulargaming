@@ -65,6 +65,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 				{
 					$position = (isset($desc['location'])) ? $desc['location'] : 'end';
 					$relative = (isset($desc['location'])) ? $desc['relative'] : null;
+					$options = (isset($desc['options'])) ? $desc['options'] : array();
 					Assets::add($type, $desc['name'], $desc['file'], $location, $position, $relative);
 				}
 			}
@@ -93,9 +94,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 				->rule('csrf', 'not_empty')
 				->rule('csrf', 'Security::check');
 
-			if ( ! $validation->check() OR
-				($this->request->method() == HTTP_Request::POST AND $this->request->headers('Origin') != $root
-			    AND strpos($this->request->headers('Referer'), $root.$base_url) === FALSE))
+			if ( ! $validation->check())
 			{
 				throw HTTP_Exception::Factory(403, 'CSRF check failed!');
 			}
