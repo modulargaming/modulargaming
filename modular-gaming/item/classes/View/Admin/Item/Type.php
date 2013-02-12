@@ -40,14 +40,15 @@ class View_Admin_Item_Type extends Abstract_View_Admin {
 		$list_c = array();
 		
 		foreach($commands as $cmd) {
-			$name = 'Item_Command_'.str_replace('/', '_', $cmd['name']);;
+			$name = str_replace(Kohana::include_paths(), '', $cmd);
+			$name = 'Item_Command_'.str_replace(array('\\', '/'), '_', $name);
 			$command = new $name;
 				
 			if($command->is_default() == false)
 			{
 				$list_c[] = array(
-					'name' 	=> str_replace('_', ' - ', $cmd['name']),
-					'value' => $cmd['name']
+					'name' 	=> str_replace('_', ' - ', $name),
+					'value' => $name
 				);
 			}
 		}
