@@ -22,6 +22,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		if($config['ajax'] === true) 
 		{
 			Assets::js('item.inventory', 'item/inventory/index.js');
+			$this->view->ajax = true;
 		}
 		
 		$items = Item::location('inventory');

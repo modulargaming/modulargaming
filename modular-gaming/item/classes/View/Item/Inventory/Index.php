@@ -22,6 +22,16 @@ class View_Item_Inventory_Index extends Abstract_View_Inventory {
 	 */
 	public $links = array();
 	
+	/**
+	 * Whether or not to include the csrf span element
+	 * @return boolean
+	 */
+	public $ajax = false;
+	
+	/**
+	 * Simplify item data
+	 * @return array
+	 */
 	public function items(){
 		$list = array();
 		
