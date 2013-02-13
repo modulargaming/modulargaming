@@ -38,6 +38,7 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 	{
 		$topics = $this->category->topics
 			->with('last_post')
+			->with('last_post:user')
 			->order_by('sticky', 'DESC')
 			->order_by('last_post.created', 'DESC');
 
