@@ -137,6 +137,7 @@ Kohana::modules(array(
 	'asset-merger'  => MODPATH.'asset-merger',      
 	'cache'         => MODPATH.'cache',      // Caching with multiple backends
 	'database'      => MODPATH.'database',   // Database access
+	'datatables'      => MODPATH.'datatables', 
 	'debug-toolbar' => MODPATH.'debug-toolbar',
 	'email'         => MODPATH.'email',      // Email manipulation
 	'image'         => MODPATH.'image',      // Image manipulation
