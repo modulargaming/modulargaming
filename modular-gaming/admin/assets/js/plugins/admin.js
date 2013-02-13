@@ -200,7 +200,7 @@
             });
         },
         doDelete : function(id, name) {
-        	$.post(opts.base_url+'remove', {id: id}, function(data) {
+        	$.post(opts.base_url+'remove', {id: id, csrf: $('span#csrf').text()}, function(data) {
         		if(data.action == 'deleted') {        			
         			//remove the row from the table
             		var row_id = $('#modal-crud').data('row-id');
