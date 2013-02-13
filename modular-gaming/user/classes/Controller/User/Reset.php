@@ -20,26 +20,37 @@ class Controller_User_Reset extends Abstract_Controller_User {
 			$this->redirect(Route::get('user')->uri());
 		}
 
-		if ($this->request->method() == HTTP_Request::POST)
+		$token = $this->request->param('token');
+
+		if ($token)
 		{
-			$user = ORM::factory('User')
-				->where('email', '=', $this->request->post('email'))
-				->find();
+			// TODO: Load the user from the token.
+			$user = ORM::factory('User', 1);
 
-			// TODO: Generate a token
-			$token = "Hax1234";
-
-			// Send the reset email.
-			$view = new View_Email_User_Reset;
-			$view->user = $user;
-			$view->token = $token;
-
-			Email::factory($view)
-				->to($user->email)
-				->send();
+			$this->view = new View_User_Reset_Enter;
 		}
+		else
+		{
+			if ($this->request->method() == HTTP_Request::POST)
+			{
+				$user = ORM::factory('User', array('email', $this->request->post('email')))
+					->find();
 
-		$this->view = new View_User_Reset;
+				// TODO: Generate a token
+				$token = "Hax1234";
+
+				// Send the reset email.
+				$view = new View_Email_User_Reset;
+				$view->user = $user;
+				$view->token = $token;
+
+				Email::factory($view)
+					->to($user->email)
+					->send();
+			}
+
+			$this->view = new View_User_Reset_Request;
+		}
 	}
 
 } // End User_Forgot

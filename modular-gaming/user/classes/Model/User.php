@@ -90,15 +90,25 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		return $user->loaded();
 	}
 
+	/**
+	 * (Re)calculate the users forum posts.
+	 */
+
 	public function calculate_post_count()
 	{
 		$posts = ORM::factory('Forum_Post')
-				->where('user_id', '=', $this->id)
-				->count_all();
+			->where('user_id', '=', $this->id)
+			->count_all();
+
 		$this->post_count = $posts;
 		$this->save();
 	}
 
+	/**
+	 * @param  array $values    Values to insert
+	 * @param  array $expected  Expected values, the rest will be ignored
+	 * @return Model_User
+	 */
 	public function create_user($values, $expected)
 	{
 		if ( ! isset($values['timezone_id']))
@@ -130,7 +140,9 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 			$status = $class->execute($this, $args);
 
 			if ($status === TRUE)
+			{
 				return TRUE;
+			}
 		}
 		catch (ReflectionException $ex) // try and find a message based policy
 		{
