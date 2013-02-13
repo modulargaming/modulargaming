@@ -134,6 +134,7 @@ Kohana::modules(array(
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
 	'auth'          => MODPATH.'auth',       // Basic authentication
+	'asset-merger'  => MODPATH.'asset-merger',      
 	'cache'         => MODPATH.'cache',      // Caching with multiple backends
 	'database'      => MODPATH.'database',   // Database access
 	'debug-toolbar' => MODPATH.'debug-toolbar',
