@@ -93,7 +93,6 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 	/**
 	 * (Re)calculate the users forum posts.
 	 */
-
 	public function calculate_post_count()
 	{
 		$posts = ORM::factory('Forum_Post')
@@ -118,6 +117,25 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		$expected[] = 'timezone_id';
 
 		return parent::create_user($values, $expected);
+	}
+
+	/**
+	 * Cache the user preferences to a local field.
+	 */
+	public function cache_preferences()
+	{
+		$properties = ORM::factory('User_Property')
+			->where('user_id', '=', $this->id)
+			->find_all();
+
+		$cache = array();
+
+		foreach ($properties as $p)
+		{
+			$cache[$p->key] = $p->value;
+		}
+
+		$this->properties = json_encode($cache);
 	}
 
 	/**
