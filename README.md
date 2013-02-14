@@ -37,9 +37,9 @@ Download Modular Gaming from Github.
 
 Edit `application/config/database.php` with the correct information.
 
-### Step 3: Import SQL
+### Step 3: Import database
 
-Import modulargaming.sql using your tool of choice (MySQL client, PHPMyAdmin etc)
+Run the command ./minion migrations:run
 
 ### Step 4: Configuration of modulargaming
 
