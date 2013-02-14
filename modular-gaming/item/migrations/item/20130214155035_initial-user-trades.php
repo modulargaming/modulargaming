@@ -43,7 +43,7 @@ class Migration_Item_20130214155035 extends Minion_Migration_Base {
 	 */
 	public function down(Kohana_Database $db)
 	{
-		 $db->query(NULL, 'DROP TABLE `user_trade`, `user_trade_bids`;');
+		 $db->query(NULL, 'DROP TABLE `user_trades`, `user_trade_bids`;');
 	}
 
 }
