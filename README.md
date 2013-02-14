@@ -11,9 +11,9 @@ It aims to be swift, secure, and small.
 
 ORM is a a powerful Object Relational Mapping (ORM) module that uses the active record pattern and database introspection to determine a model's column information. 
 
-### KOstache
+### Mustache
 
-Kostache is a Kohana 3.3 module for using [Mustache](https://github.com/mustache) templates in your application.
+[Mustache](https://github.com/mustache) is a template specification we use for our templates, we use [Kostache](https://github.com/zombor/KOstache)'s implementation.
 
 ### License
 
@@ -37,9 +37,10 @@ Download Modular Gaming from Github.
 
 Edit `application/config/database.php` with the correct information.
 
-### Step 3: Import SQL
+### Step 3: Import database
 
-Import modulargaming.sql using your tool of choice (MySQL client, PHPMyAdmin etc)
+* On UNIX run the command ./minion migrations:run
+* On Windows run the command php minion migrations:run
 
 ### Step 4: Configuration of modulargaming
 

@@ -51,7 +51,9 @@ class Migration_User_20130205224618 extends Minion_Migration_Base {
 	 */
 	public function down(Kohana_Database $db)
 	{
+		$db->query(NULL, ' SET FOREIGN_KEY_CHECKS = 0');
 		$db->query(NULL, 'DROP TABLE roles_users');
+		$db->query(NULL, ' SET FOREIGN_KEY_CHECKS = 1');
 		$db->query(NULL, 'DROP TABLE roles');
 	}
 
