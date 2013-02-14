@@ -398,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 */
-
+/*
 CREATE TABLE IF NOT EXISTS `user_pets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -442,8 +442,9 @@ CREATE TABLE IF NOT EXISTS `pet_species` (
 
 INSERT INTO `pet_species` (`id`, `name`, `dir`, `description`) VALUES
 (1, 'Koorai', '1', 'The Koorai'),
-(2, 'Zedro', '2', 'The Zedro.');
+(2, 'Zedro', '2', 'The Zedro.');*/
 
+/*
 CREATE TABLE IF NOT EXISTS `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_id` int(11) NOT NULL,
@@ -543,3 +544,4 @@ INSERT INTO  `pet_species_colours` (`pet_specie_id` , `colour_id`)
 VALUES ('1',  '1'), ('1',  '2'), ('1',  '3'), 
 ('1',  '4'), ('1',  '5'), ('1',  '6'), ('2',  '1'), 
 ('2',  '2'), ('2',  '3'), ('2',  '4'), ('2',  '5'), ('2',  '6');
+*/
