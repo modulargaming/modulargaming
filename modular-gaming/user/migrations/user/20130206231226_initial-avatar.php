@@ -27,7 +27,8 @@ class Migration_User_20130206231226 extends Minion_Migration_Base {
 			  `user_id` int(11) unsigned NOT NULL,
 			  `avatar_id` int(11) unsigned NOT NULL,
 			  PRIMARY KEY (`user_id`,`avatar_id`),
-			  KEY `users_avatars_ibfk_2` (`avatar_id`),
+			  KEY `k_user` (`user_id`),
+			  KEY `k_avatar` (`avatar_id`),
 			  CONSTRAINT `users_avatars_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
 			  CONSTRAINT `users_avatars_ibfk_2` FOREIGN KEY (`avatar_id`) REFERENCES `avatars` (`id`) ON DELETE CASCADE
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,8 +42,10 @@ class Migration_User_20130206231226 extends Minion_Migration_Base {
 	 */
 	public function down(Kohana_Database $db)
 	{
-		$db->query(NULL, 'DROP TABLE users_avatars');
-		$db->query(NULL, 'DROP TABLE avatars');
+		$db->query(NULL, ' SET FOREIGN_KEY_CHECKS = 0');
+		$db->query(NULL, 'DROP TABLE IF EXISTS `users_avatars`;');
+		$db->query(NULL, ' SET FOREIGN_KEY_CHECKS = 1');
+		$db->query(NULL, 'DROP TABLE `avatars`;');
 	}
 
 }

@@ -60,7 +60,9 @@ class Migration_User_20130210232021 extends Minion_Migration_Base {
 	 */
 	public function down(Kohana_Database $db)
 	{
+		 $db->query(NULL, ' SET FOREIGN_KEY_CHECKS = 0');
 		 $db->query(NULL, 'DROP TABLE `user_notifications` ');
+		 $db->query(NULL, ' SET FOREIGN_KEY_CHECKS = 1');
 		 $db->query(NULL, 'DROP TABLE `user_notification_icons` ');
 		 $db->query(NULL, 'DROP TABLE `logs` ');
 	}

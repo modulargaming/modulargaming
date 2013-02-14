@@ -86,7 +86,9 @@ class Migration_Item_20130210224336 extends Minion_Migration_Base {
 	 */
 	public function down(Kohana_Database $db)
 	{
+		$db->query(NULL, ' SET FOREIGN_KEY_CHECKS = 0');
 		 $db->query(NULL, "DROP TABLE IF EXISTS `items`, `item_types`, `user_items`, `item_recipes`, `item_recipe_materials`");
+		 $db->query(NULL, ' SET FOREIGN_KEY_CHECKS = 1');
 	}
 
 }
