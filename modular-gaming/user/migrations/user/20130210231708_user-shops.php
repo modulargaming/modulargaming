@@ -22,8 +22,9 @@ class Migration_User_20130210231708 extends Minion_Migration_Base {
 			  `till` int(11) NOT NULL DEFAULT '0',
 			  PRIMARY KEY (`id`),
 			  KEY `user_shops_user` (`user_id`),
-		 	  CONSTRAINT `user_shops_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-			) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+		 	  CONSTRAINT `user_shops_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+			 )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;");
+
 	}
 
 	/**
