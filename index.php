@@ -18,7 +18,7 @@ $modules = 'modules';
 /**
  * The directory in which your moduler gaming modules are located.
  */
-$modulargaming = 'modular-gaming';
+$modulargaming = 'modulargaming';
 
 /**
  * The directory in which the Kohana resources are located. The system
@@ -69,7 +69,7 @@ if ( ! is_dir($application) AND is_dir(DOCROOT.$application))
 if ( ! is_dir($modules) AND is_dir(DOCROOT.$modules))
 	$modules = DOCROOT.$modules;
 
-// Make the modular-gaming modules relative to the docroot, for symlink'd index.php
+// Make the modulargaming modules relative to the docroot, for symlink'd index.php
 if ( ! is_dir($modulargaming) AND is_dir(DOCROOT.$modulargaming))
 	$modulargaming = DOCROOT.$modulargaming;
 
