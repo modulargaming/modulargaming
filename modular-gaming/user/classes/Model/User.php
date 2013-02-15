@@ -30,12 +30,19 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		),
 		'avatars' => array(
 			'through' => 'users_avatars'		
+		),
+		'properties' => array(
+			'model' => 'User_Property'
 		)
 	);
 
 	protected $_load_with = array(
 		// 'timezone', // TODO: We should load the timezone in the auth get_user().
 		'title',
+	);
+
+	protected $_serialize_columns = array(
+		'cached_properties'
 	);
 
 	public function rules()
@@ -121,8 +128,10 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 
 	/**
 	 * Cache the user preferences to a local field.
+	 *
+	 * @param boolean $save Save the user?
 	 */
-	public function cache_preferences()
+	public function cache_properties($save = TRUE)
 	{
 		$properties = ORM::factory('User_Property')
 			->where('user_id', '=', $this->id)
@@ -135,7 +144,54 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 			$cache[$p->key] = $p->value;
 		}
 
-		$this->properties = json_encode($cache);
+		$this->cached_properties = $cache;
+
+		if ($save)
+		{
+			$this->save();
+		}
+	}
+
+	/**
+	 * Get a property from the key, if undefined return an empty string.
+	 * @param string $key the key to get
+	 *
+	 * @return mixed
+	 */
+	public function get_property($key)
+	{
+		return Arr::get($this->cached_properties, $key);
+	}
+
+	/**
+	 * Set a property, runs an insert query with ON DUPLICATE KEY UPDATE flag.
+	 * If the property already exists mySQL swaps it to a update query.
+	 *
+	 * @param string  $key
+	 * @param mixed   $value
+	 * @param boolean $refresh_cache Reload the cache?
+	 */
+	public function set_property($key, $value)
+	{
+		// Insert the value to the cached property.
+		$array = $this->cached_properties;
+		$array[$key] = $value;
+		$this->cached_properties = $array;
+
+		$query = DB::query(DATABASE::INSET, "
+			INSERT INTO user_properties (user_id, `key`, value)
+			VALUES (:user_id, :key, :value)
+			ON DUPLICATE KEY UPDATE
+				value = :value
+		");
+
+		$query->parameters(array(
+			':user_id' => $this->id,
+			':key'     => $key,
+			':value'   => $value
+		));
+
+		$query->execute();
 	}
 
 	/**
