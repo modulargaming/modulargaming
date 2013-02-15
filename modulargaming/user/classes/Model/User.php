@@ -141,7 +141,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 
 		foreach ($properties as $p)
 		{
-			$cache[$p->key] = $p->value;
+			$cache[$p->key] = $this->_unserialize_value($p->value);
 		}
 
 		$this->cached_properties = $cache;
@@ -154,13 +154,15 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 
 	/**
 	 * Get a property from the key, if undefined return an empty string.
-	 * @param string $key the key to get
+	 *
+	 * @param string $key     the key to get
+	 * @param mixed  $default return value if index not found
 	 *
 	 * @return mixed
 	 */
-	public function get_property($key)
+	public function get_property($key, $default = NULL)
 	{
-		return Arr::get($this->cached_properties, $key);
+		return Arr::get($this->cached_properties, $key, $default);
 	}
 
 	/**
@@ -178,7 +180,9 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		$array[$key] = $value;
 		$this->cached_properties = $array;
 
-		$query = DB::query(DATABASE::INSET, "
+		$value = $this->_serialize_value($value);
+
+		$query = DB::query(DATABASE::INSERT, "
 			INSERT INTO user_properties (user_id, `key`, value)
 			VALUES (:user_id, :key, :value)
 			ON DUPLICATE KEY UPDATE
@@ -192,6 +196,16 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		));
 
 		$query->execute();
+	}
+
+	/**
+	 * Get the users avatar class.
+	 *
+	 * @return Avatar
+	 */
+	public function avatar()
+	{
+		return Avatar::factory($this, $this->get_property('avatar', array()));
 	}
 
 	/**

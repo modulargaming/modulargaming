@@ -62,11 +62,12 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 				'content' => $post->content, // Escaped properly at create now
 				'created' =>  Date::format($post->created),
 				'user' => array(
-					'avatar' => $post->user->avatar,
+					'avatar' => $post->user->avatar(),
+					// 'avatar' => $post->user->avatar,
 					'username'  => $post->user->username,
 					'title'  => $post->user->title->title,
-					'signature' => $post->user->signature,
-					'post_count' => number_format($post->user->post_count),
+					// 'signature' => $post->user->signature,
+					// 'post_count' => number_format($post->user->post_count),
 					'created' => Date::format($post->user->created),
 					'href'      => Route::url('user.view', array(
 						'id'     => $post->user->id,

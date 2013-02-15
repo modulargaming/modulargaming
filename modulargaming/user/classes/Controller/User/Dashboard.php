@@ -12,6 +12,11 @@ class Controller_User_Dashboard extends Abstract_Controller_User {
 		{
 			$this->redirect(Route::get('user.login')->uri());
 		}
+
+		$this->user->set_property('avatar', array(
+			'driver' => 'gravatar',
+		));
+		$this->user->save();
 		
 		$this->view = new View_User_Dashboard;
 	}

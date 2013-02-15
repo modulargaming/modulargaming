@@ -2,7 +2,9 @@
 	<div class="row-fluid">
 		<div class="thumbnail center span2">
 			<a href="#">
-				<img class="img-polaroid" src="{{#user.avatar}}{{user.avatar}}{{/user.avatar}}{{^user.avatar}}{{base_url}}assets/img/avatars/default.png{{/user.avatar}}" width="64" height="64">
+				{{#user.avatar}}
+					{{>avatar}}
+				{{/user.avatar}}
 			</a>
 
 			<br>
