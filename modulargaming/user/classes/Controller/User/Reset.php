@@ -24,8 +24,33 @@ class Controller_User_Reset extends Abstract_Controller_User {
 
 		if ($token)
 		{
-			// TODO: Load the user from the token.
-			$user = ORM::factory('User', 1);
+			$tokens = ORM::factory('User_Property')
+				->where('key', '=', 'reset_token')
+				->find_all();
+
+			$match = NULL;
+
+			foreach ($tokens as $t)
+			{
+				// Remove tokens older than 2 days.
+				if (Arr::get($t->value, 'time', 0) + Date::DAY * 2 < time())
+				{
+					$t->delete();
+				}
+				else
+				{
+					if (Arr::get($t->value, 'token') == $token)
+					{
+						$match = $t;
+					}
+				}
+			}
+
+			if ( ! $match)
+			{
+				Hint::error('Incorrect token');
+				$this->redirect();
+			}
 
 			$this->view = new View_User_Reset_Enter;
 		}
@@ -33,20 +58,33 @@ class Controller_User_Reset extends Abstract_Controller_User {
 		{
 			if ($this->request->method() == HTTP_Request::POST)
 			{
-				$user = ORM::factory('User', array('email', $this->request->post('email')))
+				$user = ORM::factory('User')
+					->where('email', '=', $this->request->post('email'))
 					->find();
 
-				// TODO: Generate a token
-				$token = "Hax1234";
+				if ($user->loaded())
+				{
+					$token = Text::random();
 
-				// Send the reset email.
-				$view = new View_Email_User_Reset;
-				$view->user = $user;
-				$view->token = $token;
+					$user->set_property('reset_token', array(
+						'token' => $token,
+						'time'  => time()
+					));
+					$user->save();
 
-				Email::factory($view)
-					->to($user->email)
-					->send();
+					// Send the reset email.
+					$view = new View_Email_User_Reset;
+					$view->user = $user;
+					$view->token = $token;
+
+					Email::factory($view)
+						->to($user->email)
+						->send();
+				}
+				else
+				{
+					// TODO: Display error.
+				}
 			}
 
 			$this->view = new View_User_Reset_Request;

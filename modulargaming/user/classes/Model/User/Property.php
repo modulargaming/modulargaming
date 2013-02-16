@@ -2,4 +2,8 @@
 
 class Model_User_Property extends ORM {
 
+	protected $_serialize_columns = array(
+		'value'
+	);
+
 }
