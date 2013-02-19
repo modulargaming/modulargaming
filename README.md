@@ -70,6 +70,11 @@ Open `application/config/email.php` and make the following changes:
 ### Step 5: Permissions
 
 	$ chmod 0777 application/{cache,logs}
+
+### Step 6: Cron jobs
+
+	$ php ./minion Pet
+
 ## Testing
 
 We use BDD, with 2 different tools, phpspec and behat.
