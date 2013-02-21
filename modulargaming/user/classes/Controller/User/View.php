@@ -25,7 +25,11 @@ class Controller_User_View extends Abstract_Controller_User {
 		}
 
 		$container = new Tab_Container();
+
 		$about = new Tab("About me");
+		$about->add_content(new Tab_Content_Text("Hello, short text about me!"));
+		$about->add_content(new Tab_Content_Text("Hello, this is my signature!"));
+
 		$container->add_tab($about);
 
 		Event::fire('user.profile_tabs', array($container));
