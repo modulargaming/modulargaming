@@ -35,6 +35,10 @@ class Controller_User_Reset extends Abstract_Controller_User {
 				// Remove tokens older than 2 days.
 				if (Arr::get($t->value, 'time', 0) + Date::DAY * 2 < time())
 				{
+					if (Arr::get($t->value, 'token') == $token)
+					{
+						Hint::error('Token has expired');
+					}
 					$t->delete();
 				}
 				else
