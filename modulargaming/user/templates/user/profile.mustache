@@ -15,34 +15,7 @@
 			</div>
 		</div>
 		<div class="span9">
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#pets" data-toggle="tab">Pets</a></li>
-				<li><a href="#about" data-toggle="tab">About me</a></li>
-			</ul>
-{{& pagination}}
-			<div class="tab-content">
-				<div class="tab-pane active in" id="pets">
-					<div class="row">
-						{{#pets}}
-
-						
-						<div class="span3 center">
-							<span class="thumbnail">
-								<a href="{{href}}"><img src="{{src}}" alt=""></a>
-								<h4><a href="{{href}}">{{name}} the {{colour}} {{race}}</a></h4>
-							</span>
-							<br>
-						</div>
-						{{/pets}}
-						{{^pets}}
-						<p class="span5">{{profile_user.username}} has no pets.</p>
-						{{/pets}}
-					</div>
-				</div>
-				<div class="tab-pane fade" id="about">
-				{{{profile_user.about}}}
-				</div>
-			</div>
+			{{& tabs}}
 		</div>
 	</div>
 </div>

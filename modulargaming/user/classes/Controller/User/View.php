@@ -24,6 +24,17 @@ class Controller_User_View extends Abstract_Controller_User {
 			throw HTTP_Exception::Factory('404', 'No such user');
 		}
 
+		$container = new Tab_Container();
+		$about = new Tab("About me");
+		$container->add_tab($about);
+
+		Event::fire('user.profile_tabs', array($container));
+
+		$this->view = new View_User_Profile;
+		$this->view->profile_user = $user;
+		$this->view->tabs = $container->render();
+
+		/*
 		// @TODO, This belongs to the pet module, better to use events?
 		$pets = ORM::factory('User_Pet')
 			->where('user_id', '=', $user->id)
@@ -37,6 +48,8 @@ class Controller_User_View extends Abstract_Controller_User {
 		$this->view->profile_user = $user;
 		//$this->view->pets = ORM::factory('User_Pet')->where('user_id', '=', $user->id)->order_by('active', 'desc')->find_all()->as_array();
 		$this->view->pets = $paginate->result();
+		*/
+
 	}
 
 }
