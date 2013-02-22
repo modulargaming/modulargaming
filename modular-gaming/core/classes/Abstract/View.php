@@ -33,12 +33,12 @@ abstract class Abstract_View {
 
 	public function assets_head()
 	{
-		return Assets::head();
+		return Assets::factory('head')->render();
 	}
 
 	public function assets_body()
 	{
-		return Assets::body();
+		return Assets::factory('body')->render();
 	}
 
 	/**

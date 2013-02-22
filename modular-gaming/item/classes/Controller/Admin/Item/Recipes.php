@@ -22,7 +22,6 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		}
 		
 		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
-		Assets::js('admin.crud', 'plugins/admin.js');
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.recipe'));
 	
 	

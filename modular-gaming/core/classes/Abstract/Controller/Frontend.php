@@ -45,12 +45,12 @@ abstract class Abstract_Controller_Frontend extends Controller {
 	{
 		if (isset($config['head']))
 		{
-			$this->_register_assets('head', $config['head']);
+			Assets::factory('head')->load($config['head']);
 		}
 
 		if (isset($config['body']))
 		{
-			$this->_register_assets('body', $config['body']);
+			Assets::factory('body')->load($config['body']);
 		}
 
 	}
