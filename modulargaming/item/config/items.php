@@ -19,6 +19,7 @@ return array (
 	'user_shop' => array(
 		'description_char_limit' => 500, //character length of the user's shop description
 		'creation_cost' => 200, //set to 0 or false to disable
+		'log_limit' => 35, //how many sale logs the player can view
 		'size' => array( //put a limit on how many items that shop can contain
 			'active' => true, 
 			'unit_cost' => 100,	//cost of upgrading to one unit higher
@@ -34,8 +35,9 @@ return array (
 		),
 		'bids' => array(
 			'max_results' => 20, //max amount of bids per page
-			'max_items' => 11, //Max amount of items (including 1 slot for points) a user can bid
-			'count_amount' => true //count the amount of items(true) or item stacks(false)
+			'max_items' => 10, //Max amount of items a user can bid
+			'count_amount' => true, //count the amount of items(true) or item stacks(false)
+			'max_in_stack' => 10 //this is the max amount of items a user can bid(counted from stacks)
 		)
 	)
 );

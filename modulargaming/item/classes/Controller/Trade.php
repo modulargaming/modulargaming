@@ -28,6 +28,23 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 		$this->view->lots = $paginate->result();
 	}
 	
+	public function action_lots()
+	{
+		$page = $this->request->param('page');
+	
+		$config = Kohana::$config->load('items.trade.lots');
+		$max_lots = $config['max_results'];
+	
+		$lots = ORM::factory('User_Trade')
+			->where('user_id', '=', $this->user->id);
+	
+		$paginate = Paginate::factory($lots, array ('total_items' => $max_lots), $this->request)->execute();
+	
+		$this->view = new View_Item_Trade_Lots;
+		$this->view->pagination = $paginate->render();
+		$this->view->lots = $paginate->result();
+	}
+	
 	/**
 	 * Create a new lot
 	 */
@@ -35,10 +52,19 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 		$items = Item::location('inventory', true)->find_all();
 		
 		$this->view = new View_Item_Trade_Create;
-		$this->view->items = $items;
-		$this->view->max_items = Kohana::$config->load('items.trade.lots.max_items');
-		$this->view->max_type = (Kohana::$config->load('items.trade.lots.count_amount')) ? 'items' : 'stacks';
-		$this->view->process_url = Route::url('item.trade.create.process');
+		
+		if(count($items) == 0)
+		{
+			Hint::error('You don\'t have any items in your invetnory to put up for trade.');
+			$this->view->unable = true;
+		}
+		else
+		{
+			$this->view->items = $items;
+			$this->view->max_items = Kohana::$config->load('items.trade.lots.max_items');
+			$this->view->max_type = (Kohana::$config->load('items.trade.lots.count_amount')) ? 'items' : 'stacks';
+			$this->view->process_url = Route::url('item.trade.create.process');
+		}
 	}
 	
 	/**
@@ -161,6 +187,8 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 		//remove all bids made to this lot
 		if(count($bids) > 0) 
 		{
+			$log = Item::log('item.trade.'.$id.'.delete', 'Trade #id deleted', array(':id' => $id));
+			
 			foreach($bids as $bid)
 			{
 				$items = $bid->items();
@@ -171,10 +199,11 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 					
 				if($bid->points > 0)
 				{
-					$this->user->points += $bid->points;
-					$this->user->save();
+					$bid->user->points += $bid->points;
+					$bid->user->save();
 				}
-					
+				
+				Item::notify($log, $bid->user, 'item.trades.delete', array(':lot' => $id));
 				$bid->delete();
 			}
 		}
@@ -241,10 +270,16 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 		
 		if(!$lot->loaded()) 
 		{
-			//@todo change to HTTP error
 			Hint::error('No trade lot found to bid on.');
+			$this->view->unable = true;
 		}
-		else {
+		else if(count($items) == 0)
+		{
+			Hint::error('You don\'t have any items in your invetnory to put up for trade.');
+			$this->view->unable = true;
+		}
+		else 
+		{
 			$this->view->lot = $lot;
 			$this->view->items = Item::location('inventory', true)->find_all();
 			$this->view->max_items = Kohana::$config->load('items.trade.bids.max_items') - 1;
@@ -276,7 +311,7 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 		}
 		else if(Valid::digit($points) && points > $this->user->points)
 		{
-			Hint::error(__('If you don\'t have enough points to add to this bid (:points)', array(':points' => $points)));
+			Hint::error(__('You don\'t have enough points to add to this bid (:points)', array(':points' => $points)));
 		}
 		else
 		{
@@ -316,7 +351,7 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 						
 					$a_count += $amount;
 						
-					if($config['count_amount'] == true && $a_count >= $config['max_items'])
+					if($config['count_amount'] == true && $a_count > $config['max_items'])
 					{
 						Hint::error(__('You can\'t bid more than a total of :amount items.', array(':amount' => $config['max_items'])));
 						break;
@@ -325,7 +360,18 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 					$stored_items[] = $item->move('trade.bid', $amount, false);
 				}
 			}
-		
+			
+			//check stack total if needed
+			if($config['count_amount'] == false && count($stored_items) > $config['max_items'])
+			{
+				Hint::error(__('You can\'t bid more than a total of :amount different items.', array(':amount' => $config['max_items'])));
+			}
+			//check stack amount total if needed
+			else if($config['count_amount'] == false && $a_count > $config['max_in_stack'])
+			{
+				Hint::error(__('You can\'t bid more than a total of :amount items.', array(':amount' => $config['max_in_stack'])));
+			}
+			
 			$dump = Hint::dump();
 		
 			if($dump['status'] == 'error')
@@ -364,7 +410,25 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 		
 					return $this->redirect(Route::get('item.trade.bid')->uri(array('id' => $id)));
 				}
-		
+				
+				$log = Item::log('item.trade.bid.'.$bod->lot_id, 'Made a bid with :amount items and :points points', array(
+					array(':amount' => $a_count, ':points' => (int) $points, 
+						'items' => function() use ($stored_items) {
+							$list = array();
+							
+							foreach($stored_items as $item) {
+								$list[] = $item->name();
+							}
+							
+							return $list;
+						})		
+				));
+				
+				Item::notify($log, $bid->lot->user, array(
+					':user' => $this->user->username,
+					':lot' => '<strong>#<a href="'.Route::url('item.trade.lot', array('id' => $bid->lot_id)).'">'.$bid->lot_id.'</a></strong>'
+				));
+				
 				Database::instance()->commit();
 				Hint::success('You\'ve successfully made a bid!');
 				return $this->redirect(Route::get('item.trade.bids')->uri());
@@ -430,6 +494,9 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 				$item->transfer($bid->user, $item->amount);
 			}
 				
+			$log = Item::log('item.trade.'.$id.'.accept', 'Trade #id completed', array(':id' => $id));
+			Item::notify($log, $user, 'item.trades.accept', array(':username' => $this->user->username));
+			
 			Hint::success('You\'ve accepted bid #:id made by :username', array(':id' => $bid->id, ':username' => $bid->user->username));
 				
 			$bid->delete();
@@ -475,6 +542,8 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 			
 			Hint::success('You\'ve rejected bid #:id made by :username', array(':id' => $bid->id, ':username' => $user->username));
 			
+			$log = Item::log('item.trade.'.$id.'.reject', 'Bid from :user declined', array(':user' => $user->username));
+			Item::notify($log, $user, 'item.trades.reject', array(':lot' => $id));
 			$bid->delete();
 		}
 		
@@ -517,6 +586,9 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 			
 			Hint::success('You\'ve retracted your bid');
 			
+			$log = Item::log('item.trade.'.$id.'.retract', 'Retracted bid for #id', array(':id' => $id));
+			Item::notify($log, $bid->lot->user, 'item.trades.retract', array(':lot' => $id, ':username' => $this->user->username));
+			
 			$bid->delete();
 		}
 		
@@ -525,27 +597,39 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 	
 	/**
 	 * Search lots
-	 * @todo implement
+	 * @todo implement search entries pp limit
 	 */
 	public function action_search() {
+		$term = $this->request->query("t");
 		
+		$items = ORM::factory('User_Item')
+			->where('location', '=', 'trade.lot')
+			->where('item.name', 'LIKE', '%'.$term.'%');
+		
+		$paginate = Paginate::factory($items, array ('total_items' => 25), $this->request, 't')->execute();
+		
+		$this->view = new View_Item_Trade_Search;
+		$this->view->term = $term;
+		$this->view->count_results = $paginate->count_total();
+		$this->view->pagination = $paginate->render();
+		$this->view->items = $paginate->result();
 	}
 	
 	public function after() {
-		$map = array('index', 'lots', 'bids', 'create', 'search');
+		$map = array('index', 'lots', 'bids', 'create');
 		
 		$links = array(
 				array('name' => 'List', 'url' => Route::url('item.trade.index'), 'active'=>false),
 				array('name' => 'Your lots', 'url' => Route::url('item.trade.lots'), 'active'=>false),
 				array('name' => 'Your bids', 'url' => Route::url('item.trade.bids'), 'active'=>false),
 				array('name' => 'Create', 'url' => Route::url('item.trade.create'), 'active'=>false),
-				array('name' => 'Search', 'url' => Route::url('item.trade.search'), 'active'=>false),
 		);
 		
 		if(in_array($this->request->action(), $map))
 			$links[array_search($this->request->action(), $map)]['active'] = true;
 		
 		$this->view->trade_nav = $links;
+		$this->view->search_url = Route::url('item.trade.search');
 		parent::after();
 	}
 }

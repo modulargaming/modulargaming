@@ -20,7 +20,6 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		
 		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 		$this->_load_assets(Kohana::$config->load('assets.upload'));
-		Assets::js('admin.crud', 'plugins/admin.js');
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.list'));
 		
 		$types = ORM::factory('Item_Type')
