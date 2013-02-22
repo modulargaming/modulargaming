@@ -4,14 +4,7 @@
 	<meta charset=utf-8>
 	<title>{{title}} - Modular Gaming</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{#assets_head}}
-    	{{#css}}
-    		<link rel="stylesheet" href="{{base_url}}{{file}}" />
-    	{{/css}}
-    	{{#js}}
-    		<script src="{{base_url}}{{file}}"></script>
-    	{{/js}}
-    {{/assets_head}}
+    {{&assets_head}}
 </head>
 <body>
 
@@ -84,14 +77,7 @@
 		</footer>
 	</div>
 	
-	{{#assets_body}}
-    	{{#css}}
-    		<link rel="stylesheet" href="{{base_url}}{{file}}" />
-    	{{/css}}
-    	{{#js}}
-    		<script src="{{base_url}}{{file}}"></script>
-    	{{/js}}
-    {{/assets_body}}
+	{{&assets_body}}
 
 	{{{debug_toolbar}}}
 </body>

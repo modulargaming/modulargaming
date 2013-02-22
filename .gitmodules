@@ -51,4 +51,4 @@
 	url = git://github.com/morgan/kohana-datatables.git
 [submodule "modules/asset-merger"]
 	path = modules/asset-merger
-	url = git://github.com/OpenBuildings/asset-merger.git
+	url = git://github.com/modulargaming/asset-merger.git

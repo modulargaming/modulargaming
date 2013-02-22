@@ -46,7 +46,7 @@ class Controller_Pet_Create extends Abstract_Controller_Frontend {
 				'adopt' => Route::url('pet.adopt'),
 			);
 		
-		Assets::add('js', 'pets.create', 'pets/create.js', 'body');
+		Assets::factory('body')->js('pets.create', 'pets/create.js');
 	}
 
 }

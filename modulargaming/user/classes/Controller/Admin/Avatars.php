@@ -20,8 +20,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		
 		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 		$this->_load_assets(Kohana::$config->load('assets.upload'));
-		Assets::js('admin.crud', 'plugins/admin.js');
-		Assets::js('admin.avatar.index', 'admin/avatar.js');
+		Assets::factory('body')->js('admin.avatar.index', 'admin/avatar.js');
 	
 		$this->view = new View_Admin_Avatar_Index;
 		$this->_nav('user', 'avatar');
