@@ -105,7 +105,7 @@ class Model_Forum_Topic extends ORM {
 
 	/**
 	 * Delete all topics for the specified category.
-	 * Mysql will delete all related topics and posts using "On Delete CASCADE".
+	 * Mysql will delete all related topics AND posts using "On Delete CASCADE".
 	 *
 	 * @param   int  $category category_id to delete from
 	 * @return  object

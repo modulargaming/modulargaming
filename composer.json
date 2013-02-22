@@ -1,4 +1,11 @@
 {
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/modulargaming/PHP-CS-Fixer"
+		}
+	],
+
 	"require": {
 		"php": ">=5.3.3",
 		"phploc/phploc": "dev-master",

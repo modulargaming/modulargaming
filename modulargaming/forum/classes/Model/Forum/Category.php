@@ -20,9 +20,9 @@ class Model_Forum_Category extends ORM {
 		$category = ORM::factory('Forum_Category', $id);
 		if (Auth::instance()->get_user()->can('Forum_Topic_Create', array('category' => $category)) OR $category->locked == 0)
 		{
-			return true;
+			return TRUE;
 		}
-		return false;
+		return FALSE;
 	}
 
 	public static function category_exists($id)

@@ -34,22 +34,24 @@ class Model_User_Item extends ORM {
 	 *
 	 * @return string
 	 */
-	public function img(){
+	public function img()
+	{
 		return $this->item->img();
 	}
 
 	/**
-	 * Move the currently initialised item to a new location and update its quantity.
+	 * Move the currently initialised item to a new location AND update its quantity.
 	 *
-	 * Returns false if you're trying to move a higher amount of this item than you already have,
+	 * Returns FALSE if you're trying to move a higher amount of this item than you already have,
 	 * if successfull it will return the instance of the user item stack where the copies have moved to.
 	 *
 	 * @param string $location Location to send the item to
 	 * @param integer $amount How many are moving to $location
-	 * @param boolean $single_stack Add to an existing stack or alway create a new stack
+	 * @param boolean $single_stack Add to an existing stack OR alway create a new stack
 	 * @return boolean|Model_User_Item
 	 */
-	public function move($location, $amount=1, $single_stack=true) {
+	public function move($location, $amount=1, $single_stack=true)
+	{
 		if($amount == '*')
 			$amount = $this->amount;
 
@@ -61,7 +63,8 @@ class Model_User_Item extends ORM {
 	 *
 	 * @return string
 	 */
-	public function name() {
+	public function name()
+	{
 		if($this->amount > 1)
 			return $this->amount . ' ' . Inflector::plural($this->item->name, $this->amount);
 		else
@@ -71,7 +74,7 @@ class Model_User_Item extends ORM {
 	/**
 	 * Transfer the initialised item to a different user.
 	 *
-	 * Returns false if you're trying to transfer a higher amount of this item than the owner already has,
+	 * Returns FALSE if you're trying to transfer a higher amount of this item than the owner already has,
 	 * if successfull it will return a user item instance of where the item copies transfered to.
 	 *
 	 * @param Model_User $user A user model instance of the new owner
@@ -79,8 +82,9 @@ class Model_User_Item extends ORM {
 	 * @throws Item_Exception When trying to transfer an untrasferable item
 	 * @return boolean|Model_User_Item
 	 */
-	public function transfer(Model_User $user, $amount=1) {
-		if($this->item->transferable == false)
+	public function transfer(Model_User $user, $amount=1)
+	{
+		if($this->item->transferable == FALSE)
 			Throw new Item_Exception('":item" is bound to your account only.', array(':item' => $this->item->name));
 		else
 			return $this->_relocate($user->id, 'inventory', $amount);
@@ -94,16 +98,17 @@ class Model_User_Item extends ORM {
 	 * @param integer $user_id The (new) owner of the item
 	 * @param string $location The new location of the item
 	 * @param integer $amount The amount of copies to relocate
-	 * @param boolean $single_stack Add to an existing stack or alway create a new stack
+	 * @param boolean $single_stack Add to an existing stack OR alway create a new stack
 	 * @return boolean|Model_User_Item
 	 */
-	protected function _relocate($user_id, $location, $amount, $single_stack=true) {
+	protected function _relocate($user_id, $location, $amount, $single_stack=true)
+	{
 		if($amount > $this->amount)
-			return false;
+			return FALSE;
 
 		$item = ORM::factory('User_Item');
 
-		if($single_stack == true)
+		if($single_stack == TRUE)
 		{
 			//check if the item already has a stack for its new location
 			$item->where('user_id', '=', $user_id)
@@ -147,9 +152,10 @@ class Model_User_Item extends ORM {
 	 * @param integer $amount
 	 * @return boolean
 	 */
-	public function amount($type, $amount=1) {
+	public function amount($type, $amount=1)
+	{
 		if($amount < 0)
-			return false;
+			return FALSE;
 
 		switch ($type) {
 			case 'add':
@@ -158,7 +164,7 @@ class Model_User_Item extends ORM {
 				$this->save();
 
 				//@todo log
-				return true;
+				return TRUE;
 			break;
 			case 'substract':
 			case '-':
@@ -168,17 +174,17 @@ class Model_User_Item extends ORM {
 					$this->save();
 
 					//@todo log
-					return true;
+					return TRUE;
 				}
 				else if($amount == $this->amount)
 				{
 					$this->delete();
 
 					//@todo log
-					return true;
+					return TRUE;
 				}
 				else
-					return false;
+					return FALSE;
 			break;
 		}
 	}

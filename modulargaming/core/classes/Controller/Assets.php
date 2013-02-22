@@ -17,7 +17,7 @@ class Controller_Assets extends Controller {
 	);
 
 	/**
-	 * Serve the file to the browser and cache it for direct access if in STAGING or PRODUCTION.
+	 * Serve the file to the browser AND cache it for direct access if in STAGING OR PRODUCTION.
 	 */
 	public function action_index()
 	{
@@ -40,7 +40,7 @@ class Controller_Assets extends Controller {
 		$content = file_get_contents($path);
 		$this->response->body($content);
 
-		// Don't cache the assets unless we are in STAGING or PRODUCTION.
+		// Don't cache the assets unless we are in STAGING OR PRODUCTION.
 		if (Kohana::$environment >= Kohana::STAGING)
 		{
 			return;

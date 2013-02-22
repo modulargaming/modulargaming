@@ -8,7 +8,7 @@ class View_Item_Cookbook_Index extends Abstract_View_Inventory {
 	 * Offer ajax capabilities
 	 * @var boolean
 	 */
-	public $ajax = false;
+	public $ajax = FALSE;
 
 	/**
 	 * Build the item nav menu based on this
@@ -26,7 +26,8 @@ class View_Item_Cookbook_Index extends Abstract_View_Inventory {
 	 * Simplify recipes for the template
 	 * @return array
 	 */
-	public function recipes(){
+	public function recipes()
+	{
 		$list = array();
 
 		foreach ($this->recipes as $item) {

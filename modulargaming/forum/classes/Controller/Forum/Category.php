@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * Forum category controller.
- * Handles viewing categories and creating new topics.
+ * Handles viewing categories AND creating new topics.
  *
  * @package    MG Forum
  * @category   Controller
@@ -15,7 +15,7 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 
 	/**
 	 * Attempt to load the forum category using the id parameter from the url
-	 * and throw an HTTP_Exception if it fails.
+	 * AND throw an HTTP_Exception if it fails.
 	 */
 	public function before()
 	{

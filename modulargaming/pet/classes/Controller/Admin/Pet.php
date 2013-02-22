@@ -15,7 +15,8 @@ class Controller_Admin_Pet extends Abstract_Controller_Admin {
 		$this->view = new View_Admin_Pet_Index;
 	}
 
-	public function action_search() {
+	public function action_search()
+	{
 		$this->view = null;
 
 		$type = $this->request->query('type');

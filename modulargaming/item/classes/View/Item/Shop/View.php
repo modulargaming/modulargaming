@@ -8,13 +8,13 @@ class View_Item_Shop_View extends Abstract_View_Inventory {
 	 * Contains shop info
 	 * @var array
 	 */
-	public $shop = false;
+	public $shop = FALSE;
 
 	/**
 	 * Contains the shop's owner info
 	 * @var array
 	 */
-	public $owner = false;
+	public $owner = FALSE;
 
 	/**
 	 * Contains priced User_Items
@@ -26,7 +26,8 @@ class View_Item_Shop_View extends Abstract_View_Inventory {
 	 * Parse the shop's items into inventory
 	 * @return array
 	 */
-	public function inventory() {
+	public function inventory()
+	{
 		$list = array();
 
 		if(count($this->items) > 0)
@@ -48,7 +49,8 @@ class View_Item_Shop_View extends Abstract_View_Inventory {
 	 * simplifies the shop owner's data
 	 * @return array
 	 */
-	public function owner() {
+	public function owner()
+	{
 		return array('url' => Route::url('user.view', array('id' => $this->owner['id'])), 'username' => $this->owner['username']);
 	}
 

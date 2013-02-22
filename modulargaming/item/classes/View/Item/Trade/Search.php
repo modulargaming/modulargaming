@@ -8,7 +8,7 @@ class View_Item_Trade_Search extends Abstract_View_Inventory {
 	 * Store the pagination HTML.
 	 * @var string
 	 */
-	public $pagination = false;
+	public $pagination = FALSE;
 
 	/**
 	 * Stores the found items
@@ -20,7 +20,7 @@ class View_Item_Trade_Search extends Abstract_View_Inventory {
 	 * Holds the search term
 	 * @var string
 	 */
-	public $term = false;
+	public $term = FALSE;
 
 	/**
 	 * Stores the navigation
@@ -29,10 +29,11 @@ class View_Item_Trade_Search extends Abstract_View_Inventory {
 	public $trade_nav = array();
 
 	/**
-	 * Simplify lot data and add linked items
+	 * Simplify lot data AND add linked items
 	 * @return array
 	 */
-	public function lots(){
+	public function lots()
+	{
 		$list = array();
 
 		if(count($this->items) > 0)
@@ -72,7 +73,7 @@ class View_Item_Trade_Search extends Abstract_View_Inventory {
 				'href'  => Route::url('item.trade.index')
 			),
 			array(
-				'title' => ($this->term != false) ? "'".$this->term."'" : 'Search',
+				'title' => ($this->term != FALSE) ? "'".$this->term."'" : 'Search',
 				'href'  => Route::url('item.trade.search')
 			)
 		));

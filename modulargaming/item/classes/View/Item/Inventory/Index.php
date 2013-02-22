@@ -8,7 +8,7 @@ class View_Item_Inventory_Index extends Abstract_View_Inventory {
 	 * Store the pagination HTML.
 	 * @var string
 	 */
-	public $pagination = false;
+	public $pagination = FALSE;
 
 	/**
 	 * Stores the user's inventory items
@@ -23,16 +23,17 @@ class View_Item_Inventory_Index extends Abstract_View_Inventory {
 	public $links = array();
 
 	/**
-	 * Whether or not to include the csrf span element
+	 * Whether OR not to include the csrf span element
 	 * @return boolean
 	 */
-	public $ajax = false;
+	public $ajax = FALSE;
 
 	/**
 	 * Simplify item data
 	 * @return array
 	 */
-	public function items(){
+	public function items()
+	{
 		$list = array();
 
 		if(count($this->items) > 0)

@@ -42,7 +42,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$class = 'Item_Command_'.$name;
 			$command = new $class;
 
-			if($command->is_default() == false)
+			if($command->is_default() == FALSE)
 			{
 				$struct = explode('_', $name);
 				$admin = $command->build_admin($name);
@@ -68,7 +68,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->view->image = Kohana::$config->load('items.image');
 	}
 
-	public function action_search() {
+	public function action_search()
+	{
 		$this->view = null;
 		$type = $this->request->query('type');
 
@@ -136,7 +137,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->response->body(json_encode($list));
 	}
 
-	public function action_paginate() {
+	public function action_paginate()
+	{
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Item');
@@ -164,7 +166,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			throw new HTTP_Exception_500();
 	}
 
-	public function action_retrieve() {
+	public function action_retrieve()
+	{
 		$this->view = null;
 
 		$item_id = $this->request->query('id');
@@ -186,7 +189,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->response->body(json_encode($list));
 	}
 
-	public function action_save(){
+	public function action_save()
+	{
 		$values = $this->request->post();
 		$this->view = null;
 
@@ -222,7 +226,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					//error not valid upload
 					$file = array('status' => 'error', 'msg' => 'You did not provide a valid file to upload.');
 				}
-				else if(!Upload::image($image, $cfg['width'], $cfg['heigth'], true))
+				else if(!Upload::image($image, $cfg['width'], $cfg['heigth'], TRUE))
 				{
 					//not the right image dimensions
 					$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :heigth.', array(
@@ -232,18 +236,18 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				else
 				{
 					$msg = '';
-					if($id != null && !empty($img) && file_exists(DOCROOT.'assets/img/items/'.$dir.$img))
+					if($id != NULLAND !empty($img) AND file_exists(DOCROOT.'assets/img/items/'.$dir.$img))
 					{
 						//move the previously stored item to the graveyard
 						$new_name = Text::random('alnum', 4).$img;
 						copy(DOCROOT.'assets/img/items/'.$dir.$img, DOCROOT.'assets/graveyard/items/'.$new_name);
 						unlink(DOCROOT.'assets/img/items/'.$dir.$img);
-						$msg = 'The old image has been moved to the graveyard and renamed to '.$new_name;
+						$msg = 'The old image has been moved to the graveyard AND renamed to '.$new_name;
 					}
 
 					$up = Upload::save($image, $image['name'], DOCROOT.'assets/img/items/'.$item->type->img_dir);
 
-					if($up != false)
+					if($up != FALSE)
 					{
 						$file['status'] = 'success';
 						$file['msg'] = 'You\'ve successfully uploaded your item image';
@@ -260,7 +264,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					}
 				}
 			}
-			else if($dir != $item->type->img_dir && file_exists(DOCROOT.'assets/img/items/'.$dir.$img))
+			else if($dir != $item->type->img_dir AND file_exists(DOCROOT.'assets/img/items/'.$dir.$img))
 			{
 				//item type changed, move the item image
 				copy(DOCROOT.'assets/img/items/'.$dir.$item->image, DOCROOT.'assets/img/items/'.$item->type->img_dir.$item->image);
@@ -298,7 +302,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		}
 	}
 
-	public function action_delete(){
+	public function action_delete()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 
@@ -309,7 +314,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->response->body(json_encode(array('action' => 'deleted')));
 	}
 
-	public function action_gift(){
+	public function action_gift()
+	{
 		$this->view = null;
 
 		//gift the item

@@ -20,7 +20,8 @@ class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
 	}
 
 
-	public function action_retrieve() {
+	public function action_retrieve()
+	{
 		$this->view = null;
 
 		$item_id = $this->request->query('id');
@@ -45,7 +46,8 @@ class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
 		$this->response->body(json_encode($list));
 	}
 
-	public function action_save(){
+	public function action_save()
+	{
 		$values = $this->request->post();
 		$this->view = null;
 
@@ -86,7 +88,8 @@ class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
 		}
 	}
 
-	public function action_delete(){
+	public function action_delete()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 

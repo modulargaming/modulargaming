@@ -1,4 +1,4 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') OR die('No direct script access.');
 
 class Task_Pet extends Minion_Task
 {
@@ -8,7 +8,7 @@ class Task_Pet extends Minion_Task
     );
 
     /**
-     * This is a task to decrease pet happiness and hunger
+     * This is a task to decrease pet happiness AND hunger
      *
      * @return null
      */

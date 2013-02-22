@@ -10,7 +10,9 @@
  * @copyright  (c) Modular gaming
  */
 class Item_Command_Pet_Paint extends Item_Command_Pet {
-	protected function _build($name){
+
+	protected function _build($name)
+	{
 		return array(
 			'title' => 'Pet color',
 			'search' => 'pet-color',
@@ -24,14 +26,16 @@ class Item_Command_Pet_Paint extends Item_Command_Pet {
 		);
 	}
 
-	public function validate($param) {
+	public function validate($param)
+	{
 		$color = ORM::factory('Pet_Colour')
 			->where('pet_colour.name', '=', $param)
 			->find();
 		return $color->loaded();
 	}
 
-	public function perform($item, $param, $pet=null) {
+	public function perform($item, $param, $pet=null)
+	{
 		$colour = ORM::factory('Pet_Colour')
 		->where('pet_colour.name', '=', $param)
 		->find();

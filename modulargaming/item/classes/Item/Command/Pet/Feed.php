@@ -10,7 +10,9 @@
  * @copyright  (c) Modular gaming
  */
 class Item_Command_Pet_Feed extends Item_Command_Pet {
-	protected function _build($name){
+
+	protected function _build($name)
+	{
 		return array(
 			'title' => 'Pet hunger',
 			'fields' => array(
@@ -23,13 +25,13 @@ class Item_Command_Pet_Feed extends Item_Command_Pet {
 		);
 	}
 
-	public function validate($param) {
-		return (Valid::digit($param) && $param > 0);
+	public function validate($param)
+	{
+		return (Valid::digit($param) AND $param > 0);
 	}
 
-	public function perform($item, $param, $pet=null) {
-
-
+	public function perform($item, $param, $pet=null)
+	{
 		if($pet->hunger == 100)
 			return $pet->name.' is already full';
 		else

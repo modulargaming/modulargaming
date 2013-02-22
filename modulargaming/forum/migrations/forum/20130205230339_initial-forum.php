@@ -27,7 +27,7 @@ class Migration_Forum_20130205230339 extends Minion_Migration_Base {
 			INSERT INTO `forum_categories` (`id`, `title`, `description`, `locked`) VALUES
 			(1, 'News', 'Only admins can create topics here', 1),
 			(2, 'General', 'General discussions', 0),
-			(3, 'Marketplace', 'Buy and sell items', 0);
+			(3, 'Marketplace', 'Buy AND sell items', 0);
 		");
 
 		$db->query(NULL, "

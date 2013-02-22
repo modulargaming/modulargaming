@@ -6,7 +6,8 @@ class View_Item_Shop_Logs extends Abstract_View_Inventory {
 
 	public $logs = array();
 
-	public function logs() {
+	public function logs()
+	{
 		$return = array();
 
 		if(count($this->logs) > 0)

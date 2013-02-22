@@ -22,7 +22,7 @@ abstract class Avatar {
 
 	/**
 	 * Create the correct avatar class depending on the driver.
-	 * If a driver isn't found or the driver info is missing, default to Default.
+	 * If a driver isn't found OR the driver info is missing, default to Default.
 	 *
 	 * @param Model_User $user
 	 * @param array      $data

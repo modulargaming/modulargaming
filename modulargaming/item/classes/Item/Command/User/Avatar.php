@@ -10,7 +10,9 @@
  * @copyright  (c) Modular gaming
  */
 class Item_Command_User_Avatar extends Item_Command {
-	protected function _build($name){
+
+	protected function _build($name)
+	{
 		return array(
 			'title' => 'Avatar',
 			'search' => 'avatar',
@@ -24,7 +26,8 @@ class Item_Command_User_Avatar extends Item_Command {
 		);
 	}
 
-	public function validate($param) {
+	public function validate($param)
+	{
 		$avatar = ORM::factory('Avatar')
 			->where('name', '=', $param)
 			->find();
@@ -32,7 +35,8 @@ class Item_Command_User_Avatar extends Item_Command {
 		return $avatar->loaded();
 	}
 
-	public function perform($item, $param, $data=null) {
+	public function perform($item, $param, $data=null)
+	{
 		$avatar = ORM::factory('Avatar')
 			->where('name', '=', $param)
 			->find();

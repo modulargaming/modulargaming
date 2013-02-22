@@ -35,7 +35,8 @@ class View_Admin_Item_Type extends Abstract_View_Admin {
 	 * A list of item commands
 	 * @return array
 	 */
-	public function commands() {
+	public function commands()
+	{
 		$commands = Item::list_commands();
 		$list_c = array();
 
@@ -44,7 +45,7 @@ class View_Admin_Item_Type extends Abstract_View_Admin {
 			$name = 'Item_Command_'.str_replace(array('\\', '/'), '_', $name);
 			$command = new $name;
 
-			if($command->is_default() == false)
+			if($command->is_default() == FALSE)
 			{
 				$list_c[] = array(
 					'name' 	=> str_replace('_', ' - ', $name),

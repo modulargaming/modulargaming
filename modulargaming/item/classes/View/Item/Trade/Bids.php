@@ -8,13 +8,13 @@ class View_Item_Trade_Bids extends Abstract_View_Inventory {
 	 * Stores a bid
 	 * @var array|false
 	 */
-	public $bids = false;
+	public $bids = FALSE;
 
 	/**
 	 * The image URL to the defined currency image
 	 * @var unknown_type
 	 */
-	public $currency_image = false;
+	public $currency_image = FALSE;
 
 	/**
 	 * Total amount of bids the user has made
@@ -33,8 +33,8 @@ class View_Item_Trade_Bids extends Abstract_View_Inventory {
 	 *
 	 * @return array
 	 */
-	protected function _bid() {
-
+	protected function _bid()
+	{
 		if ($bid != null) {
 			$items = array();
 
@@ -44,7 +44,7 @@ class View_Item_Trade_Bids extends Abstract_View_Inventory {
 
 			return array (
 				'id' => $bid->id,
-				'points' => ($bid->points > 0) ? array('amount' => $bid->points) : false,
+				'points' => ($bid->points > 0) ? array('amount' => $bid->points) : FALSE,
 				'username' => $bid->lot->user->username,
 				'lot' => Route::url('item.trade.lot', array('id' => $bid->lot_id)),
 				'lot_id' => $bid->lot_id,
@@ -53,14 +53,15 @@ class View_Item_Trade_Bids extends Abstract_View_Inventory {
 				'retract' => Route::url('item.trade.retract', array('id' => $bid->id))
 			);
 		}
-		return false;
+		return FALSE;
 	}
 
 	/**
 	 * Simplify bid data
 	 * @return array
 	 */
-	public function bids() {
+	public function bids()
+	{
 		$list = array();
 
 		$bids = $this->bids;

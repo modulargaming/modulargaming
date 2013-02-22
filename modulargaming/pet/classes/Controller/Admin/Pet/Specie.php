@@ -23,7 +23,8 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 		$this->view->colours = $colours->as_array();
 	}
 
-	public function action_retrieve() {
+	public function action_retrieve()
+	{
 		$this->view = null;
 
 		$item_id = $this->request->query('id');
@@ -46,7 +47,8 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 		$this->response->body(json_encode($list));
 	}
 
-	public function action_save(){
+	public function action_save()
+	{
 		$values = $this->request->post();
 		$this->view = null;
 
@@ -86,7 +88,8 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 		}
 	}
 
-	public function action_delete(){
+	public function action_delete()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 
@@ -97,7 +100,8 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 		$this->response->body(json_encode(array('action' => 'deleted')));
 	}
 
-	public function action_col_load() {
+	public function action_col_load()
+	{
 		$specie = ORM::factory('Pet_Specie', $this->request->query('id'));
 
 		$colours = $specie->colours->find_all();
@@ -111,7 +115,8 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 		$this->response->body(json_encode(array('colours' => $list)));
 	}
 
-	public function action_col_delete() {
+	public function action_col_delete()
+	{
 		$specie = ORM::factory('Pet_Specie', $this->request->query('specie_id'));
 		$colour = ORM::factory('Pet_Colour', $this->request->query('colour_id'));
 
@@ -122,7 +127,8 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 		$this->response->body(json_encode(array('action' => 'deleted')));
 	}
 
-	public function action_col_update() {
+	public function action_col_update()
+	{
 		$specie = ORM::factory('Pet_Specie', $this->request->post('specie_id'));
 
 		$colours = $this->request->post('colours');

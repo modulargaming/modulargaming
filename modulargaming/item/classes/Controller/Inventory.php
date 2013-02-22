@@ -2,7 +2,7 @@
 /**
  * Item inventory controller
  *
- * List and consume items
+ * List AND consume items
  *
  * @package    ModularGaming/Items
  * @category   Controller
@@ -10,6 +10,7 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Inventory extends Abstract_Controller_Frontend {
+
 	protected $protected = TRUE;
 
 	public function action_index()
@@ -19,10 +20,10 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		$config = Kohana::$config->load('items.inventory');
 		$max_items = $config['pagination'];
 
-		if($config['ajax'] === true)
+		if($config['ajax'] === TRUE)
 		{
 			Assets::factory('body')->js('item.inventory', 'item/inventory/index.js');
-			$this->view->ajax = true;
+			$this->view->ajax = TRUE;
 		}
 
 		$items = Item::location('inventory');
@@ -38,7 +39,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		);
 	}
 
-	public function action_view() {
+	public function action_view()
+	{
 		$id = $this->request->param('id');
 
 		$item = ORM::factory('User_Item', $id);
@@ -64,7 +66,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 			$default_command = Item_Command::factory($item->item->type->default_command);
 
-			if ($default_command->pets_required() == true) {
+			if ($default_command->pets_required() == TRUE) {
 				$pets = ORM::factory('User_Pet')
 					->where('user_id', '=', $this->user->id)
 					->find_all();
@@ -100,7 +102,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 			->where('item_id', '=', $item->item_id)
 			->find();
 
-			if($user_shop->loaded() && ($user_shop->inventory_space() == true || ($user_shop->inventory_space() == false && $shop_item->loaded())))
+			if($user_shop->loaded() AND ($user_shop->inventory_space() == TRUE OR ($user_shop->inventory_space() == FALSE AND $shop_item->loaded())))
 			{
 				$actions['move_shop'] = array (
 						'item' => 'Move to your shop',
@@ -108,7 +110,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				);
 			}
 
-			if($item->item->transferable == true)
+			if($item->item->transferable == TRUE)
 			{
 				$actions['gift'] = array (
 					'item' =>  'Send as gift',
@@ -157,7 +159,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		Assets::js('item.inventory', 'item/inventory/view.js');
 	}
 
-	public function action_consume() {
+	public function action_consume()
+	{
 		$item = ORM::factory('User_Item', $this->request->param('id'));
 		$action = $this->request->post('action');
 
@@ -196,7 +199,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 				{
 					Hint::error('You can\'t let a pet comsume this item if it\'s not yours');
 				}
-				else if($def_cmd->pets_required() == false)
+				else if($def_cmd->pets_required() == FALSE)
 				{
 					Hint::error('can\'t perform this item action on a pet');
 				}
@@ -206,14 +209,14 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 					$db = Database::instance();
 					$db->begin();
-					$error = false;
+					$error = FALSE;
 					foreach ($commands as $command) {
 						$cmd = Item_Command::factory($command['name']);
 						$res = $cmd->perform($item, $command['param'], $pet);
 
 						if($res == FALSE)
 						{
-							//the command couldn't be performed, spit out error, rollback changes and break the loop
+							//the command couldn't be performed, spit out error, rollback changes AND break the loop
 							Hint::error(__(':item_name could not be used on :pet_name', array(':item_name' => $item->name, ':pet_name' => $pet->name)));
 							$error = TRUE;
 							$db->rollback();
@@ -250,9 +253,9 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							$cmd = Item_Command::factory($command['name']);
 							$res = $cmd->perform($item, $command['param']);
 
-							if($res == false)
+							if($res == FALSE)
 							{
-								//the command couldn't be performed, spit out error, rollback changes and break the loop
+								//the command couldn't be performed, spit out error, rollback changes AND break the loop
 								Hint::error(__(':item_name could not be used', array(':item_name' => $item->name)));
 								$db->rollback();
 								$error = TRUE;
@@ -264,7 +267,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 						if($error = FALSE)
 						{
-							if($def_cmd->delete_after_consume == true)
+							if($def_cmd->delete_after_consume == TRUE)
 								$item->amount('-', 1);
 
 							$db->commit();

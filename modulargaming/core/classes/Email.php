@@ -24,7 +24,7 @@ class Email extends Kohana_Email {
 	}
 
 	/**
-	 * Setup the standard email information, and render the templates.
+	 * Setup the standard email information, AND render the templates.
 	 *
 	 * @param  Abstract_View_Email $view
 	 */

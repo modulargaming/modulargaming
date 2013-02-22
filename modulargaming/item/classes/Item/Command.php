@@ -17,7 +17,8 @@ abstract class Item_Command {
 	 * @param Kohana_Validation $validation
 	 * @return Item_Command
 	 */
-	public static function factory($command, $validation=null) {
+	public static function factory($command, $validation=null)
+	{
 		$cmd = 'Item_Command_'.$command;
 		return new $cmd($validation);
 	}
@@ -26,22 +27,22 @@ abstract class Item_Command {
 	 * If a command is a default one it won't be shown in the admin
 	 * @var boolean
 	 */
-	public $default = false;
+	public $default = FALSE;
 
 	//this command would be the only one, no extra commands would be able to get assigned
-	public $allow_more = true;
+	public $allow_more = TRUE;
 
 	/**
 	 * Does the command require a pet to be loaded?
 	 * @var bool
 	 */
-	public $load_pets = false;
+	public $load_pets = FALSE;
 
 	/**
 	 * Does the item automatically gets destroyed after performing its actions?
 	 * @var bool
 	 */
-	public $delete_after_consume = true;
+	public $delete_after_consume = TRUE;
 
 	protected $_validation = null;
 
@@ -70,11 +71,13 @@ abstract class Item_Command {
 	 * Assign an extra form field in the item action list in the inventory
 	 * @return NULL|array
 	 */
-	public function inventory() {
+	public function inventory()
+	{
 		return null;
 	}
 
-	public function __construct(Kohana_Validation $validation=null) {
+	public function __construct(Kohana_Validation $validation=null)
+	{
 		$this->_validation = $validation;
 	}
 
@@ -83,7 +86,8 @@ abstract class Item_Command {
 	 * @param string $name
 	 * @return number
 	 */
-	public function build_admin($name) {
+	public function build_admin($name)
+	{
 		$def = $this->_build($name);
 
 		//if loading pets is required
@@ -104,7 +108,8 @@ abstract class Item_Command {
 	 * If this command is a default one, don't include it in the admin
 	 * @return boolean
 	 */
-	public function is_default() {
+	public function is_default()
+	{
 		return $this->default;
 	}
 
@@ -112,7 +117,8 @@ abstract class Item_Command {
 	 * Check if this command requires a pet to be loaded
 	 * @return boolean
 	 */
-	public function pets_required() {
+	public function pets_required()
+	{
 		return $this->load_pets;
 	}
 
@@ -120,7 +126,8 @@ abstract class Item_Command {
 	 * check if the item should be deleted after performing all related commands
 	 * @return boolean
 	 */
-	public function delete() {
+	public function delete()
+	{
 		return $this->delete_after_consume;
 	}
 }

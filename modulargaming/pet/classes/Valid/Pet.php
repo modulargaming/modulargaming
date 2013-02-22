@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 class Valid_Pet {
+
 	public static function specie_exists($id)
 	{
 		$specie = ORM::factory('Pet_Specie', $id);

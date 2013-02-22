@@ -20,13 +20,13 @@ class View_Pet_Create extends Abstract_View_Pet {
 	 * Contains the default pet specie dir
 	 * @var string
 	 */
-	public $default_specie = false;
+	public $default_specie = FALSE;
 
 	/**
 	 * Contains the default colour image name
 	 * @var string
 	 */
-	public $default_colour = false;
+	public $default_colour = FALSE;
 
 	/**
 	 * Simplify specie data
@@ -50,11 +50,12 @@ class View_Pet_Create extends Abstract_View_Pet {
 	}
 
 	/**
-	 * Javascript reference point for species and colours
+	 * Javascript reference point for species AND colours
 	 *
 	 * @return string JSON
 	 */
-	public function compose() {
+	public function compose()
+	{
 		$list = array();
 
 		foreach ($this->species as $specie) {

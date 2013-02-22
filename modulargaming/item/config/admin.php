@@ -3,9 +3,9 @@
 return array (
 	'items' => array(
 		'nav' => array(
-			'index' => array('link' => 'item', 'title' => 'Items', 'active' => false),
-			'types' => array('link' => 'item/types', 'title' => 'Types', 'active' => false),
-			'recipes' =>	array('link' => 'item/recipes', 'title' => 'Recipes', 'active' => false),
+			'index' => array('link' => 'item', 'title' => 'Items', 'active' => FALSE),
+			'types' => array('link' => 'item/types', 'title' => 'Types', 'active' => FALSE),
+			'recipes' =>	array('link' => 'item/recipes', 'title' => 'Recipes', 'active' => FALSE),
 		),
 	),
 );

@@ -8,7 +8,7 @@ class View_Item_Trade_Lots extends Abstract_View_Inventory {
 	 * Store the pagination HTML.
 	 * @var string
 	 */
-	public $pagination = false;
+	public $pagination = FALSE;
 
 	/**
 	 * Stores the trade lots
@@ -23,10 +23,11 @@ class View_Item_Trade_Lots extends Abstract_View_Inventory {
 	public $trade_nav = array();
 
 	/**
-	 * Simplify lot data and add linked item
+	 * Simplify lot data AND add linked item
 	 * @return array
 	 */
-	public function lots(){
+	public function lots()
+	{
 		$list = array();
 
 		if(count($this->lots) > 0)

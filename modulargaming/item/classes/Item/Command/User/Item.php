@@ -10,7 +10,9 @@
  * @copyright  (c) Modular gaming
  */
 class Item_Command_User_Item extends Item_Command {
-	protected function _build($name){
+
+	protected function _build($name)
+	{
 		return array(
 			'title' => 'Item',
 			'search' => 'item',
@@ -25,7 +27,8 @@ class Item_Command_User_Item extends Item_Command {
 		);
 	}
 
-	public function validate($param) {
+	public function validate($param)
+	{
 		$item = ORM::factory('Item')
 			->where('item.name', '=', $param)
 			->find();
@@ -33,7 +36,8 @@ class Item_Command_User_Item extends Item_Command {
 		return $item->loaded();
 	}
 
-	public function perform($item, $param, $data=null) {
+	public function perform($item, $param, $data=null)
+	{
 		$item = ORM::factory('Item')
 			->where('item.name', '=', $param)
 			->find();

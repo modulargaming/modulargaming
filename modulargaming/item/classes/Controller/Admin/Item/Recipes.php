@@ -31,7 +31,8 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		$this->view->recipes = $types;
 	}
 
-	public function action_paginate() {
+	public function action_paginate()
+	{
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Item_Recipe');
@@ -58,7 +59,8 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 			throw new HTTP_Exception_500();
 	}
 
-	public function action_retrieve() {
+	public function action_retrieve()
+	{
 		$this->view = null;
 
 		$item_id = $this->request->query('id');
@@ -89,7 +91,8 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		$this->response->body(json_encode($list));
 	}
 
-	public function action_save(){
+	public function action_save()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 
@@ -110,7 +113,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 			if($crafted->loaded())
 			{
 				//validate item materials
-				$mat_fail = false;
+				$mat_fail = FALSE;
 
 				if(count($values['materials']) > 0)
 				{
@@ -132,7 +135,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 							$values['materials'][$index]['item'] = $mat->id;
 					}
 				}
-				if($mat_fail == false)
+				if($mat_fail == FALSE)
 				{
 					$values['crafted_item_id'] = $crafted->id;
 
@@ -196,7 +199,8 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		}
 	}
 
-	public function action_delete(){
+	public function action_delete()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 

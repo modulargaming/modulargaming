@@ -10,10 +10,12 @@
  * @copyright  (c) Modular gaming
  */
 class Item_Command_General_Cook extends Item_Command {
-	public $allow_more = false;
-	public $delete_after_consume = false;
 
-	protected function _build($name){
+	public $allow_more = FALSE;
+	public $delete_after_consume = FALSE;
+
+	protected function _build($name)
+	{
 		return array(
 			'title' => 'Recipe',
 			'search' => 'recipe',
@@ -27,7 +29,8 @@ class Item_Command_General_Cook extends Item_Command {
 		);
 	}
 
-	public function validate($param) {
+	public function validate($param)
+	{
 		$recipe = ORM::factory('Item_Recipe')
 			->where('item_recipe.name', '=', $param)
 			->find();
@@ -35,7 +38,8 @@ class Item_Command_General_Cook extends Item_Command {
 		return $recipe->loaded();
 	}
 
-	public function perform($item, $param, $data=null) {
+	public function perform($item, $param, $data=null)
+	{
 		$item->move('cookbook');
 
 		return $item->item->name . ' has been moved to your cookbook.';

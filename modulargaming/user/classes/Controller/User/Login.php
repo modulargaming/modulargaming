@@ -11,7 +11,7 @@
 class Controller_User_Login extends Abstract_Controller_User {
 
 	/**
-	 * Display the login page and handle login attempts.
+	 * Display the login page AND handle login attempts.
 	 */
 	public function action_index()
 	{

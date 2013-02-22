@@ -10,7 +10,9 @@
  * @copyright  (c) Modular gaming
  */
 class Item_Command_Pet_Transform extends Item_Command_Pet {
-	protected function _build($name){
+
+	protected function _build($name)
+	{
 		return array(
 			'title' => 'Pet specie',
 			'search' => 'pet-specie',
@@ -24,7 +26,8 @@ class Item_Command_Pet_Transform extends Item_Command_Pet {
 		);
 	}
 
-	public function validate($param) {
+	public function validate($param)
+	{
 		$specie = ORM::factory('Pet_Specie')
 			->where('pet_specie.name', '=', $param)
 			->find();
@@ -32,7 +35,8 @@ class Item_Command_Pet_Transform extends Item_Command_Pet {
 		return $specie->loaded();
 	}
 
-	public function perform($item, $param, $pet=null) {
+	public function perform($item, $param, $pet=null)
+	{
 		$specie = ORM::factory('Pet_Specie', $param);
 
 		$pet->specie_id = $param;

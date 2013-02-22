@@ -15,10 +15,10 @@ class View_Tabs {
 			$tabs[] = array(
 				'name'    => $tab->name,
 				'content' => $tab->render(),
-				'active'  => false
+				'active'  => FALSE
 			);
 		}
-		isset($tabs[0]) && $tabs[0]['active'] = true;
+		isset($tabs[0]) AND $tabs[0]['active'] = TRUE;
 
 		return $tabs;
 	}

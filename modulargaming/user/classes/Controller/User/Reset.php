@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Controller for recovering the username or password.
+ * Controller for recovering the username OR password.
  *
  * @package    MG User
  * @category   Controller
@@ -11,7 +11,7 @@
 class Controller_User_Reset extends Abstract_Controller_User {
 
 	/**
-	 * Display the login page and handle login attempts.
+	 * Display the login page AND handle login attempts.
 	 */
 	public function action_index()
 	{

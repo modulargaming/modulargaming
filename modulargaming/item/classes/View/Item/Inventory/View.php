@@ -8,19 +8,20 @@ class View_Item_Inventory_View extends Abstract_View_Inventory {
 	 * Store the item's information
 	 * @var User_Item
 	 */
-	public $item = false;
+	public $item = FALSE;
 
 	/**
 	 * Contains the item's action list
 	 * @var array
 	 */
-	public $action_list = false;
+	public $action_list = FALSE;
 
 	/**
 	 * Build the item template data, along with the action list.
 	 * @return array
 	 */
-	public function item() {
+	public function item()
+	{
 		$return = array (
 			'image' => $this->item->img(),
 			'amount' => $this->item->amount,

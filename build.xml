@@ -54,20 +54,20 @@
 	</target>
 
 	<target name="cs-fixer-dry" description="Runs PHP Coding Standard Fixer with --dry-run (list changes only)">
-		<exec executable="bin/php-cs-fixer">
+		<exec executable="../cs/php-cs-fixer">
 			<arg value="fix" />
 			<arg value="--dry-run" />
-			<arg value="--fixers=linefeed, trailing_spaces, php_closing_tag, short_tag, return, visibility,
-				eof_ending, controls_spaces, elseif" />
+			<arg value="--fixers=linefeed, trailing_spaces, php_closing_tag, short_tag, return, visibility, braces,
+				eof_ending, controls_spaces, elseif, caps" />
 			<arg path="${basedir}/modulargaming" />
 		</exec>
 	</target>
 
 	<target name="cs-fixer" description="Runs PHP Coding Standard Fixer">
-		<exec executable="bin/php-cs-fixer">
+		<exec executable="../cs/php-cs-fixer">
 			<arg value="fix" />
-			<arg value="--fixers=linefeed, trailing_spaces, php_closing_tag, short_tag, return, visibility,
-				eof_ending, controls_spaces, elseif" />
+			<arg value="--fixers=linefeed, trailing_spaces, php_closing_tag, short_tag, return, visibility, braces,
+				eof_ending, controls_spaces, elseif, caps" />
 			<arg path="${basedir}/modulargaming" />
 		</exec>
 	</target>

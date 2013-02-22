@@ -14,7 +14,7 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 	 * Stores a bid
 	 * @var array|false
 	 */
-	public $bid = false;
+	public $bid = FALSE;
 
 	/**
 	 * Whether to show actions only an owner can perform
@@ -22,13 +22,13 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 	 *
 	 * @var boolean
 	 */
-	public $owner_actions = false;
+	public $owner_actions = FALSE;
 
 	/**
 	 * The image URL to the defined currency image
 	 * @var unknown_type
 	 */
-	public $currency_image = false;
+	public $currency_image = FALSE;
 
 	/**
 	 * Stores the navigation
@@ -37,10 +37,11 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 	public $trade_nav = array();
 
 	/**
-	 * Simplify lot data and add linked item
+	 * Simplify lot data AND add linked item
 	 * @return array
 	 */
-	public function lot(){
+	public function lot()
+	{
 		$inventory = array();
 
 		foreach ($this->lot->items() as $item) {
@@ -53,12 +54,12 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 		$lot = array (
 			'id' => $this->lot->id,
 			'is_owner' => $this->owner_actions,
-			'can_bid' => ($this->bid == false && $this->owner_actions != false) ? false: array('link' => Route::url('item.trade.bid', array('id' => $this->lot->id))),
+			'can_bid' => ($this->bid == FALSE AND $this->owner_actions != FALSE) ? FALSE: array('link' => Route::url('item.trade.bid', array('id' => $this->lot->id))),
 			'description' => $this->lot->description,
 			'inventory' => $inventory,
 			'username' => $this->lot->user->username,
 			'user_profile' => Route::url('user.view', array('id' => $this->lot->user_id)),
-			'delete_trade' => ($this->owner_actions) ? Route::url('item.trade.delete', array('id' => $this->lot->id)) : false
+			'delete_trade' => ($this->owner_actions) ? Route::url('item.trade.delete', array('id' => $this->lot->id)) : FALSE
 		);
 
 		return $lot;
@@ -70,8 +71,9 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 	 * @param User_Trade_Bid $bid
 	 * @return array
 	 */
-	public function bid($bid=null) {
-		if($bid == null && $this->bid != false)
+	public function bid($bid=null)
+	{
+		if($bid == NULLAND $this->bid != FALSE)
 		{
 			$bid = $this->bid;
 		}
@@ -85,7 +87,7 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 
 			return array (
 				'id' => $bid->id,
-				'points' => ($bid->points > 0) ? array('amount' => $bid->points) : false,
+				'points' => ($bid->points > 0) ? array('amount' => $bid->points) : FALSE,
 				'username' => $bid->user->username,
 				'profile' => Route::url('user.view', array('id' => $bid->user_id)),
 				'inventory' => $items,
@@ -94,7 +96,7 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 				'retract' => Route::url('item.trade.retract', array('id' => $bid->id))
 			);
 		}
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -103,10 +105,11 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 	 *
 	 * @return array
 	 */
-	public function bids() {
+	public function bids()
+	{
 		$list = array();
 
-		if($this->owner_actions == true)
+		if($this->owner_actions == TRUE)
 		{
 			$bids = $this->lot->bids->find_all();
 

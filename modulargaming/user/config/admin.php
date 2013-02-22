@@ -3,8 +3,8 @@
 return array (
 	'user' => array(
 		'nav' => array(
-			'index' => array('link' => 'user', 'title' => 'User', 'active' => false),
-			'avatar' => array('link' => 'avatar', 'title' => 'Avatars', 'active' => false),
+			'index' => array('link' => 'user', 'title' => 'User', 'active' => FALSE),
+			'avatar' => array('link' => 'avatar', 'title' => 'Avatars', 'active' => FALSE),
 		)
 	)
 );

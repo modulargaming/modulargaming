@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Controller_Pet_Profile extends Abstract_Controller_Frontend {
+
 	protected $protected = TRUE;
 	public function action_index()
 	{

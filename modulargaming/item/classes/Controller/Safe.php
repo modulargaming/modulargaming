@@ -2,7 +2,7 @@
 /**
  * Item safe controller
  *
- * List and move items
+ * List AND move items
  *
  * @package    ModularGaming/Items
  * @category   Controller
@@ -10,6 +10,7 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Safe extends Abstract_Controller_Frontend {
+
 	protected $protected = TRUE;
 
 	public function action_index()
@@ -39,7 +40,8 @@ class Controller_Safe extends Abstract_Controller_Frontend {
 		);
 	}
 
-	public function action_move() {
+	public function action_move()
+	{
 		$items = $this->request->post('items');
 
 		if (count($items) > 0) {
@@ -48,7 +50,7 @@ class Controller_Safe extends Abstract_Controller_Frontend {
 				{
 					$i = ORM::factory('User_Item', $id);
 
-					if($i->loaded() && $i->location == 'safe' && $i->user_id == $this->user->id)
+					if($i->loaded() AND $i->location == 'safe' AND $i->user_id == $this->user->id)
 					{
 						if($item['amount'] > $i->amount)
 						{
@@ -59,7 +61,7 @@ class Controller_Safe extends Abstract_Controller_Frontend {
 								))
 							);
 						}
-						else if ($item['location'] == 'shop') {
+						elseif ($item['location'] == 'shop') {
 							$shop = ORM::factory('User_Shop')
 								->where('user_id', '=', $this->user->id)
 								->find();
@@ -74,7 +76,7 @@ class Controller_Safe extends Abstract_Controller_Frontend {
 							{
 								Hint::error('You don\'t have a shop yet.');
 							}
-							else if(!$shop->inventory_space() && !$shop_item->loaded())
+							else if(!$shop->inventory_space() AND !$shop_item->loaded())
 							{
 								Hint::error('Your shop is already full.');
 							}

@@ -37,7 +37,8 @@ class Model_Item_Recipe extends ORM {
 		);
 	}
 
-	public static function validate_material_names($validation, $materials, $name_key='name'){
+	public static function validate_material_names($validation, $materials, $name_key='name')
+	{
 		$mat_names = array();
 
 		foreach ($materials as $material) {
@@ -51,14 +52,15 @@ class Model_Item_Recipe extends ORM {
 		}
 		catch(ORM_Validation_Exception $e) {
 			$validation->error('materials', $e->errors());
-			return false;
+			return FALSE;
 		}
 
-		return true;
+		return TRUE;
 	}
 
-	public static function validate_material_amounts($validation, $materials, $amount_key='amount', $name_key='name') {
-		$status = true;
+	public static function validate_material_amounts($validation, $materials, $amount_key='amount', $name_key='name')
+	{
+		$status = TRUE;
 
 		foreach ($materials as $material) {
 			if(!Valid::digit($material[$amount_key]))

@@ -10,6 +10,7 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Cookbook extends Abstract_Controller_Frontend {
+
 	protected $protected = TRUE;
 
 	public function action_index()
@@ -18,10 +19,10 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 
 		$config = Kohana::$config->load('items.cookbook');
 
-		if($config['ajax'] === true)
+		if($config['ajax'] === TRUE)
 		{
 			Assets::factory('body')->js('item.cookbook', 'item/cookbook.js');
-			$this->view->ajax = true;
+			$this->view->ajax = TRUE;
 		}
 
 		$items = ORM::factory('User_Item')
@@ -37,7 +38,8 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 		);
 	}
 
-	public function action_view() {
+	public function action_view()
+	{
 		$id = $this->request->param('id');
 		$item = ORM::factory('User_Item', $id);
 
@@ -127,7 +129,8 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 		}
 	}
 
-	public function action_complete() {
+	public function action_complete()
+	{
 		$item = ORM::factory('User_Item', $this->request->param('id'));
 		$action = $this->request->post('action');
 
@@ -149,7 +152,7 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 		{
 			$errors[] = 'You can\'t use this item as a recipe.';
 		}
-		else if ($action == null) {
+		elseif ($action == null) {
 			$errors[] = 'No action to perform has been specified';
 		}
 		else
@@ -167,7 +170,7 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 				$user_item = Item::factory($material->item)
 					->user_has('inventory');
 
-				if($user_item != FALSE && $user_item->amount >= $material->amount)
+				if($user_item != FALSE AND $user_item->amount >= $material->amount)
 				{
 					$user_item->amount('-', $material->amount);
 					$materials++;

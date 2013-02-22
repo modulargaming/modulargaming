@@ -42,7 +42,8 @@ class Model_User_Shop extends ORM {
 	 * Count how many item stacks there are in the inventory
 	 * @return integer
 	 */
-	public function inventory_count() {
+	public function inventory_count()
+	{
 		return DB::select(array(DB::expr('COUNT(*)'), 'total'))
 		->from('user_items')
 		->where('user_id', '=', $this->user_id)
@@ -55,7 +56,8 @@ class Model_User_Shop extends ORM {
 	 * Check if there's space left in the inventory
 	 * @return boolean
 	 */
-	public function inventory_space() {
+	public function inventory_space()
+	{
 		if(Kohana::$config->load('items.user_shop.size.active'))
 			return (($this->size * Kohana::$config->load('items.user_shop.size.unit_size')) < $this->inventory_count());
 		else

@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class Abstract_View_Admin extends Abstract_View {
+
 	public $subnav = array();
 
 	public function navigation()
@@ -16,7 +17,8 @@ class Abstract_View_Admin extends Abstract_View {
 		return array_merge($list, $nav);
 	}
 
-	public function subnav() {
+	public function subnav()
+	{
 		$list = array();
 		foreach ($this->subnav as $nav) {
 			$list[] = $nav;
@@ -24,7 +26,8 @@ class Abstract_View_Admin extends Abstract_View {
 		return $list;
 	}
 
-	public function has_subnav(){
-		return (is_array($this->subnav) && count($this->subnav) > 0);
+	public function has_subnav()
+	{
+		return (is_array($this->subnav) AND count($this->subnav) > 0);
 	}
 }

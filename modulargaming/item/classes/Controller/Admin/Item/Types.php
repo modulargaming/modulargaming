@@ -25,7 +25,8 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 		$this->_nav('items', 'types');
 	}
 
-	public function action_paginate() {
+	public function action_paginate()
+	{
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Item_Type');
@@ -50,7 +51,8 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 			throw new HTTP_Exception_500();
 	}
 
-	public function action_retrieve() {
+	public function action_retrieve()
+	{
 		$this->view = null;
 
 		$item_id = $this->request->query('id');
@@ -69,7 +71,8 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 		$this->response->body(json_encode($list));
 	}
 
-	public function action_save(){
+	public function action_save()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 
@@ -112,7 +115,8 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 		}
 	}
 
-	public function action_delete(){
+	public function action_delete()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 

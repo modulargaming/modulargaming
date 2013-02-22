@@ -20,13 +20,14 @@ class View_Item_Trade_Bid extends Abstract_View_Inventory {
 	 * Contains trade lot data
 	 * @var Model_User_Trade
 	 */
-	public $lot = false;
+	public $lot = FALSE;
 
 	/**
 	 * Simplify lot data
 	 */
-	public function lot() {
-		if($this->lot != false && $this->lot->loaded())
+	public function lot()
+	{
+		if($this->lot != FALSE AND $this->lot->loaded())
 		{
 			$items = array();
 
@@ -46,14 +47,15 @@ class View_Item_Trade_Bid extends Abstract_View_Inventory {
 				'description' => $this->lot->description
 			);
 		}
-		return false;
+		return FALSE;
 	}
 
 	/**
 	 * Simplify item data
 	 * @return array
 	 */
-	public function items(){
+	public function items()
+	{
 		$list = array();
 
 		if(count($this->items) > 0)

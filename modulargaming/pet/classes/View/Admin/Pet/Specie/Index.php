@@ -20,7 +20,8 @@ class View_Admin_Pet_Specie_Index extends Abstract_View_Admin {
 		return $species;
 	}
 
-	public function pet_colours() {
+	public function pet_colours()
+	{
 		$list = array();
 
 		foreach ($this->colours as $colour) {
@@ -30,7 +31,8 @@ class View_Admin_Pet_Specie_Index extends Abstract_View_Admin {
 		return json_encode($list, JSON_NUMERIC_CHECK);
 	}
 
-	public function colours() {
+	public function colours()
+	{
 		$list = array();
 
 		foreach ($this->colours as $colour) {

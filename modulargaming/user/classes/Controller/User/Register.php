@@ -11,7 +11,7 @@
 class Controller_User_Register extends Abstract_Controller_User {
 
 	/**
-	 * Display and handle the register form.
+	 * Display AND handle the register form.
 	 */
 	public function action_index()
 	{

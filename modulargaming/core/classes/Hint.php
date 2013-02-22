@@ -43,8 +43,8 @@ class Hint {
 	 *         array(':file' => $file));
 	 *
 	 * @param   string  $type    message type (e.g. Hint::SUCCESS)
-	 * @param   mixed   $text    message text or array of messages
-	 * @param   array   $values  values to replace with sprintf or strtr
+	 * @param   mixed   $text    message text OR array of messages
+	 * @param   array   $values  values to replace with sprintf OR strtr
 	 * @param   mixed   $data    custom data
 	 */
 	public static function set($type, $text, array $values = NULL, $data = NULL)
@@ -117,10 +117,10 @@ class Hint {
 	 *     // Get error messages
 	 *     $error_messages = Hint::get(Hint::ERROR);
 	 *
-	 *     // Get error and alert messages
+	 *     // Get error AND alert messages
 	 *     $messages = Hint::get(array(Hint::ERROR, Hint::ALERT));
 	 *
-	 *     // Get everything except error and alert messages
+	 *     // Get everything except error AND alert messages
 	 *     $messages = Hint::get(array(1 => array(Hint::ERROR, Hint::ALERT)));
 	 *
 	 *     // Customize the default value
@@ -147,7 +147,7 @@ class Hint {
 			// Will hold the filtered set of messages to return
 			$return = array();
 
-			// Store the remainder in case `delete` or `get_once` is called
+			// Store the remainder in case `delete` OR `get_once` is called
 			$remainder = array();
 
 			foreach ($messages as $message)
@@ -198,10 +198,10 @@ class Hint {
 	 *     // Get error messages
 	 *     $error_messages = Hint::get_once(Hint::ERROR);
 	 *
-	 *     // Get error and alert messages
+	 *     // Get error AND alert messages
 	 *     $error_messages = Hint::get_once(array(Hint::ERROR, Hint::ALERT));
 	 *
-	 *     // Get everything except error and alert messages
+	 *     // Get everything except error AND alert messages
 	 *     $messages = Hint::get_once(array(1 => array(Hint::ERROR, Hint::ALERT)));
 	 *
 	 *     // Customize the default value
@@ -224,7 +224,7 @@ class Hint {
 	 *     // Delete error messages
 	 *     Hint::delete(Hint::ERROR);
 	 *
-	 *     // Delete error and alert messages
+	 *     // Delete error AND alert messages
 	 *     Hint::delete(array(Hint::ERROR, Hint::ALERT));
 	 *
 	 * @param  mixed  $type  message type (e.g. Hint::SUCCESS, array(Hint::ERROR, Hint::ALERT))
@@ -243,7 +243,8 @@ class Hint {
 		}
 	}
 
-	public static function ajax_dump() {
+	public static function ajax_dump()
+	{
 		$error_messages = Hint::get(Hint::ERROR);
 
 		if(count($error_messages) > 0)
@@ -256,7 +257,8 @@ class Hint {
 		}
 	}
 
-	public static function dump() {
+	public static function dump()
+	{
 		$error_messages = Hint::get(Hint::ERROR);
 
 		if(count($error_messages) > 0)

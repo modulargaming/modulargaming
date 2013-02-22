@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 class Model_Item_Recipe_Material extends ORM {
+
 	protected $_belongs_to = array(
 		'recipe' => array(
 			'model' => 'Item_Recipe',

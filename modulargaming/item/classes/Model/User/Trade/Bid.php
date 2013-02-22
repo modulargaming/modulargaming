@@ -29,8 +29,9 @@ class Model_User_Trade_Bid extends ORM {
 		);
 	}
 
-	public function items() {
-		return Item::location('trade.bid', true, $this->id, $this->user)
+	public function items()
+	{
+		return Item::location('trade.bid', TRUE, $this->id, $this->user)
 			->find_all();
 	}
 

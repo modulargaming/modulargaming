@@ -2,5 +2,4 @@
 
 class Abstract_Controller_User extends Abstract_Controller_Frontend {
 
-
 } // End User

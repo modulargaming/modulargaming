@@ -20,7 +20,8 @@ class View_Item_Trade_Create extends Abstract_View_Inventory {
 	 * Simplify item data
 	 * @return array
 	 */
-	public function items(){
+	public function items()
+	{
 		$list = array();
 
 		if(count($this->items) > 0)

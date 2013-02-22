@@ -3,7 +3,6 @@
 
 class Controller_Message_View extends Abstract_Controller_Message {
 
-
 	/**
 	 * View message
 	 */

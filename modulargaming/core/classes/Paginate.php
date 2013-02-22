@@ -14,10 +14,10 @@ abstract class Paginate extends Kohana_Paginate {
 	// Route parameters.
 	private $route_params;
 
-	public $query = false;
+	public $query = FALSE;
 
 	// Current page
-	public $current_page = false;
+	public $current_page = FALSE;
 
 	public static function factory($object, $config = array(), Request $request = NULL, $query=false)
 	{
@@ -113,7 +113,7 @@ abstract class Paginate extends Kohana_Paginate {
 			array($this->config['param'] => $page)
 		);
 
-		$suffix = ($this->query != false) ? '?'.$this->query.'='.$this->request->query($this->query) : '';
+		$suffix = ($this->query != FALSE) ? '?'.$this->query.'='.$this->request->query($this->query) : '';
 		return URL::site($this->route->uri($params)).$suffix;
 	}
 

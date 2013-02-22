@@ -43,15 +43,17 @@ class Model_Item extends ORM {
 	 * Create the url to the item's image
 	 * @return string
 	 */
-	public function img(){
+	public function img()
+	{
 		return URL::site('assets/img/items/'.$this->type->img_dir.$this->image);
 	}
 
 	/**
-	 * Check if the item isn't a draft or retired.
+	 * Check if the item isn't a draft OR retired.
 	 * @return boolean
 	 */
-	public function in_circulation(){
+	public function in_circulation()
+	{
 		return ($this->status == 'released');
 	}
 
@@ -61,7 +63,8 @@ class Model_Item extends ORM {
 	 * @param integer $amount
 	 * @return string
 	 */
-	public function name($amount) {
+	public function name($amount)
+	{
 		if($amount > 1)
 			return $amount . ' ' . Inflector::plural($this->name, $amount);
 		else

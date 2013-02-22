@@ -11,7 +11,7 @@
 class Controller_User_Logout extends Abstract_Controller_User {
 
 	/**
-	 * Sign out the user and redirect him to the frontpage.
+	 * Sign out the user AND redirect him to the frontpage.
 	 */
 	public function action_index()
 	{

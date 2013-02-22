@@ -115,7 +115,7 @@ class Event {
 	}
 
 	/**
-	 * Fire an event and return the first response.
+	 * Fire an event AND return the first response.
 	 *
 	 * <code>
 	 *		// Fire the "start" event
@@ -135,7 +135,7 @@ class Event {
 	}
 
 	/**
-	 * Fire an event and return the first response.
+	 * Fire an event AND return the first response.
 	 *
 	 * Execution will be halted after the first valid response is found.
 	 *
@@ -145,7 +145,7 @@ class Event {
 	 */
 	public static function until($event, $parameters = array())
 	{
-		return static::fire($event, $parameters, true);
+		return static::fire($event, $parameters, TRUE);
 	}
 
 	/**
@@ -191,15 +191,15 @@ class Event {
 	 * @param  bool          $halt
 	 * @return array
 	 */
-	public static function fire($events, $parameters = array(), $halt = false)
+	public static function fire($events, $parameters = array(), $halt = FALSE)
 	{
 		$responses = array();
 
 		$parameters = (array) $parameters;
 
-		// If the event has listeners, we will simply iterate through them and call
+		// If the event has listeners, we will simply iterate through them AND call
 		// each listener, passing in the parameters. We will add the responses to
-		// an array of event responses and return the array.
+		// an array of event responses AND return the array.
 		foreach ((array) $events as $event)
 		{
 			if (static::listeners($event))
@@ -211,20 +211,20 @@ class Event {
 					// If the event is set to halt, we will return the first response
 					// that is not null. This allows the developer to easily stack
 					// events but still get the first valid response.
-					if ($halt and ! is_null($response))
+					if ($halt AND ! is_null($response))
 					{
 						return $response;
 					}
 
 					// After the handler has been called, we'll add the response to
-					// an array of responses and return the array to the caller so
+					// an array of responses AND return the array to the caller so
 					// all of the responses can be easily examined.
 					$responses[] = $response;
 				}
 			}
 		}
 
-		return $halt ? null : $responses;
+		return $halt ? NULL: $responses;
 	}
 
 }

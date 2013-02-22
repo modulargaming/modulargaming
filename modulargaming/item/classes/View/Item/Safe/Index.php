@@ -7,19 +7,19 @@ class View_Item_Safe_Index extends Abstract_View_Inventory {
 	 * Pagination HTML
 	 * @var string
 	 */
-	public $pagination = false;
+	public $pagination = FALSE;
 
 	/**
 	 * form submit url
 	 * @var string
 	 */
-	public $process_url = false;
+	public $process_url = FALSE;
 
 	/**
-	 * Whether or not the user has a shop
+	 * Whether OR not the user has a shop
 	 * @var boolean
 	 */
-	public $shop = false;
+	public $shop = FALSE;
 
 	/**
 	 * Contains User_Items
@@ -37,13 +37,14 @@ class View_Item_Safe_Index extends Abstract_View_Inventory {
 	 * Format item data
 	 * @return array
 	 */
-	public function items(){
+	public function items()
+	{
 		$list = array();
 
 		$options = array();
 		$options[] = array('name' => 'Inventory', 'value' => 'inventory');
 
-		if($this->shop == true)
+		if($this->shop == TRUE)
 		{
 			$options[] = array('name' => 'Shop', 'value' => 'shop');
 		}

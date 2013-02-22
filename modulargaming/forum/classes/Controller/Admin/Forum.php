@@ -115,10 +115,10 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 		{
 			$post = $this->request->post();
 
-			// Either delete all posts, or move them to another category.
+			// Either delete all posts, OR move them to another category.
 			if (isset($post['delete']))
 			{
-				// TODO, Possible change the API to only have move_topics and keep delete_all_topics as a sql "rule".
+				// TODO, Possible change the API to only have move_topics AND keep delete_all_topics as a sql "rule".
 				$this->_category->delete_all_topics();
 			}
 			else

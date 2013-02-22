@@ -31,7 +31,8 @@ class View_Item_Cookbook_View extends Abstract_View_Inventory {
 	 * Build the item recipe info
 	 * @return array
 	 */
-	public function recipe() {
+	public function recipe()
+	{
 		return array (
 			'name' => $this->recipe->name,
 			'img' => $this->recipe->item->img(),
@@ -42,8 +43,8 @@ class View_Item_Cookbook_View extends Abstract_View_Inventory {
 	 * Format the materials
 	 * @return array
 	 */
-	public function materials() {
-
+	public function materials()
+	{
 		if(count($this->materials) > 0)
 		{
 			foreach ($this->materials as $key => $material) {
@@ -60,9 +61,10 @@ class View_Item_Cookbook_View extends Abstract_View_Inventory {
 	 *
 	 * @return boolean|array
 	 */
-	public function collected() {
-		if($this->collected == false)
-			return false;
+	public function collected()
+	{
+		if($this->collected == FALSE)
+			return FALSE;
 		else {
 			return array(
 				'url' => URL::site(Route::get('item.cookbook.complete')->uri(array('id' => $this->id))),

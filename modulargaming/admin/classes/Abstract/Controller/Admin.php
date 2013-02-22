@@ -6,7 +6,8 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 
 
-	public function before(){
+	public function before()
+	{
 		parent::before();
 
 		$assets = Kohana::$config->load('assets.admin');
@@ -14,9 +15,10 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 		$permission = $this->request->controller() . '_' . $this->request->action();
 	}
 
-	public function after() {
+	public function after()
+	{
 		//if no subnav has been defined search for one
-		if($this->view !== null AND !$this->view->has_subnav())
+		if($this->view !== NULLAND !$this->view->has_subnav())
 		{
 			$this->_nav(strtolower($this->request->controller()), $this->request->action());
 		}
@@ -24,12 +26,13 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 		parent::after();
 	}
 
-	protected function _nav($type, $action='index') {
+	protected function _nav($type, $action='index')
+	{
 		$nav = Kohana::$config->load('admin.'.$type.'.nav');
 
 		if($nav != FALSE)
 		{
-			$nav[$action]['active'] = true;
+			$nav[$action]['active'] = TRUE;
 			$this->view->subnav = $nav;
 		}
 	}

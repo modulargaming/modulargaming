@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * Forum Topic controller.
- * Handles viewing a topic and replying to it.
+ * Handles viewing a topic AND replying to it.
  *
  * @package    MG Forum
  * @category   Controller
@@ -184,7 +184,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 				$post_data = Arr::merge($this->request->post(), array(
 							'user_id'	=> $this->user->id,
 						));
-				if (isset($post_data['vote']) && isset($post_data['option_id']))
+				if (isset($post_data['vote']) AND isset($post_data['option_id']))
 				{
 					if (ORM::factory('Forum_Poll_Vote')->where('poll_id', '=', $this->topic->poll->id)->where('user_id', '=', $this->user->id)->count_all())
 					{

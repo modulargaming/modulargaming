@@ -32,8 +32,9 @@ class Model_User_Trade extends ORM {
 		);
 	}
 
-	public function items() {
-		return Item::location('trade.lot', false, $this->id, $this->user)
+	public function items()
+	{
+		return Item::location('trade.lot', FALSE, $this->id, $this->user)
 			->find_all();
 	}
 

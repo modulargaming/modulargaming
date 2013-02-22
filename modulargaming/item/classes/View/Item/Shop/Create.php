@@ -10,7 +10,7 @@ class View_Item_Shop_Create extends Abstract_View_Inventory {
 	 * - affordable (bool) whether the user can afford it to create a shop
 	 * @var array
 	 */
-	public $creation = false;
+	public $creation = FALSE;
 
 	protected function get_breadcrumb()
 	{

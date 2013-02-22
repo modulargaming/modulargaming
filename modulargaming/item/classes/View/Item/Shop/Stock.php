@@ -14,19 +14,20 @@ class View_Item_Shop_Stock extends Abstract_View_Inventory {
 	 * Pagination HTML
 	 * @var string
 	 */
-	public $pagination = false;
+	public $pagination = FALSE;
 
 	/**
 	 * Where to submit the form to
 	 * @var string
 	 */
-	public $inventory_url = false;
+	public $inventory_url = FALSE;
 
 	/**
 	 * Simplify User_item data for the template.
 	 * @return array
 	 */
-	public function items() {
+	public function items()
+	{
 		$list = array();
 
 		if(count($this->items) > 0)

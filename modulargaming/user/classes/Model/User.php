@@ -232,7 +232,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 				return TRUE;
 			}
 		}
-		catch (ReflectionException $ex) // try and find a message based policy
+		catch (ReflectionException $ex) // try AND find a message based policy
 		{
 			// Try each of this user's roles to match a policy
 			foreach ($this->roles->find_all() as $role)

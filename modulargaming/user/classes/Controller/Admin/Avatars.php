@@ -27,7 +27,8 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		$this->view->image = Kohana::$config->load('avatar.size');;
 	}
 
-	public function action_paginate() {
+	public function action_paginate()
+	{
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Avatar');
@@ -54,7 +55,8 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 			throw new HTTP_Exception_500();
 	}
 
-	public function action_retrieve() {
+	public function action_retrieve()
+	{
 		$this->view = null;
 
 		$item_id = $this->request->query('id');
@@ -72,7 +74,8 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		$this->response->body(json_encode($list));
 	}
 
-	public function action_save(){
+	public function action_save()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 
@@ -100,7 +103,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 					$file['status'] = 'error';
 					$file['msg'] = 'There\'s already an image with the same filename';
 				}
-				else if(!Upload::image($_FILES['img'], $cfg['width'], $cfg['heigth'], true))
+				else if(!Upload::image($_FILES['img'], $cfg['width'], $cfg['heigth'], TRUE))
 				{
 					//not the right image dimensions
 					$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :heigth.', array(
@@ -147,7 +150,8 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		}
 	}
 
-	public function action_delete(){
+	public function action_delete()
+	{
 		$this->view = null;
 		$values = $this->request->post();
 

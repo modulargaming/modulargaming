@@ -3,6 +3,6 @@
 return array (
 	'topic' => array(
 		'pagination' => 5,
-		'ajax' => false,
+		'ajax' => FALSE,
 	),
 );
