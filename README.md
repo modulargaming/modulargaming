@@ -74,6 +74,7 @@ Open `application/config/email.php` and make the following changes:
 ### Step 6: Cron jobs
 
 	$ php ./minion Pet
+	$ php ./minion Restock
 
 ## Testing
 
