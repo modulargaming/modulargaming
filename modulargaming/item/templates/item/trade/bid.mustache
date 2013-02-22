@@ -1,17 +1,9 @@
 <div class="row">
 	<div class="span8 offset2">
 			<div class="row-fluid">
-				<div class="span12 pagination-centered">
-					<p>
-					<div class="btn-group">
-					{{#trade_nav}}
-					<a href="{{url}}" class="btn{{#active}} active{{/active}}">{{name}}</a>
-					{{/trade_nav}}
-					</div>
-					</p>
-				</div>
+				{{>item/trades}}
 			</div>
-			
+			{{^unable}}
 			{{#lot}}
 			<div class="row">
 				You are bidding on lot <strong>#{{id}}</strong> - by <em><a href="{{profile}}">{{username}}</a></em>
@@ -61,5 +53,6 @@
 			  	</form>
 			  </div>
 			</div>
+		{{/unable}}
 	</div>
 </div>

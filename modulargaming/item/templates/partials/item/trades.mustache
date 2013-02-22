@@ -1,0 +1,14 @@
+	<div class="span12 pagination-centered">
+		<div class="btn-group">
+			<div class="input-append pull-right" style="padding-left: 15px;">
+				<form action="{{search_url}}">
+			  		<input class="input-medium" name="t" type="text" value="{{term}}" placeholder="Item name">
+			  		<button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button> 
+			  	</form>
+			</div>
+						
+			{{#trade_nav}}
+			<a href="{{url}}" class="btn{{#active}} active{{/active}}">{{name}}</a>
+			{{/trade_nav}}
+		</div>
+	</div>
