@@ -2,8 +2,8 @@
 
 class Abstract_View_Admin extends Abstract_View {
 	public $subnav = array();
-	
-	function navigation()
+
+	public function navigation()
 	{
 		$nav = array_reverse(Event::fire('admin.nav_list'));
 		$list = array(
@@ -18,12 +18,12 @@ class Abstract_View_Admin extends Abstract_View {
 
 	public function subnav() {
 		$list = array();
-		foreach($this->subnav as $nav) {
+		foreach ($this->subnav as $nav) {
 			$list[] = $nav;
 		}
 		return $list;
 	}
-	
+
 	public function has_subnav(){
 		return (is_array($this->subnav) && count($this->subnav) > 0);
 	}

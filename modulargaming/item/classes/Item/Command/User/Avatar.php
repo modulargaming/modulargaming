@@ -12,7 +12,7 @@
 class Item_Command_User_Avatar extends Item_Command {
 	protected function _build($name){
 		return array(
-			'title' => 'Avatar', 
+			'title' => 'Avatar',
 			'search' => 'avatar',
 			'fields' => array(
 				array(
@@ -20,25 +20,25 @@ class Item_Command_User_Avatar extends Item_Command {
 						'name' => $name, 'class' => 'input-small search'
 					)
 				)
-			)	
+			)
 		);
 	}
-	
+
 	public function validate($param) {
 		$avatar = ORM::factory('Avatar')
 			->where('name', '=', $param)
 			->find();
-		
+
 		return $avatar->loaded();
 	}
-	
+
 	public function perform($item, $param, $data=null) {
 		$avatar = ORM::factory('Avatar')
 			->where('name', '=', $param)
 			->find();
-		
+
 		$user = Auth::instance()->get_user();
-		
+
 		if($user->has('avatars', $avatar))
 			return '';
 		else {

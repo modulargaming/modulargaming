@@ -58,7 +58,7 @@ class Controller_Assets extends Controller {
 		foreach($parts as $part)
 		{
 			$dir .= $part.DIRECTORY_SEPARATOR;
-			if( ! is_dir ($dir)) {
+			if ( ! is_dir ($dir)) {
 				mkdir($dir);
 			}
 		}

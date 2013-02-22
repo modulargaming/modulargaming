@@ -16,7 +16,7 @@ class Model_Forum_Poll extends ORM {
 		),
 	);
 
-	static public function poll_exists($id)
+	public static function poll_exists($id)
 	{
 		$poll = ORM::factory('Forum_Poll', $id);
 		return $poll->loaded();

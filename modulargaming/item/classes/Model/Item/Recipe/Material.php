@@ -11,9 +11,9 @@ class Model_Item_Recipe_Material extends ORM {
 			'foreign_key' => 'item_id'
 		),
 	);
-	
+
 	protected $_load_with = array('item');
-	
+
 	public function rules()
 	{
 		return array(

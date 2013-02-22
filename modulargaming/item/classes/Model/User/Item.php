@@ -28,22 +28,22 @@ class Model_User_Item extends ORM {
 			),
 		);
 	}
-	
+
 	/**
 	 * Return the item's image url
-	 * 
+	 *
 	 * @return string
 	 */
 	public function img(){
 		return $this->item->img();
 	}
-	
+
 	/**
 	 * Move the currently initialised item to a new location and update its quantity.
-	 * 
+	 *
 	 * Returns false if you're trying to move a higher amount of this item than you already have,
 	 * if successfull it will return the instance of the user item stack where the copies have moved to.
-	 * 
+	 *
 	 * @param string $location Location to send the item to
 	 * @param integer $amount How many are moving to $location
 	 * @param boolean $single_stack Add to an existing stack or alway create a new stack
@@ -52,28 +52,28 @@ class Model_User_Item extends ORM {
 	public function move($location, $amount=1, $single_stack=true) {
 		if($amount == '*')
 			$amount = $this->amount;
-		
+
 		return $this->_relocate($this->user_id, $location, $amount, $single_stack);
 	}
-	
+
 	/**
 	 * Return the item's name prefixed with its amount
-	 * 
+	 *
 	 * @return string
 	 */
-	public function name() {		
+	public function name() {
 		if($this->amount > 1)
 			return $this->amount . ' ' . Inflector::plural($this->item->name, $this->amount);
 		else
 			return $this->amount . ' ' . $this->item->name;
 	}
-	
+
 	/**
 	 * Transfer the initialised item to a different user.
-	 * 
+	 *
 	 * Returns false if you're trying to transfer a higher amount of this item than the owner already has,
 	 * if successfull it will return a user item instance of where the item copies transfered to.
-	 * 
+	 *
 	 * @param Model_User $user A user model instance of the new owner
 	 * @param Integer $amount The amount of copies you want to transfer
 	 * @throws Item_Exception When trying to transfer an untrasferable item
@@ -85,12 +85,12 @@ class Model_User_Item extends ORM {
 		else
 			return $this->_relocate($user->id, 'inventory', $amount);
 	}
-	
+
 	/**
 	 * Move the item to
 	 * - a new location
 	 * - a new user
-	 * 
+	 *
 	 * @param integer $user_id The (new) owner of the item
 	 * @param string $location The new location of the item
 	 * @param integer $amount The amount of copies to relocate
@@ -100,10 +100,10 @@ class Model_User_Item extends ORM {
 	protected function _relocate($user_id, $location, $amount, $single_stack=true) {
 		if($amount > $this->amount)
 			return false;
-		
+
 		$item = ORM::factory('User_Item');
-		
-		if($single_stack == true) 
+
+		if($single_stack == true)
 		{
 			//check if the item already has a stack for its new location
 			$item->where('user_id', '=', $user_id)
@@ -111,8 +111,8 @@ class Model_User_Item extends ORM {
 			->where('location', '=', $location)
 			->find();
 		}
-		
-		if($item->loaded()) {
+
+		if ($item->loaded()) {
 			$item->amount = $user_item->amount + $amount;
 			$item->save();
 		}
@@ -124,25 +124,25 @@ class Model_User_Item extends ORM {
 			$item->amount = $amount;
 			$item->save();
 		}
-		
+
 		//update the amount
 		$new_amount = $this->amount - $amount;
-		
+
 		if($new_amount == 0)
 			$this->delete();
 		else {
 			$this->amount = $new_amount;
 			$this->save();
 		}
-		
+
 		//@todo log
-		
+
 		return $item;
 	}
-	
+
 	/**
 	 * Change the amount of the loaded item.
-	 * 
+	 *
 	 * @param string $type (add|+|substract|-)
 	 * @param integer $amount
 	 * @return boolean
@@ -150,13 +150,13 @@ class Model_User_Item extends ORM {
 	public function amount($type, $amount=1) {
 		if($amount < 0)
 			return false;
-		
-		switch($type) {
+
+		switch ($type) {
 			case 'add':
 			case '+':
 				$this->amount = $this->amount + $amount;
 				$this->save();
-				
+
 				//@todo log
 				return true;
 			break;
@@ -166,18 +166,18 @@ class Model_User_Item extends ORM {
 				{
 					$this->amount = $this->amount - $amount;
 					$this->save();
-					
+
 					//@todo log
 					return true;
 				}
 				else if($amount == $this->amount)
 				{
 					$this->delete();
-					
+
 					//@todo log
 					return true;
 				}
-				else 
+				else
 					return false;
 			break;
 		}

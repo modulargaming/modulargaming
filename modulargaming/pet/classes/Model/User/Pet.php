@@ -62,4 +62,3 @@ class Model_User_Pet extends ORM {
 		return URL::base() . 'assets/img/pets/'.$this->specie->dir.'/'.$this->colour->image;
 	}
 }
-

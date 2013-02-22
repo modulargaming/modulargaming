@@ -33,19 +33,19 @@ class Controller_Pet_Create extends Abstract_Controller_Frontend {
 
 		$species = ORM::factory('Pet_Specie')->find_all();
 		$this->view = new View_Pet_Create;
-		
+
 		$colours = ORM::factory('Pet_Colour')->where('locked', '=', 0)->find_all();
 		$this->view->colours = $colours;
 
 		$this->view->species = $species;
-		
+
 		$this->view->default_specie = $species[0]->dir;
 		$this->view->default_colour = $colours[0]->image;
-		
+
 		$this->view->href = array(
 				'adopt' => Route::url('pet.adopt'),
 			);
-		
+
 		Assets::factory('body')->js('pets.create', 'pets/create.js');
 	}
 

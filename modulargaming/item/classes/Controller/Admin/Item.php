@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * Item admin controller
- * 
+ *
  * Manage site items
  *
  * @package    ModularGaming/Items
@@ -17,11 +17,11 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
-		
+
 		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 		$this->_load_assets(Kohana::$config->load('assets.upload'));
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.list'));
-		
+
 		$types = ORM::factory('Item_Type')
 			->find_all();
 
@@ -36,12 +36,12 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			array('name' => 'Pet', 'commands' => array()),
 		);
 		$def_c = array();
-		
-		foreach($commands as $cmd) {
+
+		foreach ($commands as $cmd) {
 			$name = str_replace(DIRECTORY_SEPARATOR, '_', $cmd);
 			$class = 'Item_Command_'.$name;
 			$command = new $class;
-			
+
 			if($command->is_default() == false)
 			{
 				$struct = explode('_', $name);
@@ -57,95 +57,95 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				$loc = (in_array($struct[0], array('General', 'User'))) ? 0 : 1;
 				$menu_c[$loc]['commands'][] = array (
 					'name' => $struct[1],
-					'cmd' => $name		
+					'cmd' => $name
 				);
 			}
 		}
-		
+
 		$this->view->input_commands = $input_c;
 		$this->view->menu_commands = $menu_c;
 		$this->view->command_definitions = $def_c;
 		$this->view->image = Kohana::$config->load('items.image');
 	}
-	
+
 	public function action_search() {
 		$this->view = null;
 		$type = $this->request->query('type');
-		
-		if($type == 'item') {
+
+		if ($type == 'item') {
 			$item_name = $this->request->query('item');
 			$property = 'name';
-			
+
 			$items = ORM::factory('Item')
 				->where('item.name', 'LIKE', '%'.$item_name.'%')
 				->find_all();
 		}
-		else if($type == 'item_type') 
+		else if($type == 'item_type')
 		{
 			$item_name = $this->request->query('item');
 			$property = 'name';
-			
+
 			$items = ORM::factory('Item_Type')
 				->where('item_type.name', 'LIKE', '%'.$item_name.'%')
 				->find_all();
 		}
-		else if($type == 'user') 
+		else if($type == 'user')
 		{
 			$item_name = $this->request->query('username');
 			$property = 'username';
-			
+
 			$items = ORM::factory('User')
 				->where('username', 'LIKE', '%'.$item_name.'%')
 				->find_all();
 		}
-		else if($type == 'recipe') 
+		else if($type == 'recipe')
 		{
 			$item_name = $this->request->query('name');
 			$property = 'name';
-				
+
 			$items = ORM::factory('Item_Recipe')
 			->where('item_recipe.name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
-		else if($type == 'pet-specie') 
+		else if($type == 'pet-specie')
 		{
 			$item_name = $this->request->query('name');
 			$property = 'name';
-		
+
 			$items = ORM::factory('Pet_Specie')
 			->where('pet_specie.name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
-		else if($type == 'pet-color') 
+		else if($type == 'pet-color')
 		{
 			$item_name = $this->request->query('name');
 			$property = 'name';
-		
+
 			$items = ORM::factory('Pet_Colour')
 			->where('pet_colour.name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
-		
+
 		$list = array();
-		
-		foreach($items as $item) {
+
+		foreach ($items as $item) {
 			$list[] = $item->{$property};
 		}
-		
+
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
 	}
-	
+
 	public function action_paginate() {
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Item');
-	
+
 			$paginate = Paginate::factory($orm)
 			->columns(array('id', 'name', 'image', 'status', 'type'));
-	
+
 			$datatables = DataTables::factory($paginate)->execute();
-	
+
 			foreach ($datatables->result() as $item)
 			{
 				$datatables->add_row(array (
@@ -157,20 +157,20 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					)
 				);
 			}
-	
+
 			$datatables->render($this->response);
 		}
 		else
 			throw new HTTP_Exception_500();
 	}
-	 
+
 	public function action_retrieve() {
 		$this->view = null;
-	
+
 		$item_id = $this->request->query('id');
 
 		$item = ORM::factory('Item', $item_id);
-	
+
 		$list = array (
 			'id' => $item->id,
 			'name' => $item->name,
@@ -180,43 +180,43 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			'unique' => $item->unique,
 			'transferable' => $item->transferable,
 			'type_id' => $item->type_id,
-			'commands' => $item->commands		
+			'commands' => $item->commands
 		);
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
 	}
-	
+
 	public function action_save(){
 		$values = $this->request->post();
 		$this->view = null;
-		
+
 		if($values['id'] == 0)
 			$values['id'] = null;
-		
+
 		$id = $values['id'];
-		
+
 		$this->response->headers('Content-Type','application/json');
 
-		try {			
+		try {
 			if(isset($values['commands']))
 				$values['commands'] = Item::parse_commands($values['commands']);
-			
+
 			$item = ORM::factory('Item', $values['id']);
-			
+
 			$img = $item->image;
 			$dir = $item->type->img_dir;
-			
+
 			$values['image'] = (isset($_FILES['image'])) ? 'tmp' : $img;
 			$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id', 'commands'));
 			$item->save();
-			
+
 			$file = array('status' => 'empty', 'msg' => '');
-			
+
 			if(isset($_FILES['image']))
 			{
 				$image = $_FILES['image'];
 				$cfg = Kohana::$config->load('items.image');
-				
+
 				if(!Upload::valid($image))
 				{
 					//error not valid upload
@@ -229,7 +229,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 						':width' => $cfg['width'], ':heigth' => $cfg['heigth']
 					));
 				}
-				else 
+				else
 				{
 					$msg = '';
 					if($id != null && !empty($img) && file_exists(DOCROOT.'assets/img/items/'.$dir.$img))
@@ -240,21 +240,21 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 						unlink(DOCROOT.'assets/img/items/'.$dir.$img);
 						$msg = 'The old image has been moved to the graveyard and renamed to '.$new_name;
 					}
-					
+
 					$up = Upload::save($image, $image['name'], DOCROOT.'assets/img/items/'.$item->type->img_dir);
-					
+
 					if($up != false)
 					{
 						$file['status'] = 'success';
 						$file['msg'] = 'You\'ve successfully uploaded your item image';
-						
+
 						if(!empty($msg))
 							$file['msg'] .= '<br />'.$msg;
-						
+
 						$item->image = $image['name'];
 						$item->save();
 					}
-					else 
+					else
 					{
 						$file = array('status' => 'error', 'msg' => 'There was an error uploading your file.');
 					}
@@ -266,7 +266,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				copy(DOCROOT.'assets/img/items/'.$dir.$item->image, DOCROOT.'assets/img/items/'.$item->type->img_dir.$item->image);
 				unlink(DOCROOT.'assets/img/items/'.$dir.$item->image);
 			}
-			
+
 			$data = array (
 				'action' => 'saved',
 				'type' => ($id == null) ? 'new' : 'update',
@@ -284,41 +284,41 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		catch(ORM_Validation_Exception $e)
 		{
 			$errors = array();
-			
+
 			$list = $e->errors('models');
-			
-			foreach($list as $field => $er) {
+
+			foreach ($list as $field => $er) {
 				if(!is_array($er))
 					$er = array($er);
-				
+
 				$errors[] = array('field' => $field, 'msg' => $er);
 			}
-			
+
 			$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
 		}
 	}
-	
+
 	public function action_delete(){
 		$this->view = null;
 		$values = $this->request->post();
-	
+
 		$item = ORM::factory('Item', $values['id']);
 		$item->delete();
-				
+
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode(array('action' => 'deleted')));
 	}
 
 	public function action_gift(){
 		$this->view = null;
-	
+
 		//gift the item
 		$item = Item::factory($this->request->post('id'));
-		
+
 		$user = ORM::factory('User')
 		->where('username', '=', $this->request->post('username'))
 		->find();
-		
+
 		try {
 			$item->to_user($user, 'admin.'.$this->user->username, $this->request->post('amount'));
 			$list = array('action' => 'success');
@@ -326,7 +326,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		catch(Item_Exception $e) {
 			$list = array('action' => 'error', 'errors' => (array) $e->errors());
 		}
-		
+
 		//return response
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));

@@ -23,7 +23,7 @@ class Model_Item_Type extends ORM {
 			),
 		);
 	}
-	
+
 	public function filters()
 	{
 		return array(

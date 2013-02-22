@@ -19,7 +19,7 @@ return array (
 				array(
 					'name' => 'style',
 					'file'  => 'style.css'
-				)		
+				)
 			),
 			'js' => array()
 		),

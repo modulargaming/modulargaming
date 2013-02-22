@@ -1,36 +1,36 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 class Valid_Pet {
-	static public function specie_exists($id)
+	public static function specie_exists($id)
 	{
 		$specie = ORM::factory('Pet_Specie', $id);
-	
+
 		return $specie->loaded();
 	}
-	
-	static public function colour_exists($id)
+
+	public static function colour_exists($id)
 	{
 		$colour = ORM::factory('Pet_Colour', $id);
-	
+
 		return $colour->loaded();
 	}
-	
-	static public function colour_available($id, $model)
+
+	public static function colour_available($id, $model)
 	{
 		$colour = ORM::factory('Pet_Colour', $id);
 		$specie = ORM::factory('Pet_Specie', $model->specie_id);
-		
-	
+
+
 		return $specie->has('colours', $colour);
 	}
-	
-	static public function colour_free($id)
+
+	public static function colour_free($id)
 	{
 		$colour = ORM::factory('Pet_Colour', $id);
-	
+
 		return $colour->locked == 0;
 	}
-	
+
 	public static function limit($user_id)
 	{
 		$limit = Kohana::$config->load('pet.limit');
@@ -39,7 +39,7 @@ class Valid_Pet {
 		->where('user_id', '=', $user_id)
 		->execute()
 		->get('total');
-		
+
 		return ($user_id == 0 OR $pet_count < $limit);
 	}
 }

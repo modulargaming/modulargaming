@@ -3,53 +3,53 @@
 class View_Item_Trade_Lot extends Abstract_View_Lot {
 
 	public $title = 'Trade lots';
-	
+
 	/**
 	 * Stores the trade lot data
 	 * @var array
 	 */
 	public $lot = array();
-	
+
 	/**
 	 * Stores a bid
 	 * @var array|false
 	 */
 	public $bid = false;
-	
+
 	/**
 	 * Whether to show actions only an owner can perform
 	 * on this lot.
-	 * 
+	 *
 	 * @var boolean
 	 */
 	public $owner_actions = false;
-	
+
 	/**
 	 * The image URL to the defined currency image
 	 * @var unknown_type
 	 */
 	public $currency_image = false;
-	
+
 	/**
 	 * Stores the navigation
 	 * @var array
 	 */
 	public $trade_nav = array();
-	
+
 	/**
 	 * Simplify lot data and add linked item
 	 * @return array
 	 */
 	public function lot(){
 		$inventory = array();
-				
-		foreach($this->lot->items() as $item) {
+
+		foreach ($this->lot->items() as $item) {
 			$inventory[] = array(
 				'name' => $item->name(),
 				'img' => $item->img()
 			);
 		}
-				
+
 		$lot = array (
 			'id' => $this->lot->id,
 			'is_owner' => $this->owner_actions,
@@ -60,29 +60,29 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 			'user_profile' => Route::url('user.view', array('id' => $this->lot->user_id)),
 			'delete_trade' => ($this->owner_actions) ? Route::url('item.trade.delete', array('id' => $this->lot->id)) : false
 		);
-		
+
 		return $lot;
 	}
-	
+
 	/**
 	 * Return a simplified bid data definition.
-	 * 
+	 *
 	 * @param User_Trade_Bid $bid
 	 * @return array
 	 */
 	public function bid($bid=null) {
-		if($bid == null && $this->bid != false) 
+		if($bid == null && $this->bid != false)
 		{
 			$bid = $this->bid;
 		}
-		
-		if($bid != null) {
+
+		if ($bid != null) {
 			$items = array();
-			
+
 			foreach ($bid->items() as $item) {
 				$items[] = array('name' => $item->name(), 'img' => $item->img());
 			}
-				
+
 			return array (
 				'id' => $bid->id,
 				'points' => ($bid->points > 0) ? array('amount' => $bid->points) : false,
@@ -96,27 +96,27 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * If the owner is viewing the page
 	 * return bids people have made.
-	 * 
+	 *
 	 * @return array
 	 */
 	public function bids() {
 		$list = array();
-		
+
 		if($this->owner_actions == true)
 		{
 			$bids = $this->lot->bids->find_all();
-			
-			if(count($bids) > 0) 
+
+			if(count($bids) > 0)
 			{
 				foreach($bids as $bid)
 					$list[] = $this->bid($bid);
 			}
 		}
-		
+
 		return $list;
 	}
 

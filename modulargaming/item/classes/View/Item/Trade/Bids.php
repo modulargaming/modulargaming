@@ -3,45 +3,45 @@
 class View_Item_Trade_Bids extends Abstract_View_Inventory {
 
 	public $title = 'Trade bids';
-	
+
 	/**
 	 * Stores a bid
 	 * @var array|false
 	 */
 	public $bids = false;
-	
+
 	/**
 	 * The image URL to the defined currency image
 	 * @var unknown_type
 	 */
 	public $currency_image = false;
-	
+
 	/**
 	 * Total amount of bids the user has made
 	 * @var integer
 	 */
 	public $count = 0;
-	
+
 	/**
 	 * Stores the navigation
 	 * @var array
 	 */
 	public $trade_nav = array();
-	
+
 	/**
 	 * Return a simplified bid data definition.
-	 * 
+	 *
 	 * @return array
 	 */
 	protected function _bid() {
-		
-		if($bid != null) {
+
+		if ($bid != null) {
 			$items = array();
-			
+
 			foreach ($bid->items() as $item) {
 				$items[] = array('name' => $item->name(), 'img' => $item->img());
 			}
-				
+
 			return array (
 				'id' => $bid->id,
 				'points' => ($bid->points > 0) ? array('amount' => $bid->points) : false,
@@ -55,7 +55,7 @@ class View_Item_Trade_Bids extends Abstract_View_Inventory {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Simplify bid data
 	 * @return array
@@ -64,13 +64,13 @@ class View_Item_Trade_Bids extends Abstract_View_Inventory {
 		$list = array();
 
 		$bids = $this->bids;
-			
-		if(count($bids) > 0) 
+
+		if(count($bids) > 0)
 		{
 			foreach($bids as $bid)
 				$list[] = $this->bid($bid);
 		}
-		
+
 		return $list;
 	}
 

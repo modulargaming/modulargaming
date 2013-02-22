@@ -16,7 +16,7 @@ class Controller_Search extends Abstract_Controller_Frontend {
 		{
 			return $this->_search($this->request->query('type'), $this->request->query('item'));
 		}
-		
+
 		$this->view = new View_Search;
 
 		if (isset($_GET['query']))
@@ -47,12 +47,12 @@ class Controller_Search extends Abstract_Controller_Frontend {
 	{
 		switch($type)
 		{
-			case 'user' : 
+			case 'user' :
 				$users = ORM::factory('User')
 					->where('username', 'LIKE', '%'.$item.'%')
 					->find_all();
 				$output = array();
-				
+
 				foreach($users as $user)
 				{
 					$output[] = $user->username;
@@ -62,7 +62,7 @@ class Controller_Search extends Abstract_Controller_Frontend {
 				$output = 'ERROR';
 				break;
 		}
-		
+
 		$this->response->headers('Content-Type', 'application/json');
 		return $this->response->body(json_encode($output));
 	}

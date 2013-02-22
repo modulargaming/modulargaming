@@ -10,7 +10,7 @@ return array (
 					'location' => 'after',
 					'relative' => 'bootstrap'
 				)
-			)		
+			)
 		),
 		'body' => array(
 			'js' => array(

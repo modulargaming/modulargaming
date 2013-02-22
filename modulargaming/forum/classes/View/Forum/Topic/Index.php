@@ -153,4 +153,3 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 	}
 
 }
-

@@ -3,7 +3,7 @@
 return array (
 	'image' => array(
 		'width' => 80,
-		'heigth' => 80		
+		'heigth' => 80
 	),
 	'inventory' => array(
 		'pagination' => 20,
@@ -11,7 +11,7 @@ return array (
 		'consume_show_results' => 'all', // (all|first) show all or the first result the item commands return when consuming an item
 	),
 	'cookbook' => array(
-		'ajax' => true		
+		'ajax' => true
 	),
 	'safe' => array(
 		'pagination' => 30
@@ -21,10 +21,10 @@ return array (
 		'creation_cost' => 200, //set to 0 or false to disable
 		'log_limit' => 35, //how many sale logs the player can view
 		'size' => array( //put a limit on how many items that shop can contain
-			'active' => true, 
+			'active' => true,
 			'unit_cost' => 100,	//cost of upgrading to one unit higher
 			'unit_size' => 10 //how many items can be stored per unit
-		)	
+		)
 	),
 	'trade' => array(
 		'currency_image' => false,

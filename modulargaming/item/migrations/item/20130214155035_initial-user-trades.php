@@ -21,7 +21,7 @@ class Migration_Item_20130214155035 extends Minion_Migration_Base {
 		 	  KEY `user_trades_user` (`user_id`),
 		  	  CONSTRAINT `user_trades_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 			) ENGINE=InnoDB  DEFAULT CHARSET=latin1;");
-			
+
 			$db->query(NULL, "CREATE TABLE `user_trade_bids` (
 			  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 			  `trade_id` int(11) UNSIGNED NOT NULL,

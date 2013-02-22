@@ -3,5 +3,5 @@
 class View_Admin_Avatar_Index extends Abstract_View_Admin {
 
 	public $title = 'Avatars';
-	
+
 }

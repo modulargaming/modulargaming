@@ -45,7 +45,7 @@ class Controller_User_Register extends Abstract_Controller_User {
 						->send();
 
 					$this->auth->force_login($user);
-					$this->redirect(Route::get('user')->uri());	
+					$this->redirect(Route::get('user')->uri());
 				}
 				catch (ORM_Validation_Exception $e)
 				{

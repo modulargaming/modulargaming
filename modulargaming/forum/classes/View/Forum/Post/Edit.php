@@ -28,4 +28,3 @@ class View_Forum_Post_Edit extends Abstract_View_Forum_Post {
 
 
 }
-

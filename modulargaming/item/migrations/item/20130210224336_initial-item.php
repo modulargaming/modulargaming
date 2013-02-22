@@ -36,7 +36,7 @@ class Migration_Item_20130210224336 extends Minion_Migration_Base {
 			  `img_dir` varchar(50) NOT NULL,
 			  PRIMARY KEY (`id`)
 			) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;	");
-		 	
+
 		 	$db->query(NULL, "CREATE TABLE IF NOT EXISTS `user_items` (
 			  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 			  `item_id` int(11) unsigned NOT NULL,
@@ -52,7 +52,7 @@ class Migration_Item_20130210224336 extends Minion_Migration_Base {
 		 	  CONSTRAINT `user_items_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 			) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 		 ");
-		 
+
 		 //setup item recipes
 		 $db->query(null, "
 			CREATE TABLE IF NOT EXISTS `item_recipes` (
@@ -63,7 +63,7 @@ class Migration_Item_20130210224336 extends Minion_Migration_Base {
 			  PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 			");
-		 
+
 		 	$db->query(NULL, "
 			CREATE TABLE IF NOT EXISTS `item_recipe_materials` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -74,8 +74,8 @@ class Migration_Item_20130210224336 extends Minion_Migration_Base {
 			  KEY `key_item` (`item_id`),
 			  KEY `key_recipe` (`item_recipe_id`),
 		 	  CONSTRAINT `item_recipe_materials_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE,
-		 	  CONSTRAINT `item_recipe_materials_ibfk_2` FOREIGN KEY (`item_recipe_id`) REFERENCES `item_recipes` (`id`) ON DELETE CASCADE		 			
-			) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;	 		
+		 	  CONSTRAINT `item_recipe_materials_ibfk_2` FOREIGN KEY (`item_recipe_id`) REFERENCES `item_recipes` (`id`) ON DELETE CASCADE
+			) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 		 ");
 	}
 

@@ -24,11 +24,11 @@ class Model_User_Shop extends ORM {
 				array('max_length', array(':value', 70)),
 			),
 			'description' => array(
-				array('max_length', array(':value', Kohana::$config->load('items.user_shop.description_char_limit')))		
+				array('max_length', array(':value', Kohana::$config->load('items.user_shop.description_char_limit')))
 			)
 		);
 	}
-	
+
 	public function filters()
 	{
 		return array(
@@ -37,7 +37,7 @@ class Model_User_Shop extends ORM {
 			),
 		);
 	}
-	
+
 	/**
 	 * Count how many item stacks there are in the inventory
 	 * @return integer
@@ -50,7 +50,7 @@ class Model_User_Shop extends ORM {
 		->execute()
 		->get('total');
 	}
-	
+
 	/**
 	 * Check if there's space left in the inventory
 	 * @return boolean

@@ -5,4 +5,3 @@ class View_User_Register extends Abstract_View {
 	public $title = 'Register';
 
 }
-

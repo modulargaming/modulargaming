@@ -39,7 +39,7 @@ class Hint {
 	 *     Hint::set(Hint::ERROR, '%s is not writable', array($file));
 	 *
 	 *     // Embed some values with strtr
-	 *     Hint::set(Hint::ERROR, ':file is not writable', 
+	 *     Hint::set(Hint::ERROR, ':file is not writable',
 	 *         array(':file' => $file));
 	 *
 	 * @param   string  $type    message type (e.g. Hint::SUCCESS)
@@ -135,7 +135,7 @@ class Hint {
 	{
 		// Load existing messages
 		$messages = Session::instance()->get(Hint::$storage_key);
-		
+
 		if ($messages === NULL)
 		{
 			// No messages found
@@ -143,7 +143,7 @@ class Hint {
 		}
 
 		if ($type !== NULL)
-		{			
+		{
 			// Will hold the filtered set of messages to return
 			$return = array();
 
@@ -210,7 +210,7 @@ class Hint {
 	 * @param   mixed  $type     message type (e.g. Hint::SUCCESS, array(Hint::ERROR, Hint::ALERT))
 	 * @param   mixed  $default  default value to return
 	 * @return  mixed
-	 */	
+	 */
 	public static function get_once($type = NULL, $default = NULL)
 	{
 		return Hint::get($type, $default, TRUE);
@@ -242,23 +242,23 @@ class Hint {
 			Hint::get($type, NULL, TRUE);
 		}
 	}
-	
+
 	public static function ajax_dump() {
 		$error_messages = Hint::get(Hint::ERROR);
-		
-		if(count($error_messages) > 0) 
+
+		if(count($error_messages) > 0)
 		{
 			Hint::delete(Hint::ERROR);
 		}
-		else 
+		else
 		{
 			Hint::delete(Hint::SUCCESS);
 		}
 	}
-	
+
 	public static function dump() {
 		$error_messages = Hint::get(Hint::ERROR);
-		
+
 		if(count($error_messages) > 0)
 		{
 			return array('status' => 'error', 'errors' => $error_messages);

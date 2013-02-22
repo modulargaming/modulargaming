@@ -43,4 +43,3 @@ class View_Forum_Post_Delete extends Abstract_View_Forum_Post {
 
 
 }
-

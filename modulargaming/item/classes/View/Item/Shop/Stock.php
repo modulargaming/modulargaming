@@ -9,27 +9,27 @@ class View_Item_Shop_Stock extends Abstract_View_Inventory {
 	 * @var array
 	 */
 	public $items = array();
-	
+
 	/**
 	 * Pagination HTML
 	 * @var string
 	 */
 	public $pagination = false;
-	
+
 	/**
 	 * Where to submit the form to
 	 * @var string
 	 */
 	public $inventory_url = false;
-	
+
 	/**
 	 * Simplify User_item data for the template.
 	 * @return array
 	 */
 	public function items() {
 		$list = array();
-		
-		if(count($this->items) > 0) 
+
+		if(count($this->items) > 0)
 		{
 			foreach ($this->items as $item) {
 				$list[] = array (
@@ -37,7 +37,7 @@ class View_Item_Shop_Stock extends Abstract_View_Inventory {
 					'price' => $item->parameter,
 					'img' => $item->img(),
 					'name' => $item->item->name,
-					'amount' => $item->amount		
+					'amount' => $item->amount
 				);
 			}
 		}

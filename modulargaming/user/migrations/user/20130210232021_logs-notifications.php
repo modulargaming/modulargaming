@@ -12,7 +12,7 @@ class Migration_User_20130210232021 extends Minion_Migration_Base {
 	 */
 	public function up(Kohana_Database $db)
 	{
-		 $db->query(NULL, "			
+		 $db->query(NULL, "
 		 	CREATE TABLE `user_notification_icons` (
 			  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 		 	  `name` varchar(35) DEFAULT NULL,

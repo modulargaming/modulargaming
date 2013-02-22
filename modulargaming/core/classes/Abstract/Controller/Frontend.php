@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * Abstract base controller for frontend controllers.
- * 
+ *
  * @package    Modular Gaming
  * @category   Controller
  * @author     Modular Gaming Team
@@ -36,11 +36,11 @@ abstract class Abstract_Controller_Frontend extends Controller {
 		{
 			throw HTTP_Exception::Factory(403, 'Login to access this page!');
 		}
-		
+
 		$assets = Kohana::$config->load('assets.global');
 		$this->_load_assets($assets);
 	}
-	
+
 	protected function _load_assets($config)
 	{
 		if (isset($config['head']))
@@ -54,7 +54,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 		}
 
 	}
-	
+
 	protected function _register_assets($location, $config)
 	{
 		foreach ($config as $type => $files)
@@ -89,7 +89,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 			$url = URL::base('http');
 			$base_url = Kohana::$base_url;
 			$root = str_replace($base_url, '', $url);
-				
+
 			$validation = Validation::factory($this->request->post())
 				->rule('csrf', 'not_empty')
 				->rule('csrf', 'Security::check');

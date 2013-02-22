@@ -19,24 +19,24 @@ class View_Admin_Pet_Specie_Index extends Abstract_View_Admin {
 
 		return $species;
 	}
-	
+
 	public function pet_colours() {
 		$list = array();
-		
-		foreach($this->colours as $colour) {
+
+		foreach ($this->colours as $colour) {
 			$list[$colour->id] = array('name' => $colour->name, 'locked' => $colour->locked);
 		}
-		
+
 		return json_encode($list, JSON_NUMERIC_CHECK);
 	}
-	
+
 	public function colours() {
 		$list = array();
-	
-		foreach($this->colours as $colour) {
+
+		foreach ($this->colours as $colour) {
 			$list[] = array('name' => $colour->name, 'id' => $colour->id);
 		}
-	
+
 		return $list;
 	}
 }

@@ -10,33 +10,33 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Admin_Avatars extends Abstract_Controller_Admin {
-	
+
 	public function action_index()
 	{
 		if ( ! $this->user->can('Admin_Item_Index') )
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
-		
+
 		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 		$this->_load_assets(Kohana::$config->load('assets.upload'));
 		Assets::factory('body')->js('admin.avatar.index', 'admin/avatar.js');
-	
+
 		$this->view = new View_Admin_Avatar_Index;
 		$this->_nav('user', 'avatar');
-		$this->view->image = Kohana::$config->load('avatar.size');;		
+		$this->view->image = Kohana::$config->load('avatar.size');;
 	}
-	
+
 	public function action_paginate() {
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Avatar');
-		
+
 			$paginate = Paginate::factory($orm)
 			->columns(array('id', 'title', 'img', 'default'));
-		
+
 			$datatables = DataTables::factory($paginate)->execute();
-		
+
 			foreach ($datatables->result() as $avatar)
 			{
 				$datatables->add_row(array (
@@ -47,48 +47,48 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 					)
 				);
 			}
-		
+
 			$datatables->render($this->response);
 		}
 		else
 			throw new HTTP_Exception_500();
 	}
-	
+
 	public function action_retrieve() {
 		$this->view = null;
-	
+
 		$item_id = $this->request->query('id');
 
 		$item = ORM::factory('Avatar', $item_id);
-	
+
 		$list = array (
 			'id' => $item->id,
 			'title' => $item->title,
 			'default' => $item->default,
 			'img' => URL::base().'assets/img/avatars/'.$item->img,
 		);
-		
+
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode($list));
 	}
-	
+
 	public function action_save(){
 		$this->view = null;
 		$values = $this->request->post();
-	
+
 		if($values['id'] == 0)
 			$values['id'] = null;
-	
+
 		$id = $values['id'];
-		
+
 		$this->response->headers('Content-Type','application/json');
-	
+
 		try {
 			$check = array('title', 'default');
-			
+
 			$file = array('status' => 'empty', 'msg' => '');
-			
-			if(!isset($values['img'])) {
+
+			if (!isset($values['img'])) {
 				$cfg = Kohana::$config->load('avatar.size');
 				if(!Upload::image($_FILES['img']))
 				{
@@ -111,13 +111,13 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 				$values['img'] = $_FILES['img']['name'];
 				$check[] = 'img';
 			}
-			
+
 			$values['default'] = ($values['default'] == 'on');
-			
+
 			$avatar = ORM::factory('Avatar', $values['id']);
 			$avatar->values($values, $check);
 			$avatar->save();
-			
+
 			$data = array (
 				'action' => 'saved',
 				'type' => ($id == null) ? 'new' : 'update',
@@ -133,27 +133,27 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		catch(ORM_Validation_Exception $e)
 		{
 			$errors = array();
-				
+
 			$list = $e->errors('models');
-				
-			foreach($list as $field => $er) {
+
+			foreach ($list as $field => $er) {
 				if(!is_array($er))
 					$er = array($er);
-	
+
 				$errors[] = array('field' => $field, 'msg' => $er);
 			}
-				
+
 			$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
 		}
 	}
-	
+
 	public function action_delete(){
 		$this->view = null;
 		$values = $this->request->post();
-	
+
 		$item = ORM::factory('Avatar', $values['id']);
 		$item->delete();
-	
+
 		$this->response->headers('Content-Type','application/json');
 		$this->response->body(json_encode(array('action' => 'deleted')));
 	}

@@ -22,13 +22,13 @@ class Migration_Pet_20130210230444 extends Minion_Migration_Base {
 			  `description` text NOT NULL,
 			  PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;");
-		 
-		 $db->query(NULL, "			
+
+		 $db->query(NULL, "
 			INSERT INTO `pet_species` (`id`, `name`, `dir`, `description`) VALUES
 				(1, 'Koorai', '1', 'The Koorai'),
 				(2, 'Zedro', '2', 'The Zedro.');");
-		 
-		 $db->query(NULL, "					 		
+
+		 $db->query(NULL, "
 		 	CREATE TABLE IF NOT EXISTS `pet_colours` (
 			  `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT,
 			  `locked` int(1) NOT NULL,
@@ -37,8 +37,8 @@ class Migration_Pet_20130210230444 extends Minion_Migration_Base {
 			  `image` varchar(50) NOT NULL,
 			  PRIMARY KEY (`id`)
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;");
-		 
-		 $db->query(NULL, "						
+
+		 $db->query(NULL, "
 			INSERT INTO `pet_colours` (`id`, `locked`, `name`, `description`, `image`) VALUES
 				(1, 0, 'Black', 'Black colour', 'black.png'),
 				(2, 0, 'Blue', 'Blue colour', 'blue.png'),
@@ -47,10 +47,10 @@ class Migration_Pet_20130210230444 extends Minion_Migration_Base {
 				(5, 0, 'White', 'White colour', 'white.png'),
 				(6, 0, 'Yellow', 'Yellow colour', 'yellow.png'),
 				(7, 1, 'Outline', 'Special outline colour', 'outline.png');");
-		 
-		 
-		 
-		 $db->query(NULL, "						
+
+
+
+		 $db->query(NULL, "
 		 	CREATE TABLE IF NOT EXISTS `pet_species_colours` (
 			  `pet_specie_id` int(11) UNSIGNED NOT NULL,
 			  `colour_id` int(11) UNSIGNED NOT NULL,
@@ -66,7 +66,7 @@ class Migration_Pet_20130210230444 extends Minion_Migration_Base {
 			VALUES ('1',  '1'), ('1',  '2'), ('1',  '3'),
 				('1',  '4'), ('1',  '5'), ('1',  '6'), ('2',  '1'),
 				('2',  '2'), ('2',  '3'), ('2',  '4'), ('2',  '5'), ('2',  '6');");
-		 
+
 		 $db->query(NULL, "
 		 	CREATE TABLE IF NOT EXISTS `user_pets` (
 			  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,

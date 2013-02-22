@@ -16,10 +16,10 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 		),
 		'avatar' => array(
 			'foreign_key' => 'avatar_id',
-			'model' => 'Avatar'		
+			'model' => 'Avatar'
 		)
 	);
-	
+
 	protected $_has_many = array(
 		'user_tokens' => array(
 			'model' => 'User_Token'
@@ -29,7 +29,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 			'through' => 'roles_users'
 		),
 		'avatars' => array(
-			'through' => 'users_avatars'		
+			'through' => 'users_avatars'
 		),
 		'properties' => array(
 			'model' => 'User_Property'
@@ -90,7 +90,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 	 * @param   integer $id User id
 	 * @return  bool
 	 */
-	static public function user_exists($id)
+	public static function user_exists($id)
 	{
 		$user = ORM::factory('User', $id);
 

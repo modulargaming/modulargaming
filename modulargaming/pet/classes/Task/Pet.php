@@ -1,12 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
- 
+
 class Task_Pet extends Minion_Task
 {
     protected $_options = array(
         'limit' => 4,
         'amount' => 1,
     );
- 
+
     /**
      * This is a task to decrease pet happiness and hunger
      *

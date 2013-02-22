@@ -3,41 +3,41 @@
 class View_Item_Inventory_Index extends Abstract_View_Inventory {
 
 	public $title = 'Inventory';
-	
+
 	/**
 	 * Store the pagination HTML.
 	 * @var string
 	 */
 	public $pagination = false;
-	
+
 	/**
 	 * Stores the user's inventory items
 	 * @var unknown_type
 	 */
 	public $item = array();
-	
+
 	/**
 	 * Build the item nav
 	 * @var array
 	 */
 	public $links = array();
-	
+
 	/**
 	 * Whether or not to include the csrf span element
 	 * @return boolean
 	 */
 	public $ajax = false;
-	
+
 	/**
 	 * Simplify item data
 	 * @return array
 	 */
 	public function items(){
 		$list = array();
-		
+
 		if(count($this->items) > 0)
 		{
-			foreach($this->items as $item) {			
+			foreach ($this->items as $item) {
 				$list[] = array (
 					'action_link' => URL::site(Route::get('item.inventory.view')->uri(array('id' => $item->id))),
 					'img' => $item->item->img(),
@@ -46,7 +46,7 @@ class View_Item_Inventory_Index extends Abstract_View_Inventory {
 				);
 			}
 		}
-		
+
 		return $list;
 	}
 }

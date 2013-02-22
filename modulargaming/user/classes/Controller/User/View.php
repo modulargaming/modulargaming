@@ -46,7 +46,7 @@ class Controller_User_View extends Abstract_Controller_User {
 
 		$paginate = Paginate::factory($pets)
 			->execute();
-		
+
 		$this->view = new View_User_Profile;
 		$this->view->pagination = $paginate->render();
 		$this->view->profile_user = $user;

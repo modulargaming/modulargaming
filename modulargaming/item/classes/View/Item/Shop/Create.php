@@ -3,7 +3,7 @@
 class View_Item_Shop_Create extends Abstract_View_Inventory {
 
 	public $title = 'Shop';
-	
+
 	/**
 	 * Contains 2 keys:
 	 * - cost (integer)

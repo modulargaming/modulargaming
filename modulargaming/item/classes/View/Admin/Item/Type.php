@@ -8,7 +8,7 @@ class View_Admin_Item_Type extends Abstract_View_Admin {
 	 * @var integer
 	 */
 	public $paginate_max = 20;
-	
+
 	/**
 	 * simplify item type data
 	 * @return array
@@ -38,12 +38,12 @@ class View_Admin_Item_Type extends Abstract_View_Admin {
 	public function commands() {
 		$commands = Item::list_commands();
 		$list_c = array();
-		
-		foreach($commands as $cmd) {
+
+		foreach ($commands as $cmd) {
 			$name = str_replace(Kohana::include_paths(), '', $cmd);
 			$name = 'Item_Command_'.str_replace(array('\\', '/'), '_', $name);
 			$command = new $name;
-				
+
 			if($command->is_default() == false)
 			{
 				$list_c[] = array(
@@ -52,7 +52,7 @@ class View_Admin_Item_Type extends Abstract_View_Admin {
 				);
 			}
 		}
-		
+
 		return $list_c;
 	}
 }

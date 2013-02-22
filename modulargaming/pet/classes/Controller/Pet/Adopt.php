@@ -38,7 +38,7 @@ class Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 		$pets = ORM::factory('User_Pet')
 		->where('user_id', '=', 0)
 		->order_by('abandoned', 'desc');
-		
+
 		$paginate = Paginate::factory($pets)
 			->execute();
 

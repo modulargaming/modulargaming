@@ -3,3 +3,4 @@ application/logs/*
 /vendor/
 /bin/
 /composer.lock
+/build/logs/

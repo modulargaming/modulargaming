@@ -34,7 +34,7 @@ Route::set('user.reset', 'user/reset(/<token>)')
 		'controller' => 'Reset',
 		'action'     => 'index',
 	));
-  	
+
 Route::set('user', 'user(/<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'directory'  => 'User',

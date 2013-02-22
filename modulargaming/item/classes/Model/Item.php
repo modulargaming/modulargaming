@@ -10,7 +10,7 @@ class Model_Item extends ORM {
 	);
 
 	protected $_serialize_columns = array('commands');
-	
+
 	protected $_load_with = array('type');
 
 	public function rules()
@@ -34,11 +34,11 @@ class Model_Item extends ORM {
 			),
 			'commands' => array(
 				array('not_empty'),
-				array('Item::validate_commands', array(':validation', ':value'))		
+				array('Item::validate_commands', array(':validation', ':value'))
 			)
 		);
 	}
-	
+
 	/**
 	 * Create the url to the item's image
 	 * @return string
@@ -46,7 +46,7 @@ class Model_Item extends ORM {
 	public function img(){
 		return URL::site('assets/img/items/'.$this->type->img_dir.$this->image);
 	}
-	
+
 	/**
 	 * Check if the item isn't a draft or retired.
 	 * @return boolean
@@ -54,10 +54,10 @@ class Model_Item extends ORM {
 	public function in_circulation(){
 		return ($this->status == 'released');
 	}
-	
+
 	/**
 	 * Get the item's name based on an amount
-	 * 
+	 *
 	 * @param integer $amount
 	 * @return string
 	 */

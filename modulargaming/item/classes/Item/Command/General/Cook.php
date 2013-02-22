@@ -12,10 +12,10 @@
 class Item_Command_General_Cook extends Item_Command {
 	public $allow_more = false;
 	public $delete_after_consume = false;
-	
+
 	protected function _build($name){
 		return array(
-			'title' => 'Recipe', 
+			'title' => 'Recipe',
 			'search' => 'recipe',
 			'fields' => array(
 				array(
@@ -23,21 +23,21 @@ class Item_Command_General_Cook extends Item_Command {
 						'name' => $name, 'class' => 'input-small search'
 					)
 				)
-			)	
+			)
 		);
 	}
-	
+
 	public function validate($param) {
 		$recipe = ORM::factory('Item_Recipe')
 			->where('item_recipe.name', '=', $param)
 			->find();
-		
+
 		return $recipe->loaded();
 	}
-	
+
 	public function perform($item, $param, $data=null) {
 		$item->move('cookbook');
-		
+
 		return $item->item->name . ' has been moved to your cookbook.';
 	}
 }

@@ -107,7 +107,7 @@ Route::set('pet.admin.colour.index', 'admin/pet/colour')
 		'controller' => 'Colour',
 		'action'     => 'index',
 ));
-	
+
 //Add link to manage forums in admin
 Event::listen('admin.nav_list', function(){
 	return array(

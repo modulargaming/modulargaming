@@ -17,7 +17,7 @@ class Model_User_Trade_Bid extends ORM {
 			'column' => 'created',
 			'format' => TRUE
 	);
-	
+
 	protected $_load_with = array('user');
 
 	public function rules()
@@ -28,7 +28,7 @@ class Model_User_Trade_Bid extends ORM {
 			),
 		);
 	}
-	
+
 	public function items() {
 		return Item::location('trade.bid', true, $this->id, $this->user)
 			->find_all();

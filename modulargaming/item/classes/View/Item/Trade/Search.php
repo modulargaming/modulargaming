@@ -3,52 +3,52 @@
 class View_Item_Trade_Search extends Abstract_View_Inventory {
 
 	public $title = 'Trade lots';
-	
+
 	/**
 	 * Store the pagination HTML.
 	 * @var string
 	 */
 	public $pagination = false;
-	
+
 	/**
 	 * Stores the found items
 	 * @var Model_User_Item
 	 */
 	public $items = array();
-	
+
 	/**
 	 * Holds the search term
 	 * @var string
 	 */
 	public $term = false;
-	
+
 	/**
 	 * Stores the navigation
 	 * @var array
 	 */
 	public $trade_nav = array();
-	
+
 	/**
 	 * Simplify lot data and add linked items
 	 * @return array
 	 */
 	public function lots(){
 		$list = array();
-		
+
 		if(count($this->items) > 0)
 		{
-			foreach($this->$items as $item) {
+			foreach ($this->$items as $item) {
 				$lot = ORM::factory('User_Trade', $item->parameter_id);
-				
+
 				$inventory = array();
-				
-				foreach($lot->items() as $item) {
+
+				foreach ($lot->items() as $item) {
 					$inventory[] = array(
 						'name' => $item->name(),
 						'img' => $item->img()
 					);
 				}
-				
+
 				$list[] = array (
 					'id' => $lot->id,
 					'bid_link' => Route::url('item.trade.bid', array('id' => $lot->id)),
@@ -60,7 +60,7 @@ class View_Item_Trade_Search extends Abstract_View_Inventory {
 				);
 			}
 		}
-		
+
 		return $list;
 	}
 

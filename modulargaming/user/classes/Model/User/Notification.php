@@ -9,7 +9,7 @@ class Model_User_Notification extends ORM {
 		'icon' => array(
 			'model' => 'User_Notification_Icon',
 			'foreign_key' => 'icon',
-			'far_key' => 'name'	
+			'far_key' => 'name'
 		)
 	);
 
@@ -24,10 +24,10 @@ class Model_User_Notification extends ORM {
 	 * @param array $param
 	 * @param string $type
 	 */
-	static function add_notification(Model_Log $log, Model_User $user, $title, $icon, $message, array $param = array(), $type='info')
+	public static function add_notification(Model_Log $log, Model_User $user, $title, $icon, $message, array $param = array(), $type='info')
 	{
 		$param['username'] = $log->user->username;
-		
+
 		$values = array(
 			'log_id' => $log->id,
 			'user_id' => $user->id,

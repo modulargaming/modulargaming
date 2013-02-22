@@ -6,7 +6,7 @@ class Model_Log extends ORM {
 		'column' => 'time',
 		'format' => TRUE
 	);
-	
+
 	protected $_serialize_columns = array('params');
 
 	public static function add_log(Model_User $user, $alias, $message, array $params = array(), $type="app")
@@ -21,7 +21,7 @@ class Model_Log extends ORM {
 			'type' 	   => $type,
 			'params'   => $params,
 		);
-		
+
 		return ORM::factory('Log')
 			->values($values)
 			->create();
