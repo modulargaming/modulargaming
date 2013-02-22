@@ -61,7 +61,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 	public function action_retrieve()
 	{
-		$this->view = null;
+		$this->view = NULL;
 
 		$item_id = $this->request->query('id');
 
@@ -93,11 +93,11 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 	public function action_save()
 	{
-		$this->view = null;
+		$this->view = NULL;
 		$values = $this->request->post();
 
 		if($values['id'] == 0)
-			$values['id'] = null;
+			$values['id'] = NULL;
 
 		$id = $values['id'];
 
@@ -146,7 +146,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 					if(count($values['materials']) > 0)
 					{
 						//if we're updating delete old data
-						if($values['id'] != null)
+						if($values['id'] != NULL)
 						{
 							foreach($item->materials->find_all() as $mat)
 								$mat->delete();
@@ -162,7 +162,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 					}
 					$data = array (
 						'action' => 'saved',
-						'type' => ($id == null) ? 'new' : 'update',
+						'type' => ($id == NULL) ? 'new' : 'update',
 						'row' => array (
 							$item->name,
 							$item->materials->count_all(),
@@ -201,7 +201,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
-		$this->view = null;
+		$this->view = NULL;
 		$values = $this->request->post();
 
 		$item = ORM::factory('Item_Recipe', $values['id']);

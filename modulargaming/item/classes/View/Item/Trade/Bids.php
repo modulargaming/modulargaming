@@ -35,7 +35,7 @@ class View_Item_Trade_Bids extends Abstract_View_Inventory {
 	 */
 	protected function _bid()
 	{
-		if ($bid != null) {
+		if ($bid != NULL) {
 			$items = array();
 
 			foreach ($bid->items() as $item) {

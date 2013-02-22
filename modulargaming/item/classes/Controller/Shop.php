@@ -13,7 +13,7 @@
 class Controller_Shop extends Abstract_Controller_Frontend {
 
 	protected $protected = TRUE;
-	protected $_shop = null;
+	protected $_shop = NULL;
 
 	public function action_index()
 	{
@@ -336,7 +336,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 
 	public function after()
 	{
-		if($this->view !== null)
+		if($this->view !== NULL)
 		{
 			$map_links = array('index' => 0, 'stock' => 1, 'logs' => 2);
 			$this->view->links = array (
@@ -357,7 +357,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		if($this->_shop != NULLAND $this->_shop->loaded())
 			return Route::url('item.user_shop.view', array('id' => $this->_shop->id));
 		else
-			return null;
+			return NULL;
 	}
 
 	protected function _check_shop()

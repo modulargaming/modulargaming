@@ -152,7 +152,7 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 		{
 			$errors[] = 'You can\'t use this item as a recipe.';
 		}
-		elseif ($action == null) {
+		elseif ($action == NULL) {
 			$errors[] = 'No action to perform has been specified';
 		}
 		else

@@ -25,7 +25,7 @@ class View_Item_Safe_Index extends Abstract_View_Inventory {
 	 * Contains User_Items
 	 * @var array
 	 */
-	public $items = null;
+	public $items = NULL;
 
 	/**
 	 * Format item nav

@@ -8,13 +8,13 @@ class View_Item_Cookbook_View extends Abstract_View_Inventory {
 	 * Id of the recipe's item we're trying to complete
 	 * @var unknown_type
 	 */
-	public $id = null;
+	public $id = NULL;
 
 	/**
 	 * Contains an Item_Recipe model
 	 * @var Item_Recipe
 	 */
-	public $recipe = null;
+	public $recipe = NULL;
 	/**
 	 * A list of materials needed to complete a recipe
 	 * @var array

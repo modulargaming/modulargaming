@@ -15,16 +15,16 @@ class Item_Command_General_Remove extends Item_Command {
 
 	protected function _build($name)
 	{
-		return null;
+		return NULL;
 	}
 
 	public function validate($param)
 	{
-		return null;
+		return NULL;
 	}
 
 	public function perform($item, $amount, $data=null)
 	{
-		return null;
+		return NULL;
 	}
 }

@@ -21,7 +21,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 	protected $user;
 
 	protected $protected = FALSE; // Require user to be logged in.
-	protected $view = null; // View to render.
+	protected $view = NULL; // View to render.
 
 	protected $layout = 'layout';
 
@@ -64,7 +64,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 				foreach($files as $desc)
 				{
 					$position = (isset($desc['location'])) ? $desc['location'] : 'end';
-					$relative = (isset($desc['location'])) ? $desc['relative'] : null;
+					$relative = (isset($desc['location'])) ? $desc['relative'] : NULL;
 					$options = (isset($desc['options'])) ? $desc['options'] : array();
 					Assets::add($type, $desc['name'], $desc['file'], $location, $position, $relative);
 				}
@@ -74,7 +74,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 
 	public function after()
 	{
-		if ($this->view != null)
+		if ($this->view != NULL)
 		{
 			$renderer = Kostache_Layout::factory();
 			$renderer->set_layout($this->layout);

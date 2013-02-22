@@ -3,8 +3,8 @@
 class DataTable {
 
 	protected $_columns = array();
-	protected $_model = null;
-	protected $_request = null;
+	protected $_model = NULL;
+	protected $_request = NULL;
 
 	public function __construct(ORM $model, Request $request)
 	{

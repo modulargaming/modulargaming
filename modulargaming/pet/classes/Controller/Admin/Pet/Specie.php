@@ -25,11 +25,11 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 
 	public function action_retrieve()
 	{
-		$this->view = null;
+		$this->view = NULL;
 
 		$item_id = $this->request->query('id');
 
-		if($item_id == null)
+		if($item_id == NULL)
 		{
 			$specie = ORM::factory('Pet_Specie')
 			->where('pet_specie.name', '=', $this->request->query('name'))
@@ -50,10 +50,10 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 	public function action_save()
 	{
 		$values = $this->request->post();
-		$this->view = null;
+		$this->view = NULL;
 
 		if($values['id'] == 0)
-			$values['id'] = null;
+			$values['id'] = NULL;
 
 		$this->response->headers('Content-Type','application/json');
 
@@ -90,7 +90,7 @@ class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 
 	public function action_delete()
 	{
-		$this->view = null;
+		$this->view = NULL;
 		$values = $this->request->post();
 
 		$specie = ORM::factory('Pet_Specie', $values['id']);

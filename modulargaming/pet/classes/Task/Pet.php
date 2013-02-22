@@ -10,7 +10,7 @@ class Task_Pet extends Minion_Task
     /**
      * This is a task to decrease pet happiness AND hunger
      *
-     * @return null
+     * @return NULL
      */
     protected function _execute(array $params)
     {

@@ -78,7 +78,7 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 			$bid = $this->bid;
 		}
 
-		if ($bid != null) {
+		if ($bid != NULL) {
 			$items = array();
 
 			foreach ($bid->items() as $item) {

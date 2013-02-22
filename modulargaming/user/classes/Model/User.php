@@ -264,7 +264,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 	 *
 	 * @throws Policy_Exception
 	 *
-	 * @return null
+	 * @return NULL
 	 */
 	public function assert($policy_name, $args = array())
 	{

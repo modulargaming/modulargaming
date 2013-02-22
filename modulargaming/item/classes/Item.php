@@ -14,7 +14,7 @@ class Item {
 	 * Contains a Model_Item instance
 	 * @var Model_Item
 	 */
-	protected $_item = null;
+	protected $_item = NULL;
 
 	/**
 	 * Load up the class by assigning a Model_Item
@@ -43,7 +43,7 @@ class Item {
 			else
 			{
 				throw new Item_Exception('The supplied item\'s resource does not come from a model.');
-				$this->_item = null;
+				$this->_item = NULL;
 			}
 		}
 		else
@@ -123,7 +123,7 @@ class Item {
 	 */
 	public function user_has($location='inventory', $amount=false, $user=null)
 	{
-		if($user == null)
+		if($user == NULL)
 		{
 			$user = Auth::instance()->get_user();
 		}
@@ -157,18 +157,18 @@ class Item {
 	 */
 	public static function location($location='inventory', $transferable_check=false, $parameter_id=null, $other_user=null)
 	{
-		static $user = null;
+		static $user = NULL;
 
-		if($user == NULLAND $other_user == null)
+		if($user == NULLAND $other_user == NULL)
 		{
 			$user = Auth::instance()->get_user();
 		}
-		else if($other_user != null)
+		else if($other_user != NULL)
 		{
 			$user = $other_user;
 		}
 
-		if($user != null)
+		if($user != NULL)
 		{
 			$items = ORM::factory('User_Item')
 				->where('user_id', '=', $user->id)
@@ -178,14 +178,14 @@ class Item {
 			{
 				$items = $items->where('transferable', '=', 1);
 			}
-			if($parameter_id != null)
+			if($parameter_id != NULL)
 			{
 				$items = $items->where('parameter_id', '=', $parameter_id);
 			}
 
 			return $items;
 		}
-		return null;
+		return NULL;
 	}
 
 	/**
@@ -199,7 +199,7 @@ class Item {
 	 */
 	public static function log($alias, $message, $params=array(), $user=null)
 	{
-		if($user == null)
+		if($user == NULL)
 		{
 			$user = Auth::instance()->get_user();
 		}
@@ -292,9 +292,9 @@ class Item {
 	 */
 	public static function list_commands()
 	{
-		static $commands = null;
+		static $commands = NULL;
 
-		if($commands == null)
+		if($commands == NULL)
 		{
 			// Include paths must be searched in reverse
 			$paths = array_reverse(Kohana::list_files('classes/Item/Command/'));

@@ -3,7 +3,7 @@
 abstract class Paginate extends Kohana_Paginate {
 
 	// Config array
-	private $config = null;
+	private $config = NULL;
 
 	// Request object
 	private $request;

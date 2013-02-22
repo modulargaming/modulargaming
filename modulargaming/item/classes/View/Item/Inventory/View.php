@@ -32,7 +32,7 @@ class View_Item_Inventory_View extends Abstract_View_Inventory {
 		$url = URL::site(Route::get('item.inventory.consume')->uri(array('id' => $this->item->id)));
 
 		foreach ($this->action_list as $type => $action) {
-			if($action['extra'] == null)
+			if($action['extra'] == NULL)
 			{
 				$return['menu'][] = array (
 					'normal' => array (

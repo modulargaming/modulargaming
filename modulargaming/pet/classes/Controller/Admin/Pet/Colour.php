@@ -22,11 +22,11 @@ class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
 
 	public function action_retrieve()
 	{
-		$this->view = null;
+		$this->view = NULL;
 
 		$item_id = $this->request->query('id');
 
-		if($item_id == null)
+		if($item_id == NULL)
 		{
 			$colour = ORM::factory('Pet_Colour')
 			->where('pet_colour.name', '=', $this->request->query('name'))
@@ -49,10 +49,10 @@ class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
 	public function action_save()
 	{
 		$values = $this->request->post();
-		$this->view = null;
+		$this->view = NULL;
 
 		if($values['id'] == 0)
-			$values['id'] = null;
+			$values['id'] = NULL;
 
 		$this->response->headers('Content-Type','application/json');
 
@@ -90,7 +90,7 @@ class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
-		$this->view = null;
+		$this->view = NULL;
 		$values = $this->request->post();
 
 		$colour = ORM::factory('Pet_Colour', $values['id']);

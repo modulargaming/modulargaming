@@ -178,7 +178,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 		{
 				Hint::error('The item you want to view is not located in your inventory');
 		}
-		else if($action == null)
+		else if($action == NULL)
 		{
 			Hint::error('No action to perform has been specified');
 		}
@@ -277,7 +277,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 					case 'remove' : //takes an amount
 						$amount = $this->request->post('amount');
 
-						if($amount == null)
+						if($amount == NULL)
 							$amount = 1;
 
 						if(!Valid::digit($amount))
@@ -341,7 +341,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 							$amount = $this->request->post('amount');
 
-							if($amount == null)
+							if($amount == NULL)
 								$amount = 1;
 
 							if(!Valid::digit($amount))

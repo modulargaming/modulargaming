@@ -44,7 +44,7 @@ abstract class Item_Command {
 	 */
 	public $delete_after_consume = TRUE;
 
-	protected $_validation = null;
+	protected $_validation = NULL;
 
 	/**
 	 * Build the admin interface for this command
@@ -73,7 +73,7 @@ abstract class Item_Command {
 	 */
 	public function inventory()
 	{
-		return null;
+		return NULL;
 	}
 
 	public function __construct(Kohana_Validation $validation=null)

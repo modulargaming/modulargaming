@@ -209,7 +209,7 @@ class Event {
 					$response = call_user_func_array($callback, $parameters);
 
 					// If the event is set to halt, we will return the first response
-					// that is not null. This allows the developer to easily stack
+					// that is not NULL. This allows the developer to easily stack
 					// events but still get the first valid response.
 					if ($halt AND ! is_null($response))
 					{

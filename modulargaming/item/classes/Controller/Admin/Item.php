@@ -70,7 +70,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_search()
 	{
-		$this->view = null;
+		$this->view = NULL;
 		$type = $this->request->query('type');
 
 		if ($type == 'item') {
@@ -168,7 +168,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_retrieve()
 	{
-		$this->view = null;
+		$this->view = NULL;
 
 		$item_id = $this->request->query('id');
 
@@ -192,10 +192,10 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 	public function action_save()
 	{
 		$values = $this->request->post();
-		$this->view = null;
+		$this->view = NULL;
 
 		if($values['id'] == 0)
-			$values['id'] = null;
+			$values['id'] = NULL;
 
 		$id = $values['id'];
 
@@ -273,7 +273,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 			$data = array (
 				'action' => 'saved',
-				'type' => ($id == null) ? 'new' : 'update',
+				'type' => ($id == NULL) ? 'new' : 'update',
 				'file' => $file,
 				'row' => array (
 					$item->img(),
@@ -304,7 +304,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
-		$this->view = null;
+		$this->view = NULL;
 		$values = $this->request->post();
 
 		$item = ORM::factory('Item', $values['id']);
@@ -316,7 +316,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_gift()
 	{
-		$this->view = null;
+		$this->view = NULL;
 
 		//gift the item
 		$item = Item::factory($this->request->post('id'));

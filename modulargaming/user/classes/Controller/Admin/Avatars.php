@@ -57,7 +57,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 	public function action_retrieve()
 	{
-		$this->view = null;
+		$this->view = NULL;
 
 		$item_id = $this->request->query('id');
 
@@ -76,11 +76,11 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 	public function action_save()
 	{
-		$this->view = null;
+		$this->view = NULL;
 		$values = $this->request->post();
 
 		if($values['id'] == 0)
-			$values['id'] = null;
+			$values['id'] = NULL;
 
 		$id = $values['id'];
 
@@ -123,7 +123,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 			$data = array (
 				'action' => 'saved',
-				'type' => ($id == null) ? 'new' : 'update',
+				'type' => ($id == NULL) ? 'new' : 'update',
 				'row' => array (
 					URL::base().'assets/img/avatars/'.$avatar->img,
 					$avatar->title,
@@ -152,7 +152,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
-		$this->view = null;
+		$this->view = NULL;
 		$values = $this->request->post();
 
 		$item = ORM::factory('Avatar', $values['id']);
