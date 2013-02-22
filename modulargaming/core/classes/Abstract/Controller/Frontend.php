@@ -61,7 +61,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 		{
 			if (count($files) > 0)
 			{
-				foreach($files as $desc)
+				foreach ($files as $desc)
 				{
 					$position = (isset($desc['location'])) ? $desc['location'] : 'end';
 					$relative = (isset($desc['location'])) ? $desc['relative'] : NULL;

@@ -45,7 +45,7 @@ class Controller_Search extends Abstract_Controller_Frontend {
 
 	protected function _search($type, $item)
 	{
-		switch($type)
+		switch ($type)
 		{
 			case 'user' :
 				$users = ORM::factory('User')
@@ -53,7 +53,7 @@ class Controller_Search extends Abstract_Controller_Frontend {
 					->find_all();
 				$output = array();
 
-				foreach($users as $user)
+				foreach ($users as $user)
 				{
 					$output[] = $user->username;
 				}

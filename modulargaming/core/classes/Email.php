@@ -50,7 +50,7 @@ class Email extends Kohana_Email {
 	/**
 	 * Overwrite the to function to support redirect target, for testing.
 	 *
-	 * @param   $email
+	 * @param   string $email
 	 * @param   string $name
 	 * @param   string $type
 	 * @return  Email

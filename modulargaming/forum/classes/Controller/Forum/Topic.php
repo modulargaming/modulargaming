@@ -218,9 +218,9 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 						$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
 					}
 					$options = $options = array_slice($post_data['options'], 0, 5);
-					foreach($options as $key => $value)
+					foreach ($options as $key => $value)
 					{
-						if (!trim($value))
+						if ( ! trim($value))
 						{
 							unset($options[$key]);
 						}
@@ -261,7 +261,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 							$option->title = $value;
 							$option->save();
 						}
-						else if(trim($value))
+						elseif (trim($value))
 						{
 							ORM::factory('Forum_Poll_Option')->create_option(array('poll_id' => $this->topic->poll->id, 'title' => $value), array('poll_id', 'title'));
 						}

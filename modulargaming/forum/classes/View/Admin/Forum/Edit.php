@@ -8,7 +8,7 @@ class View_Admin_Forum_Edit extends Abstract_View_Admin_Forum {
 	public $category;
 
 	public $_partials = array(
-		//'modal' => 'Admin/Modal/Forum/Edit'
+		// 'modal' => 'Admin/Modal/Forum/Edit'
 	);
 
 	protected function get_breadcrumb()

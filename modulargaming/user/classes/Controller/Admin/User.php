@@ -10,7 +10,7 @@ class Controller_Admin_User extends Abstract_Controller_Admin {
 
 	public function action_index()
 	{
-		if ( ! $this->user->can('Admin_User_Index') )
+		if ( ! $this->user->can('Admin_User_Index'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to access admin user index');
 		}
@@ -24,7 +24,7 @@ class Controller_Admin_User extends Abstract_Controller_Admin {
 
 	public function action_edit()
 	{
-		if ( ! $this->user->can('Admin_User_Edit') )
+		if ( ! $this->user->can('Admin_User_Edit'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to access admin user view');
 		}

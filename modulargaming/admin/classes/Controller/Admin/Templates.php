@@ -20,8 +20,8 @@ class Controller_Admin_Templates extends Abstract_Controller_Admin {
 			$key = str_replace('.mustache', '', $key);
 
 			$value = file_get_contents($value);
-			//$value = preg_replace('/\s\s+/', ' ', $value);
-			//$value = stripslashes($value);
+			// $value = preg_replace('/\s\s+/', ' ', $value);
+			// $value = stripslashes($value);
 
 			$content[$key] = $value;
 		}

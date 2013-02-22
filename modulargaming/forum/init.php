@@ -39,7 +39,7 @@ Route::set('forum.admin', 'admin/forum(/<action>(/<id>))', array('id' => '[0-9]+
 		'action'     => 'index',
 	));
 
-//Add link to manage forums in admin
+// Add link to manage forums in admin
 Event::listen('admin.nav_list', function(){
 	return array(
 		'title' => 'Forum',

@@ -247,7 +247,7 @@ class Hint {
 	{
 		$error_messages = Hint::get(Hint::ERROR);
 
-		if(count($error_messages) > 0)
+		if (count($error_messages) > 0)
 		{
 			Hint::delete(Hint::ERROR);
 		}
@@ -261,7 +261,7 @@ class Hint {
 	{
 		$error_messages = Hint::get(Hint::ERROR);
 
-		if(count($error_messages) > 0)
+		if (count($error_messages) > 0)
 		{
 			return array('status' => 'error', 'errors' => $error_messages);
 		}

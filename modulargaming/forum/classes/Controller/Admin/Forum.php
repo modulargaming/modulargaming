@@ -29,7 +29,7 @@ class Controller_Admin_Forum extends Abstract_Controller_Admin {
 	 */
 	public function action_index()
 	{
-		if ( ! $this->user->can('Admin_Forum_Index') )
+		if ( ! $this->user->can('Admin_Forum_Index'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin forum index');
 		}

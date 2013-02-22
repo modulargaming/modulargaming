@@ -19,7 +19,7 @@ abstract class Paginate extends Kohana_Paginate {
 	// Current page
 	public $current_page = FALSE;
 
-	public static function factory($object, $config = array(), Request $request = NULL, $query=false)
+	public static function factory($object, $config = array(), Request $request = NULL, $query = FALSE)
 	{
 		$instance = parent::factory($object);
 
@@ -42,7 +42,7 @@ abstract class Paginate extends Kohana_Paginate {
 			'action'     => $request->action(),
 		) + $request->param();
 
-		//get the current page
+		// get the current page
 		$page = $request->param($instance->config['param']);
 
 		if ( ! Valid::digit($page))
@@ -52,7 +52,7 @@ abstract class Paginate extends Kohana_Paginate {
 
 		$instance->current_page = (int) $page;
 
-		//limit the pagination results
+		// limit the pagination results
 		$instance->limit(($page - 1) * $instance->config['total_items'], $instance->config['total_items']);
 
 		return $instance;
