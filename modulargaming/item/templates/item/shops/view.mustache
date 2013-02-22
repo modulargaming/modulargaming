@@ -1,0 +1,33 @@
+{{#shop_id}}
+<h3>{{shop_title}}</h3>
+
+<div class="row">
+    <div class="span8 offset2">
+        <p align="center">
+            <img src="{{npc_img}}" /><br />
+            {{npc_text}}
+        </p>
+        <p>
+        {{#stock_count}}Currently there are {{stock_count}} items in stock{{/stock_amount}}
+        </p>
+        <hr>
+        {{^stock_amount}}<p align="center">There are no items in stock, come back later</p>{{/stock_amount}}
+        <ul class="thumbnails">
+            {{#items}}
+                <li class="span2">
+                    <div class="thumbnail pagination-centered"">
+                        {{img}} <br />
+                        <b>{{name}}</b><br />
+                        <i>Price: {{price}}</i><br />
+                        <form action="{{url}}" method="post">
+                            <input type="hidden" name="csrf" value="{{csrf}}" />
+                            <input type="hidden" name="id" value="{{id}}" />
+                            <input type="submit" value="buy" />
+                        </form>
+                    </div>
+                </li>
+            {{/items}}
+        </ul>
+    </div>
+</div>
+{{/shop_id}}
