@@ -37,7 +37,7 @@ class Migration_Item_20130222152428 extends Minion_Migration_Base {
 		  `shop_id` int(10) unsigned NOT NULL,
 		  `item_id` int(10) unsigned NOT NULL,
 		  `frequency` int(10) unsigned NOT NULL,
-		  `last_restock` int(10) unsigned NOT NULL,
+		  `next_restock` int(10) unsigned NOT NULL,
 		  `min_price` int(10) unsigned NOT NULL,
 		  `max_price` int(10) unsigned NOT NULL,
 		  `min_amount` smallint(3) unsigned NOT NULL COMMENT 'minimum amount to restock',
