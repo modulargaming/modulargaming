@@ -221,7 +221,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 		$logs = ORM::factory('Log')
 			->where('alias', '=', 'user_shop.'.$shop->id)
 			->where('time', '>', strtotime('-30 days'))
-			->limit(35)
+			->limit(Kohana::$config->load('items.user_shop.log_limit'))
 			->find_all();
 		
 		$this->view->logs = $logs;
