@@ -1,152 +1,232 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
+	class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 
-	public function action_index()
-	{
-
-		if ( ! $this->user->can('Admin_Pet_Specie_Index') )
+		public function action_index()
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin pets index');
+
+			if (!$this->user->can('Admin_Pet_Specie_Index'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets index');
+			}
+
+			$species = ORM::factory('Pet_Specie')
+				->find_all();
+
+			$colours = ORM::factory('Pet_Colour')
+				->find_all();
+
+			$this->view = new View_Admin_Pet_Specie_Index;
+			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
+			$this->_load_assets(Kohana::$config->load('assets.admin_pet.specie'));
+			$this->_nav('pet', 'specie');
+			$this->view->species = $species->as_array();
+			$this->view->colours = $colours->as_array();
+			$this->view->image_dim = Kohana::$config->load('pet.image');
 		}
 
-		$species = ORM::factory('Pet_Specie')
-			->find_all();
+		public function action_paginate() {
+			if (DataTables::is_request())
+			{
+				$orm = ORM::factory('Pet_Specie');
 
-		$colours = ORM::factory('Pet_Colour')
-			->find_all();
+				$paginate = Paginate::factory($orm)
+					->columns(array('id', 'name'));
 
-		$this->view = new View_Admin_Pet_Specie_Index;
-		$this->_load_assets(Kohana::$config->load('assets.admin_pet.specie'));
-		$this->_nav('pet', 'specie');
-		$this->view->species = $species->as_array();
-		$this->view->colours = $colours->as_array();
-	}
+				$datatables = DataTables::factory($paginate)->execute();
 
-	public function action_retrieve()
-	{
-		$this->view = NULL;
+				foreach ($datatables->result() as $specie)
+				{
+					$datatables->add_row(array (
+							$specie->name,
+							$specie->id
+						)
+					);
+				}
 
-		$item_id = $this->request->query('id');
-
-		if($item_id == NULL)
-		{
-			$specie = ORM::factory('Pet_Specie')
-			->where('pet_specie.name', '=', $this->request->query('name'))
-			->find();
+				$datatables->render($this->response);
+			}
+			else
+				throw new HTTP_Exception_500();
 		}
-		else
-			$specie = ORM::factory('Pet_Specie', $item_id);
 
-		$list = array(
-			'id' => $specie->id,
-			'name' => $specie->name,
-			'description' => $specie->description,
-		);
-		$this->response->headers('Content-Type','application/json');
-		$this->response->body(json_encode($list));
-	}
+		public function action_retrieve()
+		{
+			$this->view = NULL;
 
-	public function action_save()
-	{
-		$values = $this->request->post();
-		$this->view = NULL;
+			$item_id = $this->request->query('id');
 
-		if($values['id'] == 0)
-			$values['id'] = NULL;
+			if ($item_id == NULL)
+			{
+				$specie = ORM::factory('Pet_Specie')
+					->where('pet_specie.name', '=', $this->request->query('name'))
+					->find();
+			}
+			else
+			{
+				$specie = ORM::factory('Pet_Specie', $item_id);
+			}
 
-		$this->response->headers('Content-Type','application/json');
+			$list = array(
+				'id'          => $specie->id,
+				'name'        => $specie->name,
+				'description' => $specie->description,
+				'dir'         => $specie->dir
+			);
+			$this->response->headers('Content-Type', 'application/json');
+			$this->response->body(json_encode($list));
+		}
 
-		try {
-			$specie = ORM::factory('Pet_Specie', $values['id']);
-			$specie->values($values, array('name', 'description', 'dir'));
-			$specie->save();
+		public function action_save()
+		{
+			$values = $this->request->post();
+			$this->view = NULL;
 
-			$data = array(
+			if ($values['id'] == 0)
+			{
+				$values['id'] = NULL;
+			}
+
+			$this->response->headers('Content-Type', 'application/json');
+
+			try
+			{
+				$specie = ORM::factory('Pet_Specie', $values['id']);
+				$specie->values($values, array('name', 'description', 'dir'));
+				$specie->save();
+
+				$data = array(
 					'action' => 'saved',
-					'row' => array(
-						'id' => $specie->id,
+					'row'    => array(
+						'id'   => $specie->id,
 						'name' => $specie->name,
 					)
-			);
-			$this->response->body(json_encode($data));
+				);
+				$this->response->body(json_encode($data));
+			} catch (ORM_Validation_Exception $e)
+			{
+				$errors = array();
+
+				$list = $e->errors('models');
+
+				foreach ($list as $field => $er)
+				{
+					if (!is_array($er))
+					{
+						$er = array($er);
+					}
+
+					$errors[] = array('field' => $field, 'msg' => $er);
+				}
+
+				$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
+			}
 		}
-		catch(ORM_Validation_Exception $e)
+
+		public function action_delete()
 		{
-			$errors = array();
+			$this->view = NULL;
+			$values = $this->request->post();
 
-			$list = $e->errors('models');
+			$specie = ORM::factory('Pet_Specie', $values['id']);
+			$specie->delete();
 
-			foreach ($list as $field => $er) {
-				if(!is_array($er))
-					$er = array($er);
+			$this->response->headers('Content-Type', 'application/json');
+			$this->response->body(json_encode(array('action' => 'deleted')));
+		}
 
-				$errors[] = array('field' => $field, 'msg' => $er);
+		public function action_col_load()
+		{
+			$specie = ORM::factory('Pet_Specie', $this->request->query('id'));
+
+			$colours = $specie->colours->find_all();
+			$list = array();
+
+			foreach ($colours as $colour)
+			{
+				$list[] = $colour->id;
 			}
 
-			$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
-		}
-	}
-
-	public function action_delete()
-	{
-		$this->view = NULL;
-		$values = $this->request->post();
-
-		$specie = ORM::factory('Pet_Specie', $values['id']);
-		$specie->delete();
-
-		$this->response->headers('Content-Type','application/json');
-		$this->response->body(json_encode(array('action' => 'deleted')));
-	}
-
-	public function action_col_load()
-	{
-		$specie = ORM::factory('Pet_Specie', $this->request->query('id'));
-
-		$colours = $specie->colours->find_all();
-		$list = array();
-
-		foreach ($colours as $colour) {
-			$list[] = $colour->id;
+			$this->response->headers('Content-Type', 'application/json');
+			$this->response->body(json_encode(array('colours' => $list)));
 		}
 
-		$this->response->headers('Content-Type','application/json');
-		$this->response->body(json_encode(array('colours' => $list)));
-	}
+		public function action_col_delete()
+		{
+			$specie = ORM::factory('Pet_Specie', $this->request->query('specie_id'));
+			$colour = ORM::factory('Pet_Colour', $this->request->query('colour_id'));
 
-	public function action_col_delete()
-	{
-		$specie = ORM::factory('Pet_Specie', $this->request->query('specie_id'));
-		$colour = ORM::factory('Pet_Colour', $this->request->query('colour_id'));
+			if ($specie->has('colours', $colour))
+			{
+				$specie->remove('colours', $colour);
+			}
 
-		if($specie->has('colours', $colour))
-			$specie->remove('colours', $colour);
+			$this->response->headers('Content-Type', 'application/json');
+			$this->response->body(json_encode(array('action' => 'deleted')));
+		}
 
-		$this->response->headers('Content-Type','application/json');
-		$this->response->body(json_encode(array('action' => 'deleted')));
-	}
+		public function action_col_update()
+		{
+			$specie = ORM::factory('Pet_Specie', $this->request->post('specie_id'));
 
-	public function action_col_update()
-	{
-		$specie = ORM::factory('Pet_Specie', $this->request->post('specie_id'));
+			$colour = $this->request->post('colour_id');
+			$c = ORM::factory('Pet_Colour', $colour);
 
-		$colours = $this->request->post('colours');
-		$updated = array();
+			//handle upload
+			$file = array('status' => 'empty', 'msg' => '');
 
-		if (count($colours) > 0) {
-			foreach ($colours as $colour) {
-				$c = ORM::factory('Pet_Colour', $colour);
+			if (isset($_FILES['image']))
+			{
+				$image = $_FILES['image'];
+				$cfg = Kohana::$config->load('pet.image');
 
-				if(!$specie->has('colours', $c))
+				if (!Upload::valid($image))
 				{
-					$specie->add('colours', $c);
-					$updated[] = $colour;
+					//error not valid upload
+					$file = array('status' => 'error', 'msg' => 'You did not provide a valid file to upload.');
+				}
+				else if (!Upload::image($image, $cfg['width'], $cfg['height'], TRUE))
+				{
+					//not the right image dimensions
+					$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :heigth.', array(
+						':width' => $cfg['width'], ':height' => $cfg['height']
+					));
+				}
+				else
+				{
+					$msg = '';
+					if (file_exists(DOCROOT . 'assets/img/pets/' . $specie->dir . $c->image))
+					{
+						//move the previously stored item to the graveyard
+						$new_name = Text::random('alnum', 4) . $specie->name;
+						copy(DOCROOT . 'assets/img/pets/' . $specie->dir . $c->image, DOCROOT . 'assets/graveyard/pets/' . $new_name);
+						unlink(DOCROOT . 'assets/img/pets/' . $specie->dir . $c->image);
+						$msg = 'The old image has been moved to the graveyard and renamed to ' . $new_name;
+					}
+
+					$up = Upload::save($image, $c->image, DOCROOT . 'assets/img/pets/' . $specie->dir);
+
+					if ($up != FALSE)
+					{
+						$file['status'] = 'success';
+						$file['msg'] = 'You\'ve successfully uploaded your pet image';
+
+						if (!empty($msg))
+						{
+							$file['msg'] .= '<br />' . $msg;
+						}
+					}
+					else
+					{
+						$file = array('status' => 'error', 'msg' => 'There was an error uploading your file.');
+					}
 				}
 			}
-		}
 
-		$this->response->headers('Content-Type','application/json');
-		$this->response->body(json_encode(array($updated)));
+			//save colour
+			$specie->add('colours', $c);
+
+			$this->response->headers('Content-Type', 'application/json');
+			$this->response->body(json_encode($file));
+		}
 	}
-}

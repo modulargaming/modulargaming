@@ -1,45 +1,23 @@
-<div class="row">
-	<div class="span12">
-		<ul class="nav nav-pills">
-			<li class="offset1 pull-left"><button class="btn btn-success btn-create">Create Specie</button></li>
-		    <li class="pull-right">
-		    	<form class="navbar-form">
-		        	<input type="text" class="input-medium" placeholder="Look up pet specie" id="specie_search" data-provide="typeahead">
-		      	</form>
-		    </li>
-		</ul>
-	</div>
-</div>
-<div class="row">
-	<div class="span6 offset3">
-		<table class="table table-striped table-hover" id="crud-container">
-			<thead>
-				<tr>
-					<th class="span1"></th>
-					<th class="span2">Name</th>
-					<th>Options</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#species}}
-					<tr id="container-{{id}}">
-						<td>{{id}}</td>
-						<td data-prop="name">{{name}}</td>
-						<td><button class="btn btn-warning btn-edit">Edit</button> <button class="btn btn-info btn-colour">Colours</button> <button class="btn btn-danger btn-delete">Delete</button></td>
-						</tr>
-				{{/species}}
-					<tr id="crud-container-bottom">
-						<td colspan="2">
-						</td>
-						<td>
-							<button class="btn btn-success pull-right btn-create">Create specie</button>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
- 	</div>
+<span class="hide" id="csrf">{{csrf}}</span>
+
+<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="crud-container">
+	<thead>
+		<tr>
+			<th class="span2">Name</th>
+			<th class="span3">Options</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="3" class="dataTables_empty">Loading data from server</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3"><button class="btn btn-success pull-right btn-create">Create Specie</button></td>
+		</tr>
+	</tfoot>
+</table>
 
 {{! Pet modal}}
 
@@ -97,11 +75,11 @@
 		<h3>Colours</h3>
 	</div>
 	<div class="modal-body">
-		<button class="btn btn-success pull-right" id="add-colour">Add colour(s)</button>
+		<button class="btn btn-success pull-right" id="add-colour">Add colour</button>
 		<form id="colour-form">
 		<input type="hidden" id="csrf" name="csrf" value="{{csrf}}" />
 		<input type="hidden" name="specie_id" id="specie-id" />
-		<select id="colour-list-options" name="colours[]" multiple="multiple">
+		<select id="colour-list-options" name="colour">
 		</select>
 		</form>
 		
@@ -118,6 +96,46 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal">Done</button>
+	</div>
+</div>
+
+{{! Pet colour modal}}
+<div class="modal hide fade" id="modal-colour-add">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3>Add <span id="add-colour-name"></span></h3>
+	</div>
+	<div class="modal-body">
+		<form id="add-colour-form" class="form-horizontal">
+		    <input type="hidden" id="csrf" name="csrf" value="{{csrf}}" />
+		    <input type="hidden" name="specie_id" id="add-specie-id" />
+		    <input type="hidden" name="colour_id" id="add-colour-id" />
+		    <div class="control-group">
+        	    <label class="control-label" for="input-image">Image name</label>
+
+        		<div class="controls">
+        				<div class="fileupload fileupload-new" data-provides="fileupload" id="input-image">
+        					<div class="fileupload-new thumbnail" style="width: {{image_dim.width}}px; height: {{image_dim.height}}px;">
+        				  		<img src="http://www.placehold.it/{{image_dim.width}}x{{image_dim.height}}" />
+        				  	</div>
+        				 	<div class="fileupload-preview fileupload-exists thumbnail" style="width: {{image_dim.width}}px; height: {{image_dim.height}}px;"></div>
+        				  	<span class="btn btn-file">
+        				  		<span class="fileupload-new">Select image</span>
+        				  		<span class="fileupload-exists">Change</span>
+        				  		<input type="file" />
+        				  	</span>
+        				  	<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+        				</div>
+        		</div>
+        	</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+	    <div class="progress progress-striped active span8 hide">
+            <div id="modal-footer-upload-progress" class="bar bar-success" style="width: 1%;"></div>
+        </div>
+		<button class="btn" data-dismiss="modal">Return</button>
+		<button class="btn btn-success" id="modal-colour-add-done">Complete</button>
 	</div>
 </div>
 

@@ -1,24 +1,27 @@
 /**
- * Admin pet specie's js file.
+ * Admin pet colour js file.
  */
 
 $(document).ready(function() {
-	$('#search').typeahead({
-	    source: function (query, process) {
-	        return $.get('./search/', { type: 'pet-colour', item: query }, function (data) {
-	            return process(data);
-	        });
-	    },
-	    updater: function(obj){
-	    	$('#crud-container').trigger('crud.FormOpen', {name: obj});
-	    }
-	});
-	
-	$('#crud-container').mgForm({
-		retrieve: './colour/retrieve/',
-		save: './colour/save/',
-		data_in_table: ['name'],
-		remove: './colour/delete/',
-		identifier: 'name'
-	});
+    $('#data-table').CRUD({
+        base_url: './colour/',
+        identifier: {data: 'name', table: 1},
+        dataTable: {
+            "aoColumnDefs": [
+                {
+                    "aTargets": [ 1 ],
+                    "mRender": function ( data, type, full ) {
+                        if(data == 1)
+                            return '<i class="icon-lock offset5"> </i>';
+                        else
+                            return '<i class="icon-eye-open offset5"> </i>';
+                    }
+                }
+            ]
+        },
+        table: {
+            span: 5,
+            offset: 3
+        }
+    });
 });

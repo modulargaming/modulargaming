@@ -1,102 +1,135 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
+	class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
 
-	public function action_index()
-	{
-
-		if ( ! $this->user->can('Admin_Pet_Colour_Index') )
+		public function action_index()
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin pet colour index');
-		}
 
-		$colours = ORM::factory('Pet_Colour')
-			->find_all();
-
-		$this->view = new View_Admin_Pet_Colour_Index;
-		$this->_load_assets(Kohana::$config->load('assets.admin_pet.colour'));
-		$this->_nav('pet', 'colour');
-		$this->view->colours = $colours->as_array();
-	}
-
-
-	public function action_retrieve()
-	{
-		$this->view = NULL;
-
-		$item_id = $this->request->query('id');
-
-		if($item_id == NULL)
-		{
-			$colour = ORM::factory('Pet_Colour')
-			->where('pet_colour.name', '=', $this->request->query('name'))
-			->find();
-		}
-		else
-			$colour = ORM::factory('Pet_Colour', $item_id);
-
-		$list = array(
-			'id' => $colour->id,
-			'name' => $colour->name,
-			'description' => $colour->description,
-			'image' => $colour->image,
-			'locked' => $colour->locked
-		);
-		$this->response->headers('Content-Type','application/json');
-		$this->response->body(json_encode($list));
-	}
-
-	public function action_save()
-	{
-		$values = $this->request->post();
-		$this->view = NULL;
-
-		if($values['id'] == 0)
-			$values['id'] = NULL;
-
-		$this->response->headers('Content-Type','application/json');
-
-		try {
-			$colour = ORM::factory('Pet_Colour', $values['id']);
-			$colour->values($values, array('name', 'description', 'locked', 'image'));
-			$colour->save();
-
-			$data = array(
-				'action' => 'saved',
-				'row' => array(
-					'id' => $colour->id,
-					'name' => $colour->name,
-					'locked' => $colour->locked
-				)
-			);
-			$this->response->body(json_encode($data));
-		}
-		catch(ORM_Validation_Exception $e)
-		{
-			$errors = array();
-
-			$list = $e->errors('models');
-
-			foreach ($list as $field => $er) {
-				if(!is_array($er))
-					$er = array($er);
-
-				$errors[] = array('field' => $field, 'msg' => $er);
+			if (!$this->user->can('Admin_Pet_Colour_Index'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pet colour index');
 			}
 
-			$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
+			$colours = ORM::factory('Pet_Colour')
+				->find_all();
+
+			$this->view = new View_Admin_Pet_Colour_Index;
+			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
+			$this->_load_assets(Kohana::$config->load('assets.admin_pet.colour'));
+			$this->_nav('pet', 'colour');
+			$this->view->colours = $colours->as_array();
+		}
+
+		public function action_paginate() {
+			if (DataTables::is_request())
+			{
+				$orm = ORM::factory('Pet_Colour');
+
+				$paginate = Paginate::factory($orm)
+					->columns(array('id', 'name', 'locked'));
+
+				$datatables = DataTables::factory($paginate)->execute();
+
+				foreach ($datatables->result() as $avatar)
+				{
+					$datatables->add_row(array (
+							$avatar->name,
+							$avatar->locked,
+							$avatar->id
+						)
+					);
+				}
+
+				$datatables->render($this->response);
+			}
+			else
+				throw new HTTP_Exception_500();
+		}
+
+		public function action_retrieve()
+		{
+			$this->view = NULL;
+
+			$item_id = $this->request->query('id');
+
+			if ($item_id == NULL)
+			{
+				$colour = ORM::factory('Pet_Colour')
+					->where('pet_colour.name', '=', $this->request->query('name'))
+					->find();
+			}
+			else
+			{
+				$colour = ORM::factory('Pet_Colour', $item_id);
+			}
+
+			$list = array(
+				'id'          => $colour->id,
+				'name'        => $colour->name,
+				'description' => $colour->description,
+				'image'       => $colour->image,
+				'locked'      => $colour->locked
+			);
+			$this->response->headers('Content-Type', 'application/json');
+			$this->response->body(json_encode($list));
+		}
+
+		public function action_save()
+		{
+			$values = $this->request->post();
+			$this->view = NULL;
+
+			if ($values['id'] == 0)
+			{
+				$values['id'] = NULL;
+			}
+
+			$this->response->headers('Content-Type', 'application/json');
+
+			try
+			{
+				$colour = ORM::factory('Pet_Colour', $values['id']);
+				$colour->values($values, array('name', 'description', 'locked', 'image'));
+				$colour->save();
+
+				$data = array(
+					'action' => 'saved',
+					'row'    => array(
+						'id'     => $colour->id,
+						'name'   => $colour->name,
+						'locked' => $colour->locked
+					)
+				);
+				$this->response->body(json_encode($data));
+			} catch (ORM_Validation_Exception $e)
+			{
+				$errors = array();
+
+				$list = $e->errors('models');
+
+				foreach ($list as $field => $er)
+				{
+					if (!is_array($er))
+					{
+						$er = array($er);
+					}
+
+					$errors[] = array('field' => $field, 'msg' => $er);
+				}
+
+				$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
+			}
+		}
+
+		public function action_delete()
+		{
+			$this->view = NULL;
+			$values = $this->request->post();
+
+			$colour = ORM::factory('Pet_Colour', $values['id']);
+			$colour->delete();
+
+			$this->response->headers('Content-Type', 'application/json');
+			$this->response->body(json_encode(array('action' => 'deleted')));
 		}
 	}
-
-	public function action_delete()
-	{
-		$this->view = NULL;
-		$values = $this->request->post();
-
-		$colour = ORM::factory('Pet_Colour', $values['id']);
-		$colour->delete();
-
-		$this->response->headers('Content-Type','application/json');
-		$this->response->body(json_encode(array('action' => 'deleted')));
-	}
-}
