@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-return array (
+return array(
 	'admin_item' => array(
-		'list' => array(
+		'list'   => array(
 			'body' => array(
 				'js' => array(
 					array(
@@ -12,12 +12,22 @@ return array (
 				)
 			),
 		),
-		'type' => array(
+		'type'   => array(
 			'body' => array(
 				'js' => array(
 					array(
 						'name' => 'item.type',
 						'file' => 'admin/item/type.js'
+					)
+				)
+			),
+		),
+		'shop'   => array(
+			'body' => array(
+				'js' => array(
+					array(
+						'name' => 'item.shop',
+						'file' => 'admin/item/shops.js'
 					)
 				)
 			),
