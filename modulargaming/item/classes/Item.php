@@ -19,22 +19,25 @@ class Item {
 	/**
 	 * Load up the class by assigning a Model_Item
 	 *
-	 * @param integer|Model_Item $item Either an id OR a model instance
+	 * @param integer|Model_Item $item Either an id or a model instance
+	 *
 	 * @throws Item_Exception
 	 */
 	public function __construct($item)
 	{
-		if(Valid::digit($item))
+		if (Valid::digit($item))
 		{
 			$id = $item;
 			$item = ORM::factory('Item', $id);
 
-			if($item->loaded())
+			if ($item->loaded())
 			{
 				$this->_item = $item;
 			}
 			else
+			{
 				throw new Item_Exception('Item ":id" could not be loaded', array(':id' => $id));
+			}
 		}
 		else if ($item->loaded())
 		{
@@ -57,28 +60,35 @@ class Item {
 	 * Send x copies of the registered item to a user.
 	 *
 	 * @param integer|Model_User $user
-	 * @param integer $amount
-	 * @param string $location
+	 * @param integer            $amount
+	 * @param string             $location
+	 *
 	 * @throws Item_Exception
 	 */
-	public function to_user($user, $origin="app", $amount=1, $location='inventory')
+	public function to_user($user, $origin = "app", $amount = 1, $location = 'inventory')
 	{
-		if(!Valid::digit($amount))
+		if (!Valid::digit($amount))
+		{
 			throw new Item_Exception('The supplied amount should be a number.');
+		}
 
-		if(Valid::digit($user))
+		if (Valid::digit($user))
 		{
 			$user = ORM::factory('User', $user);
 		}
-		else if(!is_a($user, 'Model_User'))
+		else if (!is_a($user, 'Model_User'))
+		{
 			throw new Item_Exception('The supplied user does not come from a model.');
+		}
 
 
-		if(!$user->loaded())
+		if (!$user->loaded())
+		{
 			throw new Item_Exception('The supplied user does not exist.');
+		}
 		else
 		{
-			if($this->_type == 'item')
+			if ($this->_type == 'item')
 			{
 				$user_item = ORM::factory('User_Item')
 					->where('user_id', '=', $user->id)
@@ -87,16 +97,18 @@ class Item {
 					->find();
 			}
 			else
+			{
 				$user_item = $this->_item;
+			}
 
 			$action = ($amount > 0) ? '+' : '-';
 
-			if($user_item->loaded())
+			if ($user_item->loaded())
 			{
 				//update item amount
 				$user_item->amount($action, $amount);
 			}
-			else if($action == '+')
+			else if ($action == '+')
 			{
 				$id = ($this->_type == 'item') ? $this->_item->id : $this->_item->item_id;
 
@@ -106,10 +118,10 @@ class Item {
 					->save();
 			}
 
-			Item::log('item.in.'.$origin, 'Player recieved :amount :item_name @ :origin', array(
-				':amount' => $amount,
+			Item::log('item.in.' . $origin, 'Player recieved :amount :item_name @ :origin', array(
+				':amount'    => $amount,
 				':item_name' => $user_item->item->name($amount, FALSE),
-				':origin' => str_replace('.', ' ', $origin)
+				':origin'    => str_replace('.', ' ', $origin)
 			));
 
 		}
@@ -120,13 +132,15 @@ class Item {
 	 *
 	 * Optionally check if the user has atleast $amount.
 	 *
-	 * @param string $location
+	 * @param string  $location
 	 * @param integer $amount
+	 *
 	 * @return Ambigous <ORM, Database_Result, Kohana_ORM, object, mixed, number, Database_Result_Cached, multitype:>|boolean
 	 */
-	public function user_has($location='inventory', $amount=false, $user=null)
+	public function user_has($location = 'inventory', $amount = FALSE, $user = NULL)
 	{
-		if($user == NULL)
+
+		if ($user == NULL)
 		{
 			$user = Auth::instance()->get_user();
 		}
@@ -137,12 +151,18 @@ class Item {
 			->where('user_id', '=', $user->id)
 			->find();
 
-		if($user_item->loaded() AND $amount == FALSE)
+		if ($user_item->loaded() && $amount == FALSE)
+		{
 			return $user_item;
-		else if($user_item->loaded() AND $user_item->amount >= $amount)
+		}
+		else if ($user_item->loaded() AND $user_item->amount >= $amount)
+		{
 			return $user_item;
+		}
 		else
+		{
 			return FALSE;
+		}
 	}
 
 	/**
@@ -152,57 +172,64 @@ class Item {
 	 * Optionally limit to only transferable items
 	 * Optionally look for a relation through Item->parameter_id
 	 *
-	 * @param string $location The location to look for items
+	 * @param string  $location           The location to look for items
 	 * @param boolean $transferable_check Check if we need to load only transferable items
-	 * @param integer $parameter_id Look for a specific linked id
-	 * @param User $other_user Provide a user whose item's we'll be looking up
+	 * @param integer $parameter_id       Look for a specific linked id
+	 * @param User    $other_user         Provide a user whose item's we'll be looking up
+	 *
 	 * @return User_Item|NULL
 	 */
-	public static function location($location='inventory', $transferable_check=false, $parameter_id=null, $other_user=null)
+	static public function location($location = 'inventory', $transferable_check = FALSE, $parameter_id = NULL, $other_user = NULL)
 	{
 		static $user = NULL;
 
+<<<<<<< HEAD
 		if($user == NULL AND $other_user == NULL)
+=======
+		if ($user == NULL && $other_user == NULL)
+>>>>>>> item command bug fix
 		{
 			$user = Auth::instance()->get_user();
 		}
-		else if($other_user != NULL)
+		else if ($other_user != NULL)
 		{
 			$user = $other_user;
 		}
 
-		if($user != NULL)
+		if ($user != NULL)
 		{
 			$items = ORM::factory('User_Item')
 				->where('user_id', '=', $user->id)
 				->where('location', '=', $location);
 
-			if($transferable_check == TRUE)
+			if ($transferable_check == TRUE)
 			{
 				$items = $items->where('transferable', '=', 1);
 			}
-			if($parameter_id != NULL)
+			if ($parameter_id != NULL)
 			{
 				$items = $items->where('parameter_id', '=', $parameter_id);
 			}
 
 			return $items;
 		}
+
 		return NULL;
 	}
 
 	/**
 	 * Create a new log
 	 *
-	 * @param string $alias An identifier to help index logs
-	 * @param string $message A general message describing the action
-	 * @param array $params Parameters that give insight into the action that has been performed
-	 * @param Model_User $user The user that did an action
+	 * @param string     $alias   An identifier to help index logs
+	 * @param string     $message A general message describing the action
+	 * @param array      $params  Parameters that give insight into the action that has been performed
+	 * @param Model_User $user    The user that did an action
+	 *
 	 * @return Ambigous <ORM, Kohana_ORM>
 	 */
-	public static function log($alias, $message, $params=array(), $user=null)
+	static public function log($alias, $message, $params = array(), $user = NULL)
 	{
-		if($user == NULL)
+		if ($user == NULL)
 		{
 			$user = Auth::instance()->get_user();
 		}
@@ -212,9 +239,9 @@ class Item {
 			'message'  => $message,
 			'user_id'  => $user->id,
 			'agent'    => Request::user_agent(array('browser', 'platform')),
-			'ip'	   => Request::$client_ip,
+			'ip'       => Request::$client_ip,
 			'location' => Request::current()->uri(),
-			'type' 	   => 'item',
+			'type'     => 'item',
 			'params'   => $params,
 		);
 
@@ -226,40 +253,43 @@ class Item {
 	/**
 	 * Send a notification to a user based on a log.
 	 *
-	 * @param Moel_Log $log Which log we'll be basing our notification on.
-	 * @param Model_User $user User instance we'll be notifying
-	 * @param string $notification A string that can be parsed through __()
-	 * @param array $param Params to parse the notification with (combined with $log->params)
-	 * @param string $type Type of notification (info, error, success, warning)
+	 * @param Moel_Log   $log          Which log we'll be basing our notification on.
+	 * @param Model_User $user         User instance we'll be notifying
+	 * @param string     $notification A string that can be parsed through __()
+	 * @param array      $param        Params to parse the notification with (combined with $log->params)
+	 * @param string     $type         Type of notification (info, error, success, warning)
+	 *
 	 * @return User_Notification
 	 */
-	public static function notify($log, $user, $notification, $param = array(), $type="info")
+	public static function notify($log, $user, $notification, $param = array(), $type = "info")
 	{
-		$notify = Kohana::$config->load('notify.'.$notification);
+
+		$notify = Kohana::$config->load('notify.' . $notification);
 
 		$param['username'] = $log->user->username;
 
 		$values = array(
-			'log_id' => $log->id,
+			'log_id'  => $log->id,
 			'user_id' => $user->id,
-			'title' => $notify['title'],
+			'title'   => $notify['title'],
 			'message' => __($notify['message'], $log->params + $param),
-			'icon' => $notify['icon'],
-			'type' => $type
+			'icon'    => $notify['icon'],
+			'type'    => $type
 		);
 
 		return ORM::factory('User_Notification')
-		->values($values)
-		->create();
+			->values($values)
+			->create();
 	}
 
 	/**
 	 * Build an Item instance
 	 *
-	 * @param Model_Item|integer $item Could be an item id OR an item model instance
+	 * @param Model_Item|integer $item Could be an item id or an item model instance
+	 *
 	 * @return Item
 	 */
-	public static function factory($item)
+	static public function factory($item)
 	{
 		return new Item($item);
 	}
@@ -268,24 +298,30 @@ class Item {
 	 * Parse item commands before saving
 	 *
 	 * @param array $input User command definition
+	 *
 	 * @return array Formatted commands array
 	 */
-	public static function parse_commands($input)
+	static public function parse_commands($input)
 	{
 		$commands = array();
 
-		foreach ($input as $k => $c) {
-			//if we're dealing string as parameter OR an assoc array
-			if (!is_array($c) OR count(array_filter(array_keys($c), 'is_string')) > 0) {
+		foreach ($input as $k => $c)
+		{
+			//if we're dealing string as parameter or an assoc array
+			if (!is_array($c) OR count(array_filter(array_keys($c), 'is_string')) > 0)
+			{
 				$commands[] = array('name' => $k, 'param' => $c);
 			}
-			else {
+			else
+			{
 				//if multiple command instances were defined (non-assoc array)
-				foreach ($c as $p) {
+				foreach ($c as $p)
+				{
 					$commands[] = array('name' => $k, 'param' => $p);
 				}
 			}
 		}
+
 		return $commands;
 	}
 
@@ -293,11 +329,11 @@ class Item {
 	 * Load all item command classes
 	 * @return array
 	 */
-	public static function list_commands()
+	static public function list_commands()
 	{
 		static $commands = NULL;
 
-		if($commands == NULL)
+		if ($commands == NULL)
 		{
 			// Include paths must be searched in reverse
 			$paths = array_reverse(Kohana::list_files('classes/Item/Command/'));
@@ -307,12 +343,13 @@ class Item {
 
 			foreach ($paths as $files)
 			{
-				$replacements = array_merge(Kohana::include_paths(), array('classes'.DIRECTORY_SEPARATOR.'Item'.DIRECTORY_SEPARATOR.'Command'.DIRECTORY_SEPARATOR, '.php'));
+				$replacements = array_merge(Kohana::include_paths(), array('classes' . DIRECTORY_SEPARATOR . 'Item' . DIRECTORY_SEPARATOR . 'Command' . DIRECTORY_SEPARATOR, '.php'));
 
-				if (is_array($files)) {
-					foreach($files as $file)
+				if (is_array($files))
+				{
+					foreach ($files as $file)
 					{
-						foreach($replacements as $replace)
+						foreach ($replacements as $replace)
 							$file = str_replace($replace, '', $file);
 
 						$found[] = $file;
@@ -329,27 +366,29 @@ class Item {
 	 * Make sure directories have a trailing slash
 	 *
 	 * @param string $value
+	 *
 	 * @return string
 	 */
-	public static function filter_type_dir($value)
+	static public function filter_type_dir($value)
 	{
-		return (substr($value, -1) != '/') ? $value.'/' : $value;
+		return (substr($value, -1) != '/') ? $value . '/' : $value;
 	}
 
 	/**
 	 * Validate item command input when creating an item
 	 *
 	 * @param Validation $validation Validation objec
-	 * @param JSON $value Command to validate
+	 * @param JSON       $value      Command to validate
 	 */
-	public static function validate_commands($validation, $value)
+	static public function validate_commands($validation, $value)
 	{
 		$values = json_decode($value, TRUE);
 
-		foreach ($values as $command) {
+		foreach ($values as $command)
+		{
 			$cmd = Item_Command::factory($command['name']);
 
-			if(!$cmd->validate($command['param']))
+			if (!$cmd->validate($command['param']))
 			{
 				$validation->error('commands', $command['name']);
 			}

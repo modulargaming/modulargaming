@@ -48,7 +48,7 @@ class View_Admin_Item_Index extends Abstract_View_Admin {
 				$list[] = array(
 					'id'      => $type->id,
 					'name'    => $type->name,
-					'command' => $type->default_command
+					'command' => str_replace('Item_Command_', '', $type->default_command)
 				);
 			}
 		}
