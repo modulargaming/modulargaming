@@ -11,7 +11,7 @@
 abstract class Abstract_Controller_Frontend extends Controller {
 
 	/**
-	 * @var Auth $auth
+	 * @var Auth_ORM $auth
 	 */
 	protected $auth;
 

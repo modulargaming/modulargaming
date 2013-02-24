@@ -15,35 +15,19 @@ class Controller_User_Register extends Abstract_Controller_User {
 	 */
 	public function action_index()
 	{
-		if ($this->auth->logged_in())
-		{
-			$this->redirect(Route::get('user')->uri());
-		}
+		$this->_not_logged_in();
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
-			// Honeypot check.
-			if ($this->request->post('full_name') == "")
+			if ($this->_honeypot_empty())
 			{
 				try
 				{
-					$user = ORM::factory('User')
-						->create_user($this->request->post(), array(
-							'username',
-							'email',
-							'password'
-						));
+					$user = $this->_create_user($this->request->post());
 
-					// Add the login role.
-					$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
+					$this->_send_welcome_email($user);
 
-					// Send the welcome email.
-					$view = new View_Email_User_Welcome;
-					$view->user = $user;
-					Email::factory($view)
-						->to($user->email)
-						->send();
-
+					// Log in the user, and send him to his dashboard.
 					$this->auth->force_login($user);
 					$this->redirect(Route::get('user')->uri());
 				}
@@ -59,6 +43,54 @@ class Controller_User_Register extends Abstract_Controller_User {
 		}
 
 		$this->view = new View_User_Register;
+	}
+
+	/**
+	 * Use a fake input field (hidden) to trick bots,
+	 * regular users leaves it empty while bots fill it in.
+	 *
+	 * @return bool honeypot field was empty
+	 */
+	private function _honeypot_empty()
+	{
+		return $this->request->post('full_name') == "";
+	}
+
+	/**
+	 * Create the user.
+	 *
+	 * @param  array $post
+	 *
+	 * @return Model_User
+	 */
+	private function _create_user($post)
+	{
+		$user = ORM::factory('User')
+			->create_user($post, array(
+				'username',
+				'email',
+				'password'
+			));
+
+		// Add the login role.
+		$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
+
+		return $user;
+	}
+
+	/**
+	 * Send the welcome email to the newly registered user.
+	 *
+	 * @param Model_User $user user to welcome.
+	 */
+	private function _send_welcome_email($user)
+	{
+		$view = new View_Email_User_Welcome;
+		$view->user = $user;
+
+		Email::factory($view)
+			->to($user->email)
+			->send();
 	}
 
 } // End User_Register

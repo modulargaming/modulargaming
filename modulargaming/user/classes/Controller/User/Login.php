@@ -15,10 +15,7 @@ class Controller_User_Login extends Abstract_Controller_User {
 	 */
 	public function action_index()
 	{
-		if ($this->auth->logged_in())
-		{
-			$this->redirect(Route::get('user')->uri());
-		}
+		$this->_not_logged_in();
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
