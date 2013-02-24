@@ -35,7 +35,7 @@ class Item_Command_Pet_Transform extends Item_Command_Pet {
 		return $specie->loaded();
 	}
 
-	public function perform($item, $param, $pet=null)
+	public function perform($item, $param, $pet = null)
 	{
 		$specie = ORM::factory('Pet_Specie', $param);
 
