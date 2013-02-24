@@ -49,3 +49,6 @@
 [submodule "modules/datatables"]
 	path = modules/datatables
 	url = git://github.com/morgan/kohana-datatables.git
+[submodule "modules/asset-merger"]
+	path = modules/asset-merger
+	url = git://github.com/modulargaming/asset-merger.git
