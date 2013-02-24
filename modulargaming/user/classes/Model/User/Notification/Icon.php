@@ -5,10 +5,7 @@ class Model_User_Notification_Icon extends ORM {
 	/**
 	 * Create a new notification & log.
 	 *
-	 * @param User_Model $user
-	 * @param string $title
-	 * @param string $description
-	 * @param array $param
+	 * @return String url to icon
 	 */
 	public function img()
 	{

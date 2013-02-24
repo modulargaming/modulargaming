@@ -16,13 +16,15 @@ class Model_User_Notification extends ORM {
 	/**
 	 * Create a new notification & log.
 	 *
-	 * @param User_Log $log
-	 * @param User_Model $user
+	 * @param Model_Log $log
+	 * @param Model_User $user
 	 * @param string $title
 	 * @param string $icon
 	 * @param string $message
 	 * @param array $param
 	 * @param string $type
+	 *
+	 * @return ORM
 	 */
 	public static function add_notification(Model_Log $log, Model_User $user, $title, $icon, $message, array $param = array(), $type='info')
 	{
