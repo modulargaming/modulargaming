@@ -1,14 +1,14 @@
 <ul class="nav nav-tabs">
 	{{#tabs}}
 		<li {{#active}}class="active"{{/active}}>
-			<a href="#{{name}}" data-toggle="tab">{{name}}</a>
+			<a href="#{{machine-name}}" data-toggle="tab">{{name}}</a>
 		</li>
 	{{/tabs}}
 </ul>
 
 <div class="tab-content">
 	{{#tabs}}
-		<div class="tab-pane {{#active}}active{{/active}}" id="home">
+		<div class="tab-pane {{#active}}active{{/active}}" id="{{machine-name}}">
 			{{& content}}
 		</div>
 	{{/tabs}}

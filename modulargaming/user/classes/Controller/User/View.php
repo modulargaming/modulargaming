@@ -26,7 +26,7 @@ class Controller_User_View extends Abstract_Controller_User {
 
 		$container = new Tab_Container;
 
-		$about = new Tab("About me");
+		$about = new Tab('About me');
 		$about->add_content(new Tab_Content_Text("Hello, short text about me!"));
 		$about->add_content(new Tab_Content_Text("Hello, this is my signature!"));
 
@@ -37,6 +37,8 @@ class Controller_User_View extends Abstract_Controller_User {
 		$this->view = new View_User_Profile;
 		$this->view->user = $user;
 		$this->view->tabs = $container->render();
+
+
 
 		/*
 		// @TODO, This belongs to the pet module, better to use events?

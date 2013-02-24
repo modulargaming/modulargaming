@@ -129,3 +129,5 @@ Event::listen('admin.nav_list', function ()
 		'icon'  => 'icon-picture'
 	);
 });
+
+Event::listen('user.profile_tabs', 'PetEvents::user_profile');

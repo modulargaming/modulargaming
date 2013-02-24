@@ -13,9 +13,10 @@ class View_Tabs {
 		foreach ($this->tabs as $tab)
 		{
 			$tabs[] = array(
-				'name'    => $tab->name,
-				'content' => $tab->render(),
-				'active'  => FALSE
+				'name'         => $tab->name,
+				'machine-name' => URL::title($tab->name),
+				'content'      => $tab->render(),
+				'active'       => FALSE
 			);
 		}
 		isset($tabs[0]) AND $tabs[0]['active'] = TRUE;

@@ -10,7 +10,7 @@ class Tab {
 	/**
 	 * @var Abstract_Tab_Content[] $content
 	 */
-	private $contents;
+	private $contents = array();
 
 	public function __construct($name)
 	{
