@@ -32,7 +32,7 @@ class Controller_User_View extends Abstract_Controller_User {
 
 		$container->add_tab($about);
 
-		Event::fire('user.profile_tabs', array($container));
+		Event::fire('user.profile_tabs', array($user, $container));
 
 		$this->view = new View_User_Profile;
 		$this->view->user = $user;

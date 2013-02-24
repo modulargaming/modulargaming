@@ -2,11 +2,17 @@
  
 class PetEvents {
 
-	public static function user_profile(Tab_Container $tabs)
+	public static function user_profile(Model_User $user, Tab_Container $tabs)
 	{
-		$pets = new Tab('Pets');
+		$pets = ORM::factory('User_Pet')
+			->where('user_id', '=', $user->id)
+			->order_by('active', 'desc')
+			->find_all();
 
-		$tabs->add_tab($pets);
+		$tab = new Tab('Pets');
+		$tab->add_content(new Tab_Content_PetList($pets->as_array()));
+
+		$tabs->add_tab($tab);
 	}
 
 }
