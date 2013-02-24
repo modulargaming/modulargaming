@@ -199,4 +199,183 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 		$this->response->headers('Content-Type', 'application/json');
 		$this->response->body(json_encode(array('action' => 'deleted')));
 	}
+
+	public function action_stock()
+	{
+		$this->view = NULL;
+
+		$shop_id = $this->request->query('id');
+
+		$shop = ORM::factory('Shop', $shop_id);
+
+		$items = array();
+
+		switch($shop->stock_type) {
+			case 'steady':
+				$inventory = ORM::factory('Shop_Inventory')
+					->where('shop_id', '=', $shop_id)
+					->find_all();
+
+				if(count($inventory) > 0)
+				{
+					foreach($inventory as $item) {
+						$items[] = array(
+							'id' => $item->id,
+							'img' => $item->item->img(),
+							'name' => $item->item->name,
+							'price' => $item->price,
+							'amount' => '-',
+							'cap_amount' => '-',
+							'last_restock' => '-'
+						);
+					}
+				}
+				break;
+			case 'restock':
+				$inventory = ORM::factory('Shop_Restock')
+					->where('shop_id', '=', $shop_id)
+					->find_all();
+
+				if(count($inventory) > 0)
+				{
+					foreach($inventory as $item) {
+						$items[] = array(
+							'id' => $item->id,
+							'img' => $item->item->img(),
+							'name' => $item->item->name,
+							'price' => $item->min_price . ' - ' . $item->max_price,
+							'amount' => $item->min_amount . ' - ' . $item->max_amount,
+							'cap_amount' => $item->cap_amount,
+							'frequency' => $item->frequency,
+							'last_restock' => Date::format($item->next_restock - $item->frequency)
+						);
+					}
+				}
+				break;
+		}
+		$list = array(
+			'stock_type'    => $shop->stock_type,
+			'stock_cap'     => $shop->stock_cap,
+			'total_amount'  => count($items),
+			'items'         => $items,
+		);
+
+		$this->response->headers('Content-Type', 'application/json');
+		$this->response->body(json_encode($list));
+	}
+
+	public function action_stock_item() {
+		$shop_id = $this->request->post('shop_id');
+		$item_id = $this->request->post('item_id');
+
+		$shop = ORM::factory('Shop', $shop_id);
+
+		switch($shop->stock_type) {
+			case 'steady':
+				$item = ORM::factory('Shop_Inventory', $item_id);
+
+				$data = array(
+					'item_name' => $item->item->name,
+					'min_price' => $item->price
+				);
+				break;
+			case 'restock':
+				$item = ORM::factory('Shop_Restock', $item_id);
+
+				$data = array(
+					'item_name' => $item->item->name,
+					'frequency' => $item->frequency,
+					'min_amount' => $item->min_amount,
+					'max_amount' => $item->max_amount,
+					'cap_amount' => $item->cap_amount,
+					'min_price' => $item->min_price,
+					'max_price' => $item->max_price
+				);
+				break;
+		}
+
+		$this->response->headers('Content-Type', 'application/json');
+		$this->response->body(json_encode($data));
+	}
+
+	public function action_stock_save() {
+		$shop_id = $this->request->post('shop_id');
+		$item_id = ($this->request->post('item_id') == 0) ? null : $this->request->post('item_id');
+		$values = $this->request->post();
+		$state = 'edit';
+
+		if($item_id == null) {
+			$i = ORM::factory('Item')
+				->where('name', '=', $values['item_name'])
+				->find();
+			$item_id = $i->id;
+			$state = 'new';
+		}
+		$shop = ORM::factory('Shop', $shop_id);
+
+		try {
+			switch($shop->stock_type) {
+				case 'steady':
+					$item = ORM::factory('Shop_Inventory');
+
+					if($state == 'edit')
+					{
+						$item = $item->where('item_id', '=', $item_id)
+							->where('shop_id', '=', $shop_id)
+							->find();
+					}
+					else
+					{
+						$item->item_id = $item_id;
+						$item->shop_id = $shop_id;
+					}
+
+
+					$item->price = $values['min_price'];
+					$item->save();
+					break;
+				case 'restock':
+					$item = ORM::factory('Shop_Restock');
+
+					if($state == 'edit')
+					{
+						$item = $item->where('item_id', '=', $item_id)
+							->where('shop_id', '=', $shop_id)
+							->find();
+					}
+					else
+					{
+						$item->item_id = $item_id;
+						$item->shop_id = $shop_id;
+					}
+
+					$item->values($values, array('frequency','min_amount','max_amount','cap_amount','min_price','max_price'));
+					$item->save();
+					break;
+			}
+			$data = array(
+				'status' => 'saved'
+			);
+		}
+		catch(ORM_Validation_Exception $e) {
+			$errors = array();
+
+			$list = $e->errors('models');
+
+			foreach ($list as $field => $er)
+			{
+				if (!is_array($er))
+				{
+					$er = array($er);
+				}
+
+				$errors[] = array('field' => $field, 'msg' => $er);
+			}
+
+			$data = array('status' => 'error', 'errors' => $errors);
+		}
+
+		$this->response->headers('Content-Type', 'application/json');
+		$this->response->body(json_encode($data));
+	}
 }

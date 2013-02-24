@@ -4,9 +4,9 @@
 			<thead>
 				<tr>
 					<th class="span2">Title</th>
-					<th class="span1">Stock</th>
 					<th class="span1">Status</th>
-					<th class="span2">Options</th>
+					<th class="span1">Stock</th>
+					<th class="span3">Options</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,7 +22,7 @@
 		</table>
 
 
-{{! Item type form modal}}
+{{! Shop form modal}}
 <div class="modal hide fade" id="modal-crud">
 	<div class="modal-header"> 
 		<button class="close" data-dismiss="modal">x</button>
@@ -114,6 +114,117 @@
 		<button type="submit" class="btn btn-success" id="modal-crud-save">Save</button>
 	</div>
 </div>
+
+{{! Stock modal}}
+<div class="modal hide fade" id="modal-stock">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3>Stock</h3>
+	</div>
+	<div class="modal-body">
+	    <p>This shop contains <span id="modal-stock-count"></span> items<span id="modal-stock-cap" class="hide"></span></p>
+		<table class="table table-striped">
+		    <thead>
+		        <tr>
+		            <th class="span1"></th>
+		            <th class="span2">Name</th>
+		            <th class="span2">Price</th>
+		            <th class="span2">Amount</th>
+		            <th class="span1">Cap</th>
+		            <th class="span2">Frequency</th>
+		            <th></th>
+		        </tr>
+		    </thead>
+		    <tbody id="table-stock-content">
+
+		    </tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-success" id="btn-stock-add"><i class="icon-plus-sign icon-white"></i> Item</button>
+		<button class="btn" data-dismiss="modal">Return</button>
+	</div>
+</div>
+<div class="notifications bottom-right" id="crud-notify"></div>
+
+{{! restock item modal}}
+<div class="modal hide fade" id="modal-stock-item">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<div class="btn-group pull-right hide" id="modal-stock-errors" style="margin-right: 15px;">
+            <a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+        	    <i class="icon-exclamation-sign icon-white"> </i> Errors
+        		<span class="caret"></span>
+        	</a>
+            <ul class="dropdown-menu" id="modal-stock-error-list">
+        	    <!-- error messages -->
+            </ul>
+        </div>
+		<h3>Add item to stock</h3>
+	</div>
+	<div class="modal-body">
+		<form id="form-stock-item" class="form-horizontal">
+		    <input type="hidden" name="shop_id" value="" id="input-stock-shop-id" />
+		    <input type="hidden" name="item_id" value="" id="input-stock-item-id" />
+		    <input type="hidden" name="csrf" value="{{csrf}}" />
+
+		    <div class="control-group">
+                <label class="control-label" for="input-stock-item_name">Item name</label>
+
+                <div class="controls">
+                    <input type="text" class="input-medium" id="input-stock-item_name" name="item_name" value="" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input-stock-min_price"><span class="restock">Min</span> price</label>
+
+                <div class="controls">
+                    <input type="number" class="input-medium" id="input-stock-min_price" name="min_price" value="" />
+                </div>
+            </div>
+            <div class="control-group restock">
+                <label class="control-label" for="input-stock-max_price">Max price</label>
+
+                <div class="controls">
+                    <input type="number" class="input-medium" id="input-stock-max_price" name="max_price" value="" />
+                </div>
+            </div>
+            <div class="control-group restock">
+                <label class="control-label" for="input-stock-min_amount">Min amount</label>
+
+                <div class="controls">
+                    <input type="number" class="input-medium" id="input-stock-min_amount" name="min_amount" value="" />
+                </div>
+            </div>
+            <div class="control-group restock">
+                <label class="control-label" for="input-stock-max_amount">Max amount</label>
+
+                <div class="controls">
+                    <input type="number" class="input-medium" id="input-stock-max_amount" name="max_amount" value="" />
+                </div>
+            </div>
+            <div class="control-group restock">
+                <label class="control-label" for="input-stock-cap_amount">Cap amount</label>
+
+                <div class="controls">
+                    <input type="number" class="input-medium" id="input-stock-cap_amount" name="cap_amount" value="" />
+                </div>
+            </div>
+            <div class="control-group restock">
+                <label class="control-label" for="input-stock-frequency">Frequency</label>
+
+                <div class="controls">
+                    <input type="text" class="input-medium" id="input-stock-frequency" name="frequency" value="" />
+                </div>
+            </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-success" id="btn-stock-add-complete">Add item to stock</button>
+		<button class="btn" data-dismiss="modal">Return</button>
+	</div>
+</div>
+<div class="notifications bottom-right" id="crud-notify"></div>
 
 {{! Delete modal}}
 <div class="modal hide fade" id="modal-delete">

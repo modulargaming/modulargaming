@@ -38,6 +38,24 @@ Route::set('item.admin.shop.delete', 'admin/item/shops/remove')
 	'controller' => 'Shops',
 	'action'     => 'delete',
 ));
+Route::set('item.admin.shop.stock', 'admin/item/shops/stock')
+	->defaults(array(
+	'directory'  => 'Admin/Item',
+	'controller' => 'Shops',
+	'action'     => 'stock',
+));
+Route::set('item.admin.shop.stock.load', 'admin/item/shops/stock/load')
+	->defaults(array(
+	'directory'  => 'Admin/Item',
+	'controller' => 'Shops',
+	'action'     => 'stock_item',
+));
+Route::set('item.admin.shop.stock.save', 'admin/item/shops/stock/save')
+	->defaults(array(
+	'directory'  => 'Admin/Item',
+	'controller' => 'Shops',
+	'action'     => 'stock_save',
+));
 Route::set('item.admin.list.search', 'admin/item/search')
 	->defaults(array(
 	'directory'  => 'Admin',
