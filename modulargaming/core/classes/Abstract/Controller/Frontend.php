@@ -20,7 +20,11 @@ abstract class Abstract_Controller_Frontend extends Controller {
 	 */
 	protected $user;
 
-	protected $protected = FALSE; // Require user to be logged in.
+	/**
+	 * @var bool User is required to be logged in?
+	 */
+	protected $protected = FALSE;
+
 	protected $view = NULL; // View to render.
 
 	protected $layout = 'layout';
