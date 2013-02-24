@@ -36,18 +36,21 @@ class Item {
 			else
 				throw new Item_Exception('Item ":id" could not be loaded', array(':id' => $id));
 		}
-		else if($item->loaded())
+		else if ($item->loaded())
 		{
-			if(is_a($item, 'Model_Item'))
+			if (is_a($item, 'Model_Item'))
+			{
 				$this->_item = $item;
+			}
 			else
 			{
 				throw new Item_Exception('The supplied item\'s resource does not come from a model.');
-				$this->_item = NULL;
 			}
 		}
 		else
+		{
 			throw new Item_Exception('Item ":name" could not be loaded', array(':name' => $item->name));
+		}
 	}
 
 	/**
