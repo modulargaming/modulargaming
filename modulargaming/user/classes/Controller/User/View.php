@@ -35,7 +35,7 @@ class Controller_User_View extends Abstract_Controller_User {
 		Event::fire('user.profile_tabs', array($container));
 
 		$this->view = new View_User_Profile;
-		$this->view->profile_user = $user;
+		$this->view->user = $user;
 		$this->view->tabs = $container->render();
 
 		/*

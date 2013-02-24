@@ -2,30 +2,29 @@
 
 class View_User_Profile extends Abstract_View {
 
-	public $profile_user;
-	public $pets;
+	/**
+	 * @var Model_User the profile user
+	 */
+	public $user;
 
 	public function title()
 	{
-		return $this->profile_user->username . '\'s Profile';
+		return $this->user->username.'\'s Profile';
 	}
 
-	public function profile_user()
+	public function user()
 	{
-		$profile_user = $this->profile_user;
-		$profile_user = array(
-			'id' => $profile_user->id,
-			'username' => $profile_user->username,
-			'created' => Date::format($profile_user->created),
-			'last_login' => Date::format($profile_user->last_login),
-			'post_count' => $profile_user->post_count,
-			'avatar' => $profile_user->avatar,
-			'title' => $profile_user->title->title,
-			'about' => $profile_user->about,
+		$user = $this->user;
+		return array(
+			'id'         => $user->id,
+			'username'   => $user->username,
+			'created'    => Date::format($user->created),
+			'last_login' => Date::format($user->last_login),
+			'post_count' => $user->post_count,
+			'avatar'     => $user->avatar(),
+			'title'      => $user->title->title,
+			'about'      => $user->about,
 		);
-
-		return $profile_user;
-
 	}
 
 }

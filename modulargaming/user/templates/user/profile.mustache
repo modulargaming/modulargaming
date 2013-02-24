@@ -1,21 +1,21 @@
-<div class="container">
-	<div class="row">
-		<div class="span3">
-			<div class="row well">
-				<h3>{{profile_user.username}}</h3>
-				<img src="{{#profile_user.avatar}}{{profile_user.avatar}}{{/profile_user.avatar}}{{^profile_user.avatar}}{{base_url}}assets/img/avatars/default.png{{/profile_user.avatar}}" alt="" class="img-polaroid">
-				<p>
-					<ul class="unstyled">
-						<li>Created: {{profile_user.created}}</li>
-						<li>Last Login: {{profile_user.last_login}}</li>
-						<li>Forum posts: {{profile_user.post_count}}</li>
-						<li>Title: {{profile_user.title}}</li>
-					</ul>
-				</p>
-			</div>
+<div class="row">
+	<div class="span3">
+		<div class="well">
+			<h3>{{profile_user.username}}</h3>
+			{{#user.avatar}}
+				{{>avatar}}
+			{{/user.avatar}}
+			<p>
+				<ul class="unstyled">
+					<li>Created: {{profile_user.created}}</li>
+					<li>Last Login: {{profile_user.last_login}}</li>
+					<li>Forum posts: {{profile_user.post_count}}</li>
+					<li>Title: {{profile_user.title}}</li>
+				</ul>
+			</p>
 		</div>
-		<div class="span9">
-			{{& tabs}}
-		</div>
+	</div>
+	<div class="span9">
+		{{& tabs}}
 	</div>
 </div>
