@@ -14,8 +14,7 @@ class View_Message_Index extends Abstract_View_Message {
 				'created' => Date::format($message->created),
 				'subject' => $message->subject,
 				'content' => $message->content,
-				'sender' => $message->sender,
-				'id'	=> $message->id,
+				'id'	  => $message->id,
 				'href'    => Route::url('message.view', array('id' => $message->id)),
 
 				'sender' => array(

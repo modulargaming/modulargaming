@@ -159,7 +159,7 @@ class Item {
 	{
 		static $user = NULL;
 
-		if($user == NULLAND $other_user == NULL)
+		if($user == NULL AND $other_user == NULL)
 		{
 			$user = Auth::instance()->get_user();
 		}
