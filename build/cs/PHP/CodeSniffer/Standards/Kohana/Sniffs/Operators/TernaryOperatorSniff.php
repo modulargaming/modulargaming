@@ -202,7 +202,7 @@ class Kohana_Sniffs_Operators_TernaryOperatorSniff implements PHP_CodeSniffer_Sn
                     $current = $file->findNext(T_WHITESPACE, $current + 1, $end, TRUE);
                 }
 
-                if ($current AND $current < $end)
+                if ($current AND $current < $end AND $start != 1)
                 {
                     // The current position is NOT the end. Some other comparison, operation, etc must be happening.
                     $error = 'Comparisons and operations must be in parentheses in the '.$name.' portion of ternary operations';

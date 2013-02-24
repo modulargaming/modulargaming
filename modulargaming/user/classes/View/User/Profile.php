@@ -7,6 +7,11 @@ class View_User_Profile extends Abstract_View {
 	 */
 	public $user;
 
+	/**
+	 * @var String html for the tabs.
+	 */
+	public $tabs;
+
 	public function title()
 	{
 		return $this->user->username.'\'s Profile';

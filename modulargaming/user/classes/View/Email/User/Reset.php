@@ -13,7 +13,7 @@ class View_Email_User_Reset extends Abstract_View_Email {
 	public $subject = 'Password reset';
 
 	/**
-	 * @var View_Model_User User
+	 * @var Model_User User
 	 */
 	public $user;
 

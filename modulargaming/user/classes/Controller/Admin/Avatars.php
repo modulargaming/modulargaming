@@ -13,7 +13,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 	public function action_index()
 	{
-		if (!$this->user->can('Admin_Item_Index'))
+		if ( ! $this->user->can('Admin_Item_Index'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
@@ -42,7 +42,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 			foreach ($datatables->result() as $avatar)
 			{
 				$datatables->add_row(array(
-						URL::base() . 'assets/img/avatars/' . $avatar->img,
+						URL::base().'assets/img/avatars/'.$avatar->img,
 						$avatar->title,
 						$avatar->default,
 						$avatar->id
@@ -54,7 +54,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		}
 		else
 		{
-			throw new HTTP_Exception_500();
+			throw HTTP_Exception::factory(500, 'error');
 		}
 	}
 
@@ -70,7 +70,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 			'id'      => $item->id,
 			'title'   => $item->title,
 			'default' => $item->default,
-			'img'     => URL::base() . 'assets/img/avatars/' . $item->img,
+			'img'     => URL::base().'assets/img/avatars/'.$item->img,
 		);
 
 		$this->response->headers('Content-Type', 'application/json');
@@ -97,27 +97,27 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 			$file = array('status' => 'empty', 'msg' => '');
 
-			if (!isset($values['img']))
+			if ( ! isset($values['img']))
 			{
 				$cfg = Kohana::$config->load('avatar.size');
-				if (!Upload::image($_FILES['img']))
+				if ( ! Upload::image($_FILES['img']))
 				{
 					$file['status'] = 'error';
 					$file['msg'] = 'The supplied image is not uploadable.';
 				}
-				else if (file_exists(DOCROOT . 'assets/img/avatars/' . $_FILES['img']['name']))
+				elseif (file_exists(DOCROOT.'assets/img/avatars/'.$_FILES['img']['name']))
 				{
 					$file['status'] = 'error';
 					$file['msg'] = 'There\'s already an image with the same filename';
 				}
-				else if (!Upload::image($_FILES['img'], $cfg['width'], $cfg['heigth'], TRUE))
+				elseif ( ! Upload::image($_FILES['img'], $cfg['width'], $cfg['heigth'], TRUE))
 				{
-					//not the right image dimensions
+					// not the right image dimensions
 					$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :heigth.', array(
 						':width' => $cfg['width'], ':heigth' => $cfg['heigth']
 					));
 				}
-				Upload::save($_FILES['img'], $_FILES['img']['name'], DOCROOT . 'assets/img/avatars/');
+				Upload::save($_FILES['img'], $_FILES['img']['name'], DOCROOT.'assets/img/avatars/');
 				$values['img'] = $_FILES['img']['name'];
 				$check[] = 'img';
 			}
@@ -132,7 +132,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 				'action' => 'saved',
 				'type'   => ($id == NULL) ? 'new' : 'update',
 				'row'    => array(
-					URL::base() . 'assets/img/avatars/' . $avatar->img,
+					URL::base().'assets/img/avatars/'.$avatar->img,
 					$avatar->title,
 					$avatar->default,
 					$avatar->id
@@ -147,7 +147,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 			foreach ($list as $field => $er)
 			{
-				if (!is_array($er))
+				if ( ! is_array($er))
 				{
 					$er = array($er);
 				}

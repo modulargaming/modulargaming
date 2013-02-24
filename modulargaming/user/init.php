@@ -72,7 +72,8 @@ Route::set('item.admin.avatar.index', 'admin/avatar')
 	'controller' => 'Avatars',
 	'action'     => 'index',
 ));
-//Add link to manage users in admin
+
+// Add link to manage users in admin
 Event::listen('admin.nav_list', function ()
 {
 	return array(

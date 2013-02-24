@@ -58,7 +58,7 @@ class Controller_User_Edit extends Abstract_Controller_User {
 					$avatar = '';
 					if (array_key_exists('gravatar', $post))
 					{
-						$avatar = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->user->email));
+						$avatar = 'http://www.gravatar.com/avatar/'.md5(strtolower($this->user->email));
 						$post['gravatar'] = 1;
  					}
  					else
@@ -69,7 +69,7 @@ class Controller_User_Edit extends Abstract_Controller_User {
 						{
 							$upload = $this->_save_image($_FILES['avatar'], $this->user->id);
 							$avatar = URL::base().'assets/img/avatars/'.$this->user->id.'.png';
-							if (!$upload)
+							if ( ! $upload)
 							{
 								$avatar = '';
 								Hint::error('There was a problem while uploading your avatar. Make sure it is a JPG/PNG/GIF file.');
@@ -116,10 +116,8 @@ class Controller_User_Edit extends Abstract_Controller_User {
 
 	protected function _save_image($image, $user_id)
 	{
-		if (
-			! Upload::valid($image) OR
-			! Upload::not_empty($image) OR
-			! Upload::type($image, array('jpg', 'jpeg', 'png', 'gif')))
+		// TODO: Use validation instead?
+		if ( ! Upload::valid($image) OR ! Upload::not_empty($image) OR ! Upload::type($image, array('jpg', 'jpeg', 'png', 'gif')))
 		{
 			return FALSE;
 		}

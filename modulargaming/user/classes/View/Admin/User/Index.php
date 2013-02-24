@@ -4,6 +4,11 @@ class View_Admin_User_Index extends Abstract_View_Admin {
 
 	public $title = 'Users';
 
+	/**
+	 * @var Model_User[] users to render in the table.
+	 */
+	public $users;
+
 	public function users()
 	{
 		$users = array();
