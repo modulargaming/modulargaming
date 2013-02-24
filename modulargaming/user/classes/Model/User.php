@@ -171,7 +171,6 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 	 *
 	 * @param string  $key
 	 * @param mixed   $value
-	 * @param boolean $refresh_cache Reload the cache?
 	 */
 	public function set_property($key, $value)
 	{
