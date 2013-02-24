@@ -70,7 +70,7 @@ Open `application/config/email.php` and make the following changes:
 ### Step 5: Permissions
 
 	$ chmod 0777 application/{cache,logs}
-	$ chmod 0777 assets
+	$ chmod -R 0777 assets
 
 ### Step 6: Cron jobs
 
