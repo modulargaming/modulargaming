@@ -44,11 +44,11 @@ class View_Item_Trade_Search extends Abstract_View_Inventory {
 
 				$inventory = array();
 
-				foreach ($lot->items() as $item)
+				foreach ($lot->items() as $i)
 				{
 					$inventory[] = array(
-						'name' => $item->name(),
-						'img'  => $item->img()
+						'name' => $i->name(),
+						'img'  => $i->img()
 					);
 				}
 
