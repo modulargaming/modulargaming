@@ -13,7 +13,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 	public function action_index()
 	{
-		if ( ! $this->user->can('Admin_Item_Index'))
+		if (!$this->user->can('Admin_Item_Index'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
@@ -24,7 +24,8 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 		$this->view = new View_Admin_Avatar_Index;
 		$this->_nav('user', 'avatar');
-		$this->view->image = Kohana::$config->load('avatar.size');;
+		$this->view->image = Kohana::$config->load('avatar.size');
+		;
 	}
 
 	public function action_paginate()
@@ -34,17 +35,17 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 			$orm = ORM::factory('Avatar');
 
 			$paginate = Paginate::factory($orm)
-			->columns(array('id', 'title', 'img', 'default'));
+				->columns(array('id', 'title', 'img', 'default'));
 
 			$datatables = DataTables::factory($paginate)->execute();
 
 			foreach ($datatables->result() as $avatar)
 			{
-				$datatables->add_row(array (
-					URL::base().'assets/img/avatars/'.$avatar->img,
-					$avatar->title,
-					$avatar->default,
-					$avatar->id
+				$datatables->add_row(array(
+						URL::base() . 'assets/img/avatars/' . $avatar->img,
+						$avatar->title,
+						$avatar->default,
+						$avatar->id
 					)
 				);
 			}
@@ -53,7 +54,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		}
 		else
 		{
-			throw HTTP_Exception::factory('500', 'error');
+			throw new HTTP_Exception_500();
 		}
 	}
 
@@ -65,14 +66,14 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 		$item = ORM::factory('Avatar', $item_id);
 
-		$list = array (
-			'id' => $item->id,
-			'title' => $item->title,
+		$list = array(
+			'id'      => $item->id,
+			'title'   => $item->title,
 			'default' => $item->default,
-			'img' => URL::base().'assets/img/avatars/'.$item->img,
+			'img'     => URL::base() . 'assets/img/avatars/' . $item->img,
 		);
 
-		$this->response->headers('Content-Type','application/json');
+		$this->response->headers('Content-Type', 'application/json');
 		$this->response->body(json_encode($list));
 	}
 
@@ -88,33 +89,35 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 		$id = $values['id'];
 
-		$this->response->headers('Content-Type','application/json');
+		$this->response->headers('Content-Type', 'application/json');
 
-		try {
+		try
+		{
 			$check = array('title', 'default');
 
 			$file = array('status' => 'empty', 'msg' => '');
 
-			if ( ! isset($values['img'])) {
+			if (!isset($values['img']))
+			{
 				$cfg = Kohana::$config->load('avatar.size');
-				if ( ! Upload::image($_FILES['img']))
+				if (!Upload::image($_FILES['img']))
 				{
 					$file['status'] = 'error';
 					$file['msg'] = 'The supplied image is not uploadable.';
 				}
-				elseif (file_exists(DOCROOT.'assets/img/avatars/'.$_FILES['img']['name']))
+				else if (file_exists(DOCROOT . 'assets/img/avatars/' . $_FILES['img']['name']))
 				{
 					$file['status'] = 'error';
 					$file['msg'] = 'There\'s already an image with the same filename';
 				}
-				elseif ( ! Upload::image($_FILES['img'], $cfg['width'], $cfg['heigth'], TRUE))
+				else if (!Upload::image($_FILES['img'], $cfg['width'], $cfg['heigth'], TRUE))
 				{
 					//not the right image dimensions
 					$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :heigth.', array(
-							':width' => $cfg['width'], ':heigth' => $cfg['heigth']
+						':width' => $cfg['width'], ':heigth' => $cfg['heigth']
 					));
 				}
-				Upload::save($_FILES['img'], $_FILES['img']['name'], DOCROOT.'assets/img/avatars/');
+				Upload::save($_FILES['img'], $_FILES['img']['name'], DOCROOT . 'assets/img/avatars/');
 				$values['img'] = $_FILES['img']['name'];
 				$check[] = 'img';
 			}
@@ -125,19 +128,18 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 			$avatar->values($values, $check);
 			$avatar->save();
 
-			$data = array (
+			$data = array(
 				'action' => 'saved',
-				'type' => ($id == NULL) ? 'new' : 'update',
-				'row' => array (
-					URL::base().'assets/img/avatars/'.$avatar->img,
+				'type'   => ($id == NULL) ? 'new' : 'update',
+				'row'    => array(
+					URL::base() . 'assets/img/avatars/' . $avatar->img,
 					$avatar->title,
 					$avatar->default,
 					$avatar->id
 				)
 			);
 			$this->response->body(json_encode($data));
-		}
-		catch(ORM_Validation_Exception $e)
+		} catch (ORM_Validation_Exception $e)
 		{
 			$errors = array();
 
@@ -145,7 +147,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
 			foreach ($list as $field => $er)
 			{
-				if ( ! is_array($er))
+				if (!is_array($er))
 				{
 					$er = array($er);
 				}
@@ -165,7 +167,7 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		$item = ORM::factory('Avatar', $values['id']);
 		$item->delete();
 
-		$this->response->headers('Content-Type','application/json');
+		$this->response->headers('Content-Type', 'application/json');
 		$this->response->body(json_encode(array('action' => 'deleted')));
 	}
 }

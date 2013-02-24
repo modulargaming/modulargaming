@@ -1,9 +1,9 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-return array (
+return array(
 	'user' => array(
 		'nav' => array(
-			'index' => array('link' => 'user', 'title' => 'User', 'active' => FALSE),
+			'index'  => array('link' => 'user', 'title' => 'User', 'active' => FALSE),
 			'avatar' => array('link' => 'avatar', 'title' => 'Avatars', 'active' => FALSE),
 		)
 	)

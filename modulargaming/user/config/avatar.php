@@ -2,7 +2,7 @@
 
 return array(
 	'size' => array(
-		'width' => 50,
+		'width'  => 50,
 		'heigth' => 50
 	)
 );
