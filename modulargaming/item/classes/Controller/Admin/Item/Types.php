@@ -93,6 +93,12 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 			$item->values($values, array('name', 'status', 'action', 'default_command', 'img_dir'));
 			$item->save();
 
+			//create the item type directory
+			if($id == null)
+			{
+				mkdir(DOCROOT.'assets'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'items'.DIRECTORY_SEPARATOR.$values['img_dir']);
+			}
+
 			$data = array(
 				'action' => 'saved',
 				'type'   => ($id == NULL) ? 'new' : 'update',

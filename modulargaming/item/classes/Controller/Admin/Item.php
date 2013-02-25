@@ -248,9 +248,14 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					$msg = '';
 					if ($id != NULL && !empty($img) && file_exists(DOCROOT . 'assets/img/items/' . $dir . $img))
 					{
+						$grave_dir = DOCROOT . 'assets/graveyard/items/';
+						if(!is_dir($grave_dir))
+						{
+							mkdir($grave_dir);
+						}
 						//move the previously stored item to the graveyard
 						$new_name = Text::random('alnum', 4) . $img;
-						copy(DOCROOT . 'assets/img/items/' . $dir . $img, DOCROOT . 'assets/graveyard/items/' . $new_name);
+						copy(DOCROOT . 'assets/img/items/' . $dir . $img, $grave_dir . $new_name);
 						unlink(DOCROOT . 'assets/img/items/' . $dir . $img);
 						$msg = 'The old image has been moved to the graveyard and renamed to ' . $new_name;
 					}

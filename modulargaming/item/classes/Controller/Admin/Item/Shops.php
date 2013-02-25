@@ -127,11 +127,21 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 					$msg = '';
 					if ($id != NULL && $img != null && file_exists(DOCROOT . 'assets/img/npc/shop/' . $img))
 					{
+						$grave_dir = DOCROOT . 'assets/graveyard/npc/shop/';
+						if(!is_dir($grave_dir))
+						{
+							mkdir($grave_dir);
+						}
 						//move the previously stored item to the graveyard
 						$new_name = Text::random('alnum', 4) . $img;
-						copy(DOCROOT . 'assets/img/npc/shop/' . $img, DOCROOT . 'assets/graveyard/npc/shop/' . $new_name);
+						copy(DOCROOT . 'assets/img/npc/shop/' . $img, $grave_dir. $new_name);
 						unlink(DOCROOT . 'assets/img/npc/shop/' . $img);
 						$msg = 'The old image has been moved to the graveyard and renamed to ' . $new_name;
+					}
+
+					if(!is_dir(DOCROOT . 'assets/img/npc/shop/'))
+					{
+						mkdir(DOCROOT . 'assets/img/npc/shop/');
 					}
 
 					$up = Upload::save($image, $image['name'], DOCROOT . 'assets/img/npc/shop/');
