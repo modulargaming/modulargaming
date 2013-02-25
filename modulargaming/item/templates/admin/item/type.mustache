@@ -51,11 +51,11 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="input-action">Action</label>
+					<label class="control-label" for="input-action">Action text</label>
 
 					<div class="controls">
 						<input type="text" class="input-medium" id="input-action" name="action" value="" maxlength="200">
-						
+						<a href="#" class="btn btn-mini btn-inverse" title="Gets shown when the user wants to consume an item"><i class="icon-question-sign icon-white"></i></a>
 					</div>
 				</div>
 				<div class="control-group">
@@ -74,6 +74,7 @@
 								<option value="{{value}}">{{name}}</option>
 							{{/commands}}
 						</select>
+						<a href="#" class="btn btn-mini btn-inverse" title="Any item with this item type will require this command"><i class="icon-question-sign icon-white"></i></a>
 					</div>
 				</div>
 			</fieldset>
