@@ -316,7 +316,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 		if($item_id == null) {
 			$i = ORM::factory('Item')
-				->where('name', '=', $values['item_name'])
+				->where('item.name', '=', $values['item_name'])
 				->find();
 			$item_id = $i->id;
 			$state = 'new';
