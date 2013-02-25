@@ -183,11 +183,7 @@ class Item {
 	{
 		static $user = NULL;
 
-<<<<<<< HEAD
-		if($user == NULL AND $other_user == NULL)
-=======
 		if ($user == NULL && $other_user == NULL)
->>>>>>> item command bug fix
 		{
 			$user = Auth::instance()->get_user();
 		}
