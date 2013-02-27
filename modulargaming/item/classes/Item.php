@@ -39,7 +39,7 @@ class Item {
 				throw new Item_Exception('Item ":id" could not be loaded', array(':id' => $id));
 			}
 		}
-		else if ($item->loaded())
+		elseif ($item->loaded())
 		{
 			if (is_a($item, 'Model_Item'))
 			{
@@ -88,18 +88,11 @@ class Item {
 		}
 		else
 		{
-			if ($this->_type == 'item')
-			{
 				$user_item = ORM::factory('User_Item')
 					->where('user_id', '=', $user->id)
 					->where('item_id', '=', $this->_item->id)
 					->where('location', '=', $location)
 					->find();
-			}
-			else
-			{
-				$user_item = $this->_item;
-			}
 
 			$action = ($amount > 0) ? '+' : '-';
 
@@ -110,7 +103,7 @@ class Item {
 			}
 			else if ($action == '+')
 			{
-				$id = ($this->_type == 'item') ? $this->_item->id : $this->_item->item_id;
+				$id = $this->_item->id;
 
 				//create new copy
 				$user_item = ORM::factory('User_Item')
@@ -183,7 +176,7 @@ class Item {
 	{
 		static $user = NULL;
 
-		if ($user == NULL && $other_user == NULL)
+		if ($user == NULL AND $other_user == NULL)
 		{
 			$user = Auth::instance()->get_user();
 		}
