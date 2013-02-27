@@ -13,14 +13,15 @@ abstract class Item_Command {
 
 	/**
 	 * Spew out a command
-	 * @param string $command
+	 *
+	 * @param string            $command
 	 * @param Kohana_Validation $validation
+	 *
 	 * @return Item_Command
 	 */
-	public static function factory($command, $validation=null)
+	static public function factory($command, $validation = NULL)
 	{
-		$cmd = 'Item_Command_'.$command;
-		return new $cmd($validation);
+		return new $command($validation);
 	}
 
 	/**
@@ -48,12 +49,14 @@ abstract class Item_Command {
 
 	/**
 	 * Build the admin interface for this command
+	 *
 	 * @param string $name
 	 */
 	abstract protected function _build($name);
 
 	/**
 	 * Validate param for a command in the admin
+	 *
 	 * @param mixed $param
 	 */
 	abstract public function validate($param);
@@ -62,10 +65,10 @@ abstract class Item_Command {
 	 * Perform the command
 	 *
 	 * @param Model_User_Item $item
-	 * @param string|array $param Item defined param for the command
-	 * @param mixed $data Extra data that could be used(e.g. pet)
+	 * @param string|array    $param Item defined param for the command
+	 * @param mixed           $data  Extra data that could be used(e.g. pet)
 	 */
-	abstract public function perform($item, $param, $data=null);
+	abstract public function perform($item, $param, $data = NULL);
 
 	/**
 	 * Assign an extra form field in the item action list in the inventory
@@ -76,14 +79,16 @@ abstract class Item_Command {
 		return NULL;
 	}
 
-	public function __construct(Kohana_Validation $validation=null)
+	public function __construct(Kohana_Validation $validation = NULL)
 	{
 		$this->_validation = $validation;
 	}
 
 	/**
 	 * Define the admin form field for adding a command to an item.
+	 *
 	 * @param string $name
+	 *
 	 * @return number
 	 */
 	public function build_admin($name)
@@ -94,12 +99,16 @@ abstract class Item_Command {
 		$def['pets'] = ($this->pets_required()) ? 1 : 0;
 
 		//if multiple instances of the command may be defined
-		if(!isset($def['multiple']))
+		if (!isset($def['multiple']))
+		{
 			$def['multiple'] = 0;
+		}
 
 		//if autocomplete search is needed
-		if(!isset($def['search']))
+		if (!isset($def['search']))
+		{
 			$def['search'] = 0;
+		}
 
 		return $def;
 	}
