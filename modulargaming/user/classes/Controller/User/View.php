@@ -24,11 +24,11 @@ class Controller_User_View extends Abstract_Controller_User {
 			throw HTTP_Exception::Factory('404', 'No such user');
 		}
 
-		$container = new Tab_Container;
+		$container = new Tabs;
 
 		$about = new Tab('About me');
-		$about->add_content(new Tab_Content_Text("Hello, short text about me!"));
-		$about->add_content(new Tab_Content_Text("Hello, this is my signature!"));
+		$about->add_content(new Tab_Text("Hello, short text about me!"));
+		$about->add_content(new Tab_Text("Hello, this is my signature!"));
 
 		$container->add_tab($about);
 

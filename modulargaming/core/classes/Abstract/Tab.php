@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-abstract class Abstract_Tab_Content {
+abstract class Abstract_Tab {
 
 	/**
 	 * @var View_Tab_Content $view
