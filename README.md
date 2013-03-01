@@ -39,8 +39,7 @@ Edit `application/config/database.php` with the correct information.
 
 ### Step 3: Import database
 
-* On UNIX run the command ./minion migrations:run
-* On Windows run the command php minion migrations:run
+	$ php minion migrations:run
 
 ### Step 4: Configuration of modulargaming
 
