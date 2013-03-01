@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Tab_Content_PetList extends Abstract_View_Tab_Content {
+class View_Tab_PetList extends Abstract_View_Tab {
 
 	/**
 	 * @var Array Pets

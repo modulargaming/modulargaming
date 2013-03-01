@@ -2,7 +2,7 @@
  
 class PetEvents {
 
-	public static function user_profile(Model_User $user, Tab_Container $tabs)
+	public static function user_profile(Model_User $user, Tabs $tabs)
 	{
 		$pets = ORM::factory('User_Pet')
 			->where('user_id', '=', $user->id)
@@ -10,7 +10,7 @@ class PetEvents {
 			->find_all();
 
 		$tab = new Tab('Pets');
-		$tab->add_content(new Tab_Content_PetList($pets->as_array()));
+		$tab->add_content(new Tab_PetList($pets->as_array()));
 
 		$tabs->add_tab($tab);
 	}

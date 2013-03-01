@@ -1,5 +1,10 @@
 default:
   extensions:
     Behat\MinkExtension\Extension:
-      base_url: http://localhost
+      base_url: http://mg.dev
       goutte: ~
+
+user:
+  paths:
+    features:  'modulargaming/user/tests/features/'
+    bootstrap: 'modulargaming/user/tests/features/bootstrap'

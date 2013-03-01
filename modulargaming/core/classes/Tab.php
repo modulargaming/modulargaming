@@ -8,7 +8,7 @@ class Tab {
 	public $name;
 
 	/**
-	 * @var Abstract_Tab_Content[] $content
+	 * @var Abstract_Tab[] $content
 	 */
 	private $contents = array();
 
@@ -17,7 +17,7 @@ class Tab {
 		$this->name = $name;
 	}
 
-	public function add_content(Abstract_Tab_Content $content)
+	public function add_content(Abstract_Tab $content)
 	{
 		$this->contents[] = $content;
 	}
