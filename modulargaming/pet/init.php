@@ -53,7 +53,7 @@ Route::set('pet.admin.specie.retrieve', 'admin/pet/specie/retrieve')
 	'controller' => 'Specie',
 	'action'     => 'retrieve',
 ));
-Route::set('pet.admin.specie.delete', 'admin/pet/specie/delete')
+Route::set('pet.admin.specie.delete', 'admin/pet/specie/remove')
 	->defaults(array(
 	'directory'  => 'Admin/Pet',
 	'controller' => 'Specie',
@@ -101,7 +101,7 @@ Route::set('pet.admin.colour.retrieve', 'admin/pet/colour/retrieve')
 	'controller' => 'Colour',
 	'action'     => 'retrieve',
 ));
-Route::set('pet.admin.colour.delete', 'admin/pet/colour/delete')
+Route::set('pet.admin.colour.delete', 'admin/pet/colour/remove')
 	->defaults(array(
 	'directory'  => 'Admin/Pet',
 	'controller' => 'Colour',
