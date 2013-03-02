@@ -5,10 +5,14 @@ abstract class Paginate extends Kohana_Paginate {
 	// Config array
 	private $config = NULL;
 
-	// Request object
+	/**
+	 * @var Kohana_Request
+	 */
 	private $request;
 
-	// Route
+	/**
+	 * @var Kohana_Route
+	 */
 	private $route;
 
 	// Route parameters.
@@ -113,7 +117,28 @@ abstract class Paginate extends Kohana_Paginate {
 			array($this->config['param'] => $page)
 		);
 
-		$suffix = ($this->query != FALSE) ? '?'.$this->query.'='.$this->request->query($this->query) : '';
+		if($this->query != FALSE)
+		{
+			if(is_string($this->query))
+			{
+				$suffix = ($this->query != FALSE) ? '?'.$this->query.'='.$this->request->query($this->query) : '';
+			}
+			elseif(is_array($this->query)) {
+				$suffix = '?';
+				$first = TRUE;
+
+				foreach($this->query as $q) {
+					if($first) {
+						$first = FALSE;
+						$suffix .= $q.'='.$this->request->query($q);
+					}
+					else {
+						$suffix .= '&'.$q.'='.$this->request->query($q);
+					}
+				}
+			}
+		}
+
 		return URL::site($this->route->uri($params)).$suffix;
 	}
 

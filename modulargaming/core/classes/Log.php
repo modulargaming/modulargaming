@@ -31,6 +31,7 @@ class Log {
 			'alias'    => $alias,
 			'message'  => $message,
 			'user_id'  => $user->id,
+			'username' => $user->username,
 			'agent'    => Request::user_agent(array('browser', 'platform')),
 			'ip'       => Request::$client_ip,
 			'location' => Request::current()->uri(),
