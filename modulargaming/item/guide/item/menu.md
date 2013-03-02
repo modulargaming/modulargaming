@@ -1,0 +1,10 @@
+## [Items]()
+- [Inventory](inventory)
+- [User shops](shops)
+- [Trades](trades)
+- [Shops](shop)
+- Helpers
+  - [Class](helpers/class)
+  - [Model](helpers/model)
+  - [Commands](helpers/commands)
+- [Admin](admin)
