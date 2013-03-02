@@ -1,0 +1,6 @@
+<label for="timezone">Timezone</label>
+<select name="timezone_id" id="timezone">
+	{{#timezones}}
+		<option value="{{id}}" {{#selected}}selected{{/selected}}>{{name}}</option>
+	{{/timezones}}
+</select>

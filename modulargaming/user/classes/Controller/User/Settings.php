@@ -6,8 +6,13 @@ class Controller_User_Settings extends Abstract_Controller_User {
 
 	public function action_index()
 	{
+		$settings = new Settings;
+
+		$settings->add_setting(new Setting_Preferences($this->user));
+		$settings->add_setting(new Setting_Account($this->user));
+
 		$this->view = new View_User_Settings;
-		//$this->view->timezones = $timezones->as_array();
+		$this->view->settings = $settings;
 	}
 
 }
