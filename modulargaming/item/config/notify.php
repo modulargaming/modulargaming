@@ -2,6 +2,7 @@
 
 return array (
 	'items' => array(
+		'gift' => ':username sent you :item_name',
 		'user_shop' => array(
 			'buy' => array(
 				'icon' => 'user_shop',

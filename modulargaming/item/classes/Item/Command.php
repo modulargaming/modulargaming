@@ -21,6 +21,10 @@ abstract class Item_Command {
 	 */
 	static public function factory($command, $validation = NULL)
 	{
+		if(strstr('Item_Command', $command) == false)
+		{
+			$command = 'Item_Command'.$command;
+		}
 		return new $command($validation);
 	}
 

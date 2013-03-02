@@ -14,7 +14,7 @@ class View_Item_Shop_Logs extends Abstract_View_Inventory {
 		{
 			foreach ($this->logs as $log)
 			{
-				$return[] = array('time' => Date::fuzzy_span($log->time), 'img' => $log->param['item']->img(), 'name' => $log->param['item_name'], 'price' => $log->param['amount']);
+				$return[] = array('time' => Date::fuzzy_span($log->time), 'img' => $log->param['item']->img(), 'username' => $log->param['username'], 'user_id' => $log->param['user_id'], 'name' => $log->param['item_name'], 'price' => $log->param['amount']);
 			}
 		}
 

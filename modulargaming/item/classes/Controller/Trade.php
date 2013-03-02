@@ -30,8 +30,6 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 
 	public function action_lots()
 	{
-		$page = $this->request->param('page');
-
 		$config = Kohana::$config->load('items.trade.lots');
 		$max_lots = $config['max_results'];
 
@@ -200,7 +198,7 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 		//remove all bids made to this lot
 		if (count($bids) > 0)
 		{
-			$log = Item::log('item.trade.' . $id . '.delete', 'Trade #id deleted', array(':id' => $id));
+			$log = Log::create('item.trade.' . $id . '.delete', 'item', 'Trade #id deleted', array(':id' => $id));
 
 			foreach ($bids as $bid)
 			{
@@ -217,7 +215,8 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 					$bid->user->save();
 				}
 
-				Item::notify($log, $bid->user, 'item.trades.delete', array(':lot' => $id));
+				$log->notify($bid->user, 'item.trades.delete', array(':lot' => $id));
+
 				$bid->delete();
 			}
 		}
@@ -312,7 +311,6 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 	public function action_process_bid()
 	{
 		$id = $this->request->param('id');
-
 		$config = Kohana::$config->load('items.trade.bids');
 
 		if ($this->request->method() != HTTP_Request::POST)
@@ -412,17 +410,19 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 					//deduct points if specified
 					if (Valid::digit($points))
 					{
-						$user->points -= $points;
-						$user->save();
+						$this->user->points -= $points;
+						$this->user->save();
 						$bid->points = $points;
 					}
 
 					$bid->save();
 
+					$item_names = array();
 					//point the items to the created lot
 					foreach ($stored_items as $item)
 					{
 						$item->parameter_id = $bid->id;
+						$item_names[] = $item->name();
 						$item->save();
 					}
 				} catch (Kohana_ORM_Validation_Exception $e)
@@ -437,22 +437,10 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 					return $this->redirect(Route::get('item.trade.bid')->uri(array('id' => $id)));
 				}
 
-				$log = Item::log('item.trade.bid.' . $bod->lot_id, 'Made a bid with :amount items and :points points', array(
-					array(':amount' => $a_count, ':points' => (int)$points,
-					      'items'   => function () use ($stored_items)
-					      {
-						      $list = array();
+				$log = Log::create('item.trade.bid.' . $bid->lot_id, 'items', 'Made a bid with :amount items and :points points', array(
+					':amount' => $a_count, ':points' => (int)$points, 'items' => $item_names));
 
-						      foreach ($stored_items as $item)
-						      {
-							      $list[] = $item->name();
-						      }
-
-						      return $list;
-					      })
-				));
-
-				Item::notify($log, $bid->lot->user, array(
+				$log->notify($bid->lot_user, 'items.trades.bid', array(
 					':user' => $this->user->username,
 					':lot'  => '<strong>#<a href="' . Route::url('item.trade.lot', array('id' => $bid->lot_id)) . '">' . $bid->lot_id . '</a></strong>'
 				));
@@ -491,8 +479,7 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 
 		if (!$bid->loaded())
 		{
-			//@todo change to HTTP exception
-			return Hint::error('No bid found to reject');
+			Hint::error('No bid found to reject');
 		}
 		else if ($bid->trade->user_id != $this->user->id)
 		{
@@ -527,8 +514,8 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 				$item->transfer($bid->user, $item->amount);
 			}
 
-			$log = Item::log('item.trade.' . $id . '.accept', 'Trade #id completed', array(':id' => $id));
-			Item::notify($log, $user, 'item.trades.accept', array(':username' => $this->user->username));
+			$log = Log::create('item.trade.' . $id . '.accept', 'item', 'Trade #id completed', array(':id' => $id));
+			$log->notify($user, 'items.trades.accept', array(':username' => $this->user->username));
 
 			Hint::success('You\'ve accepted bid #:id made by :username', array(':id' => $bid->id, ':username' => $bid->user->username));
 
@@ -549,7 +536,6 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 
 		if (!$bid->loaded())
 		{
-			//@todo change to HTTP exception
 			return Hint::error('No bid found to reject');
 		}
 
@@ -577,8 +563,8 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 
 			Hint::success('You\'ve rejected bid #:id made by :username', array(':id' => $bid->id, ':username' => $user->username));
 
-			$log = Item::log('item.trade.' . $id . '.reject', 'Bid from :user declined', array(':user' => $user->username));
-			Item::notify($log, $user, 'item.trades.reject', array(':lot' => $id));
+			$log = Log::create('item.trade.' . $id . '.reject', 'item', 'Bid from :user declined', array(':user' => $user->username));
+			$log->notify($user, 'items.trades.reject', array(':lot' => $id));
 			$bid->delete();
 		}
 
@@ -623,8 +609,8 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 
 			Hint::success('You\'ve retracted your bid');
 
-			$log = Item::log('item.trade.' . $id . '.retract', 'Retracted bid for #id', array(':id' => $id));
-			Item::notify($log, $bid->lot->user, 'item.trades.retract', array(':lot' => $id, ':username' => $this->user->username));
+			$log = Log::create('item.trade.' . $id . '.retract', 'item', 'Retracted bid for :id', array(':id' => $id));
+			$log->notify($log, $bid->lot->user, 'items.trades.retract', array(':lot' => $id, ':username' => $this->user->username));
 
 			$bid->delete();
 		}
@@ -639,12 +625,13 @@ class Controller_Trade extends Abstract_Controller_Frontend {
 	public function action_search()
 	{
 		$term = $this->request->query("t");
+		$limit = $this->request->query("l");
 
 		$items = ORM::factory('User_Item')
 			->where('location', '=', 'trade.lot')
 			->where('item.name', 'LIKE', '%' . $term . '%');
 
-		$paginate = Paginate::factory($items, array('total_items' => 25), $this->request, 't')->execute();
+		$paginate = Paginate::factory($items, array('total_items' => $limit), $this->request, array('t', 'l'))->execute();
 
 		$this->view = new View_Item_Trade_Search;
 		$this->view->term = $term;

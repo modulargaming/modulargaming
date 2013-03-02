@@ -342,7 +342,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 				$this->user->save();
 
 				//log this action
-				$log = Item::log('user_shop.' . $shop->id, 'Bought 1 :item_name for :amount from :user', array(
+				$log = Log::create('user_shop.' . $shop->id, 'item', 'Bought 1 :item_name for :amount from :user', array(
 					'item'      => $item->item,
 					'item_name' => $item->item->name,
 					'user'      => $item->user->username,
@@ -351,7 +351,7 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 
 				$item->transfer($this->user);
 
-				Item::notify($log, $shop->user, 'user_shop.buy');
+				$log->notify($shop->user, 'user_shop.buy');
 
 				Hint::success(__('You\'ve successfully bought :item_name from :shop_owner for :amount :currency_short', array(':owner' => $shop->user->username, ':item_name' => $item->item->name('1'))));
 			}

@@ -43,7 +43,7 @@
 		 * Move the currently initialised item to a new location and update its quantity.
 		 *
 		 * Returns false if you're trying to move a higher amount of this item than you already have,
-		 * if successfull it will return the instance of the user item stack where the copies have moved to.
+		 * if successful it will return the instance of the user item stack where the copies have moved to.
 		 *
 		 * @param string  $location     Location to send the item to
 		 * @param integer $amount       How many are moving to $location
@@ -87,7 +87,7 @@
 		 * @param Model_User $user   A user model instance of the new owner
 		 * @param Integer    $amount The amount of copies you want to transfer
 		 *
-		 * @throws Item_Exception When trying to transfer an untrasferable item
+		 * @throws Item_Exception When trying to transfer an untransferable item
 		 * @return boolean|Model_User_Item
 		 */
 		public function transfer(Model_User $user, $amount = 1)
@@ -98,7 +98,10 @@
 			}
 			else
 			{
-				return $this->_relocate($user->id, 'inventory', $amount);
+				$this->_relocate($user->id, 'inventory', $amount);
+
+				return Log::create('transfer'.$this->item_id, 'item', ':item_name transferred to :other_user', array(
+					':tem_name' => $this->item->name, ':other_user' => $user->username));
 			}
 		}
 
@@ -134,7 +137,7 @@
 
 			if ($item->loaded())
 			{
-				$item->amount = $user_item->amount + $amount;
+				$item->amount += $amount;
 				$item->save();
 			}
 			else
@@ -160,15 +163,13 @@
 				$this->save();
 			}
 
-			//@todo log
-
 			return $item;
 		}
 
 		/**
 		 * Change the amount of the loaded item.
 		 *
-		 * @param string  $type (add|+|substract|-)
+		 * @param string  $type (add|+|subtract|-)
 		 * @param integer $amount
 		 *
 		 * @return boolean
@@ -187,24 +188,21 @@
 					$this->amount = $this->amount + $amount;
 					$this->save();
 
-					//@todo log
 					return TRUE;
 					break;
-				case 'substract':
+				case 'subtract':
 				case '-':
 					if ($this->amount > $amount)
 					{
 						$this->amount = $this->amount - $amount;
 						$this->save();
 
-						//@todo log
 						return TRUE;
 					}
 					else if ($amount == $this->amount)
 					{
 						$this->delete();
 
-						//@todo log
 						return TRUE;
 					}
 					else

@@ -346,7 +346,11 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 		try
 		{
-			$item->to_user($user, 'admin.' . $this->user->username, $this->request->post('amount'));
+			$log = $item->to_user($user, 'admin.' . $this->user->username, $this->request->post('amount'));
+
+			//notify the user
+			$log->notify($user, 'You received :item_name!', array(':item_name' => $item->item()->name));
+
 			$list = array('action' => 'success');
 		} catch (Item_Exception $e)
 		{

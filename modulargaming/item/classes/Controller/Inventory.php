@@ -236,6 +236,8 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 					if ($error == FALSE)
 					{
+						Log::create('consume'.$item->item_id, 'item', ':item_name consumed', array(':tem_name' => $item->name));
+
 						if ($def_cmd->delete_after_consume == TRUE)
 						{
 							$item->amount('-', 1);
@@ -243,7 +245,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 						$db->commit();
 
-						//@todo log
+
 					}
 				}
 			}
@@ -281,6 +283,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 						if ($error = FALSE)
 						{
+							Log::create('consume'.$item->item_id, 'item', ':item_name consumed', array(':tem_name' => $item->name));
 							if ($def_cmd->delete_after_consume == TRUE)
 							{
 								$item->amount('-', 1);
@@ -320,6 +323,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 							}
 
 							$item->amount('-', $amount);
+							Log::create('remove.'.$item->item_id, 'item', ':item_name removed', array(':tem_name' => $name));
 							$results = __(':item :verb deleted successfully', array(
 								':verb' => $verb, ':item' => $name
 							));
@@ -340,8 +344,9 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 							if ($user->loaded())
 							{
-								$item->transfer($user);
-								//@todo notification
+								$log = $item->transfer($user);
+
+								$log->notify($user, 'items.gift', array(':item_name' => $item->item->name(1)));
 
 								$results = __('You\'ve successfully sent :item to :username', array(
 									':item' => $item->item->name, ':username' => $user->username
