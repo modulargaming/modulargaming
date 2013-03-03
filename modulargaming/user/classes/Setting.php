@@ -45,14 +45,20 @@ abstract class Setting {
 	/**
 	 * Get the validation rules for the settings page.
 	 *
+	 * @param array $post
 	 * @return Validation
 	 */
-	public abstract function get_validation();
+	public function get_validation(array $post)
+	{
+		return Validation::factory($post);
+	}
 
 	/**
 	 * Save the user information.
+	 *
+	 * @param array $post
 	 */
-	public abstract function save();
+	public abstract function save(array $post);
 
 	/**
 	 * Get the Settings page html by appending the content views.

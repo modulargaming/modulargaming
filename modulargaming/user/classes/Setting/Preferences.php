@@ -19,18 +19,12 @@ class Setting_Preferences extends Setting {
 	}
 
 	/**
-	 * @return Validation
-	 */
-	public function get_validation()
-	{
-		// TODO: Implement get_validation() method.
-	}
-
-	/**
 	 * Save the user information.
+	 *
+	 * @param array $post
 	 */
-	public function save()
+	public function save(array $post)
 	{
-		// TODO: Implement save() method.
+		$this->user->update_user($post, array('timezone_id'));
 	}
 }

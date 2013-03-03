@@ -3,7 +3,7 @@
 		<div class="well" style="padding: 8px 0">
 			<ul class="nav nav-list">
 				<li class="nav-header">Navigation</li>
-				{{#navigation}}
+				{{#settings}}
 					<li {{#active}}class="active"{{/active}}>
 						<a href="#{{id}}" data-toggle="tab">
 							{{#icon}}
@@ -12,26 +12,27 @@
 							{{title}}
 						</a>
 					</li>
-				{{/navigation}}
+				{{/settings}}
 			</ul>
 		</div>
 	</div>
 	<div class="span9">
-		<form method="post">
-			<input type="hidden" name="csrf" value="{{csrf}}">
+		<div class="tab-content">
+			{{#settings}}
+				<div class="tab-pane" id="{{id}}">
+					<form method="post">
+						<input type="hidden" name="csrf" value="{{csrf}}">
+						<input type="hidden" name="settings-tab" value="{{id}}">
 
-			<div class="tab-content">
-				{{#settings}}
-					<div class="tab-pane" id="{{id}}">
 						<legend>{{title}}</legend>
 						{{& view}}
-					</div>
-				{{/settings}}
-			</div>
 
-			<div class="form-actions">
-				<input type="submit" class="btn btn-primary" value="Save!">
-			</div>
-		</form>
+						<div class="form-actions">
+							<input type="submit" class="btn btn-primary" value="Save!">
+						</div>
+					</form>
+				</div>
+			{{/settings}}
+		</div>
 	</div>
 </div>

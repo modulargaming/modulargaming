@@ -26,39 +26,21 @@ class Settings {
 	}
 
 	/**
-	 * Validate the post array, returns TRUE if successful, else returns the array of errors.
+	 * Get the setting with the specified id.
 	 *
-	 * @param array $post
-	 * @return array|bool
+	 * @param integer $id
+	 * @return null|Setting
 	 */
-	public function validate(array $post)
+	public function get_by_id($id)
 	{
-		$error = FALSE;
-		$errors = array();
-
 		foreach ($this->settings as $setting)
 		{
-			$validation = $setting->get_validation();
-			if ( ! $validation->check())
+			if ($setting->id() == $id)
 			{
-				$error = TRUE;
-				$errors = $errors + $validation->errors(); // Correct?
+				return $setting;
 			}
 		}
-
-		if ( ! $error)
-		{
-			return TRUE;
-		}
-		return $errors;
-	}
-
-	public function save(array $post)
-	{
-		foreach ($this->settings as $setting)
-		{
-			$setting->save($post);
-		}
+		return NULL;
 	}
 
 }

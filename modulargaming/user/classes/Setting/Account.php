@@ -15,19 +15,23 @@ class Setting_Account extends Setting {
 	}
 
 	/**
+	 * Get the validation rules for the settings page.
+	 *
+	 * @param array $post
 	 * @return Validation
 	 */
-	public function get_validation()
+	public function get_validation(array $post)
 	{
 		// TODO: Implement get_validation() method.
 	}
 
 	/**
 	 * Save the user information.
+	 *
+	 * @param array $post
 	 */
-	public function save()
+	public function save(array $post)
 	{
 		// TODO: Implement save() method.
 	}
-
 }
