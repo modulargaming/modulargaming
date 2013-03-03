@@ -21,8 +21,9 @@ abstract class Item_Command {
 	 */
 	static public function factory($command, $validation = NULL)
 	{
-		if(strpos('Item_Command_', $command) == FALSE)
+		if(strpos('Item_Command_', $command) === FALSE)
 		{
+			$command = str_replace('Item_Command_','', $command);
 			$command = 'Item_Command_'.$command;
 		}
 		return new $command($validation);
