@@ -141,7 +141,7 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 
 		foreach ($properties as $p)
 		{
-			$cache[$p->key] = $this->_unserialize_value($p->value);
+			$cache[$p->key] = $p->value;
 		}
 
 		$this->cached_properties = $cache;
