@@ -24,6 +24,7 @@ class Controller_User_Settings extends Abstract_Controller_User {
 				{
 					try {
 						$setting->save($post);
+						Hint::success('Updated '.$setting->title.'!');
 					}
 					catch (ORM_Validation_Exception $e)
 					{

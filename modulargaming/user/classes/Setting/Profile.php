@@ -22,7 +22,9 @@ class Setting_Profile extends Setting {
 	 */
 	public function get_validation(array $post)
 	{
-		// TODO: Implement get_validation() method.
+		return Validation::factory($post)
+			->rule('about', 'max_length', array(':value', '1024'))
+			->rule('signature', 'max_length', array(':value', '1024'));
 	}
 
 	/**
@@ -32,6 +34,8 @@ class Setting_Profile extends Setting {
 	 */
 	public function save(array $post)
 	{
-		// TODO: Implement save() method.
+		$this->user->set_property('about',     Security::xss_clean(Arr::get($post, 'about')));
+		$this->user->set_property('signature', Security::xss_clean(Arr::get($post, 'signature')));
+		$this->user->update(); // Save cached_properties.
 	}
 }
