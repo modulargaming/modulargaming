@@ -21,7 +21,7 @@ abstract class Item_Command {
 	 */
 	static public function factory($command, $validation = NULL)
 	{
-		if(strstr('Item_Command', $command) == FALSE)
+		if(strpos('Item_Command_', $command) == FALSE)
 		{
 			$command = 'Item_Command_'.$command;
 		}
