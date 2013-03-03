@@ -10,7 +10,7 @@
 			'colours' => array(
 				'through'     => 'pet_species_colours',
 				'model'       => 'Pet_Colour',
-				'foreign_key' => 'pet_specie_id',
+				'foreign_key' => 'specie_id',
 				'far_key'     => 'colour_id'
 			)
 		);

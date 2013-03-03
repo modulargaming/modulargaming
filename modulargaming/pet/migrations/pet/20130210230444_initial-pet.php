@@ -52,17 +52,17 @@ class Migration_Pet_20130210230444 extends Minion_Migration_Base {
 
 		 $db->query(NULL, "
 		 	CREATE TABLE IF NOT EXISTS `pet_species_colours` (
-			  `pet_specie_id` int(11) UNSIGNED NOT NULL,
+			  `specie_id` int(11) UNSIGNED NOT NULL,
 			  `colour_id` int(11) UNSIGNED NOT NULL,
-			  KEY `pet_species_colours_specie` (`pet_specie_id`),
+			  KEY `pet_species_colours_specie` (`specie_id`),
 			  KEY `pet_species_colours_colour` (`colour_id`),
-		 	  CONSTRAINT `pet_species_colours_ibfk_1` FOREIGN KEY (`pet_specie_id`) REFERENCES `pet_species` (`id`) ON DELETE CASCADE,
+		 	  CONSTRAINT `pet_species_colours_ibfk_1` FOREIGN KEY (`specie_id`) REFERENCES `pet_species` (`id`) ON DELETE CASCADE,
 		 	  CONSTRAINT `pet_species_colours_ibfk_2` FOREIGN KEY (`colour_id`) REFERENCES `pet_colours` (`id`) ON DELETE CASCADE
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 		 ");
 
 		 $db->query(NULL, "
-		 	INSERT INTO  `pet_species_colours` (`pet_specie_id` , `colour_id`)
+		 	INSERT INTO  `pet_species_colours` (`specie_id` , `colour_id`)
 			VALUES ('1',  '1'), ('1',  '2'), ('1',  '3'),
 				('1',  '4'), ('1',  '5'), ('1',  '6'), ('2',  '1'),
 				('2',  '2'), ('2',  '3'), ('2',  '4'), ('2',  '5'), ('2',  '6');");
