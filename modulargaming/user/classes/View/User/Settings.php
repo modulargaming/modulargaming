@@ -13,7 +13,7 @@ class View_User_Settings extends Abstract_View {
 		foreach ($this->settings->get_all() as $setting)
 		{
 			$navigation[] = array(
-				'id'    => $setting->id,
+				'id'    => $setting->id(),
 				'title' => $setting->title,
 				'icon'  => $setting->icon
 			);

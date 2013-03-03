@@ -1,15 +1,15 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
  
-class Setting_Account extends Setting {
+class Setting_Profile extends Setting {
 
-	public $title = "Account";
-	public $icon = "icon-user";
+	public $title = "Profile";
+	public $icon = "icon-book";
 
 	public function __construct(Model_User $user)
 	{
 		parent::__construct($user);
 
-		$view = new View_User_Settings_Account;
+		$view = new View_User_Settings_Profile;
 
 		$this->add_content($view);
 	}
@@ -29,5 +29,4 @@ class Setting_Account extends Setting {
 	{
 		// TODO: Implement save() method.
 	}
-
 }

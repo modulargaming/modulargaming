@@ -2,7 +2,6 @@
  
 class Setting_Preferences extends Setting {
 
-	public $id = "preferences";
 	public $title = "Preferences";
 	public $icon = "icon-wrench";
 

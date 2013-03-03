@@ -3,11 +3,6 @@
 abstract class Setting {
 
 	/**
-	 * @var integer id of setting
-	 */
-	public $id;
-
-	/**
 	 * @var string title for navigation
 	 */
 	public $title;
@@ -25,19 +20,31 @@ abstract class Setting {
 	/**
 	 * @var Abstract_View[]
 	 */
-	protected $views;
+	protected $views = array();
 
 	public function __construct(Model_User $user)
 	{
 		$this->user = $user;
 	}
 
+	public function id()
+	{
+		return URL::title($this->title);
+	}
+
+	/**
+	 * Add a new view.
+	 *
+	 * @param Abstract_View $view
+	 */
 	public function add_content(Abstract_View $view)
 	{
 		$this->views[] = $view;
 	}
 
 	/**
+	 * Get the validation rules for the settings page.
+	 *
 	 * @return Validation
 	 */
 	public abstract function get_validation();
@@ -47,6 +54,11 @@ abstract class Setting {
 	 */
 	public abstract function save();
 
+	/**
+	 * Get the Settings page html by appending the content views.
+	 *
+	 * @return string
+	 */
 	public function view()
 	{
 		$renderer = Kostache::factory();
