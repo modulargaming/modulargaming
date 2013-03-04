@@ -354,7 +354,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			$list = array('action' => 'success');
 		} catch (Item_Exception $e)
 		{
-			$list = array('action' => 'error', 'errors' => (array)$e->errors());
+			$list = array('action' => 'error', 'errors' => (array)$e->getMessage());
 		}
 
 		//return response
