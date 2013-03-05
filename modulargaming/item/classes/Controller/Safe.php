@@ -58,7 +58,7 @@ class Controller_Safe extends Abstract_Controller_Frontend {
 							Hint::error(__('You can\'t move :name, you only have :amount.',
 									array(
 										':amount' => $i->amount,
-										':name'   => $i->item->name($item['amount'])
+										':name' => $i->item->name($item['amount'])
 									))
 							);
 						}

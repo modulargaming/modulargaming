@@ -1,14 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Log class.
+ * MG class.
  *
  * @package    MG/core
- * @category   Log
+ * @category   MG
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Log {
+class MG {
 	/**
 	 * Create a new log
 	 *
@@ -20,7 +20,7 @@ class Log {
 	 *
 	 * @return Log
 	 */
-	static public function create($alias, $type, $message, $params = array(), $user = NULL)
+	static public function log($alias, $type, $message, $params = array(), $user = NULL)
 	{
 		if ($user == NULL)
 		{
@@ -43,7 +43,7 @@ class Log {
 			->values($values)
 			->create();
 
-		return new Log($log);
+		return new MG($log);
 	}
 
 	protected $_log = null;

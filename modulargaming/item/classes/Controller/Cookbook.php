@@ -92,10 +92,10 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 				}
 
 				$materials[] = array(
-					'name'          => $material->item->name,
-					'img'           => $material->item->img(),
+					'name' => $material->item->name,
+					'img' => $material->item->img(),
 					'amount_needed' => $material->amount,
-					'amount_owned'  => $mat
+					'amount_owned' => $mat
 				);
 			}
 
@@ -106,12 +106,12 @@ class Controller_Cookbook extends Abstract_Controller_Frontend {
 				$this->response->headers('Content-Type', 'application/json');
 
 				return $this->response->body(json_encode(array(
-					'status'    => 'success',
+					'status' => 'success',
 					'materials' => $materials,
-					'name'      => $recipe->name,
-					'img'       => $recipe->item->img(),
+					'name' => $recipe->name,
+					'img' => $recipe->item->img(),
 					'collected' => $collect_count,
-					'csrf'      => Security::token()
+					'csrf' => Security::token()
 				)));
 			}
 

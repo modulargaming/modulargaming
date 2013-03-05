@@ -88,11 +88,11 @@ class Item {
 		}
 		else
 		{
-				$user_item = ORM::factory('User_Item')
-					->where('user_id', '=', $user->id)
-					->where('item_id', '=', $this->_item->id)
-					->where('location', '=', $location)
-					->find();
+			$user_item = ORM::factory('User_Item')
+				->where('user_id', '=', $user->id)
+				->where('item_id', '=', $this->_item->id)
+				->where('location', '=', $location)
+				->find();
 
 			$action = ($amount > 0) ? '+' : '-';
 
@@ -111,10 +111,10 @@ class Item {
 					->save();
 			}
 
-			Log::create('item.in.' . $origin, 'item' ,'Player received :amount :item_name @ :origin', array(
-				':amount'    => $amount,
+			MG::log('item.in.' . $origin, 'item', 'Player received :amount :item_name @ :origin', array(
+				':amount' => $amount,
 				':item_name' => $user_item->item->name($amount, FALSE),
-				':origin'    => str_replace('.', ' ', $origin)
+				':origin' => str_replace('.', ' ', $origin)
 			));
 
 		}
@@ -275,7 +275,9 @@ class Item {
 					foreach ($files as $file)
 					{
 						foreach ($replacements as $replace)
+						{
 							$file = str_replace($replace, '', $file);
+						}
 
 						$found[] = $file;
 					}

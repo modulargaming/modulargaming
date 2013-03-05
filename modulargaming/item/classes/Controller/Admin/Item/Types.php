@@ -62,11 +62,11 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 		$item = ORM::factory('Item_Type', $item_id);
 
 		$list = array(
-			'id'              => $item->id,
-			'name'            => $item->name,
-			'action'          => $item->action,
+			'id' => $item->id,
+			'name' => $item->name,
+			'action' => $item->action,
 			'default_command' => $item->default_command,
-			'img_dir'         => $item->img_dir,
+			'img_dir' => $item->img_dir,
 		);
 
 		$this->response->headers('Content-Type', 'application/json');
@@ -94,15 +94,15 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 			$item->save();
 
 			//create the item type directory
-			if($id == null)
+			if ($id == null)
 			{
-				mkdir(DOCROOT.'assets'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'items'.DIRECTORY_SEPARATOR.$values['img_dir']);
+				mkdir(DOCROOT . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'items' . DIRECTORY_SEPARATOR . $values['img_dir']);
 			}
 
 			$data = array(
 				'action' => 'saved',
-				'type'   => ($id == NULL) ? 'new' : 'update',
-				'row'    => array(
+				'type' => ($id == NULL) ? 'new' : 'update',
+				'row' => array(
 					$item->name,
 					$item->id
 				)

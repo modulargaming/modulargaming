@@ -65,13 +65,13 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 		$shop = ORM::factory('Shop', $shop_id);
 
 		$list = array(
-			'id'              => $shop->id,
-			'title'            => $shop->title,
-			'npc_img'          => $shop->npc_img,
+			'id' => $shop->id,
+			'title' => $shop->title,
+			'npc_img' => $shop->npc_img,
 			'npc_text' => $shop->npc_text,
-			'stock_type'         => $shop->stock_type,
-			'stock_cap'         => $shop->stock_cap,
-			'status'         => $shop->status,
+			'stock_type' => $shop->stock_type,
+			'stock_cap' => $shop->stock_cap,
+			'status' => $shop->status,
 		);
 
 		$this->response->headers('Content-Type', 'application/json');
@@ -128,18 +128,18 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 					if ($id != NULL && $img != null && file_exists(DOCROOT . 'assets/img/npc/shop/' . $img))
 					{
 						$grave_dir = DOCROOT . 'assets/graveyard/npc/shop/';
-						if(!is_dir($grave_dir))
+						if (!is_dir($grave_dir))
 						{
 							mkdir($grave_dir);
 						}
 						//move the previously stored item to the graveyard
 						$new_name = Text::random('alnum', 4) . $img;
-						copy(DOCROOT . 'assets/img/npc/shop/' . $img, $grave_dir. $new_name);
+						copy(DOCROOT . 'assets/img/npc/shop/' . $img, $grave_dir . $new_name);
 						unlink(DOCROOT . 'assets/img/npc/shop/' . $img);
 						$msg = 'The old image has been moved to the graveyard and renamed to ' . $new_name;
 					}
 
-					if(!is_dir(DOCROOT . 'assets/img/npc/shop/'))
+					if (!is_dir(DOCROOT . 'assets/img/npc/shop/'))
 					{
 						mkdir(DOCROOT . 'assets/img/npc/shop/');
 					}
@@ -168,9 +168,9 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 			$data = array(
 				'action' => 'saved',
-				'type'   => ($id == NULL) ? 'new' : 'update',
-				'file'   => $file,
-				'row'    => array(
+				'type' => ($id == NULL) ? 'new' : 'update',
+				'file' => $file,
+				'row' => array(
 					$item->title,
 					$item->stock_type,
 					$item->status,
@@ -220,15 +220,17 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 		$items = array();
 
-		switch($shop->stock_type) {
+		switch ($shop->stock_type)
+		{
 			case 'steady':
 				$inventory = ORM::factory('Shop_Inventory')
 					->where('shop_id', '=', $shop_id)
 					->find_all();
 
-				if(count($inventory) > 0)
+				if (count($inventory) > 0)
 				{
-					foreach($inventory as $item) {
+					foreach ($inventory as $item)
+					{
 						$items[] = array(
 							'id' => $item->id,
 							'img' => $item->item->img(),
@@ -246,9 +248,10 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 					->where('shop_id', '=', $shop_id)
 					->find_all();
 
-				if(count($inventory) > 0)
+				if (count($inventory) > 0)
 				{
-					foreach($inventory as $item) {
+					foreach ($inventory as $item)
+					{
 						$items[] = array(
 							'id' => $item->id,
 							'img' => $item->item->img(),
@@ -264,23 +267,25 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 				break;
 		}
 		$list = array(
-			'stock_type'    => $shop->stock_type,
-			'stock_cap'     => $shop->stock_cap,
-			'total_amount'  => count($items),
-			'items'         => $items,
+			'stock_type' => $shop->stock_type,
+			'stock_cap' => $shop->stock_cap,
+			'total_amount' => count($items),
+			'items' => $items,
 		);
 
 		$this->response->headers('Content-Type', 'application/json');
 		$this->response->body(json_encode($list));
 	}
 
-	public function action_stock_item() {
+	public function action_stock_item()
+	{
 		$shop_id = $this->request->post('shop_id');
 		$item_id = $this->request->post('item_id');
 
 		$shop = ORM::factory('Shop', $shop_id);
 
-		switch($shop->stock_type) {
+		switch ($shop->stock_type)
+		{
 			case 'steady':
 				$item = ORM::factory('Shop_Inventory', $item_id);
 
@@ -308,13 +313,15 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 		$this->response->body(json_encode($data));
 	}
 
-	public function action_stock_save() {
+	public function action_stock_save()
+	{
 		$shop_id = $this->request->post('shop_id');
 		$item_id = ($this->request->post('item_id') == 0) ? null : $this->request->post('item_id');
 		$values = $this->request->post();
 		$state = 'edit';
 
-		if($item_id == null) {
+		if ($item_id == null)
+		{
 			$i = ORM::factory('Item')
 				->where('item.name', '=', $values['item_name'])
 				->find();
@@ -323,12 +330,14 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 		}
 		$shop = ORM::factory('Shop', $shop_id);
 
-		try {
-			switch($shop->stock_type) {
+		try
+		{
+			switch ($shop->stock_type)
+			{
 				case 'steady':
 					$item = ORM::factory('Shop_Inventory');
 
-					if($state == 'edit')
+					if ($state == 'edit')
 					{
 						$item = $item->where('item_id', '=', $item_id)
 							->where('shop_id', '=', $shop_id)
@@ -347,7 +356,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 				case 'restock':
 					$item = ORM::factory('Shop_Restock');
 
-					if($state == 'edit')
+					if ($state == 'edit')
 					{
 						$item = $item->where('item_id', '=', $item_id)
 							->where('shop_id', '=', $shop_id)
@@ -359,15 +368,15 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 						$item->shop_id = $shop_id;
 					}
 
-					$item->values($values, array('frequency','min_amount','max_amount','cap_amount','min_price','max_price'));
+					$item->values($values, array('frequency', 'min_amount', 'max_amount', 'cap_amount', 'min_price', 'max_price'));
 					$item->save();
 					break;
 			}
 			$data = array(
 				'status' => 'saved'
 			);
-		}
-		catch(ORM_Validation_Exception $e) {
+		} catch (ORM_Validation_Exception $e)
+		{
 			$errors = array();
 
 			$list = $e->errors('models');

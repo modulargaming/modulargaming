@@ -115,7 +115,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				->where('pet_colour.name', 'LIKE', '%' . $name . '%')
 				->find_all();
 		}
-		else if($type == 'avatar')
+		else if ($type == 'avatar')
 		{
 			$property = 'title';
 
@@ -123,13 +123,14 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				->where('avatar.title', 'LIKE', '%' . $name . '%')
 				->find_all();
 		}
-		else {
+		else
+		{
 			$items = array();
 		}
 
 		$list = array();
 
-		if(count($items) > 0)
+		if (count($items) > 0)
 		{
 			foreach ($items as $item)
 			{
@@ -232,7 +233,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					':width' => $cfg['width'], ':height' => $cfg['height']
 				));
 			}
-			elseif(!Upload::type($image, $cfg['format']))
+			elseif (!Upload::type($image, $cfg['format']))
 			{
 				//not the right image type
 				$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (type: :type).', array(
@@ -241,7 +242,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			else
 			{
 				//check if the temp dir exists
-				if(!file_exists($cfg['tmp_dir']))
+				if (!file_exists($cfg['tmp_dir']))
 				{
 					mkdir($cfg['tmp_dir']);
 				}
@@ -260,31 +261,33 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			}
 		}
 
-		if($file['status'] == 'temp' || $file['status'] == 'empty') {
+		if ($file['status'] == 'temp' || $file['status'] == 'empty')
+		{
 			try
 			{
 				$data = array();
 
 				$type = ORM::factory('Item_Type', $values['type_id']);
 
-				$base_dir = DOCROOT.'assets'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'items'.DIRECTORY_SEPARATOR;
+				$base_dir = DOCROOT . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'items' . DIRECTORY_SEPARATOR;
 
 				//if we're just changing the item type we'll have to move it a different dir
-				if($type->id != $item->type_id && $file['status'] == 'empty') {
-					$TMP['upload'] = $base_dir.$item->type->img_dir.$item->img;
+				if ($type->id != $item->type_id && $file['status'] == 'empty')
+				{
+					$TMP['upload'] = $base_dir . $item->type->img_dir . $item->img;
 					$TMP['name'] = $item->img;
 				}
 
 				//move the file to the correct dir if it's possible
-				$new_loc = $base_dir.$type->img_dir.$TMP['name'];
+				$new_loc = $base_dir . $type->img_dir . $TMP['name'];
 
 				//check if the dir exists
-				if(!file_exists($base_dir.$type->img_dir))
+				if (!file_exists($base_dir . $type->img_dir))
 				{
-					mkdir($base_dir.$type->img_dir);
+					mkdir($base_dir . $type->img_dir);
 				}
 
-				if(($file['status'] == 'empty' && $TMP != null) && file_exists($new_loc))
+				if (($file['status'] == 'empty' && $TMP != null) && file_exists($new_loc))
 				{
 					$file = array('status' => 'error', 'msg' => 'That filename already exists');
 					$data['type'] = 'error';
@@ -299,14 +302,14 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					}
 
 					//attempt to save the item
-					if($TMP != null)
+					if ($TMP != null)
 					{
 						$values['image'] = $TMP['name'];
 						$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id', 'commands'));
 						$item->save();
 
 						//if it's saved move the file to the new location
-						if($item->saved())
+						if ($item->saved())
 						{
 							copy($TMP['upload'], $new_loc);
 							$file['status'] = 'success';
@@ -328,7 +331,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 					$data['action'] = 'saved';
 				}
 
-				$data['type'] =($id == NULL) ? 'new' : 'update';
+				$data['type'] = ($id == NULL) ? 'new' : 'update';
 				$data['file'] = $file;
 
 				$this->response->body(json_encode($data));

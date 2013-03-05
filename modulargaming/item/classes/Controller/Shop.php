@@ -89,7 +89,9 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 				$errors = $e->errors('models');
 
 				foreach ($errors as $error)
+				{
 					Hint::error($error);
+				}
 			}
 		}
 
@@ -342,11 +344,11 @@ class Controller_Shop extends Abstract_Controller_Frontend {
 				$this->user->save();
 
 				//log this action
-				$log = Log::create('user_shop.' . $shop->id, 'item', 'Bought 1 :item_name for :amount from :user', array(
-					'item'      => $item->item,
+				$log = MG::log('user_shop.' . $shop->id, 'item', 'Bought 1 :item_name for :amount from :user', array(
+					'item' => $item->item,
 					'item_name' => $item->item->name,
-					'user'      => $item->user->username,
-					'amount'    => $item->parameter
+					'user' => $item->user->username,
+					'amount' => $item->parameter
 				));
 
 				$item->transfer($this->user);
