@@ -74,66 +74,67 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$this->view = NULL;
 		$type = $this->request->query('type');
 
+		$name = $this->request->query('item');
+		$property = 'name';
+
 		if ($type == 'item')
 		{
-			$item_name = $this->request->query('item');
-			$property = 'name';
-
 			$items = ORM::factory('Item')
-				->where('item.name', 'LIKE', '%' . $item_name . '%')
+				->where('item.name', 'LIKE', '%' . $name . '%')
 				->find_all();
 		}
 		else if ($type == 'item_type')
 		{
-			$item_name = $this->request->query('item');
-			$property = 'name';
-
 			$items = ORM::factory('Item_Type')
-				->where('item_type.name', 'LIKE', '%' . $item_name . '%')
+				->where('item_type.name', 'LIKE', '%' . $name . '%')
 				->find_all();
 		}
 		else if ($type == 'user')
 		{
-			$item_name = $this->request->query('username');
 			$property = 'username';
 
 			$items = ORM::factory('User')
-				->where('username', 'LIKE', '%' . $item_name . '%')
+				->where('username', 'LIKE', '%' . $name . '%')
 				->find_all();
 		}
 		else if ($type == 'recipe')
 		{
-			$item_name = $this->request->query('name');
-			$property = 'name';
-
 			$items = ORM::factory('Item_Recipe')
-				->where('item_recipe.name', 'LIKE', '%' . $item_name . '%')
+				->where('item_recipe.name', 'LIKE', '%' . $name . '%')
 				->find_all();
 		}
 		else if ($type == 'pet-specie')
 		{
-			$item_name = $this->request->query('name');
-			$property = 'name';
-
 			$items = ORM::factory('Pet_Specie')
-				->where('pet_specie.name', 'LIKE', '%' . $item_name . '%')
+				->where('pet_specie.name', 'LIKE', '%' . $name . '%')
 				->find_all();
 		}
 		else if ($type == 'pet-color')
 		{
-			$item_name = $this->request->query('name');
-			$property = 'name';
-
 			$items = ORM::factory('Pet_Colour')
-				->where('pet_colour.name', 'LIKE', '%' . $item_name . '%')
+				->where('pet_colour.name', 'LIKE', '%' . $name . '%')
 				->find_all();
+		}
+		else if($type == 'avatar')
+		{
+			$property = 'title';
+
+			$items = ORM::factory('Avatar')
+				->where('avatar.title', 'LIKE', '%' . $name . '%')
+				->find_all();
+		}
+		else {
+			$items = array();
 		}
 
 		$list = array();
 
-		foreach ($items as $item)
+		if(count($items) > 0)
 		{
-			$list[] = $item->{$property};
+			foreach ($items as $item)
+			{
+				$list[] = $item->{$property};
+			}
 		}
 
 		$this->response->headers('Content-Type', 'application/json');
