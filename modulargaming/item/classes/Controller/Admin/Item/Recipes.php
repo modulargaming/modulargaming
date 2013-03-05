@@ -38,7 +38,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 			$orm = ORM::factory('Item_Recipe');
 
 			$paginate = Paginate::factory($orm)
-				->columns(array('item_recipe.id', 'item_recipe.name', 'materials', 'item'));
+				->columns(array('item_recipe.id', 'item_recipe.name', 'item_recipe.materials', 'item.img'));
 
 			$datatables = DataTables::factory($paginate)->execute();
 
