@@ -111,7 +111,7 @@ class Item {
 					->save();
 			}
 
-			Log::create('item.in.' . $origin, 'Player recieved :amount :item_name @ :origin', array(
+			Log::create('item.in.' . $origin, 'item' ,'Player received :amount :item_name @ :origin', array(
 				':amount'    => $amount,
 				':item_name' => $user_item->item->name($amount, FALSE),
 				':origin'    => str_replace('.', ' ', $origin)
