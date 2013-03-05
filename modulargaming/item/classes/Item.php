@@ -111,7 +111,7 @@ class Item {
 					->save();
 			}
 
-			Item::log('item.in.' . $origin, 'Player recieved :amount :item_name @ :origin', array(
+			Log::create('item.in.' . $origin, 'Player recieved :amount :item_name @ :origin', array(
 				':amount'    => $amount,
 				':item_name' => $user_item->item->name($amount, FALSE),
 				':origin'    => str_replace('.', ' ', $origin)
@@ -206,70 +206,6 @@ class Item {
 		return NULL;
 	}
 
-	/**
-	 * Create a new log
-	 *
-	 * @param string     $alias   An identifier to help index logs
-	 * @param string     $message A general message describing the action
-	 * @param array      $params  Parameters that give insight into the action that has been performed
-	 * @param Model_User $user    The user that did an action
-	 *
-	 * @return Ambigous <ORM, Kohana_ORM>
-	 */
-	static public function log($alias, $message, $params = array(), $user = NULL)
-	{
-		if ($user == NULL)
-		{
-			$user = Auth::instance()->get_user();
-		}
-
-		$values = array(
-			'alias'    => $alias,
-			'message'  => $message,
-			'user_id'  => $user->id,
-			'agent'    => Request::user_agent(array('browser', 'platform')),
-			'ip'       => Request::$client_ip,
-			'location' => Request::current()->uri(),
-			'type'     => 'item',
-			'params'   => $params,
-		);
-
-		return ORM::factory('Log')
-			->values($values)
-			->create();
-	}
-
-	/**
-	 * Send a notification to a user based on a log.
-	 *
-	 * @param Moel_Log   $log          Which log we'll be basing our notification on.
-	 * @param Model_User $user         User instance we'll be notifying
-	 * @param string     $notification A string that can be parsed through __()
-	 * @param array      $param        Params to parse the notification with (combined with $log->params)
-	 * @param string     $type         Type of notification (info, error, success, warning)
-	 *
-	 * @return User_Notification
-	 */
-	public static function notify($log, $user, $notification, $param = array(), $type = "info")
-	{
-
-		$notify = Kohana::$config->load('notify.' . $notification);
-
-		$param['username'] = $log->user->username;
-
-		$values = array(
-			'log_id'  => $log->id,
-			'user_id' => $user->id,
-			'title'   => $notify['title'],
-			'message' => __($notify['message'], $log->params + $param),
-			'icon'    => $notify['icon'],
-			'type'    => $type
-		);
-
-		return ORM::factory('User_Notification')
-			->values($values)
-			->create();
-	}
 
 	/**
 	 * Build an Item instance
