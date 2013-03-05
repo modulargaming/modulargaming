@@ -283,12 +283,13 @@
                 methods.bindSave.call(this);
                 tableEl.trigger('crud.error');
                 //mark the errors on the form
-                $.each(data.errors, function (key, val) {
-                    $('#input-' + val.field).parents('.control-group').addClass('error');
-                    $('#modal-crud-error-list').append('<li><a href="#">' + val.msg.join('<br />') + '</a></li>');
-                });
-                $('#modal-crud-errors').removeClass('hide');
-
+	            if(data.errors.length > 0) {
+		            $.each(data.errors, function (key, val) {
+			            $('#input-' + val.field).parents('.control-group').addClass('error');
+			            $('#modal-crud-error-list').append('<li><a href="#">' + val.msg.join('<br />') + '</a></li>');
+		            });
+		            $('#modal-crud-errors').removeClass('hide');
+	            }
             }
         },
         bindSave:function (type) {
