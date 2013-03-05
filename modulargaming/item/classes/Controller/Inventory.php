@@ -236,7 +236,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 					if ($error == FALSE)
 					{
-						Journal::log('consume'.$item->item_id, 'item', ':item_name consumed', array(':item_name' => $item->name));
+						Journal::log('consume'.$item->item_id, 'item', ':item_name consumed', array(':item_name' => $item->item->name));
 
 						if ($def_cmd->delete_after_consume == TRUE)
 						{
@@ -283,7 +283,7 @@ class Controller_Inventory extends Abstract_Controller_Frontend {
 
 						if ($error = FALSE)
 						{
-							Journal::log('consume'.$item->item_id, 'item', ':item_name consumed', array(':tem_name' => $item->name));
+							Journal::log('consume'.$item->item_id, 'item', ':item_name consumed', array(':item_name' => $item->item->name));
 							if ($def_cmd->delete_after_consume == TRUE)
 							{
 								$item->amount('-', 1);
