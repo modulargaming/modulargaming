@@ -38,7 +38,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 			$orm = ORM::factory('Item_Recipe');
 
 			$paginate = Paginate::factory($orm)
-				->columns(array('id', 'name', 'materials', 'item'));
+				->columns(array('item_recipe.id', 'item_recipe.name', 'materials', 'item'));
 
 			$datatables = DataTables::factory($paginate)->execute();
 
@@ -76,18 +76,18 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		foreach ($materials as $ingredient)
 		{
 			$ingredients[] = array(
-				'id'     => $ingredient->id,
-				'name'   => $ingredient->item->name,
+				'id' => $ingredient->id,
+				'name' => $ingredient->item->name,
 				'amount' => $ingredient->amount
 			);
 		}
 
 		$list = array(
-			'id'           => $item->id,
-			'name'         => $item->name,
-			'description'  => $item->description,
+			'id' => $item->id,
+			'name' => $item->name,
+			'description' => $item->description,
 			'crafted_item' => $item->item->name,
-			'materials'    => $ingredients
+			'materials' => $ingredients
 		);
 
 		$this->response->headers('Content-Type', 'application/json');
@@ -158,7 +158,9 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 						if ($values['id'] != NULL)
 						{
 							foreach ($item->materials->find_all() as $mat)
+							{
 								$mat->delete();
+							}
 						}
 
 						foreach ($values['materials'] as $key => $ingredient)
@@ -172,8 +174,8 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 					}
 					$data = array(
 						'action' => 'saved',
-						'type'   => ($id == NULL) ? 'new' : 'update',
-						'row'    => array(
+						'type' => ($id == NULL) ? 'new' : 'update',
+						'row' => array(
 							$item->name,
 							$item->materials->count_all(),
 							URL::base() . $item->item->img(),
