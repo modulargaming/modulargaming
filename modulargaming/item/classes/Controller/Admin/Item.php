@@ -49,16 +49,16 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				$admin = $command->build_admin($name);
 				$input_c[] = array('title' => $admin['title'], 'fields' => $admin['fields']);
 				$def_c[] = array(
-					'name'     => $name,
+					'name' => $name,
 					'multiple' => $admin['multiple'],
-					'pets'     => $admin['pets'],
-					'search'   => $admin['search'],
-					'only'     => (!$command->allow_more)
+					'pets' => $admin['pets'],
+					'search' => $admin['search'],
+					'only' => (!$command->allow_more)
 				);
 				$loc = (in_array($struct[0], array('General', 'User'))) ? 0 : 1;
 				$menu_c[$loc]['commands'][] = array(
 					'name' => $struct[1],
-					'cmd'  => $name
+					'cmd' => $name
 				);
 			}
 		}
@@ -180,15 +180,15 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$item = ORM::factory('Item', $item_id);
 
 		$list = array(
-			'id'           => $item->id,
-			'name'         => $item->name,
-			'status'       => $item->status,
-			'image'        => $item->img(),
-			'description'  => $item->description,
-			'unique'       => $item->unique,
+			'id' => $item->id,
+			'name' => $item->name,
+			'status' => $item->status,
+			'image' => $item->img(),
+			'description' => $item->description,
+			'unique' => $item->unique,
 			'transferable' => $item->transferable,
-			'type_id'      => $item->type_id,
-			'commands'     => $item->commands
+			'type_id' => $item->type_id,
+			'commands' => $item->commands
 		);
 		$this->response->headers('Content-Type', 'application/json');
 		$this->response->body(json_encode($list));
@@ -197,6 +197,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 	public function action_save()
 	{
 		$values = $this->request->post();
+		$cfg = Kohana::$config->load('items.image');
 		$this->view = NULL;
 
 		if ($values['id'] == 0)
@@ -208,116 +209,150 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 		$this->response->headers('Content-Type', 'application/json');
 
-		try
+		//get the item
+		$item = ORM::factory('Item', $values['id']);
+
+		$file = array('status' => 'empty', 'msg' => '');
+		$TMP = null;
+
+		if (isset($_FILES['image']))
 		{
-			if (isset($values['commands']))
+			$image = $_FILES['image'];
+
+			if (!Upload::valid($image))
 			{
-				$values['commands'] = Item::parse_commands($values['commands']);
+				//error not valid upload
+				$file = array('status' => 'error', 'msg' => 'You did not provide a valid file to upload.');
 			}
-
-			$item = ORM::factory('Item', $values['id']);
-
-			$img = ($item->loaded()) ? $item->image : 'tmp';
-			$dir = $item->type->img_dir;
-
-			$values['image'] = (isset($_FILES['image'])) ? 'tmp' : $img;
-			$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id', 'commands'));
-			$item->save();
-
-			$file = array('status' => 'empty', 'msg' => '');
-
-			if (isset($_FILES['image']))
+			else if (!Upload::image($image, $cfg['width'], $cfg['height'], TRUE))
 			{
-				$image = $_FILES['image'];
-				$cfg = Kohana::$config->load('items.image');
-
-				if (!Upload::valid($image))
+				//not the right image dimensions
+				$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :height.', array(
+					':width' => $cfg['width'], ':height' => $cfg['height']
+				));
+			}
+			elseif(!Upload::type($image, $cfg['format']))
+			{
+				//not the right image type
+				$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (type: :type).', array(
+					':type' => implode(',', $cfg['format'])));
+			}
+			else
+			{
+				//check if the temp dir exists
+				if(!file_exists($cfg['tmp_dir']))
 				{
-					//error not valid upload
-					$file = array('status' => 'error', 'msg' => 'You did not provide a valid file to upload.');
+					mkdir($cfg['tmp_dir']);
 				}
-				else if (!Upload::image($image, $cfg['width'], $cfg['height'], TRUE))
+
+				//save it temporarily
+				$TMP = array('upload' => Upload::save($image, Text::random(), $cfg['tmp_dir']), 'name' => $image['name']);
+
+				if ($TMP['upload'] != FALSE)
 				{
-					//not the right image dimensions
-					$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :height.', array(
-						':width' => $cfg['width'], ':height' => $cfg['height']
-					));
+					$file['status'] = 'temp';
 				}
 				else
 				{
-					$msg = '';
-					if ($id != NULL && !empty($img) && file_exists(DOCROOT . 'assets/img/items/' . $dir . $img))
+					$file = array('status' => 'error', 'msg' => 'There was an error uploading your file.');
+				}
+			}
+		}
+
+		if($file['status'] == 'temp' || $file['status'] == 'empty') {
+			try
+			{
+				$data = array();
+
+				$type = ORM::factory('Item_Type', $values['type_id']);
+
+				$base_dir = DOCROOT.'assets'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'items'.DIRECTORY_SEPARATOR;
+
+				//if we're just changing the item type we'll have to move it a different dir
+				if($type->id != $item->type_id && $file['status'] == 'empty') {
+					$TMP['upload'] = $base_dir.$item->type->img_dir.$item->img;
+					$TMP['name'] = $item->img;
+				}
+
+				//move the file to the correct dir if it's possible
+				$new_loc = $base_dir.$type->img_dir.$TMP['name'];
+
+				//check if the dir exists
+				if(!file_exists($base_dir.$type->img_dir))
+				{
+					mkdir($base_dir.$type->img_dir);
+				}
+
+				if(($file['status'] == 'empty' && $TMP != null) && file_exists($new_loc))
+				{
+					$file = array('status' => 'error', 'msg' => 'That filename already exists');
+					$data['type'] = 'error';
+					$data['errors'] = array();
+				}
+				else
+				{
+					//if commands are set parse them
+					if (isset($values['commands']))
 					{
-						$grave_dir = DOCROOT . 'assets/graveyard/items/';
-						if(!is_dir($grave_dir))
-						{
-							mkdir($grave_dir);
-						}
-						//move the previously stored item to the graveyard
-						$new_name = Text::random('alnum', 4) . $img;
-						copy(DOCROOT . 'assets/img/items/' . $dir . $img, $grave_dir . $new_name);
-						unlink(DOCROOT . 'assets/img/items/' . $dir . $img);
-						$msg = 'The old image has been moved to the graveyard and renamed to ' . $new_name;
+						$values['commands'] = Item::parse_commands($values['commands']);
 					}
 
-					$up = Upload::save($image, $image['name'], DOCROOT . 'assets/img/items/' . $item->type->img_dir);
-
-					if ($up != FALSE)
+					//attempt to save the item
+					if($TMP != null)
 					{
-						$file['status'] = 'success';
-						$file['msg'] = 'You\'ve successfully uploaded your item image';
-
-						if (!empty($msg))
-						{
-							$file['msg'] .= '<br />' . $msg;
-						}
-
-						$item->image = $image['name'];
+						$values['image'] = $TMP['name'];
+						$item->values($values, array('name', 'status', 'image', 'description', 'unique', 'transferable', 'type_id', 'commands'));
 						$item->save();
+
+						//if it's saved move the file to the new location
+						if($item->saved())
+						{
+							copy($TMP['upload'], $new_loc);
+							$file['status'] = 'success';
+						}
 					}
 					else
 					{
-						$file = array('status' => 'error', 'msg' => 'There was an error uploading your file.');
+						$item->values($values, array('name', 'status', 'description', 'unique', 'transferable', 'type_id', 'commands'));
+						$item->save();
 					}
+
+					$data['row'] = array(
+						$item->img(),
+						$item->name,
+						$item->status,
+						$item->type->name,
+						$item->id,
+					);
+					$data['action'] = 'saved';
 				}
-			}
-			else if ($dir != $item->type->img_dir && file_exists(DOCROOT . 'assets/img/items/' . $dir . $img))
+
+				$data['type'] =($id == NULL) ? 'new' : 'update';
+				$data['file'] = $file;
+
+				$this->response->body(json_encode($data));
+			} catch (ORM_Validation_Exception $e)
 			{
-				//item type changed, move the item image
-				copy(DOCROOT . 'assets/img/items/' . $dir . $item->image, DOCROOT . 'assets/img/items/' . $item->type->img_dir . $item->image);
-				unlink(DOCROOT . 'assets/img/items/' . $dir . $item->image);
-			}
+				$errors = array();
 
-			$data = array(
-				'action' => 'saved',
-				'type'   => ($id == NULL) ? 'new' : 'update',
-				'file'   => $file,
-				'row'    => array(
-					$item->img(),
-					$item->name,
-					$item->status,
-					$item->type->name,
-					$item->id,
-				)
-			);
-			$this->response->body(json_encode($data));
-		} catch (ORM_Validation_Exception $e)
-		{
-			$errors = array();
+				$list = $e->errors('models');
 
-			$list = $e->errors('models');
-
-			foreach ($list as $field => $er)
-			{
-				if (!is_array($er))
+				foreach ($list as $field => $er)
 				{
-					$er = array($er);
+					if (!is_array($er))
+					{
+						$er = array($er);
+					}
+
+					$errors[] = array('field' => $field, 'msg' => $er);
 				}
 
-				$errors[] = array('field' => $field, 'msg' => $er);
+				$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
 			}
-
-			$this->response->body(json_encode(array('action' => 'error', 'errors' => $errors)));
+		}
+		else
+		{
+			$this->response->body(json_encode(array('action' => 'error', 'errors' => array('upload_file' => array('Error uploading your file')))));
 		}
 	}
 
@@ -347,6 +382,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		try
 		{
 			$log = $item->to_user($user, 'admin.' . $this->user->username, $this->request->post('amount'));
+
 			//notify the user
 			$log->notify($user, 'You received :item_name!', array(':item_name' => $item->item()->name));
 
