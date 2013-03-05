@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * MG class.
+ * Journal class.
  *
  * @package    Journal log/notify
  * @category   Core
@@ -43,7 +43,7 @@ class Journal{
 			->values($values)
 			->create();
 
-		return new MG($log);
+		return new Journal($log);
 	}
 
 	protected $_log = null;
