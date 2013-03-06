@@ -21,7 +21,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 			foreach ($this->topic->poll->options->find_all() as $key => $value)
 			{
 				$colour = $key % 4;
-				
+
 				$options[] = array(
 					'id' => $value->id,
 					'title' => $value->title,

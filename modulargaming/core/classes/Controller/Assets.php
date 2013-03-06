@@ -55,7 +55,7 @@ class Controller_Assets extends Controller {
 		// Check if assets sub dir exist.
 		$parts = explode('/', $file);
 		$file = array_pop($parts);
-		foreach($parts as $part)
+		foreach ($parts as $part)
 		{
 			$dir .= $part.DIRECTORY_SEPARATOR;
 			if ( ! is_dir ($dir))

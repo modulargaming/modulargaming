@@ -46,9 +46,10 @@ class Journal{
 		return new Journal($log);
 	}
 
-	protected $_log = null;
+	protected $_log = NULL;
 
-	public function __construct($log) {
+	public function __construct($log)
+	{
 		$this->_log = $log;
 	}
 
@@ -66,7 +67,7 @@ class Journal{
 	{
 		$log = $this->_log;
 
-		$notify = Kohana::$config->load('notify.' . $notification);
+		$notify = Kohana::$config->load('notify.'.$notification);
 
 		$param['username'] = $log->user->username;
 

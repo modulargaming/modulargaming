@@ -16,7 +16,7 @@ class Tabs {
 
 	public function render()
 	{
-		$view = new View_Tabs();
+		$view = new View_Tabs;
 		$view->tabs = $this->tabs;
 
 		$renderer = Kostache::factory();

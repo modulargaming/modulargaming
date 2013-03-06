@@ -4,7 +4,7 @@ class Tab_Text extends Abstract_Tab {
 
 	public function __construct($text)
 	{
-		$this->view = new View_Tab_Text();
+		$this->view = new View_Tab_Text;
 		$this->view->text = $text;
 	}
 

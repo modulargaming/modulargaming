@@ -4,6 +4,14 @@ class View_Search extends Abstract_View {
 
 	public $title = 'Search';
 
-	public $user;
+	/**
+	 * @var String search query
+	 */
+	public $query;
+
+	/**
+	 * @var Model_User[] user search results
+	 */
+	public $users;
 
 }

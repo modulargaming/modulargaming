@@ -1,4 +1,4 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * Clear assets cache
  *
@@ -26,20 +26,20 @@ class Task_Assets_Clear extends Minion_Task
 	 */
 	protected function _execute(array $params)
 	{
-		//get the types
+		// get the types
 		$types = explode(',', $params['type']);
 
-		//get the list of modules to clear
-		if($params['module'] == '*') {
-			//get all the module paths
+		// get the list of modules to clear
+		if ($params['module'] == '*') {
+			// get all the module paths
 			$mod_paths = Kohana::modules();
 
-			//get all the asset files
+			// get all the asset files
 			$files = Kohana::list_files('assets', $mod_paths);
 
-			//loop over the required types
-			foreach($types as $type) {
-				if(array_key_exists('assets'.DIRECTORY_SEPARATOR.$type, $files)) {
+			// loop over the required types
+			foreach ($types as $type) {
+				if (array_key_exists('assets'.DIRECTORY_SEPARATOR.$type, $files)) {
 					$this->_clear_recur($files['assets'.DIRECTORY_SEPARATOR.$type], $mod_paths);
 				}
 			}
@@ -49,20 +49,23 @@ class Task_Assets_Clear extends Minion_Task
 		else
 		{
 			$modules = explode(',', $params['module']);
-			//get all the module paths
+			// get all the module paths
 			$mod_paths = Kohana::modules();
 
-			//start looping through the modules
-			foreach($modules as $mod) {
-				//get the base path
+			// start looping through the modules
+			foreach ($modules as $mod)
+			{
+				// get the base path
 				$read = $mod_paths[$mod];
 
-				//get all the asset files
+				// get all the asset files
 				$files = Kohana::list_files('assets', array($read));
 
-				//loop over the required types
-				foreach($types as $type) {
-					if(array_key_exists('assets'.DIRECTORY_SEPARATOR.$type, $files)) {
+				// loop over the required types
+				foreach ($types as $type)
+				{
+					if (array_key_exists('assets'.DIRECTORY_SEPARATOR.$type, $files))
+					{
 						$this->_clear_recur($files['assets'.DIRECTORY_SEPARATOR.$type], $read);
 					}
 				}
@@ -72,15 +75,19 @@ class Task_Assets_Clear extends Minion_Task
 		}
 	}
 
-	protected function _clear_recur($entry, $base_dir) {
-		if(is_array($entry)) {
-			foreach($entry as $e) {
+	protected function _clear_recur($entry, $base_dir)
+	{
+		if (is_array($entry))
+		{
+			foreach ($entry as $e)
+			{
 				$this->_clear_recur($e, $base_dir);
 			}
 		}
-		else {
+		else
+		{
 			$rm = str_replace($base_dir, '', $entry);
-			if(file_exists(DOCROOT.$rm))
+			if (file_exists(DOCROOT.$rm))
 			{
 				unlink(DOCROOT.$rm);
 			}

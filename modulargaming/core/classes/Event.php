@@ -200,7 +200,7 @@ class Event {
 		// If the event has listeners, we will simply iterate through them AND call
 		// each listener, passing in the parameters. We will add the responses to
 		// an array of event responses AND return the array.
-		foreach ((array) $events as $event)
+		foreach ( (array) $events as $event)
 		{
 			if (static::listeners($event))
 			{

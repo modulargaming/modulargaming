@@ -69,7 +69,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 				{
 					$position = (isset($desc['location'])) ? $desc['location'] : 'end';
 					$relative = (isset($desc['location'])) ? $desc['relative'] : NULL;
-					$options = (isset($desc['options'])) ? $desc['options'] : array();
+					// $options = (isset($desc['options'])) ? $desc['options'] : array();
 					Assets::add($type, $desc['name'], $desc['file'], $location, $position, $relative);
 				}
 			}
@@ -90,9 +90,9 @@ abstract class Abstract_Controller_Frontend extends Controller {
 	{
 		if ($this->request->method() == HTTP_Request::POST)
 		{
-			$url = URL::base('http');
-			$base_url = Kohana::$base_url;
-			$root = str_replace($base_url, '', $url);
+			// $url = URL::base('http');
+			// $base_url = Kohana::$base_url;
+			// $root = str_replace($base_url, '', $url);
 
 			$validation = Validation::factory($this->request->post())
 				->rule('csrf', 'not_empty')

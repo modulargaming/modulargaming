@@ -117,22 +117,26 @@ abstract class Paginate extends Kohana_Paginate {
 			array($this->config['param'] => $page)
 		);
 
-		if($this->query != FALSE)
+		if ($this->query != FALSE)
 		{
-			if(is_string($this->query))
+			if (is_string($this->query))
 			{
 				$suffix = ($this->query != FALSE) ? '?'.$this->query.'='.$this->request->query($this->query) : '';
 			}
-			elseif(is_array($this->query)) {
+			elseif (is_array($this->query))
+			{
 				$suffix = '?';
 				$first = TRUE;
 
-				foreach($this->query as $q) {
-					if($first) {
+				foreach ($this->query as $q)
+				{
+					if ($first)
+					{
 						$first = FALSE;
 						$suffix .= $q.'='.$this->request->query($q);
 					}
-					else {
+					else
+					{
 						$suffix .= '&'.$q.'='.$this->request->query($q);
 					}
 				}

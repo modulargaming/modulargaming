@@ -3,7 +3,7 @@
 abstract class Abstract_Tab {
 
 	/**
-	 * @var View_Tab_Content $view
+	 * @var Abstract_View_Tab $view
 	 */
 	protected $view;
 
