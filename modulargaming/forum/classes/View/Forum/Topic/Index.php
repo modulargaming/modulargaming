@@ -20,11 +20,8 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 			$colours = array('info', 'success', 'warning', 'danger');
 			foreach ($this->topic->poll->options->find_all() as $key => $value)
 			{
-				$colour = $key;
-				while ($colour >= 4)
-				{
-					$colour -= 4;
-				}
+				$colour = $key % 4;
+				
 				$options[] = array(
 					'id' => $value->id,
 					'title' => $value->title,
@@ -57,20 +54,19 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 		foreach ($this->posts as $post)
 		{
 			$posts[] = array(
-				'id' => $post->id,
-				'title' => $this->topic->title,
+				'id'      => $post->id,
+				'title'   => $this->topic->title,
 				'content' => $post->content, // Escaped properly at create now
 				'created' =>  Date::format($post->created),
-				'user' => array(
-					'avatar' => $post->user->avatar(),
-					// 'avatar' => $post->user->avatar,
+				'user'    => array(
+					'avatar'    => $post->user->avatar(),
 					'username'  => $post->user->username,
-					'title'  => $post->user->title->title,
-					// 'signature' => $post->user->signature,
+					'title'     => $post->user->title->title,
+					'signature' => $post->user->get_property('signature'),
 					// 'post_count' => number_format($post->user->post_count),
-					'created' => Date::format($post->user->created),
+					'created'   => Date::format($post->user->created),
 					'href'      => Route::url('user.view', array(
-						'id'     => $post->user->id,
+						'id' => $post->user->id,
 					)),
 				),
 				'links' => array(
@@ -83,7 +79,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 						'id'     => $post->id,
 					)),
 				),
-				'can_edit' => Auth::instance()->get_user()->can('Forum_Post_Edit', array('post' => $post)),
+				'can_edit'   => Auth::instance()->get_user()->can('Forum_Post_Edit', array('post' => $post)),
 				'can_delete' => Auth::instance()->get_user()->can('Forum_Post_Delete', array('post' => $post)),
 			);
 		}
