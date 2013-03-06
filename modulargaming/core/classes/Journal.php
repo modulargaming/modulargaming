@@ -9,6 +9,12 @@
  * @license    BSD http://modulargaming.com/license
  */
 class Journal{
+
+	/**
+	 * @var Model_Log
+	 */
+	protected $_log = NULL;
+
 	/**
 	 * Create a new log
 	 *
@@ -46,8 +52,6 @@ class Journal{
 		return new Journal($log);
 	}
 
-	protected $_log = NULL;
-
 	public function __construct($log)
 	{
 		$this->_log = $log;
@@ -61,7 +65,7 @@ class Journal{
 	 * @param array      $param        Params to parse the notification with (combined with $log->params)
 	 * @param string     $type         Type of notification (info, error, success, warning)
 	 *
-	 * @return User_Notification
+	 * @return Model_User_Notification
 	 */
 	public function notify($user, $notification, $param = array(), $type = "info")
 	{

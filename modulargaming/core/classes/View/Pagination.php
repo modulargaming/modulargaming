@@ -2,7 +2,9 @@
 
 class View_Pagination {
 
-	// Paginate object.
+	/**
+	 * @var Paginate
+	 */
 	public $paginate;
 
 	public function items()
