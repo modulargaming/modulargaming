@@ -22,7 +22,8 @@ class Setting_Account extends Setting {
 	 */
 	public function get_validation(array $post)
 	{
-		// TODO: Implement get_validation() method.
+		return Validation::factory($post)
+			->rule('password_current', array($this, 'check_current_password'), array(':validation', ':field', ':value'));
 	}
 
 	/**
@@ -32,6 +33,28 @@ class Setting_Account extends Setting {
 	 */
 	public function save(array $post)
 	{
-		// TODO: Implement save() method.
+		$this->user->update_user($post, array(
+			'email',
+			'password'
+		));
+
+		if ( ! empty($post['password']))
+		{
+			Hint::success('Updated password!');
+		}
+	}
+
+	/**
+	 * Check to ensure the entered password matches the users password.
+	 *
+	 * @param Validation $validation
+	 * @param string $value
+	 */
+	public function check_current_password($validation, $field, $value)
+	{
+		if (Auth::instance()->hash($value) !== $this->user->password)
+		{
+			$validation->error($field, 'Wrong password');
+		}
 	}
 }
