@@ -14,6 +14,46 @@ class Avatar_Gallery extends Avatar {
 	public $name = 'Gallery';
 
 	/**
+	 * Return the save data array.
+	 *
+	 * @return array
+	 */
+	public function data($data)
+	{
+		return array(
+			'driver' => 'gallery',
+			'id'     => $data['avatar-gallery']['id']
+		);
+	}
+
+	/**
+	 * Check to ensure the user "owns" the gallery
+	 *
+	 * @param Validation $validation
+	 */
+	public function validate($validation)
+	{
+		$validation->rule(
+			'avatar-gallery[id]',
+			array($this, 'user_has_avatar'),
+			array(':validaiton', ':field', ':value')
+		);
+	}
+
+	/**
+	 * @param Validation $validation
+	 * @param string $field
+	 * @param string $value
+	 */
+	public function user_has_avatar($validation, $field, $value)
+	{
+		if ( ! $this->user->has('avatars', $value))
+		{
+			$validation->error($field, 'You do not own that avatar');
+		}
+	}
+
+	/**
 	 * Return the gallery avatar.
 	 *
 	 * @return string
@@ -26,8 +66,9 @@ class Avatar_Gallery extends Avatar {
 
 	protected function _edit_view()
 	{
-		$view = new View_Avatar_Gravatar;
-		$view->url = $this->url();
+		$view = new View_Avatar_Gallery;
+		$view->avatars = $this->user->avatars->find_all();
 		return $view;
 	}
+
 }

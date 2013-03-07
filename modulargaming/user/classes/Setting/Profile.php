@@ -23,9 +23,19 @@ class Setting_Profile extends Setting {
 	 */
 	public function get_validation(array $post)
 	{
-		return Validation::factory($post)
+		$validation = Validation::factory($post)
 			->rule('about', 'max_length', array(':value', '1024'))
-			->rule('signature', 'max_length', array(':value', '1024'));
+			->rule('signature', 'max_length', array(':value', '1024'))
+			->rule('avatar-type', array($this, 'valid_avatar_type'), array(':validation', ':field', ':value'));
+
+		// Add avatar specific rules.
+		if (isset($post['avatar-type']))
+		{
+			$avatar = Avatar::factory($this->user, array('driver' => $post['avatar-type']));
+			$avatar->validate($validation);
+		}
+
+		return $validation;
 	}
 
 	/**
@@ -35,6 +45,9 @@ class Setting_Profile extends Setting {
 	 */
 	public function save(array $post)
 	{
+		$avatar = Avatar::factory($this->user, array('driver' => $post['avatar-type']));
+		$this->user->set_property('avatar', $avatar->data($post));
+
 		$this->user->set_property('about',     Security::xss_clean(Arr::get($post, 'about')));
 		$this->user->set_property('signature', Security::xss_clean(Arr::get($post, 'signature')));
 		$this->user->update(); // Save cached_properties.
@@ -76,5 +89,25 @@ class Setting_Profile extends Setting {
 		}
 
 		return $avatars;
+	}
+
+	/**
+	 * @param Validation $validation
+	 * @param string $field
+	 * @param string $value
+	 */
+	public function valid_avatar_type($validation, $field, $value)
+	{
+		$avatars = $this->get_avatar_drivers();
+		$ids = array();
+		foreach ($avatars as $avatar)
+		{
+			$ids[] = $avatar->id;
+		}
+
+		if ( ! in_array($value, $ids))
+		{
+			$validation->error($field, 'Unknown avatar type');
+		}
 	}
 }

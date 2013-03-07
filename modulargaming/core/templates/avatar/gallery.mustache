@@ -1,0 +1,9 @@
+{{#avatars}}
+	<label for="avatar-gallery-{{id}}">
+		<input type="radio" name="avatar-gallery[id]" id="avatar-gallery-{{id}}" value="{{id}}" {{#active}}checked{{/active}}>
+		<img src="{{image}}" title="{{title}}">
+	</label>
+{{/avatars}}
+{{^avatars}}
+	<div class="alert alert-error">Seems like you don't have any gallery avatars yet.</div>
+{{/avatars}}

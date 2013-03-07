@@ -28,13 +28,15 @@ class View_User_Settings_Profile extends Abstract_View {
 	public function avatars()
 	{
 		$avatars = array();
+		$user_avatar = Auth::instance()->get_user()->avatar();
+
 		foreach ($this->avatars as $avatar)
 		{
 			$avatars[] = array(
 				'id'     => $avatar->id,
 				'name'   => $avatar->name,
 				'view'   => $avatar->edit_view(),
-				'active' => ($avatar->id == Auth::instance()->get_user()->avatar()->id)
+				'active' => ($avatar->id == $user_avatar->id)
 			);
 		}
 		return $avatars;

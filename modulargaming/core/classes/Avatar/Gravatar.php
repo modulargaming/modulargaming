@@ -17,6 +17,18 @@ class Avatar_Gravatar extends Avatar {
 	private $url = 'http://www.gravatar.com/avatar/';
 
 	/**
+	 * Return the save data array.
+	 *
+	 * @return array
+	 */
+	public function data($data)
+	{
+		return array(
+			'driver' => 'gravatar'
+		);
+	}
+
+	/**
 	 * Return the url for the avatar.
 	 *
 	 * @return string
@@ -32,4 +44,5 @@ class Avatar_Gravatar extends Avatar {
 		$view->url = $this->url();
 		return $view;
 	}
+
 }

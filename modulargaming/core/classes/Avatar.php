@@ -70,6 +70,24 @@ abstract class Avatar {
 	}
 
 	/**
+	 * Return the save data array.
+	 *
+	 * @param array $data post data
+	 * @return array
+	 */
+	public abstract function data($data);
+
+	/**
+	 * Set extra validation rules.
+	 *
+	 * @param Validation $validation
+	 */
+	public function validate($validation)
+	{
+
+	}
+
+	/**
 	 * Return the url for the avatar.
 	 *
 	 * @return string
@@ -107,4 +125,5 @@ abstract class Avatar {
 	 * @return Abstract_View
 	 */
 	protected abstract function _edit_view();
+
 }

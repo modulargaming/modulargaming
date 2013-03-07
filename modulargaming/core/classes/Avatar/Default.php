@@ -14,6 +14,18 @@ class Avatar_Default extends Avatar {
 	public $name = 'Default';
 
 	/**
+	 * Return the save data array.
+	 *
+	 * @return array
+	 */
+	public function data($data)
+	{
+		return array(
+			'driver' => 'default'
+		);
+	}
+
+	/**
 	 * Return the default avatar png.
 	 *
 	 * @return string
