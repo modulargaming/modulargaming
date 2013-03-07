@@ -70,7 +70,7 @@ $(document).ready(function() {
         var specie_id = $('#specie-id').val();
 
         $('#add-colour-id').val(colour_id);
-        $('#add-specie_id').val(specie_id);
+        $('#add-specie-id').val(specie_id);
         $('#add-colour-name').text(colour_name);
 
         //reset upload
@@ -97,6 +97,7 @@ $(document).ready(function() {
                 var ajax_options = {
                     type:"POST",
                     url:'./specie/col/update',
+
                     success: function(data){
                         if(data.status == 'success')
                         {
