@@ -7,6 +7,8 @@ class Model_Log extends ORM {
 		'format' => TRUE
 	);
 
+	protected $_belongs_to = array('user' => array());
+
 	protected $_serialize_columns = array('params');
 
 	public static function add_log(Model_User $user, $alias, $message, array $params = array(), $type="app")
