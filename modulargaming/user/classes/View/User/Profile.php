@@ -25,10 +25,11 @@ class View_User_Profile extends Abstract_View {
 			'username'   => $user->username,
 			'created'    => Date::format($user->created),
 			'last_login' => Date::format($user->last_login),
-			//'post_count' => $user->post_count,
+			'post_count' => $user->post_count,
 			'avatar'     => $user->avatar(),
 			'title'      => $user->title->title,
-			//'about'      => $user->about,
+			'about'      => $user->get_property('about'),
+			'signature'      => $user->get_property('signature')
 		);
 	}
 

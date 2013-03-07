@@ -27,8 +27,8 @@ class Controller_User_View extends Abstract_Controller_User {
 		$container = new Tabs;
 
 		$about = new Tab('About me');
-		$about->add_content(new Tab_Text("Hello, short text about me!"));
-		$about->add_content(new Tab_Text("Hello, this is my signature!"));
+		$about->add_content(new Tab_Text($user->get_property('about') ));
+		$about->add_content(new Tab_Text($user->get_property('signature') ));
 
 		$container->add_tab($about);
 
