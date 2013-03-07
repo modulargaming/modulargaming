@@ -63,7 +63,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 					'username'  => $post->user->username,
 					'title'     => $post->user->title->title,
 					'signature' => $post->user->get_property('signature'),
-					// 'post_count' => number_format($post->user->post_count),
+					'post_count' => number_format($post->user->post_count),
 					'created'   => Date::format($post->user->created),
 					'href'      => Route::url('user.view', array(
 						'id' => $post->user->id,
