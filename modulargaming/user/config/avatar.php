@@ -1,8 +1,12 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 return array(
-	'size' => array(
-		'width'  => 50,
-		'heigth' => 50
+
+	// Array of enabled avatar classes.
+	'enabled' => array(
+		'Default',
+		'Gallery',
+		'Gravatar'
 	)
+
 );
