@@ -158,6 +158,10 @@ class Item {
 		}
 	}
 
+	public function item() {
+		return $this->_item;
+	}
+
 	/**
 	 * Retrieve a user's items.
 	 *
