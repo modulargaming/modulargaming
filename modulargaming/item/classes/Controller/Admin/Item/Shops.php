@@ -33,7 +33,8 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 			$orm = ORM::factory('Shop');
 
 			$paginate = Paginate::factory($orm)
-				->columns(array('id', 'title', 'status', 'stock_type'));
+				->columns(array('shop.id', 'title', 'status', 'stock_type'))
+				->search_columns('title', 'status', 'stock_type');
 
 			$datatables = DataTables::factory($paginate)->execute();
 
