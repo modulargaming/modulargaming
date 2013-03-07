@@ -1,4 +1,4 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+ <?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * Default avatar driver, returns a static url.
  *
@@ -10,6 +10,9 @@
  */
 class Avatar_Default extends Avatar {
 
+	public $id = 'default';
+	public $name = 'Default';
+
 	/**
 	 * Return the default avatar png.
 	 *
@@ -18,5 +21,12 @@ class Avatar_Default extends Avatar {
 	public function url()
 	{
 		return URL::site('assets/img/avatars/default.png', NULL, FALSE);
+	}
+
+	protected function _edit_view()
+	{
+		$view = new View_Avatar_Default;
+		$view->url = $this->url();
+		return $view;
 	}
 }

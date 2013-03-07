@@ -1,3 +1,16 @@
+<label for="avatar-type">Avatar</label>
+<select id="avatar-type" name="avatar-type">
+	{{#avatars}}
+		<option value="{{id}}" {{#active}}selected{{/active}}>{{name}}</option>
+	{{/avatars}}
+</select>
+
+{{#avatars}}
+<div id="avatar-{{id}}" class="avatar{{^active}} hidden{{/active}}">
+	{{& view}}
+</div>
+{{/avatars}}
+
 <label for="about">About me</label>
 <textarea id="about" name="about" class="textarea">{{& properties.about}}</textarea>
 

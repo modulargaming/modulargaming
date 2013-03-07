@@ -10,6 +10,9 @@
  */
 class Avatar_Gallery extends Avatar {
 
+	public $id = 'gallery';
+	public $name = 'Gallery';
+
 	/**
 	 * Return the gallery avatar.
 	 *
@@ -19,5 +22,12 @@ class Avatar_Gallery extends Avatar {
 	{
 		$id = Arr::get($this->data, 'id', 0);
 		return URL::site('assets/img/avatars/gallery/'.$id.'.png', NULL, FALSE);
+	}
+
+	protected function _edit_view()
+	{
+		$view = new View_Avatar_Gravatar;
+		$view->url = $this->url();
+		return $view;
 	}
 }

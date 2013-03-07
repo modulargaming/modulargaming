@@ -11,6 +11,9 @@
  */
 class Avatar_Gravatar extends Avatar {
 
+	public $id = 'gravatar';
+	public $name = 'Gravatar';
+
 	private $url = 'http://www.gravatar.com/avatar/';
 
 	/**
@@ -21,5 +24,12 @@ class Avatar_Gravatar extends Avatar {
 	public function url()
 	{
 		return $this->url.md5(strtolower($this->user->email)).'?s=64';
+	}
+
+	protected function _edit_view()
+	{
+		$view = new View_Avatar_Gravatar;
+		$view->url = $this->url();
+		return $view;
 	}
 }

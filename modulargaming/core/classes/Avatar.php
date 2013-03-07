@@ -11,6 +11,16 @@
 abstract class Avatar {
 
 	/**
+	 * @var string machine safe id
+	 */
+	public $id;
+
+	/**
+	 * @var string driver display name
+	 */
+	public $name;
+
+	/**
 	 * @var Model_User $user
 	 */
 	protected $user;
@@ -59,7 +69,6 @@ abstract class Avatar {
 		$this->data = $data;
 	}
 
-
 	/**
 	 * Return the url for the avatar.
 	 *
@@ -82,4 +91,20 @@ abstract class Avatar {
 	{
 		return 64;
 	}
+
+	/**
+	 * Get the edit view.
+	 *
+	 * @return string Html of the view
+	 */
+	public function edit_view()
+	{
+		$renderer = Kostache::factory();
+		return $renderer->render($this->_edit_view());
+	}
+
+	/**
+	 * @return Abstract_View
+	 */
+	protected abstract function _edit_view();
 }
