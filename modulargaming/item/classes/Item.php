@@ -111,7 +111,7 @@ class Item {
 					->save();
 			}
 
-			Journal::log('item.in.' . $origin, 'item', 'Player received :amount :item_name @ :origin', array(
+			return Journal::log('item.in.' . $origin, 'item', 'Player received :amount :item_name @ :origin', array(
 				':amount' => $amount,
 				':item_name' => $user_item->item->name($amount, FALSE),
 				':origin' => str_replace('.', ' ', $origin)
