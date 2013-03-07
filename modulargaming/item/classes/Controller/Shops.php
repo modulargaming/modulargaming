@@ -4,7 +4,7 @@
  *
  * All shops get routed through here.
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Controller
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

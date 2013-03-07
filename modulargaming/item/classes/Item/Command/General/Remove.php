@@ -4,7 +4,7 @@
  *
  * Delete an item from the inventory
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Commands
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

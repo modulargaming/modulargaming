@@ -2,19 +2,13 @@
 /**
  * Journal class.
  *
- * @package    Journal log/notify
+ * @package    MG/Journal
  * @category   Core
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
 class Journal{
-
-	/**
-	 * @var Model_Log
-	 */
-	protected $_log = NULL;
-
 	/**
 	 * Create a new log
 	 *
@@ -52,8 +46,9 @@ class Journal{
 		return new Journal($log);
 	}
 
-	public function __construct($log)
-	{
+	protected $_log = null;
+
+	public function __construct($log) {
 		$this->_log = $log;
 	}
 
@@ -65,13 +60,13 @@ class Journal{
 	 * @param array      $param        Params to parse the notification with (combined with $log->params)
 	 * @param string     $type         Type of notification (info, error, success, warning)
 	 *
-	 * @return Model_User_Notification
+	 * @return User_Notification
 	 */
 	public function notify($user, $notification, $param = array(), $type = "info")
 	{
 		$log = $this->_log;
 
-		$notify = Kohana::$config->load('notify.'.$notification);
+		$notify = Kohana::$config->load('notify.' . $notification);
 
 		$param['username'] = $log->user->username;
 

@@ -4,7 +4,7 @@
  *
  * Move an item to the player's shop
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Commands
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

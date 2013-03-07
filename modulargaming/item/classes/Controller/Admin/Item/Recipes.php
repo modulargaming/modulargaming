@@ -4,7 +4,7 @@
  *
  * Manage item recipes
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Admin
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

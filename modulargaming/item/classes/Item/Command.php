@@ -4,7 +4,7 @@
  *
  * Define commands that items perform when they're consumed
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Commands
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

@@ -4,7 +4,7 @@
  *
  * Manage site items
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Admin
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

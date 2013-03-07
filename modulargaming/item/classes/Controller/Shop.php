@@ -5,7 +5,7 @@
  * Let the user manage his/her shop,
  * buy items
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Controller
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

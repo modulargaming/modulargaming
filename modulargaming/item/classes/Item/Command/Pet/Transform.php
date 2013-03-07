@@ -4,7 +4,7 @@
  *
  * Change a pet's specie
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Commands
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

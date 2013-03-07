@@ -4,7 +4,7 @@
  *
  * Trade items
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Controller
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

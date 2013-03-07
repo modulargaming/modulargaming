@@ -4,7 +4,7 @@
  *
  * Change a pet's colour (if possible)
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Commands
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming

@@ -4,7 +4,7 @@
  *
  * Increase a pet's happiness level
  *
- * @package    ModularGaming/Items
+ * @package    MG/Items
  * @category   Commands
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming
