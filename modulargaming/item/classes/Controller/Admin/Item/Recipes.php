@@ -39,7 +39,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 			$paginate = Paginate::factory($orm)
 				->columns(array('id', 'name', 'materials', 'crafted_item_id'))
-				->search_columns('name');
+				->search_columns(array('name'));
 
 			$datatables = DataTables::factory($paginate)->execute();
 

@@ -150,7 +150,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 			$paginate = Paginate::factory($orm)
 				->columns(array('item.id', 'item.name', 'image', 'status', 'type.name'))
-				->search_columns('item.name', 'status', 'type.name');
+				->search_columns(array('item.name', 'status', 'type.name'));
 
 			$datatables = DataTables::factory($paginate)->execute();
 
