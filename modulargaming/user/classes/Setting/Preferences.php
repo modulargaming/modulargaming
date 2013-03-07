@@ -9,7 +9,7 @@ class Setting_Preferences extends Setting {
 	{
 		parent::__construct($user);
 
-		$timezones = ORM::factory('user_timezone')
+		$timezones = ORM::factory('User_Timezone')
 			->find_all();
 
 		$view = new View_User_Settings_Preferences;
