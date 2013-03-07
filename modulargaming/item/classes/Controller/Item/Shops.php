@@ -9,7 +9,7 @@
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming
  */
-class Controller_Shops extends Abstract_Controller_Frontend {
+class Controller_Item_Shops extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 
 	//provide a list of all the shops

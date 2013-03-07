@@ -10,7 +10,7 @@
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming
  */
-class Controller_Shop extends Abstract_Controller_Frontend {
+class Controller_Item_Shop extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 	protected $_shop = NULL;
 

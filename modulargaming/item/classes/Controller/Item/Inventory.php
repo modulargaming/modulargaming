@@ -9,7 +9,7 @@
  * @author     Maxim Kerstens
  * @copyright  (c) Modular gaming
  */
-class Controller_Inventory extends Abstract_Controller_Frontend {
+class Controller_Item_Inventory extends Abstract_Controller_Frontend {
 	protected $protected = TRUE;
 
 	public function action_index()
