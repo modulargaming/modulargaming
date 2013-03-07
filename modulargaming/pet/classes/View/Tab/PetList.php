@@ -18,6 +18,7 @@ class View_Tab_PetList extends Abstract_View_Tab {
 				'name' => $pet->name,
 				'specie' => $pet->specie->name,
 				'colour' => $pet->colour->name,
+				'username' => $pet->user->username
 			);
 		}
 		return $pets;

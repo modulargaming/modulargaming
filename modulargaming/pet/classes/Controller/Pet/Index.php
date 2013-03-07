@@ -26,7 +26,7 @@ class Controller_Pet_Index extends Abstract_Controller_Frontend {
 					->where('user_pet.id', '=', $this->request->post('abandon'))
 					->where('user_id', '=', $this->user->id)
 					->find();
-					$pet->user_id = 0;
+					$pet->user_id = NULL;
 					$pet->abandoned = time();
 					$pet->save();
 					Hint::success('You have abandoned ' . $pet->name . '.');
