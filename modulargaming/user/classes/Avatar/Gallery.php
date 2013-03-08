@@ -21,7 +21,7 @@ class Avatar_Gallery extends Avatar {
 	public function data($data)
 	{
 		return array(
-			'driver' => 'gallery',
+			'driver' => 'Gallery',
 			'id'     => $data['avatar-gallery']['id']
 		);
 	}

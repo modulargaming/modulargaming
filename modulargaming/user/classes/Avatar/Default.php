@@ -21,7 +21,7 @@ class Avatar_Default extends Avatar {
 	public function data($data)
 	{
 		return array(
-			'driver' => 'default'
+			'driver' => 'Default'
 		);
 	}
 
