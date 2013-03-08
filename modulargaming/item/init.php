@@ -172,7 +172,7 @@ Route::set('item.inventory.consume', 'inventory/consume/<id>', array('id' => '[0
 ));
 Route::set('item.inventory.search', 'inventory/search')
 	->defaults(array(
-	'directory'  => 'Item',
+//	'directory'  => 'Item',
 	'controller' => 'Search',
 	'action'     => 'index',
 ));
