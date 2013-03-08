@@ -5,7 +5,7 @@
 	<div class="row-fluid">
 		<div class="thumbnail center span2">
 			<a href="#">
-				<img class="img-polaroid" src="{{#sender.avatar}}{{sender.avatar}}{{/sender.avatar}}{{^sender.avatar}}{{base_url}}assets/img/avatars/default.png{{/sender.avatar}}" width="64" height="64">
+				{{#sender.avatar}}{{>avatar}}{{/sender.avatar}}"
 			</a>
 
 			<br>
