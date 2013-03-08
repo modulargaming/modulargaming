@@ -5,14 +5,21 @@ class Controller_Message_Create extends Abstract_Controller_Message {
 
 	public function action_index()
 	{
-		$id = $this->request->param('id');
+		$username = $this->request->param('username');
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try
 			{
+				$post = $this->request->post();
+				$receiver = ORM::factory('User')->where('username', '=', $post['receiver'])->find();
+				if ( ! $receiver->loaded())
+				{
+					throw HTTP_Exception::Factory('404', 'No such user');
+				}
 				$message_data = Arr::merge($this->request->post(), array(
 					'sender_id' => $this->user->id,
+					'receiver_id' => $receiver->id,
 				));
 
 				$message = ORM::factory('Message')
@@ -34,7 +41,7 @@ class Controller_Message_Create extends Abstract_Controller_Message {
 		}
 
 		$this->view = new View_Message_Create;
-		$this->view->id = $id;
+		$this->view->username = $username;
 	}
 
 }

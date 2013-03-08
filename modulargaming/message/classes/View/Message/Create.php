@@ -5,9 +5,9 @@ class View_Message_Create extends Abstract_View_Message {
 	public $title = 'Create Message';
 
 
-	public function id()
+	public function username()
 	{
-		return $this->id;
+		return $this->username;
 	}
 
 	protected function get_breadcrumb()
@@ -15,7 +15,7 @@ class View_Message_Create extends Abstract_View_Message {
 		return array_merge(parent::get_breadcrumb(), array(
 			array(
 				'title' => 'Create Message',
-				'href'  => Route::url('message.create', array('id' => $this->id))
+				'href'  => Route::url('message.create', array('username' => $this->username))
 			)
 		));
 	}

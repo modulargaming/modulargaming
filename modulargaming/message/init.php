@@ -15,7 +15,7 @@ Route::set('message.view', 'message/view(/<id>)', array('id' => '[0-9]+'))
     'action'     => 'index',
   ));
 
-Route::set('message.create', 'message/create(/<id>)', array('id' => '[0-9]+'))
+Route::set('message.create', 'message/create(/<username>)', array('username' => '[a-zA-Z0-9-_]+'))
   ->defaults(array(
     'directory'  => 'Message',
     'controller' => 'Create',
