@@ -24,7 +24,7 @@ class Avatar_Gravatar extends Avatar {
 	public function data($data)
 	{
 		return array(
-			'driver' => 'gravatar'
+			'driver' => 'Gravatar'
 		);
 	}
 
