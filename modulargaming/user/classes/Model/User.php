@@ -98,19 +98,6 @@ class Model_User extends Model_Auth_User implements Model_ACL_User {
 	}
 
 	/**
-	 * (Re)calculate the users forum posts.
-	 */
-	public function calculate_post_count()
-	{
-		$posts = ORM::factory('Forum_Post')
-			->where('user_id', '=', $this->id)
-			->count_all();
-
-		$this->post_count = $posts;
-		$this->save();
-	}
-
-	/**
 	 * @param  array $values    Values to insert
 	 * @param  array $expected  Expected values, the rest will be ignored
 	 * @return Model_User

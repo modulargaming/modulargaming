@@ -54,6 +54,7 @@ abstract class Avatar {
 		catch (ReflectionException $ex)
 		{
 			$class = new Avatar_Default($user, array());
+			Kohana::$log->add(LOG::ERROR, 'Enabled avatar driver ":driver" does not exist', array(':driver' => $driver));
 		}
 
 		return $class;

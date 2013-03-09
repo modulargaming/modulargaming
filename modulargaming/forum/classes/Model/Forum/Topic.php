@@ -68,14 +68,17 @@ class Model_Forum_Topic extends ORM {
 	public function delete_posts()
 	{
 		$post_users = array();
+
 		foreach ($this->posts->find_all() as $post)
 		{
 			$post_users[$post->user->id] = $post->user;
 			$post->delete();
 		}
+
 		foreach ($post_users as $user)
 		{
-			$user->calculate_post_count();
+			$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($this->user->id));
+			$user->save();
 		}
 	}
 

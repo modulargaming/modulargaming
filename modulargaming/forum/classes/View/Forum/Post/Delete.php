@@ -10,20 +10,19 @@ class View_Forum_Post_Delete extends Abstract_View_Forum_Post {
 	public function post()
 	{
 		$post = $this->post;
+		$user = $post->user;
+
 		return array(
-			'id' => $post->id,
+			'id'      => $post->id,
 			'content' => $post->content,
-			'created' =>  Date::format($post->created),
-			'user' => array(
-				'avatar' => 'http://www.gravatar.com/avatar/'.md5(strtolower($post->user->email)).'?s=64', // TODO: Have this as a method in the user Model.
-				'username'  => $post->user->username,
-				'signature' => $post->user->signature,
-				'post_count' => number_format($post->user->post_count),
-				'created' => Date::format($post->user->created),
-				'href'      => Route::url('user', array(
-					'action' => 'view',
-					'id'     => $post->user->id,
-				)),
+			'created' => Date::format($post->created),
+			'user'    => array(
+				'avatar'     => $user->avatar(),
+				'username'   => $user->username,
+				'signature'  => $user->get_property('signature'),
+				'post_count' => number_format($user->get_property('forum.posts')),
+				'created'    => Date::format($user->created),
+				'href'       => Route::url('user.view', array('id' => $user->id))
 			)
 		);
 	}

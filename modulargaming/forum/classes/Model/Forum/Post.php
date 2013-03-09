@@ -57,4 +57,17 @@ class Model_Forum_Post extends ORM {
 			->create($extra_validation);
 	}
 
+	/**
+	 * Get the number of posts a user has.
+	 *
+	 * @param int $id user id
+	 * @return int
+	 */
+	public static function get_user_post_count($id)
+	{
+		return ORM::factory('Forum_Post')
+			->where('user_id', '=', $id)
+			->count_all();
+	}
+
 }

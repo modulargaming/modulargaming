@@ -53,21 +53,20 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 
 		foreach ($this->posts as $post)
 		{
+			$user = $post->user;
 			$posts[] = array(
 				'id'      => $post->id,
 				'title'   => $this->topic->title,
 				'content' => $post->content, // Escaped properly at create now
-				'created' =>  Date::format($post->created),
+				'created' => Date::format($post->created),
 				'user'    => array(
-					'avatar'    => $post->user->avatar(),
-					'username'  => $post->user->username,
-					'title'     => $post->user->title->title,
-					'signature' => $post->user->get_property('signature'),
-					'post_count' => number_format($post->user->post_count),
-					'created'   => Date::format($post->user->created),
-					'href'      => Route::url('user.view', array(
-						'id' => $post->user->id,
-					)),
+					'avatar'     => $user->avatar(),
+					'username'   => $user->username,
+					'title'      => $user->title->title,
+					'signature'  => $user->get_property('signature'),
+					'post_count' => number_format($user->get_property('forum.posts')),
+					'created'    => Date::format($user->created),
+					'href'       => Route::url('user.view', array('id' => $user->id))
 				),
 				'links' => array(
 					'edit' => Route::url('forum.post', array(

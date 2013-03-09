@@ -75,7 +75,8 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 				$this->topic->last_post_id = $post->id;
 				$this->topic->save();
 
-				$this->user->calculate_post_count();
+				$this->user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($this->user->id));
+				$this->user->save();
 
 				Hint::success('You have created a post!');
 				$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));
