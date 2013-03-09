@@ -90,7 +90,7 @@
 		 * @throws Item_Exception When trying to transfer an untransferable item
 		 * @return boolean|Model_User_Item
 		 */
-		public function transfer(Model_User $user, $amount = 1)
+		public function transfer(Model_User $user, $item, $amount = 1)
 		{
 			if ($this->item->transferable == FALSE)
 			{
