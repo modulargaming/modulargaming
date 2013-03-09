@@ -92,7 +92,7 @@
 		 */
 		public function transfer(Model_User $user, $amount = 1)
 		{
-			if ($user->item->transferable == FALSE)
+			if ($this->item->transferable == FALSE)
 			{
 				Throw new Item_Exception('":item" is bound to your account only.', array(':item' => $item->name));
 			}
