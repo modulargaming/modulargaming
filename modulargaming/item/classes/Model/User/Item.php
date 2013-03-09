@@ -100,7 +100,7 @@
 			{
 				$this->_relocate($user->id, 'inventory', $amount);
 
-				return Log::create('transfer'.$this->item_id, 'item', ':item_name transferred to :other_user', array(
+				return Journal::notify('transfer'.$this->item_id, 'item', ':item_name transferred to :other_user', array(
 					':tem_name' => $this->item->name, ':other_user' => $user->username));
 			}
 		}
