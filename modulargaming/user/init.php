@@ -7,10 +7,10 @@ Route::set('user.view', 'user/view(/<id>(/<page>))', array('id' => '[0-9]+', 'pa
 	'action'     => 'index',
 ));
 
-Route::set('user.edit', 'user/edit')
+Route::set('user.settings', 'user/settings')
 	->defaults(array(
 	'directory'  => 'User',
-	'controller' => 'Edit',
+	'controller' => 'Settings',
 	'action'     => 'index',
 ));
 
