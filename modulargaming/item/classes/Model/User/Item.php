@@ -92,15 +92,15 @@
 		 */
 		public function transfer(Model_User $user, $item, $amount = 1)
 		{
-			if ($this->item->transferable == FALSE)
+			if ($item->item->transferable == FALSE)
 			{
 				Throw new Item_Exception('":item" is bound to your account only.', array(':item' => $item->name));
 			}
 			else
 			{
 				$this->_relocate($user->id, 'inventory', $amount);
-					return Journal::notify('transfer'.$this->item_id, 'item', ':item_name transferred to :other_user',
-						array(':item_name' => $this->item->name, ':other_user' => $user->username));
+					return Journal::notify('transfer'.$item->item->id, 'item', ':item_name transferred to :other_user',
+						array(':item_name' => $item->item->name, ':other_user' => $user->username));
 			}
 		}
 
