@@ -6,7 +6,8 @@ return array(
 	'enabled' => array(
 		'Default',
 		'Gallery',
-		'Gravatar'
+		'Gravatar',
+		'Upload'
 	)
 
 );
