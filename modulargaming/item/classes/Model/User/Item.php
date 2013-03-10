@@ -90,7 +90,7 @@
 		 * @throws Item_Exception When trying to transfer an untransferable item
 		 * @return boolean|Model_User_Item
 		 */
-		public function transfer(Model_User $user, $item, $amount = 1)
+		public function transfer(Model_User $user, $amount = 1)
 		{
 			if ($item->item->transferable == FALSE)
 			{
@@ -99,8 +99,10 @@
 			else
 			{
 				$this->_relocate($user->id, 'inventory', $amount);
+					return Journal::log('transfer'.$this->item_id, 'item', ':item_name transferred to :other_user', 
+					array(
 					return Journal::notify('transfer'.$item->item->id, 'item', ':item_name transferred to :other_user',
-						array(':item_name' => $item->item->name, ':other_user' => $user->username));
+						array('':item_name' => $this->item->name, ':other_user' => $user->username));
 			}
 		}
 
