@@ -344,7 +344,7 @@ class Controller_Item_Inventory extends Abstract_Controller_Frontend {
 
 							if ($user->loaded())
 							{
-								$log = $item->transfer($user, $item);
+								$log = $item->transfer($user);
 
 								$log->notify($user, 'items.gift', array(':item_name' => $item->item->name(1)));
 
