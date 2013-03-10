@@ -22,7 +22,7 @@ class View_Forum_Post_Delete extends Abstract_View_Forum_Post {
 				'signature'  => $user->get_property('signature'),
 				'post_count' => number_format($user->get_property('forum.posts')),
 				'created'    => Date::format($user->created),
-				'href'       => Route::url('user.view', array('id' => $user->id))
+				'href'       => Route::url('user.profile', array('id' => $user->id))
 			)
 		);
 	}

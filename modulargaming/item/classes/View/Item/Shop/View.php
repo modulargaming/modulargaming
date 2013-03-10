@@ -52,7 +52,7 @@ class View_Item_Shop_View extends Abstract_View_Inventory {
 	 */
 	public function owner()
 	{
-		return array('url' => Route::url('user.view', array('id' => $this->owner['id'])), 'username' => $this->owner['username']);
+		return array('url' => Route::url('user.profile', array('id' => $this->owner['id'])), 'username' => $this->owner['username']);
 	}
 
 	protected function get_breadcrumb()

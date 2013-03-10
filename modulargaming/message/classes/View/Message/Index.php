@@ -20,7 +20,7 @@ class View_Message_Index extends Abstract_View_Message {
 				'sender' => array(
 					'id' => $message->sender->id,
 					'username'  => $message->sender->username,
-					'href'      => Route::url('user.view', array(
+					'href'      => Route::url('user.profile', array(
 						'id'     => $message->sender->id,
 					)),
 				),

@@ -59,7 +59,7 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 			'description'  => $this->lot->description,
 			'inventory'    => $inventory,
 			'username'     => $this->lot->user->username,
-			'user_profile' => Route::url('user.view', array('id' => $this->lot->user_id)),
+			'user_profile' => Route::url('user.profile', array('id' => $this->lot->user_id)),
 			'delete_trade' => ($this->owner_actions) ? Route::url('item.trade.delete', array('id' => $this->lot->id)) : FALSE
 		);
 
@@ -93,7 +93,7 @@ class View_Item_Trade_Lot extends Abstract_View_Lot {
 				'id'        => $bid->id,
 				'points'    => ($bid->points > 0) ? array('amount' => $bid->points) : FALSE,
 				'username'  => $bid->user->username,
-				'profile'   => Route::url('user.view', array('id' => $bid->user_id)),
+				'profile'   => Route::url('user.profile', array('id' => $bid->user_id)),
 				'inventory' => $items,
 				'accept'    => Route::url('item.trade.accept', array('id' => $bid->id)),
 				'reject'    => Route::url('item.trade.reject', array('id' => $bid->id)),

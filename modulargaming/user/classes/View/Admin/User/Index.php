@@ -22,7 +22,7 @@ class View_Admin_User_Index extends Abstract_View_Admin {
 				'last_login' => Date::format($user->last_login),
 				'created'    => Date::format($user->created),
 				'links' => array(
-					'profile' => Route::url('user.view', array('id' => $user->id)),
+					'profile' => Route::url('user.profile', array('id' => $user->id)),
 					'edit'    => '/admin/user/edit/'.$user->id, // TODO: Use reverse routing!
 				),
 			);
