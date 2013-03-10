@@ -441,3 +441,4 @@ class Controller_Item_Inventory extends Abstract_Controller_Frontend {
 		$this->redirect(Route::get('item.inventory')->uri());
 	}
 }
+
