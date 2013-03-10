@@ -2,7 +2,12 @@
 
 return array (
 	'items' => array(
-		'gift' => ':username sent you :item_name',
+		'gift' => array(
+			'title' => 'Gift',
+			'message' => ':username sent you :item_name',
+			'icon' => 'item_gift'
+		),
+		'transfer' => '',
 		'user_shop' => array(
 			'buy' => array(
 				'icon' => 'user_shop',
