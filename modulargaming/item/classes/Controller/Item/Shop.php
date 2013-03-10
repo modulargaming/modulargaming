@@ -344,7 +344,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 				$this->user->save();
 
 				//log this action
-				$log = MG::log('user_shop.' . $shop->id, 'item', 'Bought 1 :item_name for :amount from :user', array(
+				$log = Journal::log('user_shop.' . $shop->id, 'item', 'Bought 1 :item_name for :amount from :user', array(
 					'item' => $item->item,
 					'item_name' => $item->item->name,
 					'user' => $item->user->username,

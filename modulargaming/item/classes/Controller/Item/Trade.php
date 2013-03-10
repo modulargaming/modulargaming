@@ -198,7 +198,7 @@ class Controller_Item_Trade extends Abstract_Controller_Frontend {
 		//remove all bids made to this lot
 		if (count($bids) > 0)
 		{
-			$log = MG::log('item.trade.' . $id . '.delete', 'item', 'Trade #id deleted', array(':id' => $id));
+			$log = Journal::log('item.trade.' . $id . '.delete', 'item', 'Trade #id deleted', array(':id' => $id));
 
 			foreach ($bids as $bid)
 			{
@@ -437,7 +437,7 @@ class Controller_Item_Trade extends Abstract_Controller_Frontend {
 					return $this->redirect(Route::get('item.trade.bid')->uri(array('id' => $id)));
 				}
 
-				$log = MG::log('item.trade.bid.' . $bid->lot_id, 'items', 'Made a bid with :amount items and :points points', array(
+				$log = Journal::log('item.trade.bid.' . $bid->lot_id, 'items', 'Made a bid with :amount items and :points points', array(
 					':amount' => $a_count, ':points' => (int)$points, 'items' => $item_names));
 
 				$log->notify($bid->lot_user, 'items.trades.bid', array(
@@ -514,7 +514,7 @@ class Controller_Item_Trade extends Abstract_Controller_Frontend {
 				$item->transfer($bid->user, $item->amount);
 			}
 
-			$log = MG::log('item.trade.' . $id . '.accept', 'item', 'Trade #id completed', array(':id' => $id));
+			$log = Journal::log('item.trade.' . $id . '.accept', 'item', 'Trade #id completed', array(':id' => $id));
 			$log->notify($user, 'items.trades.accept', array(':username' => $this->user->username));
 
 			Hint::success('You\'ve accepted bid #:id made by :username', array(':id' => $bid->id, ':username' => $bid->user->username));
@@ -563,7 +563,7 @@ class Controller_Item_Trade extends Abstract_Controller_Frontend {
 
 			Hint::success('You\'ve rejected bid #:id made by :username', array(':id' => $bid->id, ':username' => $user->username));
 
-			$log = MG::log('item.trade.' . $id . '.reject', 'item', 'Bid from :user declined', array(':user' => $user->username));
+			$log = Journal::log('item.trade.' . $id . '.reject', 'item', 'Bid from :user declined', array(':user' => $user->username));
 			$log->notify($user, 'items.trades.reject', array(':lot' => $id));
 			$bid->delete();
 		}
@@ -609,7 +609,7 @@ class Controller_Item_Trade extends Abstract_Controller_Frontend {
 
 			Hint::success('You\'ve retracted your bid');
 
-			$log = MG::log('item.trade.' . $id . '.retract', 'item', 'Retracted bid for :id', array(':id' => $id));
+			$log = Journal::log('item.trade.' . $id . '.retract', 'item', 'Retracted bid for :id', array(':id' => $id));
 			$log->notify($log, $bid->lot->user, 'items.trades.retract', array(':lot' => $id, ':username' => $this->user->username));
 
 			$bid->delete();

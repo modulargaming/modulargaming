@@ -99,8 +99,8 @@
 			else
 			{
 				$this->_relocate($user->id, 'inventory', $amount);
-					return Journal::log('transfer'.$item->item->id, 'item', ':item_name transferred to :other_user',
-						array('':item_name' => $this->item->name, ':other_user' => $user->username));
+					return Journal::log('transfer'.$this->item->id, 'item', ':item_name transferred to :other_user',
+						array(':item_name' => $this->item->name, ':other_user' => $user->username));
 			}
 		}
 
