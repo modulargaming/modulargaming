@@ -25,7 +25,7 @@ abstract class Abstract_View {
 		return $this->title;
 	}
 
-	// TODO: We want to avoid using base_url() inside templates,
+	// TODO: We want to avoid using base_url() inside templates, remove it?
 	public function base_url()
 	{
 		return URL::base();
