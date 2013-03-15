@@ -25,9 +25,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 	{
 		parent::before();
 
-		$id = $this->request->param('id');
-
-		$this->topic = ORM::Factory('Forum_Topic', $id);
+		$this->topic = ORM::Factory('Forum_Topic', $this->request->param('id'));
 
 		if ( ! $this->topic->loaded())
 		{

@@ -11,19 +11,20 @@
  */
 class Controller_Forum_Category extends Abstract_Controller_Forum {
 
+	/**
+	 * @var Model_Forum_Category
+	 */
 	protected $category;
 
 	/**
-	 * Attempt to load the forum category using the id parameter from the url
-	 * AND throw an HTTP_Exception if it fails.
+	 * Attemp tto load the forum category using the id parameter.
+	 * @throws HTTP_Exception
 	 */
 	public function before()
 	{
 		parent::before();
 
-		$id = $this->request->param('id');
-
-		$this->category = ORM::factory('Forum_Category', $id);
+		$this->category = ORM::factory('Forum_Category', $this->request->param('id'));
 
 		if ( ! $this->category->loaded())
 		{
@@ -47,9 +48,6 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 
 		$this->view = new View_Forum_Category_View;
 
-		// TODO: This belongs to the view class.
-		$this->view->can_create = $this->user->can('Forum_Topic_Create', array('category' => $this->category));
-
 		$this->view->pagination = $paginate->render();
 		$this->view->category = $this->category;
 		$this->view->topics = $paginate->result();
@@ -69,10 +67,11 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 		{
 			try
 			{
-				$topic_data = Arr::merge($this->request->post(), array(
+				$topic_data = array(
 					'category_id' => $this->category->id,
 					'user_id'     => $this->user->id,
-				));
+					'title'       => $this->request->post('title')
+				);
 
 				$topic = ORM::factory('Forum_Topic')
 					->create_topic($topic_data, array(
@@ -81,10 +80,11 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 						'title',
 					));
 
-				$post_data = Arr::merge($this->request->post(), array(
+				$post_data = array(
 					'topic_id' => $topic->id,
 					'user_id'  => $this->user->id,
-				));
+					'content'  => $this->request->post('content')
+				);
 
 				$post = ORM::factory('Forum_Post')
 					->create_post($post_data, array(

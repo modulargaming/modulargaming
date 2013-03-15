@@ -29,9 +29,7 @@ class Controller_Forum_Post extends Abstract_Controller_Forum {
 	{
 		parent::before();
 
-		$id = $this->request->param('id');
-
-		$this->post = ORM::factory('Forum_Post', $id);
+		$this->post = ORM::factory('Forum_Post', $this->request->param('id'));
 
 		if ( ! $this->post->loaded())
 		{

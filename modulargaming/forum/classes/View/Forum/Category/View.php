@@ -2,8 +2,10 @@
 
 class View_Forum_Category_View extends Abstract_View_Forum_Category {
 
+	/**
+	 * @var Model_Forum_Topic[]
+	 */
 	public $topics;
-	public $can_create;
 
 	public function title()
 	{
@@ -57,6 +59,11 @@ class View_Forum_Category_View extends Abstract_View_Forum_Category {
 				'id'     => $this->category->id
 			)),
 		);
+	}
+
+	public function can_create()
+	{
+		return Auth::instance()->get_user()->can('Forum_Topic_Create', array('category' => $this->category));
 	}
 
 }

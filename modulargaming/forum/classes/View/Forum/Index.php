@@ -3,6 +3,10 @@
 class View_Forum_Index extends Abstract_View_Forum {
 
 	public $title = 'Forum';
+
+	/**
+	 * @var Model_Forum_Category[]
+	 */
 	public $categories;
 
 	public function categories()

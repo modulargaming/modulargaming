@@ -11,6 +11,9 @@
  */
 class Controller_Forum_Index extends Abstract_Controller_Forum {
 
+	/**
+	 * List all forum categories.
+	 */
 	public function action_index()
 	{
 		$categories = ORM::factory('Forum_Category')
