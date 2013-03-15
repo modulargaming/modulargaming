@@ -43,7 +43,7 @@ class View_Item_Trade_Bid extends Abstract_View_Inventory {
 				'id'          => $this->lot->id,
 				'url'         => Route::url('item.trade.lot', array('id' => $this->lot->id)),
 				'username'    => $this->lot->user->username,
-				'profile'     => Route::url('user.view', array('id' => $this->lot->user->id)),
+				'profile'     => Route::url('user.profile', array('id' => $this->lot->user->id)),
 				'inventory'   => $items,
 				'description' => $this->lot->description
 			);

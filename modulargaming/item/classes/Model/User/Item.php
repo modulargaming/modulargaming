@@ -90,17 +90,17 @@
 		 * @throws Item_Exception When trying to transfer an untransferable item
 		 * @return boolean|Model_User_Item
 		 */
-		public function transfer(Model_User $user, $item, $amount = 1)
+		public function transfer(Model_User $user, $amount = 1)
 		{
-			if ($item->item->transferable == FALSE)
+			if ($this->item->transferable == FALSE)
 			{
-				Throw new Item_Exception('":item" is bound to your account only.', array(':item' => $item->name));
+				Throw new Item_Exception('":item" is bound to your account only.', array(':item' => $this->item->name));
 			}
 			else
 			{
 				$this->_relocate($user->id, 'inventory', $amount);
-					return Journal::notify('transfer'.$item->item->id, 'item', ':item_name transferred to :other_user',
-						array(':item_name' => $item->item->name, ':other_user' => $user->username));
+					return Journal::log('transfer'.$this->item->id, 'items.gift', ':item_name transferred to :other_user',
+						array(':item_name' => $this->item->name, ':other_user' => $user->username));
 			}
 		}
 

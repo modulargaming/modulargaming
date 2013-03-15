@@ -8,7 +8,7 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Controller_User_View extends Abstract_Controller_User {
+class Controller_User_Profile extends Abstract_Controller_User {
 
 	/**
 	 * View users profile

@@ -51,7 +51,7 @@ class View_Item_Trade_Index extends Abstract_View_Inventory {
 					'description'  => $lot->description,
 					'inventory'    => $inventory,
 					'username'     => $lot->user->username,
-					'user_profile' => Route::url('user.view', array('id' => $lot->user_id))
+					'user_profile' => Route::url('user.profile', array('id' => $lot->user_id))
 				);
 			}
 		}

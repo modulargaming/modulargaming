@@ -22,7 +22,7 @@ class View_Message_View extends Abstract_View_Message {
 				'title'  => $this->message->sender->title->title,
 				'signature' => $this->message->sender->get_property('signature'),
 				'created' => Date::format($this->message->created),
-				'href'      => Route::url('user.view', array(
+				'href'      => Route::url('user.profile', array(
 					'id'     => $this->message->sender->id,
 				)),
 			),

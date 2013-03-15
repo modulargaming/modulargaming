@@ -236,7 +236,8 @@ class Controller_Item_Inventory extends Abstract_Controller_Frontend {
 
 					if ($error == FALSE)
 					{
-						Journal::notify('consume'.$item->item_id, 'item', ':item_name consumed', array(':item_name' => $item->name));
+						$log = Journal::log('consume', 'item', ':item_name consumed', array(':item_name' => $item->item->name));
+						$log->notify('consume'.$item->item_id, 'item', ':item_name consumed');
 
 						if ($def_cmd->delete_after_consume == TRUE)
 						{
@@ -344,7 +345,7 @@ class Controller_Item_Inventory extends Abstract_Controller_Frontend {
 
 							if ($user->loaded())
 							{
-								$log = $item->transfer($user, $item);
+								$log = $item->transfer($user);
 
 								$log->notify($user, 'items.gift', array(':item_name' => $item->item->name(1)));
 
@@ -440,3 +441,4 @@ class Controller_Item_Inventory extends Abstract_Controller_Frontend {
 		$this->redirect(Route::get('item.inventory')->uri());
 	}
 }
+

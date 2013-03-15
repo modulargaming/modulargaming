@@ -116,13 +116,14 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			{
 				if ($config['creation_cost'] != FALSE || $config['creation_cost'] > 0)
 				{
-					if ($this->user->points < $config['creation_cost'])
+					if ($this->user->get_property('points') < $config['creation_cost'])
 					{
 						Hint::error('You can\'t afford to open a shop!');
 
 						return $this->redirect(Route::get('item.user_shop.create')->uri());
 					}
-
+	
+					$this->user->set_property('shop.points', $this->user->points - $config['creation_cost']);
 					$this->user->points = $this->user->points - $config['creation_cost'];
 					$this->user->save();
 				}
@@ -156,7 +157,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 		if ($config['creation_cost'] != FALSE || $config['creation_cost'] > 0)
 		{
-			$this->view->creation = array('cost' => $config['creation_cost'], 'affordable' => ($this->user->points < $config['creation_cost']));
+			$this->view->creation = array('cost' => $config['creation_cost'], 'affordable' => ($this->user->get_property('points') < $config['creation_cost']));
 		}
 	}
 
@@ -344,7 +345,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 				$this->user->save();
 
 				//log this action
-				$log = MG::log('user_shop.' . $shop->id, 'item', 'Bought 1 :item_name for :amount from :user', array(
+				$log = Journal::log('user_shop.' . $shop->id, 'item', 'Bought 1 :item_name for :amount from :user', array(
 					'item' => $item->item,
 					'item_name' => $item->item->name,
 					'user' => $item->user->username,
