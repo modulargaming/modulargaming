@@ -25,13 +25,19 @@ abstract class Abstract_Controller_Frontend extends Controller {
 	 */
 	protected $protected = FALSE;
 
+	/**
+	 * @var Abstract_View view to render
+	 */
 	protected $view = NULL; // View to render.
 
+	/**
+	 * @var string layout file.
+	 */
 	protected $layout = 'layout';
 
 	public function before()
 	{
-		$this->validate_csrf();
+		$this->_validate_csrf();
 
 		$this->auth = Auth::instance();
 		$this->user = $this->auth->get_user();
@@ -43,6 +49,38 @@ abstract class Abstract_Controller_Frontend extends Controller {
 
 		$assets = Kohana::$config->load('assets.global');
 		$this->_load_assets($assets);
+	}
+
+	/**
+	 * Set $this->view as response body.
+	 */
+	public function after()
+	{
+		if ($this->view != NULL)
+		{
+			$renderer = Kostache_Layout::factory();
+			$renderer->set_layout($this->layout);
+			$this->response->body($renderer->render($this->view));
+		}
+	}
+
+	/**
+	 * Check to ensure POST requests contains CSRF.
+	 * @throws HTTP_Exception
+	 */
+	private function _validate_csrf()
+	{
+		if ($this->request->method() == HTTP_Request::POST)
+		{
+			$validation = Validation::factory($this->request->post())
+				->rule('csrf', 'not_empty')
+				->rule('csrf', 'Security::check');
+
+			if ( ! $validation->check())
+			{
+				throw HTTP_Exception::Factory(403, 'CSRF check failed!');
+			}
+		}
 	}
 
 	protected function _load_assets($config)
@@ -72,35 +110,6 @@ abstract class Abstract_Controller_Frontend extends Controller {
 					// $options = (isset($desc['options'])) ? $desc['options'] : array();
 					Assets::add($type, $desc['name'], $desc['file'], $location, $position, $relative);
 				}
-			}
-		}
-	}
-
-	public function after()
-	{
-		if ($this->view != NULL)
-		{
-			$renderer = Kostache_Layout::factory();
-			$renderer->set_layout($this->layout);
-			$this->response->body($renderer->render($this->view));
-		}
-	}
-
-	private function validate_csrf()
-	{
-		if ($this->request->method() == HTTP_Request::POST)
-		{
-			// $url = URL::base('http');
-			// $base_url = Kohana::$base_url;
-			// $root = str_replace($base_url, '', $url);
-
-			$validation = Validation::factory($this->request->post())
-				->rule('csrf', 'not_empty')
-				->rule('csrf', 'Security::check');
-
-			if ( ! $validation->check())
-			{
-				throw HTTP_Exception::Factory(403, 'CSRF check failed!');
 			}
 		}
 	}

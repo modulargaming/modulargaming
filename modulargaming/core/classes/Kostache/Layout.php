@@ -2,6 +2,15 @@
 
 class Kostache_Layout extends Kohana_Kostache_Layout {
 
+	/**
+	 * @param string $layout layout file
+	 * @return Kostache_Layout
+	 */
+	public static function factory($layout = 'layout')
+	{
+		return parent::factory($layout);
+	}
+
 	public function render($class, $template = NULL)
 	{
 		if ( ! empty($class->_partials))
