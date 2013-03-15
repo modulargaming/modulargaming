@@ -198,7 +198,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			{
 				$item = ORM::factory('User_item', $id);
 
-				if (!$item_loaded())
+				if ( ! $item->loaded())
 				{
 					$lost_items++;
 					$errors = TRUE;
@@ -341,7 +341,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			}
 			else
 			{
-				$this->user->set_property($this->user->get_property('points', 200) - $item->parameter);
+				$this->user->set_property('points', $this->user->get_property('points', 200) - $item->parameter);
 				$this->user->save();
 
 				//log this action
