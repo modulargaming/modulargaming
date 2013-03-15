@@ -49,7 +49,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 		{
 			if ($this->user->get_property('points', 200) >= $config['unit_cost'])
 			{
-				$this->user->set_property('points') = $this->user->get_property('points', 200) - $config['unit_cost'];
+				$this->user->set_property('points', $this->user->get_property('points', 200) - $config['unit_cost']);
 				$this->user->save();
 
 				$this->_shop->size = $this->_shop->size + 1;
@@ -123,9 +123,8 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 						return $this->redirect(Route::get('item.user_shop.create')->uri());
 					}
 
-			//		$this->user->set_property('shop.points', 
-					$this->user->get_property('points', 200) - $config['creation_cost'];
-					$this->user->set_property = $this->user->get_property('points', 200) - $config['creation_cost'];
+					//$this->user->get_property('points', 200) - $config['creation_cost'];
+					$this->user->set_property('points', $this->user->get_property('points', 200) - $config['creation_cost']);
 					$this->user->save();
 				}
 
@@ -283,7 +282,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			}
 			else if ($amount > 0)
 			{
-				$this->user->set_property('points') = $this->user->get_property('points', 200) + $amount;
+				$this->user->set_property('points', $this->user->get_property('points', 200) + $amount);
 				$this->user->save();
 
 				$this->_shop->till = $this->_shop->till - $amount;
@@ -342,7 +341,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			}
 			else
 			{
-				$this->user->set_property('points') = $this->user->get_property('points', 200) - $item->parameter;
+				$this->user->set_property($this->user->get_property('points', 200) - $item->parameter);
 				$this->user->save();
 
 				//log this action
