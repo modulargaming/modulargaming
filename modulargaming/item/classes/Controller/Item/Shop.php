@@ -122,9 +122,9 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 						return $this->redirect(Route::get('item.user_shop.create')->uri());
 					}
-	
+
 			//		$this->user->set_property('shop.points', 
-					$this->user->get_property('points', 200) - $config['creation_cost']);
+					$this->user->get_property('points', 200) - $config['creation_cost'];
 					$this->user->set_property = $this->user->get_property('points', 200) - $config['creation_cost'];
 					$this->user->save();
 				}
