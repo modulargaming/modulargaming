@@ -11,88 +11,156 @@
 class Controller_User_Reset extends Abstract_Controller_User {
 
 	/**
-	 * Display the login page AND handle login attempts.
+	 * @var string reset token.
 	 */
-	public function action_index()
+	private $token;
+
+	/**
+	 * Change action to 'token' if token parameter exists.
+	 */
+	public function before()
 	{
+		parent::before();
+
+		// We got no reason to allow logged in users to access this page.
 		if ($this->auth->logged_in())
 		{
 			$this->redirect(Route::get('user')->uri());
 		}
 
-		$token = $this->request->param('token');
+		$this->token = $this->request->param('token');
 
-		if ($token)
+		if ($this->token !== NULL)
 		{
-			$tokens = ORM::factory('User_Property')
-				->where('key', '=', 'reset_token')
-				->find_all();
-
-			$match = NULL;
-
-			foreach ($tokens as $t)
-			{
-				// Remove tokens older than 2 days.
-				if (Arr::get($t->value, 'time', 0) + Date::DAY * 2 < time())
-				{
-					if (Arr::get($t->value, 'token') == $token)
-					{
-						Hint::error('Token has expired');
-					}
-					$t->delete();
-				}
-				else
-				{
-					if (Arr::get($t->value, 'token') == $token)
-					{
-						$match = $t;
-					}
-				}
-			}
-
-			if ( ! $match)
-			{
-				Hint::error('Incorrect token');
-				$this->redirect();
-			}
-
-			$this->view = new View_User_Reset_Enter;
+			$this->request->action('token');
 		}
-		else
+	}
+
+	/**
+	 * Display the request reset page.
+	 */
+	public function action_index()
+	{
+		if ($this->request->method() == HTTP_Request::POST)
 		{
-			if ($this->request->method() == HTTP_Request::POST)
+			$user = ORM::factory('User')
+				->where('email', '=', $this->request->post('email'))
+				->find();
+
+			if ($user->loaded())
 			{
-				$user = ORM::factory('User')
-					->where('email', '=', $this->request->post('email'))
-					->find();
+				$user->set_property('reset_token', $this->_generate_token());
+				$user->save();
 
-				if ($user->loaded())
+				$this->_send_reset_email($user);
+			}
+			else
+			{
+				Hint::error('No user exists with that email.');
+			}
+		}
+
+		$this->view = new View_User_Reset_Request;
+	}
+
+	/**
+	 * Enter new password, accessed if token is in the url.
+	 */
+	public function action_token()
+	{
+		$tokens = ORM::factory('User_Property')
+			->where('key', '=', 'reset_token')
+			->find_all();
+
+		$token = $this->_get_token($tokens);
+
+		if ( ! $token)
+		{
+			Hint::error('Incorrect token, perhaps it expired?');
+			$this->redirect();
+		}
+
+		if ($this->request->method() == HTTP_Request::POST)
+		{
+			$user = $token->user;
+
+			try
+			{
+				$user->update_user($this->request->post(), array('password'));
+
+				// Delete the token.
+				$token->delete();
+
+				// Confirm and redirect the user.
+				Hint::success('Password changed, please login.');
+				$this->redirect(Route::get('user.login')->uri());
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				Hint::error($e->errors('models'));
+			}
+		}
+
+		$this->view = new View_User_Reset_Enter;
+	}
+
+	/**
+	 * Generate the reset token.
+	 *
+	 * @return array
+	 */
+	private function _generate_token()
+	{
+		return array(
+			'token' => Text::random(),
+			'time' => time()
+		);
+	}
+
+	/**
+	 * Send the reset email to the user.
+	 *
+	 * @param Model_User $user
+	 */
+	private function _send_reset_email(Model_User $user)
+	{
+		// Send the reset email.
+		$view = new View_Email_User_Reset;
+		$view->user = $user;
+		$view->token = $this->token;
+
+		Email::factory($view)
+			->to($user->email)
+			->send();
+	}
+
+	/**
+	 * Get the token object from $tokens and delete tokens older than 2 days.
+	 *
+	 * @param ORM[] $tokens
+	 * @return mixed
+	 */
+	private function _get_token($tokens)
+	{
+		$match = NULL;
+
+		foreach ($tokens as $t)
+		{
+			// Remove tokens older than 2 days.
+			if (Arr::get($t->value, 'time', 0) + Date::DAY * 2 < time())
+			{
+				$t->delete();
+			}
+			else
+			{
+				if (Arr::get($t->value, 'token') == $this->token)
 				{
-					$token = Text::random();
-
-					$user->set_property('reset_token', array(
-						'token' => $token,
-						'time'  => time()
-					));
-					$user->save();
-
-					// Send the reset email.
-					$view = new View_Email_User_Reset;
-					$view->user = $user;
-					$view->token = $token;
-
-					Email::factory($view)
-						->to($user->email)
-						->send();
-				}
-				else
-				{
-					// TODO: Display error.
+					$match = $t;
 				}
 			}
-
-			$this->view = new View_User_Reset_Request;
 		}
+
+		return $match;
 	}
 
 } // End User_Forgot
