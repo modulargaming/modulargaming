@@ -11,21 +11,6 @@
 abstract class Abstract_Controller_Frontend extends Controller {
 
 	/**
-	 * @var Auth_ORM $auth
-	 */
-	protected $auth;
-
-	/**
-	 * @var Model_User $user Current user
-	 */
-	protected $user;
-
-	/**
-	 * @var bool User is required to be logged in?
-	 */
-	protected $protected = FALSE;
-
-	/**
 	 * @var Abstract_View view to render
 	 */
 	protected $view = NULL; // View to render.
@@ -37,15 +22,9 @@ abstract class Abstract_Controller_Frontend extends Controller {
 
 	public function before()
 	{
+		parent::before();
+
 		$this->_validate_csrf();
-
-		$this->auth = Auth::instance();
-		$this->user = $this->auth->get_user();
-
-		if ($this->protected == TRUE AND $this->auth->logged_in() == FALSE)
-		{
-			throw HTTP_Exception::Factory(403, 'Login to access this page!');
-		}
 
 		$assets = Kohana::$config->load('assets.global');
 		$this->_load_assets($assets);

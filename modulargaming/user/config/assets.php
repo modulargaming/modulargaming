@@ -5,6 +5,10 @@ return array(
 		'body' => array(
 			'js' => array(
 				array(
+					'name' => 'user',
+					'file' => 'user.js'
+				),
+				array(
 					'name' => 'user-settings',
 					'file' => 'user/settings.js'
 				)
