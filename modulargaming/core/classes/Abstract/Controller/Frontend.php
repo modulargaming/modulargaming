@@ -20,6 +20,9 @@ abstract class Abstract_Controller_Frontend extends Controller {
 	 */
 	protected $layout = 'layout';
 
+	/**
+	 * Run CSRF check and load frontend assets.
+	 */
 	public function before()
 	{
 		parent::before();
@@ -31,7 +34,7 @@ abstract class Abstract_Controller_Frontend extends Controller {
 	}
 
 	/**
-	 * Set $this->view as response body.
+	 * Set the response body to $this->view if $this->view is defined..
 	 */
 	public function after()
 	{
@@ -74,23 +77,6 @@ abstract class Abstract_Controller_Frontend extends Controller {
 			Assets::factory('body')->load($config['body']);
 		}
 
-	}
-
-	protected function _register_assets($location, $config)
-	{
-		foreach ($config as $type => $files)
-		{
-			if (count($files) > 0)
-			{
-				foreach ($files as $desc)
-				{
-					$position = (isset($desc['location'])) ? $desc['location'] : 'end';
-					$relative = (isset($desc['location'])) ? $desc['relative'] : NULL;
-					// $options = (isset($desc['options'])) ? $desc['options'] : array();
-					Assets::add($type, $desc['name'], $desc['file'], $location, $position, $relative);
-				}
-			}
-		}
 	}
 
 } // End Frontend
