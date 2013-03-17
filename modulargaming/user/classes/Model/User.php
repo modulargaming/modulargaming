@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-class Model_User extends Model_Auth_User implements Model_ACL_User {
+class Model_User extends Model_Auth_User implements Model_ACL_User, Interface_Property {
 
 	protected $_created_column = array(
 		'column' => 'created',
