@@ -44,6 +44,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 
 	public function can_create_poll()
 	{
+
 		return Auth::instance()->get_user()->can('Forum_Poll_Create', array('topic' => $this->topic));
 	}
 
