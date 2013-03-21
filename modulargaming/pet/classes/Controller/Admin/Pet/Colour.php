@@ -21,6 +21,13 @@
 		}
 
 		public function action_paginate() {
+
+			if (!$this->user->can('Admin_Pet_Colour_Paginate'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pet colour paginate');
+			}
+
+
 			if (DataTables::is_request())
 			{
 				$orm = ORM::factory('Pet_Colour');
@@ -48,6 +55,12 @@
 
 		public function action_retrieve()
 		{
+
+			if (!$this->user->can('Admin_Pet_Colour_Retrieve'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pet colour retrieve');
+			}
+
 			$this->view = NULL;
 
 			$item_id = $this->request->query('id');
@@ -76,6 +89,12 @@
 
 		public function action_save()
 		{
+
+			if (!$this->user->can('Admin_Pet_Colour_Save'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pet colour save');
+			}
+
 			$values = $this->request->post();
 			$this->view = NULL;
 
@@ -123,6 +142,12 @@
 
 		public function action_delete()
 		{
+
+			if (!$this->user->can('Admin_Pet_Colour_Delete'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pet colour delete');
+			}
+
 			$this->view = NULL;
 			$values = $this->request->post();
 

@@ -17,6 +17,12 @@ class Controller_Admin_Pet extends Abstract_Controller_Admin {
 
 	public function action_search()
 	{
+		if ( ! $this->user->can('Admin_Pet_Search') )
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin pets search');
+		}
+
+
 		$this->view = NULL;
 
 		$type = $this->request->query('type');

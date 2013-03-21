@@ -7,7 +7,7 @@
 
 			if (!$this->user->can('Admin_Pet_Specie_Index'))
 			{
-				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets index');
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie index');
 			}
 
 			$species = ORM::factory('Pet_Specie')
@@ -26,6 +26,12 @@
 		}
 
 		public function action_paginate() {
+
+			if (!$this->user->can('Admin_Pet_Specie_Paginate'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie paginate');
+			}
+
 			if (DataTables::is_request())
 			{
 				$orm = ORM::factory('Pet_Specie');
@@ -52,6 +58,12 @@
 
 		public function action_retrieve()
 		{
+
+			if (!$this->user->can('Admin_Pet_Specie_Retrieve'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie retrieve');
+			}
+
 			$this->view = NULL;
 
 			$item_id = $this->request->query('id');
@@ -79,6 +91,12 @@
 
 		public function action_save()
 		{
+
+			if (!$this->user->can('Admin_Pet_Specie_Save'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie save');
+			}
+
 			$values = $this->request->post();
 			$this->view = NULL;
 
@@ -125,6 +143,12 @@
 
 		public function action_delete()
 		{
+
+			if (!$this->user->can('Admin_Pet_Specie_Delete'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie delete');
+			}
+
 			$this->view = NULL;
 			$values = $this->request->post();
 
@@ -135,8 +159,14 @@
 			$this->response->body(json_encode(array('action' => 'deleted')));
 		}
 
-		public function action_col_load()
+		public function action_colour_load()
 		{
+
+			if (!$this->user->can('Admin_Pet_Specie_Colour_Load'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie colour load');
+			}
+
 			$specie = ORM::factory('Pet_Specie', $this->request->query('id'));
 
 			$colours = $specie->colours->find_all();
@@ -151,8 +181,14 @@
 			$this->response->body(json_encode(array('colours' => $list)));
 		}
 
-		public function action_col_delete()
+		public function action_colour_delete()
 		{
+
+			if (!$this->user->can('Admin_Pet_Specie_Colour_Delete'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie colour delete');
+			}
+
 			$specie = ORM::factory('Pet_Specie', $this->request->query('specie_id'));
 			$colour = ORM::factory('Pet_Colour', $this->request->query('colour_id'));
 
@@ -165,8 +201,14 @@
 			$this->response->body(json_encode(array('action' => 'deleted')));
 		}
 
-		public function action_col_update()
+		public function action_colour_update()
 		{
+
+			if (!$this->user->can('Admin_Pet_Specie_Colour_Update'))
+			{
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie colour update');
+			}
+
 			$specie = ORM::factory('Pet_Specie', $this->request->post('specie_id'));
 
 			$colour = $this->request->post('colour_id');

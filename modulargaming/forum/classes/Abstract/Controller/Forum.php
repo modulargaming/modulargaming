@@ -10,7 +10,8 @@
  */
 class Abstract_Controller_Forum extends Abstract_Controller_Frontend {
 
-	protected $protected = TRUE;
+//	protected $protected = TRUE;
+	protected $protected = FALSE;
 
 	public function before()
 	{

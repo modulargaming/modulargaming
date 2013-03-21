@@ -22,7 +22,7 @@ $(document).ready(function() {
         $('#specie-id').val(id);
         btn.text('loading');
 
-        $.get('./specie/col/load', {id: id}, function (data) {
+        $.get('./specie/colour/load', {id: id}, function (data) {
             var options = [];
             var table = [];
             $('#add-colour').data('specie-id', id);
@@ -52,7 +52,7 @@ $(document).ready(function() {
         var colour = $(this).data('id');
         var specie = $('#add-colour').data('specie-id');
 
-        $.get('./specie/col/delete', {specie_id: specie, colour_id: colour}, function (data) {
+        $.get('./specie/colour/delete', {specie_id: specie, colour_id: colour}, function (data) {
             //remove the table row
             $('#colour-list > tbody').find('button[data-id="'+colour+'"]').parents('tr').remove();
             //add back the option
@@ -96,7 +96,7 @@ $(document).ready(function() {
 
                 var ajax_options = {
                     type:"POST",
-                    url:'./specie/col/update',
+                    url:'./specie/colour/update',
 
                     success: function(data){
                         if(data.status == 'success')
