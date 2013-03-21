@@ -70,7 +70,7 @@ class Migration_Pet_20130210230444 extends Minion_Migration_Base {
 		 $db->query(NULL, "
 		 	CREATE TABLE IF NOT EXISTS `user_pets` (
 			  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-			  `user_id` int(11) UNSIGNED NOT NULL,
+			  `user_id` int(11) UNSIGNED DEFAULT NULL,
 			  `created` int(10) NOT NULL,
 			  `abandoned` int(10) NOT NULL,
 			  `active` int(10) NOT NULL,
