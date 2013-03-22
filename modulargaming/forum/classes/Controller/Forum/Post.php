@@ -10,6 +10,8 @@
  */
 class Controller_Forum_Post extends Abstract_Controller_Forum {
 
+	protected $protected = TRUE;
+
 	/**
 	 * @var Model_Forum_Post
 	 */
