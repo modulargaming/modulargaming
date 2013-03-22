@@ -58,6 +58,27 @@ abstract class Abstract_View {
 	}
 
 	/**
+	 * Get the body classes for the page consiting of request directory, controller and action.
+	 * @return string
+	 */
+	public function body_class()
+	{
+		$request = Request::current();
+
+		$directory = $request->directory();
+		$controller = $request->controller();
+
+		if ($directory)
+		{
+			$controller = $directory.'-'.$controller;
+		}
+
+		$action = $controller.'-'.$request->action();
+
+		return strtolower($directory.' '.$controller.' '.$action);
+	}
+
+	/**
 	 * Get the current CSRF (Cross-site request forgery) token
 	 *
 	 * @return string
