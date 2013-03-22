@@ -114,6 +114,14 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 		{
 			try
 			{
+				//create the shop
+				$shop = ORM::factory('User_Shop')
+					->values($this->request->post(), array('title', 'description'));
+
+				$shop->user_id = $this->user->id;
+				$shop->size = 1;
+				$shop->save();
+
 				if ($config['creation_cost'] != FALSE || $config['creation_cost'] > 0)
 				{
 					if ($this->user->get_property('points', 200) < $config['creation_cost'])
@@ -128,13 +136,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 					$this->user->save();
 				}
 
-				//create the shop
-				$shop = ORM::factory('User_Shop')
-					->values($this->request->post(), array('title', 'description'));
 
-				$shop->user_id = $this->user->id;
-				$shop->size = 1;
-				$shop->save();
 
 			} catch (ORM_Validation_Exception $e)
 			{
