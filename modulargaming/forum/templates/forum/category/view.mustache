@@ -11,24 +11,35 @@
 
 	<thead>
 		<tr>
-			<th>Subject</th>
-			<th>Posted by</th>
-			<th>Last post</th>
-			<th>Created</th>
+			<th class="topics">Topics</th>
+			<th class="last-post">Last post</th>
+			<th class="replies">Replies</th>
+			<th class="views">Views</th>
 		</tr>
 	</thead>
 
 	<tbody>
 		{{#topics}}
 			<tr>
-				<td>
-				{{#sticky}}<i class="icon-bullhorn"></i>{{/sticky}}
-				{{#locked}}<i class="icon-lock"></i>{{/locked}}
-				{{#poll}}<i class="icon-tasks"></i>{{/poll}}
-				<a href="{{href}}">{{title}}</a></td>
-				<td><a href="{{user.href}}">{{user.username}}</a></td>
-				<td><a href="{{last_post.user.href}}">{{last_post.user.username}}</a> - {{last_post.created}}</td>
-				<td>{{created}}</td>
+				<td class="topics">
+					<span class="title">
+						{{#sticky}}<i class="icon-bullhorn"></i>{{/sticky}}
+						{{#locked}}<i class="icon-lock"></i>{{/locked}}
+						{{#poll}}<i class="icon-tasks"></i>{{/poll}}
+						<a href="{{href}}">{{title}}</a>
+					</span>
+					<span class="author">
+						by <a href="{{user.href}}">{{user.username}}</a> at {{created}}
+					</span>
+				</td>
+				<td class="last-post">
+					<span class="author">
+						Last post by <a href="{{user.href}}">{{user.username}}</a>
+					</span>
+					{{created}}
+				</td>
+				<td class="replies"><span class="badge">0</span></td>
+				<td class="views"><span class="badge">0</span></td>
 			</tr>
 		{{/topics}}
 	</tbody>

@@ -34,15 +34,13 @@ class View_Forum_Category_View extends Abstract_View_Forum_Category {
 				'created' => Date::format($topic->created),
 				'user'    => array(
 					'username' => $topic->user->username,
-					'href'     => Route::url('user.profile', array(
-						'id'     => $topic->user->id,
-					))
+					'href'     => Route::url('user.profile', array('id' => $topic->user->id))
 				),
 				'last_post' => array(
 					'created' => Date::format($last_post->created),
 					'user'    => array(
 						'username' => $last_post->user->username,
-						'href'     => Route::url('user', array('action' => 'profile', 'id' => $last_post->user->id)),
+						'href'     => Route::url('user.profile', array('id' => $last_post->user->id))
 					),
 				)
 			);

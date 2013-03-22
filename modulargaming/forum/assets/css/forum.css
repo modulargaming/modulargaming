@@ -1,0 +1,17 @@
+th.topics {
+	width: 70%;
+}
+
+td.replies, td.views {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.forum-category-page .author {
+	display: block;
+}
+
+.forum-category-page .author a {
+	color: #9d261d;
+	font-weight: bold;
+}
