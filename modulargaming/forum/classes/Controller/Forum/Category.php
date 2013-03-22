@@ -17,7 +17,7 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 	protected $category;
 
 	/**
-	 * Attemp tto load the forum category using the id parameter.
+	 * Attempt to load the forum category using the id parameter.
 	 * @throws HTTP_Exception
 	 */
 	public function before()
@@ -58,6 +58,8 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 	 */
 	public function action_create()
 	{
+		$this->logged_in_required();
+
 		if ( ! $this->user->can('Forum_Topic_Create', array('category' => $this->category)))
 		{
 			throw HTTP_Exception::factory('403', 'Category is locked');

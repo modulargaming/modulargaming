@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * Forum Index.
- * Lists categories AND short information about them.
+ * Displays the forum category list.
  *
  * @package    MG Forum
  * @category   Controller

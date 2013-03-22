@@ -16,6 +16,22 @@ abstract class Abstract_View {
 	public $title = 'Welcome';
 
 	/**
+	 * @var Auth
+	 */
+	protected $_auth;
+
+	/**
+	 * @var Model_User
+	 */
+	protected $_user;
+
+	public function __construct()
+	{
+		$this->_auth = Auth::instance();
+		$this->_user = Auth::instance()->get_user();
+	}
+
+	/**
 	 * Get the page title.
 	 *
 	 * @return string
@@ -58,7 +74,7 @@ abstract class Abstract_View {
 	 */
 	public function logged_in()
 	{
-		return Auth::instance()->logged_in();
+		return $this->_auth->logged_in();
 	}
 
 	/**
@@ -68,7 +84,7 @@ abstract class Abstract_View {
 	 */
 	public function player()
 	{
-		$user = Auth::instance()->get_user()->as_array();
+		$user = $this->_user->as_array();
 
 		$user['last_login'] = Date::format($user['last_login']);
 		$user['created'] = Date::format($user['created']);
@@ -126,6 +142,23 @@ abstract class Abstract_View {
 	public function debug_toolbar()
 	{
 		return DebugToolbar::render();
+	}
+
+	/**
+	 * Check if the current active user can use a policy.
+	 *
+	 * @param string $policy_name
+	 * @param array $args
+	 * @return bool
+	 */
+	protected function user_can($policy_name, $args = array())
+	{
+		if ($this->_user === NULL)
+		{
+			return FALSE;
+		}
+
+		return $this->_user->can($policy_name, $args);
 	}
 
 }
