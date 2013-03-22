@@ -11,8 +11,11 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 
 	public function topic()
 	{
-		$topic = $this->topic->as_array();
-		$topic['locked_date'] = Date::format($topic['locked']);
+		$topic = array(
+			'title'       => $this->topic->title,
+			'locked_date' => Date::format($this->topic->locked)
+		);
+
 		if ($this->topic->poll->loaded())
 		{
 			$topic['poll'] = $this->topic->poll->as_array();
@@ -33,19 +36,20 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 			$topic['poll']['options'] = $options;
 			$topic['poll']['can_edit'] = Auth::instance()->get_user()->can('Forum_Poll_Edit', array('poll' => $this->topic->poll));
 			$topic['poll']['can_delete'] = Auth::instance()->get_user()->can('Forum_Poll_Delete', array('poll' => $this->topic->poll));
+			// TODO: We do not want database queries in the views, move to model?
 			$topic['poll']['voted'] = ORM::factory('Forum_Poll_Vote')->where('poll_id', '=', $this->topic->poll->id)->where('user_id', '=', Auth::instance()->get_user()->id)->count_all();
 		}
 		else
 		{
 			$topic['poll'] = NULL;
 		}
+
 		return $topic;
 	}
 
 	public function can_create_poll()
 	{
-
-		return Auth::instance()->get_user()->can('Forum_Poll_Create', array('topic' => $this->topic));
+		return $this->_user_can('Forum_Poll_Create', array('topic' => $this->topic));
 	}
 
 	public function posts()
@@ -79,8 +83,8 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 						'id'     => $post->id,
 					)),
 				),
-				'can_edit'   => Auth::instance()->get_user()->can('Forum_Post_Edit', array('post' => $post)),
-				'can_delete' => Auth::instance()->get_user()->can('Forum_Post_Delete', array('post' => $post)),
+				'can_edit'   => $this->_user_can('Forum_Post_Edit', array('post' => $post)),
+				'can_delete' => $this->_user_can('Forum_Post_Delete', array('post' => $post)),
 			);
 		}
 
@@ -104,9 +108,8 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 	public function actions()
 	{
 		$actions = array();
-		$user = Auth::instance()->get_user();
 
-		if ($user->can('Forum_Topic_Delete'))
+		if ($this->_user_can('Forum_Topic_Delete'))
 		{
 			$actions[] = array(
 				'title' => 'Delete',
@@ -117,7 +120,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 			);
 		}
 
-		if ($user->can('Forum_Topic_Sticky'))
+		if ($this->_user_can('Forum_Topic_Sticky'))
 		{
 			$actions[] = array(
 				'title' => $this->topic->sticky ? 'Unstick' : 'Stick',
@@ -128,7 +131,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 			);
 		}
 
-		if ($user->can('Forum_Topic_Lock'))
+		if ($this->_user_can('Forum_Topic_Lock'))
 		{
 			$actions[] = array(
 				'title' => $this->topic->locked ? 'Unlock' : 'Lock',
@@ -146,6 +149,11 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 	{
 		$actions = $this->actions();
 		return ! empty($actions);
+	}
+
+	public function can_reply()
+	{
+		return $this->_user_can('Forum_Topic_Reply');
 	}
 
 }

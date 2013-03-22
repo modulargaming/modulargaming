@@ -3,12 +3,14 @@
 {{#topic.poll}}
 	{{>Forum/Poll}}
 {{/topic.poll}}
+
 {{^topic.poll}}
 	{{#can_create_poll}}
 	<a class="btn btn-primary" href="{{links.poll}}">Add a poll</a>
 	<hr>
 	{{/can_create_poll}}
 {{/topic.poll}}
+
 {{#posts}}
 	{{>Forum/Post}}
 	<hr>
@@ -16,26 +18,29 @@
 
 <div class="form-actions">
     {{#topic.locked}}
-    <p>This topic is locked - {{topic.locked_date}}</p>
+        <p>This topic is locked - {{topic.locked_date}}</p>
     {{/topic.locked}}
-    {{^topic.locked}}
-	<a href="{{links.reply}}" class="btn">Reply</a>
-    {{/topic.locked}}
+
+    {{#can_reply}}
+		<a href="{{links.reply}}" class="btn">Reply</a>
+    {{/can_reply}}
+
 	{{#has_actions}}
-	<div class="btn-group">
-		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-			<i class="icon-wrench"></i>
-			Action
-			<span class="caret"></span>
-		</a>
-		<ul class="dropdown-menu">
-			{{#actions}}
-				<li><a href="{{href}}">{{title}}</a></li>
-			{{/actions}}
-			<!-- dropdown menu links -->
-		</ul>
-	</div>
+		<div class="btn-group">
+			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+				<i class="icon-wrench"></i>
+				Action
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				{{#actions}}
+					<li><a href="{{href}}">{{title}}</a></li>
+				{{/actions}}
+				<!-- dropdown menu links -->
+			</ul>
+		</div>
 	{{/has_actions}}
 
-{{& pagination}}
 </div>
+
+{{& pagination}}

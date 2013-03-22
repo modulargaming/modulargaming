@@ -151,7 +151,7 @@ abstract class Abstract_View {
 	 * @param array $args
 	 * @return bool
 	 */
-	protected function user_can($policy_name, $args = array())
+	protected function _user_can($policy_name, $args = array())
 	{
 		if ($this->_user === NULL)
 		{

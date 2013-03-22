@@ -63,7 +63,7 @@ class View_Forum_Category_View extends Abstract_View_Forum_Category {
 
 	public function can_create()
 	{
-		return $this->user_can('Forum_Topic_Create', array('category' => $this->category));
+		return $this->_user_can('Forum_Topic_Create', array('category' => $this->category));
 	}
 
 }

@@ -48,7 +48,9 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 
 	public function action_reply()
 	{
-		if ($this->topic->locked)
+		$this->logged_in_required();
+
+		if ($this->user->can('Forum_Topic_Reply'))
 		{
 			throw HTTP_Exception::factory('403', 'Topic is locked');
 		}
