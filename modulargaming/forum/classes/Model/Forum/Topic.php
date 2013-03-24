@@ -40,6 +40,13 @@ class Model_Forum_Topic extends ORM {
 		'poll'
 	);
 
+	public static function topic_exists($id)
+	{
+		$topic = ORM::factory('Forum_Topic', $id);
+
+		return $topic->loaded();
+	}
+
 	public function rules()
 	{
 		return array(
@@ -59,44 +66,42 @@ class Model_Forum_Topic extends ORM {
 		);
 	}
 
-	public function delete()
-	{
-		$this->delete_posts();
-		parent::delete();
-	}
-
-	public function delete_posts()
-	{
-		$post_users = array();
-
-		foreach ($this->posts->find_all() as $post)
-		{
-			$post_users[$post->user->id] = $post->user;
-			$post->delete();
-		}
-
-		foreach ($post_users as $user)
-		{
-			$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($this->user->id));
-			$user->save();
-		}
-	}
-
 	public function create_topic($values, $expected)
 	{
 		// Validation for category
 		$extra_validation = Validation::Factory($values)
 			->rule('category_id', 'Model_Forum_Category::category_exists');
 
- 		return $this->values($values, $expected)
+		return $this->values($values, $expected)
 			->create($extra_validation);
 	}
 
-	public static function topic_exists($id)
+	public function delete()
 	{
-		$topic = ORM::factory('Forum_Topic', $id);
+		$this->delete_posts();
+		parent::delete();
+	}
 
-		return $topic->loaded();
+	/**
+	 * Delete all forum posts, and recalculate the users post count.
+	 *
+	 * Loops the posts to locate all users and calls delete on them.
+	 */
+	public function delete_posts()
+	{
+		$users = array();
+
+		foreach ($this->posts->find_all() as $post)
+		{
+			$users[$post->user->id] = $post->user;
+			$post->delete();
+		}
+
+		foreach ($users as $user)
+		{
+			$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($this->user->id));
+			$user->save();
+		}
 	}
 
 	/**
