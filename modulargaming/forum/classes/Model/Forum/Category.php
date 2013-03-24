@@ -28,7 +28,6 @@ class Model_Forum_Category extends ORM {
 				array('not_empty'),
 				array('max_length', array(':value', 50)),
 			),
-
 			'description' => array(
 				array('not_empty'),
 				array('max_length', array(':value', 255)),

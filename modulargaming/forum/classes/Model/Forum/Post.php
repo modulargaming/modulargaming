@@ -50,8 +50,7 @@ class Model_Forum_Post extends ORM {
 	{
 		// Validation for topic
 		$extra_validation = Validation::Factory($values)
-			->rule('topic_id', 'Model_Forum_Topic::topic_exists')
-			->rule('topic_id', 'Model_Forum_Topic::topic_open');
+			->rule('topic_id', 'Model_Forum_Topic::topic_exists');
 
 		return $this->values($values, $expected)
 			->create($extra_validation);
