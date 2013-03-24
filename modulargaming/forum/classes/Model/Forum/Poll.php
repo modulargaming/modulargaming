@@ -42,15 +42,4 @@ class Model_Forum_Poll extends ORM {
 			->create($extra_validation);
 	}
 
-	public function delete()
-	{
-		DB::delete('forum_poll_options')
-			->where('poll_id', '=', $this->id)
-			->execute();
-		DB::delete('forum_poll_votes')
-			->where('poll_id', '=', $this->id)
-			->execute();
-		parent::delete();
-	}
-
 }
