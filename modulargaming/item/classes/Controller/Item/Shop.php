@@ -192,7 +192,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			$this->redirect(Route::get('item.user_shop.create')->uri());
 		}
 
-		if ($this->request->method() == HTTP_Request::POST)
+		if ($this->request->method() == HTTP_Request::POST && count($this->request->post('item')) > 0)
 		{
 			$lost_items = 0;
 			$errors = FALSE;
