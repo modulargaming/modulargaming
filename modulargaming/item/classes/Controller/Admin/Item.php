@@ -217,6 +217,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 		$file = array('status' => 'empty', 'msg' => '');
 		$TMP = null;
+		$upload = null;
 
 		if (isset($_FILES['image']))
 		{
@@ -249,7 +250,10 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				}
 
 				//save it temporarily
-				$TMP = array('upload' => Upload::save($image, Text::random(), $cfg['tmp_dir']), 'name' => $image['name']);
+				$upload = Image::factory($_FILES['image'])
+					->save($cfg['tmp_dir'].$image['name'].Text::random().'.png');
+
+				$TMP = array('upload' => $upload->file, 'name' => $image['name']);
 
 				if ($TMP['upload'] != FALSE)
 				{
@@ -312,7 +316,17 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 						//if it's saved move the file to the new location
 						if ($item->saved())
 						{
-							copy($TMP['upload'], $new_loc);
+							//move the uploaded file to the correct place with the correct name
+							if($upload != null)
+							{
+								$upload->save($new_loc);
+							}
+							//otherwise move the file to the new dir
+							else
+							{
+								copy($TMP['upload'], $new_loc);
+							}
+
 							$file['status'] = 'success';
 						}
 					}
