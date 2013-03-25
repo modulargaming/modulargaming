@@ -50,7 +50,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 	{
 		$this->logged_in_required();
 
-		if ($this->user->can('Forum_Topic_Reply'))
+		if ( ! $this->user->can('Forum_Topic_Reply', array('topic' => $this->topic)))
 		{
 			throw HTTP_Exception::factory('403', 'Topic is locked');
 		}
