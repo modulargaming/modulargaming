@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
  
-class Policy_Forum_Topic_Create extends Policy_Forum_Topic {
+class Policy_Forum_Topic_Reply extends Policy_Forum_Topic {
 
 	public function execute(Model_ACL_User $user, array $extra = NULL)
 	{

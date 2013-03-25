@@ -153,7 +153,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 
 	public function can_reply()
 	{
-		return $this->_user_can('Forum_Topic_Reply');
+		return $this->_user_can('Forum_Topic_Reply', array('topic' => $this->topic));
 	}
 
 }
