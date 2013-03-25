@@ -15,7 +15,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 	{
 		if (!$this->user->can('Admin_Item_Shops_Index'))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops index');
 		}
 
 		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
@@ -30,7 +30,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 	{
 		if (!$this->user->can('Admin_Item_Shops_Paginate'))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops paginate');
 		}
 
 		if (DataTables::is_request())
@@ -66,7 +66,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 	{
 		if (!$this->user->can('Admin_Item_Shops_Retrieve'))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops retrieve');
 		}
 
 		$this->view = NULL;
@@ -93,7 +93,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 	{
 		if (!$this->user->can('Admin_Item_Shops_Save'))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops save');
 		}
 
 		$this->view = NULL;
@@ -218,7 +218,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 	{
 		if (!$this->user->can('Admin_Item_Shops_Delete'))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops delete');
 		}
 
 		$this->view = NULL;
@@ -235,7 +235,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 	{
 		if (!$this->user->can('Admin_Item_Shops_Stock'))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops stock');
 		}
 
 		$this->view = NULL;
@@ -307,7 +307,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 	{
 		if (!$this->user->can('Admin_Item_Shops_Stock_Item'))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops stock item');
 		}
 
 		$shop_id = $this->request->post('shop_id');
@@ -348,7 +348,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 	{
 		if (!$this->user->can('Admin_Item_Shops_Stock_Save'))
 		{
-			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops stock save');
 		}
 
 		$shop_id = $this->request->post('shop_id');
