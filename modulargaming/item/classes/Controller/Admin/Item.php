@@ -71,6 +71,12 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_search()
 	{
+		if (!$this->user->can('Admin_Item_Search'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
+
 		$this->view = NULL;
 		$type = $this->request->query('type');
 
@@ -144,6 +150,12 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_paginate()
 	{
+
+		if (!$this->user->can('Admin_Item_Paginate'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Item');
@@ -176,6 +188,12 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_retrieve()
 	{
+
+		if (!$this->user->can('Admin_Item_Retrieve'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 
 		$item_id = $this->request->query('id');
@@ -199,6 +217,12 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_save()
 	{
+
+		if (!$this->user->can('Admin_Item_Save'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$values = $this->request->post();
 		$cfg = Kohana::$config->load('items.image');
 		$this->view = NULL;
@@ -377,6 +401,11 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
+		if (!$this->user->can('Admin_Item_Delete'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 		$values = $this->request->post();
 
@@ -389,6 +418,12 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 	public function action_gift()
 	{
+
+		if (!$this->user->can('Admin_Item_Gift'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 
 		//gift the item

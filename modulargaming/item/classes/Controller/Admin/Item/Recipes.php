@@ -13,13 +13,13 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 	public function action_index()
 	{
-		$this->view = new View_Admin_Item_Recipe;
-		$this->_nav('items', 'recipes');
-
-		if (!$this->user->can('Admin_Item_Index'))
+		if (!$this->user->can('Admin_Item_Recipes_Index'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
+
+		$this->view = new View_Admin_Item_Recipe;
+		$this->_nav('items', 'recipes');
 
 		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.recipe'));
@@ -33,6 +33,11 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 	public function action_paginate()
 	{
+		if (!$this->user->can('Admin_Item_Recipes_Paginate'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Item_Recipe');
@@ -64,6 +69,11 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 	public function action_retrieve()
 	{
+		if (!$this->user->can('Admin_Item_Recipes_Retrieve'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 
 		$item_id = $this->request->query('id');
@@ -97,6 +107,11 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 	public function action_save()
 	{
+		if (!$this->user->can('Admin_Item_Recipes_Save'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 		$values = $this->request->post();
 
@@ -216,6 +231,11 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
+		if (!$this->user->can('Admin_Item_Recipes_Delete'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 		$values = $this->request->post();
 

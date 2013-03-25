@@ -13,7 +13,7 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 
 	public function action_index()
 	{
-		if (!$this->user->can('Admin_Item_Index'))
+		if (!$this->user->can('Admin_Item_Types_Index'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
@@ -27,6 +27,11 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 
 	public function action_paginate()
 	{
+		if (!$this->user->can('Admin_Item_Types_Paginate'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		if (DataTables::is_request())
 		{
 			$orm = ORM::factory('Item_Type');
@@ -55,6 +60,11 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 
 	public function action_retrieve()
 	{
+		if (!$this->user->can('Admin_Item_Types_Retrieve'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 
 		$item_id = $this->request->query('id');
@@ -75,6 +85,11 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 
 	public function action_save()
 	{
+		if (!$this->user->can('Admin_Item_Types_Save'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 		$values = $this->request->post();
 
@@ -130,6 +145,11 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 
 	public function action_delete()
 	{
+		if (!$this->user->can('Admin_Item_Types_Delete'))
+		{
+			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
+		}
+
 		$this->view = NULL;
 		$values = $this->request->post();
 
