@@ -1,5 +1,7 @@
 {{& pagination}}
 
+<h2>{{topic.title}}</h2>
+
 {{#topic.poll}}
 	{{>Forum/Poll}}
 {{/topic.poll}}
@@ -13,7 +15,6 @@
 
 {{#posts}}
 	{{>Forum/Post}}
-	<hr>
 {{/posts}}
 
 <div class="form-actions">
@@ -22,7 +23,7 @@
     {{/topic.locked}}
 
     {{#can_reply}}
-		<a href="{{links.reply}}" class="btn">Reply</a>
+		<a href="{{links.reply}}" class="btn btn-primary"><i class="icon-comment icon-white"></i> Reply</a>
     {{/can_reply}}
 
 	{{#has_actions}}
@@ -34,7 +35,7 @@
 			</a>
 			<ul class="dropdown-menu">
 				{{#actions}}
-					<li><a href="{{href}}">{{title}}</a></li>
+					<li><a href="{{href}}">{{#icon}}<i class="{{icon}}"></i> {{/icon}}{{title}}</a></li>
 				{{/actions}}
 				<!-- dropdown menu links -->
 			</ul>

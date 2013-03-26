@@ -1,5 +1,30 @@
-<div class="post">
+<div class="post well">
 	<div class="row-fluid">
+		<div class="span10" id="post{{id}}">
+			<h5>
+				<a href="#post{{id}}">
+					<small>#{{id}}</small>
+				</a>
+
+				{{#can_edit}}
+					<a href="{{links.edit}}" class="btn btn-small">edit</a>
+				{{/can_edit}}
+				{{#can_delete}}
+					<a href="{{links.delete}}" class="btn btn-small">delete</a>
+				{{/can_delete}}
+
+				<span class="pull-right">{{created}}</span>
+			</h5>
+
+			<p class="wrap">{{{content}}}</p>
+
+			{{#user.signature}}
+				<div class="signature">
+					<p>{{{user.signature}}}</p>
+				</div>
+			{{/user.signature}}
+		</div>
+
 		<div class="thumbnail center span2">
 			<a href="#">
 				{{#user.avatar}}
@@ -14,33 +39,10 @@
 			<br>
 
 			Posts: {{user.post_count}}
-			
+
 			<br>
 
 			Title: {{user.title}}
-		</div>
-		<div class="span10" id="post{{id}}">
-			<h5>
-				<a href="#post{{id}}">
-					<small>#{{id}}</small>
-				</a>
-				<span class="pull-right">{{created}}</span>
-			</h5>
-
-			<p class="wrap">{{{content}}}</p>
-
-			{{#user.signature}}
-				<div class="signature">
-					<p>{{{user.signature}}}</p>
-				</div>
-			{{/user.signature}}
-
-			{{#can_edit}}
-				<a href="{{links.edit}}" class="btn btn-small">edit</a>
-			{{/can_edit}}
-			{{#can_delete}}
-				<a href="{{links.delete}}" class="btn btn-small">delete</a>
-			{{/can_delete}}
 		</div>
 	</div>
 </div>

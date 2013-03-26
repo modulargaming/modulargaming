@@ -113,6 +113,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 		{
 			$actions[] = array(
 				'title' => 'Delete',
+				'icon'   => 'icon-remove',
 				'href'  => Route::url('forum.topic', array(
 					'action' => 'delete',
 					'id'     => $this->topic->id,
@@ -124,6 +125,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 		{
 			$actions[] = array(
 				'title' => $this->topic->sticky ? 'Unstick' : 'Stick',
+				'icon'  => 'icon-star',
 				'href'  => Route::url('forum.topic', array(
 					'action' => 'sticky',
 					'id'     => $this->topic->id,
@@ -135,6 +137,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 		{
 			$actions[] = array(
 				'title' => $this->topic->locked ? 'Unlock' : 'Lock',
+				'icon'  => 'icon-lock',
 				'href'  => Route::url('forum.topic', array(
 					'action' => 'lock',
 					'id'     => $this->topic->id,
