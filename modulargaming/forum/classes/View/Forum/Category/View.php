@@ -27,11 +27,13 @@ class View_Forum_Category_View extends Abstract_View_Forum_Category {
 
 			$topics[] = array(
 				'title'   => $topic->title,
+				'replies' => $topic->replies,
+				'views'   => $topic->views,
 				'locked'  => $topic->locked,
 				'sticky'  => $topic->sticky,
 				'poll'    => $topic->poll->loaded(),
-				'href'    => Route::url('forum.topic', array('id' => $topic->id)),
 				'created' => Date::format($topic->created),
+				'href'    => Route::url('forum.topic', array('id' => $topic->id)),
 				'user'    => array(
 					'username' => $topic->user->username,
 					'href'     => Route::url('user.profile', array('id' => $topic->user->id))

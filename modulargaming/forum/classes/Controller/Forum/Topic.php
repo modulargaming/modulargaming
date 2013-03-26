@@ -35,6 +35,16 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 
 	public function action_view()
 	{
+		// Increase the topic views
+		$session = Session::instance();
+		if ($session->get('forum.topic.last_visited_id') !== $this->topic->id)
+		{
+			$this->topic->views++;
+			$this->topic->save();
+		}
+		$session->set('forum.topic.last_visited_id', $this->topic->id);
+
+
 		$posts = $this->topic->posts;
 
 		$paginate = Paginate::factory($posts)
@@ -176,6 +186,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		}
 	}
 
+	/*
 	public function action_poll()
 	{
 		if ($this->request->method() == HTTP_Request::POST)
@@ -301,5 +312,6 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 			throw HTTP_Exception::factory('403', 'Permission denied to edit poll');
 		}
 	}
+	*/
 
 }

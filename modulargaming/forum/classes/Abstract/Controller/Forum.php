@@ -21,8 +21,9 @@ class Abstract_Controller_Forum extends Abstract_Controller_Frontend {
 	{
 		$this->config = Kohana::$config->load('forum');
 
-		// Check if we allow guests to view the forum in config.
+		// Set forum to protected if we do not allow guests.
 		// TODO: improve this check, database based depending on category?
+		// Perhapse we should use policies?
 		if ($this->protected === FALSE AND $this->config['guest'] === FALSE)
 		{
 			$this->protected = TRUE;
