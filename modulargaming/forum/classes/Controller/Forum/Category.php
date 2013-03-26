@@ -69,35 +69,17 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 		{
 			try
 			{
-				$topic_data = array(
+				$topic = new Model_Forum_Topic;
+				$topic->create_topic(array(
 					'category_id' => $this->category->id,
 					'user_id'     => $this->user->id,
-					'title'       => $this->request->post('title')
-				);
-
-				$topic = ORM::factory('Forum_Topic')
-					->create_topic($topic_data, array(
-						'category_id',
-						'user_id',
-						'title',
-					));
-
-				$post_data = array(
-					'topic_id' => $topic->id,
-					'user_id'  => $this->user->id,
-					'content'  => $this->request->post('content')
-				);
-
-				$post = ORM::factory('Forum_Post')
-					->create_post($post_data, array(
-						'topic_id',
-						'user_id',
-						'content',
-					));
-
-				// Set the last post id.
-				$topic->last_post_id = $post->id;
-				$topic->save();
+					'title'       => $this->request->post('title'),
+					'content'     => $this->request->post('content')
+				), array(
+					'category_id',
+					'user_id',
+					'title'
+				));
 
 				$this->user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($this->user->id));
 				$this->user->save();

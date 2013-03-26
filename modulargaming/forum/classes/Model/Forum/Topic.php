@@ -40,9 +40,15 @@ class Model_Forum_Topic extends ORM {
 		'poll'
 	);
 
+	/**
+	 * Check if the topic exists.
+	 *
+	 * @param int $id topic_id of the topic to check.
+	 * @return bool
+	 */
 	public static function topic_exists($id)
 	{
-		$topic = ORM::factory('Forum_Topic', $id);
+		$topic = new Model_Forum_Topic($id);
 
 		return $topic->loaded();
 	}
@@ -66,14 +72,37 @@ class Model_Forum_Topic extends ORM {
 		);
 	}
 
-	public function create_topic($values, $expected)
+	/**
+	 * Create the topic and the first post.
+	 *
+	 * @param array $values
+	 * @param array $expected
+	 * @return $this
+	 */
+	public function create_topic(array $values, array $expected)
 	{
-		// Validation for category
-		$extra_validation = Validation::Factory($values)
-			->rule('category_id', 'Model_Forum_Category::category_exists');
+		$post = new Model_Forum_Post;
 
-		return $this->values($values, $expected)
+		// We need to set values before getting the validation
+		$post->values($values, array(
+			'user_id',
+			'content'
+		));
+
+		// Add the post validation and category_exists.
+		$extra_validation = $post->validation();
+		$extra_validation->rule('category_id', 'Model_Forum_Category::category_exists');
+
+		$topic = $this->values($values, $expected)
 			->create($extra_validation);
+
+		$post->create_post(array('topic_id' => $topic->id), array('topic_id'));
+
+		// Set the last_post_id to the newly created post.
+		$topic->last_post_id = $post->id;
+		$topic->save();
+
+		return $topic;
 	}
 
 	public function delete()
@@ -86,6 +115,7 @@ class Model_Forum_Topic extends ORM {
 	 * Delete all forum posts, and recalculate the users post count.
 	 *
 	 * Loops the posts to locate all users and calls delete on them.
+	 * TODO: Get all users, delete topic, recalculate and let mysql handle removing posts using constraints?
 	 */
 	public function delete_posts()
 	{

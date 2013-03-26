@@ -12,8 +12,8 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 	public function topic()
 	{
 		$topic = array(
-			'title'       => $this->topic->title,
-			'locked_date' => Date::format($this->topic->locked)
+			'title'  => $this->topic->title,
+			'locked' => $this->topic->locked
 		);
 
 		if ($this->topic->poll->loaded())

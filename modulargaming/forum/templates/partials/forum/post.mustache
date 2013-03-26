@@ -25,24 +25,19 @@
 			{{/user.signature}}
 		</div>
 
-		<div class="thumbnail center span2">
+		<div class="span2">
+
+			<p><a href="{{user.href}}">{{user.username}}</a></p>
+
 			<a href="#">
 				{{#user.avatar}}
 					{{>avatar}}
 				{{/user.avatar}}
 			</a>
 
-			<br>
-
-			<a href="{{user.href}}">{{user.username}}</a>
-
-			<br>
-
-			Posts: {{user.post_count}}
-
-			<br>
-
-			Title: {{user.title}}
+			<div class="userinfo">
+				{{user.post_count}} Posts
+			</div>
 		</div>
 	</div>
 </div>

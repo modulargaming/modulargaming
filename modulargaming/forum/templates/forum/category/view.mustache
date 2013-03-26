@@ -27,6 +27,11 @@
 						{{#locked}}<i class="icon-lock"></i>{{/locked}}
 						{{#poll}}<i class="icon-tasks"></i>{{/poll}}
 						<a href="{{href}}">{{title}}</a>
+
+						<div class="pull-right">
+							{{#sticky}}<span class="label label-success">Sticky</span>{{/sticky}}
+							{{#locked}}<span class="label label-important">Locked</span>{{/locked}}
+						</div>
 					</span>
 					<span class="author">
 						by <a href="{{user.href}}">{{user.username}}</a> at {{created}}
@@ -45,11 +50,11 @@
 	</tbody>
 </table>
 
-{{& pagination}}
-
 {{^topics}}
 	<div class="alert alert-error">No forum topics</div>
 {{/topics}}
+
+{{& pagination}}
 
 {{#can_create}}
 	<div class="form-actions">
