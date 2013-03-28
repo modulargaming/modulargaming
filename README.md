@@ -76,6 +76,10 @@ Open `application/config/email.php` and make the following changes:
 	$ php ./minion Pet
 	$ php ./minion Restock
 
+### Step 7: Admin
+
+Insert into the database your user id (1) and admin role (2) into roles_users now you can access /admin
+
 ## Testing
 
 We use BDD, with 2 different tools, phpspec and behat.
