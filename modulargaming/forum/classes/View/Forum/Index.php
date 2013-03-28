@@ -17,6 +17,7 @@ class View_Forum_Index extends Abstract_View_Forum {
 			$categories[] = array(
 				'title'       => $category->title,
 				'description' => $category->description,
+				'topics'      => number_format(ORM::factory('Forum_Topic')->where('category_id', '=', $category->id)->count_all()),
 				'href'        => Route::url('forum.category', array('id' => $category->id)),
 			);
 		}
