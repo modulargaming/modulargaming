@@ -90,14 +90,16 @@ class Model_Forum_Post extends ORM {
 	 */
 	public function delete()
 	{
+		// Update topic replies.
+		$this->topic->replies--;
+		$this->topic->save();
+
+		// Update post count.
 		$user = $this->user;
-
-		$post = parent::delete();
-
 		$user->set_property('forum.posts', $user->get_property('forum.posts') - 1);
 		$user->save();
 
-		return $post;
+		return parent::delete();
 	}
 
 }
