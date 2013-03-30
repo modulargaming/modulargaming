@@ -59,6 +59,13 @@ class Model_Forum_Post extends ORM {
 		);
 	}
 
+	/**
+	 * Create a new post and recalculate post count.
+	 *
+	 * @param array $values
+	 * @param array $expected
+	 * @return ORM
+	 */
 	public function create_post($values, $expected)
 	{
 		// Validation for topic
@@ -70,6 +77,23 @@ class Model_Forum_Post extends ORM {
 
 		// Update the post count for the post owner.
 		$user = $post->user;
+		$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($user->id));
+		$user->save();
+
+		return $post;
+	}
+
+	/**
+	 * Recalculate the post count on delete.
+	 *
+	 * @return ORM
+	 */
+	public function delete()
+	{
+		$user = $this->user;
+
+		$post = parent::delete();
+
 		$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($user->id));
 		$user->save();
 

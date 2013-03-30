@@ -91,10 +91,7 @@ class Controller_Forum_Post extends Abstract_Controller_Forum {
 					$post->topic->delete();
 				}
 
-				$user = $post->user;
 				$post->delete();
-				$this->user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($user->id));
-				$this->user->save();
 			}
 			catch (ORM_Validation_Exception $e)
 			{
