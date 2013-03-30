@@ -72,15 +72,15 @@ class Model_Forum_Post extends ORM {
 		$extra_validation = Validation::Factory($values)
 			->rule('topic_id', 'Model_Forum_Topic::topic_exists');
 
-		$post = $this->values($values, $expected)
+		$this->values($values, $expected)
 			->create($extra_validation);
 
 		// Update the post count for the post owner.
-		$user = $post->user;
-		$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($user->id));
+		$user = $this->user;
+		$user->set_property('forum.posts', $user->get_property('forum.posts') + 1);
 		$user->save();
 
-		return $post;
+		return $this;
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Model_Forum_Post extends ORM {
 
 		$post = parent::delete();
 
-		$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($user->id));
+		$user->set_property('forum.posts', $user->get_property('forum.posts') - 1);
 		$user->save();
 
 		return $post;

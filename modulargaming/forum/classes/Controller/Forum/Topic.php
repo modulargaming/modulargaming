@@ -44,7 +44,6 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		}
 		$session->set('forum.topic.last_visited_id', $this->topic->id);
 
-
 		$posts = $this->topic->posts;
 
 		$paginate = Paginate::factory($posts)
@@ -67,23 +66,17 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 
 		if ($this->request->method() == HTTP_Request::POST)
 		{
-
 			try
 			{
 				$post_data = Arr::merge($this->request->post(), array(
-					'topic_id' => $this->topic->id,
 					'user_id'	=> $this->user->id,
 				));
 
-				$post = ORM::factory('Forum_Post')
-					->create_post($post_data, array(
-						'topic_id',
-						'user_id',
-						'content',
-					));
-
-				$this->topic->last_post_id = $post->id;
-				$this->topic->save();
+				$this->topic->create_reply($post_data, array(
+					'topic_id',
+					'user_id',
+					'content',
+				));
 
 				Hint::success('You have created a post!');
 				$this->redirect(Route::get('forum.topic')->uri(array('id' => $this->topic->id)));

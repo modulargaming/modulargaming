@@ -106,6 +106,27 @@ class Model_Forum_Topic extends ORM {
 	}
 
 	/**
+	 * Create a new reply for the topic.
+	 *
+	 * @param array $values
+	 * @param array $expected
+	 * @return Model_Forum_Post
+	 */
+	public function create_reply(array $values, array $expected)
+	{
+		$post = new Model_Forum_Post;
+
+		$post->topic_id = $this->id;
+
+		$post->create_post($values, $expected);
+
+		// Set the last_post_id to the newly created post and increase replies.
+		$this->last_post_id = $post->id;
+		$this->replies++;
+		$this->save();
+	}
+
+	/**
 	 * Update the post count for users with posts in the topic.
 	 *
 	 * @return ORM
