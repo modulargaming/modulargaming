@@ -1,6 +1,17 @@
 <div class="post well">
 	<div class="row-fluid">
-		<div class="span10" id="post{{id}}">
+		<div class="span2">
+			<a href="#">
+				{{#user.avatar}}
+					{{>avatar}}
+				{{/user.avatar}}
+			</a>
+			<p><a href="{{user.href}}">{{user.username}}</a></p>
+			<div class="userinfo">
+				{{user.post_count}} Posts
+			</div>
+		</div>
+		<div class="span10 forum-post" id="post{{id}}">
 			<h5>
 				<a href="#post{{id}}">
 					<small>#{{id}}</small>
@@ -23,21 +34,6 @@
 					<p>{{{user.signature}}}</p>
 				</div>
 			{{/user.signature}}
-		</div>
-
-		<div class="span2">
-
-			<p><a href="{{user.href}}">{{user.username}}</a></p>
-
-			<a href="#">
-				{{#user.avatar}}
-					{{>avatar}}
-				{{/user.avatar}}
-			</a>
-
-			<div class="userinfo">
-				{{user.post_count}} Posts
-			</div>
 		</div>
 	</div>
 </div>
