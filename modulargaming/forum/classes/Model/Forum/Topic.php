@@ -105,33 +105,33 @@ class Model_Forum_Topic extends ORM {
 		return $topic;
 	}
 
+	/**
+	 * Update the post count for users with posts in the topic.
+	 *
+	 * @return ORM
+	 */
 	public function delete()
 	{
-		$this->delete_posts();
-		parent::delete();
-	}
-
-	/**
-	 * Delete all forum posts, and recalculate the users post count.
-	 *
-	 * Loops the posts to locate all users and calls delete on them.
-	 * TODO: Get all users, delete topic, recalculate and let mysql handle removing posts using constraints?
-	 */
-	public function delete_posts()
-	{
+		/* @var $users Model_User[] */
 		$users = array();
 
+		// Find all users.
 		foreach ($this->posts->find_all() as $post)
 		{
 			$users[$post->user->id] = $post->user;
-			$post->delete();
 		}
 
+		// Delete the topic, posts gets deleted by sql constraints.
+		$post = parent::delete();
+
+		// Update the forum.posts property.
 		foreach ($users as $user)
 		{
-			$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($this->user->id));
+			$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($user->id));
 			$user->save();
 		}
+
+		return $post;
 	}
 
 	/**

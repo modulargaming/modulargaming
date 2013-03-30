@@ -81,9 +81,6 @@ class Controller_Forum_Category extends Abstract_Controller_Forum {
 					'title'
 				));
 
-				$this->user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($this->user->id));
-				$this->user->save();
-
 				Hint::success('You have created a topic');
 				$this->redirect(Route::get('forum.topic')->uri(array('id' => $topic->id)));
 			}

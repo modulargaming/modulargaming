@@ -65,8 +65,15 @@ class Model_Forum_Post extends ORM {
 		$extra_validation = Validation::Factory($values)
 			->rule('topic_id', 'Model_Forum_Topic::topic_exists');
 
-		return $this->values($values, $expected)
+		$post = $this->values($values, $expected)
 			->create($extra_validation);
+
+		// Update the post count for the post owner.
+		$user = $post->user;
+		$user->set_property('forum.posts', Model_Forum_Post::get_user_post_count($user->id));
+		$user->save();
+
+		return $post;
 	}
 
 }
