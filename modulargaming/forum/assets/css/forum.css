@@ -15,3 +15,37 @@ td.replies, td.views {
 	color: #9d261d;
 	font-weight: bold;
 }
+
+.forum-post {
+	position: relative;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	padding: 10px 20px;
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+                border-radius: 4px;
+}
+
+.forum-post:after, .forum-post:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.forum-post:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-right-color: #ffffff;
+	border-width: 9px;
+	top: 18px;
+}
+
+.forum-post:before {
+	border-color: rgba(187, 187, 187, 0);
+	border-right-color: #bbbbbb;
+	border-width: 10px;
+	top: 17px;
+}
