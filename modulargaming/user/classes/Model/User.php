@@ -2,6 +2,19 @@
 
 class Model_User extends Model_Auth_User implements Model_ACL_User, Interface_Property {
 
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'email'       => NULL,
+		'username'    => NULL,
+		'password'    => NULL,
+		'logins'      => NULL,
+		'created'     => NULL,
+		'last_login'  => NULL,
+		'title_id'    => NULL,
+		'timezone_id' => NULL,
+		'cached_properties' => NULL
+	);
+
 	protected $_created_column = array(
 		'column' => 'created',
 		'format' => TRUE
