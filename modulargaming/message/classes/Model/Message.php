@@ -3,6 +3,16 @@
 class Model_Message extends ORM
 {
 
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'sender_id'       => NULL,
+		'receiver_id'    => NULL,
+		'created'    => NULL,
+		'logins'      => NULL,
+		'subject'     => NULL,
+		'content'  => NULL
+	);
+
 	protected $_created_column = array(
 		'column' => 'created',
 		'format' => TRUE,
