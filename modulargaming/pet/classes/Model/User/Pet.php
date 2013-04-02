@@ -2,6 +2,21 @@
 
 class Model_User_Pet extends ORM {
 
+
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'user_id'       => NULL,
+		'created'    => NULL,
+		'abandoned'    => NULL,
+		'active'      => NULL,
+		'name'      => NULL,
+		'gender'      => NULL,
+		'specie_id'      => NULL,
+		'colour_id'      => NULL,
+		'hunger'      => NULL,
+		'happiness'      => NULL
+	);
+
 	protected $_created_column = array(
 		'column' => 'created',
 		'format' => TRUE,

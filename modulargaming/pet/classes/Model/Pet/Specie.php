@@ -2,6 +2,13 @@
 
 	class Model_Pet_Specie extends ORM {
 
+
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'name'       => NULL,
+		'dir'    => NULL,
+		'description'    => NULL
+	);
 		protected $_has_many = array(
 			'pets'    => array(
 				'model'       => 'User_Pet',

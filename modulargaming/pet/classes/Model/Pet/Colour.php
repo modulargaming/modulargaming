@@ -2,6 +2,14 @@
 
 class Model_Pet_Colour extends ORM {
 
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'locked'       => NULL,
+		'name'    => NULL,
+		'description'    => NULL,
+		'image'      => NULL
+	);
+
 	protected $_has_many = array(
 		'pets' => array(
 			'model' => 'User_Pet',
