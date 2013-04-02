@@ -2,6 +2,15 @@
 
 class Model_Forum_Category extends ORM {
 
+
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'title'       => NULL,
+		'description'    => NULL,
+		'locked'    => NULL,
+		'created'      => NULL
+	);
+
 	protected $_created_column = array(
 		'column' => 'created',
 		'format' => TRUE,

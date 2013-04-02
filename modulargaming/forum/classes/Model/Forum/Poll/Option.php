@@ -2,6 +2,14 @@
 
 class Model_Forum_Poll_Option extends ORM {
 
+
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'poll_id'       => NULL,
+		'title'    => NULL,
+		'votes'    => NULL
+	);
+
 	protected $_belongs_to = array(
 		'poll' => array(
 			'model' => 'Forum_Poll',

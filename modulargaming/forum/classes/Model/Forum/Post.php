@@ -2,6 +2,16 @@
 
 class Model_Forum_Post extends ORM {
 
+
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'topic_id'       => NULL,
+		'user_id'    => NULL,
+		'content'    => NULL,
+		'created'      => NULL,
+		'updated'	=> NULL
+	);
+
 	protected $_belongs_to = array(
 		'topic' => array(
 			'model' => 'Forum_Topic',

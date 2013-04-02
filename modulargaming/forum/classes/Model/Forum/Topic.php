@@ -2,6 +2,20 @@
 
 class Model_Forum_Topic extends ORM {
 
+
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'category_id'       => NULL,
+		'user_id'    => NULL,
+		'title'    => NULL,
+		'created'      => NULL,
+		'last_post_id' => NULL,
+		'sticky' => NULL,
+		'locked' => NULL,
+		'replies' => NULL,
+		'views' => NULL
+	);
+
 	protected $_created_column = array(
 		'column' => 'created',
 		'format' => TRUE,
