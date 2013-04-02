@@ -2,6 +2,13 @@
 
 	class Model_Item_Recipe extends ORM {
 
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'name'       => NULL,
+		'description'    => NULL,
+		'crafted_item_id'    => NULL
+		);
+
 		protected $_has_many = array(
 			'materials' => array(
 				'model'       => 'Item_Recipe_Material',

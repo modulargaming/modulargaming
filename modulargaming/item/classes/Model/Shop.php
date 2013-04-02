@@ -2,6 +2,18 @@
 
 	class Model_Shop extends ORM {
 
+
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'title'       => NULL,
+		'npc_image'    => NULL,
+		'npc_text'    => NULL,
+		'stock_type'      => NULL,
+		'stock_cap'     => NULL,
+		'max_price'  => NULL,
+		'status' => NULL
+		);
+
 		public function rules()
 		{
 			return array(

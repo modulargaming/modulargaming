@@ -2,6 +2,16 @@
 
 	class Model_Item_Type extends ORM {
 
+
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'name'       => NULL,
+		'action'    => NULL,
+		'default_command'    => NULL,
+		'img_dir'      => NULL
+		);
+
+
 		public function rules()
 		{
 			return array(

@@ -2,6 +2,19 @@
 
 	class Model_Item extends ORM {
 
+
+	protected $_table_columns = array(
+		'id'          => NULL,
+		'type_id'       => NULL,
+		'name'    => NULL,
+		'description'    => NULL,
+		'image'      => NULL,
+		'status'     => NULL,
+		'unique'  => NULL,
+		'transferable'     => NULL,
+		'commands'     => NULL,
+	);
+
 		protected $_belongs_to = array(
 			'type' => array(
 				'model'       => 'Item_Type',

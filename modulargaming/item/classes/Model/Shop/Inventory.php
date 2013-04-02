@@ -1,6 +1,16 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 	class Model_Shop_Inventory extends ORM {
+
+
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'shop_id'       => NULL,
+		'item_id'    => NULL,
+		'price'    => NULL,
+		'stock'      => NULL
+		);
+
 		protected $_belongs_to = array(
 			'item' => array(
 				'model' => 'Item',

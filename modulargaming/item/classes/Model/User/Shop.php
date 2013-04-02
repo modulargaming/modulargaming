@@ -2,6 +2,16 @@
 
 	class Model_User_Shop extends ORM {
 
+
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'user_id'       => NULL,
+		'title'    => NULL,
+		'description'    => NULL,
+		'size'      => NULL,
+		'till'     => NULL
+		);
+
 		protected $_belongs_to = array(
 			'user' => array(
 				'model'       => 'User',

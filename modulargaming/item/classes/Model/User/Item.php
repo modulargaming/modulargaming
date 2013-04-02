@@ -2,6 +2,16 @@
 
 	class Model_User_Item extends ORM {
 
+
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'item_id'       => NULL,
+		'user_id'    => NULL,
+		'amount'    => NULL,
+		'parameter'      => NULL,
+		'parameter_id'     => NULL
+		);
+
 		protected $_belongs_to = array(
 			'item' => array(
 				'model'       => 'Item',

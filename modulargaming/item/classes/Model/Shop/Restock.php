@@ -1,6 +1,20 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 	class Model_Shop_Restock extends ORM {
+
+
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'shop_id'       => NULL,
+		'item_id'    => NULL,
+		'frequency'    => NULL,
+		'next_restock'      => NULL,
+		'min_price'     => NULL,
+		'max_price'  => NULL,
+		'min_amount' => NULL,
+		'max_amount' => NULL,
+		'cap_amount' => NULL
+		);
 		protected $_belongs_to = array(
 			'item' => array(
 				'model' => 'Item',

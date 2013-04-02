@@ -2,6 +2,13 @@
 
 	class Model_User_Trade extends ORM {
 
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'user_id'       => NULL,
+		'created'    => NULL,
+		'description'    => NULL
+		);
+
 		protected $_belongs_to = array(
 			'user' => array(
 				'model'       => 'User',

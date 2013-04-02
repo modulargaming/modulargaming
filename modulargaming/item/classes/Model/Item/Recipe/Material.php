@@ -1,6 +1,16 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-	class Model_Item_Recipe_Material extends ORM {
+class Model_Item_Recipe_Material extends ORM {
+		
+
+
+		protected $_table_columns = array(
+		'id'          => NULL,
+		'item_recipe_id'       => NULL,
+		'item_id'    => NULL,
+		'amount'    => NULL
+		);
+
 		protected $_belongs_to = array(
 			'recipe' => array(
 				'model'       => 'Item_Recipe',
