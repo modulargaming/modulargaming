@@ -17,3 +17,15 @@ textarea {
 .wrap {
 	word-wrap: break-word;
 }
+#debug-toolbar {
+	top: auto !important;
+	bottom: 0;
+}
+#kohana-debug-toolbar .top {
+	top: auto !important;
+	bottom: 25px;
+	right: 0;
+	width: auto !important;
+	max-height: 70%;
+	overflow-y: auto;
+}
