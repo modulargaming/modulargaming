@@ -13,13 +13,14 @@ class View_Message_Index extends Abstract_View_Message {
 			$messages[] = array(
 				'created' => Date::format($message->created),
 				'subject' => $message->subject,
-				'content' => $message->content,
+				'content' => substr(strip_tags($message->content), 0, 100),
 				'id'	  => $message->id,
 				'href'    => Route::url('message.view', array('id' => $message->id)),
 
 				'sender' => array(
 					'id' => $message->sender->id,
 					'username'  => $message->sender->username,
+					'avatar' => $message->sender->avatar(),
 					'href'      => Route::url('user.profile', array(
 						'id'     => $message->sender->id,
 					)),

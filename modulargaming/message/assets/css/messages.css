@@ -1,0 +1,49 @@
+#messages {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#messages > li {
+	display: block;
+	height: 47px;
+	padding: 5px 10px 5px 30px;
+	background-color: #eeeeee;
+	margin-top: 5px;
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+	        border-radius: 4px;
+}
+#messages > li:hover {
+	background-color: #e3f2f0;
+}
+.messages-avatar {
+	float: left;
+	margin-right: 10px;
+}
+.messages-avatar img {
+	width: 37px;
+	height: 37px;
+}
+.messages-subject {
+	display: block;
+	color: #777777;
+}
+.messages-subject:hover {
+	text-decoration: none;
+	color: #777777;
+}
+.messages-subject > strong {
+	color: #444444;
+}
+.messages-subject > span {
+	display: inline-block;
+	vertical-align: top;
+	width: 40%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.messages-date {
+	float: right;
+	margin-top: -25px;
+}

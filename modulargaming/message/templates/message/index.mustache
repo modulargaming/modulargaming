@@ -7,24 +7,18 @@
 {{#total_messages}}
 You have {{total_messages}} messages. 
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Subject</th>
-			<th>Sender</th>
-			<th>Time</th>
-		</tr>
-	</thead>
-	<tbody>
+<ul id="messages">
 		{{#messages}}
-			<tr>
-				<td><a href="{{href}}">{{subject}}</a></td>
-				<td><a href="{{sender.href}}">{{sender.username}}</a></td>
-				<td>{{created}}</td>
-			</tr>
+<li>
+  <a href="{{sender.href}}" class="messages-avatar">{{#sender.avatar}}{{>avatar}}{{/sender.avatar}}</a>
+  <a href="{{href}}" class="messages-subject">
+    <strong>{{sender.username}}</strong><br>
+    {{subject}} &mdash; <span>{{content}}</span>
+  </a>
+  <span class="messages-date">{{created}}</span>
+</li>
 		{{/messages}}
-	</tbody>
-</table>
+</ul>
 
 {{/total_messages}}
 
