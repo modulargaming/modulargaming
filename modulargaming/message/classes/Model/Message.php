@@ -8,7 +8,6 @@ class Model_Message extends ORM
 		'sender_id'       => NULL,
 		'receiver_id'    => NULL,
 		'created'    => NULL,
-		'logins'      => NULL,
 		'subject'     => NULL,
 		'content'  => NULL
 	);
