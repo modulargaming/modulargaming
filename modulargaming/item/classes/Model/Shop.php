@@ -6,7 +6,7 @@
 		protected $_table_columns = array(
 		'id'          => NULL,
 		'title'       => NULL,
-		'npc_image'    => NULL,
+		'npc_img'    => NULL,
 		'npc_text'    => NULL,
 		'stock_type'      => NULL,
 		'stock_cap'     => NULL,
