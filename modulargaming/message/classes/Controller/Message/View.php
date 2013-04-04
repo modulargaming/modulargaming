@@ -22,6 +22,17 @@ class Controller_Message_View extends Abstract_Controller_Message {
 			throw HTTP_Exception::Factory('403', 'Message does not belong to you');
 		}
 
+		if ( ! $message->read)
+		{
+			$message->read = 1;
+			$message->save();
+		}
+
+		if ( $message->sent)
+		{
+			$message->sender = $message->receiver;
+		}
+
 		$this->view = new View_Message_View;
 		$this->view->message = $message;
 	}

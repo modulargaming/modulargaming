@@ -30,6 +30,23 @@ class Controller_Message_Create extends Abstract_Controller_Message {
 						'sender_id',
 					));
 
+				$message_data_sent = Arr::merge($this->request->post(), array(
+					'receiver_id' => $this->user->id,
+					'sender_id' => $receiver->id,
+					'sent' => 1,
+					'read' => 1,
+				));
+
+				ORM::factory('Message')
+					->create_message($message_data_sent, array(
+						'receiver_id',
+						'subject',
+						'content',
+						'sender_id',
+						'sent',
+						'read',
+					));
+
 				Hint::success('You have sent a message');
 				$this->redirect(Route::get('messages')->uri());
 			}

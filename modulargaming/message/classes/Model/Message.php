@@ -9,7 +9,9 @@ class Model_Message extends ORM
 		'receiver_id'    => NULL,
 		'created'    => NULL,
 		'subject'     => NULL,
-		'content'  => NULL
+		'content'  => NULL,
+		'read'  => NULL,
+		'sent'  => NULL
 	);
 
 	protected $_created_column = array(

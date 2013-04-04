@@ -6,18 +6,21 @@
 
 {{#total_messages}}
 You have {{total_messages}} messages. 
-
+<ul class="nav nav-tabs">
+	<li{{^outbox}} class="active"{{/outbox}}><a href="{{links.inbox}}">Inbox</a></li>
+  	<li{{#outbox}} class="active"{{/outbox}}><a href="{{links.outbox}}">Outbox</a></li>
+</ul>
 <ul id="messages">
-		{{#messages}}
-<li>
-  <a href="{{sender.href}}" class="messages-avatar">{{#sender.avatar}}{{>avatar}}{{/sender.avatar}}</a>
-  <a href="{{href}}" class="messages-subject">
-    <strong>{{sender.username}}</strong><br>
-    {{subject}} &mdash; <span>{{content}}</span>
-  </a>
-  <span class="messages-date">{{created}}</span>
-</li>
-		{{/messages}}
+	{{#messages}}
+	<li class="message-{{^read}}un{{/read}}read">
+		<a href="{{sender.href}}" class="messages-avatar">{{#sender.avatar}}{{>avatar}}{{/sender.avatar}}</a>
+		<a href="{{href}}" class="messages-subject">
+			<strong>{{sender.username}}</strong><br>
+			{{subject}} &mdash; <span>{{content}}</span>
+		</a>
+		<span class="messages-date">{{created}}</span>
+	</li>
+	{{/messages}}
 </ul>
 
 {{/total_messages}}
