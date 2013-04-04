@@ -240,8 +240,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 		$item = ORM::factory('Item', $values['id']);
 
 		$file = array('status' => 'empty', 'msg' => '');
-		$TMP = null;
-		$upload = null;
+		$TMP = NULL;
+		$upload = NULL;
 
 		if (isset($_FILES['image']))
 		{
