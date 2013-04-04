@@ -324,7 +324,7 @@ class Controller_Item_Inventory extends Abstract_Controller_Frontend {
 							}
 
 							$item->amount('-', $amount);
-							Journal::log('remove.'.$item->item_id, 'item', ':item_name removed', array(':tem_name' => $name));
+							Journal::log('remove.'.$item->item_id, 'item', ':item_name removed', array(':item_name' => $name));
 							$results = __(':item :verb deleted successfully', array(
 								':verb' => $verb, ':item' => $name
 							));
