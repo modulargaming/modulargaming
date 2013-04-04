@@ -37,12 +37,12 @@
 
 				$datatables = DataTables::factory($paginate)->execute();
 
-				foreach ($datatables->result() as $avatar)
+				foreach ($datatables->result() as $colour)
 				{
 					$datatables->add_row(array (
-							$avatar->name,
-							$avatar->locked,
-							$avatar->id
+							$colour->name,
+							$colour->id,
+							$colour->locked
 						)
 					);
 				}
