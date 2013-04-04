@@ -1,4 +1,4 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+	<?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * Item admin controller
  *
@@ -274,10 +274,10 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 				}
 
 				//save it temporarily
-				$upload = Image::factory($_FILES['image'])
+				$upload = Image::factory($image['tmp_name'])
 					->save($cfg['tmp_dir'].$image['name'].Text::random().'.png');
 
-				$TMP = array('upload' => $upload->file, 'name' => $image['name']);
+				$TMP = array('upload' => $upload, 'name' => $image['name']);
 
 				if ($TMP['upload'] != FALSE)
 				{
@@ -343,7 +343,8 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 							//move the uploaded file to the correct place with the correct name
 							if($upload != null)
 							{
-								$upload->save($new_loc);
+								$upload = Image::factory($image['tmp_name'])
+                                        			->save($new_loc);
 							}
 							//otherwise move the file to the new dir
 							else

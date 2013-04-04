@@ -5,7 +5,7 @@ return array(
 		'width' => 80,
 		'height' => 80,
 		'format' => array('png'),
-		'tmp_dir' => DOCROOT.'assets'.DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'items'.DIRECTORY_SEPARATOR,
+		'tmp_dir' => DOCROOT.'assets'.DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'items'.DIRECTORY_SEPARATOR
 	),
 	'npc' => array(
 		'image' => array(
