@@ -8,6 +8,7 @@
 		'item_id'       => NULL,
 		'user_id'    => NULL,
 		'amount'    => NULL,
+		'location' => NULL,
 		'parameter'      => NULL,
 		'parameter_id'     => NULL
 		);
