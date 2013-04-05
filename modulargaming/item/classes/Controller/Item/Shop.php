@@ -403,6 +403,6 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			->where('user_id', '=', $this->user->id)
 			->find();
 
-		return $this->_shop->loaded();
+		return $this->_shop;
 	}
 }
