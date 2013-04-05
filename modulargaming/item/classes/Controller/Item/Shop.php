@@ -176,7 +176,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 		$items = Item::location('shop');
 
-		$pagination = Paginate::factory($items, array(), $this->request);
+		$pagination = Paginate::factory($items, array(), $this->request)->execute();
 
 		$this->view->items = $pagination->result();
 		$this->view->pagination = $pagination->render();
@@ -191,6 +191,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 		{
 			$this->redirect(Route::get('item.user_shop.create')->uri());
 		}
+
 
 		if ($this->request->method() == HTTP_Request::POST && count($this->request->post('item')) > 0)
 		{
