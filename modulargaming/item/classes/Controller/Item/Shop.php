@@ -216,7 +216,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 					Hint::error('You\'re trying to change an item that\'s not located in your shop');
 					$errors = TRUE;
 				}
-				else if ($param['remove'] == 1)
+				else if (isset($param['remove']) AND $param['remove'] == 1)
 				{
 					//move the item to the inventory
 					$item->move('inventory', '*');
