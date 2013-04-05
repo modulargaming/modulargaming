@@ -193,7 +193,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 		}
 
 
-		if ($this->request->method() == HTTP_Request::POST && count($this->request->post('item')) > 0)
+		if ($this->request->method() == HTTP_Request::POST AND count($this->request->post('item')) > 0)
 		{
 			$lost_items = 0;
 			$errors = FALSE;
@@ -206,11 +206,13 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 					$lost_items++;
 					$errors = TRUE;
 				}
+
 				else if ($item->user_id != $this->user->id)
 				{
 					Hint::error('you\'re trying to change an item you don\'t own');
 					$errors = TRUE;
 				}
+
 				else if ($item->location != 'shop')
 				{
 					Hint::error('You\'re trying to change an item that\'s not located in your shop');
@@ -239,7 +241,8 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			}
 		}
 
-		$this->redirect(Route::get('item.user_shop.stock'), array('page' => $this->request->param('page')));
+		$this->redirect(Route::get('item.user_shop.stock')->uri(array('page' => $this->request->param('page'))));
+
 	}
 
 	public function action_logs()
