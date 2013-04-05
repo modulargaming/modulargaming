@@ -37,10 +37,12 @@ class Item_Command_Pet_Transform extends Item_Command_Pet {
 
 	public function perform($item, $param, $pet = null)
 	{
-		$specie = ORM::factory('Pet_Specie', $param);
+		$specie = ORM::factory('Pet_Specie')
+		->where('pet_specie.name', '=', $param)
+		->find();
 
-		$pet->specie_id = $param;
-		$pet-save();
+		$pet->specie_id = $specie->id;
+		$pet->save();
 
 		return 'Your ' . $pet->name . ' has changed in to a ' . $specie->name;
 	}
