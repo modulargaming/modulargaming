@@ -3,8 +3,7 @@
 /**
  * Read and sent messages
  */
-class Migration_Message_201304042192200 extends Minion_Migration_Base {
-
+class Migration_Message_20130404219220 extends Minion_Migration_Base {
 	/**
 	 * Run queries needed to apply this migration
 	 *
