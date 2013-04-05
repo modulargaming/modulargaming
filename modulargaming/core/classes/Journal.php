@@ -68,13 +68,11 @@ class Journal{
 
 		$notify = Kohana::$config->load('notify.' . $notification);
 
-		$param['username'] = $log->user->username;
-
 		$values = array(
 			'log_id'  => $log->id,
-			'user_id' => $user->id,
+			'user_id' => $log->user->id,
 			'title'   => $notify['title'],
-			'message' => __($notify['message'], $log->params + $param),
+			'message' => __($notify['message'], $log->params, $param),
 			'icon'    => $notify['icon'],
 			'type'    => $type
 		);
