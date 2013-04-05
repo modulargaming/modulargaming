@@ -41,6 +41,7 @@ abstract class Abstract_View {
 		return $this->title;
 	}
 
+
 	// TODO: We want to avoid using base_url() inside templates, remove it?
 	public function base_url()
 	{
@@ -109,6 +110,7 @@ abstract class Abstract_View {
 
 		$user['last_login'] = Date::format($user['last_login']);
 		$user['created'] = Date::format($user['created']);
+		$user['points'] = $this->_user->get_property('points', 200);
 
 		return $user;
 	}

@@ -53,6 +53,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		$this->view->pagination = $paginate->render();
 		$this->view->topic = $this->topic;
 		$this->view->posts = $paginate->result();
+
 	}
 
 	public function action_reply()
