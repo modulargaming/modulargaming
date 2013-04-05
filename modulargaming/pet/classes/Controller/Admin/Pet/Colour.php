@@ -115,8 +115,8 @@
 					'action' => 'saved',
 					'row'    => array(
 						$colour->name,
-						$colour->id,
-						$colour->locked
+						$colour->locked,
+						$colour->id
 					)
 				);
 				$this->response->body(json_encode($data));
