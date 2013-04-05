@@ -14,7 +14,7 @@ class View_Admin_Pet_Colour_Index extends Abstract_View_Admin {
 				'id'          => $colour->id,
 				'name'        => $colour->name,
 				'description' => $colour->description,
-				'locked'      => (boolean) $colour->locked,
+				'locked'      => (boolean) $colour->locked
 			);
 		}
 

@@ -41,8 +41,8 @@
 				{
 					$datatables->add_row(array (
 							$colour->name,
-							$colour->id,
-							$colour->locked
+							$colour->locked,
+							$colour->id
 						)
 					);
 				}
@@ -63,9 +63,9 @@
 
 			$this->view = NULL;
 
-			$item_id = $this->request->query('id');
+			$colour_id = $this->request->query('id');
 
-			if ($item_id == NULL)
+			if ($colour_id == NULL)
 			{
 				$colour = ORM::factory('Pet_Colour')
 					->where('pet_colour.name', '=', $this->request->query('name'))
@@ -73,7 +73,7 @@
 			}
 			else
 			{
-				$colour = ORM::factory('Pet_Colour', $item_id);
+				$colour = ORM::factory('Pet_Colour', $colour_id);
 			}
 
 			$list = array(
@@ -114,9 +114,9 @@
 				$data = array(
 					'action' => 'saved',
 					'row'    => array(
-						'id'     => $colour->id,
-						'name'   => $colour->name,
-						'locked' => $colour->locked
+						$colour->name,
+						$colour->id,
+						$colour->locked
 					)
 				);
 				$this->response->body(json_encode($data));

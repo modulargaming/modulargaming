@@ -80,8 +80,8 @@
 			}
 
 			$list = array(
-				'id'          => $specie->id,
 				'name'        => $specie->name,
+				'id'          => $specie->id,
 				'description' => $specie->description,
 				'dir'         => $specie->dir
 			);
@@ -116,8 +116,8 @@
 				$data = array(
 					'action' => 'saved',
 					'row'    => array(
-						'id'   => $specie->id,
-						'name' => $specie->name,
+						$specie->id,
+						$specie->name
 					)
 				);
 				$this->response->body(json_encode($data));
