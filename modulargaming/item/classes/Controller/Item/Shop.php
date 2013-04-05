@@ -198,7 +198,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			$errors = FALSE;
 			foreach ($this->request->post('item') as $id => $param)
 			{
-				$item = ORM::factory('User_item', $id);
+				$item = ORM::factory('User_Item', $id);
 
 				if ( ! $item->loaded())
 				{
