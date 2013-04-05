@@ -116,6 +116,9 @@ class Model_Forum_Topic extends ORM {
 		$topic->last_post_id = $post->id;
 		$topic->save();
 
+		$topic->category->topics_count++;
+		$topic->category->save();
+
 		return $topic;
 	}
 
@@ -147,6 +150,9 @@ class Model_Forum_Topic extends ORM {
 	 */
 	public function delete()
 	{
+		$this->category->topics_count --;
+		$this->category->save();
+
 		/* @var $users Model_User[] */
 		$users = array();
 

@@ -2,23 +2,23 @@
 
 class Model_Forum_Category extends ORM {
 
-
 	protected $_table_columns = array(
-		'id'          => NULL,
-		'title'       => NULL,
-		'description'    => NULL,
-		'locked'    => NULL,
-		'created'      => NULL
+		'id'           => NULL,
+		'title'        => NULL,
+		'description'  => NULL,
+		'locked'       => NULL,
+		'created'      => NULL,
+		'topics_count' => NULL  // Number of topics in category.
 	);
 
 	protected $_created_column = array(
 		'column' => 'created',
-		'format' => TRUE,
+		'format' => TRUE
 	);
 
 	protected $_has_many = array(
 		'topics' => array(
-			'model' => 'Forum_Topic',
+			'model'       => 'Forum_Topic',
 			'foreign_key' => 'category_id',
 		),
 	);
