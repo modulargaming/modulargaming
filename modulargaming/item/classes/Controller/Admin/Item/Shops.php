@@ -110,8 +110,12 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 		try
 		{
-			$values['npc_img'] = 'tmp';
 
+			//$base_dir = DOCROOT . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'items'
+			// . DIRECTORY_SEPARATOR . 'shops' . DIRECTORY_SEPARATOR . 'npc' . DIRECTORY_SEPARATOR;
+			//$values['npc_img'] = $base_dir . $values['npc_img'];
+			
+			$values['npc_img'] = 'tmp';
 			$item = ORM::factory('Shop', $values['id']);
 
 			$img = ($item->loaded()) ? $item->npc_img : null;
@@ -161,6 +165,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 					}
 
 					$up = Upload::save($image, $image['name'], DOCROOT . 'assets/img/npc/shop/');
+					// $up = Upload::save($image, DOCROOT . 'assets/img/npc/shop/'.$image['name']);
 
 					if ($up != FALSE)
 					{
