@@ -117,6 +117,8 @@ abstract class Paginate extends Kohana_Paginate {
 			array($this->config['param'] => $page)
 		);
 
+		$suffix = '';
+
 		if ($this->query != FALSE)
 		{
 			if (is_string($this->query))
