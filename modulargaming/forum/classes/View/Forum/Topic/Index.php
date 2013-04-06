@@ -94,10 +94,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 	public function links()
 	{
 		return array(
-			'poll' => Route::url('forum.topic', array(
-				'action' => 'poll',
-				'id'     => $this->topic->id
-			)),
+			'poll' => Route::url('forum.poll', array('id' => $this->topic->id)),
 			'reply' => Route::url('forum.topic', array(
 				'action' => 'reply',
 				'id'     => $this->topic->id
