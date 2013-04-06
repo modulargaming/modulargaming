@@ -33,7 +33,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 		}
 	}
 
-	public function action_view()
+	public function action_page()
 	{
 		// Increase the topic views
 		$session = Session::instance();
@@ -46,7 +46,7 @@ class Controller_Forum_Topic extends Abstract_Controller_Forum {
 
 		$posts = $this->topic->posts;
 
-		$paginate = Paginate::factory($posts)
+		$paginate = Paginate::factory($posts, array('total_items' => 10))
 			->execute();
 
 		$this->view = new View_Forum_Topic_Index;

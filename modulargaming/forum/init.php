@@ -17,11 +17,11 @@ Route::set('forum.category', 'forum/category/<id>(/<action>(/<page>))', array('i
 		'action'     => 'page',
 	));
 
-Route::set('forum.topic', 'forum/topic/<id>(/<action>)', array('id' => '[0-9]+'))
+Route::set('forum.topic', 'forum/topic/<id>(/<action>(/<page>))', array('id' => '[0-9]+', 'page' => '[0-9]+'))
 	->defaults(array(
 		'directory'  => 'Forum',
 		'controller' => 'Topic',
-		'action'     => 'view',
+		'action'     => 'page',
 	));
 
 Route::set('forum.post', 'forum/post/<id>(/<action>)', array('id' => '[0-9]+'))
