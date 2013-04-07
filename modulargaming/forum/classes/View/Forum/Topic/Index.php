@@ -9,6 +9,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 		return 'Forum - '.$this->topic->title;
 	}
 
+	/*
 	public function topic()
 	{
 		$topic = array(
@@ -46,11 +47,7 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 
 		return $topic;
 	}
-
-	public function can_create_poll()
-	{
-		return $this->_user_can('Forum_Poll_Create', array('topic' => $this->topic));
-	}
+	*/
 
 	public function posts()
 	{
@@ -89,17 +86,6 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 		}
 
 		return $posts;
-	}
-
-	public function links()
-	{
-		return array(
-			'poll' => Route::url('forum.poll', array('id' => $this->topic->id)),
-			'reply' => Route::url('forum.topic', array(
-				'action' => 'reply',
-				'id'     => $this->topic->id
-			)),
-		);
 	}
 
 	public function actions()

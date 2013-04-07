@@ -1,22 +1,12 @@
 <h2>{{topic.title}}</h2>
 
-{{#topic.poll}}
-	{{>Forum/Poll}}
-{{/topic.poll}}
-
 <div class="row">
 	<div class="span6">
 		{{#can_reply}}
 			<a href="{{links.reply}}" class="btn btn-primary"><i class="icon-comment icon-white"></i> Reply</a>
 		{{/can_reply}}
-
-		{{^topic.poll}}
-			{{#can_create_poll}}
-				<a class="btn btn-primary" href="{{links.poll}}">Add a poll</a>
-			{{/can_create_poll}}
-		{{/topic.poll}}
 	</div>
-	<div class="span6" style="margin: -20px 0; text-align: right">
+	<div class="span6 pagination-right">
 		{{& pagination}}
 	</div>
 </div>
