@@ -123,6 +123,7 @@ I18n::lang('en-gb');
 Kohana::modules(array(
 	
 	// Modular Gaming modules
+	'game'    => MGPATH.'game',
 	'forum'   => MGPATH.'forum',
 	'item'    => MGPATH.'item',
 	'pet'     => MGPATH.'pet',
