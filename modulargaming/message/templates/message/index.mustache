@@ -1,15 +1,14 @@
+<ul class="nav nav-tabs">
+	<li{{^outbox}} class="active"{{/outbox}}><a href="{{links.inbox}}">Inbox</a></li>
+  	<li{{#outbox}} class="active"{{/outbox}}><a href="{{links.outbox}}">Outbox</a></li>
+</ul>
 {{^total_messages}}
 <div class="alert alert-error">
   You have have no messages.
 </div>
 {{/total_messages}}
-
 {{#total_messages}}
 You have {{total_messages}} messages. 
-<ul class="nav nav-tabs">
-	<li{{^outbox}} class="active"{{/outbox}}><a href="{{links.inbox}}">Inbox</a></li>
-  	<li{{#outbox}} class="active"{{/outbox}}><a href="{{links.outbox}}">Outbox</a></li>
-</ul>
 <ul id="messages">
 	{{#messages}}
 	<li class="message-{{^read}}un{{/read}}read">
