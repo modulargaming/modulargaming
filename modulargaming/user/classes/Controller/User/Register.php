@@ -73,7 +73,7 @@ class Controller_User_Register extends Abstract_Controller_User {
 			));
 
 		// Add the login role.
-		$user->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
+		$user->add('roles', Model_Role::LOGIN);
 
 		return $user;
 	}
