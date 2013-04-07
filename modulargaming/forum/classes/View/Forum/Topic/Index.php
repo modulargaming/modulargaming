@@ -88,6 +88,16 @@ class View_Forum_Topic_Index extends Abstract_View_Forum_Topic {
 		return $posts;
 	}
 
+	public function links()
+	{
+		return array(
+			'reply' => Route::url('forum.topic', array(
+				'action' => 'reply',
+				'id'     => $this->topic->id
+			))
+		);
+	}
+
 	public function actions()
 	{
 		$actions = array();
