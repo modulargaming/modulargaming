@@ -32,7 +32,7 @@ class View_Pet_Profile extends Abstract_View {
 	{
 		$array = array();
 
-		if ($this->pet->user_id == $this->player()['id'])
+		if ($this->pet->user_id == $this->player())
 		{
 			$array[] = array(
 				'title' => 'Your pets',
