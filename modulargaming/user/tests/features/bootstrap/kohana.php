@@ -8,3 +8,5 @@ defined('MGPATH')  ?: define('MGPATH', 'modulargaming/');
 defined('EXT') ?: define('EXT', '.php');
 
 require_once APPPATH.'bootstrap.php';
+
+Database::$default = 'test';

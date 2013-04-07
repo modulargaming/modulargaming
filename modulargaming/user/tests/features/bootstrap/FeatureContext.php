@@ -1,6 +1,7 @@
 <?php
 
 use Behat\Behat\Context\Step;
+use Behat\Behat\Event\SuiteEvent;
 
 //
 // Require 3rd-party libraries here:
@@ -17,6 +18,26 @@ require 'kohana.php';
  */
 class FeatureContext extends Behat\MinkExtension\Context\MinkContext
 {
+	/**
+	 * @BeforeSuite
+	 */
+	public static function prepare(SuiteEvent $event)
+	{
+		// Clear the user table.
+		$query = DB::delete('users')
+			->execute();
+
+		// Setup the test user for login.
+		$user = new Model_User;
+		$user->username = 'username';
+		$user->password = 'password';
+		$user->email = 'username@test.com';
+		$user->timezone_id = 1;
+		$user->create();
+
+		$user->add('roles', Model_Role::LOGIN);
+	}
+
 	/**
 	 * Initializes context.
 	 * Every scenario gets it's own context object.
