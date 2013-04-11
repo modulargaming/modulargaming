@@ -53,4 +53,32 @@ return array
 		'charset'      => 'utf8',
 		'caching'      => FALSE,
 	),
+	// Connection details for "testing" database,
+	// WARNING: Do not use the same details as default, the tests runs many queries that will/may destroy your data.
+	'test' => array
+	(
+		'type'       => 'MySQL',
+		'connection' => array(
+			/**
+			 * The following options are available for MySQL:
+			 *
+			 * string   hostname     server hostname, or socket
+			 * string   database     database name
+			 * string   username     database username
+			 * string   password     database password
+			 * boolean  persistent   use persistent connections?
+			 * array    variables    system variables as "key => value" pairs
+			 *
+			 * Ports and sockets may be appended to the hostname.
+			 */
+			'hostname' => 'localhost',
+			'database' => 'mg-test',
+			'username' => 'root',
+			'password' => 'password',
+			'persistent' => FALSE,
+		),
+		'table_prefix' => '',
+		'charset'      => 'utf8',
+		'caching'      => FALSE,
+	),
 );
