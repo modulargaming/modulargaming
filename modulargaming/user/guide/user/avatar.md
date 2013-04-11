@@ -78,7 +78,7 @@ class Avatar_Gravatar extends Avatar {
 ~~~
 
 `data` is used for generating the save information, with gravatar we only have to save the Class name, but there
-are other use cases, such as the gallery driver where we need to store the selected avatar's id.
+are other use cases, such as the [gallery driver](../../guide-api/Avatar_Gallery#data) where we need to store the selected avatar's id.
 
 `url` is selfexplaining, it generates the avatar url, in this case we hash the user email with md5.
 
@@ -109,3 +109,5 @@ As you can see, we only need the bare essential for a view, the template is like
 And we are done, you should now have something that looks like this at user settings, be sure to
 enable the driver in the config.
 ![Gravatar result](gravatar.png)
+
+Be sure to check out the other avatar drivers in the module for more code examples.
