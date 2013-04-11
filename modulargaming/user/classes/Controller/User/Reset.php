@@ -2,7 +2,7 @@
 /**
  * Controller for recovering the username OR password.
  *
- * @package    MG User
+ * @package    MG/User
  * @category   Controller
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team

@@ -2,7 +2,7 @@
 /**
  * View a users public profile.
  *
- * @package    Modular Gaming
+ * @package    MG/User
  * @category   Controller
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team
