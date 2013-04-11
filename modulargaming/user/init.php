@@ -1,5 +1,12 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
+Route::set('user.dashboard', 'user/dashboard')
+	->defaults(array(
+	'directory'  => 'User',
+	'controller' => 'Dashboard',
+	'action'     => 'index',
+));
+
 Route::set('user.profile', 'user/profile(/<id>(/<page>))', array('id' => '[0-9]+', 'page' => '[0-9]+'))
 	->defaults(array(
 	'directory'  => 'User',
@@ -18,6 +25,13 @@ Route::set('user.login', 'user/login')
 	->defaults(array(
 	'directory'  => 'User',
 	'controller' => 'Login',
+	'action'     => 'index',
+));
+
+Route::set('user.logout', 'user/logout')
+	->defaults(array(
+	'directory'  => 'User',
+	'controller' => 'Logout',
 	'action'     => 'index',
 ));
 

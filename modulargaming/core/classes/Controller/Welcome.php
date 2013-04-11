@@ -14,7 +14,7 @@ class Controller_Welcome extends Abstract_Controller_Frontend {
 	{
 		if ($this->auth->logged_in())
 		{
-			$this->redirect(Route::get('user')->uri());
+			$this->redirect(Route::get('user.dashboard')->uri());
 		}
 
 		$this->view = new View_Welcome;

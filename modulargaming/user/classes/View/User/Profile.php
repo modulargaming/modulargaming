@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_User_Profile extends Abstract_View {
+class View_User_Profile extends Abstract_View_User {
 
 	/**
 	 * @var Model_User the profile user
@@ -31,6 +31,17 @@ class View_User_Profile extends Abstract_View {
 			'about'      => $user->get_property('about'),
 			'signature'  => $user->get_property('signature')
 		);
+	}
+
+	protected function get_breadcrumb()
+	{
+		$user = $this->user;
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => $user->username,
+				'href'  => Route::url('user.profile', array('id' => $user->id))
+			)
+		));
 	}
 
 }

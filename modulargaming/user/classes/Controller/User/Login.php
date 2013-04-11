@@ -24,7 +24,7 @@ class Controller_User_Login extends Abstract_Controller_User {
 			if ($this->auth->login($post['username'], $post['password'], isset($post['remember'])))
 			{
 				Hint::success(Kohana::message('user', 'login.success'));
-				$this->redirect(Route::get('user')->uri());
+				$this->redirect(Route::get('user.dashboard')->uri());
 			}
 			else
 			{

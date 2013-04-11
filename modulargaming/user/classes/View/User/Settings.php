@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_User_Settings extends Abstract_View {
+class View_User_Settings extends Abstract_View_User {
 
 	/**
 	 * @var Settings
@@ -22,6 +22,17 @@ class View_User_Settings extends Abstract_View {
 			$first = FALSE;
 		}
 		return $settings;
+	}
+
+	protected function get_breadcrumb()
+	{
+		
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Settings',
+				'href'  => Route::url('user.settings')
+			)
+		));
 	}
 
 
