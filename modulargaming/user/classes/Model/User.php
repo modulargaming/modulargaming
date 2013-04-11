@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-
+/**
+ * User Model.
+ *
+ * @package    MG/User
+ * @category   Model
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Model_User extends Model_Auth_User implements Model_ACL_User, Interface_Property {
 
 	protected $_table_columns = array(

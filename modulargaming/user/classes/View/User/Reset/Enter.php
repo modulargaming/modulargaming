@@ -2,7 +2,7 @@
 /**
  * View for entering the new password.
  *
- * @package    Modular Gaming/User
+ * @package    MG/User
  * @category   View
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team

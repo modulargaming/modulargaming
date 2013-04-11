@@ -2,7 +2,7 @@
 /**
  * Abstract base view for user.
  *
- * @package    MG User
+ * @package    MG/User
  * @category   View
  * @author     Modular Gaming Team
  * @copyright  (c) 2013 Modular Gaming Team

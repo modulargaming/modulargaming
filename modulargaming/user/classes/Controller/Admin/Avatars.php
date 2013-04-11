@@ -1,13 +1,12 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Item Avatar admin controller
  *
- * Manage site item types
  *
- * @package    ModularGaming/Items
- * @category   Admin
- * @author     Maxim Kerstens
- * @copyright  (c) Modular gaming
+ * @package    MG/User
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
  */
 class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 

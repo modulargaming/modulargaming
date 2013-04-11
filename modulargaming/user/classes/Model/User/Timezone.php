@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-
+/**
+ * User timezone model, contains all timezones a user can use.
+ *
+ * @package    MG/User
+ * @category   Model
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Model_User_Timezone extends ORM {
 
 	protected $_table_columns = array(

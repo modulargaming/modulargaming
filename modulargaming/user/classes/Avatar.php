@@ -2,7 +2,7 @@
 /**
  * Abstract avatar class.
  *
- * @package    Modular Gaming
+ * @package    MG/User
  * @category   Avatar
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team

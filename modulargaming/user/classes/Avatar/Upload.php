@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
- 
+/**
+ * Upload custom avatar.
+ *
+ * @package    MG/User
+ * @category   Avatar
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Avatar_Upload extends Avatar {
 
 	public $id = 'upload';

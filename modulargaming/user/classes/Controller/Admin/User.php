@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ *
+ *
+ * @package    MG/User
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Controller_Admin_User extends Abstract_Controller_Admin {
 
 	public function before()

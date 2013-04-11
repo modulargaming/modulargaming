@@ -2,8 +2,8 @@
 /**
  * Settings list
  *
- * @package    Modular Gaming
- * @category   User
+ * @package    MG/User
+ * @category   Setting
  * @author     Modular Gaming Team
  * @copyright  (c) 2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license

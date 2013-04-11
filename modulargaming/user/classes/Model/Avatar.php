@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-
+/**
+ * Avatar model, used for gallery.
+ *
+ * @package    MG/User
+ * @category   Model
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class Model_Avatar extends ORM {
 
 	protected $_belongs_to = array(

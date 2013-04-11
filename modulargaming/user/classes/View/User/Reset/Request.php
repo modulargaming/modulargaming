@@ -2,7 +2,7 @@
 /**
  * View for entering the email of the user to request a password reset.
  *
- * @package    Modular Gaming/User
+ * @package    MG/User
  * @category   View
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team
