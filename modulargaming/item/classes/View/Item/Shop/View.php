@@ -65,12 +65,12 @@ class View_Item_Shop_View extends Abstract_View_Inventory {
 				'title' => 'Shop',
 				'href'  => Route::url('item.user_shop.index')
 			),
-			/**
+			
 			array(
-			'title' => $shop->id,
-			'href'  => Route::url('item.user_shop.view', array('id' => $shop->id))
+			'title' => $shop['title'],
+			'href'  => Route::url('item.user_shop.view', array('id' => $shop['id']))
 			)
-			 **/
+			 
 		));
 	}
 }

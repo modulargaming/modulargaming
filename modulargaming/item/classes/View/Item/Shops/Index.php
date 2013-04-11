@@ -31,4 +31,14 @@ class View_Item_Shops_Index extends Abstract_View {
 
 		return $list;
 	}
+
+	protected function get_breadcrumb()
+	{
+		return array_merge(parent::get_breadcrumb(), array(
+			array(
+				'title' => 'Shops',
+				'href'  => Route::url('item.shops.index')
+			)
+		));
+	}
 }
