@@ -20,6 +20,9 @@ class Controller_User_Settings extends Abstract_Controller_User {
 		$settings->add_setting(new Setting_Profile($this->user));
 		$settings->add_setting(new Setting_Account($this->user));
 
+		// Run the events.
+		Event::fire('user.settings', array($this->user, $settings));
+
 		if ($this->request->method() == HTTP_Request::POST)
 		{
 			$setting = $settings->get_by_id($this->request->post('settings-tab'));

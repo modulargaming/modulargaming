@@ -6,7 +6,7 @@ User is a complete user managment module, a few of the features it provides are:
  * Login/Logout
  * Password reset
  * User profile
- * User settings
+ * [User settings](setting)
  * [Avatar system](avatar)
  * [User Properties](property) (Key/Value storage)
 
