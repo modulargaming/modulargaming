@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 class HTTP_Exception extends Kohana_HTTP_Exception {
-
 	/**
 	* Generate a Response for all Exceptions without a more specific override
 	*
@@ -10,6 +9,9 @@ class HTTP_Exception extends Kohana_HTTP_Exception {
 	*
 	* @return Response
 	*/
+	/**
+	 * Run CSRF check and load frontend assets.
+	 */
 	public function get_response()
 	{
 		// Lets log the Exception, Just in case it's important!
@@ -23,6 +25,9 @@ class HTTP_Exception extends Kohana_HTTP_Exception {
 
 		$response = Response::factory();
 
+		$assets = Kohana::$config->load('assets.global');
+		$this->_load_assets($assets);
+
 		$view = new View_Error;
 		$view->title = $this->getCode();
 		$view->message = $this->getMessage();
@@ -31,5 +36,18 @@ class HTTP_Exception extends Kohana_HTTP_Exception {
 		$response->body($renderer->render($view));
 
 		return $response;
-    }
+	}
+	protected function _load_assets($config)
+	{
+		if (isset($config['head']))
+		{
+			Assets::factory('head')->load($config['head']);
+		}
+
+		if (isset($config['body']))
+		{
+			Assets::factory('body')->load($config['body']);
+		}
+
+	}
 }
