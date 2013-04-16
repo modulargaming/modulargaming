@@ -45,7 +45,7 @@ class Controller_Game_Rockpaperscissors extends Abstract_Controller_Game {
 				$post = $this->request->post();
 				if (isset($post['collect']) AND $game->winnings)
 				{
-					$this->user->set_property('points', $this->user->get_property('points', 200) + $game->winnings);
+					$this->user->set_property('points', $this->user->get_property('points', 2000) + $game->winnings);
 					$this->user->save();
 					$game->winnings = 0;
 					$game->plays ++;

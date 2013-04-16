@@ -110,7 +110,7 @@ abstract class Abstract_View {
 
 		$user['last_login'] = Date::format($user['last_login']);
 		$user['created'] = Date::format($user['created']);
-		$user['points'] = $this->_user->get_property('points', 200);
+		$user['points'] = $this->_user->get_property('points', 2000);
 
 		return $user;
 	}
