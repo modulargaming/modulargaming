@@ -2,7 +2,7 @@
 
 class View_Item_Shops_View extends Abstract_View {
 
-	public $title = 'Shop';
+	public $title = 'Shops';
 
 	/**
 	 * Store the shop's id for routing
