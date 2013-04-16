@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 /**
- * "item types seed"
+ * "item shops seed"
  */
 class Migration_Item_20130416092400 extends Minion_Migration_Base {
 
