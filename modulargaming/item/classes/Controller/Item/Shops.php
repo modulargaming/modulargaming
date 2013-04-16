@@ -79,14 +79,15 @@ class Controller_Item_Shops extends Abstract_Controller_Frontend {
 			{
 				Hint::error('The item you tried to buy has already been sold.');
 			}
-			elseif ($item->price > $this->user->points)
+			elseif ($item->price > $this->user->get_property('points', 200))
 			{
 				Hint::error('You don\'t have enough points to buy ' . $item->item->name);
 			}
 			else
 			{
 				//retract the points
-				$this->user->points -= $item->price;
+
+				$this->user->set_property('points', $this->user->get_property('points', 200) - $item->price);
 				$this->user->save();
 
 				//send over the item
