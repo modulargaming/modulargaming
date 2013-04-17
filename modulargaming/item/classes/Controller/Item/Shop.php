@@ -20,7 +20,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 		$shop = $this->_check_shop();
 
-		if ($shop == FALSE)
+		if ($shop->loaded() == FALSE)
 		{
 			$this->redirect(Route::get('item.user_shop.create')->uri());
 		}
@@ -39,7 +39,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 		$shop = $this->_check_shop();
 
 		//if the user already has a shop redirect to index
-		if ($shop == TRUE)
+		if ($shop->loaded() == TRUE)
 		{
 			$this->redirect(Route::get('item.user_shop.index')->uri());
 		}
@@ -73,7 +73,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 		$shop = $this->_check_shop();
 
 		//if the user already has a shop redirect to index
-		if ($shop == TRUE)
+		if ($shop->loaded() == TRUE)
 		{
 			$this->redirect(Route::get('item.user_shop.index')->uri());
 		}
@@ -104,12 +104,12 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 	{
 
 		$points = Kohana::$config->load('items.points');
-		$initial_points = $points['value'];
+		$initial_points = $points['initial'];
 
 		$shop = $this->_check_shop();
 
 		//if the user already has a shop redirect to index
-		if ($shop == TRUE)
+		if ($shop->loaded() == TRUE)
 		{
 			$this->redirect(Route::get('item.user_shop.index')->uri());
 		}
