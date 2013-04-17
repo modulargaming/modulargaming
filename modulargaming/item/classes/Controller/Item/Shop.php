@@ -34,6 +34,8 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 	public function action_upgrade()
 	{
+		$points = Kohana::$config->load('items.points');
+		$initial_points = $points['initial'];
 		$shop = $this->_check_shop();
 
 		//if the user already has a shop redirect to index
@@ -47,9 +49,9 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 		//if the shops are upgradeable
 		if ($config['active'] == TRUE)
 		{
-			if ($this->user->get_property('points', 2000) >= $config['unit_cost'])
+			if ($this->user->get_property('points', $initial_points) >= $config['unit_cost'])
 			{
-				$this->user->set_property('points', $this->user->get_property('points', 2000) - $config['unit_cost']);
+				$this->user->set_property('points', $this->user->get_property('points', $initial_points) - $config['unit_cost']);
 				$this->user->save();
 
 				$this->_shop->size = $this->_shop->size + 1;
@@ -100,6 +102,10 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 	public function action_create()
 	{
+
+		$points = Kohana::$config->load('items.points');
+		$initial_points = $points['value'];
+
 		$shop = $this->_check_shop();
 
 		//if the user already has a shop redirect to index
@@ -124,15 +130,14 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 				if ($config['creation_cost'] != FALSE || $config['creation_cost'] > 0)
 				{
-					if ($this->user->get_property('points', 2000) < $config['creation_cost'])
+					if ($this->user->get_property('points', $initial_points) < $config['creation_cost'])
 					{
 						Hint::error('You can\'t afford to open a shop!');
 
 						return $this->redirect(Route::get('item.user_shop.create')->uri());
 					}
 
-					//$this->user->get_property('points', 2000) - $config['creation_cost'];
-					$this->user->set_property('points', $this->user->get_property('points', 2000) - $config['creation_cost']);
+					$this->user->set_property('points', $this->user->get_property('points', $initial_points) - $config['creation_cost']);
 					$this->user->save();
 				}
 
@@ -159,7 +164,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 		if ($config['creation_cost'] != FALSE || $config['creation_cost'] > 0)
 		{
-			$this->view->creation = array('cost' => $config['creation_cost'], 'affordable' => ($this->user->get_property('points', 2000) < $config['creation_cost']));
+			$this->view->creation = array('cost' => $config['creation_cost'], 'affordable' => ($this->user->get_property('points', $initial_points) < $config['creation_cost']));
 		}
 	}
 
@@ -288,7 +293,7 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			}
 			else if ($amount > 0)
 			{
-				$this->user->set_property('points', $this->user->get_property('points', 2000) + $amount);
+				$this->user->set_property('points', $this->user->get_property('points', $initial_points) + $amount);
 				$this->user->save();
 
 				$this->_shop->till = $this->_shop->till - $amount;
@@ -341,13 +346,13 @@ class Controller_Item_Shop extends Abstract_Controller_Frontend {
 			{
 				Hint::error('This item is not in stock');
 			}
-			else if ($this->user->get_property('points', 2000) < $item->parameter)
+			else if ($this->user->get_property('points', $inital_points) < $item->parameter)
 			{
 				Hint::error(__('You don\'t have enough :currency to buy a ":item_name"', array(':item_name' => $item->item->name)));
 			}
 			else
 			{
-				$this->user->set_property('points', $this->user->get_property('points', 2000) - $item->parameter);
+				$this->user->set_property('points', $this->user->get_property('points', $initial_points) - $item->parameter);
 				$this->user->save();
 
 				//log this action

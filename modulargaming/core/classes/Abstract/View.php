@@ -106,11 +106,14 @@ abstract class Abstract_View {
 	 */
 	public function player()
 	{
+		$points = Kohana::$config->load('items.points');
+		$initial_points = $points['value'];
+
 		$user = $this->_user->as_array();
 
 		$user['last_login'] = Date::format($user['last_login']);
 		$user['created'] = Date::format($user['created']);
-		$user['points'] = $this->_user->get_property('points', 2000);
+		$user['points'] = $this->_user->get_property('points', $initial_points);
 
 		return $user;
 	}

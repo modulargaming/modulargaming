@@ -5,6 +5,10 @@ class Controller_Game_Rockpaperscissors extends Abstract_Controller_Game {
 
 	public function action_index()
 	{
+
+		$points = Kohana::$config->load('items.points');
+		$initial_points = $points['initial'];
+
 		$this->view = new View_Game_Rockpaperscissors;
 		$game = ORM::factory('Game')
 			->where('game_id', '=', 1)
@@ -45,7 +49,7 @@ class Controller_Game_Rockpaperscissors extends Abstract_Controller_Game {
 				$post = $this->request->post();
 				if (isset($post['collect']) AND $game->winnings)
 				{
-					$this->user->set_property('points', $this->user->get_property('points', 2000) + $game->winnings);
+					$this->user->set_property('points', $this->user->get_property('points', $initial_points) + $game->winnings);
 					$this->user->save();
 					$game->winnings = 0;
 					$game->plays ++;

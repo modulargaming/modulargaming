@@ -1,6 +1,11 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 return array(
+
+	'points' => array(
+		'initial' => 2000
+		),
+
 	'image' => array(
 		'width' => 80,
 		'height' => 80,
