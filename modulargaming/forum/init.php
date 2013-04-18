@@ -46,6 +46,7 @@ Route::set('forum.admin.index', 'admin/forum')
 	'action'     => 'index',
 ));
 
+
 Route::set('forum.admin.search', 'admin/forum/search')
 	->defaults(array(
 	'directory'  => 'Admin',

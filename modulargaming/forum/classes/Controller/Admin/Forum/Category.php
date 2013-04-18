@@ -33,14 +33,14 @@ class Controller_Admin_Forum_Category extends Abstract_Controller_Admin {
 				$orm = ORM::factory('Forum_Category');
 
 				$paginate = Paginate::factory($orm)
-					->columns(array('id', 'name', 'locked'));
+					->columns(array('id', 'title', 'locked'));
 
 				$datatables = DataTables::factory($paginate)->execute();
 
 				foreach ($datatables->result() as $category)
 				{
 					$datatables->add_row(array (
-							$category->name,
+							$category->title,
 							$category->locked,
 							$category->id
 						)
@@ -68,7 +68,7 @@ class Controller_Admin_Forum_Category extends Abstract_Controller_Admin {
 			if ($category_id == NULL)
 			{
 				$category = ORM::factory('Forum_Category')
-					->where('forum_category.name', '=', $this->request->query('name'))
+					->where('forum_category.title', '=', $this->request->query('title'))
 					->find();
 			}
 			else
@@ -78,9 +78,8 @@ class Controller_Admin_Forum_Category extends Abstract_Controller_Admin {
 
 			$list = array(
 				'id'          => $category->id,
-				'name'        => $category->name,
+				'title'        => $category->title,
 				'description' => $category->description,
-				'image'       => $category->image,
 				'locked'      => $category->locked
 			);
 			$this->response->headers('Content-Type', 'application/json');
@@ -108,13 +107,13 @@ class Controller_Admin_Forum_Category extends Abstract_Controller_Admin {
 			try
 			{
 				$category = ORM::factory('Forum_Category', $values['id']);
-				$category->values($values, array('name', 'description', 'locked', 'image'));
+				$category->values($values, array('title', 'description', 'locked'));
 				$category->save();
 
 				$data = array(
 					'action' => 'saved',
 					'row'    => array(
-						$category->name,
+						$category->title,
 						$category->locked,
 						$category->id
 					)
