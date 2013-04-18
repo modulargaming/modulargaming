@@ -12,7 +12,7 @@ class View_Admin_Forum_Category_Index extends Abstract_View_Admin {
 		{
 			$categories[] = array(
 				'id'          => $category->id,
-				'name'        => $category->name,
+				'title'        => $category->title,
 				'description' => $category->description,
 				'locked'      => (boolean) $category->locked
 			);
