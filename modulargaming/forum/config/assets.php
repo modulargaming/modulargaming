@@ -10,5 +10,18 @@ return array (
 				)
 			)
 		)
-	)
+	),
+
+		'admin_forum' => array(
+			'category' => array(
+				'body' => array(
+					'js' => array(
+						array(
+							'name' => 'forum.category',
+							'file' => 'admin/forum/category.js'
+						)
+					)
+				),
+			),
+		)
 );
