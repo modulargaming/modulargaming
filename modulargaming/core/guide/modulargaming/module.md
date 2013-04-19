@@ -67,3 +67,5 @@ able between different apps. For example, creating a new modeling system, a sear
 * Finally enable your module by adding it to application/bootstrap.php
 
 		'module'    => MGPATH.'module',		
+
+* You can now access your module using /module
