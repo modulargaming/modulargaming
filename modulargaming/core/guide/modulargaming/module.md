@@ -1,8 +1,6 @@
 # Writing a module for Modular Gaming
 
-Modules are simply an addition to the Cascading Filesystem. A module can add any kind of file (controllers, views, classes, config files, etc.)
- to the filesystem available to Kohana (via Kohana::find_file). This is useful to make any part of your application more transportable or share
-able between different apps. For example, creating a new modeling system, a search engine, a css/js manager, etc.
+Modules are simply an addition to the [Cascading Filesystem](../kohana/files). A module can add any kind of file (controllers, views, classes, config files, etc.)
 
 ## Setup
 
