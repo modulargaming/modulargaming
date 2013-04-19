@@ -3,7 +3,12 @@
 class View_Tab_PetList extends Abstract_View_Tab {
 
 	/**
-	 * @var Array Pets
+	 * @var Model_User
+	 */
+	public $user;
+
+	/**
+	 * @var Model_User_Pet[]
 	 */
 	public $pets;
 
@@ -13,15 +18,20 @@ class View_Tab_PetList extends Abstract_View_Tab {
 		foreach ($this->pets as $pet)
 		{
 			$pets[] = array(
-				'src' => URL::base().'assets/img/pets/'.$pet->specie->id.'/'.$pet->colour->image,
-				'href' => Route::url('pet', array('name' => strtolower($pet->name))),
-				'name' => $pet->name,
+				'src'    => URL::base().'assets/img/pets/'.$pet->specie->id.'/'.$pet->colour->image,
+				'href'   => Route::url('pet', array('name' => strtolower($pet->name))),
+				'name'   => $pet->name,
 				'specie' => $pet->specie->name,
-				'colour' => $pet->colour->name,
-				'username' => $pet->user->username
+				'colour' => $pet->colour->name
 			);
 		}
 		return $pets;
+	}
+
+	public function user() {
+		return array(
+			'username' => $this->user->username
+		);
 	}
 
 }

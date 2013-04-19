@@ -10,7 +10,7 @@ class PetEvents {
 			->find_all();
 
 		$tab = new Tab('Pets');
-		$tab->add_content(new Tab_PetList($pets->as_array()));
+		$tab->add_content(new Tab_PetList($user, $pets->as_array()));
 
 		$tabs->add_tab($tab);
 	}

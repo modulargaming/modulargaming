@@ -9,22 +9,20 @@ class View_Pet_Profile extends Abstract_View {
 		$pet = $this->pet;
 
 		return array(
-			'id'      => $pet->id,
-			'created' => Date::format($pet->created),
-			'name'    => $pet->name,
-			'gender'  => $pet->gender,
-			'specie'    => $pet->specie,
-			'colour'  => $pet->colour,
-			'img' => $pet->img(),
-			'hunger'  => $pet->hunger,
+			'id'         => $pet->id,
+			'created'    => Date::format($pet->created),
+			'name'       => $pet->name,
+			'gender'     => $pet->gender,
+			'specie'     => $pet->specie,
+			'colour'     => $pet->colour,
+			'img'        => $pet->img(),
+			'hunger'     => $pet->hunger,
 			'happiness'  => $pet->happiness,
-			'user'    => array(
+			'user'       => array(
 				'username' => $pet->user->username,
-				'id'   => $pet->user->id,
-				'href' => Route::url('user.profile', array(
-					'id'     => $pet->user->id,
-				)),
-			),
+				'id'       => $pet->user->id,
+				'href'     => Route::url('user.profile', array('id' => $pet->user->id))
+			)
 		);
 	}
 
