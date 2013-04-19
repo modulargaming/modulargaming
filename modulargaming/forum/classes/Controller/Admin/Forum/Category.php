@@ -16,7 +16,7 @@ class Controller_Admin_Forum_Category extends Abstract_Controller_Admin {
 			$this->view = new View_Admin_Forum_Category_Index;
 			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 			$this->_load_assets(Kohana::$config->load('assets.admin_forum.category'));
-			$this->_nav('forum', 'category');
+//			$this->_nav('forum', 'category');
 			$this->view->categories = $categories->as_array();
 		}
 
