@@ -1,6 +1,6 @@
 # Writing a module for Modular Gaming
 
-Modules are simply an addition to the [Cascading Filesystem](../kohana/files). A module can add any kind of file (controllers, views, classes, config files, etc.)
+Modules are simply an addition to the [Cascading Filesystem](../kohana/files). A module can add any kind of file (controllers, views, models, classes, templates, config files, etc.)
 
 ## Setup
 
