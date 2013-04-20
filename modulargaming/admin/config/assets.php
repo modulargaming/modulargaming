@@ -27,6 +27,14 @@ return array(
 		'body' => array(
 			'js' => array(
 				array(
+					'name' => 'jquery',
+					'file'  => 'libs/jquery-1.9.0.min.js'
+				),
+				array(
+					'name' => 'bootstrap',
+					'file'  => 'libs/bootstrap.min.js'
+				),
+				array(
 					'name'     => 'mustache',
 					'file'     => 'libs/mustache.js',
 					'location' => 'after',
