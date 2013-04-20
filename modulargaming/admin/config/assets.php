@@ -5,10 +5,22 @@ return array(
 		'head' => array(
 			'css' => array(
 				array(
+					'name' => 'bootstrap',
+					'file' => 'bootstrap.css'
+				),
+				array(
+					'name' => 'bootstrap.responsive',
+					'file'  => 'bootstrap-responsive.css'
+				),
+				array(
 					'name'     => 'bootstrap.notify',
 					'file'     => 'bootstrap-notify.css',
 					'location' => 'after',
 					'relative' => 'bootstrap'
+				),
+				array(
+					'name' => 'style',
+					'file'  => 'style.css'
 				)
 			)
 		),

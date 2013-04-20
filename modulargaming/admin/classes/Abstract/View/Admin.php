@@ -17,6 +17,16 @@ class Abstract_View_Admin extends Abstract_View {
 		return array_merge($list, $nav);
 	}
 
+	public function assets_head()
+	{
+		return Assets::factory('head_admin')->render();
+	}
+
+	public function assets_body()
+	{
+		return Assets::factory('body_admin')->render();
+	}
+
 	public function subnav()
 	{
 		$list = array();

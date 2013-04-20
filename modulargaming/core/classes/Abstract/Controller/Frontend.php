@@ -28,9 +28,11 @@ abstract class Abstract_Controller_Frontend extends Controller {
 		parent::before();
 
 		$this->_validate_csrf();
-
-		$assets = Kohana::$config->load('assets.global');
-		$this->_load_assets($assets);
+		if ($this->layout == 'layout')
+		{
+			$assets = Kohana::$config->load('assets.global');
+			$this->_load_assets($assets);
+		}
 	}
 
 	/**

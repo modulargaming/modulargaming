@@ -36,4 +36,18 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 		}
 	}
 
+	protected function _load_assets($config)
+	{
+		if (isset($config['head']))
+		{
+			Assets::factory('head_admin')->load($config['head']);
+		}
+
+		if (isset($config['body']))
+		{
+			Assets::factory('body_admin')->load($config['body']);
+		}
+
+	}
+
 }
