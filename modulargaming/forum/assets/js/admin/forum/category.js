@@ -5,7 +5,7 @@
 $(document).ready(function() {
     $('#data-table').CRUD({
         base_url: './category/',
-        identifier: {data: 'name', table: 1},
+        identifier: {data: 'title', table: 1},
         dataTable: {
             "aoColumnDefs": [
                 {
