@@ -1,11 +1,11 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 
-class Controller_Game_Rockpaperscissors extends Abstract_Controller_Game {
+class Controller_Game_RockPaperScissors extends Abstract_Controller_Game {
 
 	public function action_index()
 	{
-		$this->view = new View_Game_Rockpaperscissors;
+		$this->view = new View_Game_RockPaperScissors;
 		$game = ORM::factory('Game')
 			->where('game_id', '=', 1)
 			->where('user_id', '=', $this->user->id)
@@ -35,7 +35,7 @@ class Controller_Game_Rockpaperscissors extends Abstract_Controller_Game {
 				{
 					$game->collect_winnings();
 					Hint::success('You have collected your winnings');
-					$this->redirect(Route::url('game', array('controller' => 'rockpaperscissors')));
+					$this->redirect(Route::url('games.rock-paper-scissors'));
 				}
 				$validation = Validation::factory($post)
    						 ->rule('move', 'not_empty')
