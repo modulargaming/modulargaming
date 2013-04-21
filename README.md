@@ -31,7 +31,7 @@ Released under a [BSD license](http://www.modulargaming.com/license), Modular Ga
 
 Download Modular Gaming from Github.
 
-	$ git clone git@github.com:hinton/mg.git --recursive
+	$ git clone git@github.com:modulargaming/modulargaming.git --recursive
 
 ### Step 2: Configuration of Database
 
