@@ -1,18 +1,16 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Game_Rockpaperscissors extends Abstract_View_Game {
+class View_Game_RockPaperScissors extends Abstract_View_Game {
 
-	public $title = 'Rock-paper-scissors';
+	public $title = 'Rock Paper Scissors';
 
 	public function get_breadcrumb()
 	{
 		return array_merge(parent::get_breadcrumb(), array(
 			array(
-				'title' => 'Rock-paper-scissors',
-				'href'  => Route::url('game', array(
-					'controller' => 'rockpaperscissors',
-				))
-			)
+				'title' => 'Rock Paper Scissors',
+				'href'  => Route::url('games.rock-paper-scissors'
+			))
 		));
 	}
 
