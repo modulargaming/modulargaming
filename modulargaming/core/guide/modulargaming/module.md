@@ -24,14 +24,14 @@ Modules are simply an addition to the [Cascading Filesystem](../kohana/files). A
 
 		<?php defined('SYSPATH') OR die('No direct script access.');
 
-		class Controller_User_Dashboard extends Abstract_Controller_User {
+		class Controller_Module_Welcome extends Abstract_Controller_Frontend {
 	
 			/**
 			 * Show the user dashboard.
 		 	*/
 			public function action_index()
 			{
-				$this->view = new View_User_Dashboard;
+				$this->view = new View_Module_Welcome;
 				$this->view->hello_world = 'Hello World';
 			}
 
