@@ -36,14 +36,14 @@
 				$orm = ORM::factory('User');
 
 				$paginate = Paginate::factory($orm)
-					->columns(array('id', 'name'));
+					->columns(array('id', 'username'));
 
 				$datatables = DataTables::factory($paginate)->execute();
 
 				foreach ($datatables->result() as $user)
 				{
 					$datatables->add_row(array (
-							$user->name,
+							$user->username,
 							$user->id
 						)
 					);
@@ -79,7 +79,7 @@
 			}
 
 			$list = array(
-				'name'        => $user->name,
+				'name'        =>  $user->username,
 				'id'          => $user->id,
 			);
 			$this->response->headers('Content-Type', 'application/json');
@@ -114,7 +114,7 @@
 					'action' => 'saved',
 					'row'    => array(
 						$user->id,
-						$user->name
+						 $user->username
 					)
 				);
 				$this->response->body(json_encode($data));
