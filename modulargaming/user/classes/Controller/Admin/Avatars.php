@@ -121,6 +121,10 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 				$check[] = 'img';
 			}
 
+			if ( !isset($values['default']))
+			{
+				$values['default'] = FALSE;
+			}
 			$values['default'] = ($values['default'] == 'on');
 
 			$avatar = ORM::factory('Avatar', $values['id']);
