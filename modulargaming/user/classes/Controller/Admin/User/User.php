@@ -19,7 +19,7 @@
 			$this->view = new View_Admin_User_User_Index;
 			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 			$this->_load_assets(Kohana::$config->load('assets.admin_user.user'));
-			$this->_nav('user', 'index');
+			$this->_nav('users', 'user');
 			$this->view->users = $users->as_array();
 			$this->view->roles = $roles->as_array();
 		}
