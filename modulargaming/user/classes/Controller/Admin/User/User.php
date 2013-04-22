@@ -215,6 +215,6 @@
 			$user->add('roles', $r);
 
 			$this->response->headers('Content-Type', 'application/json');
-			$this->response->body(json_encode($file));
+			$this->response->body(json_encode(array('status' => 'success', 'msg' => 'Role added to user')));
 		}
 	}
