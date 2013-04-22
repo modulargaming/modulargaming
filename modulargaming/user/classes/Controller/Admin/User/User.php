@@ -70,7 +70,7 @@
 			if ($item_id == NULL)
 			{
 				$user = ORM::factory('User')
-					->where('user.name', '=', $this->request->query('name'))
+					->where('user.username', '=', $this->request->query('username'))
 					->find();
 			}
 			else
@@ -79,7 +79,7 @@
 			}
 
 			$list = array(
-				'name'        =>  $user->username,
+				'username'        =>  $user->username,
 				'id'          => $user->id,
 			);
 			$this->response->headers('Content-Type', 'application/json');
@@ -107,7 +107,7 @@
 			try
 			{
 				$user = ORM::factory('User', $values['id']);
-				$user->values($values, array('name', 'description', 'dir'));
+				$user->values($values, array('username', 'email'));
 				$user->save();
 
 				$data = array(
