@@ -1,5 +1,16 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
+/**
+ * Date helper.
+ *
+ * @package    Modular Gaming
+ * @category   Helpers
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
+
+
 class Date extends Kohana_Date {
 
 	/**

@@ -3,17 +3,11 @@
  *
  *
  * @package    MG/User
- * @category   View
+ * @category   Policy
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class View_Admin_User_Edit extends Abstract_View_Admin {
-
-	public $_partials = array(
-		'modal' => 'Admin/Modal/Edit'
-	);
-
-	public $user;
+class Policy_Admin_User_User_Role extends Policy_Admin_User_User {
 
 }

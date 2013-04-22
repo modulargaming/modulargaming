@@ -1,0 +1,145 @@
+<span class="hide" id="csrf">{{csrf}}</span>
+
+<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="crud-container">
+	<thead>
+		<tr>
+			<th class="span2">Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="3" class="dataTables_empty">Loading data from server</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3"><button class="btn btn-success pull-right btn-create">Create User</button></td>
+		</tr>
+	</tfoot>
+</table>
+
+{{! Role modal}}
+
+<div class="modal hide fade" id="modal-crud">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<a href="#" id="option-delete" class="btn pull-right hide modal-options" style="margin-right: 15px;">Delete</a>
+		<div class="btn-group pull-right hide" id="modal-crud-errors" style="margin-right: 15px;">
+			<a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+		    	<i class="icon-exclamation-sign icon-white"> </i> Errors
+		    	<span class="caret"></span>
+		  	</a>
+		  	<ul class="dropdown-menu" id="modal-crud-error-list">
+		    	<!-- error messages -->
+		  	</ul>
+		</div>
+		<h3 id="modal-header"></h3>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal" id="modal-crud-form">		
+			<input type="hidden" id="csrf" name="csrf" value="{{csrf}}" />
+			<input type="hidden" name="id" value="" id="input-id" />
+					
+			<div class="control-group">
+				<label class="control-label" for="input-name">Name</label>
+	
+				<div class="controls">
+					<input type="text" class="input-medium" id="input-name" name="name" value="" maxlength="35">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-success" id="modal-crud-save">Save</button>
+	</div>
+</div>
+
+{{!role modal}}
+<div class="modal hide fade" id="modal-role">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3>Roles</h3>
+	</div>
+	<div class="modal-body">
+		<button class="btn btn-success pull-right" id="add-role">Add role</button>
+		<form id="role-form">
+		<input type="hidden" id="csrf" name="csrf" value="{{csrf}}" />
+		<input type="hidden" name="user_id" id="user-id" />
+		<select id="role-list-options" name="role">
+		</select>
+		</form>
+		
+		<table class="table" id="role-list">
+			<thead>
+				<th class="span2">Name</th>
+				<th class="span1"></th>
+			</thead>
+			<tbody>
+				<td></td>
+				<td></td>
+			</tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal">Done</button>
+	</div>
+</div>
+
+{{! User role modal}}
+<div class="modal hide fade" id="modal-role-add">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3>Add <span id="add-role-name"></span></h3>
+	</div>
+	<div class="modal-body">
+		<form id="add-role-form" class="form-horizontal">
+		    <input type="hidden" id="csrf" name="csrf" value="{{csrf}}" />
+		    <input type="hidden" name="user_id" id="add-user-id" />
+		    <input type="hidden" name="role_id" id="add-role-id" />
+		    <div class="control-group">
+        	    <label class="control-label" for="input-image">Image name</label>
+
+        		<div class="controls">
+        				<div class="fileupload fileupload-new" data-provides="fileupload" id="input-image">
+        					<div class="fileupload-new thumbnail" style="width: {{image_dim.width}}px; height: {{image_dim.height}}px;">
+        				  		<img src="http://www.placehold.it/{{image_dim.width}}x{{image_dim.height}}" />
+        				  	</div>
+        				 	<div class="fileupload-preview fileupload-exists thumbnail" style="width: {{image_dim.width}}px; height: {{image_dim.height}}px;"></div>
+        				  	<span class="btn btn-file">
+        				  		<span class="fileupload-new">Select image</span>
+        				  		<span class="fileupload-exists">Change</span>
+        				  		<input type="file" />
+        				  	</span>
+        				  	<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+        				</div>
+        		</div>
+        	</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+	    <div class="progress progress-striped active span8 hide">
+            <div id="modal-footer-upload-progress" class="bar bar-success" style="width: 1%;"></div>
+        </div>
+		<button class="btn" data-dismiss="modal">Return</button>
+		<button class="btn btn-success" id="modal-role-add-done">Complete</button>
+	</div>
+</div>
+
+{{! Delete modal}}
+<div class="modal hide fade" id="modal-delete">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3>Delete</h3>
+	</div>
+	<div class="modal-body">
+		Are you sure you want to delete <strong id="modal-delete-name"></strong>?
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-danger" id="btn-remove">Delete</button>
+		<button class="btn" data-dismiss="modal" id="modal-delete-keep">Keep the <span id="modal-delete-type"></span></button>
+	</div>
+</div>
+<div class="notifications bottom-right" id="crud-notify"></div>
+<script type="text/javascript">
+var user_roles = {{& user_roles}};
+</script>

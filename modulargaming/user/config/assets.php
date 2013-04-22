@@ -15,14 +15,27 @@ return array(
 			)
 		)
 	),
-	'admin_user' => array(
-		'body' => array(
-			'js' => array(
-				array(
-					'name' => 'user',
-					'file' => 'admin/user.js'
+		'admin_user' => array(
+			'user.2' => array(
+				'body' => array(
+					'js' => array(
+						array(
+							'name' => 'user.user',
+							'file' => 'admin/user/user.js'
+						)
+					)
 				),
 			),
-		),
-	)
+			'role' => array(
+				'body' => array(
+					'js' => array(
+						array(
+							'name' => 'user.role',
+							'file' => 'admin/user/role.js'
+						)
+					)
+				),
+			)
+		)
+
 );

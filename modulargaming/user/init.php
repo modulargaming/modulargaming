@@ -87,12 +87,103 @@ Route::set('item.admin.avatar.index', 'admin/avatar')
 	'action'     => 'index',
 ));
 
+Route::set('user.admin.index', 'Admin/User')
+	->defaults(array(
+	'directory'  => 'Admin',
+	'controller' => 'User',
+	'action'     => 'index',
+));
+Route::set('user.admin.search', 'admin/user/search')
+	->defaults(array(
+	'directory'  => 'Admin',
+	'controller' => 'User',
+	'action'     => 'search',
+));
+Route::set('user.admin.user.paginate', 'admin/user/user/paginate')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'User',
+	'action'     => 'paginate',
+));
+Route::set('user.admin.user.retrieve', 'admin/user/user/retrieve')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'User',
+	'action'     => 'retrieve',
+));
+Route::set('user.admin.user.delete', 'admin/user/user/remove')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'User',
+	'action'     => 'delete',
+));
+Route::set('user.admin.user.save', 'admin/user/user/save')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'User',
+	'action'     => 'save',
+));
+Route::set('user.admin.user.role.load', 'admin/user/user/role/load')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'User',
+	'action'     => 'role_load',
+));
+Route::set('user.admin.user.role.update', 'admin/user/user/role/update')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'User',
+	'action'     => 'role_update',
+));
+Route::set('user.admin.user.role.delete', 'admin/user/user/role/delete')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'User',
+	'action'     => 'role_delete',
+));
+Route::set('user.admin.user.index', 'admin/user/user')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'User',
+	'action'     => 'index',
+));
+Route::set('user.admin.role.paginate', 'admin/user/role/paginate')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'role',
+	'action'     => 'paginate',
+));
+Route::set('user.admin.role.retrieve', 'admin/user/role/retrieve')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'role',
+	'action'     => 'retrieve',
+));
+Route::set('user.admin.role.delete', 'admin/user/role/remove')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'role',
+	'action'     => 'delete',
+));
+Route::set('user.admin.role.save', 'admin/user/role/save')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'role',
+	'action'     => 'save',
+));
+Route::set('user.admin.role.index', 'admin/user/role')
+	->defaults(array(
+	'directory'  => 'Admin/User',
+	'controller' => 'role',
+	'action'     => 'index',
+));
+
 // Add link to manage users in admin
 Event::listen('admin.nav_list', function ()
 {
 	return array(
 		'title' => 'User',
-		'link'  => URL::site('admin/user'),
+		'link'  => URL::site('Admin/User'),
 		'icon'  => 'icon-user'
 	);
 });

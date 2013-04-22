@@ -8,6 +8,6 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Policy_Admin_User_Index extends Policy_Admin_User {
+class Policy_Admin_User_Role extends Policy_Admin_User {
 
 }
