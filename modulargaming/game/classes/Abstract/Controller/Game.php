@@ -14,13 +14,13 @@ class Abstract_Controller_Game extends Abstract_Controller_Frontend {
 	public function before()
 	{
 		parent::before();
-		$game = ORM::factory('Game')
+		$game = ORM::factory('User_Game')
 			->where('game_id', '=', $this->game_id)
 			->where('user_id', '=', $this->user->id)
 			->find();
 		if ( ! $game->loaded())
 		{
-			$game = ORM::factory('Game')
+			$game = ORM::factory('User_Game')
 				->create_game(
 					array(
 						'game_id' => $this->game_id,

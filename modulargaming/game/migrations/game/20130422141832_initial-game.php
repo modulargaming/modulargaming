@@ -3,7 +3,7 @@
 /**
  * Initial game
  */
-class Migration_Game_20130407173304 extends Minion_Migration_Base {
+class Migration_Game_20130422141832 extends Minion_Migration_Base {
 
 	/**
 	 * Run queries needed to apply this migration
@@ -13,7 +13,7 @@ class Migration_Game_20130407173304 extends Minion_Migration_Base {
 	public function up(Kohana_Database $db)
 	{
 		$db->query(NULL, "
-			CREATE TABLE IF NOT EXISTS `games` (
+			CREATE TABLE IF NOT EXISTS `user_games` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT,
 			  `game_id` int(11) NOT NULL,
 			  `user_id` int(11) NOT NULL,
@@ -32,7 +32,7 @@ class Migration_Game_20130407173304 extends Minion_Migration_Base {
 	 */
 	public function down(Kohana_Database $db)
 	{
-		$db->query(NULL, 'DROP TABLE games');
+		$db->query(NULL, 'DROP TABLE user_games');
 	}
 
 }

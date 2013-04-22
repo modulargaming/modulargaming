@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-class Model_Game extends ORM
+class Model_User_Game extends ORM
 {
 
 	protected $_table_columns = array(
