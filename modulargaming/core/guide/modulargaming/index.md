@@ -8,7 +8,7 @@ We are in the process of creating a open source [persistent browser based web ga
 
 We are building our framework using [Kohana](http://www.kohanaframework.org) which is an open source, 
 [object oriented](http://php.net/manual/en/language.oop5.php) 
-[(H)MVC](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller)
+[H](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller)[MVC](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
  web framework built using [PHP5](http://php.net/manual/en/intro-whatis.php) by a team of volunteers that aims to be 
 swift, secure, and small. We are using [Kohana 3.3](../kohana/) with many modules, including the following:
 
