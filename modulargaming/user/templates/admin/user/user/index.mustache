@@ -4,7 +4,7 @@
 	<thead>
 		<tr>
 			<th class="span2">Name</th>
-			<th class="span2">Options</th>
+			<th class="span3">Options</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -69,6 +69,10 @@
 		<select id="role-list-options" name="role">
 		</select>
 		</form>
+		<form id="add-role-form" class="hide">
+		<input type="hidden" id="csrf" name="csrf" value="{{csrf}}" />
+		<input type="hidden" name="user_id" id="add-user-id" />
+		<input type="hidden" name="role_id" id="add-role-id" />		</form>
 		
 		<table class="table" id="role-list">
 			<thead>
@@ -83,46 +87,6 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal">Done</button>
-	</div>
-</div>
-
-{{! User role modal}}
-<div class="modal hide fade" id="modal-role-add">
-	<div class="modal-header">
-		<button class="close" data-dismiss="modal">x</button>
-		<h3>Add <span id="add-role-name"></span></h3>
-	</div>
-	<div class="modal-body">
-		<form id="add-role-form" class="form-horizontal">
-		    <input type="hidden" id="csrf" name="csrf" value="{{csrf}}" />
-		    <input type="hidden" name="user_id" id="add-user-id" />
-		    <input type="hidden" name="role_id" id="add-role-id" />
-		    <div class="control-group">
-        	    <label class="control-label" for="input-image">Image name</label>
-
-        		<div class="controls">
-        				<div class="fileupload fileupload-new" data-provides="fileupload" id="input-image">
-        					<div class="fileupload-new thumbnail" style="width: {{image_dim.width}}px; height: {{image_dim.height}}px;">
-        				  		<img src="http://www.placehold.it/{{image_dim.width}}x{{image_dim.height}}" />
-        				  	</div>
-        				 	<div class="fileupload-preview fileupload-exists thumbnail" style="width: {{image_dim.width}}px; height: {{image_dim.height}}px;"></div>
-        				  	<span class="btn btn-file">
-        				  		<span class="fileupload-new">Select image</span>
-        				  		<span class="fileupload-exists">Change</span>
-        				  		<input type="file" />
-        				  	</span>
-        				  	<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-        				</div>
-        		</div>
-        	</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-	    <div class="progress progress-striped active span8 hide">
-            <div id="modal-footer-upload-progress" class="bar bar-success" style="width: 1%;"></div>
-        </div>
-		<button class="btn" data-dismiss="modal">Return</button>
-		<button class="btn btn-success" id="modal-role-add-done">Complete</button>
 	</div>
 </div>
 
