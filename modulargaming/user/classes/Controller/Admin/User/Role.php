@@ -40,8 +40,8 @@ class Controller_Admin_User_Role extends Abstract_Controller_Admin {
 				foreach ($datatables->result() as $role)
 				{
 					$datatables->add_row(array (
-							$role->description,
 							$role->name,
+							$role->description,
 							$role->id
 						)
 					);
