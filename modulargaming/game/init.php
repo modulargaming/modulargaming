@@ -20,3 +20,10 @@ Route::set('games.rock-paper-scissors', 'games/rock-paper-scissors')
 	'controller' => 'RockPaperScissors',
 	'action' => 'index',
 ));
+
+Route::set('games.lucky-wheel', 'games/lucky-wheel')
+	 ->defaults(array(
+	'directory' => 'Game',
+	'controller' => 'LuckyWheel',
+	'action' => 'index',
+));

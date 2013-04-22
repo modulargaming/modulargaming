@@ -7,7 +7,8 @@ class View_Game_Index extends Abstract_View_Game {
 	public function links()
 	{
 		return array(
-			'rockpaperscissors' => Route::url('games.rock-paper-scissors')
+			'rockpaperscissors' => Route::url('games.rock-paper-scissors'),
+			'luckywheel' => Route::url('games.lucky-wheel')
 		);
 	}
 
