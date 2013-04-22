@@ -161,7 +161,7 @@
 
 			if (!$this->user->can('Admin_User_User_Role_Load'))
 			{
-				throw HTTP_Exception::factory('403', 'Permission denied to view admin users user colour load');
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin users user role load');
 			}
 
 			$user = ORM::factory('User', $this->request->query('id'));
@@ -175,7 +175,7 @@
 			}
 
 			$this->response->headers('Content-Type', 'application/json');
-			$this->response->body(json_encode(array('colours' => $list)));
+			$this->response->body(json_encode(array('roles' => $list)));
 		}
 
 		public function action_role_delete()
@@ -183,15 +183,15 @@
 
 			if (!$this->user->can('Admin_User_User_Role_Delete'))
 			{
-				throw HTTP_Exception::factory('403', 'Permission denied to view admin users user colour delete');
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin users user role delete');
 			}
 
-			$user = ORM::factory('User', $this->request->query('specie_id'));
-			$role = ORM::factory('Pet_Colour', $this->request->query('colour_id'));
+			$user = ORM::factory('User', $this->request->query('user_id'));
+			$role = ORM::factory('Role', $this->request->query('role_id'));
 
-			if ($user->has('colours', $role))
+			if ($user->has('roles', $role))
 			{
-				$user->remove('colours', $role);
+				$user->remove('roles', $role);
 			}
 
 			$this->response->headers('Content-Type', 'application/json');
@@ -203,7 +203,7 @@
 
 			if (!$this->user->can('Admin_User_User_Role_Update'))
 			{
-				throw HTTP_Exception::factory('403', 'Permission denied to view admin users user colour update');
+				throw HTTP_Exception::factory('403', 'Permission denied to view admin users user role update');
 			}
 
 			$user = ORM::factory('User', $this->request->post('user_id'));
