@@ -55,7 +55,7 @@ class Controller_Game_RockPaperScissors extends Abstract_Controller_Game {
 		}
 		else if ($choice != $npc)
 		{
-			$this->play_game();
+			$this->play_game(0);
 		}
 		$game->save();
 		return array(
