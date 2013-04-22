@@ -18,11 +18,11 @@ class Model_Game extends ORM
 		)
 	);
 
-	public function can_play()
+	public function can_play($max_plays, $play_timeout)
 	{
-		if ($this->plays >= 5)
+		if ($this->plays >= $max_plays)
 		{
-			if ($this->last_play > time() - Date::DAY)
+			if ($this->last_play > time() - $play_timeout)
 			{
 				return FALSE;
 			}
