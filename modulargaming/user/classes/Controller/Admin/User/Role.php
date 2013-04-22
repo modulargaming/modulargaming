@@ -33,13 +33,14 @@ class Controller_Admin_User_Role extends Abstract_Controller_Admin {
 				$orm = ORM::factory('Role');
 
 				$paginate = Paginate::factory($orm)
-					->columns(array('id', 'name'));
+					->columns(array('id', 'name', 'description'));
 
 				$datatables = DataTables::factory($paginate)->execute();
 
 				foreach ($datatables->result() as $role)
 				{
 					$datatables->add_row(array (
+							$role->description,
 							$role->name,
 							$role->id
 						)
