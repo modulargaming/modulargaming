@@ -21,7 +21,7 @@ class Controller_Game_RockPaperScissors extends Abstract_Controller_Game {
 				$post = $this->request->post();
 				if (isset($post['collect']) AND $this->game->winnings)
 				{
-					$this->game->collect_winnings();
+					$this->game->collect_winnings(true);
 					Hint::success('You have collected your winnings');
 					$this->redirect(Route::url('games.rock-paper-scissors'));
 				}

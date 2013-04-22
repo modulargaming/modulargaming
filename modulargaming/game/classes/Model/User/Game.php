@@ -35,15 +35,18 @@ class Model_User_Game extends ORM
 		return TRUE;
 	}
 
-	public function collect_winnings()
+	public function collect_winnings($play)
 	{
 		$points = Kohana::$config->load('items.points');
 		$initial_points = $points['initial'];
 		$this->user->set_property('points', $this->user->get_property('points', $initial_points) + $this->winnings);
 		$this->user->save();
 		$this->winnings = 0;
-		$this->plays ++;
-		$this->last_play = time();
+		if ($play)
+		{
+			$this->plays ++;
+			$this->last_play = time();
+		}
 		$this->save();
 	}
 

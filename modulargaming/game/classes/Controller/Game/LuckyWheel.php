@@ -15,19 +15,22 @@ class Controller_Game_LuckyWheel extends Abstract_Controller_Game {
 		$this->view = new View_Game_LuckyWheel;
 		$can_play = $this->can_play();
 		$this->view->can_play = $can_play;
-		if ($this->request->method() == HTTP_Request::POST AND $can_play)
+		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try
 			{
 				$post = $this->request->post();
 				if (isset($post['collect']) AND $this->game->winnings)
 				{
-					$this->game->collect_winnings();
+					$this->game->collect_winnings(false);
 					Hint::success('You have collected your winnings');
 					$this->redirect(Route::url('games.lucky-wheel'));
 				}
-				$play = $this->play($this->game);
-				$this->view->play = $play;
+				if ($can_play)
+				{
+					$play = $this->play($this->game);
+					$this->view->play = $play;
+				}
 			}
 			catch (ORM_Validation_Exception $e)
 			{
