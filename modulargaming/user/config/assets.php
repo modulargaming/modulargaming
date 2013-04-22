@@ -16,7 +16,7 @@ return array(
 		)
 	),
 		'admin_user' => array(
-			'user.2' => array(
+			'user' => array(
 				'body' => array(
 					'js' => array(
 						array(
