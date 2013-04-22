@@ -31,7 +31,7 @@ class Controller_Game_RockPaperScissors extends Abstract_Controller_Game {
 
 				if ($validation->check())
 				{
-					$play = $this->play_game($post['move'], $this->game);
+					$play = $this->play($post['move'], $this->game);
 					$this->view->play = $play;
 				}
 			}
@@ -43,7 +43,7 @@ class Controller_Game_RockPaperScissors extends Abstract_Controller_Game {
 		$this->view->game = $this->game;
 	}
 
-	private function play_game($choice, $game)
+	private function play($choice, $game)
 	{
 		$win = 0;
     		$choices = array('rock', 'paper', 'scissors');
@@ -55,9 +55,7 @@ class Controller_Game_RockPaperScissors extends Abstract_Controller_Game {
 		}
 		else if ($choice != $npc)
 		{
-			$game->winnings = 0;
-			$game->plays ++;
-			$game->last_play = time();
+			$this->play_game();
 		}
 		$game->save();
 		return array(
