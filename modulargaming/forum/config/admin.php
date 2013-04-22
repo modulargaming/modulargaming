@@ -3,7 +3,7 @@
 	return array(
 		'forum' => array(
 			'nav' => array(
-				'specie' => array('link' => 'forum/category', 'title' => 'Categories', 'active' => FALSE),
+				'category' => array('link' => 'forum/category', 'title' => 'Categories', 'active' => FALSE),
 			)
 		)
 	);
