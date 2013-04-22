@@ -9,6 +9,7 @@
 	height: 47px;
 	padding: 5px 10px 5px 30px;
 	margin-top: 5px;
+	border: 1px solid transparent;
 	-webkit-border-radius: 4px;
 	   -moz-border-radius: 4px;
 	        border-radius: 4px;
@@ -17,7 +18,7 @@
 	background-color: #e3f2f0;
 }
 .message-unread {
-	background-color: #fefefe;
+	background-color: #eeeeee;
 }
 .message-unread:before {
 	content: " ";
@@ -32,7 +33,11 @@
 	        border-radius: 8px;
 }
 .message-read {
-	background-color: #eeeeee;
+	background-color: #fefefe;
+}
+.message-checked {
+	border-color: #fffcaa !important;
+	background-color: #fdffdb !important;
 }
 .messages-avatar {
 	float: left;
@@ -64,4 +69,8 @@
 .messages-date {
 	float: right;
 	margin-top: -25px;
+}
+.message-checkbox {
+	float: right;
+	margin-left: 5px !important;
 }

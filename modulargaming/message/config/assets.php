@@ -5,8 +5,16 @@ return array (
 		'head' => array(
 			'css' => array(
 				array(
-					'name' => 'messages',
-					'file' => 'messages.css'
+					'name' => 'message',
+					'file' => 'message.css'
+				)
+			)
+		),
+		'body' => array(
+			'js' => array(
+				array(
+					'name' => 'message',
+					'file' => 'message.js'
 				)
 			)
 		)
