@@ -15,25 +15,28 @@ class Abstract_Controller_Game extends Abstract_Controller_Frontend {
 	public function before()
 	{
 		parent::before();
-		$game = ORM::factory('User_Game')
-			->where('game_id', '=', $this->game_id)
-			->where('user_id', '=', $this->user->id)
-			->find();
-		if ( ! $game->loaded())
+		if ($this->game_id)
 		{
 			$game = ORM::factory('User_Game')
-				->create_game(
-					array(
-						'game_id' => $this->game_id,
-						'user_id' => $this->user->id
-					),
-					array(
-						'game_id',
-						'user_id'
-					)
-				);
+				->where('game_id', '=', $this->game_id)
+				->where('user_id', '=', $this->user->id)
+				->find();
+			if ( ! $game->loaded())
+			{
+				$game = ORM::factory('User_Game')
+					->create_game(
+						array(
+							'game_id' => $this->game_id,
+							'user_id' => $this->user->id
+						),
+						array(
+							'game_id',
+							'user_id'
+						)
+					);
+			}
+			$this->game = $game;
 		}
-		$this->game = $game;
 	}
 
 	public function can_play()
@@ -47,7 +50,7 @@ class Abstract_Controller_Game extends Abstract_Controller_Frontend {
 		return FALSE;
 	}
 
-	public function play_game()
+	public function play_game($winnings)
 	{
 		if ( !$this->can_play())
 		{
@@ -59,7 +62,7 @@ class Abstract_Controller_Game extends Abstract_Controller_Frontend {
 			$initial_points = $points['initial'];
 			$this->user->set_property('points', $this->user->get_property('points', $initial_points) - $this->price);
 		}
-		$this->game->winnings = 0;
+		$this->game->winnings = $winnings;
 		$this->game->plays ++;
 		$this->game->last_play = time();
 		$this->game->save();
