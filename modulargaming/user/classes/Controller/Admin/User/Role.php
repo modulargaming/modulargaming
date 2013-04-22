@@ -16,7 +16,7 @@ class Controller_Admin_User_Role extends Abstract_Controller_Admin {
 			$this->view = new View_Admin_User_Role_Index;
 			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 			$this->_load_assets(Kohana::$config->load('assets.admin_user.role'));
-			$this->_nav('user', 'role/index');
+			$this->_nav('user', 'role');
 			$this->view->roles = $roles->as_array();
 		}
 

@@ -1,10 +1,10 @@
 /**
- * Admin pet colour js file.
+ * Admin user role js file.
  */
 
 $(document).ready(function() {
     $('#data-table').CRUD({
-        base_url: './colour/',
+        base_url: './role/',
         identifier: {data: 'name', table: 1},
         dataTable: {
             "aoColumnDefs": [

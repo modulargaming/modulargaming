@@ -148,7 +148,7 @@ $(document).ready(function() {
     });
 
     $('#crud-container').CRUD({
-        base_url: './specie/',
+        base_url: './user/',
         identifier: {data: 'name', table: 1},
         buttons: function(id, type, full) {
             return ' <button data-id="'+id+'" class="btn btn-info btn-colour">Colours</button> ';
