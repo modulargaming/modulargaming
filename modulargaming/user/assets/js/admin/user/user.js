@@ -1,5 +1,5 @@
 /**
- * Admin pet specie's js file.
+ * Admin user users js file.
  */
 
 $(document).ready(function() {
