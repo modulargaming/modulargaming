@@ -112,8 +112,10 @@ class Controller_Admin_User_Role extends Abstract_Controller_Admin {
 				$data = array(
 					'action' => 'saved',
 					'row'    => array(
+						$role->id,
 						$role->name,
 						$role->description
+
 					)
 				);
 				$this->response->body(json_encode($data));
