@@ -11,8 +11,8 @@ class View_Admin_User_User_Index extends Abstract_View_Admin {
 		foreach ($this->users as $user)
 		{
 			$users[] = array(
-				'id'          => $user->id,
-				'name'        => $user->name,
+				$user->id,
+				$user->username,
 			);
 		}
 
