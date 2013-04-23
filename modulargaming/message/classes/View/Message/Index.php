@@ -43,8 +43,8 @@ class View_Message_Index extends Abstract_View_Message {
 			'create' => Route::url('message.create', array(
 				'action' => 'create',
 			)),
-			'inbox' => Route::url('message'),
-			'outbox' => Route::url('message', array(
+			'inbox' => Route::url('messages'),
+			'outbox' => Route::url('messages', array(
 				'controller' => 'outbox',
 			)),
 		);

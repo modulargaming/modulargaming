@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-Route::set('messages', 'messages')
+Route::set('messages', 'messages(/<controller>)')
   ->defaults(array(
     'directory'  => 'Message',
     'controller' => 'Index',
