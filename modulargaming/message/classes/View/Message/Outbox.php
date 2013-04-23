@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Message_Index extends Abstract_View_Message {
+class View_Message_Outbox extends Abstract_View_Message {
 
-	public $title = 'Inbox';
+	public $title = 'Outbox';
 
 	public function messages()
 	{
@@ -44,7 +44,7 @@ class View_Message_Index extends Abstract_View_Message {
 				'action' => 'create',
 			)),
 			'inbox' => Route::url('message.inbox'),
-			'outbox' => Route::url('message.outbox')
+			'outbox' => Route::url('message.outbox'),
 		);
 	}
 
@@ -52,8 +52,8 @@ class View_Message_Index extends Abstract_View_Message {
 	{
 		return array_merge(parent::get_breadcrumb(), array(
 			array(
-				'title' => 'Inbox',
-				'href'  => Route::url('message.inbox')
+				'title' => 'Outbox',
+				'href'  => Route::url('message.outbox')
 			)
 		));
 	}

@@ -14,8 +14,8 @@ class Abstract_View_Message extends Abstract_View {
 	{
 		return array_merge(parent::get_breadcrumb(), array(
 			array(
-				'title' => 'Messages',
-				'href'  => Route::url('messages')
+				'title' => 'Message',
+				'href'  => Route::url('message.inbox')
 			)
 		));
 	}

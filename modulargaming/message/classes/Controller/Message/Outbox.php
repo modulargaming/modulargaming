@@ -25,7 +25,7 @@ class Controller_Message_Outbox extends Abstract_Controller_Message {
 					}
 					Hint::success('You have deleted the selected messages');
 				}
-				$this->redirect(Route::url('message', array('controller' => 'outbox')));
+				$this->redirect(Route::url('message.outbox'));
 			}
 			catch (ORM_Validation_Exception $e)
 			{
@@ -34,7 +34,7 @@ class Controller_Message_Outbox extends Abstract_Controller_Message {
 
 		}
 
-		$this->view = new View_Message_Index;
+		$this->view = new View_Message_Outbox;
 
 		// TODO: Add pagination
 		$messages = ORM::factory('Message')

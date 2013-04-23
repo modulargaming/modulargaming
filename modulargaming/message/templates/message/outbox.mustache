@@ -1,0 +1,44 @@
+<ul class="nav nav-tabs">
+	<li{{^outbox}} class="active"{{/outbox}}><a href="{{links.inbox}}">Inbox</a></li>
+  	<li{{#outbox}} class="active"{{/outbox}}><a href="{{links.outbox}}">Outbox</a></li>
+</ul>
+{{^total_messages}}
+<div class="alert alert-error">
+	You have have no messages.
+</div>
+{{/total_messages}}
+<form action="" method="post">
+	{{#total_messages}}
+	You have {{total_messages}} messages. <button type="button" class="btn pull-right" id="messages-select">Select all messages</button>
+	<hr>
+	<ul id="messages">
+		{{#messages}}
+		<li class="message-{{^read}}un{{/read}}read">
+			<a href="{{sender.href}}" class="messages-avatar">{{#sender.avatar}}{{>avatar}}{{/sender.avatar}}</a>
+			<a href="{{href}}" class="messages-subject">
+				<strong>{{sender.username}}</strong><br>
+				{{subject}} &mdash; <span>{{content}}</span>
+			</a>
+			<span class="messages-date">{{created}}<input type="checkbox" name="messages[]" value="{{id}}" class="message-checkbox"></span>
+		</li>
+		{{/messages}}
+	</ul>
+	<input type="hidden" name="csrf" value="{{csrf}}">
+	{{/total_messages}}
+	<div class="form-actions">
+		<a href="{{links.create}}" class="btn">Create a message</a>
+		<div class="btn-group">
+			<a id="messages-selected" class="btn dropdown-toggle disabled" data-toggle="dropdown" href="#">
+				<i class="icon-check"></i>
+				With selected...
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				{{^outbox}}<li><button class="btn-link" name="action" value="read"><i class="icon-envelope"></i> Mark as read</button></li>{{/outbox}}
+				<li><button class="btn-link" name="action" value="delete"><i class="icon-remove"></i> Delete</button></li>
+			</ul>
+		</div>
+	</div>
+</form>
+
+

@@ -41,7 +41,7 @@ class Controller_Message_Index extends Abstract_Controller_Message {
 					}
 					Hint::success('You have deleted the selected messages');
 				}
-				$this->redirect(Route::get('messages')->uri());
+				$this->redirect(Route::get('message.inbox')->uri());
 			}
 			catch (ORM_Validation_Exception $e)
 			{

@@ -1,9 +1,16 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-Route::set('messages', 'messages(/<controller>)')
+Route::set('message.inbox', 'message/inbox')
   ->defaults(array(
     'directory'  => 'Message',
     'controller' => 'Index',
+    'action'     => 'index',
+  ));
+
+Route::set('message.outbox', 'message/outbox')
+  ->defaults(array(
+    'directory'  => 'Message',
+    'controller' => 'Outbox',
     'action'     => 'index',
   ));
 
@@ -22,9 +29,18 @@ Route::set('message.create', 'message/create(/<username>)', array('username' => 
     'action'     => 'index',
   ));
 
+/**
+Route::set('messages', 'messages(/<controller>)')
+  ->defaults(array(
+    'directory'  => 'Message',
+    'controller' => 'Index',
+    'action'     => 'index',
+  ));
+
 Route::set('message', 'message(/<controller>(/<action>(/<id>)))')
   ->defaults(array(
     'directory'  => 'Message',
     'controller' => 'Index',
     'action'     => 'index',
 ));
+**/
