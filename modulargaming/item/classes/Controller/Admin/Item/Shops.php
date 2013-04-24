@@ -115,12 +115,18 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 			// . DIRECTORY_SEPARATOR . 'shops' . DIRECTORY_SEPARATOR . 'npc' . DIRECTORY_SEPARATOR;
 			//$values['npc_img'] = $base_dir . $values['npc_img'];
 			
-			$values['npc_img'] = 'tmp';
 			$item = ORM::factory('Shop', $values['id']);
-
-			$img = ($item->loaded()) ? $item->npc_img : null;
-
-			$item->values($values, array('title', 'status', 'npc_text', 'stock_type', 'stock_cap'));
+			if ($item->loaded())
+			{
+				$img = $item->npc_img;
+				$item->values($values, array('title', 'status', 'npc_text', 'stock_type', 'stock_cap'));
+			}
+			else
+			{
+				$img = NULL;
+				$values['npc_img'] = 'tmp';
+				$item->values($values, array('title', 'status', 'npc_img', 'npc_text', 'stock_type', 'stock_cap'));
+			}
 			$item->save();
 
 			$file = array('status' => 'empty', 'msg' => '');
