@@ -25,10 +25,18 @@ abstract class Abstract_View {
 	 */
 	protected $_user;
 
+	/**
+	 * @var Assets
+	 */
+	protected $_assets;
+
 	public function __construct()
 	{
 		$this->_auth = Auth::instance();
 		$this->_user = Auth::instance()->get_user();
+
+		$this->_assets = new Assets();
+		$this->_assets->group('frontend');
 	}
 
 	/**
@@ -48,14 +56,22 @@ abstract class Abstract_View {
 		return URL::base();
 	}
 
+	/**
+	 * Get the assets for <head>.
+	 * @return array
+	 */
 	public function assets_head()
 	{
-		return Assets::factory('head')->render();
+		return $this->_assets->get('head');
 	}
 
+	/**
+	 * Get the assets for <body> (shortly before </body>).
+	 * @return array
+	 */
 	public function assets_body()
 	{
-		return Assets::factory('body')->render();
+		return $this->_assets->get('body');
 	}
 
 	/**
