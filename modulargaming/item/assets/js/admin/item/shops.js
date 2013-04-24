@@ -15,7 +15,11 @@ $(document).ready(function () {
 
     //handle restock modal
     $('#data-table').on('click', '.btn-stock', function(e){
-        var id = $(this).data('id');
+        RestockModal($(this).data('id'));
+    });
+
+    //load restock modal
+    function RestockModal (id) {
         var stock_type = '';
 
         $('#table-stock-content > tr').remove();
@@ -40,7 +44,7 @@ $(document).ready(function () {
 
             current.stock = stock_type;
             current.shop_id = id;
-
+            $('#input-stock-shop-id').val(id);
             if(stock_type == 'restock') {
                 $('#modal-stock-cap').html(' and will restock maximum '+data.stock_cap+' items.').removeClass('hide');
             }
@@ -52,7 +56,7 @@ $(document).ready(function () {
 
         //when hiding the stock item modal we'll want go back to the stock modal
         $('#modal-stock-item').on('hidden', function(){
-            $('#modal-stock').modal('show');
+            RestockModal(current.shop_id);
         });
 
         //Unset a previously defined click event
@@ -67,7 +71,7 @@ $(document).ready(function () {
             $('#modal-stock').modal('hide');
             $('#modal-stock-item').modal('show');
         });
-    });
+    }
 
     //save an item restock
     $('#btn-stock-add-complete').click(function(){

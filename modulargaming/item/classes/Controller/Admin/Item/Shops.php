@@ -278,7 +278,6 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 				$inventory = ORM::factory('Shop_Restock')
 					->where('shop_id', '=', $shop_id)
 					->find_all();
-
 				if (count($inventory) > 0)
 				{
 					foreach ($inventory as $item)
@@ -392,6 +391,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 
 					$item->price = $values['min_price'];
+					$item->stock = $values['min_amount'];
 					$item->save();
 					break;
 				case 'restock':
