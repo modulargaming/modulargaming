@@ -147,7 +147,7 @@ function handle_consume(data) {
     }
     else {
         $.each(data.errors, function (k, v) {
-            $('#notifications').append('<div class="alert alert-error fade"> <button type="button" class="close" data-dismiss="alert">&times;</button>' + v + '</div>');
+            $('#notifications').append('<div class="alert alert-error fade"> <button type="button" class="close" data-dismiss="alert">&times;</button>' + v.text + '</div>');
         });
 
         $('#notifications').find('.alert').addClass('in');
