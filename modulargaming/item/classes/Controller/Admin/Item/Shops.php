@@ -120,7 +120,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 			$img = ($item->loaded()) ? $item->npc_img : null;
 
-			$item->values($values, array('title', 'status', 'npc_img', 'npc_text', 'stock_type', 'stock_cap'));
+			$item->values($values, array('title', 'status', 'npc_text', 'stock_type', 'stock_cap'));
 			$item->save();
 
 			$file = array('status' => 'empty', 'msg' => '');
@@ -129,7 +129,10 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 			{
 				$image = $_FILES['image'];
 				$cfg = Kohana::$config->load('items.npc.image');
-
+				if ($img == NULL)
+				{
+					$img = $image['name'];
+				}
 				if (!Upload::valid($image))
 				{
 					//error not valid upload
@@ -150,7 +153,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 						$grave_dir = DOCROOT . 'assets/graveyard/npc/shop/';
 						if (!is_dir($grave_dir))
 						{
-							mkdir($grave_dir);
+							mkdir($grave_dir, 0, true);
 						}
 						//move the previously stored item to the graveyard
 						$new_name = Text::random('alnum', 4) . $img;
@@ -161,7 +164,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 					if (!is_dir(DOCROOT . 'assets/img/npc/shop/'))
 					{
-						mkdir(DOCROOT . 'assets/img/npc/shop/');
+						mkdir(DOCROOT . 'assets/img/npc/shop/', 0, true);
 					}
 
 					$up = Upload::save($image, $image['name'], DOCROOT . 'assets/img/npc/shop/');
