@@ -5,5 +5,6 @@
 
 
 		<ul>
-			<li><a href="{{links.module}}">Module</a></li>
+			<li><a href="{{links.index}}">Index</a></li>
+			<li><a href="{{links.page}}">Page</a></li>
 		</ul>

@@ -16,7 +16,8 @@ Views themselves can contain code used for displaying the data you pass into the
 			public function links()
 			{
 				return array(
-					'example' => Route::url('module'),
+					'index' => Route::url('module.index'),
+					'page' => Route::url('module.page'),
 				);
 			}
 
