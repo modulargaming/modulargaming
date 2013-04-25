@@ -9,7 +9,7 @@ It aims to be swift, secure, and small.
 
 ### ORM
 
-ORM is a a powerful Object Relational Mapping (ORM) module that uses the active record pattern and database introspection to determine a model's column information. 
+ORM is a a powerful Object Relational Mapping module that uses the active record pattern and database introspection to determine a model's column information. 
 
 ### Mustache
 
