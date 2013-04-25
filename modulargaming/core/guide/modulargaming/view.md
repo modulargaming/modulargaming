@@ -27,7 +27,7 @@ Views should be expressive and output all of the data sent from the Controller.
 			{
 				$module[] = array(
 					'id' => $this->module->id,
-					'subject' => $this->module->user_id
+					'user_id' => $this->module->user_id
 					);
 				return $module;
 			}
