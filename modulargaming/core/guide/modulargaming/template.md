@@ -8,3 +8,10 @@
 			<li><a href="{{links.index}}">Index</a></li>
 			<li><a href="{{links.page}}">Page</a></li>
 		</ul>
+
+		<ul>
+			{{#module}}
+
+				<li>{{id}}</li>
+				<li>{{user_id}}</li>
+			{{/module}}

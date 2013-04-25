@@ -4,6 +4,8 @@ Views are files that contain the display information for your application. This 
 
 Views themselves can contain code used for displaying the data you pass into them. For example, looping through an array of product information and display each one on a new table row. Views are still PHP files so you can use any code you normally would. However, you should try to keep your views as "dumb" as possible and retreive all data you need in your controllers, then pass it to the view.
 
+Views should be expressive and output all of the data sent from the Controller.
+
 
 		<?php defined('SYSPATH') OR die('No direct script access.');
 
@@ -19,6 +21,15 @@ Views themselves can contain code used for displaying the data you pass into the
 					'index' => Route::url('module.index'),
 					'page' => Route::url('module.page'),
 				);
+			}
+
+			public function module()
+			{
+				$module[] = array(
+					'id' => $this->module->id,
+					'subject' => $this->module->user_id
+					);
+				return $module;
 			}
 
 		}
