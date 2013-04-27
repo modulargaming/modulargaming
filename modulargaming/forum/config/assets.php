@@ -3,9 +3,16 @@
 return array (
 
 	'frontend' => array(
-		array('style', 'assets/css/forum.css', 'head'),
+		'head' => array(
+			'style' => array(
+				'forum' => array(
+					'file' => 'assets/css/forum.css'
+				)
+			)
+		)
 	),
 
+	/*
 		'admin_forum' => array(
 			'category' => array(
 				'body' => array(
@@ -18,4 +25,5 @@ return array (
 				),
 			),
 		)
+	*/
 );
