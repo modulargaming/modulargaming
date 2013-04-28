@@ -1,8 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-return array
-(
-
+return array(
 	'frontend' => array(
 		'head' => array(
 			'style' => array(
@@ -21,10 +19,9 @@ return array
 				'style' => array(
 					'file'   => 'assets/css/style.css',
 					'weight' => -10
-				),
-			),
+				)
+			)
 		),
-
 		'body' => array(
 			'script' => array(
 				'jquery-ie8' => array(
@@ -63,7 +60,6 @@ return array
 					'file'   => 'assets/js/script.js',
 					'weight' => -10
 				)
-
 			)
 		)
 	)
