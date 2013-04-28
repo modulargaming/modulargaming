@@ -57,7 +57,7 @@
 		 */
 		public function img()
 		{
-			return URL::site('assets/img/items/' . $this->type->img_dir . $this->image);
+			return URL::site('media/image/items/' . $this->type->img_dir . $this->image);
 		}
 
 		/**

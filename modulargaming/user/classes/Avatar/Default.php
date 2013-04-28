@@ -32,7 +32,7 @@ class Avatar_Default extends Avatar {
 	 */
 	public function url()
 	{
-		return URL::site('assets/img/avatars/default.png', NULL, FALSE);
+		return URL::site('media/image/avatars/default.png', NULL, FALSE);
 	}
 
 	protected function _edit_view()

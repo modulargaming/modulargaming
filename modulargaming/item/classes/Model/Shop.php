@@ -49,7 +49,7 @@
 		 */
 		public function img()
 		{
-			return URL::site('assets/img/npc/shop/' . $this->npc_img);
+			return URL::site('media/image/npc/shop/' . $this->npc_img);
 		}
 
 	} // End Shop Model

@@ -115,12 +115,18 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 			// . DIRECTORY_SEPARATOR . 'shops' . DIRECTORY_SEPARATOR . 'npc' . DIRECTORY_SEPARATOR;
 			//$values['npc_img'] = $base_dir . $values['npc_img'];
 			
-			$values['npc_img'] = 'tmp';
 			$item = ORM::factory('Shop', $values['id']);
-
-			$img = ($item->loaded()) ? $item->npc_img : null;
-
-			$item->values($values, array('title', 'status', 'npc_img', 'npc_text', 'stock_type', 'stock_cap'));
+			if ($item->loaded())
+			{
+				$img = $item->npc_img;
+				$item->values($values, array('title', 'status', 'npc_text', 'stock_type', 'stock_cap'));
+			}
+			else
+			{
+				$img = NULL;
+				$values['npc_img'] = 'tmp';
+				$item->values($values, array('title', 'status', 'npc_img', 'npc_text', 'stock_type', 'stock_cap'));
+			}
 			$item->save();
 
 			$file = array('status' => 'empty', 'msg' => '');
@@ -129,7 +135,10 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 			{
 				$image = $_FILES['image'];
 				$cfg = Kohana::$config->load('items.npc.image');
-
+				if ($img == NULL)
+				{
+					$img = $image['name'];
+				}
 				if (!Upload::valid($image))
 				{
 					//error not valid upload
@@ -150,7 +159,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 						$grave_dir = DOCROOT . 'assets/graveyard/npc/shop/';
 						if (!is_dir($grave_dir))
 						{
-							mkdir($grave_dir);
+							mkdir($grave_dir, 0, true);
 						}
 						//move the previously stored item to the graveyard
 						$new_name = Text::random('alnum', 4) . $img;
@@ -161,7 +170,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 					if (!is_dir(DOCROOT . 'assets/img/npc/shop/'))
 					{
-						mkdir(DOCROOT . 'assets/img/npc/shop/');
+						mkdir(DOCROOT . 'assets/img/npc/shop/', 0, true);
 					}
 
 					$up = Upload::save($image, $image['name'], DOCROOT . 'assets/img/npc/shop/');
@@ -278,7 +287,6 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 				$inventory = ORM::factory('Shop_Restock')
 					->where('shop_id', '=', $shop_id)
 					->find_all();
-
 				if (count($inventory) > 0)
 				{
 					foreach ($inventory as $item)
@@ -392,6 +400,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 
 					$item->price = $values['min_price'];
+					$item->stock = $values['min_amount'];
 					$item->save();
 					break;
 				case 'restock':

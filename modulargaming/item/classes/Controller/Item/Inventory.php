@@ -223,8 +223,8 @@ class Controller_Item_Inventory extends Abstract_Controller_Frontend {
 						if ($res == FALSE)
 						{
 							//the command couldn't be performed, spit out error, rollback changes and break the loop
-							Hint::error(__(':item_name could not be used on :pet_name', array(':item_name' => $item->name, ':pet_name' => $pet->name)));
-							$error = TRUE;
+							Hint::error(__(':item_name could not be used on :pet_name', array(':item_name' => $item->item->name, ':pet_name' => $pet->name)));
+						$error = TRUE;
 							$db->rollback();
 							break;
 						}
