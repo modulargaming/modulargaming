@@ -13,7 +13,7 @@ class View_Pet_Index extends Abstract_View_Pet {
 		{
 			$pets[] = array(
 				'id'  => $pet->id,
-				'src' => URL::base().'assets/img/pets/'.$pet->specie->id.'/'.$pet->colour->image,
+				'src' => $pet->img(),
 				'href' => Route::url('pet', array('name' => strtolower($pet->name))),
 				'name' => $pet->name,
 				'specie' => $pet->specie->name,
