@@ -1,20 +1,18 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-return array (
-	'global' => array(
+return array(
+	'frontend' => array(
 		'head' => array(
-			'css' => array(
-				array(
-					'name' => 'message',
-					'file' => 'message.css'
+			'style' => array(
+				'message' => array(
+					'file' => 'assets/css/message.css'
 				)
 			)
 		),
 		'body' => array(
-			'js' => array(
-				array(
-					'name' => 'message',
-					'file' => 'message.js'
+			'script' => array(
+				'message' => array(
+					'file' => 'assets/js/message.js'
 				)
 			)
 		)
