@@ -8,7 +8,7 @@
 	<ul class="thumbnails">
 		<li class="span4">
 			<div class="thumbnail center">
-				<img src="{{base_url}}assets/img/pets/{{default_specie}}/{{default_colour}}" id="pet_image" />
+				<img src="{{base_url}}media/image/pets/{{default_specie}}/{{default_colour}}" id="pet_image" />
 				<h3><span id="pet_colour">Black</span> <span id="pet_specie">Koorai</span></h3>
 				<p id="pet_description">The Koorai</p>
 			</div>
@@ -19,7 +19,7 @@
 				{{#species}}
 				<li>
 					<a href="#" class="thumbnail" rel="popover" data-trigger="hover" data-placement="bottom" data-content="{{description}}" data-original-title="{{name}}" data-specie="{{id}}">
-						<img src="{{base_url}}assets/img/pets/{{dir}}/{{default_colour}}" class="pet_specie" />
+						<img src="{{base_url}}media/image/pets/{{dir}}/{{default_colour}}" class="pet_specie" />
 					</a>
 				</li>
 				{{/species}}
@@ -51,5 +51,5 @@
 </style>
 <script>
 var pet_data = {{& compose}},
- base_url = '{{base_url}}assets/img/pets/';
+ base_url = '{{base_url}}media/image/pets/';
 </script>
