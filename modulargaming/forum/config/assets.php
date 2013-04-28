@@ -10,6 +10,15 @@ return array(
 			)
 		)
 	),
+	'backend' => array(
+		'body' => array(
+			'script' => array(
+				'forum.category' => array(
+					'file' => 'assets/js/admin/forum/category.js'
+				)
+			)
+		)
+	)
 
 	/*
 		'admin_forum' => array(

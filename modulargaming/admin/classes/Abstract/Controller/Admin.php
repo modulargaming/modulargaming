@@ -9,8 +9,6 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 	{
 		parent::before();
 
-		$assets = Kohana::$config->load('assets.admin');
-		$this->_load_assets($assets);
 		$permission = $this->request->controller().'_'.$this->request->action();
 	}
 
@@ -34,20 +32,6 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 			$nav[$action]['active'] = TRUE;
 			$this->view->subnav = $nav;
 		}
-	}
-
-	protected function _load_assets($config)
-	{
-		if (isset($config['head']))
-		{
-			Assets::factory('head_admin')->load($config['head']);
-		}
-
-		if (isset($config['body']))
-		{
-			Assets::factory('body_admin')->load($config['body']);
-		}
-
 	}
 
 }

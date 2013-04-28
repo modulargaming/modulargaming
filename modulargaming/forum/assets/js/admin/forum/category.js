@@ -3,6 +3,11 @@
  */
 
 $(document).ready(function() {
+
+	if ( ! $('body').hasClass('admin/forum-category')) {
+		return;
+	}
+
     $('#data-table').CRUD({
         base_url: './category/',
         identifier: {data: 'title', table: 1},

@@ -16,6 +16,11 @@ abstract class Abstract_View {
 	public $title = 'Welcome';
 
 	/**
+	 * @var string Assets group to load.
+	 */
+	protected $_assets_group = 'frontend';
+
+	/**
 	 * @var Auth
 	 */
 	protected $_auth;
@@ -30,13 +35,14 @@ abstract class Abstract_View {
 	 */
 	protected $_assets;
 
+
 	public function __construct()
 	{
 		$this->_auth = Auth::instance();
 		$this->_user = Auth::instance()->get_user();
 
 		$this->_assets = new Assets();
-		$this->_assets->group('frontend');
+		$this->_assets->group($this->_assets_group);
 	}
 
 	/**
