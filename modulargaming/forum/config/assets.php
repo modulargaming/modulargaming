@@ -1,17 +1,18 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 return array (
-	'global' => array(
+
+	'frontend' => array(
 		'head' => array(
-			'css' => array(
-				array(
-					'name' => 'forum',
-					'file' => 'forum.css'
+			'style' => array(
+				'forum' => array(
+					'file'   => 'assets/css/forum.css'
 				)
 			)
 		)
 	),
 
+	/*
 		'admin_forum' => array(
 			'category' => array(
 				'body' => array(
@@ -24,4 +25,5 @@ return array (
 				),
 			),
 		)
+	*/
 );

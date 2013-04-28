@@ -3,8 +3,10 @@
 <head>
 	<meta charset=utf-8>
 	<title>{{title}} - Modular Gaming</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{&assets_head}}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{{#assets_head}}
+		{{& .}}
+	{{/assets_head}}
 </head>
 <body class="{{body_class}}">
 
@@ -82,8 +84,10 @@
 			<p>&copy; Modular Gaming 2013</p>
 		</footer>
 	</div>
-	
-	{{&assets_body}}
+
+	{{#assets_body}}
+		{{& .}}
+	{{/assets_body}}
 
 	{{{debug_toolbar}}}
 </body>

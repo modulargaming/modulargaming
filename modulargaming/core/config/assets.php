@@ -1,52 +1,70 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-return array (
-	'global' => array(
+return array
+(
+
+	'frontend' => array(
 		'head' => array(
-			'css' => array(
-				array(
-					'name' => 'bootstrap',
-					'file' => 'bootstrap.css'
+			'style' => array(
+				'bootstrap' => array(
+					'file'   => 'assets/css/bootstrap.css',
+					'weight' => -100
 				),
-				array(
-					'name' => 'bootstrap.responsive',
-					'file'  => 'bootstrap-responsive.css'
+				'bootstrap-responsive' => array(
+					'file'   => 'assets/css/bootstrap-responsive.css',
+					'weight' => -99
 				),
-				array(
-					'name' => 'wsihtml5',
-					'file'  => 'bootstrap-wysihtml5.css'
+				'bootstrap-whysihtml5' => array(
+					'file'   => 'assets/css/bootstrap-wysihtml5.css',
+					'weight' => -98
 				),
-				array(
-					'name' => 'style',
-					'file'  => 'style.css'
-				)
+				'style' => array(
+					'file'   => 'assets/css/style.css',
+					'weight' => -10
+				),
 			),
-			'js' => array()
 		),
+
 		'body' => array(
-			'css' => array(),
-			'js' => array(
-				array(
-					'name' => 'jquery',
-					'file'  => 'libs/jquery-1.9.0.min.js'
+			'script' => array(
+				'jquery-ie8' => array(
+					'file'    => 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+					'minify'  => FALSE,
+					'weight'  => -100,
+					'wrapper' => array(
+						'<!--[if lt IE 9]><!-->',
+						'<!--<![endif]-->'
+					)
 				),
-				array(
-					'name' => 'bootstrap',
-					'file'  => 'libs/bootstrap.min.js'
+				'jquery' => array(
+					'file'    => 'http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js',
+					'minify'  => FALSE,
+					'weight'  => -99,
+					'wrapper' => array(
+						'<!--[if gte IE 9]><!-->',
+						'<!--<![endif]-->'
+					)
 				),
-				array(
-					'name' => 'wysihtml5',
-					'file'  => 'plugins/wysihtml5.js'
+				'bootstrap' => array(
+					'file'   => 'assets/js/libs/bootstrap.js',
+					'minify'  => FALSE,
+					'weight' => -90,
 				),
-				array(
-					'name' => 'wysihtml.bootstrap',
-					'file'  => 'plugins/bootstrap-wysihtml5.js'
+				'wysihtml5' => array(
+					'file'   => 'assets/js/libs/wysihtml5.js',
+					'minify'  => FALSE,
+					'weight' => -89,
 				),
-				array(
-					'name' => 'script',
-					'file'  => 'script.js'
+				'bootstrap-wysihtml5' => array(
+					'file'   => 'assets/js/libs/bootstrap-wysihtml5.js',
+					'weight' => -88,
+				),
+				'script' => array(
+					'file'   => 'assets/js/script.js',
+					'weight' => -10
 				)
+
 			)
-		),
+		)
 	)
 );

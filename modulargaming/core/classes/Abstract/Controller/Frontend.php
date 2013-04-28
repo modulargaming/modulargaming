@@ -28,11 +28,6 @@ abstract class Abstract_Controller_Frontend extends Controller {
 		parent::before();
 
 		$this->_validate_csrf();
-		if ($this->layout == 'layout')
-		{
-			$assets = Kohana::$config->load('assets.global');
-			$this->_load_assets($assets);
-		}
 	}
 
 	/**
@@ -65,20 +60,6 @@ abstract class Abstract_Controller_Frontend extends Controller {
 				throw HTTP_Exception::Factory(403, 'CSRF check failed!');
 			}
 		}
-	}
-
-	protected function _load_assets($config)
-	{
-		if (isset($config['head']))
-		{
-			Assets::factory('head')->load($config['head']);
-		}
-
-		if (isset($config['body']))
-		{
-			Assets::factory('body')->load($config['body']);
-		}
-
 	}
 
 } // End Frontend

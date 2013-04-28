@@ -135,10 +135,10 @@ Kohana::modules(array(
 	// Kohana modules
 	'acl'           => MODPATH.'acl',        // Access control
 	'auth'          => MODPATH.'auth',       // Basic authentication
-	'asset-merger'  => MODPATH.'asset-merger',      
+	'assets'        => MODPATH.'assets',     // Assets system
 	'cache'         => MODPATH.'cache',      // Caching with multiple backends
 	'database'      => MODPATH.'database',   // Database access
-	'datatables'      => MODPATH.'datatables', 
+	'datatables'    => MODPATH.'datatables',
 	'debug-toolbar' => MODPATH.'debug-toolbar',
 	'email'         => MODPATH.'email',      // Email manipulation
 	'image'         => MODPATH.'image',      // Image manipulation
@@ -146,11 +146,11 @@ Kohana::modules(array(
 	'minion'        => MODPATH.'minion',     // CLI Tasks
 	'migrations'    => MODPATH.'tasks-migrations',
 	'orm'           => MODPATH.'orm',        // Object Relationship Mapping
-	'paginate'      => MODPATH.'paginate', // Pagination
+	'paginate'      => MODPATH.'paginate',   // Pagination
 	'purifier'      => MODPATH.'purifier',   // HTML Purifier
 	'unittest'      => MODPATH.'unittest',   // Unit testing
 	'userguide'     => MODPATH.'userguide',  // User guide and API documentation
-	));
+));
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
