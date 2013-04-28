@@ -41,7 +41,7 @@ class Controller_Item_Shops extends Abstract_Controller_Frontend {
 		{
 			$this->view->shop_id = $id;
 			$this->view->shop_title = $shop->title;
-			$this->view->npc_img = '/assets/img/npc/shop/'.$shop->npc_img;
+			$this->view->npc_img = $shop->img();
 			$this->view->npc_text = $shop->npc_text;
 
 			$inventory = ORM::factory('Shop_Inventory')
