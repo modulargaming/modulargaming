@@ -1,124 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
-	<meta charset=utf-8>
 	<title>{{title}} - Modular Gaming Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{{&assets_head}}
+	<style type="text/css">.required:after {
+		content: '*';
+		margin: 0 0 0 5px;
+		position: absolute;
+		color: #ccc;
+	}</style>
+	<meta name="robots" content="NONE,NOARCHIVE"/>
 </head>
-<body>
 
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="{{base_url}}admin">Modular Gaming Admin</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li><a href="{{base_url}}">Return to site</a></li>
-					</ul>
 
-					<ul class="nav pull-right">
-                        <form class="navbar-search" action="{{base_url}}search/" method="get">
-                            <input type="text" name="query" class="search-query" placeholder="Search">
-                        </form>
-						{{#logged_in}}
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									{{player.username}}
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="{{base_url}}user/">Profile</a></li>
-									<li><a href="{{base_url}}user/edit/">Settings</a></li>
-									<li class="divider"></li>
-									<li><a href="{{base_url}}user/logout/">Logout</a></li>
-								</ul>
-							</li>
-						{{/logged_in}}
-						{{^logged_in}}
-							<li><a href="{{base_url}}user/login/">Login</a></li>
-							<li><a href="{{base_url}}user/register/">Register</a></li>
-						{{/logged_in}}
-					</ul>
-				</div><!--/.nav-collapse -->
+<body class="change-list">
+
+<!-- Sticky footer wrap -->
+<div id="wrap">
+
+	<!-- Container -->
+
+	<div id="container">
+
+
+		<!-- Header -->
+		<div id="header" class="header">
+			<div id="branding">
+				<a href="{{base_url}}/admin/"><h1 id="site-name">Modular gaming</h1></a>
 			</div>
-		</div>
+
+			<div class="header-content">
+
+				<div class="header-column">
+                    <span class="grey"><!-- Space for notification or logs --></span>
+                </div>
+            </div>
+
+            <div id="user-tools">
+                <span class="date"> {{date}}</span>
+                <span class="time" id="clock">{{time}}</span>
+                <span class="separator">/</span>
+
+                <strong>{{player.username}}</strong>
+                <span class="user-links">
+
+                    <a href="{{base_url}}">Main site</a>
+                    <span class="separator">|</span>
+                    <a href="{{base_url}}user/logout/">Log out</a>
+                </span>
+            </div>
+        </div>
+        <!-- END Header -->
+
+
+
+        <div class="suit-columns two-columns">
+
+	        <div id="suit-center" class="suit-column">
+
+		        {{>hints}}
+
+		        {{#has_breadcrumb}}
+			        <ul class="breadcrumb">
+				        <i class="icon-home"></i>
+				        {{#breadcrumb}}
+					        <li{{#active}} class="active"{{/active}}>
+					            {{^active}}<a href="{{link}}">{{/active}}
+					            {{title}}
+					            {{^active}}</a>{{/active}}
+					            {{#divider}}<span class="divider">/</span>{{/divider}}
+					        </li>
+				        {{/breadcrumb}}
+			        </ul>
+		        {{/has_breadcrumb}}
+
+		        <!-- Content -->
+		        <div id="content" class="flex clearfix">
+			        <span class="hide" id="csrf">{{csrf}}</span>
+
+			        {{>content}}
+
+
+		        </div>
+		        <!-- END Content -->
+	        </div>
+
+	        <div id="suit-left" class="suit-column">
+
+		        <form class="form-search nav-quick-search" autocomplete="off" action="{{admin_search_url}}" method="GET">
+			        <input type="text" name="q" class="input-medium search-query" id="quick-search" disabled>
+			        <i class="input-icon icon-search"></i>
+			        <input type="submit" class="submit" value="">
+		        </form>
+
+		        <div class="left-nav" id="left-nav">
+			        <ul>
+				        {{#navigation}}
+				            <li{{#active}} class="active"{{/active}}>
+				                <a href="{{link}}">
+					                {{#icon}} <i class="{{icon}}{{#active}} icon-white{{/active}}"></i> {{/icon}} {{title}}
+				                </a>
+				                {{#subnav}}
+				                    <ul>
+								        {{#items}}
+								            <li{{#active}} class="active"{{/active}}>
+								                <a href="{{link}}">
+									                {{title}}
+								                </a>
+								            </li>
+								        {{/items}}
+							        </ul>
+				                {{/subnav}}
+				            </li>
+				        {{/navigation}}
+			        </ul>
+		        </div>
+
+	        </div>
+        </div>
 	</div>
 
-	<div class="container">
 
-		<div class="row-fluid">
-			<div class="span3">
-				<div class="well" style="padding: 8px 0">
-					<ul class="nav nav-list">
-						<li class="nav-header">Navigation</li>
-						{{#navigation}}
-							<li {{#active}}class="active"{{/active}}>
-								<a href="{{link}}">
-									{{#icon}}
-										<i class="{{icon}}"></i>
-									{{/icon}}
-									{{title}}
-								</a>
-							</li>
-						{{/navigation}}
-					</ul>
-				</div>
-			</div>
-			<div class="span9">
-				{{#has_subnav}}
-					<div class="row">
-						<div class="span12 pagination-centered btn-group">
-						{{#subnav}}
-							{{#active}}
-								<a href="{{base_url}}admin/{{link}}" class="btn disabled">{{title}}</a>
-							{{/active}}
-							{{^active}}
-								<a href="{{base_url}}admin/{{link}}" class="btn">{{title}}</a>
-							{{/active}}
-						{{/subnav}}
-						</div>
-					</div>
-				{{/has_subnav}}
-				{{#has_breadcrumb}}
-					<ul class="breadcrumb">
-						{{#breadcrumb}}
-							{{#active}}
-								<li class="active">
-									{{title}}
-									{{#divider}}<span class="divider">/</span>{{/divider}}
-								</li>
-							{{/active}}
-							{{^active}}
-								<li>
-									<a href="{{href}}">{{title}}</a>
-									{{#divider}}<span class="divider">/</span>{{/divider}}
-								</li>
-							{{/active}}
-						{{/breadcrumb}}
-					</ul>
-				{{/has_breadcrumb}}
+	<!-- Sticky footer push -->
+	<div class="notifications bottom-right" id="crud-notify"></div>
 
-				{{>hints}}
+</div>
 
-				{{>content}}
-			</div>
+<div class="clear"></div>
+<div id="footer" class="footer">
+	<div class="content">
+		<div class="tools">
+			<a href="https://github.com/hinton/mg/wiki" target="_blank" class="icon"><i class="icon-question-sign"></i>Support</a>
+			<a href="https://github.com/hinton/mg/issues" target="_blank" class="icon"><i class="icon-comment"></i>Report a bug</a>
 		</div>
 
-		<hr>
+		<div class="copyright">
+			Theme Copyright © 2013 DjangoSuit <br/>
+			Developed by DjangoSuit.com
+		</div>
 
-		<footer>
-			<p>&copy; Modular Gaming 2013</p>
-		</footer>
+		<div class="branding">
+
+		Modular Gaming 2013
+
+
+		</div>
 	</div>
+</div>
 
-	{{&assets_body}}
+{{&assets_body}}
 
-	{{{debug_toolbar}}}
 </body>
 </html>

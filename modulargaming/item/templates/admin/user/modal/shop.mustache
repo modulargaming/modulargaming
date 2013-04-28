@@ -1,0 +1,63 @@
+<div class="hide" id="data-sources"{{#data_sources}} data-{{id}}="{{url}}"{{/data_sources}}></div>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>Modal header</h3>
+</div>
+<div class="modal-body">
+	<ul class="nav nav-tabs" id="shop-tabs">
+		<li class="active"><a href="#shop-info">Shop info</a></li>
+	    <li><a href="#shop-stock">Stock</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="shop-info">
+	      <form id="modal-shop-form" method="post" class="form-horizontal">
+		      <input type="hidden" name="csrf" id="input-csrf" value="{{csrf}}">
+		      <div class="control-group">
+		          <label class="control-label" for="input-title">Title</label>
+
+		          <div class="controls">
+		              <input type="text" class="input-medium" id="input-title" name="title" value="" maxlength="50">
+		          </div>
+		      </div>
+		      <div class="control-group">
+		          <label class="control-label" for="input-description">Description</label>
+
+		          <div class="controls">
+		              <textarea name="description" id="input-description" class="textarea" placeholder="Enter text..."></textarea>
+		          </div>
+		      </div>
+		      <div class="control-group">
+		          <label class="control-label" for="input-size">Shop size</label>
+
+		          <div class="controls">
+		              <input type="number" class="input-small" id="input-size" name="size">
+		          </div>
+		      </div>
+
+		      <button type="submit" class="btn btn-primary pull-right" id="modal-shop-update">Update</button>
+	      </form>
+	  </div>
+	  <div class="tab-pane" id="shop-stock">
+	    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="table-shop">
+	            <thead>
+	                <tr>
+	                    <th class="span2">Image</th>
+	                    <th class="span2">Name</th>
+	                    <th class="span1">Amount</th>
+	                    <th class="span1">Price</th>
+	                    <th class="span2">Options</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr>
+	                    <td colspan="5" class="dataTables_empty pagination-centered">Loading data from server</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	  </div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">Close</button>
+</div>

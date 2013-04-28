@@ -14,7 +14,7 @@ $(document).ready(function () {
     });
 
     $('#data-table').CRUD({
-        base_url:'./avatar/',
+        base_url:'./avatars/',
         identifier:{data:'title', table:2},
         upload:true,
         dataTable:{
@@ -30,12 +30,16 @@ $(document).ready(function () {
                     "aTargets":[ 2 ],
                     "mRender":function (data, type, full) {
                         if (data == 1)
-                            return '<i class="icon-ok offset5"> </i>';
+                            return '<i class="icon-ok"> </i>';
                         else
-                            return '<i class="icon-eye-close offset5"> </i>';
+                            return '<i class="icon-eye-close"> </i>';
                     }
                 }
             ]
-        }
+        },
+	    table:{
+		    span:7,
+		    offset:2
+	    }
     });
 });

@@ -120,37 +120,8 @@ I18n::lang('en-gb');
 /**
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
-Kohana::modules(array(
-	
-	// Modular Gaming modules
-	'game'    => MGPATH.'game',
-	'forum'   => MGPATH.'forum',
-	'item'    => MGPATH.'item',
-	'pet'     => MGPATH.'pet',
-	'message' => MGPATH.'message',
-	'user'    => MGPATH.'user',
-	'admin'   => MGPATH.'admin',
-	'core'    => MGPATH.'core', //Modular gaming core module
-
-	// Kohana modules
-	'acl'           => MODPATH.'acl',        // Access control
-	'auth'          => MODPATH.'auth',       // Basic authentication
-	'asset-merger'  => MODPATH.'asset-merger',      
-	'cache'         => MODPATH.'cache',      // Caching with multiple backends
-	'database'      => MODPATH.'database',   // Database access
-	'datatables'      => MODPATH.'datatables', 
-	'debug-toolbar' => MODPATH.'debug-toolbar',
-	'email'         => MODPATH.'email',      // Email manipulation
-	'image'         => MODPATH.'image',      // Image manipulation
-	'kostache'      => MODPATH.'kostache',   // Mustache template system
-	'minion'        => MODPATH.'minion',     // CLI Tasks
-	'migrations'    => MODPATH.'tasks-migrations',
-	'orm'           => MODPATH.'orm',        // Object Relationship Mapping
-	'paginate'      => MODPATH.'paginate', // Pagination
-	'purifier'      => MODPATH.'purifier',   // HTML Purifier
-	'unittest'      => MODPATH.'unittest',   // Unit testing
-	'userguide'     => MODPATH.'userguide',  // User guide and API documentation
-	));
+$mod_cfg = include(MGPATH.'core'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'core.php');
+Kohana::modules($mod_cfg['modules']['mg'] + $mod_cfg['modules']['mod']);
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of

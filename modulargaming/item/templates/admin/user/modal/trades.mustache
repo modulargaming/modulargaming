@@ -1,0 +1,104 @@
+<div class="hide" id="data-sources"{{#data_sources}} data-{{id}}="{{url}}"{{/data_sources}}></div>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>Modal header</h3>
+</div>
+<div class="modal-body">
+	<ul class="nav nav-tabs" id="trades-tabs">
+		<li class="{{#has_lot}}active{{/has_lot}}{{^has_lot}}disabled{{/has_lot}}"><a href="#trades-lots">Lots</a></li>
+	    <li{{^has_bid}} class="disabled"{{/has_bid}}><a href="#trades-bids">Bids</a></li>
+	</ul>
+	<div class="tab-content">
+	  <div class="tab-pane{{#has_lot}} active{{/has_lot}}" id="trades-lots">
+	    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="table-trades-lots">
+	            <thead>
+	                <tr>
+	                    <th class="span1">Lot</th>
+	                    <th class="span2">Description</th>
+	                    <th class="span1">Created</th>
+	                    <th class="span2">Options</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr>
+	                    <td colspan="4" class="dataTables_empty pagination-centered">Loading data from server</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	  </div>
+	  <div class="tab-pane" id="trades-bids">
+	    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="table-trades-bids">
+	            <thead>
+	                <tr>
+	                    <th class="span1">Bid</th>
+	                    <th class="span1">Lot</th>
+	                    <th class="span1">Created</th>
+	                    <th class="span1">Points</th>
+	                    <th class="span2">Options</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr>
+	                    <td colspan="5" class="dataTables_empty pagination-centered">Loading data from server</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	  </div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">Close</button>
+</div>
+
+<div id="modal-trades-modify" class="modal hide fade" tabindex="-1" data-focus-on="input:first" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-user-header">Lot #<span class="modal-trades-modify-lot"></span></h3>
+  </div>
+  <div class="modal-body" id="modal-trade-body">
+      <form id="modal-trades-modify-form" class="form-horizontal">
+          <input type="hidden" name="csrf" value="{{csrf}}" />
+          <input type="hidden" name="id" id="lot-id" />
+	      <div class="control-group">
+	          <label class="control-label" for="modal-trades-modify-lot">Lot</label>
+
+	          <div class="controls modal-trades-modify-lot">
+
+	          </div>
+	      </div>
+	      <div class="control-group">
+	          <label class="control-label" for="input-trades-modify-description">Description</label>
+
+	          <div class="controls">
+
+				<textarea name="description" id="input-trades-modify-description"></textarea>
+
+	          </div>
+	      </div>
+	  </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-settings-remove-cancel" aria-hidden="true">Cancel</button>
+    <button class="btn btn-warning" id="modal-trades-modify-complete">Edit</button>
+  </div>
+</div>
+
+<div id="modal-trades-cancel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-user-header"><span class="modal-trades-cancel-type"></span> #<span class="modal-trades-cancel-id"></span></h3>
+  </div>
+  <div class="modal-body" id="modal-trade-cancel-body">
+      <form id="modal-trades-cancel-form" class="form-horizontal">
+          <input type="hidden" name="csrf" value="{{csrf}}" />
+          <input type="hidden" name="id" id="cancel-id" />
+          <input type="hidden" name="type" id="cancel-type" />
+	  </form>
+	  Are you sure you want to cancel <span class="modal-trades-cancel-type"></span> #<span class="modal-trades-cancel-id"></span>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-settings-remove-cancel" aria-hidden="true">Cancel</button>
+    <button class="btn btn-danger" id="modal-trades-cancel-complete">Edit</button>
+  </div>
+</div>

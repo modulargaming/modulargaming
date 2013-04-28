@@ -1,0 +1,60 @@
+<div class="hide" id="data-sources"{{#data_sources}} data-{{id}}="{{url}}"{{/data_sources}}></div>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>Modal header</h3>
+</div>
+<div class="modal-body">
+	<ul class="nav nav-tabs" id="avatars-tabs">
+		<li class="active"><a href="#avatars-list">List</a></li>
+	    <li><a href="#avatars-give">Give</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane" id="avatars-give">
+	      <form method="post" id="modal-avatars-form" class="form-horizontal">
+		      <input type="hidden" name="csrf" value="{{csrf}}">
+		      <div class="control-group">
+		          <label class="control-label" for="input-title">Avatar</label>
+
+		          <div class="controls">
+		              <input type="text" class="input-medium" id="input-title" name="title" value="" maxlength="50">
+		          </div>
+		      </div>
+
+		      <button type="submit" class="btn btn-success pull-right" id="modal-msg-send">Give</button>
+	      </form>
+	  </div>
+	  <div class="tab-pane active" id="avatars-list">
+	    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="table-avatars">
+	            <thead>
+	                <tr>
+	                    <th class="span1">ID</th>
+	                    <th class="span1">Image</th>
+	                    <th class="span2">Title</th>
+	                    <th class="span2">Options</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr>
+	                    <td colspan="4" class="dataTables_empty pagination-centered">Loading data from server</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	  </div>
+	</div>
+</div>
+
+<div id="modal-avatars-delete" class="modal hide fade" tabindex="-1" data-focus-on="input:first" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-user-header">Avatar #<span class="modal-avatars-delete-id"></span></h3>
+  </div>
+  <div class="modal-body">
+		Are you sure you want to delete setting #<span class="modal-avatars-delete-id"></span>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-avatars-remove-cancel" aria-hidden="true">Cancel</button>
+    <button class="btn btn-danger" id="modal-avatars-delete-complete">Delete</button>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<form id="config-form" class="form-horizontal" action="{{link}}" method="post">
+<input type="hidden" name="csrf" value="{{csrf}}" />
+	<div class="control-group">
+		<label class="control-label" for="input-currency">Currency</label>
+
+		<div class="controls">
+			<input type="text" class="input-medium" id="input-currency" name="currency" value="{{currency}}" maxlength="32" required />
+			<span class="help-block">The name of your game's currency</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="input-initial_points">Initial points</label>
+
+		<div class="controls">
+			<input type="number" class="input-small" id="input-initial_points" name="initial_points" value="{{initial_points}}" maxlength="6" required />
+			<span class="help-block">How many points does the user get when registering</span>
+		</div>
+	</div>
+	<fieldset>
+	<h3>Site</h3>
+	<div class="control-group">
+		<label class="control-label" for="input-status">Status</label>
+
+		<div class="controls">
+			<select id="input-status" name="site-status">
+			{{#status}}
+				<option value="{{name}}"{{#active}} selected{{/active}}>{{title}}</option>
+			{{/status}}
+			</select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="input-route">Route</label>
+
+		<div class="controls">
+			<input type="text" class="input-medium" id="input-route" name="site-route" value="{{site.route}}" maxlength="50" />
+			<span class="help-block">Route to parse when the site is closed</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="input-message">Message</label>
+
+		<div class="controls">
+			<textarea id="input-message" name="site-message">{{site.message}}</textarea>
+			<span class="help-block">Message to display when the site is closed and no route is set.</span>
+		</div>
+	</div>
+	</fieldset>
+	<fieldset>
+	<h3>Data backup <a href="#" class="pull-right btn btn-primary" data-toggle="popover" title="Google Drive" id="link_drive"><i class="icon-white icon-question-sign"></i></a></h3>
+	<div class="control-group">
+		<label class="control-label" for="input-client_id">Redirect URL</label>
+
+		<div class="controls">
+			<em>{{google_drive.url}}</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="input-client_id">Client id</label>
+
+		<div class="controls">
+			<input type="text" class="input-xxlarge" id="input-client_id" name="google_drive-client_id" value="{{google_drive.client_id}}" />
+			<span class="help-block">Google API client id</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="input-secret">Client secret</label>
+
+		<div class="controls">
+			<input type="text" class="input-large" id="input-secret" name="google_drive-client_secret" value="{{google_drive.client_secret}}" />
+			<span class="help-block">Google API client secret</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="input-secret">Max records per file</label>
+
+		<div class="controls">
+			<input type="number" class="input-large" id="input-secret" name="google_drive-records_per_file" value="{{google_drive.records_per_file}}" />
+			<span class="help-block">The maximum amount of records a database backup can hold for a table</span>
+		</div>
+	</div>
+	</fieldset>
+<div class="row-fluid">
+	<div class="span12">
+	<input type="submit" class="btn-success btn pull-right" value="Save" />
+	</div>
+</div>
+</form>

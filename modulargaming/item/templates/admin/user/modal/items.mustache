@@ -1,0 +1,115 @@
+<div class="hide" id="data-sources"{{#data_sources}} data-{{id}}="{{url}}"{{/data_sources}}></div>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>Modal header</h3>
+</div>
+<div class="modal-body">
+	<ul class="nav nav-tabs" id="items-tabs">
+		<li class="active"><a href="#items-list">List</a></li>
+	    <li><a href="#items-give">Give</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane" id="items-give">
+	      <form id="modal-items-form" method="post" class="form-horizontal">
+		      <input type="hidden" name="csrf" id="input-csrf" value="{{csrf}}">
+		      <div class="control-group">
+		          <label class="control-label" for="input-item">Item</label>
+
+		          <div class="controls">
+		              <input type="text" class="input-medium" id="input-item" value="" maxlength="50">
+		          </div>
+		      </div>
+		      <div class="control-group">
+		          <label class="control-label checkbox" for="input-items">List</label>
+
+		          <div class="controls">
+		              <!-- Add items as checkbox here -->
+		              <ul id="input-item-list" class="unstyled">
+
+		              </ul>
+		          </div>
+		      </div>
+
+		      <button type="submit" class="btn btn-primary pull-right" id="modal-items-give">Send to user</button>
+	      </form>
+	  </div>
+	  <div class="tab-pane active" id="items-list">
+	    <div id="filter-select">
+	        <select id="filter-location" class="input-medium">
+	            {{#locations}}
+	                <option value="{{value}}">{{value}}</option>
+	            {{/locations}}
+	        </select>
+	    </div>
+	    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="table-items">
+	            <thead>
+	                <tr>
+	                    <th class="span1">Image</th>
+	                    <th class="span2">Name</th>
+	                    <th class="span1">Location</th>
+	                    <th class="span1">Amount</th>
+	                    <th class="span2">Options</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr>
+	                    <td colspan="5" class="dataTables_empty pagination-centered">Loading data from server</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	  </div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">Close</button>
+</div>
+
+<div id="modal-items-modify" class="modal hide fade" tabindex="-1" data-focus-on="input:first" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-user-header">Setting #<span class="modal-items-modify-name"></span></h3>
+  </div>
+  <div class="modal-body">
+      <form id="modal-items-modify-form" class="form-horizontal">
+          <input type="hidden" name="csrf" value="{{csrf}}" />
+          <input type="hidden" name="id" id="item-id" />
+
+	      <div class="control-group">
+	          <label class="control-label" for="input-items-modify-id">Id</label>
+
+	          <div class="controls" id="input-items-modify-id">
+
+	          </div>
+	      </div>
+	      <div class="control-group">
+	          <label class="control-label" for="modal-items-modify-id">Name</label>
+
+	          <div class="controls modal-items-modify-name">
+
+	          </div>
+	      </div>
+	      <div class="control-group">
+	          <label class="control-label" for="input-items-modify-location">Location</label>
+
+	          <div class="controls" id="input-items-modify-location">
+
+	          </div>
+	      </div>
+	      <div class="control-group">
+	          <label class="control-label" for="input-items-modify-amount">Amount</label>
+
+	          <div class="controls">
+
+				<input type="text" name="amount" id="input-items-modify-amount" />
+
+	          </div>
+	      </div>
+	  </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-settings-remove-cancel" aria-hidden="true">Cancel</button>
+    <button class="btn btn-success" id="modal-items-modify-complete">Edit</button>
+  </div>
+</div>
+

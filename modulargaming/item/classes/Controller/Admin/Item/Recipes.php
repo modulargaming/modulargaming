@@ -10,6 +10,8 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
+	protected $_root_node = 'Item';
+	protected $_node = 'Recipes';
 
 	public function action_index()
 	{
@@ -19,7 +21,7 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		}
 
 		$this->view = new View_Admin_Item_Recipe;
-		$this->_nav('items', 'recipes');
+
 
 		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.recipe'));

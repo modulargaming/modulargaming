@@ -19,8 +19,10 @@ return array(
 					'relative' => 'bootstrap'
 				),
 				array(
-					'name' => 'style',
-					'file'  => 'style.css'
+					'name' => 'suit',
+					'file' => 'admin.suit.css',
+					'location' => 'after',
+					'relative' => 'bootstrap'
 				)
 			)
 		),
@@ -45,13 +47,6 @@ return array(
 					'file'     => 'plugins/bootstrap-notify.js',
 					'location' => 'after',
 					'relative' => 'bootstrap'
-				),
-				array(
-					'name'      => 'templates',
-					'file'      => 'admin/templates.js',
-					'location'  => 'after',
-					'relative'  => 'mustache',
-					'generated' => TRUE
 				),
 				array(
 					'name' => 'admin.crud',

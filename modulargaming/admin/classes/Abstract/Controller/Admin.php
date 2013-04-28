@@ -4,6 +4,10 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 
 	protected $layout = 'Admin/layout';
 	protected $protected = TRUE;
+	protected $_admin = TRUE;
+
+	protected $_root_node = 'Dashboard';
+	protected $_node = 'Dashboard';
 
 	public function before()
 	{
@@ -11,29 +15,20 @@ class Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 
 		$assets = Kohana::$config->load('assets.admin');
 		$this->_load_assets($assets);
-		$permission = $this->request->controller().'_'.$this->request->action();
 	}
 
 	public function after()
 	{
-		// if no subnav has been defined search for one
-		if ($this->view !== NULL AND ! $this->view->has_subnav())
+		if($this->view != null)
 		{
-			$this->_nav(strtolower($this->request->controller()), $this->request->action());
+			//for the navigation
+			$this->view->root_node = $this->_root_node;
+			$this->view->node = $this->_node;
+			$this->view->date = Date::formatted_time('now', 'l, jS F \'y');
+			$this->view->time = Date::formatted_time('now', 'G:i');
 		}
 
 		parent::after();
-	}
-
-	protected function _nav($type, $action='index')
-	{
-		$nav = Kohana::$config->load('admin.'.$type.'.nav');
-
-		if ($nav != FALSE)
-		{
-			$nav[$action]['active'] = TRUE;
-			$this->view->subnav = $nav;
-		}
 	}
 
 	protected function _load_assets($config)

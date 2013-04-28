@@ -10,6 +10,8 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
+	protected $_root_node = 'Item';
+	protected $_node = 'Shops';
 
 	public function action_index()
 	{
@@ -23,7 +25,7 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 
 		$this->view = new View_Admin_Item_Shop;
 		$this->view->image = Kohana::$config->load('items.npc.image');
-		$this->_nav('items', 'shops');
+
 	}
 
 	public function action_paginate()

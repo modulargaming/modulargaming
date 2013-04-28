@@ -1,0 +1,208 @@
+<form action="{{link_submit}}" method="post" id="user_form" class="form-horizontal">
+
+    <div class="inner-center-column">
+        <input type='hidden' name='csrf' value='{{csrf}}' />
+
+        <div class="tab-content tab-content-main">
+			<fieldset class="module aligned with-legend">
+                <h2 class="legend">Game info</h2>
+
+                <div class="control-group form-row">
+
+                    <div>
+                        <div class="btn-toolbar">
+                            {{#game_info}}
+                                <div class="btn-group">
+                                    {{#links}}
+                                        <a data-handler="{{handler}}" href="{{link}}" class="btn modal-ajax">{{title}}</a>
+                                    {{/links}}
+                                </div>
+
+                            {{/game_info}}
+                        </div>
+                    </div>
+                </div>
+			</fieldset>
+			<fieldset class="module aligned first ">
+		        <div class="control-group form-row">
+		            <div>
+		                <div class="control-label">
+		                    <label for="input-username"">Username:</label>
+		                </div>
+		                <div class="controls">
+		                    <input id="input-username" maxlength="32" name="username" type="text" value="{{user.username}}" />
+		                    <span class="help-inline">Required. 32 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+		                </div>
+		            </div>
+		        </div>
+
+		        <div class="control-group form-row">
+	                <div>
+	                    <div class="control-label">
+	                        <label for="input-password">Password:</label>
+	                    </div>
+	                    <div class="controls">
+	                        <a href="{{link_pwd}}" class="btn btn-warning" id="input-password">Change</a>
+	                    </div>
+	                </div>
+	            </div>
+			</fieldset>
+
+			<fieldset class="module aligned with-legend">
+                <h2 class="legend">Personal info</h2>
+
+                <div class="control-group form-row field-email ">
+
+                    <div>
+                        <div class="control-label">
+                            <label for="id_email">Email address:</label>
+                        </div>
+                        <div class="controls">
+                            <input class="vTextField" id="id_email" maxlength="127" name="email" type="text" value="{{user.email}}" />
+                        </div>
+                    </div>
+                </div>
+
+			    <div class="control-group form-row ">
+
+	                <div>
+	                    <div class="control-label">
+	                        <label for="id_last_name">Title:</label>
+	                    </div>
+	                    <div class="controls">
+	                        <select name="title_id">
+	                        {{#titles}}
+	                            <option value="{{id}}"{{#linked}} selected{{/linked}}>{{title}}</option>
+	                        {{/titles}}
+	                         <!-- Load user titles -->
+	                        </select>
+	                    </div>
+	                </div>
+
+                </div>
+
+
+			    <div class="control-group form-row ">
+
+	                <div>
+	                    <div class="control-label">
+	                        <label for="id_last_name">Time zone:</label>
+	                    </div>
+	                    <div class="controls">
+	                        <select name="timezone_id">
+	                        {{#timezones}}
+	                            <option value="{{id}}"{{#selected}} selected{{/selected}}>{{name}}</option>
+	                        {{/timezones}}
+	                        </select>
+	                    </div>
+	                </div>
+
+                </div>
+
+			    <div class="control-group form-row ">
+
+	                <div>
+	                    <div class="control-label">
+	                        <label for="input-roles">Roles:</label>
+	                    </div>
+	                    <div class="controls">
+	                        <div class="selector">
+								<div class="selector-available">
+								<h2>
+									Available roles
+									<i class="icon-question-sign" title="This is the list of available roles. You may choose some by selecting them in the box below and then clicking the &quot;Choose&quot; arrow between the two boxes."></i>
+								</h2>
+								<p id="id_roles_filter" class="selector-filter">
+									<label for="id_groups_input">
+										<i class="icon-search" title="Type into this box to filter down the list of available roles."></i>
+									</label>
+									<input type="text" placeholder="Filter" id="input-roles-filter" style="width: 250px;">
+								</p>
+								<select multiple="multiple" class="filtered" id="input-roles-list" style="width: 260px; height: 150px;">
+								{{#roles_available}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/roles_available}}
+								</select>
+								<a title="Click to choose all roles at once." href='#' id="input-roles-list-select" class="selector-chooseall">Choose all</a>
+								</div>
+
+								<ul class="selector-chooser">
+									<li>
+										<a title="Choose" href='#' id="role_in" class="selector-add">Choose</a>
+									</li>
+									<li>
+										<a title="Remove" href='#' id="role_out" class="selector-remove">Remove</a>
+									</li>
+								</ul>
+
+								<div class="selector-chosen">
+									<h2>
+									Chosen roles
+									<i class="icon-question-sign" title="This is the list of chosen roles. You may remove some by selecting them in the box below and then clicking the &quot;Remove&quot; arrow between the two boxes."></i>
+									</h2>
+									<select id="input-roles" multiple="multiple" name="roles[]" class="filtered" style="width: 260px; height: 178px;">
+                                	{{#roles}}
+                                    <option value="{{id}}">{{name}}</option>
+                                    {{/roles}}
+									</select>
+									<a title="Click to remove all chosen roles at once." href='#' id="input-roles-select" class="selector-clearall">
+									Remove all
+									</a>
+								</div>
+	                        </div>
+	                        <span class="help-inline">Specific roles for this user. Hold down "Control", or "Command" on a Mac, to select more than one.</span>
+	                    </div>
+	                </div>
+
+                </div>
+
+			    <div class="control-group form-row ">
+
+	                <div>
+	                    <div class="control-label">
+	                        <label for="id_last_name">Registered:</label>
+	                    </div>
+	                    <div class="controls">
+	                        {{created}}
+	                    </div>
+	                </div>
+
+                </div>
+
+			    <div class="control-group form-row ">
+
+	                <div>
+	                    <div class="control-label">
+	                        <label for="id_last_name">Last login:</label>
+	                    </div>
+	                    <div class="controls">
+	                        {{last_login}}
+	                    </div>
+	                </div>
+
+                </div>
+				<div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="form-user-save">Save changes</button>
+                    <a href="{{link_list}}" class="btn">Cancel</a>
+                </div>
+			</fieldset>
+
+        </div>
+	</div>
+</form>
+
+<div id="modal-ajax" class="modal hide fade" tabindex="-1"></div>
+
+<div id="modal-user" class="modal hide fade" tabindex="-1" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-user-header">Modal header</h3>
+  </div>
+  <div class="modal-body" id="modal-user-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-user-cancel" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" id="modal-user-save">Save changes</button>
+  </div>
+</div>

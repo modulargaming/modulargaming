@@ -10,6 +10,8 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
+	protected $_root_node = 'Item';
+	protected $_node = 'Types';
 
 	public function action_index()
 	{
@@ -22,7 +24,6 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 		$this->_load_assets(Kohana::$config->load('assets.admin_item.type'));
 
 		$this->view = new View_Admin_Item_Type;
-		$this->_nav('items', 'types');
 	}
 
 	public function action_paginate()

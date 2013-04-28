@@ -230,11 +230,11 @@ $(document).ready(function () {
                     "aTargets":[ 2 ],
                     "mRender":function (data, type, full) {
                         if (data == 'draft')
-                            return '<span class="label label-warning offset3">Draft</span>';
+                            return '<span class="label label-warning">Draft</span>';
                         else if (data == 'retired')
-                            return '<span class="label label-important offset1">Retired</span>';
+                            return '<span class="label label-important">Retired</span>';
                         else
-                            return '<span class="label offset1">' + data.charAt(0).toUpperCase() + data.substr(1) + '</span>';
+                            return '<span class="label">' + data.charAt(0).toUpperCase() + data.substr(1) + '</span>';
                     }
                 }
             ]

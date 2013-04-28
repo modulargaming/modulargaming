@@ -21,6 +21,11 @@ abstract class Abstract_Controller_Frontend extends Controller {
 	protected $layout = 'layout';
 
 	/**
+	 * @var bool If it's an admin controller or not
+	 */
+	protected $_admin = FALSE;
+
+	/**
 	 * Run CSRF check and load frontend assets.
 	 */
 	public function before()

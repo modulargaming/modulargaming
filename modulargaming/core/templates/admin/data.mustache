@@ -1,0 +1,90 @@
+<ul class="nav nav-tabs" id="data-tabs">
+  <li class="active"><a href="#migrations">Migrations</a></li>
+  <li><a href="{{^drive.auth}}{{drive.link}}{{/drive.auth}}{{#drive.auth}}#backup{{/drive.auth}}">Backup</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="migrations">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Group</th>
+              <th>Last update</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          {{#groups}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{last_run}}</td>
+              <td>
+                {{#has_unrun}}
+        	        <div class="dropdown">
+        	          <a class="dropdown-toggle btn btn-warning" data-toggle="dropdown" data-target="{{link}}" href="{{link}}">
+        	            <i class="icon-hdd icon-white"></i>
+        	            <b class="caret"></b>
+        	          </a>
+        	          <ul class="dropdown-menu" role="menu">
+        	            {{#unrun}}
+        	                <li><a href="{{link}}">{{description}}</a></li>
+        	            {{/unrun}}
+        	          </ul>
+        	        </div>
+                {{/has_unrun}}
+                {{^has_unrun}}
+                <span class="btn btn-success">
+                    <i class="icon-ok-sign icon-white"></i>
+                </span>
+                {{/has_unrun}}
+                </td>
+            </tr>
+            {{/groups}}
+          </tbody>
+        </table>
+  </div>
+  <div class="tab-pane" id="backup">
+	  <div class="well">
+	      <strong>Note: </strong> This only backs up records from your database, you will have to keep a copy of your database scheme yourself. <br />
+	      <small class="muted"><i class="icon-info-sign"></i> The database schema that's bundled with MG is already stored in migrations.</small>
+	  </div>
+  <div class="hide" id="table-requests" {{#table_requests}}data-{{id}}="{{url}}" {{/table_requests}}></div>
+
+  <div class="row">
+      <div class="span11">
+          <a href="#" class="btn btn-warning pull-right" id="backup-start">Create backup</a>
+      </div>
+  </div>
+
+  <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Records</th>
+                <th>Info</th>
+              </tr>
+            </thead>
+            <tbody>
+            {{#tables}}
+              <tr>
+                <td>{{name}}</td>
+                <td>{{total}}</td>
+                <td>
+          	        <div class="dropdown">
+          	          <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+          	            <i class="icon-hdd"></i>
+          	            <b class="caret"></b>
+          	          </a>
+          	          <ul class="dropdown-menu" role="menu">
+          	            {{#files}}
+          	                <li id="backup-{{id}}"><a href="#">#{{num}} - <span class="stored_records">{{records}}</span> records</a></li>
+          	            {{/files}}
+          	          </ul>
+          	        </div>
+                  </td>
+              </tr>
+              {{/tables}}
+            </tbody>
+          </table>
+      </div>
+</div>

@@ -10,6 +10,8 @@
  * @copyright  (c) Modular gaming
  */
 class Controller_Admin_Item extends Abstract_Controller_Admin {
+	protected $_root_node = 'Item';
+	protected $_node = 'List';
 
 	public function action_index()
 	{
@@ -26,7 +28,6 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			->find_all();
 
 		$this->view = new View_Admin_Item_Index;
-		$this->_nav('items', 'index');
 		$this->view->item_types = $types->as_array();
 
 		$commands = Item::list_commands();

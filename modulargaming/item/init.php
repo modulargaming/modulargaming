@@ -5,7 +5,25 @@ Event::listen('admin.nav_list', function ()
 	return array(
 		'title' => 'Item',
 		'link'  => URL::site('admin/item'),
-		'icon'  => 'icon-shopping-cart'
+		'icon'  => 'icon-shopping-cart',
+		'items' => array(
+			array(
+				'title' => 'List',
+				'link' => Route::url('item.admin.list.index')
+			),
+			array(
+				'title' => 'Types',
+				'link' => Route::url('item.admin.types.index')
+			),
+			array(
+				'title' => 'Recipes',
+				'link' => Route::url('item.admin.recipe.index')
+			),
+			array(
+				'title' => 'Shops',
+				'link' => Route::url('item.admin.shop.index')
+			),
+		)
 	);
 });
 Route::set('item.admin.shop.index', 'admin/item/shops')
@@ -376,3 +394,167 @@ Route::set('item.shops.buy', 'shops/<id>/buy', array('id' => '[0-9]+'))
 	'controller' => 'Shops',
 	'action'     => 'buy',
 ));
+
+//User admin
+Route::set('admin.item.modal.shop', 'admin/user/modal/shop/<user_id>')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'shop',
+));
+Route::set('admin.item.modal.shop.reset', 'admin/user/modal/shop/<user_id>/reset')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'shop_reset',
+));
+Route::set('admin.item.modal.shop.stock', 'admin/user/modal/shop/<user_id>/stock')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'shop_stock',
+));
+Route::set('admin.item.modal.shop.load', 'admin/user/modal/shop/<user_id>/load')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'shop_load',
+));
+Route::set('admin.item.modal.shop.update', 'admin/user/modal/shop/<user_id>/update')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'shop_update',
+));
+Route::set('admin.item.modal.items', 'admin/user/modal/items/<user_id>')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'items',
+));
+Route::set('admin.item.modal.items.load', 'admin/user/modal/items/<user_id>/load')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'items_load',
+));
+Route::set('admin.item.modal.items.give', 'admin/user/modal/items/<user_id>/give')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'items_give',
+));
+Route::set('admin.item.modal.items.search', 'admin/user/modal/items/<user_id>/search')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'items_search',
+));
+Route::set('admin.item.modal.items.modify', 'admin/user/modal/items/<user_id>/modify')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'items_modify',
+));
+Route::set('admin.item.modal.items.save', 'admin/user/modal/items/<user_id>/save')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'items_save',
+));
+Route::set('admin.item.modal.trades', 'admin/user/modal/trades/<user_id>')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'trades',
+));
+Route::set('admin.item.modal.trades.bids', 'admin/user/modal/trades/<user_id>/bids')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'trades_bid',
+));
+Route::set('admin.item.modal.trades.lots', 'admin/user/modal/trades/<user_id>/lots')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'trades_lot',
+));
+Route::set('admin.item.modal.trades.cancel', 'admin/user/modal/trades/<user_id>/lots/cancel')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'trades_cancel',
+));
+Route::set('admin.item.modal.trades.lots.load', 'admin/user/modal/trades/<user_id>/lots')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'trades_lot_load',
+));
+Route::set('admin.item.modal.trades.lots.edit', 'admin/user/modal/trades/<user_id>/lots/edit')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Item',
+	'action'     => 'trades_lot_edit',
+));
+
+
+Event::listen('admin.user.view', function($user)
+{
+	$id = $user->id;
+
+	$return = array(
+		'links' => array(
+			array(
+				'title' => 'Items',
+				'handler' => 'items',
+				'link' => Route::url('admin.item.modal.items', array('user_id' => $id))
+			),
+		)
+	);
+
+	$user_shop = ORM::factory('User_Shop')
+		->where('user_id', '=', $id)
+		->find();
+
+	if ($user_shop->loaded())
+	{
+		$return['links'][] = array(
+			'title' => 'Shop',
+			'handler' => 'shop',
+			'link' => Route::url('admin.item.modal.shop', array('user_id' => $id))
+		);
+	}
+
+	$load_trades = true;
+
+	$trades = ORM::factory('User_Trade')
+		->where('user_id', '=', $user->id)
+		->count_all();
+
+	if($trades == 0)
+	{
+		$load_trades = false;
+
+		$bids = ORM::factory('User_Trade_Bid')
+			->where('user_id', '=', $user->id)
+			->count_all();
+
+		if($bids > 0)
+		{
+			$load_trades = true;
+		}
+	}
+
+	if($load_trades == true)
+	{
+		$return['links'][] = array(
+			'title' => 'Trades',
+			'handler' => 'trades',
+			'link' => Route::url('admin.item.modal.trades', array('user_id' => $id))
+		);
+	}
+
+	return $return;
+});

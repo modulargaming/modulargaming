@@ -106,8 +106,7 @@ abstract class Abstract_View {
 	 */
 	public function player()
 	{
-		$points = Kohana::$config->load('items.points');
-		$initial_points = $points['initial'];
+		$initial_points = Kohana::$config->load('core.initial_points');
 
 		$user = $this->_user->as_array();
 

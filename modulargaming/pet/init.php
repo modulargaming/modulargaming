@@ -120,14 +120,68 @@ Route::set('pet.admin.colour.index', 'admin/pet/colour')
 	'action'     => 'index',
 ));
 
+Event::listen('user.profile_tabs', 'PetEvents::user_profile');
+
+//User admin
+Route::set('admin.pet.modal.view', 'admin/user/modal/pets/<user_id>')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Pet',
+	'action'     => 'view',
+));
+Route::set('admin.pet.modal.save', 'admin/user/modal/pets/<user_id>/save/<pet_id>')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Pet',
+	'action'     => 'save',
+));
+
 //Add link to manage forums in admin
 Event::listen('admin.nav_list', function ()
 {
 	return array(
 		'title' => 'Pet',
 		'link'  => URL::site('admin/pet'),
-		'icon'  => 'icon-picture'
+		'icon'  => 'icon-picture',
+		'items' => array(
+			array(
+				'title' => 'Species',
+				'link' => Route::url('pet.admin.specie.index')
+			),
+			array(
+				'title' => 'Colours',
+				'link' => Route::url('pet.admin.colour.index')
+			)
+		)
 	);
 });
 
 Event::listen('user.profile_tabs', 'PetEvents::user_profile');
+
+//User admin
+Route::set('admin.pet.modal.view', 'admin/user/modal/pets/<user_id>')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Pet',
+	'action'     => 'view',
+));
+Route::set('admin.pet.modal.save', 'admin/user/modal/pets/<user_id>/save/<pet_id>')
+	->defaults(array(
+	'directory'  => 'Admin/Modal',
+	'controller' => 'Pet',
+	'action'     => 'save',
+));
+
+Event::listen('admin.user.view', function($user)
+{
+	$id = $user->id;
+	return array(
+		'links' => array(
+			array(
+				'title' => 'Pets',
+				'handler' => 'pets',
+				'link' => Route::url('admin.pet.modal.view', array('user_id' => $id))
+			)
+		)
+	);
+});

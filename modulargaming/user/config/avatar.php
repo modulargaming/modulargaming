@@ -8,6 +8,10 @@ return array(
 		'Gallery',
 		'Gravatar',
 		'Upload'
+	),
+	'size' => array(
+		'width' => 60,
+		'height' => 60
 	)
 
 );

@@ -21,7 +21,9 @@
                 "bProcessing":true,
                 "bServerSide":true,
                 "sAjaxSource":opts.base_url + "paginate",
-                "sDom":"<'row-fluid'<'span4 offset1'l><'span4 pull-right'f>r><'row'<'span" + opts.table.span + " offset" + opts.table.offset + "'t>><'row-fluid'<'span6'i><'span6'p>>",
+                "sDom":"<'row-fluid'<'span4 offset1'l><'span2'><'span4'f>><'row-fluid muted pagination-centered'r>"+
+	                "<'row'<'span" + opts.table.span + " offset" + opts.table.offset + "'t>>"+
+	                "<'row-fluid'<'span5 offset1 muted'i><'span5'p>>",
                 "aoColumnDefs":[
                     {
                         "bSortable":false,
@@ -34,7 +36,19 @@
                                 buttons = opts.buttons.call(this, data, type, full);
                             }
 
-                            return '<button data-id="' + data + '" class="btn btn-warning btn-edit">Edit</button>' + buttons + '<button data-id="' + data + '" class="btn btn-danger btn-delete">Delete</button>';
+	                        var output = '';
+							if(opts.edit_btn != false)
+							{
+								output += '<button data-id="' + data + '" class="btn btn-warning btn-'+opts.edit_btn+'">'+opts.edit_btn+'</button>';
+							}
+
+	                        output += buttons;
+
+	                        if(opts.delete_btn == true)
+	                        {
+		                        output += '<button data-id="' + data + '" class="btn btn-danger btn-delete">Delete</button>';
+	                        }
+                            return  output;
                         }
                     }
                 ]
@@ -352,6 +366,8 @@
         dataTable:{
             "aoColumnDefs":[]
         },
+	    edit_btn: 'edit',
+	    delete_btn: true,
         buttons:null,
         dT:null
     };

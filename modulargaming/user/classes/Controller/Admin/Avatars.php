@@ -10,6 +10,9 @@
  */
 class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 
+	protected $_root_node = 'User';
+	protected $_node = 'Avatars';
+
 	public function action_index()
 	{
 		if ( ! $this->user->can('Admin_Item_Index'))
@@ -22,7 +25,6 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 		$this->_load_assets(Kohana::$config->load('assets.admin_avatar'));
 
 		$this->view = new View_Admin_Avatar_Index;
-		$this->_nav('user', 'avatar');
 		$this->view->image = Kohana::$config->load('avatar.size');
 		;
 	}

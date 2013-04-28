@@ -1,0 +1,81 @@
+<div class="hide" id="data-sources"{{#data_sources}} data-{{id}}="{{url}}"{{/data_sources}}></div>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>Modal header</h3>
+</div>
+<div class="modal-body">
+	<ul class="nav nav-tabs" id="pets-tabs">
+		{{#pets}}
+			<li{{#active}} class="active"{{/active}}><a href="#pet-info-{{id}}">{{name}}</a></li>
+		{{/pets}}
+	</ul>
+	<div class="tab-content">
+		{{#pet_info}}
+		<div class="tab-pane{{#active}} active{{/active}}" id="pet-info-{{id}}">
+	      <form method="post" id="modal-pets-form-{{id}}" class="form-horizontal">
+		      <input type="hidden" name="csrf" id="input-csrf" value="{{csrf}}" />
+		      <div class="control-group">
+		          <label class="control-label" for="input-name-{{id}}">Name</label>
+
+		          <div class="controls">
+		              <input type="text" class="input-medium" id="input-name-{{id}}" name="name" value="{{name}}" maxlength="35" />
+		          </div>
+		      </div>
+		      <div class="control-group">
+		          <label class="control-label" for="input-gender-{{id}}">Gender</label>
+
+		          <div class="controls">
+		              <select name="gender" id="input-gender-{{id}}">
+		                {{#genders}}
+		                    <option value="{{id}}"{{#selected}} selected{{/selected}}>{{value}}</option>
+		                {{/genders}}
+		              </select>
+		          </div>
+		      </div>
+		      <div class="control-group">
+		          <label class="control-label" for="input-specie-{{id}}">Specie</label>
+
+		          <div class="controls">
+		              <select name="specie" id="input-specie-{{id}}">
+		                {{#species}}
+		                    <option value="{{id}}"{{#selected}} selected{{/selected}}>{{value}}</option>
+		                {{/species}}
+		              </select>
+		          </div>
+		      </div>
+		      <div class="control-group">
+		          <label class="control-label" for="input-colour-{{id}}">Colour</label>
+
+		          <div class="controls">
+		              <select name="colour" id="input-colour-{{id}}">
+		                {{#colours}}
+		                    <option value="{{id}}"{{#selected}} selected{{/selected}}>{{value}}</option>
+		                {{/colours}}
+		              </select>
+		          </div>
+		      </div>
+		      <div class="control-group">
+		          <label class="control-label" for="input-hunger-{{id}}">Hunger level</label>
+
+		          <div class="controls">
+		              <input type="number" class="input-small" id="input-hunger-{{id}}" name="title" value="{{hunger}}" maxlength="3" />
+		          </div>
+		      </div>
+		      <div class="control-group">
+		          <label class="control-label" for="input-happiness-{{id}}">Happiness level</label>
+
+		          <div class="controls">
+		              <input type="number" class="input-small" id="input-happiness-{{id}}" name="title" value="{{happiness}}" maxlength="3" />
+		          </div>
+		      </div>
+
+		      <button type="submit" class="btn btn-success pull-right pet-save" data-id="{{id}}">save</button>
+	      </form>
+	  </div>
+	  {{/pet_info}}
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">Close</button>
+</div>

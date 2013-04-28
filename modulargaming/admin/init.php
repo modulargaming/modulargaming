@@ -1,11 +1,12 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
+Route::set('admin.index', 'admin')
 	->defaults(array(
-		'directory'  => 'admin',
+		'directory'  => 'Admin',
 		'controller' => 'dashboard',
 		'action'     => 'index',
-	));
+	)
+);
 
 Route::set('admin.templates', 'assets/js/admin/templates.js')
 	->defaults(array(

@@ -1,0 +1,80 @@
+<div class="hide" id="data-sources"{{#data_sources}} data-{{id}}="{{url}}"{{/data_sources}}></div>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>Modal header</h3>
+</div>
+<div class="modal-body">
+	<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="table-settings">
+    	<thead>
+            <tr>
+            	<th class="span1">Name</th>
+            	<th class="span2">Value</th>
+            	<th class="span2">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<tr>
+        		<td colspan="3" class="dataTables_empty pagination-centered">Loading data from server</td>
+        	</tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">Close</button>
+</div>
+
+
+<div id="modal-settings-read" class="modal hide fade" tabindex="-1" data-focus-on="input:first" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-settings-header">Setting #<span class="modal-settings-read-name"></span></h3>
+  </div>
+  <div class="modal-body form-horizontal" id="modal-settings-body">
+	      <div class="control-group">
+	          <label class="control-label" for="modal-settings-read-id">Id</label>
+
+	          <div class="controls" id="modal-settings-read-id">
+
+	          </div>
+	      </div>
+	      <div class="control-group">
+	          <label class="control-label" for="modal-settings-read-name">Name</label>
+
+	          <div class="controls modal-settings-read-name">
+
+	          </div>
+	      </div>
+	      <div class="control-group">
+	          <label class="control-label" for="modal-settings-read-content">Value</label>
+
+	          <div class="controls" id="modal-settings-read-content">
+	            <form id="modal-settings-form">
+	            <input type="hidden" name="id" id="input-settings-id" />
+	            <input type="hidden" name="csrf" value="{{csrf}}" />
+				<textarea name="content" id="input-settings-content"></textarea>
+				</form>
+	          </div>
+	      </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-settings-read-cancel" aria-hidden="true">Close</button>
+    <button class="btn btn-success" id="modal-settings-read-save">Save</button>
+    <button class="btn btn-danger" id="modal-settings-read-delete">Delete</button>
+  </div>
+</div>
+
+<div id="modal-settings-delete" class="modal hide fade" tabindex="-1" data-focus-on="input:first" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-user-header">Setting #<span class="modal-settings-delete-name"></span></h3>
+  </div>
+  <div class="modal-body">
+		Are you sure you want to delete setting #<span class="modal-settings-delete-name"></span>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-settings-remove-cancel" aria-hidden="true">Cancel</button>
+    <button class="btn btn-danger" id="modal-settings-delete-complete">Delete</button>
+  </div>
+</div>

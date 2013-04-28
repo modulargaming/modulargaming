@@ -1,6 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
 	class Controller_Admin_Pet_Colour extends Abstract_Controller_Admin {
+		protected $_root_node = 'Pet';
+		protected $_node = 'Colours';
 
 		public function action_index()
 		{
@@ -16,7 +18,7 @@
 			$this->view = new View_Admin_Pet_Colour_Index;
 			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 			$this->_load_assets(Kohana::$config->load('assets.admin_pet.colour'));
-			$this->_nav('pet', 'colour');
+
 			$this->view->colours = $colours->as_array();
 		}
 

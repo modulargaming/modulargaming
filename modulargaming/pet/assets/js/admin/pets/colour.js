@@ -21,7 +21,7 @@ $(document).ready(function() {
         },
         table: {
             span: 5,
-            offset: 3
+            offset: 4
         }
     });
 });

@@ -1,0 +1,103 @@
+<div class="hide" id="data-sources"{{#data_sources}} data-{{id}}="{{url}}"{{/data_sources}}></div>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>Modal header</h3>
+</div>
+<div class="modal-body">
+	<table border="0" class="table table-bordered table-striped" id="table-logs">
+    	<thead>
+    		<tr>
+    			<th class="span1">Type</th>
+    			<th class="span2">Alias</th>
+    			<th class="span2">Location</th>
+    			<th class="span2">Time</th>
+    			<th class="span1">Options</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+    			<td colspan="5" class="dataTables_empty">Loading data from server</td>
+    		</tr>
+    	</tbody>
+    </table>
+</div>
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">Close</button>
+</div>
+
+
+<div class="modal hide fade" id="modal-log-read">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">x</button>
+		<h3 id="modal-header"></h3>
+	</div>
+	<div class="modal-body">
+		<table class="table table-hover">
+			<tr>
+				<td><strong>
+					Time
+				</strong></td>
+				<td id="log-time">
+
+				</td>
+			</tr>
+			<tr>
+				<td><strong>
+					User
+				</strong></td>
+				<td id="log-user">
+
+				</td>
+			</tr>
+			<tr>
+				<td><strong>
+					Type
+				</strong></td>
+				<td id="log-type">
+
+				</td>
+			</tr>
+			<tr>
+				<td><strong>
+					Alias
+				</strong></td>
+				<td id="log-alias">
+
+				</td>
+			</tr>
+			<tr>
+				<td><strong>
+					Location
+				</strong></td>
+				<td id="log-location">
+
+				</td>
+			</tr>
+			<tr>
+				<td><strong>
+					Client
+				</strong></td>
+				<td id="log-client">
+
+				</td>
+			</tr>
+			<tr>
+				<td><strong>
+					Message
+				</strong></td>
+				<td id="log-msg">
+
+				</td>
+			</tr>
+			<tr>
+				<td><strong>
+					Parameters
+				</strong></td>
+				<td id="log-param">
+
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

@@ -12,9 +12,9 @@ $(document).ready(function() {
                     "aTargets": [ 1 ],
                     "mRender": function ( data, type, full ) {
                         if(data == 1)
-                            return '<i class="icon-lock offset5"> </i>';
+                            return '<i class="icon-lock"> </i>';
                         else
-                            return '<i class="icon-eye-open offset5"> </i>';
+                            return '<i class="icon-eye-open"> </i>';
                     }
                 }
             ]

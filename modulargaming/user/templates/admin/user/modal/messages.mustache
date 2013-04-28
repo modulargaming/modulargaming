@@ -1,0 +1,142 @@
+<div class="hide" id="data-sources"{{#data_sources}} data-{{id}}="{{url}}"{{/data_sources}}></div>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>Modal header</h3>
+</div>
+<div class="modal-body">
+	<ul class="nav nav-tabs" id="msg-tabs">
+		<li class="active"><a href="#msg-send">Send message</a></li>
+	    <li><a href="#msg-received">Received</a></li>
+	    <li><a href="#msg-sent">sent</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="msg-send">
+	      <form method="post" id="modal-msg-form" class="form-horizontal">
+		      <input type="hidden" name="csrf" value="{{csrf}}">
+
+					<div class="control-group">
+						<label class="control-label" for="input-subject">Subject</label>
+
+						<div class="controls">
+							<input type="text" class="input-medium" id="input-subject" name="subject" value="" maxlength="50">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="input-msg">Message</label>
+
+						<div class="controls">
+							<textarea name="content" id="input-msg" class="textarea" placeholder="Enter text..."></textarea>
+						</div>
+					</div>
+		      <button type="submit" class="btn btn-primary pull-right" id="modal-msg-send">Send</button>
+	      </form>
+	  </div>
+	  <div class="tab-pane" id="msg-received">
+	    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="table-msg-received">
+	            <thead>
+	                <tr>
+	                    <th class="span1">ID</th>
+	                    <th class="span1">Sender</th>
+	                    <th class="span2">Subject</th>
+	                    <th class="span1">Date</th>
+	                    <th class="span2">Options</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr>
+	                    <td colspan="5" class="dataTables_empty pagination-centered">Loading data from server</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	  </div>
+	  <div class="tab-pane" id="msg-sent">
+	        <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped" id="table-msg-sent">
+	                <thead>
+	                    <tr>
+	                        <th class="span1">ID</th>
+	                        <th class="span1">Receiver</th>
+	                        <th class="span2">Subject</th>
+	                        <th class="span1">Date</th>
+	                        <th class="span2">Options</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr>
+	                        <td colspan="5" class="dataTables_empty pagination-centered">Loading data from server</td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	  </div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" data-dismiss="modal" class="btn">Close</button>
+</div>
+
+<div id="modal-msg-read" class="modal hide fade" tabindex="-1" role="dialog" data-focus-on="input:first">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-user-header">Message #<span class="modal-msg-read-id"></span></h3>
+  </div>
+  <div class="modal-body" id="modal-msg-body">
+    <form class="form-horizontal">
+    <fieldset>
+
+					<div class="control-group">
+						<label class="control-label" for="input-id">id</label>
+
+						<div class="controls modal-msg-read-id">
+
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="modal-msg-read-sender">Sender</label>
+
+						<div class="controls" id="modal-msg-read-sender">
+
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="modal-msg-read-receiver">Receiver</label>
+
+						<div class="controls" id="modal-msg-read-receiver">
+
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="modal-msg-read-subject">Subject</label>
+
+						<div class="controls" id="modal-msg-read-subject">
+
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="modal-msg-read-message">Message</label>
+
+						<div class="controls" id="modal-msg-read-message">
+
+						</div>
+					</div>
+	   </fieldset>
+	   </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-user-cancel" aria-hidden="true">Close</button>
+    <button class="btn btn-danger" id="modal-msg-read-delete">Delete</button>
+  </div>
+</div>
+
+<div id="modal-msg-delete" class="modal hide fade" tabindex="-1" role="dialog" data-focus-on="input:first">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-user-header">Message #<span class="modal-msg-delete-id"></span></h3>
+  </div>
+  <div class="modal-body">
+		Are you sure you want to delete message #<span class="modal-msg-delete-id"></span>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" id="modal-user-cancel" aria-hidden="true">Cancel</button>
+    <button class="btn btn-danger" id="modal-msg-delete-complete">Delete</button>
+  </div>
+</div>

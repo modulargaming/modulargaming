@@ -1,0 +1,72 @@
+<form action="{{link_modules}}" method="post">
+<input type="hidden" name="csrf" value="{{csrf}}" />
+<h3>Modular gaming</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="sorted_table">
+  {{#mg_modules}}
+    <tr>
+      <td>
+        <input type="checkbox" name="modules[]" value="{{handle}}"{{#active}} checked{{/active}} />
+        </td>
+      <td>{{name}}</td>
+      <td>{{description}}</td>
+      <td>
+        {{#show_cfg}}
+	        <div class="dropdown">
+	          <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
+	            <i class="icon-wrench icon-white"></i>
+
+	            <b class="caret"></b>
+	          </a>
+	          <ul class="dropdown-menu" role="menu">
+	            {{#config}}
+	                <li><a href="{{link}}">{{name}}</a></li>
+	            {{/config}}
+	          </ul>
+	        </div>
+        {{/show_cfg}}</td>
+    </tr>
+    {{/mg_modules}}
+    <tr>
+        <td colspan="4">
+            <input type="submit" class="btn btn-warning pull-right" value="Update" />
+        </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Kohana</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody class="sorted_table">
+  {{#modules}}
+    <tr>
+      <td>
+        <input type="checkbox" name="modules[]" value="{{handle}}"{{#active}} checked{{/active}} />
+        </td>
+      <td>{{name}}</td>
+      <td>{{description}}</td>
+    </tr>
+    {{/modules}}
+    <tr>
+        <td colspan="4">
+            <input type="submit" class="btn btn-warning pull-right" value="Update" />
+        </td>
+    </tr>
+  </tbody>
+</table>
+</form>

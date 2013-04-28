@@ -2,6 +2,9 @@
 
 	class Controller_Admin_Pet_Specie extends Controller_Admin_Pet {
 
+		protected $_root_node = 'Pet';
+		protected $_node = 'Species';
+
 		public function action_index()
 		{
 
@@ -19,7 +22,7 @@
 			$this->view = new View_Admin_Pet_Specie_Index;
 			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
 			$this->_load_assets(Kohana::$config->load('assets.admin_pet.specie'));
-			$this->_nav('pet', 'specie');
+
 			$this->view->species = $species->as_array();
 			$this->view->colours = $colours->as_array();
 			$this->view->image_dim = Kohana::$config->load('pet.image');
