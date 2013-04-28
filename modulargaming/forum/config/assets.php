@@ -6,7 +6,7 @@ return array (
 		'head' => array(
 			'style' => array(
 				'forum' => array(
-					'file' => 'assets/css/forum.css'
+					'file'   => 'assets/css/forum.css'
 				)
 			)
 		)
