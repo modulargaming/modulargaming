@@ -3,6 +3,11 @@
  */
 
 $(document).ready(function () {
+
+	if ( ! $('body').hasClass('admin-avatars')) {
+		return;
+	}
+
     $('#input-img').fileupload({uploadtype:'image', name:'img'});
 
     $('#data-table').on('crud.clean', function (e) {

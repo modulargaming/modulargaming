@@ -17,14 +17,9 @@ class Controller_Admin_Avatars extends Abstract_Controller_Admin {
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
 
-		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
-		$this->_load_assets(Kohana::$config->load('assets.upload'));
-		$this->_load_assets(Kohana::$config->load('assets.admin_avatar'));
-
 		$this->view = new View_Admin_Avatar_Index;
 		$this->_nav('user', 'avatar');
 		$this->view->image = Kohana::$config->load('avatar.size');
-		;
 	}
 
 	public function action_paginate()

@@ -3,6 +3,11 @@
  */
 
 $(document).ready(function() {
+
+	if ( ! $('body').hasClass('admin/user-user')) {
+		return;
+	}
+
     $('#search').typeahead({
         source: function (query, process) {
             return $.get('./search/', { type: 'role', item: query }, function (data) {
