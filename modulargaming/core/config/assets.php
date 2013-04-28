@@ -15,7 +15,7 @@ return array
 					'weight' => -99
 				),
 				'bootstrap-whysihtml5' => array(
-					'file'   => 'assets/css/bootstrap-whysihtml5.css',
+					'file'   => 'assets/css/bootstrap-wysihtml5.css',
 					'weight' => -98
 				),
 				'style' => array(
