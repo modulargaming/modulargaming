@@ -1,6 +1,22 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 return array(
+	'frontend' => array(
+		'body' => array(
+			'script' => array(
+				'item.inventory.index' => array(
+					'file' => 'assets/js/item/inventory/index.js'
+				),
+				'item.inventory.view' => array(
+					'file' => 'assets/js/item/inventory/view.js'
+				),
+				'item.cookbook' => array(
+					'file' => 'assets/js/cookbook.js'
+				)
+			)
+		)
+	)
+	/*
 	'admin_item' => array(
 		'list'   => array(
 			'body' => array(
@@ -43,4 +59,5 @@ return array(
 			),
 		)
 	)
+	*/
 );

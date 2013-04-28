@@ -20,7 +20,6 @@ class Controller_Item_Cookbook extends Abstract_Controller_Frontend {
 
 		if ($config['ajax'] === TRUE)
 		{
-			Assets::factory('body')->js('item.cookbook', 'item/cookbook.js');
 			$this->view->ajax = TRUE;
 		}
 
