@@ -61,7 +61,7 @@ class Avatar_Gallery extends Avatar {
 	public function url()
 	{
 		$id = Arr::get($this->data, 'id', 0);
-		return URL::site('assets/img/avatars/gallery/'.$id.'.png', NULL, FALSE);
+		return URL::site('media/image/avatars/gallery/'.$id.'.png', NULL, FALSE);
 	}
 
 	protected function _edit_view()

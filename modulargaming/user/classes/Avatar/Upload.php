@@ -16,7 +16,7 @@ class Avatar_Upload extends Avatar {
 	/**
 	 * @var string prefix for avatar path.
 	 */
-	private $prefix = 'assets/img/avatars/';
+	private $prefix = 'media/image/avatars/';
 
 	/**
 	 * Upload the image and return the image data.
