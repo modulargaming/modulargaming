@@ -5,6 +5,12 @@ function pet_image() {
 }
 
 $(document).ready(function () {
+
+	// Only run on pet create.
+	if ( ! $('body').hasClass('pet-create')) {
+		return;
+	}
+
     $("a[rel=popover]").click(function (e) {
         e.preventDefault();
 
