@@ -136,7 +136,7 @@ function handle_consume(data) {
 
         if (data.new_amount == '0') {
             item.removeAttr('href');
-            item.css('background-color', '#fcf8e3').find('span').text('none');
+            item.parent().fadeOut();
         }
         else {
             item.find('span').text(data.new_amount);
