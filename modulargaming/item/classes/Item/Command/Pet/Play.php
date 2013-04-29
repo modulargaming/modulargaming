@@ -33,7 +33,7 @@ class Item_Command_Pet_Play extends Item_Command_Pet {
 	public function perform($item, $param, $pet=null)
 	{
 		if($pet->happiness == 100)
-			return $pet->name.' is already too happy';
+			return FALSE;
 		else
 		{
 			$level = $pet->happiness + $param;
@@ -45,7 +45,7 @@ class Item_Command_Pet_Play extends Item_Command_Pet {
 
 			$pet->save();
 
-			return $pet->name.' played with '. $item->name;
+			return $pet->name.' played with '. $item->item->name;
 		}
 	}
 }
