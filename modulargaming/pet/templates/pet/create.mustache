@@ -31,7 +31,9 @@
 				{{/colours}}
 			</div><br /><br />
 			<label>Name</label>
-			<input type="text" name="name" /><br /><br />
+			<input type="text" name="name" maxlength="255" required>
+			<a href="#" class="btn btn-mini btn-inverse" title="Your pet's name may only contain letters, numbers, and underscores."><i class="icon-question-sign icon-white"></i></a>
+			<br /><br />
 			<label>Gender</label>
 			<div class="btn-group gender" data-toggle="buttons-radio">
 				<button type="button" class="btn active" value="male">Male</button>
