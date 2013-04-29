@@ -1,7 +1,14 @@
+{{^has_price}}
+<div class="alert alert-error">
+	You need at least 100 points to play Lucky Wheel.
+</div>
+{{/has_price}}
 {{^can_play}}
+	{{#has_price}}
 	<div class="alert alert-error">
 		You may only play Lucky Wheel once every hour. Please come back later.
 	</div>
+	{{/has_price}}
 {{/can_play}}
 {{#game}}
 	<ul>
