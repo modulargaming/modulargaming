@@ -18,10 +18,6 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item index');
 		}
 
-		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
-		$this->_load_assets(Kohana::$config->load('assets.upload'));
-		$this->_load_assets(Kohana::$config->load('assets.admin_item.list'));
-
 		$types = ORM::factory('Item_Type')
 			->find_all();
 

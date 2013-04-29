@@ -4,6 +4,10 @@
 
 $(document).ready(function () {
 
+	if ( ! $('body').hasClass('admin/item-types')) {
+		return;
+	}
+
     $('#data-table').CRUD({
         base_url:'./types/',
         identifier:{data:'name', table:1},

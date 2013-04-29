@@ -3,6 +3,11 @@
  */
 
 $(document).ready(function () {
+
+	if ( ! $('body').hasClass('admin/item-shops')) {
+		return;
+	}
+
     var current = {};
 
     $('#input-stock-item_name').typeahead({

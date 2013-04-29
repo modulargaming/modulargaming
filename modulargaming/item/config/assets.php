@@ -15,49 +15,23 @@ return array(
 				)
 			)
 		)
-	)
-	/*
-	'admin_item' => array(
-		'list'   => array(
-			'body' => array(
-				'js' => array(
-					array(
-						'name' => 'item.list',
-						'file' => 'admin/item/list.js'
-					)
+	),
+	'backend' => array(
+		'body' => array(
+			'script' => array(
+				'item.list' => array(
+					'file' => 'assets/js/admin/item/list.js'
+				),
+				'item.type' => array(
+					'file' => 'assets/js/admin/item/type.js'
+				),
+				'item.shops' => array(
+					'file' => 'assets/js/admin/item/shops.js'
+				),
+				'item.recipe' => array(
+					'file' => 'assets/js/admin/item/recipe.js'
 				)
-			),
-		),
-		'type'   => array(
-			'body' => array(
-				'js' => array(
-					array(
-						'name' => 'item.type',
-						'file' => 'admin/item/type.js'
-					)
-				)
-			),
-		),
-		'shop'   => array(
-			'body' => array(
-				'js' => array(
-					array(
-						'name' => 'item.shop',
-						'file' => 'admin/item/shops.js'
-					)
-				)
-			),
-		),
-		'recipe' => array(
-			'body' => array(
-				'js' => array(
-					array(
-						'name' => 'item.recipe',
-						'file' => 'admin/item/recipe.js'
-					)
-				)
-			),
+			)
 		)
 	)
-	*/
 );

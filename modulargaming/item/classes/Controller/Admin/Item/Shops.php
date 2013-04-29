@@ -18,9 +18,6 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin item shops index');
 		}
 
-		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
-		$this->_load_assets(Kohana::$config->load('assets.admin_item.shop'));
-
 		$this->view = new View_Admin_Item_Shop;
 		$this->view->image = Kohana::$config->load('items.npc.image');
 		$this->_nav('items', 'shops');

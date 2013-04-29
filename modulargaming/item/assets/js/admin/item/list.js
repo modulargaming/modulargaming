@@ -3,6 +3,11 @@
  */
 
 $(document).ready(function () {
+
+	if ( ! $('body').hasClass('admin-item')) {
+		return;
+	}
+
     $('#modal-crud-tab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');

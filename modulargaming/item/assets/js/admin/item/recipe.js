@@ -3,6 +3,11 @@
  */
 
 $(document).ready(function () {
+
+	if ( ! $('body').hasClass('admin/item-recipes')) {
+		return;
+	}
+
     $('#input-crafted_item').typeahead({
         source:function (query, process) {
             return $.get('./search/', { type:'item', item:query }, function (data) {

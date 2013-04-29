@@ -21,10 +21,6 @@ class Controller_Admin_Item_Recipes extends Abstract_Controller_Admin {
 		$this->view = new View_Admin_Item_Recipe;
 		$this->_nav('items', 'recipes');
 
-		$this->_load_assets(Kohana::$config->load('assets.data_tables'));
-		$this->_load_assets(Kohana::$config->load('assets.admin_item.recipe'));
-
-
 		$types = ORM::factory('Item_Recipe')
 			->find_all();
 
