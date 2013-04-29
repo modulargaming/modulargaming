@@ -17,8 +17,6 @@
 				->find_all();
 
 			$this->view = new View_Admin_Pet_Specie_Index;
-			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
-			$this->_load_assets(Kohana::$config->load('assets.admin_pet.specie'));
 			$this->_nav('pet', 'specie');
 			$this->view->species = $species->as_array();
 			$this->view->colours = $colours->as_array();

@@ -3,6 +3,11 @@
  */
 
 $(document).ready(function() {
+
+	if ( ! $('body').hasClass('admin/pet-colour')) {
+		return;
+	}
+
     $('#data-table').CRUD({
         base_url: './colour/',
         identifier: {data: 'name', table: 1},

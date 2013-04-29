@@ -3,6 +3,11 @@
  */
 
 $(document).ready(function() {
+
+	if ( ! $('body').hasClass('admin/pet-specie')) {
+		return;
+	}
+
     $('#search').typeahead({
         source: function (query, process) {
             return $.get('./search/', { type: 'pet-specie', item: query }, function (data) {

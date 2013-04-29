@@ -14,8 +14,6 @@
 				->find_all();
 
 			$this->view = new View_Admin_Pet_Colour_Index;
-			$this->_load_assets(Kohana::$config->load('assets.data_tables'));
-			$this->_load_assets(Kohana::$config->load('assets.admin_pet.colour'));
 			$this->_nav('pet', 'colour');
 			$this->view->colours = $colours->as_array();
 		}
