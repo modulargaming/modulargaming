@@ -33,7 +33,7 @@ class Item_Command_Pet_Feed extends Item_Command_Pet {
 	public function perform($item, $param, $pet=null)
 	{
 		if($pet->hunger == 100)
-			return $pet->name.' is already full';
+			return FALSE;
 		else
 		{
 			$level = $pet->hunger +  $param;
@@ -45,7 +45,7 @@ class Item_Command_Pet_Feed extends Item_Command_Pet {
 
 			$pet->save();
 
-			return $pet->name.' has been fed '. $item->name;
+			return $pet->name.' has been fed '. $item->item->name;
 		}
 	}
 }
