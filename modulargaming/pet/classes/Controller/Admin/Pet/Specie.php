@@ -235,16 +235,16 @@
 				else
 				{
 					$msg = '';
-					if (file_exists(DOCROOT . 'assets/img/pets/' . $specie->dir . $c->image))
+					if (file_exists(DOCROOT . 'media/image/pets/' . $specie->dir . $c->image))
 					{
 						//move the previously stored item to the graveyard
 						$new_name = Text::random('alnum', 4) . $specie->name;
-						copy(DOCROOT . 'assets/img/pets/' . $specie->dir . $c->image, DOCROOT . 'assets/graveyard/pets/' . $new_name);
-						unlink(DOCROOT . 'assets/img/pets/' . $specie->dir . $c->image);
+						copy(DOCROOT . 'media/image/pets/' . $specie->dir . $c->image, DOCROOT . 'assets/graveyard/pets/' . $new_name);
+						unlink(DOCROOT . 'media/image/pets/' . $specie->dir . $c->image);
 						$msg = 'The old image has been moved to the graveyard and renamed to ' . $new_name;
 					}
 
-					$up = Upload::save($image, $c->image, DOCROOT . 'assets/img/pets/' . $specie->dir);
+					$up = Upload::save($image, $c->image, DOCROOT . 'media/image/pets/' . $specie->dir);
 
 					if ($up != FALSE)
 					{

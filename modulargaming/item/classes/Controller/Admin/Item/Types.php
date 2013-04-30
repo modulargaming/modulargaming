@@ -108,7 +108,7 @@ class Controller_Admin_Item_Types extends Abstract_Controller_Admin {
 			//create the item type directory
 			if ($id == null)
 			{
-				mkdir(DOCROOT . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'items' . DIRECTORY_SEPARATOR . $values['img_dir']);
+				mkdir(DOCROOT . 'media' . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR . 'items' . DIRECTORY_SEPARATOR . $values['img_dir']);
 			}
 
 			$data = array(

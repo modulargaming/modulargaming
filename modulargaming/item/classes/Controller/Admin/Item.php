@@ -294,7 +294,7 @@ class Controller_Admin_Item extends Abstract_Controller_Admin {
 
 				$type = ORM::factory('Item_Type', $values['type_id']);
 
-				$base_dir = DOCROOT . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'items' . DIRECTORY_SEPARATOR;
+				$base_dir = DOCROOT . 'media' . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR . 'items' . DIRECTORY_SEPARATOR;
 
 				//if we're just changing the item type we'll have to move it a different dir
 				if ($type->id != $item->type_id && $file['status'] == 'empty')

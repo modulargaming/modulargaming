@@ -151,27 +151,27 @@ class Controller_Admin_Item_Shops extends Abstract_Controller_Admin {
 				else
 				{
 					$msg = '';
-					if ($id != NULL && $img != null && file_exists(DOCROOT . 'assets/img/npc/shop/' . $img))
+					if ($id != NULL && $img != null && file_exists(DOCROOT . 'media/image/npc/shop/' . $img))
 					{
-						$grave_dir = DOCROOT . 'assets/graveyard/npc/shop/';
+						$grave_dir = DOCROOT . 'media/graveyard/npc/shop/';
 						if (!is_dir($grave_dir))
 						{
 							mkdir($grave_dir, 0, true);
 						}
 						//move the previously stored item to the graveyard
 						$new_name = Text::random('alnum', 4) . $img;
-						copy(DOCROOT . 'assets/img/npc/shop/' . $img, $grave_dir . $new_name);
-						unlink(DOCROOT . 'assets/img/npc/shop/' . $img);
+						copy(DOCROOT . 'media/image/npc/shop/' . $img, $grave_dir . $new_name);
+						unlink(DOCROOT . 'media/image/npc/shop/' . $img);
 						$msg = 'The old image has been moved to the graveyard and renamed to ' . $new_name;
 					}
 
-					if (!is_dir(DOCROOT . 'assets/img/npc/shop/'))
+					if (!is_dir(DOCROOT . 'media/image/npc/shop/'))
 					{
-						mkdir(DOCROOT . 'assets/img/npc/shop/', 0, true);
+						mkdir(DOCROOT . 'media/image/npc/shop/', 0, true);
 					}
 
-					$up = Upload::save($image, $image['name'], DOCROOT . 'assets/img/npc/shop/');
-					// $up = Upload::save($image, DOCROOT . 'assets/img/npc/shop/'.$image['name']);
+					$up = Upload::save($image, $image['name'], DOCROOT . 'media/image/npc/shop/');
+					// $up = Upload::save($image, DOCROOT . 'media/image/npc/shop/'.$image['name']);
 
 					if ($up != FALSE)
 					{
