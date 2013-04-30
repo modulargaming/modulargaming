@@ -121,7 +121,8 @@ I18n::lang('en-gb');
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	
+	'theme/default' => THEMEPATH.'default',
+
 	// Modular Gaming modules
 	'game'    => MGPATH.'game',
 	'forum'   => MGPATH.'forum',

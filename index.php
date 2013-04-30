@@ -16,17 +16,22 @@ $application = 'application';
 $modules = 'modules';
 
 /**
- * The directory in which your moduler gaming modules are located.
- */
-$modulargaming = 'modulargaming';
-
-/**
  * The directory in which the Kohana resources are located. The system
  * directory must contain the classes/kohana.php file.
  *
  * @link http://kohanaframework.org/guide/about.install#system
  */
 $system = 'system';
+
+/**
+ * The directory in which your ModularGaming modules are located.
+ */
+$modulargaming = 'modulargaming';
+
+/**
+ * The directory in which the Themes are located.
+ */
+$themes = 'themes';
 
 /**
  * The default extension of resource files. If you change this, all resources
@@ -69,22 +74,27 @@ if ( ! is_dir($application) AND is_dir(DOCROOT.$application))
 if ( ! is_dir($modules) AND is_dir(DOCROOT.$modules))
 	$modules = DOCROOT.$modules;
 
+// Make the system relative to the docroot, for symlink'd index.php
+if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
+	$system = DOCROOT.$system;
+
 // Make the modulargaming modules relative to the docroot, for symlink'd index.php
 if ( ! is_dir($modulargaming) AND is_dir(DOCROOT.$modulargaming))
 	$modulargaming = DOCROOT.$modulargaming;
 
-// Make the system relative to the docroot, for symlink'd index.php
-if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
-	$system = DOCROOT.$system;
+// Make the themes relative to the docroot, for symlink'd index.php
+if ( ! is_dir($themes) AND is_dir(DOCROOT.$themes))
+	$themes = DOCROOT.$themes;
 
 // Define the absolute paths for configured directories
 define('APPPATH', realpath($application).DIRECTORY_SEPARATOR);
 define('MGPATH', realpath($modulargaming).DIRECTORY_SEPARATOR);
 define('MODPATH', realpath($modules).DIRECTORY_SEPARATOR);
 define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
+define('THEMEPATH', realpath($themes).DIRECTORY_SEPARATOR);
 
 // Clean up the configuration vars
-unset($application, $modules, $system, $modulargaming);
+unset($application, $modules, $system, $modulargaming, $themes);
 
 // Uncomment to run install check.
 // return include 'install'.EXT;
