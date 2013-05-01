@@ -123,6 +123,7 @@ I18n::lang('en-gb');
 Kohana::modules(array(
 	// Themes
 	'theme/default' => THEMEPATH.'default',
+	'theme/admin'   => THEMEPATH.'admin',
 
 	// Modular Gaming modules
 	'game'    => MGPATH.'game',
