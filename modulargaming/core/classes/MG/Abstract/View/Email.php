@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Abstract base view for normal purposes.
+ * Abstract base view for email purposes.
  *
  * @package    Modular Gaming
  * @category   View
@@ -8,4 +8,8 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-abstract class Abstract_View extends MG_Abstract_View {}
+class MG_Abstract_View_Email {
+
+	public $subject;
+
+}
