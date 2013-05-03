@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-	class Task_Restock extends Minion_Task {
+class MG_Task_Restock extends Minion_Task {
 		protected $_options = array();
 
 		/**
