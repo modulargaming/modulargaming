@@ -159,7 +159,7 @@ class MG_Controller_Item_Inventory extends Abstract_Controller_Frontend {
 		$this->view = new View_Item_Inventory_View;
 		$this->view->item = $item;
 		$this->view->action_list = $actions;
-		Assets::js('item.inventory', 'item/inventory/view.js');
+		//Assets::js('item.inventory', 'item/inventory/view.js');
 	}
 
 	public function action_consume()
