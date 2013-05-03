@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class MG_Controller_Admin_Dashboard extends MG_Abstract_Controller_Admin {
+class MG_Controller_Admin_Dashboard extends Abstract_Controller_Admin {
 
 	/**
 	 * @var string Full url to the news feed.

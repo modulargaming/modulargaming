@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class MG_Abstract_View_Admin extends MG_Abstract_View {
+class MG_Abstract_View_Admin extends Abstract_View {
 
 	protected $_assets_group = 'backend';
 

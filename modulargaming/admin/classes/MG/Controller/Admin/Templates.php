@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class MG_Controller_Admin_Templates extends MG_Abstract_Controller_Admin {
+class MG_Controller_Admin_Templates extends Abstract_Controller_Admin {
 
 	private $_directory = 'templates/Admin/Modal';
 

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class MG_Abstract_Controller_Admin extends MG_Abstract_Controller_Frontend {
+class MG_Abstract_Controller_Admin extends Abstract_Controller_Frontend {
 
 	protected $layout = 'Admin/layout';
 	protected $protected = TRUE;
