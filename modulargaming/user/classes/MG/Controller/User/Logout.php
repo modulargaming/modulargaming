@@ -8,7 +8,7 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Controller_User_Logout extends Abstract_Controller_User {
+class MG_Controller_User_Logout extends Abstract_Controller_User {
 
 	/**
 	 * Sign out the user AND redirect him to the frontpage.

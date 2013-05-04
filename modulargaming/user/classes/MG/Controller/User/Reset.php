@@ -8,7 +8,7 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Controller_User_Reset extends Abstract_Controller_User {
+class MG_Controller_User_Reset extends Abstract_Controller_User {
 
 	/**
 	 * @var string reset token.

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
  
-class Controller_User_Typeahead extends Abstract_Controller_Ajax {
+class MG_Controller_User_Typeahead extends Abstract_Controller_Ajax {
 
 	protected $protected = TRUE;
 
