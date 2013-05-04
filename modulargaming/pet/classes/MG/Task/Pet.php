@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Task to decrease pet hunger and happiness
+ *
+ * @package    MG/Pet
+ * @category   Task
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class MG_Task_Pet extends Minion_Task
 {
     protected $_options = array(

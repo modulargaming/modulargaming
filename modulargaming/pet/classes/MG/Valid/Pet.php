@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-
+/**
+ * Validation for pet.
+ *
+ * @package    MG/Pet
+ * @category   Valid
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class MG_Valid_Pet {
 
 	public static function specie_exists($id)

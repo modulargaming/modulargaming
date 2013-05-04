@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Controller for pet adopt
+ *
+ * @package    MG/Pet
+ * @category   Controller
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class MG_Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 
 	protected $protected = TRUE;

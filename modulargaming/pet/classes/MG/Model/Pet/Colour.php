@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-
+/**
+ * Colour model, used for pets.
+ *
+ * @package    MG/Pet
+ * @category   Model
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class MG_Model_Pet_Colour extends ORM {
 
 	protected $_table_columns = array(
