@@ -1,10 +1,3 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class View_Tab_Text extends Abstract_View_Tab {
-
-	/**
-	 * @var String $text
-	 */
-	public $text;
-
-}
+class View_Tab_Text extends MG_View_Tab_Text {}
