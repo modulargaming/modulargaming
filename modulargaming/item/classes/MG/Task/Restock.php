@@ -15,7 +15,7 @@ class MG_Task_Restock extends Minion_Task {
 			//find items that need to be restocked
 			$restocks = ORM::factory('Shop_Restock')
 				->where('next_restock', '<=', time())
-				->order_by('id', DB::expr('RAND()'))
+				->order_by(DB::expr('RAND()'))
 				->find_all();
 
 			foreach($restocks as $restock) {
