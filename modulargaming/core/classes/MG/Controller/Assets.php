@@ -13,7 +13,9 @@ class MG_Controller_Assets extends Controller {
 
 	// Extensions to cache in assets directory
 	private $_cache_extensions = array(
-		'jpg', 'jpeg', 'png', 'gif' // Image extensions.
+		'jpg', 'jpeg', 'png', 'gif',	// Image extensions.
+		'css',				// Cascading Style Sheets
+		'js'				// Javascript
 	);
 
 	/**
