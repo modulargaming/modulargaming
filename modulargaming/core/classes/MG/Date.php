@@ -2,7 +2,7 @@
 /**
  * Date helper.
  *
- * @package    Modular Gaming
+ * @package    MG/Core
  * @category   Helpers
  * @author     Modular Gaming Team
  * @copyright  (c) 2013 Modular Gaming Team

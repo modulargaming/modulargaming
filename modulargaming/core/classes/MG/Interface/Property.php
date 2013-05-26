@@ -2,7 +2,7 @@
 /**
  * Property enabled interface for Models and misc, provides a clean way to set and get properties.
  *
- * @package    Modular Gaming
+ * @package    MG/Core
  * @category   Interface
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team

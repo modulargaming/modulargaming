@@ -8,4 +8,4 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class Abstract_View_Email extends MG_Abstract_View_Email {}
+abstract class Abstract_View_Email extends MG_Abstract_View_Email {}

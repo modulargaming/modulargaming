@@ -18,5 +18,10 @@ return array (
 			// Copyright message, shown in the footer for this module
 			'copyright' => '&copy; 2012–2013 Modular Gaming Team',
 		)
+	),
+
+	// Set transparent class name segments
+	'transparent_prefixes' => array(
+		'MG' => TRUE,
 	)
 );

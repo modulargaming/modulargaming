@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ *
+ *
+ * @package    MG/Core
+ * @category   Exceptions
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2012-2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
+ */
 class MG_HTTP_Exception extends Kohana_HTTP_Exception {
 	/**
 	* Generate a Response for all Exceptions without a more specific override

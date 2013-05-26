@@ -3,7 +3,7 @@
  * Controller for serving assets (images, css, js) to visitors.
  * Saves the files inside assets so they can be served directly by the webserver.
  *
- * @package    Modular Gaming
+ * @package    MG/Core
  * @category   Controller
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team
