@@ -2,7 +2,7 @@
 /**
  * Abstract base controller for frontend controllers.
  *
- * @package    Modular Gaming
+ * @package    MG/Core
  * @category   Controller
  * @author     Modular Gaming Team
  * @copyright  (c) 2012-2013 Modular Gaming Team

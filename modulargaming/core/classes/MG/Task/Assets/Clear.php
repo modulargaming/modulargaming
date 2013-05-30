@@ -4,9 +4,9 @@
  *
  * @package    MG/Core
  * @category   Task
- * @author     Kohana Team
- * @copyright  (c) 2009-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @author     Modular Gaming Team
+ * @copyright  (c) 2013 Modular Gaming Team
+ * @license    BSD http://modulargaming.com/license
  */
 class MG_Task_Assets_Clear extends Minion_Task {
      protected $_options = array(
