@@ -53,6 +53,7 @@ class MG_Controller_User_Reset extends Abstract_Controller_User {
 				$user->save();
 
 				$this->_send_reset_email($user);
+				Hint::success('Reset password email sent.');
 			}
 			else
 			{
@@ -127,7 +128,8 @@ class MG_Controller_User_Reset extends Abstract_Controller_User {
 		// Send the reset email.
 		$view = new View_Email_User_Reset;
 		$view->user = $user;
-		$view->token = $this->token;
+		$token = $user->get_property('reset_token');
+		$view->token = $token['token'];
 
 		Email::factory($view)
 			->to($user->email)
