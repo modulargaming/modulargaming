@@ -112,6 +112,15 @@ abstract class MG_Abstract_View {
 	}
 
 	/**
+	 * Get the post values, so we can output them in forms.
+	 *
+	 * @return mixed
+	 */
+	public function post() {
+		return Request::current()->post();
+	}
+
+	/**
 	 * Is the player logged in?
 	 *
 	 * @return boolean
