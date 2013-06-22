@@ -126,6 +126,7 @@ Kohana::modules(array(
 	'theme/admin'   => THEMEPATH.'admin',
 
 	// Modular Gaming modules
+	'payment' => MGPATH.'payment',
 	'game'    => MGPATH.'game',
 	'forum'   => MGPATH.'forum',
 	'item'    => MGPATH.'item',

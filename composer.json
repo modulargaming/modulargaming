@@ -1,13 +1,31 @@
 {
+	"name": "modulargaming/modulargaming",
+	"type": "project",
+	"license": "BSD-3-Clause",
+	"description": "Basic Modular Gaming application.",
+
 	"repositories": [
 		{
 			"type": "vcs",
 			"url": "https://github.com/modulargaming/PHP-CS-Fixer"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/modulargaming/payment.git"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/modulargaming/installer.git"
 		}
 	],
 
 	"require": {
 		"php": ">=5.3.3",
+
+		"modulargaming/payment": "dev-master"
+	},
+
+	"require-dev": {
 		"phploc/phploc": "dev-master",
 		"squizlabs/php_codesniffer": "dev-master",
 		"fabpot/php-cs-fixer": "dev-master",
