@@ -3,6 +3,7 @@ application/logs/*
 /vendor/
 /bin/
 /composer.lock
+/composer.phar
 /build/logs/
 assets/css/head.css
 assets/js/body.js
