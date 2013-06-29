@@ -281,7 +281,7 @@ class MG_Controller_Item_Inventory extends Abstract_Controller_Frontend {
 							}
 						}
 
-						if ($error = FALSE)
+						if ($error == FALSE)
 						{
 							Journal::log('consume'.$item->item_id, 'item', ':item_name consumed', array(':item_name' => $item->item->name));
 							if ($def_cmd->delete_after_consume == TRUE)
