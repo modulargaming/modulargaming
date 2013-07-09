@@ -24,6 +24,17 @@ class MG_Controller_User_Login extends Abstract_Controller_User {
 			if ($this->auth->login($post['username'], $post['password'], isset($post['remember'])))
 			{
 				Hint::success(Kohana::message('user', 'login.success'));
+
+				// Redirect the page to ?page= value if local url.
+				if ($page = $this->request->query('page'))
+				{
+					// Ensure the url is local, we don't want the user to change site.
+					if (strpos($page, '://') === FALSE)
+					{
+						$this->redirect($page);
+					}
+				}
+
 				$this->redirect(Route::get('user.dashboard')->uri());
 			}
 			else
