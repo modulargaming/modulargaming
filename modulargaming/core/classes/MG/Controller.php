@@ -45,7 +45,7 @@ class MG_Controller extends Kohana_Controller {
 	{
 		if ($this->auth->logged_in() == FALSE)
 		{
-			throw HTTP_Exception::Factory(403, 'Login to access this page!');
+			throw HTTP_Exception::Factory(401, 'Login to access this page!');
 		}
 	}
 
