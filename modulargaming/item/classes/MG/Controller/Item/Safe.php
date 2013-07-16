@@ -84,14 +84,14 @@ class MG_Controller_Item_Safe extends Abstract_Controller_Frontend {
 							}
 							else
 							{
-								$i->move('shop', $item['amount']);
 								Hint::success(__('You\'ve moved :items to your shop.', array(':items' => $i->item->name($item['amount']))));
+								$i->move('shop', $item['amount']);
 							}
 						}
 						else if ($item['location'] == 'inventory')
 						{
-							$i->move('inventory', $item['amount']);
 							Hint::success(__('You\'ve moved :items to your inventory.', array(':items' => $i->item->name($item['amount']))));
+							$i->move('inventory', $item['amount']);
 						}
 					}
 				}
