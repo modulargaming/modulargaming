@@ -10,10 +10,16 @@
  */
 class MG_Controller_Error extends Abstract_Controller_Frontend {
 
-	public function action_404() {
+	public function action_404()
+	{
+		$this->response->status(404);
+		$this->view = new View_Error_404;
+	}
 
-		$this->view = new View_404;
-
+	public function action_500()
+	{
+		$this->response->status(500);
+		$this->view = new View_Error_500;
 	}
 
 }

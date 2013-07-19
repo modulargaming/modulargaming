@@ -8,7 +8,7 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class MG_View_404 extends Abstract_View {
+class MG_View_Error_404 extends Abstract_View {
 
 	public $title = 'Page not found';
 
