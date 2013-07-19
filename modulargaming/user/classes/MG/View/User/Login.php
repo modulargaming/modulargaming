@@ -12,6 +12,15 @@ class MG_View_User_Login extends Abstract_View_User {
 
 	public $title = 'Login';
 
+	public function title()
+	{
+		if (Request::current()->query('page'))
+		{
+			return "To access this page you must first login";
+		}
+		return "Login";
+	}
+
 	public function links()
 	{
 		return array(
