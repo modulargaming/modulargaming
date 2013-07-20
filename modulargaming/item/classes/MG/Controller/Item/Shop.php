@@ -72,19 +72,12 @@ class MG_Controller_Item_Shop extends Abstract_Controller_Frontend {
 	{
 		$shop = $this->_check_shop();
 
-		//if the user already has a shop redirect to index
-		if ($shop->loaded() == TRUE)
-		{
-			$this->redirect(Route::get('item.user_shop.index')->uri());
-		}
-
 		if ($this->request->method() == HTTP_Request::POST)
 		{
 			try
 			{
 				$this->_shop->values($this->request->post(), array('title', 'description'))
 					->save();
-
 				Hint::success('Your shop has been updated.');
 			} catch (ORM_Validation_Exception $e)
 			{
@@ -223,7 +216,7 @@ class MG_Controller_Item_Shop extends Abstract_Controller_Frontend {
 					Hint::error('You\'re trying to change an item that\'s not located in your shop');
 					$errors = TRUE;
 				}
-				else if (isset($param['remove']) AND $param['remove'] == 1)
+				else if (isset($param['remove']) AND $param['remove'] == TRUE)
 				{
 					//move the item to the inventory
 					$item->move('inventory', '*');
@@ -279,31 +272,17 @@ class MG_Controller_Item_Shop extends Abstract_Controller_Frontend {
 			$this->redirect(Route::get('item.user_shop.create')->uri());
 		}
 
-		if ($this->request->method() == HTTP_Request::POST)
-		{
-			$amount = $this->request->post('amount');
+		$points = Kohana::$config->load('items.points');
+		$initial_points = $points['initial'];
+		$this->user->set_property('points', $this->user->get_property('points', $initial_points) + $this->_shop->till);
+		$this->user->save();
 
-			if (!Valid::digit($amount) AND $amount < 0)
-			{
-				Hint::error('The specified amount is unreadable');
-			}
-			else if ($amount > $this->_shop->till)
-			{
-				Hint::error('You\'re trying to collect more :currency than you have in your shop till.');
-			}
-			else if ($amount > 0)
-			{
-				$this->user->set_property('points', $this->user->get_property('points', $initial_points) + $amount);
-				$this->user->save();
+		Hint::success(__('You\'ve successfully withdrawn :amount from your shop till.', array(':amount' => $this->_shop->till)));
 
-				$this->_shop->till = $this->_shop->till - $amount;
-				$this->_shop->save();
+		$this->_shop->till = 0;
+		$this->_shop->save();
 
-				Hint::success(__('You\'ve successfully withdrawn :amount :currency_short from your shop till.', array(':amount' => $amount)));
-			}
-		}
-
-		$this->redirect(Route::get('item.user_shop.logs')->uri());
+		$this->redirect(Route::get('item.user_shop.index')->uri());
 	}
 
 	public function action_view()
@@ -318,7 +297,7 @@ class MG_Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 		if ($shop->loaded())
 		{
-			$inventory = Item::location('shop')
+			$inventory = Item::location('shop', FALSE, NULL, $shop->user)
 				->where('parameter', '>', '0')
 				->find_all();
 
@@ -342,11 +321,18 @@ class MG_Controller_Item_Shop extends Abstract_Controller_Frontend {
 
 			$item = ORM::factory('User_item', $item_id);
 
+			$points = Kohana::$config->load('items.points');
+			$initial_points = $points['initial'];
+
 			if (!$item->loaded() OR $item->location != 'shop')
 			{
 				Hint::error('This item is not in stock');
 			}
-			else if ($this->user->get_property('points', $inital_points) < $item->parameter)
+			else if ($this->user->id == $item->user->id)
+			{
+				Hint::error('You cannot buy items from your own shop.');
+			}
+			else if ($this->user->get_property('points', $initial_points) < $item->parameter)
 			{
 				Hint::error(__('You don\'t have enough :currency to buy a ":item_name"', array(':item_name' => $item->item->name)));
 			}
@@ -356,22 +342,24 @@ class MG_Controller_Item_Shop extends Abstract_Controller_Frontend {
 				$this->user->save();
 
 				//log this action
-				$log = Journal::log('user_shop.' . $shop->id, 'item', 'Bought 1 :item_name for :amount from :user', array(
-					'item' => $item->item,
+				$log = Journal::log('user_shop.' . $shop->id, 'item', ':username bought 1 :item_name for :price', array(
 					'item_name' => $item->item->name,
-					'user' => $item->user->username,
-					'amount' => $item->parameter
+					'username' => $this->user->username,
+					'price' => $item->parameter
 				));
+
+				$shop->till += $item->parameter;
+				$shop->save();
 
 				$item->transfer($this->user);
 
 				$log->notify($shop->user, 'user_shop.buy');
 
-				Hint::success(__('You\'ve successfully bought :item_name from :shop_owner for :amount :currency_short', array(':owner' => $shop->user->username, ':item_name' => $item->item->name('1'))));
+				Hint::success(__('You\'ve successfully bought :item_name from :shop_owner for :price.', array(':shop_owner' => $shop->user->username, ':item_name' => $item->item->name('1'), ':price' => $item->parameter)));
 			}
 		}
 
-		$this->redirect(Route::get('items_user_shop.view')->uri(array('id' => $shop->id)));
+		$this->redirect(Route::get('item.user_shop.view')->uri(array('id' => $shop->id)));
 	}
 
 	public function after()

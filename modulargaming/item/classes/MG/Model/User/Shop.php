@@ -70,7 +70,7 @@
 		{
 			if (Kohana::$config->load('items.user_shop.size.active'))
 			{
-				return (($this->size * Kohana::$config->load('items.user_shop.size.unit_size')) < $this->inventory_count());
+				return $this->inventory_count() < (($this->size * Kohana::$config->load('items.user_shop.size.unit_size')));
 			}
 			else
 			{

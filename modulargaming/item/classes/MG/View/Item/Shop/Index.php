@@ -24,6 +24,11 @@ class MG_View_Item_Shop_Index extends Abstract_View_Inventory {
 		return array_merge($this->shop, array('link' => Route::url('item.user_shop.update')));
 	}
 
+	public function collect()
+	{
+		return Route::url('item.user_shop.collect');
+	}
+
 	/**
 	 * Calculates user shop unit size, inventory size
 	 */

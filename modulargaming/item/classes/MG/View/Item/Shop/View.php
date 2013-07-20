@@ -38,7 +38,7 @@ class MG_View_Item_Shop_View extends Abstract_View_Inventory {
 					'id'    => $item->id,
 					'name'  => $item->name(),
 					'price' => $item->parameter,
-					'img'   => $item->img()
+					'img'   => $item->img(),
 				);
 			}
 		}
@@ -53,6 +53,14 @@ class MG_View_Item_Shop_View extends Abstract_View_Inventory {
 	public function owner()
 	{
 		return array('url' => Route::url('user.profile', array('id' => $this->owner['id'])), 'username' => $this->owner['username']);
+	}
+
+	public function buy()
+	{
+		if ($this->_user->id != $this->shop['user_id'])
+		{
+			return Route::url('item.user_shop.buy', array('id' => $this->shop['id']));
+		}
 	}
 
 	protected function get_breadcrumb()
