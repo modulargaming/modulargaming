@@ -24,7 +24,8 @@
 
 		"modulargaming/core": "dev-master",
 		"modulargaming/user": "dev-master",
-		"modulargaming/admin": "dev-master"
+		"modulargaming/admin": "dev-master",
+		"modulargaming/forum": "dev-master"
 	},
 
 	"require-dev": {
