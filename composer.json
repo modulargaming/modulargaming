@@ -23,7 +23,8 @@
 		"php": ">=5.3.3",
 
 		"modulargaming/core": "dev-master",
-		"modulargaming/user": "dev-master"
+		"modulargaming/user": "dev-master",
+		"modulargaming/admin": "dev-master"
 	},
 
 	"require-dev": {
