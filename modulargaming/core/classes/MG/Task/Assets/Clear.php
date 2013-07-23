@@ -9,86 +9,34 @@
  * @license    BSD http://modulargaming.com/license
  */
 class MG_Task_Assets_Clear extends Minion_Task {
-     protected $_options = array(
-         'module' => '*',
-	     'type' => 'js,css'
-    );
 
 	/**
 	 * Clear the cache for assets files
 	 *
-	 * Accepts the following optional options:
-	 *  - module: name of module you want to clear the asset cache for (* for all, comma separated for multiple)
-	 *  - type: which type of files you want to clear (defaults to js,css)
-	 *
+	 * @param array $params
 	 * @return null
 	 */
 	protected function _execute(array $params)
 	{
-		// get the types
-		$types = explode(',', $params['type']);
+		$dir = new RecursiveDirectoryIterator(DOCROOT.'assets');
+		$files = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
 
-		// get the list of modules to clear
-		if ($params['module'] == '*') {
-			// get all the module paths
-			$mod_paths = Kohana::modules();
+		foreach($files as $file)
+		{
+			$filename = $file->getFilename();
 
-			// get all the asset files
-			$files = Kohana::list_files('assets', $mod_paths);
-
-			// loop over the required types
-			foreach ($types as $type) {
-				if (array_key_exists('assets'.DIRECTORY_SEPARATOR.$type, $files)) {
-					$this->_clear_recur($files['assets'.DIRECTORY_SEPARATOR.$type], $mod_paths);
-				}
+			if ($filename === '.' || $filename === '..')
+			{
+				continue;
 			}
 
-			echo 'Cleared assets for all modules';
-		}
-		else
-		{
-			$modules = explode(',', $params['module']);
-			// get all the module paths
-			$mod_paths = Kohana::modules();
-
-			// start looping through the modules
-			foreach ($modules as $mod)
+			if ($file->isDir())
 			{
-				// get the base path
-				$read = $mod_paths[$mod];
-
-				// get all the asset files
-				$files = Kohana::list_files('assets', array($read));
-
-				// loop over the required types
-				foreach ($types as $type)
-				{
-					if (array_key_exists('assets'.DIRECTORY_SEPARATOR.$type, $files))
-					{
-						$this->_clear_recur($files['assets'.DIRECTORY_SEPARATOR.$type], $read);
-					}
-				}
-
-				echo 'Cleared assets for '.$mod;
+				rmdir($file->getRealPath());
 			}
-		}
-	}
-
-	protected function _clear_recur($entry, $base_dir)
-	{
-		if (is_array($entry))
-		{
-			foreach ($entry as $e)
+			else
 			{
-				$this->_clear_recur($e, $base_dir);
-			}
-		}
-		else
-		{
-			$rm = str_replace($base_dir, '', $entry);
-			if (file_exists(DOCROOT.$rm))
-			{
-				unlink(DOCROOT.$rm);
+				unlink($file->getRealPath());
 			}
 		}
 	}

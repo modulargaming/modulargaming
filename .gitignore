@@ -5,6 +5,5 @@ application/logs/*
 /composer.lock
 /composer.phar
 /build/logs/
-assets/css/head.css
-assets/js/body.js
+assets/
 /.idea
