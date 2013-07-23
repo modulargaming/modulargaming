@@ -22,7 +22,7 @@
 	"require": {
 		"php": ">=5.3.3",
 
-		"modulargaming/payment": "dev-master"
+		"modulargaming/core": "dev-master"
 	},
 
 	"require-dev": {
