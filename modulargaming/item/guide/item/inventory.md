@@ -1,5 +1,0 @@
-#Inventory
-
-#Cookbook
-
-#Safe

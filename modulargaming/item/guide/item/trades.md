@@ -1,6 +1,0 @@
-# Trades
-
-## Config
-
-## Notifications
-
