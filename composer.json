@@ -28,7 +28,8 @@
 		"modulargaming/forum": "dev-master",
 		"modulargaming/game": "dev-master",
 		"modulargaming/item": "dev-master",
-		"modulargaming/message": "dev-master"
+		"modulargaming/message": "dev-master",
+		"modulargaming/pet": "dev-master"
 	},
 
 	"require-dev": {
