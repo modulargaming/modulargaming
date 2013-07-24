@@ -22,7 +22,14 @@
 	"require": {
 		"php": ">=5.3.3",
 
-		"modulargaming/payment": "dev-master"
+		"modulargaming/core": "dev-master",
+		"modulargaming/user": "dev-master",
+		"modulargaming/admin": "dev-master",
+		"modulargaming/forum": "dev-master",
+		"modulargaming/game": "dev-master",
+		"modulargaming/item": "dev-master",
+		"modulargaming/message": "dev-master",
+		"modulargaming/pet": "dev-master"
 	},
 
 	"require-dev": {
