@@ -156,7 +156,7 @@ Kohana::modules(array(
 /**
  * Enable development modules in development environment.
  */
-if (Kohana::$environment === Kohana::DEVELOPMENT)
+if (Kohana::$environment === Kohana::DEVELOPMENT AND PHP_SAPI !== 'cli')
 {
 	Kohana::modules(Kohana::modules() + array(
 		'debug-toolbar' => MODPATH.'debug-toolbar',
