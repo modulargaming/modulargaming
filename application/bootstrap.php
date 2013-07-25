@@ -126,7 +126,7 @@ Kohana::modules(array(
 	'theme/admin'   => THEMEPATH.'admin',
 
 	// Modular Gaming modules
-	'payment' => MGPATH.'payment',
+	//'payment' => MGPATH.'payment',
 	'game'    => MGPATH.'game',
 	'forum'   => MGPATH.'forum',
 	'item'    => MGPATH.'item',
@@ -143,7 +143,6 @@ Kohana::modules(array(
 	'cache'         => MODPATH.'cache',      // Caching with multiple backends
 	'database'      => MODPATH.'database',   // Database access
 	'datatables'    => MODPATH.'datatables',
-	'debug-toolbar' => MODPATH.'debug-toolbar',
 	'email'         => MODPATH.'email',      // Email manipulation
 	'image'         => MODPATH.'image',      // Image manipulation
 	'kostache'      => MODPATH.'kostache',   // Mustache template system
@@ -152,9 +151,19 @@ Kohana::modules(array(
 	'orm'           => MODPATH.'orm',        // Object Relationship Mapping
 	'paginate'      => MODPATH.'paginate',   // Pagination
 	'purifier'      => MODPATH.'purifier',   // HTML Purifier
-	'unittest'      => MODPATH.'unittest',   // Unit testing
-	'userguide'     => MODPATH.'userguide',  // User guide and API documentation
 ));
+
+/**
+ * Enable development modules in development environment.
+ */
+if (Kohana::$environment === Kohana::DEVELOPMENT)
+{
+	Kohana::modules(Kohana::modules() + array(
+		'debug-toolbar' => MODPATH.'debug-toolbar',
+		//'unittest'      => MODPATH.'unittest',   // Unit testing
+		'userguide'     => MODPATH.'userguide',  // User guide and API documentation
+	));
+}
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
