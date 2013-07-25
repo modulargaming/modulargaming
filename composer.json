@@ -184,7 +184,7 @@
 		"fabpot/php-cs-fixer": "dev-master",
 
 		"behat/behat": "2.4.*@stable",
-		"behat/mink": "1.4@stable",
+		"behat/mink": "1.5.*@stable",
 		"behat/mink-extension": "*",
 		"behat/mink-goutte-driver": "*",
 		"phpspec/phpspec2": "*"
