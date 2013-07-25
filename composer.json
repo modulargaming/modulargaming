@@ -10,17 +10,141 @@
 			"url": "https://github.com/modulargaming/PHP-CS-Fixer"
 		},
 		{
-			"type": "vcs",
-			"url": "https://github.com/modulargaming/payment.git"
+			"type": "package",
+			"package": {
+				"name": "kohana/core",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana/core.git",
+					"type": "git",
+					"reference": "3.3/develop"
+				}
+			}
 		},
 		{
-			"type": "vcs",
-			"url": "https://github.com/modulargaming/installer.git"
+			"type": "package",
+			"package": {
+				"name": "kohana/auth",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana/auth.git",
+					"type": "git",
+					"reference": "3.3/master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "kohana/cache",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana/cache.git",
+					"type": "git",
+					"reference": "3.3/master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "kohana/database",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana/database.git",
+					"type": "git",
+					"reference": "3.3/master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "kohana/image",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana/image.git",
+					"type": "git",
+					"reference": "3.3/master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "kohana/minion",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana/minion.git",
+					"type": "git",
+					"reference": "3.3/master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "kohana/orm",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana/orm.git",
+					"type": "git",
+					"reference": "3.3/master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "kohana/userguide",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana/userguide.git",
+					"type": "git",
+					"reference": "3.3/master"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "kohana-minion/tasks-migrations",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/kohana-minion/tasks-migrations.git",
+					"type": "git",
+					"reference": "3.3/develop"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "morgan/datatables",
+				"type": "kohana-module",
+				"version": "3.3.0",
+				"source": {
+					"url": "https://github.com/morgan/kohana-datatables.git",
+					"type": "git",
+					"reference": "3.3/master"
+				}
+			}
 		}
 	],
 
 	"require": {
 		"php": ">=5.3.3",
+
+		"composer/installers": "*",
 
 		"modulargaming/core": "dev-master",
 		"modulargaming/user": "dev-master",
@@ -29,10 +153,32 @@
 		"modulargaming/game": "dev-master",
 		"modulargaming/item": "dev-master",
 		"modulargaming/message": "dev-master",
-		"modulargaming/pet": "dev-master"
+		"modulargaming/pet": "dev-master",
+
+		"modulargaming/acl": "1.0.*",
+		"modulargaming/assets": "1.0.*",
+		"modulargaming/debug-toolbar": "3.3.*@dev",
+		"modulargaming/email": "dev-3.3/master",
+		"modulargaming/kostache": "dev-master",
+		"modulargaming/paginate": "dev-3.3/master",
+		"modulargaming/purifier": "dev-3.3/master",
+
+		"kohana/core": "3.3.*",
+		"kohana/auth": "3.3.*",
+		"kohana/cache": "3.3.*",
+		"kohana/database": "3.3.*",
+		"kohana/image": "3.3.*",
+		"kohana/minion": "3.3.*",
+		"kohana/orm": "3.3.*",
+
+		"kohana-minion/tasks-migrations": "3.3.*",
+
+		"morgan/datatables": "3.3.*"
 	},
 
 	"require-dev": {
+		"kohana/userguide": "3.3.*",
+
 		"phploc/phploc": "dev-master",
 		"squizlabs/php_codesniffer": "dev-master",
 		"fabpot/php-cs-fixer": "dev-master",
@@ -54,5 +200,11 @@
 		}
 	},
 
-	"minimum-stability": "dev"
+	"minimum-stability": "dev",
+
+	"extra": {
+		"installer-paths": {
+			"system/": ["kohana/core"]
+		}
+	}
 }
