@@ -91,7 +91,7 @@ Open `application/config/email.php` and make the following changes:
 Register your admin account at /user/register.
 Promote your newly created account to admin by using the minion task:
 
-	$ php minion user:promote --username=admin
+	$ php minion User:Promote --username=admin
 
 You should now verify that you have admin access by accessing the administration panel at /admin/.
 
