@@ -41,6 +41,8 @@ Alternatively you can also use composer create-project to download the project a
 
 	$ composer create-project modulargaming/modulargaming modulargaming dev-master --dev
 
+If you cannot use Composer you can download a packaged copy of Modular Gaming from http://sourceforge.net/projects/modulargaming/files/?source=navbar
+
 ### Step 2: Configuration of Database
 
 Edit `application/config/database.php` with the correct information.
@@ -76,8 +78,8 @@ Open `application/config/email.php` and make the following changes:
 ### Step 5: Permissions
 
 	$ chmod 0777 application/{cache,logs}
-	$ chmod -R 0777 assets
-	$ chmod -R 0777 media
+	$ chmod 0777 assets
+	$ chmod 0777 media
 
 ### Step 6: Cron jobs
 
