@@ -35,7 +35,8 @@ Download Modular Gaming from Github and install composer dependencies.
 	$ git clone git@github.com:modulargaming/modulargaming.git
 
 	$ cd modulargaming
-	$ composer install --dev
+	$ curl -s https://getcomposer.org/installer | php
+	$ php ./composer.phar install --dev
 
 Alternatively you can also use composer create-project to download the project and the dependencies.
 
