@@ -83,8 +83,8 @@ Open `application/config/email.php` and make the following changes:
 
 ### Step 6: Cron jobs
 
-	$ php ./minion Pet
-	$ php ./minion Restock
+	$ php ./minion Pet:Decrease
+	$ php ./minion Item:Restock
 
 ### Step 7: Admin
 
