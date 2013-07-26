@@ -41,7 +41,7 @@ Alternatively you can also use composer create-project to download the project a
 
 	$ composer create-project modulargaming/modulargaming modulargaming dev-master --dev
 
-If you cannot use Composer you can download a packaged copy of Modular Gaming from http://sourceforge.net/projects/modulargaming/files/?source=navbar
+If you cannot use Composer you can download a packaged copy of Modular Gaming from http://www.sourceforge.net/projects/modulargaming/files/
 
 ### Step 2: Configuration of Database
 
