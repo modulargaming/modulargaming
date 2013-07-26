@@ -170,6 +170,7 @@
 		"kohana/image": "3.3.*",
 		"kohana/minion": "3.3.*",
 		"kohana/orm": "3.3.*",
+		"kohana/userguide": "3.3.*",
 
 		"kohana-minion/tasks-migrations": "3.3.*",
 
@@ -177,8 +178,6 @@
 	},
 
 	"require-dev": {
-		"kohana/userguide": "3.3.*",
-
 		"phploc/phploc": "dev-master",
 		"squizlabs/php_codesniffer": "dev-master",
 		"fabpot/php-cs-fixer": "dev-master",
