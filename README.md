@@ -84,7 +84,6 @@ Open `application/config/email.php` and make the following changes:
 
 	$ php ./minion Pet
 	$ php ./minion Restock
-	$ php ./minion Clear
 
 ### Step 7: Admin
 
