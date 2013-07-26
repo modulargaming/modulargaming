@@ -24,14 +24,22 @@ Released under a [BSD license](http://www.modulargaming.com/license), Modular Ga
 
 * PHP 5.3.3+
 * MySQL
+* [Composer](http://getcomposer.org) (Dependency Manager)
 
 ## Installation
 
 ### Step 1: Download
 
-Download Modular Gaming from Github.
+Download Modular Gaming from Github and install composer dependencies.
 
-	$ git clone git@github.com:modulargaming/modulargaming.git --recursive
+	$ git clone git@github.com:modulargaming/modulargaming.git
+
+	$ cd modulargaming
+	$ composer install --dev
+
+Alternatively you can also use composer create-project to download the project and the dependencies.
+
+	$ composer create-project modulargaming/modulargaming modulargaming dev-master --dev
 
 ### Step 2: Configuration of Database
 
@@ -42,6 +50,12 @@ Edit `application/config/database.php` with the correct information.
 	$ php minion migrations:run
 
 ### Step 4: Configuration of modulargaming
+
+Open `.htaccess` and make the following changes:
+
+* Set the correct RewriteBase
+
+* Set the correct environment, either development or production.
 
 Open `application/bootstrap.php` and make the following changes: 
 
@@ -54,12 +68,6 @@ Open `application/bootstrap.php` and make the following changes:
 Open `application/config/auth.php` and make the following changes:
 
 * Set the default hash key
-
-Open `.htaccess` and make the following changes:
-
-* Set the correct RewriteBase
-
-* Set the correct environment, either development or production.
 
 Open `application/config/email.php` and make the following changes:
 
@@ -78,7 +86,12 @@ Open `application/config/email.php` and make the following changes:
 
 ### Step 7: Admin
 
-Insert into the database your user id (1) and admin role (2) into roles_users now you can access /admin
+Register your admin account at /user/register.
+Promote your newly created account to admin by using the minion task:
+
+	$ php minion user:promote --username=admin
+
+You should now verify that you have admin access by accessing the administration panel at /admin/.
 
 ## Testing
 
