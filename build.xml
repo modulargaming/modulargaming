@@ -23,6 +23,7 @@
 	<target name="phpcs" description="Check the codestyle using PHP_CodeSniffer">
 		<exec executable="bin/phpcs">
 			<arg value="--standard=${basedir}/build/cs/PHP/CodeSniffer/Standards/Kohana" />
+			<arg value="--ignore=*/tests/features/*" />
 			<arg path="${basedir}/application/classes" />
 			<arg path="${basedir}/modulargaming" />
 		</exec>
@@ -48,6 +49,7 @@
 			<arg value="--report=checkstyle" />
 			<arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
 			<arg value="--standard=${basedir}/build/cs/PHP/CodeSniffer/Standards/Kohana" />
+			<arg value="--ignore=*/tests/features/*" />
 			<arg path="${basedir}/application/classes" />
 			<arg path="${basedir}/modulargaming" />
 		</exec>
