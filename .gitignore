@@ -1,8 +1,23 @@
+# Application cache & logs
 application/cache/*
 application/logs/*
+
+# Composer managed directories
+/modules/
+/system/
+/modulargaming/
 /vendor/
 /bin/
-/composer.lock
+
+# Assets
+/assets/*
+
+# Build logs
 /build/logs/
-assets/css/head.css
-assets/js/body.js
+
+# Composer misc files
+/composer.lock
+/composer.phar
+
+# Development tool junk
+/.idea

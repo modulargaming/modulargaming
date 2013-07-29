@@ -24,14 +24,24 @@ Released under a [BSD license](http://www.modulargaming.com/license), Modular Ga
 
 * PHP 5.3.3+
 * MySQL
+* [Composer](http://getcomposer.org) (Dependency Manager)
 
 ## Installation
 
 ### Step 1: Download
 
-Download Modular Gaming from Github.
+Download Modular Gaming from Github and install composer dependencies.
 
-	$ git clone git@github.com:modulargaming/modulargaming.git --recursive
+	$ git clone git@github.com:modulargaming/modulargaming.git
+	$ cd modulargaming
+	$ curl -s https://getcomposer.org/installer | php
+	$ php ./composer.phar install --dev
+
+Alternatively you can also use composer create-project to download the project and the dependencies.
+
+	$ composer create-project modulargaming/modulargaming modulargaming dev-master --dev
+
+If you cannot use Composer you can download a packaged copy of Modular Gaming from http://www.sourceforge.net/projects/modulargaming/files/
 
 ### Step 2: Configuration of Database
 
@@ -42,6 +52,12 @@ Edit `application/config/database.php` with the correct information.
 	$ php minion migrations:run
 
 ### Step 4: Configuration of modulargaming
+
+Open `.htaccess` and make the following changes:
+
+* Set the correct RewriteBase
+
+* Set the correct environment, either development or production.
 
 Open `application/bootstrap.php` and make the following changes: 
 
@@ -55,13 +71,6 @@ Open `application/config/auth.php` and make the following changes:
 
 * Set the default hash key
 
-Open `.htaccess` and make the following changes:
-
-* Set the correct RewriteBase
-
-* Set the correct environment, either development or production.
-
-
 Open `application/config/email.php` and make the following changes:
 
 * Set the default from address
@@ -69,16 +78,22 @@ Open `application/config/email.php` and make the following changes:
 ### Step 5: Permissions
 
 	$ chmod 0777 application/{cache,logs}
-	$ chmod -R 0777 assets
+	$ chmod 0777 assets
+	$ chmod 0777 media
 
 ### Step 6: Cron jobs
 
-	$ php ./minion Pet
-	$ php ./minion Restock
+	$ php ./minion Pet:Decrease
+	$ php ./minion Item:Restock
 
 ### Step 7: Admin
 
-Insert into the database your user id (1) and admin role (2) into roles_users now you can access /admin
+Register your admin account at /user/register.
+Promote your newly created account to admin by using the minion task:
+
+	$ php minion User:Promote --username=admin
+
+You should now verify that you have admin access by accessing the administration panel at /admin/.
 
 ## Testing
 
