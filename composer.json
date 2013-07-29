@@ -155,6 +155,9 @@
 		"modulargaming/message": "dev-master",
 		"modulargaming/pet": "dev-master",
 
+		"modulargaming/theme-default": "dev-master",
+		"modulargaming/theme-admin": "dev-master",
+
 		"modulargaming/acl": "1.0.*",
 		"modulargaming/assets": "1.0.*",
 		"modulargaming/debug-toolbar": "3.3.*@dev",
