@@ -146,38 +146,38 @@
 
 		"composer/installers": "*",
 
-		"modulargaming/core": "dev-master",
-		"modulargaming/user": "dev-master",
-		"modulargaming/admin": "dev-master",
-		"modulargaming/forum": "dev-master",
-		"modulargaming/game": "dev-master",
-		"modulargaming/item": "dev-master",
-		"modulargaming/message": "dev-master",
-		"modulargaming/pet": "dev-master",
+		"modulargaming/core": "~1.0.0",
+		"modulargaming/user": "~1.0.0",
+		"modulargaming/admin": "~1.0.0",
+		"modulargaming/forum": "~1.0.0",
+		"modulargaming/game": "~1.0.0",
+		"modulargaming/item": "~1.0.0",
+		"modulargaming/message": "~1.0.0",
+		"modulargaming/pet": "~1.0.0",
 
-		"modulargaming/theme-default": "dev-master",
-		"modulargaming/theme-admin": "dev-master",
+		"modulargaming/theme-default": "~1.0.0",
+		"modulargaming/theme-admin": "~1.0.0",
 
 		"modulargaming/acl": "1.0.*",
 		"modulargaming/assets": "1.0.*",
-		"modulargaming/debug-toolbar": "3.3.*@dev",
-		"modulargaming/email": "dev-3.3/master",
-		"modulargaming/kostache": "dev-master",
-		"modulargaming/paginate": "dev-3.3/master",
-		"modulargaming/purifier": "dev-3.3/master",
+		"modulargaming/debug-toolbar": "1.0.0",
+		"modulargaming/email": "1.0.0",
+		"modulargaming/kostache": "1.0.0",
+		"modulargaming/paginate": "1.0.0",
+		"modulargaming/purifier": "1.0.0",
 
-		"kohana/core": "3.3.*",
-		"kohana/auth": "3.3.*",
-		"kohana/cache": "3.3.*",
-		"kohana/database": "3.3.*",
-		"kohana/image": "3.3.*",
-		"kohana/minion": "3.3.*",
-		"kohana/orm": "3.3.*",
-		"kohana/userguide": "3.3.*",
+		"kohana/core": "3.3.0",
+		"kohana/auth": "3.3.0",
+		"kohana/cache": "3.3.0",
+		"kohana/database": "3.3.0",
+		"kohana/image": "3.3.0",
+		"kohana/minion": "3.3.0",
+		"kohana/orm": "3.3.0",
+		"kohana/userguide": "3.3.0",
 
-		"kohana-minion/tasks-migrations": "3.3.*",
+		"kohana-minion/tasks-migrations": "3.3.0",
 
-		"morgan/datatables": "3.3.*"
+		"morgan/datatables": "3.3.0"
 	},
 
 	"require-dev": {
@@ -190,10 +190,6 @@
 		"behat/mink-extension": "*",
 		"behat/mink-goutte-driver": "*",
 		"phpspec/phpspec2": "*"
-	},
-
-	"config": {
-		"bin-dir": "bin/"
 	},
 
 	"autoload": {
