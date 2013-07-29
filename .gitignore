@@ -6,6 +6,7 @@ application/logs/*
 /modules/
 /system/
 /modulargaming/
+/themes/
 /vendor/
 /bin/
 
