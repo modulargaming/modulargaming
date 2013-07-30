@@ -1,5 +1,4 @@
 <?php
-
 // Sanity check, install should only be checked from index.php
 defined('SYSPATH') or exit('Install tests must be loaded from within index.php!');
 
@@ -15,14 +14,12 @@ else
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Kohana Installation</title>
+	<title>Modular Gaming Installation</title>
 
 	<style type="text/css">
 	body { width: 42em; margin: 0 auto; font-family: sans-serif; background: #fff; font-size: 1em; }
@@ -47,8 +44,8 @@ else
 	<h1>Environment Tests</h1>
 
 	<p>
-		The following tests have been run to determine if <a href="http://kohanaframework.org/">Kohana</a> will work in your environment.
-		If any of the tests have failed, consult the <a href="http://kohanaframework.org/guide/about.install">documentation</a>
+		The following tests have been run to determine if <a href="http://modulargaming.com/">Modular Gaming</a> will work in your environment.
+		If any of the tests have failed, consult the <a href="http://demo.modulargaming.com/guide/kohana/install">documentation</a>
 		for more information on how to correct the problem.
 	</p>
 
@@ -93,6 +90,22 @@ else
 				<td class="pass"><?php echo APPPATH.'logs/' ?></td>
 			<?php else: $failed = TRUE ?>
 				<td class="fail">The <code><?php echo APPPATH.'logs/' ?></code> directory is not writable.</td>
+			<?php endif ?>
+		</tr>
+		<tr>
+			<th>Assets Directory</th>
+			<?php if (is_dir(DOCROOT.'assets') AND is_writable(DOCROOT.'assets')): ?>
+				<td class="pass"><?php echo DOCROOT.'assets'.DIRECTORY_SEPARATOR ?></td>
+			<?php else: $failed = TRUE ?>
+				<td class="fail">The <code><?php echo DOCROOT.'assets'.DIRECTORY_SEPARATOR ?></code> directory is not writable.</td>
+			<?php endif ?>
+		</tr>
+		<tr>
+			<th>Media Directory</th>
+			<?php if (is_dir(DOCROOT.'media') AND is_writable(DOCROOT.'media')): ?>
+				<td class="pass"><?php echo DOCROOT.'media'.DIRECTORY_SEPARATOR ?></td>
+			<?php else: $failed = TRUE ?>
+				<td class="fail">The <code><?php echo DOCROOT.'media'.DIRECTORY_SEPARATOR ?></code> directory is not writable.</td>
 			<?php endif ?>
 		</tr>
 		<tr>
@@ -166,7 +179,7 @@ else
 	</table>
 
 	<?php if ($failed === TRUE): ?>
-		<p id="results" class="fail">✘ Kohana may not work correctly with your environment.</p>
+		<p id="results" class="fail">✘ Modular Gaming may not work correctly with your environment.</p>
 	<?php else: ?>
 		<p id="results" class="pass">✔ Your environment passed all requirements.<br />
 			Remove or rename the <code>install<?php echo EXT ?></code> file now.</p>

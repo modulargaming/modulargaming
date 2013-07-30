@@ -96,8 +96,13 @@ define('THEMEPATH', realpath($themes).DIRECTORY_SEPARATOR);
 // Clean up the configuration vars
 unset($application, $modules, $system, $modulargaming, $themes);
 
-// Uncomment to run install check.
-// return include 'install'.EXT;
+/**
+ * Run the install checks, for a slight performance gain you can comment out the code.
+ */
+if (file_exists('install'.EXT))
+{
+	return include 'install'.EXT;
+}
 
 /**
  * Define the start time of the application, used for profiling.
