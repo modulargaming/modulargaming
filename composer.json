@@ -146,17 +146,17 @@
 
 		"composer/installers": "*",
 
-		"modulargaming/core": "~1.0.0",
-		"modulargaming/user": "~1.0.0",
-		"modulargaming/admin": "~1.0.0",
-		"modulargaming/forum": "~1.0.0",
-		"modulargaming/game": "~1.0.0",
-		"modulargaming/item": "~1.0.0",
-		"modulargaming/message": "~1.0.0",
-		"modulargaming/pet": "~1.0.0",
+		"modulargaming/core": "dev-develop",
+		"modulargaming/user": "dev-develop",
+		"modulargaming/admin": "dev-develop",
+		"modulargaming/forum": "dev-develop",
+		"modulargaming/game": "dev-develop",
+		"modulargaming/item": "dev-develop",
+		"modulargaming/message": "dev-develop",
+		"modulargaming/pet": "dev-develop",
 
-		"modulargaming/theme-default": "~1.0.0",
-		"modulargaming/theme-admin": "~1.0.0",
+		"modulargaming/theme-default": "dev-develop",
+		"modulargaming/theme-admin": "dev-develop",
 
 		"modulargaming/acl": "1.0.*",
 		"modulargaming/assets": "1.0.*",
