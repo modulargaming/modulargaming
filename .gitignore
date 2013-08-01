@@ -8,7 +8,6 @@ application/logs/*
 /modulargaming/
 /vendor/
 /bin/
-/themes/
 
 # Assets
 /assets/*
