@@ -13,6 +13,26 @@ else
 	clearstatcache(TRUE);
 }
 
+// Step 2-* should be called from within the Kohana system.
+if (isset($_GET['p']))
+{
+	define('MG_INSTALL', TRUE);
+
+	// Load the Composer autoloader.
+	require 'vendor/autoload.php';
+
+	// Bootstrap the application
+	require APPPATH.'bootstrap'.EXT;
+
+	// Call the /install/ page.
+	echo Request::factory('install/'.$_GET['p'], array(), FALSE)
+		->execute()
+		->send_headers(TRUE)
+		->body();
+
+	return;
+}
+
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -182,7 +202,7 @@ else
 		<p id="results" class="fail">✘ Modular Gaming may not work correctly with your environment.</p>
 	<?php else: ?>
 		<p id="results" class="pass">✔ Your environment passed all requirements.<br />
-			Remove or rename the <code>install<?php echo EXT ?></code> file now.</p>
+			<a href="?p=database">Continue to the next step, setting up the datatabase.</a></p>
 	<?php endif ?>
 
 	<h1>Optional Tests</h1>
