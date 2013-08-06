@@ -146,7 +146,7 @@
 
 		"composer/installers": "*",
 
-		"modulargaming/core": "~1.0.0",
+		"modulargaming/core": "~1.0.1",
 		"modulargaming/user": "~1.0.0",
 		"modulargaming/admin": "~1.0.0",
 		"modulargaming/forum": "~1.0.0",
