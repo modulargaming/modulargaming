@@ -1,26 +1,10 @@
 # [Modular Gaming](http://www.modulargaming.com)
 
-A modular [persistent browser based game](http://www.pbbg.org) framework using [Kohana 3.3](https://github.com/kohana/core) with [ORM](https://github.com/kohana/orm) and [KOstache](https://github.com/zombor/KOstache).
+Modular Gaming is a open source [persistent browser based game](http://www.pbbg.org) framework built upon [Kohana 3.3](https://github.com/kohana/core) with modules such as [ORM](https://github.com/kohana/orm) and [KOstache](https://github.com/zombor/KOstache).
 
-### Kohana
+Released under a [BSD license](http://www.modulargaming.com/license), Modular Gaming can be used legally for any open source, commercial, or personal project.
 
-[Kohana](http://kohanaframework.org) is an elegant, open source, and object oriented [HMVC](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller) framework built using [PHP5](http://www.php.net), by a team of volunteers.
-It aims to be swift, secure, and small.
-
-### ORM
-
-ORM is a a powerful Object Relational Mapping module that uses the active record pattern and database introspection to determine a model's column information. 
-
-### Mustache
-
-[Mustache](https://github.com/mustache) is a template specification we use for our templates, we use [Kostache](https://github.com/zombor/KOstache)'s implementation.
-
-### License
-
-Released under a [BSD license](http://www.modulargaming.com/license), Modular Gaming can be used legally for any open source,
- commercial, or personal project.
-
-### Requirements
+## Requirements
 
 * PHP 5.3.3+
 * MySQL
@@ -34,24 +18,17 @@ Download Modular Gaming from Github and install composer dependencies.
 
 	$ git clone git@github.com:modulargaming/modulargaming.git
 	$ cd modulargaming
+    
 	$ curl -s https://getcomposer.org/installer | php
 	$ php ./composer.phar install --dev
 
 Alternatively you can also use composer create-project to download the project and the dependencies.
 
-	$ composer create-project modulargaming/modulargaming modulargaming dev-master --dev
+	$ composer create-project modulargaming/modulargaming modulargaming dev-master
 
 If you cannot use Composer you can download a packaged copy of Modular Gaming from http://www.sourceforge.net/projects/modulargaming/files/
 
-### Step 2: Configuration of Database
-
-Edit `application/config/database.php` with the correct information.
-
-### Step 3: Import database
-
-	$ php minion migrations:run
-
-### Step 4: Configuration of modulargaming
+### Step 2: Configuration of modulargaming
 
 Open `.htaccess` and make the following changes:
 
@@ -75,18 +52,17 @@ Open `application/config/email.php` and make the following changes:
 
 * Set the default from address
 
-### Step 5: Permissions
+### Step 3: File Permissions
 
 	$ chmod 0777 application/{cache,logs}
 	$ chmod 0777 assets
 	$ chmod 0777 media
 
-### Step 6: Cron jobs
+### Step 4: Run the installer
 
-	$ php ./minion Pet:Decrease
-	$ php ./minion Item:Restock
+Start the installer and follow the instructions by browsing to the Modular Gaming install with your web browser.
 
-### Step 7: Admin
+### Step 5: Admin
 
 Register your admin account at /user/register.
 Promote your newly created account to admin by using the minion task:
@@ -95,11 +71,15 @@ Promote your newly created account to admin by using the minion task:
 
 You should now verify that you have admin access by accessing the administration panel at /admin/.
 
+### Step 6: Cron jobs
+
+	$ php ./minion Pet:Decrease
+	$ php ./minion Item:Restock
+
+
 ## Testing
 
 We use BDD, with 2 different tools, phpspec and behat.
-
-We use composer to install them, http://getcomposer.org/ or you could install them manually using pear.
 
 	$ curl -s https://getcomposer.org/installer | php
 	$ ./composer.phar install --dev
@@ -110,7 +90,7 @@ The userguide module included in all Modular Gaming releases also allows you to 
 
 ## Reporting bugs
 
-If you've stumbled across a bug, please help us out by [reporting the bug](https://github.com/hinton/mg/issues?state=open) you have found. Simply log in or register and submit a new issue, leaving as much information about the bug as possible, e.g.
+If you've stumbled across a bug, please help us out by [reporting the bug](https://github.com/modulargaming/modulargaming/issues?state=open) you have found. Simply log in or register and submit a new issue, leaving as much information about the bug as possible, e.g.
 
 * Steps to reproduce
 * Expected result
