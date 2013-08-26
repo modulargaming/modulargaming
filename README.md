@@ -16,23 +16,54 @@ Released under a [BSD license](http://www.modulargaming.com/license), Modular Ga
 
 Download Modular Gaming from Github and install composer dependencies.
 
-	$ git clone git@github.com:modulargaming/modulargaming.git
-	$ cd modulargaming
-    
-	$ curl -s https://getcomposer.org/installer | php
-	$ php ./composer.phar install --dev
+        $ git clone git@github.com:modulargaming/modulargaming.git
+        $ cd modulargaming
+
+        $ curl -s https://getcomposer.org/installer | php
+        $ php ./composer.phar install --dev
 
 Alternatively you can also use composer create-project to download the project and the dependencies.
 
-	$ composer create-project modulargaming/modulargaming modulargaming dev-master
+        $ composer create-project modulargaming/modulargaming modulargaming dev-master
 
 If you cannot use Composer you can download a packaged copy of Modular Gaming from http://www.sourceforge.net/projects/modulargaming/files/
 
-### Step 2: Configuration of modulargaming
+
+
+### Step 2: File Permissions
+
+	$ chmod 0777 application/{cache,logs}
+	$ chmod 0777 assets
+	$ chmod 0777 media
+
+### Step 3: Run the installer
 
 Open `.htaccess` and make the following changes:
 
 * Set the correct RewriteBase
+
+Start the installer and follow the instructions by browsing to the Modular Gaming install with your web browser.
+
+* Once you have completed install, delete the install.php file.
+
+### Step 4: Admin
+
+Register your admin account at /user/register.
+Promote your newly created account to admin by using the minion task:
+
+	$ php minion User:Promote --username=admin
+
+You should now verify that you have admin access by accessing the administration panel at /admin/.
+
+### Step 5: Cron jobs
+
+	$ php ./minion Pet:Decrease
+	$ php ./minion Item:Restock
+
+
+### Step 6: Configuration of modulargaming
+
+Open `.htaccess` and make the following changes:
 
 * Set the correct environment, either development or production.
 
@@ -51,31 +82,6 @@ Open `application/config/auth.php` and make the following changes:
 Open `application/config/email.php` and make the following changes:
 
 * Set the default from address
-
-### Step 3: File Permissions
-
-	$ chmod 0777 application/{cache,logs}
-	$ chmod 0777 assets
-	$ chmod 0777 media
-
-### Step 4: Run the installer
-
-Start the installer and follow the instructions by browsing to the Modular Gaming install with your web browser.
-
-### Step 5: Admin
-
-Register your admin account at /user/register.
-Promote your newly created account to admin by using the minion task:
-
-	$ php minion User:Promote --username=admin
-
-You should now verify that you have admin access by accessing the administration panel at /admin/.
-
-### Step 6: Cron jobs
-
-	$ php ./minion Pet:Decrease
-	$ php ./minion Item:Restock
-
 
 ## Testing
 
