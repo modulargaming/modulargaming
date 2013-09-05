@@ -21,7 +21,7 @@ $modules = 'modules';
  *
  * @link http://kohanaframework.org/guide/about.install#system
  */
-$system = 'system';
+$system = 'vendor/kohana/core';
 
 /**
  * The directory in which your ModularGaming modules are located.
