@@ -3,7 +3,7 @@
 This license is a legal agreement between you and the Modular Gaming Team for the use of Modular Gaming (the "Software"). 
 By obtaining the Software you agree to comply with the terms and conditions of this license. 
 
-Copyright 2008-2013 CGD Hosting Ltd
+Copyright 2008-2013 Modular Gaming Ltd
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
