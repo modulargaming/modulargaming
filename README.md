@@ -16,7 +16,7 @@ Released under a [BSD license](http://www.modulargaming.com/license), Modular Ga
 
 Download Modular Gaming from Github and install composer dependencies.
 
-        $ git clone git@github.com:modulargaming/modulargaming.git
+        $ git clone https://github.com/modulargaming/modulargaming.git
         $ cd modulargaming
 
         $ curl -s https://getcomposer.org/installer | php
