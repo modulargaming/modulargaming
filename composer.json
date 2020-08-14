@@ -81,7 +81,7 @@
 		"squizlabs/php_codesniffer": "dev-master",
 		"fabpot/php-cs-fixer": "dev-master",
 
-		"behat/behat": "2.4.*@stable",
+		"behat/behat": "2.5.*@stable",
 		"behat/mink": "1.5.*@stable",
 		"behat/mink-extension": "*",
 		"behat/mink-goutte-driver": "*",
