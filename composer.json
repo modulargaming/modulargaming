@@ -68,7 +68,7 @@
 		"kohana/database": "3.3.1",
 		"kohana/image": "3.3.1",
 		"kohana/minion": "3.3.1",
-		"kohana/orm": "3.3.1",
+		"kohana/orm": "3.3.6",
 		"kohana/userguide": "3.3.1",
 
 		"kohana-minion/tasks-migrations": "3.3.0",
