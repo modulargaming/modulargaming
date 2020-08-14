@@ -65,7 +65,7 @@
 		"kohana/core": "3.3.1",
 		"kohana/auth": "3.3.1",
 		"kohana/cache": "3.3.1",
-		"kohana/database": "3.3.1",
+		"kohana/database": "3.3.6",
 		"kohana/image": "3.3.1",
 		"kohana/minion": "3.3.1",
 		"kohana/orm": "3.3.1",
