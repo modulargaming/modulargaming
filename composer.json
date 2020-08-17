@@ -63,7 +63,7 @@
 		"modulargaming/purifier": "1.0.0",
 
 		"kohana/core": "3.3.1",
-		"kohana/auth": "3.3.1",
+		"kohana/auth": "3.3.6",
 		"kohana/cache": "3.3.1",
 		"kohana/database": "3.3.1",
 		"kohana/image": "3.3.1",
